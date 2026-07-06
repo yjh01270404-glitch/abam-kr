@@ -3,8 +3,25 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Search, MapPin, Heart, User, Menu, ChevronRight, Phone, MessageSquare, PlusSquare, Star, Award, Zap, HelpCircle } from 'lucide-react';
+import DynamicBanner from '../components/DynamicBanner';
+import { JobAd } from '../lib/mockData';
+import AbamLogo from '../components/AbamLogo';
 import styles from './page.module.css';
-import { topBanners, priorityJobs, recommendedJobs, generalJobs, forumPosts, talentListings } from '../lib/mockData';
+import { topBanners, priorityJobs, recommendedJobs, generalJobs, forumPosts, talentProfiles } from '../lib/mockData';
+
+
+const demoAds: JobAd[] = [
+  { id: 'demo-v-1', type: 'top', title: '에이스 급구', companyName: '강남텐', location: '강남구', pay: '시급 25만', viewCount: 0, description: '' },
+  { id: 'demo-v-2', type: 'top', title: '당일지급', companyName: '잠실요정', location: '송파구', pay: '일급 100만', viewCount: 0, description: '' },
+  { id: 'demo-v-3', type: 'top', title: '최고대우', companyName: '역삼초이스', location: '강남구', pay: '시급 30만', viewCount: 0, description: '' },
+  { id: 'demo-p-1', type: 'priority', title: '초보환영', companyName: '홍대클럽', location: '마포구', pay: '시급 15만', viewCount: 0, description: '' },
+  { id: 'demo-p-2', type: 'special', title: '꿀알바', companyName: '신촌바', location: '서대문구', pay: '시급 12만', viewCount: 0, description: '' },
+  { id: 'demo-p-3', type: 'priority', title: '단기알바', companyName: '이태원라운지', location: '용산구', pay: '시급 10만', viewCount: 0, description: '' },
+  { id: 'demo-g-1', type: 'general', title: '가족같은분위기', companyName: '수원인계', location: '수원시', pay: '시급 8만', viewCount: 0, description: '' },
+  { id: 'demo-g-2', type: 'general', title: '급구합니다', companyName: '안양1번가', location: '안양시', pay: '시급 7만', viewCount: 0, description: '' },
+  { id: 'demo-g-3', type: 'general', title: '초보가능', companyName: '부천중동', location: '부천시', pay: '시급 9만', viewCount: 0, description: '' },
+  { id: 'demo-g-4', type: 'general', title: '주말알바', companyName: '일산라페', location: '고양시', pay: '시급 8.5만', viewCount: 0, description: '' },
+];
 
 export default function Home_Page() {
   // Search state
@@ -41,7 +58,7 @@ export default function Home_Page() {
       {/* 2. Brand Header Section */}
       <header className={styles.brandHeader}>
         <div className={styles.logoContainer}>
-          <h1 className={styles.logoText}>아름다운밤</h1>
+          <h1 className={styles.logoText}><AbamLogo fontSize="32px" /></h1>
           <span className={styles.logoDomain}>abam.kr</span>
         </div>
         
@@ -93,7 +110,7 @@ export default function Home_Page() {
       {/* 4. Flower Alba Style Main Visual Hero Banner */}
       <div className={styles.heroVisualBanner}>
         <div className={styles.heroOverlay}>
-          <h2 className={styles.heroTitle}>아름다운밤</h2>
+          <h2 className={styles.heroTitle}><AbamLogo fontSize="64px" /></h2>
           <p className={styles.heroSubtitle}>여성 고수익 일자리 정보를 제공하는 플랫폼</p>
           <div className={styles.heroSEOText}>
             유흥알바 · 밤알바 · 룸알바 · 노래방알바 · 바알바 · 여우알바 · 악녀알바 · 술집알바 · 고소득 여성전용 구인구직 1위
@@ -105,6 +122,25 @@ export default function Home_Page() {
       <div className={styles.mainLayout}>
         {/* Left Sidebar Banner Ads */}
         <aside className={styles.leftSidebar}>
+            {/* Login Widget */}
+            <div className={styles.loginCard}>
+              <h3 className={styles.loginTitle}>MEMBER LOGIN</h3>
+              <form className={styles.loginForm} onSubmit={(e) => e.preventDefault()}>
+                <input type="text" placeholder="아이디" className={styles.loginInput} />
+                <input type="password" placeholder="비밀번호" className={styles.loginInput} />
+                <div className={styles.loginOptions}>
+                  <label className={styles.loginCheckboxLabel}>
+                    <input type="checkbox" /> 자동로그인
+                  </label>
+                </div>
+                <button type="submit" className={styles.loginSubmitBtn}>로그인</button>
+              </form>
+              <div className={styles.loginLinks}>
+                <span>회원가입</span>
+                <span className={styles.loginDivider}>|</span>
+                <span>아이디/비밀번호 찾기</span>
+              </div>
+            </div>
           <div className={`${styles.sidebarAdCard} ${styles.bgPink}`}>
             <span className={styles.sidebarAdBadge}>인기</span>
             <h4>초보환영</h4>
@@ -128,94 +164,12 @@ export default function Home_Page() {
         <div className={styles.centerContent}>
           {/* Top Hero Section: Login Box + 11 Square Banner Ads */}
           <section className={styles.topHeroSection}>
-            {/* Login Widget */}
-            <div className={styles.loginCard}>
-              <h3 className={styles.loginTitle}>MEMBER LOGIN</h3>
-              <form className={styles.loginForm} onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="아이디" className={styles.loginInput} />
-                <input type="password" placeholder="비밀번호" className={styles.loginInput} />
-                <div className={styles.loginOptions}>
-                  <label className={styles.loginCheckboxLabel}>
-                    <input type="checkbox" /> 자동로그인
-                  </label>
-                </div>
-                <button type="submit" className={styles.loginSubmitBtn}>로그인</button>
-              </form>
-              <div className={styles.loginLinks}>
-                <span>회원가입</span>
-                <span className={styles.loginDivider}>|</span>
-                <span>아이디/비밀번호 찾기</span>
-              </div>
-            </div>
 
-            {/* 11 Square Ad Grid (Queen Alba style colorful grids) */}
-            <div className={styles.squareAdGrid}>
-              <div className={`${styles.squareAdItem} ${styles.borderPink}`}>
-                <span className={styles.adTag}>강남 1등</span>
-                <span className={styles.adHighlight}>시급 15~25+@</span>
-                <p>하루 100~150만 보장</p>
-                <p className={styles.adCompany}>텐프로 에이스</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderBlue}`}>
-                <span className={styles.adTag}>유흥의 종가</span>
-                <span className={styles.adHighlight}>당일 지급 100%</span>
-                <p>초보자 전담 안심케어</p>
-                <p className={styles.adCompany}>역삼 릴렉스</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderYellow}`}>
-                <span className={styles.adTag}>갯수 보장</span>
-                <span className={styles.adHighlight}>천송이실장 케어</span>
-                <p>마이킹 선지원 가능</p>
-                <p className={styles.adCompany}>논현 클라우드</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderGreen}`}>
-                <span className={styles.adTag}>의전 모델</span>
-                <span className={styles.adHighlight}>120+a 플레이</span>
-                <p>초보/대학생 투잡환영</p>
-                <p className={styles.adCompany}>신사 밸벳</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderPurple}`}>
-                <span className={styles.adTag}>분당 최강</span>
-                <span className={styles.adHighlight}>하이퍼블릭 글램</span>
-                <p>EIMI 17만 / 차량지원</p>
-                <p className={styles.adCompany}>분당 글램</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderPink}`}>
-                <span className={styles.adTag}>쩜오 에이스</span>
-                <span className={styles.adHighlight}>이승기 부장 케어</span>
-                <p>최고 대우 성실정산</p>
-                <p className={styles.adCompany}>청담 시그널</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderBlue}`}>
-                <span className={styles.adTag}>플러스 업소</span>
-                <span className={styles.adHighlight}>잠실 랜드마크</span>
-                <p>매너 손님 예약 위주</p>
-                <p className={styles.adCompany}>잠실 플러스</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderYellow}`}>
-                <span className={styles.adTag}>VVIP 케어</span>
-                <span className={styles.adHighlight}>고페이 푸오빠</span>
-                <p>주말 단기 고수익 알바</p>
-                <p className={styles.adCompany}>서면 퍼플</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderGreen}`}>
-                <span className={styles.adTag}>수원 1위</span>
-                <span className={styles.adHighlight}>하루 200만 가능</span>
-                <p>독보적인 콜수 보장</p>
-                <p className={styles.adCompany}>인계 클래식</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderPurple}`}>
-                <span className={styles.adTag}>안심 보장</span>
-                <span className={styles.adHighlight}>가족같은 분위기</span>
-                <p>진상 필터링 시스템</p>
-                <p className={styles.adCompany}>마포 레몬드롭</p>
-              </div>
-              <div className={`${styles.squareAdItem} ${styles.borderPink}`}>
-                <span className={styles.adTag}>해운대 핫플</span>
-                <span className={styles.adHighlight}>오션뷰 칵테일바</span>
-                <p>숙식 제공 및 휴가 지원</p>
-                <p className={styles.adCompany}>해운대 오션</p>
-              </div>
+            {/* Image Banner Grid (gambling site style - 2 columns fixed height) */}
+            <div className={styles.imageBannerGrid}>
+              {demoAds.map((ad) => (
+                <DynamicBanner key={ad.id} jobAd={ad} />
+              ))}
             </div>
           </section>
 
@@ -289,7 +243,7 @@ export default function Home_Page() {
 
           {/* 7. Community Boards Section ("아름다운밤 수다방") */}
           <section className={styles.communitySection}>
-            <h3 className={styles.sectionHeading}>💬 아름다운밤 수다방</h3>
+            <h3 className={styles.sectionHeading}>💬 <AbamLogo fontSize="18px" /> 수다방</h3>
             <div className={styles.communityGrid}>
               <div className={styles.communityCol}>
                 <div className={styles.colHeader}>⭐ 베스트글</div>
@@ -467,7 +421,7 @@ export default function Home_Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  {talentListings.slice(0, 10).map((talent) => (
+                  {talentProfiles.slice(0, 10).map((talent) => (
                     <tr key={talent.id}>
                       <td className={styles.talentNameCol}>
                         <strong>{talent.name}</strong> ({talent.age}/{talent.gender})
@@ -509,7 +463,7 @@ export default function Home_Page() {
             <div className={styles.sidebarAdArrow}>CLICK ▶</div>
           </div>
           <div className={styles.sidebarStickyBanner}>
-            <p>아름다운밤<br/>24시간<br/>고객상담센터<br/><strong>1588-0000</strong></p>
+            <p><AbamLogo fontSize="14px" /><br/>24시간<br/>고객상담센터<br/><strong>1588-0000</strong></p>
           </div>
         </aside>
       </div>

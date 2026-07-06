@@ -1,0 +1,364 @@
+/* BannerTemplate.module.css — 아기자기 + 네온 깜빡임 화려 버전 */
+
+/* ══════════════════════════════════════════
+   키프레임 모음
+══════════════════════════════════════════ */
+
+/* 실제 네온사인 깜빡임 — 전류 끊기는 느낌 */
+@keyframes neonFlicker {
+  0%,18%,22%,25%,53%,57%,100% { opacity: 1; }
+  20%,24%,55%                 { opacity: 0.15; }
+}
+
+/* 이름 네온 글로우 펄스 */
+@keyframes nameNeonPulse {
+  0%,100% {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 12px currentColor,
+      0 0 20px currentColor,
+      0 2px 4px rgba(0,0,0,0.3);
+  }
+  50% {
+    text-shadow:
+      0 0 8px currentColor,
+      0 0 25px currentColor,
+      0 0 45px currentColor,
+      0 0 70px currentColor,
+      0 2px 4px rgba(0,0,0,0.3);
+  }
+}
+
+/* 테두리 네온 글로우 */
+@keyframes borderNeonGlow {
+  0%,100% { box-shadow: var(--neon-shadow-sm), inset 0 1px 0 rgba(255,255,255,0.3); }
+  50%     { box-shadow: var(--neon-shadow-lg), inset 0 1px 0 rgba(255,255,255,0.3); }
+}
+
+/* 배지 깜빡임 */
+@keyframes badgeFlicker {
+  0%,85%,87%,89%,100% { opacity: 1; }
+  86%,88%             { opacity: 0.1; }
+}
+
+/* 파티클 반짝임 */
+@keyframes sparkleUp {
+  0%   { opacity: 0; transform: translateY(4px) scale(0.4) rotate(0deg); }
+  30%  { opacity: 1; transform: translateY(-8px) scale(1.4) rotate(80deg); }
+  70%  { opacity: 0.8; transform: translateY(-18px) scale(1) rotate(150deg); }
+  100% { opacity: 0; transform: translateY(-28px) scale(0.3) rotate(220deg); }
+}
+
+@keyframes sparklePop {
+  0%,100% { opacity: 0.3; transform: scale(0.6); }
+  50%     { opacity: 1;   transform: scale(1.5); }
+}
+
+/* 광택 슬라이드 */
+@keyframes shimmerPass {
+  0%      { left: -120%; }
+  60%,100%{ left: 170%; }
+}
+
+/* 카드 두근거림 */
+@keyframes cardPulse {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.015); }
+}
+
+/* 무지개 테두리 */
+@keyframes rainbowBorder {
+  0%   { border-color: rgba(255,100,150,0.8); }
+  16%  { border-color: rgba(255,200,50,0.8); }
+  33%  { border-color: rgba(100,255,150,0.8); }
+  50%  { border-color: rgba(100,200,255,0.8); }
+  66%  { border-color: rgba(180,100,255,0.8); }
+  83%  { border-color: rgba(255,100,200,0.8); }
+  100% { border-color: rgba(255,100,150,0.8); }
+}
+
+/* 리본 슬라이드 */
+@keyframes ribbonSlide {
+  0%   { transform: translateX(-8px); opacity: 0.5; }
+  50%  { transform: translateX(8px);  opacity: 1; }
+  100% { transform: translateX(-8px); opacity: 0.5; }
+}
+
+/* 물결 */
+@keyframes waveAnim {
+  0%,100% { border-radius: 14px 14px 60% 60%; }
+  50%     { border-radius: 14px 14px 40% 40%; }
+}
+
+/* ══════ 카드 기본 ══════ */
+.bannerCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2.4 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  animation: cardPulse 3s ease-in-out infinite;
+  border: 2px solid rgba(255,255,255,0.5);
+  transition: transform 0.18s;
+}
+.bannerCard:hover {
+  transform: scale(1.04) translateY(-3px);
+  animation: none;
+}
+
+/* 광택 오버레이 */
+.bannerCard::after {
+  content: '';
+  position: absolute; top: 0; left: -120%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmerPass 2.8s ease-in-out infinite;
+  pointer-events: none; z-index: 8;
+  border-radius: 14px;
+}
+
+/* 상단 물결 */
+.waveTop {
+  position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: rgba(255,255,255,0.45);
+  animation: waveAnim 3s ease-in-out infinite;
+  pointer-events: none; z-index: 6;
+}
+
+/* 하단 리본 */
+.ribbonBottom {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  background: rgba(255,255,255,0.35);
+  animation: ribbonSlide 2.5s ease-in-out infinite;
+  pointer-events: none; z-index: 6;
+}
+
+/* ══════ 반짝이 파티클 ══════ */
+.sparkle {
+  position: absolute; pointer-events: none; z-index: 9; line-height: 1;
+}
+.sp1 { top: 6%;  left: 5%;  font-size: 14px; animation: sparkleUp    2.0s ease-in-out infinite; }
+.sp2 { top: 8%;  right:8%;  font-size: 13px; animation: sparkleUp    2.4s ease-in-out infinite 0.3s; }
+.sp3 { top: 55%; left: 4%;  font-size: 11px; animation: sparklePop   1.8s ease-in-out infinite 0.6s; }
+.sp4 { top: 65%; right:6%;  font-size: 12px; animation: sparkleUp    2.7s ease-in-out infinite 0.9s; }
+.sp5 { bottom:12%; left:38%; font-size:10px; animation: sparklePop   2.2s ease-in-out infinite 1.2s; }
+.sp6 { top: 38%; right:3%;  font-size: 11px; animation: sparkleUp    2.1s ease-in-out infinite 1.5s; }
+
+/* ══════ 내용 레이아웃 ══════ */
+.bannerInner {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column; gap: 4px;
+  height: 100%;
+}
+.topRow { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+.badge {
+  font-size: 9px; font-weight: 900;
+  padding: 2px 9px; border-radius: 20px;
+  letter-spacing: 0.05em; white-space: nowrap;
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.6);
+  backdrop-filter: blur(4px);
+  animation: badgeFlicker 4s ease-in-out infinite;
+  text-shadow: 0 0 6px rgba(255,255,255,0.8);
+}
+
+.regionTag {
+  font-size: 9px; font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.nameRow { display: flex; align-items: baseline; gap: 6px; flex-shrink: 0; }
+
+.companyName {
+  font-size: 20px; font-weight: 900;
+  line-height: 1.1; letter-spacing: -0.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: #fff;
+  animation: nameNeonPulse 2s ease-in-out infinite, neonFlicker 8s linear infinite 2s;
+}
+
+.jobTypeTag {
+  font-size: 9.5px; font-weight: 700;
+  padding: 2px 8px; border-radius: 12px;
+  white-space: nowrap; flex-shrink: 0;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.5);
+  backdrop-filter: blur(4px);
+  animation: badgeFlicker 6s ease-in-out infinite 1s;
+  text-shadow: 0 0 4px rgba(255,255,255,0.6);
+}
+
+.payRow {
+  font-size: 11px; font-weight: 800;
+  color: #fff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+
+.descRow {
+  font-size: 10px;
+  color: rgba(255,255,255,0.85);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.tagsRow { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
+
+.tagChip {
+  font-size: 8.5px; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px;
+  background: rgba(255,255,255,0.22);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(4px);
+  text-shadow: 0 0 4px rgba(255,255,255,0.5);
+}
+
+/* ══════════════════════════════════════════
+   THEME 1: 딸기크림 🍓
+══════════════════════════════════════════ */
+.theme_strawberry {
+  background: linear-gradient(145deg, #ff6b9d 0%, #ff4777 40%, #ff2060 70%, #e91e8c 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(255,64,122,0.55), 0 0 0 2px rgba(255,150,190,0.35);
+  --neon-shadow-lg: 0 6px 30px rgba(255,64,122,0.75), 0 0 0 2px rgba(255,150,190,0.6), 0 0 40px rgba(255,64,122,0.3);
+  animation: cardPulse 3s ease-in-out infinite, borderNeonGlow 2s ease-in-out infinite;
+}
+.theme_strawberry .companyName { color: #fff; }
+
+/* ══════════════════════════════════════════
+   THEME 2: 로즈골드 🌹
+══════════════════════════════════════════ */
+.theme_rosegold {
+  background: linear-gradient(145deg, #ffd6e7 0%, #f4a0b5 30%, #e8738a 60%, #d45678 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(232,115,138,0.5), 0 0 0 2px rgba(255,180,200,0.4);
+  --neon-shadow-lg: 0 6px 30px rgba(232,115,138,0.7), 0 0 0 2px rgba(255,200,220,0.65), 0 0 40px rgba(232,115,138,0.3);
+  animation: cardPulse 3.5s ease-in-out infinite, borderNeonGlow 2.5s ease-in-out infinite 0.3s;
+}
+.theme_rosegold .companyName { color: #5c1a2e; }
+.theme_rosegold .badge       { color: #5c1a2e; }
+.theme_rosegold .regionTag   { color: rgba(92,26,46,0.9); }
+.theme_rosegold .jobTypeTag  { color: #5c1a2e; }
+.theme_rosegold .payRow      { color: #5c1a2e; }
+.theme_rosegold .descRow     { color: rgba(92,26,46,0.8); }
+.theme_rosegold .tagChip     { color: #5c1a2e; }
+
+/* ══════════════════════════════════════════
+   THEME 3: 라벤더 💜
+══════════════════════════════════════════ */
+.theme_lavender {
+  background: linear-gradient(145deg, #e8d5ff 0%, #c8a0f0 30%, #9575cd 60%, #7b52b5 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(149,117,205,0.55), 0 0 0 2px rgba(200,160,255,0.4);
+  --neon-shadow-lg: 0 6px 30px rgba(149,117,205,0.75), 0 0 0 2px rgba(210,180,255,0.65), 0 0 40px rgba(149,117,205,0.3);
+  animation: cardPulse 3.2s ease-in-out infinite, borderNeonGlow 2.2s ease-in-out infinite 0.6s;
+}
+.theme_lavender .companyName { color: #3a1a6e; }
+.theme_lavender .badge       { color: #3a1a6e; }
+.theme_lavender .regionTag   { color: rgba(58,26,110,0.9); }
+.theme_lavender .jobTypeTag  { color: #3a1a6e; }
+.theme_lavender .payRow      { color: #3a1a6e; }
+.theme_lavender .descRow     { color: rgba(58,26,110,0.8); }
+.theme_lavender .tagChip     { color: #3a1a6e; }
+
+/* ══════════════════════════════════════════
+   THEME 4: 복숭아 🍑
+══════════════════════════════════════════ */
+.theme_peach {
+  background: linear-gradient(145deg, #ffe0b2 0%, #ffb347 30%, #ff8c69 60%, #ff6b4a 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(255,140,105,0.5), 0 0 0 2px rgba(255,200,160,0.4);
+  --neon-shadow-lg: 0 6px 30px rgba(255,140,105,0.7), 0 0 0 2px rgba(255,215,180,0.65), 0 0 40px rgba(255,140,105,0.3);
+  animation: cardPulse 2.8s ease-in-out infinite, borderNeonGlow 2s ease-in-out infinite 0.9s;
+}
+.theme_peach .companyName { color: #6b2800; }
+.theme_peach .badge       { color: #6b2800; }
+.theme_peach .regionTag   { color: rgba(107,40,0,0.9); }
+.theme_peach .jobTypeTag  { color: #6b2800; }
+.theme_peach .payRow      { color: #6b2800; }
+.theme_peach .descRow     { color: rgba(107,40,0,0.8); }
+.theme_peach .tagChip     { color: #6b2800; }
+
+/* ══════════════════════════════════════════
+   THEME 5: 체리 🍒
+══════════════════════════════════════════ */
+.theme_cherry {
+  background: linear-gradient(145deg, #ff4da6 0%, #e91e63 35%, #c2185b 65%, #880e4f 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(233,30,99,0.6), 0 0 0 2px rgba(255,130,180,0.45);
+  --neon-shadow-lg: 0 6px 30px rgba(233,30,99,0.8), 0 0 0 2px rgba(255,160,200,0.7), 0 0 50px rgba(233,30,99,0.35);
+  animation: cardPulse 2.5s ease-in-out infinite, borderNeonGlow 1.8s ease-in-out infinite 1.2s;
+}
+.theme_cherry .companyName { color: #fff; }
+
+/* ══════════════════════════════════════════
+   THEME 6: 민트 🌿
+══════════════════════════════════════════ */
+.theme_mint {
+  background: linear-gradient(145deg, #b2f0e8 0%, #4db6ac 30%, #26a69a 60%, #00897b 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(77,182,172,0.5), 0 0 0 2px rgba(150,240,230,0.4);
+  --neon-shadow-lg: 0 6px 30px rgba(77,182,172,0.7), 0 0 0 2px rgba(180,255,248,0.65), 0 0 40px rgba(77,182,172,0.3);
+  animation: cardPulse 3.4s ease-in-out infinite, borderNeonGlow 2.4s ease-in-out infinite 1.5s;
+}
+.theme_mint .companyName { color: #003d35; }
+.theme_mint .badge       { color: #003d35; }
+.theme_mint .regionTag   { color: rgba(0,61,53,0.9); }
+.theme_mint .jobTypeTag  { color: #003d35; }
+.theme_mint .payRow      { color: #003d35; }
+.theme_mint .descRow     { color: rgba(0,61,53,0.8); }
+.theme_mint .tagChip     { color: #003d35; }
+
+/* ══════════════════════════════════════════
+   THEME 7: 샴페인 ✨
+══════════════════════════════════════════ */
+.theme_champagne {
+  background: linear-gradient(145deg, #fffde7 0%, #fff9c4 25%, #f5c842 55%, #e8a800 85%, #c68400 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(232,168,0,0.45), 0 0 0 2px rgba(255,240,140,0.5);
+  --neon-shadow-lg: 0 6px 30px rgba(232,168,0,0.65), 0 0 0 2px rgba(255,248,180,0.75), 0 0 45px rgba(232,168,0,0.3);
+  animation: cardPulse 3.1s ease-in-out infinite, borderNeonGlow 2.1s ease-in-out infinite 1.8s;
+}
+.theme_champagne .companyName { color: #5c3a00; font-style: italic; }
+.theme_champagne .badge       { color: #5c3a00; background: rgba(255,255,255,0.5); }
+.theme_champagne .regionTag   { color: rgba(92,58,0,0.9); }
+.theme_champagne .jobTypeTag  { color: #5c3a00; }
+.theme_champagne .payRow      { color: #5c3a00; }
+.theme_champagne .descRow     { color: rgba(92,58,0,0.8); }
+.theme_champagne .tagChip     { color: #5c3a00; }
+
+/* ══════════════════════════════════════════
+   THEME 8: 코랄 🌸
+══════════════════════════════════════════ */
+.theme_coral {
+  background: linear-gradient(145deg, #ffb3ba 0%, #ff6f61 35%, #e84393 65%, #d63a8c 100%);
+  --neon-shadow-sm: 0 4px 16px rgba(232,67,147,0.55), 0 0 0 2px rgba(255,160,200,0.4);
+  --neon-shadow-lg: 0 6px 30px rgba(232,67,147,0.75), 0 0 0 2px rgba(255,190,220,0.65), 0 0 45px rgba(232,67,147,0.35);
+  animation: cardPulse 2.9s ease-in-out infinite, borderNeonGlow 2s ease-in-out infinite 2.1s;
+}
+.theme_coral .companyName { color: #fff; }
+
+/* ══════ 테마 선택 버튼 ══════ */
+.themePicker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.themeBtn {
+  height: 42px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: transform 0.15s;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; gap: 3px;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+}
+.themeBtn:hover { transform: scale(1.08) translateY(-2px); }
+.themeBtnActive {
+  transform: scale(1.06) translateY(-3px) !important;
+  border: 2.5px solid rgba(255,255,255,0.95) !important;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.35), 0 4px 16px rgba(0,0,0,0.25) !important;
+}

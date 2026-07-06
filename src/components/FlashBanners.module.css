@@ -1,0 +1,495 @@
+/* FlashBanners.module.css — 12가지 완전히 다른 시각 테마 v3 (등급 차별화) */
+
+/* ══════ 키프레임 ══════ */
+@keyframes sparkleFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+  40%  { opacity: 1; transform: translateY(-10px) scale(1.3) rotate(90deg); }
+  100% { opacity: 0; transform: translateY(-22px) scale(0.4) rotate(180deg); }
+}
+@keyframes shimmerSlide {
+  0% { left: -100%; }
+  60%,100% { left: 160%; }
+}
+@keyframes shimmerSlide2 {
+  0% { left: -100%; }
+  60%,100% { left: 160%; }
+}
+@keyframes nameGlow {
+  0%,100% { text-shadow: 0 2px 8px rgba(255,255,255,0.4); }
+  50%     { text-shadow: 0 2px 18px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.25); }
+}
+@keyframes badgePop {
+  0%,100% { transform: scale(1); }
+  25%     { transform: scale(1.12); }
+  75%     { transform: scale(0.96); }
+}
+@keyframes cardFloat {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-3px); }
+}
+@keyframes cardFloatPremium {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%     { transform: translateY(-5px) scale(1.01); }
+}
+@keyframes waveAnim {
+  0%,100% { transform: scaleX(1) scaleY(1); }
+  50%     { transform: scaleX(1.03) scaleY(0.97); }
+}
+@keyframes adPulse {
+  0%,100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+  50%     { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.22); }
+}
+@keyframes badgeBlink {
+  0%,80%,100% { opacity: 1; }
+  90% { opacity: 0.3; }
+}
+@keyframes goldRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes neonPulse {
+  0%,100% { box-shadow: 0 0 8px currentColor, 0 0 20px currentColor; }
+  50% { box-shadow: 0 0 20px currentColor, 0 0 50px currentColor, 0 0 80px currentColor; }
+}
+@keyframes rgbBorder {
+  0%   { border-color: #ff0080; }
+  25%  { border-color: #ff8800; }
+  50%  { border-color: #00ff88; }
+  75%  { border-color: #0088ff; }
+  100% { border-color: #ff0080; }
+}
+/* 프리미엄 전용: 무지개 테두리 glow */
+@keyframes rainbowGlow {
+  0%   { box-shadow: 0 0 18px #ff0080, 0 0 40px rgba(255,0,128,0.4), inset 0 0 20px rgba(255,0,128,0.08); border-color: #ff0080; }
+  16%  { box-shadow: 0 0 18px #ff8800, 0 0 40px rgba(255,136,0,0.4), inset 0 0 20px rgba(255,136,0,0.08); border-color: #ff8800; }
+  33%  { box-shadow: 0 0 18px #ffee00, 0 0 40px rgba(255,238,0,0.4), inset 0 0 20px rgba(255,238,0,0.08); border-color: #ffee00; }
+  50%  { box-shadow: 0 0 18px #00ff88, 0 0 40px rgba(0,255,136,0.4), inset 0 0 20px rgba(0,255,136,0.08); border-color: #00ff88; }
+  66%  { box-shadow: 0 0 18px #0088ff, 0 0 40px rgba(0,136,255,0.4), inset 0 0 20px rgba(0,136,255,0.08); border-color: #0088ff; }
+  83%  { box-shadow: 0 0 18px #aa00ff, 0 0 40px rgba(170,0,255,0.4), inset 0 0 20px rgba(170,0,255,0.08); border-color: #aa00ff; }
+  100% { box-shadow: 0 0 18px #ff0080, 0 0 40px rgba(255,0,128,0.4), inset 0 0 20px rgba(255,0,128,0.08); border-color: #ff0080; }
+}
+/* PREMIUM 배지 반짝임 */
+@keyframes premiumBadgePulse {
+  0%,100% { opacity: 0.9; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.06); }
+}
+
+/* ══════ 래퍼 ══════ */
+.flashBannersWrapper {
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ══════ 섹션 헤더 ══════ */
+.sectionHeader {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px 10px;
+  background: #fff;
+  border-bottom: 1px solid #f3f4f6;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 12px;
+}
+.sectionBadge {
+  background: #e91e63; color: #fff;
+  font-size: 10px; font-weight: 800;
+  padding: 3px 10px; border-radius: 4px;
+  letter-spacing: 0.05em;
+  animation: badgeBlink 3s ease-in-out infinite;
+}
+.sectionTitle { font-size: 15px; font-weight: 900; color: #111827; margin: 0; flex: 1; }
+.sectionSub { font-size: 11px; color: #9ca3af; font-weight: 400; margin-left: 6px; }
+.postBtn {
+  font-size: 12px; font-weight: 700; color: #c2185b;
+  background: #fff1f2; border: 1px solid #fda4af;
+  padding: 5px 12px; border-radius: 5px;
+  text-decoration: none; transition: all 0.15s; white-space: nowrap;
+}
+.postBtn:hover { background: #ffe4e6; }
+
+/* ══════ 프리미엄 배너 그리드 ══════ */
+.premiumBannerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-bottom: 3px solid rgba(255,215,0,0.4);
+}
+
+/* ══════ 기본 카드 공통 ══════ */
+.premiumBannerCard {
+  position: relative;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 18px 14px 14px;
+  min-height: 260px; overflow: hidden; cursor: pointer;
+  text-decoration: none;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border: 3px solid transparent;
+  transition: transform 0.25s;
+  animation: cardFloatPremium 3.5s ease-in-out infinite, rainbowGlow 4s linear infinite;
+}
+.premiumBannerCard:nth-child(even) { animation-delay: 0.6s; }
+.premiumBannerCard:nth-child(3n)   { animation-delay: 1.2s; }
+.premiumBannerCard:hover { transform: scale(1.06) translateY(-6px); z-index: 10; animation: none; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+
+/* 👑 PREMIUM 워터마크 배지 */
+.premiumTierBadge {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: linear-gradient(135deg, rgba(255,215,0,0.95), rgba(255,140,0,0.95));
+  color: #1a0800;
+  font-size: 9px; font-weight: 900;
+  padding: 3px 10px; border-radius: 20px;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 2px 8px rgba(255,140,0,0.5), 0 0 12px rgba(255,215,0,0.3);
+  z-index: 10;
+  animation: premiumBadgePulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 1차 광채 */
+.shimmerEffect {
+  position: absolute; top: 0; left: -100%; width: 55%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmerSlide 2.6s ease-in-out infinite;
+  pointer-events: none; z-index: 8;
+}
+/* 2차 광채 — 프리미엄 전용 더블 shimmer */
+.shimmerEffect2 {
+  position: absolute; top: 0; left: -100%; width: 30%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: shimmerSlide2 2.6s ease-in-out infinite 1.3s;
+  pointer-events: none; z-index: 7;
+}
+
+/* 상단 물결 — 프리미엄은 더 두껍게 */
+.premiumBannerCard::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: linear-gradient(90deg, rgba(255,215,0,0.6), rgba(255,255,255,0.5), rgba(255,215,0,0.6));
+  border-radius: 0 0 50% 50%;
+  animation: waveAnim 3s ease-in-out infinite;
+  pointer-events: none; z-index: 6;
+}
+
+/* 파티클 — 프리미엄: 10개 */
+.particles { position: absolute; inset: 0; pointer-events: none; z-index: 7; }
+.p1,.p2,.p3,.p4,.p5,.p6,.p7,.p8,.p9,.p10 {
+  position: absolute; color: rgba(255,255,255,0.9);
+  animation: sparkleFloat 2.5s ease-in-out infinite;
+}
+.p1  { top: 8%;  left: 8%;   font-size: 14px; animation-delay: 0s; }
+.p2  { top: 12%; right: 10%; font-size: 13px; animation-delay: 0.4s; }
+.p3  { top: 55%; left: 5%;   font-size: 11px; animation-delay: 0.8s; }
+.p4  { top: 68%; right: 7%;  font-size: 11px; animation-delay: 1.2s; }
+.p5  { bottom: 12%; left: 42%; font-size: 10px; animation-delay: 1.6s; }
+.p6  { top: 30%; left: 15%;  font-size: 10px; animation-delay: 2.0s; }
+.p7  { top: 20%; right: 25%; font-size: 12px; animation-delay: 2.4s; }
+.p8  { top: 75%; left: 25%;  font-size: 9px;  animation-delay: 0.6s; }
+.p9  { top: 45%; right: 3%;  font-size: 10px; animation-delay: 1.0s; }
+.p10 { bottom: 5%; right: 30%; font-size: 11px; animation-delay: 1.8s; }
+
+/* 카드 내용 */
+.bannerTopRow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; position: relative; z-index: 6; }
+.bannerBadge {
+  font-size: 9px; font-weight: 900;
+  color: rgba(255,255,255,0.97);
+  background: rgba(255,255,255,0.22);
+  padding: 2px 9px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(4px);
+  animation: badgePop 2.5s ease-in-out infinite;
+}
+.bannerStars { font-size: 9px; color: #fde047; letter-spacing: -1px; }
+.bannerEmoji { font-size: 44px; text-align: center; line-height: 1; margin: 4px 0; position: relative; z-index: 6; animation: cardFloatPremium 2.5s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(255,255,255,0.5)); }
+.bannerName {
+  font-size: 22px; font-weight: 900; text-align: center;
+  color: #fff;
+  letter-spacing: -0.03em; position: relative; z-index: 6;
+  line-height: 1.1;
+  animation: nameGlow 2.5s ease-in-out infinite;
+}
+.bannerLine1 { font-size: 16px; font-weight: 900; text-align: center; color: #fff; position: relative; z-index: 6; letter-spacing: -0.01em; }
+.bannerLine2 { font-size: 13px; font-weight: 700; text-align: center; color: rgba(255,255,255,0.85); position: relative; z-index: 6; }
+.bannerLine3 { font-size: 13px; font-weight: 800; text-align: center; color: #fde047; position: relative; z-index: 6; }
+.bannerBottom {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 6px; padding-top: 6px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  position: relative; z-index: 6;
+}
+.bannerRegion { font-size: 9.5px; color: rgba(255,255,255,0.75); }
+.bannerTag { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.16); padding: 1px 7px; border-radius: 10px; }
+
+/* ══════════════════════════════════════════════════
+   테마 1: neon_pink — 사이버펑크 핫핑크 네온
+   배경: 매우 어두운 마젠타, 테두리: 이중 네온 글로우
+   ══════════════════════════════════════════════════ */
+.neon_pink {
+  background: linear-gradient(145deg, #12001e 0%, #5a0038 55%, #12001e 100%);
+  border: 2px solid #ff2d9e;
+  box-shadow: 0 0 12px #ff2d9e, 0 0 30px rgba(255,45,158,0.5), inset 0 0 20px rgba(255,45,158,0.15);
+}
+.neon_pink::before { background: #ff2d9e; box-shadow: 0 0 10px #ff2d9e; }
+.neon_pink .bannerName { color: #ff80cf !important; text-shadow: 0 0 10px #ff2d9e, 0 0 25px #ff2d9e !important; }
+.neon_pink .bannerLine1 { color: #ffffff !important; }
+.neon_pink .bannerLine3 { color: #ff9ede !important; }
+.neon_pink .bannerBadge { background: rgba(255,45,158,0.6) !important; border-color: #ff2d9e !important; }
+.neon_pink .bannerStars { color: #ff9ede; }
+
+/* ══════════════════════════════════════════════════
+   테마 2: galaxy_purple — 우주 갤럭시, 생생한 보라
+   배경: 풍부한 보라색 그라디언트 (어둡지 않음)
+   ══════════════════════════════════════════════════ */
+.galaxy_purple {
+  background: linear-gradient(160deg, #3b1070 0%, #7c3aed 45%, #1e0050 100%);
+  border: 2px solid rgba(167,139,250,0.6);
+  box-shadow: 0 8px 32px rgba(124,58,237,0.6), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.galaxy_purple::before { background: #a78bfa; opacity: 0.5; }
+.galaxy_purple .bannerName { color: #ede9fe !important; text-shadow: 0 0 12px rgba(196,181,253,0.9) !important; }
+.galaxy_purple .bannerLine3 { color: #c4b5fd !important; }
+.galaxy_purple .bannerBadge { background: rgba(109,40,217,0.8) !important; border-color: #a78bfa !important; }
+.galaxy_purple .bannerStars { color: #c4b5fd; }
+
+/* ══════════════════════════════════════════════════
+   테마 3: golden_vip — 진짜 황금 VIP 럭셔리
+   배경: 어두운 황금빛 → 진한 금색 그라디언트
+   ══════════════════════════════════════════════════ */
+.golden_vip {
+  background: linear-gradient(135deg, #1c0f00 0%, #6b3f00 35%, #c8860a 65%, #1c0f00 100%);
+  border: 2px solid #f59e0b;
+  box-shadow: 0 6px 30px rgba(245,158,11,0.7), inset 0 1px 0 rgba(255,220,100,0.3);
+}
+.golden_vip::before { background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24); height: 3px; }
+.golden_vip .bannerName { color: #fde68a !important; text-shadow: 0 0 12px rgba(251,191,36,0.9), 0 2px 4px rgba(0,0,0,0.5) !important; }
+.golden_vip .bannerLine1 { color: #fef3c7 !important; font-size: 13px !important; }
+.golden_vip .bannerLine3 { color: #fbbf24 !important; }
+.golden_vip .bannerBadge { background: rgba(180,83,9,0.9) !important; border-color: #fbbf24 !important; color: #fde68a !important; }
+.golden_vip .bannerStars { color: #fbbf24; font-size: 11px; }
+.golden_vip .bannerEmoji { filter: drop-shadow(0 0 8px rgba(251,191,36,0.8)); }
+
+/* ══════════════════════════════════════════════════
+   테마 4: flame_red — 불꽃 레드, 격렬한 에너지
+   배경: 검은색 → 진홍빛 → 주황 불꽃
+   ══════════════════════════════════════════════════ */
+.flame_red {
+  background: linear-gradient(160deg, #0d0000 0%, #7f1010 40%, #c84b00 70%, #0d0000 100%);
+  border: 2px solid #f87171;
+  box-shadow: 0 6px 28px rgba(239,68,68,0.6), inset 0 0 25px rgba(239,68,68,0.15);
+}
+.flame_red::before { background: linear-gradient(90deg, #ef4444, #f97316); }
+.flame_red .bannerName { color: #fca5a5 !important; text-shadow: 0 0 10px #ef4444 !important; }
+.flame_red .bannerLine3 { color: #fed7aa !important; }
+.flame_red .bannerBadge { background: rgba(185,28,28,0.9) !important; border-color: #f87171 !important; }
+.flame_red .bannerStars { color: #fca5a5; }
+
+/* ══════════════════════════════════════════════════
+   테마 5: ocean_blue — 심해 오션, 생동감 있는 청록
+   배경: 짙은 남색 → 선명한 시안
+   ══════════════════════════════════════════════════ */
+.ocean_blue {
+  background: linear-gradient(145deg, #001833 0%, #005a8c 45%, #00b4cc 80%, #001833 100%);
+  border: 2px solid #22d3ee;
+  box-shadow: 0 6px 30px rgba(34,211,238,0.5), inset 0 0 20px rgba(6,182,212,0.15);
+}
+.ocean_blue::before { background: linear-gradient(90deg, #06b6d4, #22d3ee, #06b6d4); }
+.ocean_blue .bannerName { color: #a5f3fc !important; text-shadow: 0 0 12px rgba(6,182,212,0.9) !important; }
+.ocean_blue .bannerLine1 { color: #e0f7fa !important; }
+.ocean_blue .bannerLine3 { color: #67e8f9 !important; }
+.ocean_blue .bannerBadge { background: rgba(8,145,178,0.9) !important; border-color: #22d3ee !important; }
+.ocean_blue .bannerStars { color: #67e8f9; }
+
+/* ══════════════════════════════════════════════════
+   테마 6: rose_gold — 로즈골드 메탈릭, 따뜻하고 우아함
+   배경: 진한 장미빛 → 로즈골드
+   ══════════════════════════════════════════════════ */
+.rose_gold {
+  background: linear-gradient(145deg, #2a0018 0%, #8b2252 40%, #d4607a 65%, #2a0018 100%);
+  border: 2px solid #fda4af;
+  box-shadow: 0 6px 28px rgba(253,164,175,0.5), inset 0 1px 0 rgba(255,200,210,0.3);
+}
+.rose_gold::before { background: linear-gradient(90deg, #fb7185, #fda4af, #fb7185); }
+.rose_gold .bannerName { color: #fecdd3 !important; text-shadow: 0 0 10px rgba(251,113,133,0.8) !important; }
+.rose_gold .bannerLine1 { color: #ffe4e6 !important; }
+.rose_gold .bannerLine3 { color: #fda4af !important; }
+.rose_gold .bannerBadge { background: rgba(159,18,57,0.9) !important; border-color: #fda4af !important; }
+.rose_gold .bannerStars { color: #fda4af; }
+
+/* ══════════════════════════════════════════════════
+   테마 7: cyber_green — 사이버 그린, 해킹 느낌
+   배경: 완전 어두운 배경에 형광 초록 네온
+   ══════════════════════════════════════════════════ */
+.cyber_green {
+  background: linear-gradient(145deg, #000a02 0%, #002d0e 50%, #004d18 75%, #000a02 100%);
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 15px rgba(0,255,136,0.6), 0 0 40px rgba(0,255,136,0.25), inset 0 0 25px rgba(0,255,136,0.1);
+}
+.cyber_green::before { background: #00ff88; box-shadow: 0 0 10px #00ff88; opacity: 0.7; }
+.cyber_green .bannerName { color: #86efac !important; text-shadow: 0 0 12px #00ff88, 0 0 30px rgba(0,255,136,0.5) !important; }
+.cyber_green .bannerLine1 { color: #dcfce7 !important; }
+.cyber_green .bannerLine3 { color: #4ade80 !important; }
+.cyber_green .bannerBadge { background: rgba(0,100,40,0.9) !important; border-color: #00ff88 !important; color: #4ade80 !important; }
+.cyber_green .bannerStars { color: #4ade80; }
+.cyber_green .p1, .cyber_green .p2, .cyber_green .p3, .cyber_green .p4, .cyber_green .p5 { color: #4ade80 !important; }
+
+/* ══════════════════════════════════════════════════
+   테마 8: sunset_orange — 노을빛 오렌지, 따뜻한 에너지
+   배경: 짙은 적갈색 → 선명한 오렌지
+   ══════════════════════════════════════════════════ */
+.sunset_orange {
+  background: linear-gradient(155deg, #1a0800 0%, #7c2d00 35%, #d96409 65%, #1a0800 100%);
+  border: 2px solid #fb923c;
+  box-shadow: 0 6px 28px rgba(251,146,60,0.55), inset 0 0 20px rgba(249,115,22,0.15);
+}
+.sunset_orange::before { background: linear-gradient(90deg, #f97316, #fb923c, #f97316); }
+.sunset_orange .bannerName { color: #fed7aa !important; text-shadow: 0 0 10px rgba(249,115,22,0.9) !important; }
+.sunset_orange .bannerLine1 { color: #ffedd5 !important; }
+.sunset_orange .bannerLine3 { color: #fdba74 !important; }
+.sunset_orange .bannerBadge { background: rgba(154,52,18,0.9) !important; border-color: #fb923c !important; }
+.sunset_orange .bannerStars { color: #fdba74; }
+
+/* ══════════════════════════════════════════════════
+   테마 9: midnight_black — 완전 블랙, 실버 럭셔리
+   배경: 순수 블랙, 실버/화이트 액센트
+   ══════════════════════════════════════════════════ */
+.midnight_black {
+  background: linear-gradient(145deg, #000000 0%, #1a1a1a 50%, #0d0d0d 100%);
+  border: 2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 1px rgba(255,255,255,0.05);
+}
+.midnight_black::before { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); height: 1px; }
+.midnight_black .bannerName { color: #f9fafb !important; text-shadow: 0 0 8px rgba(255,255,255,0.5) !important; }
+.midnight_black .bannerLine1 { color: #e5e7eb !important; }
+.midnight_black .bannerLine3 { color: #d1d5db !important; }
+.midnight_black .bannerBadge { background: rgba(255,255,255,0.12) !important; border-color: rgba(255,255,255,0.4) !important; }
+.midnight_black .bannerStars { color: #e5e7eb; }
+.midnight_black .p1, .midnight_black .p2, .midnight_black .p3, .midnight_black .p4, .midnight_black .p5 { color: rgba(255,255,255,0.6) !important; }
+
+/* ══════════════════════════════════════════════════
+   테마 10: candy_pink — 캔디 핑크, 밝고 발랄한 느낌
+   배경: 버블검 핑크 (네온핑크와 완전히 다른 느낌!)
+   ══════════════════════════════════════════════════ */
+.candy_pink {
+  background: linear-gradient(145deg, #4a0030 0%, #be185d 45%, #ec4899 70%, #4a0030 100%);
+  border: 2px solid #f9a8d4;
+  box-shadow: 0 6px 28px rgba(236,72,153,0.55), inset 0 1px 0 rgba(255,200,230,0.3);
+}
+.candy_pink::before { background: linear-gradient(90deg, #ec4899, #f9a8d4, #ec4899); }
+.candy_pink .bannerName { color: #fce7f3 !important; text-shadow: 0 0 10px rgba(236,72,153,0.8) !important; }
+.candy_pink .bannerLine1 { color: #fbcfe8 !important; }
+.candy_pink .bannerLine3 { color: #f9a8d4 !important; }
+.candy_pink .bannerBadge { background: rgba(157,23,77,0.9) !important; border-color: #f9a8d4 !important; }
+.candy_pink .bannerStars { color: #fbcfe8; }
+
+/* ══════════════════════════════════════════════════
+   테마 11: royal_blue — 로열 블루, 품격 있는 파랑
+   배경: 짙은 인디고 → 로열 블루 (퍼플과 다른!)
+   ══════════════════════════════════════════════════ */
+.royal_blue {
+  background: linear-gradient(145deg, #020617 0%, #1e3a8a 40%, #3b82f6 65%, #020617 100%);
+  border: 2px solid #60a5fa;
+  box-shadow: 0 6px 30px rgba(59,130,246,0.5), inset 0 0 20px rgba(37,99,235,0.15);
+}
+.royal_blue::before { background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6); }
+.royal_blue .bannerName { color: #bfdbfe !important; text-shadow: 0 0 12px rgba(59,130,246,0.9) !important; }
+.royal_blue .bannerLine1 { color: #dbeafe !important; }
+.royal_blue .bannerLine3 { color: #93c5fd !important; }
+.royal_blue .bannerBadge { background: rgba(29,78,216,0.9) !important; border-color: #60a5fa !important; }
+.royal_blue .bannerStars { color: #93c5fd; }
+
+/* ══════════════════════════════════════════════════
+   테마 12: sakura_pink — 벚꽃 사쿠라, 부드럽고 신비로운
+   배경: 자줏빛 다크 + 연분홍 벚꽃 포인트
+   ══════════════════════════════════════════════════ */
+.sakura_pink {
+  background: linear-gradient(145deg, #1a0824 0%, #581c4a 40%, #a21980 65%, #1a0824 100%);
+  border: 2px solid #f0abfc;
+  box-shadow: 0 6px 30px rgba(216,180,254,0.5), inset 0 0 20px rgba(168,85,247,0.15);
+}
+.sakura_pink::before { background: linear-gradient(90deg, #e879f9, #f0abfc, #e879f9); }
+.sakura_pink .bannerName { color: #fae8ff !important; text-shadow: 0 0 10px rgba(232,121,249,0.8) !important; }
+.sakura_pink .bannerLine1 { color: #f5d0fe !important; }
+.sakura_pink .bannerLine3 { color: #e879f9 !important; }
+.sakura_pink .bannerBadge { background: rgba(112,26,117,0.9) !important; border-color: #f0abfc !important; }
+.sakura_pink .bannerStars { color: #f0abfc; }
+
+/* ══════ 광고 배너 섹션 ══════ */
+.adBannerGrid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; padding: 12px; background: #fdf2f7;
+}
+.adBannerCard {
+  position: relative; border-radius: 14px; padding: 16px 14px;
+  overflow: hidden; cursor: pointer; text-decoration: none;
+  display: flex; flex-direction: column; gap: 6px;
+  align-items: center; text-align: center;
+  animation: adPulse 3s ease-in-out infinite;
+  min-height: 130px; justify-content: center;
+}
+.adBannerCard:nth-child(2) { animation-delay: 0.5s; }
+.adBannerCard:nth-child(3) { animation-delay: 1s; }
+.adBannerCard:nth-child(4) { animation-delay: 1.5s; }
+.adBannerCard:hover { animation: none; transform: scale(1.04) translateY(-2px); }
+.adBannerParticles { position: absolute; top: 8px; right: 10px; display: flex; gap: 4px; font-size: 12px; animation: sparkleFloat 2s ease-in-out infinite; }
+.adBannerEmoji { font-size: 28px; animation: cardFloat 2.5s ease-in-out infinite; }
+.adBannerText { font-size: 13px; font-weight: 900; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.adBannerSub { font-size: 10.5px; color: rgba(255,255,255,0.85); line-height: 1.4; }
+.adBannerCta {
+  font-size: 11px; font-weight: 800; color: #fff;
+  background: rgba(255,255,255,0.25); padding: 4px 14px;
+  border-radius: 20px; margin-top: 4px;
+  border: 1px solid rgba(255,255,255,0.4);
+  animation: badgePop 2s ease-in-out infinite;
+}
+.adShimmer {
+  position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmerSlide 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 줄광고 */
+.lineAdRow { display: flex; flex-direction: column; gap: 2px; padding: 8px 12px 12px; background: #fdf2f7; }
+.lineAdItem {
+  display: flex; align-items: center; gap: 8px; padding: 9px 14px;
+  background: linear-gradient(135deg, #c2185b, #e91e63);
+  border-radius: 8px; text-decoration: none;
+  transition: background 0.15s, transform 0.15s;
+  overflow: hidden; position: relative;
+}
+.lineAdItem:hover { transform: scale(1.01); background: linear-gradient(135deg, #880e4f, #c2185b); }
+.lineAdItem::after {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  animation: shimmerSlide 3s ease-in-out infinite;
+}
+.lineAdEmoji { font-size: 14px; flex-shrink: 0; }
+.lineAdText { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.92); }
+
+/* ══════ 반응형 ══════ */
+@media (max-width: 1024px) {
+  .premiumBannerGrid { grid-template-columns: repeat(3, 1fr); }
+  .adBannerGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .premiumBannerGrid { grid-template-columns: repeat(2, 1fr); }
+  .adBannerGrid { grid-template-columns: repeat(2, 1fr); }
+  .premiumBannerCard { min-height: 170px; }
+}
+@media (max-width: 480px) {
+  .premiumBannerGrid { grid-template-columns: 1fr; }
+  .adBannerGrid { grid-template-columns: 1fr; }
+  .premiumBannerCard {
+    min-height: 120px;
+    padding: 14px 12px;
+  }
+  .bannerName { font-size: 14px !important; }
+  .bannerLine1 { font-size: 12px !important; }
+  .bannerLine2 { font-size: 11px !important; }
+  .bannerLine3 { font-size: 11.5px !important; }
+  .bannerEmoji { font-size: 28px !important; }
+}

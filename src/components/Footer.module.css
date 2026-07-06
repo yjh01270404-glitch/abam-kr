@@ -1,76 +1,306 @@
+/* ============================================
+   Footer — 라이트 테마 (전면 개편)
+   ============================================ */
+
 .footer {
-  background-color: var(--bg-surface);
-  border-top: 1px solid var(--border-light);
-  padding: 3rem 1.5rem;
-  margin-top: 2rem;
-  padding-bottom: calc(5rem + env(safe-area-inset-bottom)); /* Leave space for bottom nav on mobile */
+  background-color: #f8fafc;
+  border-top: 2px solid #e2e8f0;
+  color: #475569;
+  padding: 40px 0 80px 0; /* 모바일 하단바 높이를 감안한 패딩 */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.footerContent {
-  max-width: 1200px;
+.container {
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 24px;
 }
 
-.footerBrand {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
+/* 1. 상단 4단 그리드 */
+.upperFooter {
+  padding-bottom: 35px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.footerDesc {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  gap: 32px;
 }
 
-.footerLinks {
+.gridCol {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.link {
-  cursor: pointer;
+.gridColCenter {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
 }
 
-.link:hover {
-  color: var(--text-primary);
+/* 고객센터 */
+.csHeader {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
 }
 
-.bold {
+.phoneIconCircle {
+  background-color: #fff1f2;
+  color: #db2777;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fecdd3;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(219, 39, 119, 0.05);
+}
+
+.csNumbers {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mainPhone {
+  font-size: 22px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.csHours {
+  font-size: 12px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.csSub {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.csBanner {
+  background-color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #334155;
+  text-align: center;
+  border: 1px solid #cbd5e1;
 }
 
-.divider {
-  color: var(--border-light);
+/* 퀵 링크 */
+.quickLinkItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.footerInfo {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
+.quickLinkItem:hover {
+  color: #db2777;
+}
+
+.linkIcon {
+  color: #94a3b8;
+}
+
+/* 무통장 입금 */
+.bankTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.bankList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bankRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #475569;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.bankLabel {
+  font-weight: 800;
+  color: #334155;
+}
+
+.bankAccount {
+  color: #0f172a;
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.bankOwner {
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* 2. 중간 메뉴바 */
+.middleBar {
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 0;
+}
+
+.middleContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.middleLinks {
+  display: flex;
+  gap: 20px;
+  font-size: 12.5px;
+  color: #475569;
+  font-weight: 600;
+}
+
+.middleLinks span {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.middleLinks span:hover {
+  color: #db2777;
+}
+
+.boldLink {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.resolutionBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.resolutionBtn:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+/* 3. 하단 법인 정보 */
+.bottomSection {
+  padding-top: 30px;
+}
+
+.bottomFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.corpInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 950px;
+}
+
+.corpInfo p {
+  font-size: 11.5px;
+  color: #64748b;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.footerInfo p {
-  margin-bottom: 0.25rem;
+  margin: 0;
 }
 
 .copyright {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  border-top: 1px solid var(--border-light);
-  padding-top: 1.5rem;
+  margin-top: 8px !important;
+  color: #94a3b8 !important;
+  font-weight: 500;
 }
 
-@media (min-width: 768px) {
-  .footer {
-    padding-bottom: 3rem; /* Desktop doesn't have bottom nav */
+/* 성인 및 안심 배지 */
+.badgeWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.adultBadge {
+  background-color: #ef4444;
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.15);
+}
+
+.secureBadge {
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  color: #475569;
+  text-align: center;
+  line-height: 1.3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+/* 반응형 */
+@media (max-width: 992px) {
+  .footerGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .middleContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .middleLinks {
+    flex-wrap: wrap;
+    gap: 12px 16px;
   }
 }

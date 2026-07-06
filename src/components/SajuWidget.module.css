@@ -1,0 +1,245 @@
+/* SajuWidget.module.css — 라이트 테마 */
+
+.widget {
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.widgetHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: linear-gradient(90deg, #5b21b6 0%, #7c3aed 100%);
+  border-bottom: 1px solid #6d28d9;
+}
+
+.headerIcon { font-size: 20px; line-height: 1; }
+
+.headerTitle {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.headerSub {
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1px;
+}
+
+/* 입력 폼 */
+.inputForm {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.formDesc {
+  font-size: 11.5px;
+  color: #6b7280;
+  line-height: 1.6;
+  text-align: center;
+  padding-bottom: 2px;
+}
+.formDesc strong { color: #7c3aed; font-weight: 800; }
+
+.genderRow {
+  display: flex;
+  gap: 8px;
+}
+
+.genderBtn {
+  flex: 1;
+  padding: 8px;
+  background: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.genderActiveM {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #2563eb;
+}
+
+.genderActiveF {
+  background: #fdf2f8;
+  border-color: #ec4899;
+  color: #db2777;
+}
+
+.inputRow { width: 100%; }
+
+.dateInput, .timeSelect {
+  width: 100%;
+  padding: 9px 11px;
+  background: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #1f2937;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+  -moz-appearance: textfield;
+}
+.dateInput::-webkit-outer-spin-button,
+.dateInput::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.dateInput::placeholder { color: #9ca3af; }
+.dateInput:focus, .timeSelect:focus { border-color: #7c3aed; background: #fff; }
+
+.inputRowSmall { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.dateInputSmall {
+  width: 100%;
+  padding: 9px 10px;
+  background: #f9fafb;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #1f2937;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+  -moz-appearance: textfield;
+  text-align: center;
+}
+.dateInputSmall::-webkit-outer-spin-button,
+.dateInputSmall::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.dateInputSmall::placeholder { color: #9ca3af; }
+.dateInputSmall:focus { border-color: #7c3aed; background: #fff; }
+
+.errorMsg { font-size: 11px; color: #e11d48; text-align: center; }
+
+.submitBtn {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(90deg, #5b21b6 0%, #7c3aed 100%);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.3);
+}
+.submitBtn:hover { opacity: 0.88; }
+
+/* 결과 영역 */
+.resultArea {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 사주 기둥 */
+.sajuPillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.pillar {
+  background: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  border-radius: 7px;
+  padding: 8px 4px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.pillarHanja { font-size: 17px; line-height: 1; color: #6d28d9; font-weight: 900; }
+.pillarKor { font-size: 10px; color: #4b5563; font-weight: 700; }
+.pillarLabel { font-size: 9px; color: #9ca3af; }
+
+/* 운세 제목 */
+.fortuneTitle {
+  text-align: center;
+  font-size: 13px; font-weight: 800; color: #5b21b6;
+  background: #f5f3ff; border: 1px solid #ddd6fe;
+  border-radius: 6px; padding: 7px;
+}
+
+/* 운세 메시지 */
+.fortuneMsg {
+  font-size: 11.5px; color: #4b5563; line-height: 1.7;
+  background: #f9fafb; border-radius: 7px;
+  padding: 11px; border: 1px solid #f3f4f6;
+  text-align: center;
+}
+
+/* 세부 목록 */
+.detailList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.detailRow {
+  display: flex;
+  gap: 10px;
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.detailIcon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.detailText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detailText strong {
+  font-size: 11px;
+  color: #854d0e;
+}
+
+.detailText p {
+  margin: 0;
+  font-size: 11.5px;
+  color: #3f6212;
+  line-height: 1.4;
+}
+
+/* 행운 바 */
+.luckyBar {
+  display: flex;
+  justify-content: space-around;
+  background: #fdf2f8;
+  border: 1px solid #fbcfe8;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: #be185d;
+}
+
+/* 다시하기 버튼 */
+.retryBtn {
+  width: 100%; padding: 8px;
+  background: transparent; border: 1px solid #e5e7eb;
+  color: #9ca3af; font-size: 11px; font-weight: 600;
+  border-radius: 6px; cursor: pointer; font-family: inherit; transition: all 0.15s;
+}
+.retryBtn:hover { border-color: #7c3aed; color: #7c3aed; }

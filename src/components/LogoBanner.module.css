@@ -1,0 +1,279 @@
+/* ============================================
+   LogoBanner - 실제 업계 스타일 (밝고 화려한)
+   ============================================ */
+
+/* Core Layout */
+.customBanner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  user-select: none;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes shineSweep {
+  0% { transform: translateX(-200%) skewX(-20deg); }
+  60%, 100% { transform: translateX(300%) skewX(-20deg); }
+}
+
+@keyframes borderFlashPink {
+  0%, 100% { border-color: #be123c; box-shadow: 0 0 8px rgba(190,18,60,0.5); }
+  50% { border-color: #f43f5e; box-shadow: 0 0 16px rgba(244,63,94,0.7); }
+}
+
+@keyframes borderFlashGold {
+  0%, 100% { border-color: #b45309; box-shadow: 0 0 8px rgba(180,83,9,0.5); }
+  50% { border-color: #f59e0b; box-shadow: 0 0 16px rgba(245,158,11,0.7); }
+}
+
+@keyframes neonGlowCycle {
+  0% { border-color: #e11d48; box-shadow: 0 0 10px rgba(225,29,72,0.6); }
+  33% { border-color: #7c3aed; box-shadow: 0 0 10px rgba(124,58,237,0.6); }
+  66% { border-color: #0ea5e9; box-shadow: 0 0 10px rgba(14,165,233,0.6); }
+  100% { border-color: #e11d48; box-shadow: 0 0 10px rgba(225,29,72,0.6); }
+}
+
+@keyframes neonTextFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.1), 0 0 8px currentColor;
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.7;
+  }
+}
+
+@keyframes scalePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes rainbowBorderSpin {
+  0%   { border-color: #e11d48; box-shadow: 0 0 12px rgba(225,29,72,0.6); }
+  14%  { border-color: #ea580c; box-shadow: 0 0 12px rgba(234,88,12,0.6); }
+  28%  { border-color: #ca8a04; box-shadow: 0 0 12px rgba(202,138,4,0.6); }
+  42%  { border-color: #059669; box-shadow: 0 0 12px rgba(5,150,105,0.6); }
+  57%  { border-color: #0ea5e9; box-shadow: 0 0 12px rgba(14,165,233,0.6); }
+  71%  { border-color: #7c3aed; box-shadow: 0 0 12px rgba(124,58,237,0.6); }
+  85%  { border-color: #db2777; box-shadow: 0 0 12px rgba(219,39,119,0.6); }
+  100% { border-color: #e11d48; box-shadow: 0 0 12px rgba(225,29,72,0.6); }
+}
+
+/* --- Motion Levels --- */
+
+/* LEVEL 1: Border flash + text flicker */
+.level1.archetypePink { animation: borderFlashPink 1.8s infinite ease-in-out; }
+.level1.archetypeGoldStar,
+.level1.archetypeGoldBlock,
+.level1.archetypeGoldBadge { animation: borderFlashGold 1.5s infinite ease-in-out; }
+.level1.archetypePurpleNeon { animation: neonGlowCycle 2.5s infinite ease-in-out; }
+.level1 .purpleNeonMain { animation: neonTextFlicker 2s infinite; }
+.level1.archetypeFlyer { animation: borderFlashPink 1.6s infinite ease-in-out; }
+.level1.archetypeChrome { animation: neonGlowCycle 3s infinite ease-in-out; }
+
+/* LEVEL 2: Sheen sweep */
+.level2::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: shineSweep 2s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 5;
+}
+.level2.archetypeOutlineBox { animation: scalePulse 2.5s infinite alternate ease-in-out; }
+.level2.archetypeOrangePop { animation: scalePulse 1.8s infinite alternate ease-in-out; }
+.level2 .traditionalStamp { animation: scalePulse 1.5s infinite alternate ease-in-out; }
+
+/* LEVEL 3: Rainbow + fast sweep */
+.level3::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: shineSweep 0.9s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 5;
+}
+.level3 { animation: rainbowBorderSpin 1.2s linear infinite !important; }
+.level3 span, .level3 div { animation: neonTextFlicker 1s infinite; }
+
+
+/* --- Archetypes --- */
+
+/* 1. 핑크 블라썸 */
+.archetypePink {
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%);
+  border: 2px solid #fda4af;
+}
+.pinkSub { font-size: 8px; color: #be123c; font-weight: 700; letter-spacing: 0.15em; margin-bottom: 3px; text-transform: uppercase; }
+.pinkMain {
+  font-size: 16px; color: #c2185b; font-weight: 900;
+  text-shadow: 1.5px 1.5px 0 #ffffff, -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff;
+  letter-spacing: -0.02em; text-align: center;
+}
+.pinkPay {
+  font-size: 9px; color: #be123c; font-weight: 800;
+  background: rgba(255,255,255,0.7); border: 1px solid #fda4af;
+  padding: 1px 7px; border-radius: 4px; margin-top: 3px;
+}
+
+/* 2. 글로시 크롬 3D */
+.archetypeChrome {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 2px solid #94a3b8;
+  box-shadow: inset 0 2px 6px rgba(255,255,255,0.15);
+}
+.chromeMain {
+  font-size: 17px; color: #f8fafc; font-weight: 900; letter-spacing: 0.05em;
+  text-shadow: 0 0 4px rgba(255,255,255,0.6), 0 2px 0 #475569, 0 4px 5px rgba(0,0,0,0.5);
+  text-align: center;
+}
+.chromeBadge { font-size: 8px; color: #94a3b8; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 3px; margin-top: 4px; text-align: center; }
+
+/* 3. 클래식 블랙 품격 */
+.archetypeTraditional {
+  background: linear-gradient(135deg, #1c1917 0%, #0c0a09 100%);
+  border: 2px solid #ca8a04;
+}
+.traditionalBorder {
+  border: 1px solid rgba(202,138,4,0.4); border-radius: 4px; padding: 6px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 92%; height: 88%;
+}
+.traditionalLeft {
+  font-size: 10px; color: #fbbf24; font-weight: 800; line-height: 1.1;
+  text-align: center; border-right: 1px solid rgba(202,138,4,0.3);
+  padding-right: 8px; font-family: Georgia, serif; white-space: pre-line;
+}
+.traditionalMain { font-size: 13px; color: #f5f5f4; font-weight: 800; letter-spacing: 0.02em; display: flex; flex-direction: column; }
+.traditionalSub { font-size: 8px; color: #a8a29e; font-weight: 500; margin-top: 2px; }
+.traditionalStamp {
+  font-size: 9px; background: #dc2626; color: #fff;
+  width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;
+  border-radius: 3px; font-weight: 900; margin-left: 4px;
+}
+
+/* 4. 골든 스타 라이트 */
+.archetypeGoldStar {
+  background: radial-gradient(circle, #292524 0%, #1c1917 100%);
+  border: 2px solid #ca8a04;
+  box-shadow: 0 0 10px rgba(202,138,4,0.3);
+}
+.goldStarMain {
+  font-size: 16px; color: #fde047; font-weight: 900;
+  text-shadow: 0 0 8px rgba(250,204,21,0.7), 0 2px 2px rgba(0,0,0,0.8);
+  letter-spacing: -0.01em; text-align: center;
+}
+.goldStarBadge {
+  font-size: 8px; color: #1c1917; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  padding: 2px 8px; border-radius: 99px; font-weight: 900; margin-top: 5px; text-align: center;
+}
+
+/* 5. 명품 브러쉬 스크립트 */
+.archetypeBrand {
+  background: #ffffff;
+  border: 2px solid #e11d48;
+}
+.brandMain {
+  font-size: 22px; color: #dc2626; font-weight: 900; font-style: italic;
+  font-family: Georgia, serif; letter-spacing: -0.03em;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.08); text-align: center;
+}
+.brandTag {
+  font-size: 7px; color: #7f1d1d; font-weight: 800;
+  background: #fee2e2; border: 1px solid #fca5a5;
+  padding: 2px 8px; border-radius: 3px; margin-top: 3px; text-align: center;
+}
+
+/* 6. 골드 네온 블록 */
+.archetypeGoldBlock {
+  background: #0c0a09;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 0 12px rgba(245,158,11,0.4);
+}
+.goldBlockMain {
+  font-size: 17px; color: #fbbf24; font-weight: 900;
+  text-shadow: 1.5px 1.5px 0 #000, -1px -1px 0 #000, 0 0 8px rgba(251,191,36,0.8);
+  letter-spacing: -0.02em; text-align: center;
+}
+.goldBlockSub { font-size: 9px; color: #fcd34d; font-weight: 700; margin-top: 4px; }
+
+/* 7. 화이트 아웃라인 박스 */
+.archetypeOutlineBox { background: #0f172a; border: 2px solid #ffffff; }
+.outlineBoxInner { border: 1.5px solid rgba(255,255,255,0.5); width: 88%; height: 83%; display: flex; align-items: center; justify-content: center; }
+.outlineBoxContent { display: flex; flex-direction: column; align-items: center; }
+.outlineBoxMain { font-size: 14px; color: #ffffff; font-weight: 900; letter-spacing: 0.05em; text-align: center; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+.outlineBoxSub { font-size: 8px; color: rgba(255,255,255,0.65); margin-top: 3px; }
+
+/* 8. 룸 바 골드 배지 */
+.archetypeGoldBadge {
+  background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
+  border: 2px solid #eab308;
+}
+.goldBadgeInner {
+  border: 1px solid rgba(234,179,8,0.35); border-radius: 5px;
+  padding: 6px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.goldBadgeMain {
+  font-size: 15px; color: #fde047; font-weight: 900; letter-spacing: 0.1em;
+  border-bottom: 2px solid rgba(234,179,8,0.5); padding-bottom: 2px; text-align: center;
+}
+.goldBadgeSub { font-size: 8px; color: rgba(255,255,255,0.7); font-weight: 700; margin-top: 4px; text-align: center; }
+
+/* 9. 퍼플 네온 튜브 */
+.archetypePurpleNeon {
+  background: #0f0721;
+  border: 2px solid #a855f7;
+  box-shadow: 0 0 12px rgba(168,85,247,0.4);
+}
+.purpleNeonMain {
+  font-size: 16px; color: #f3e8ff; font-weight: 900; letter-spacing: 0.05em;
+  text-align: center; text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
+}
+.purpleNeonSub { font-size: 9px; color: #d8b4fe; font-weight: 700; margin-top: 4px; }
+
+/* 10. 전단지 프린트 */
+.archetypeFlyer {
+  background: #ffffff;
+  border: 2.5px solid #dc2626;
+  padding: 6px; display: flex; flex-direction: column; align-items: center;
+}
+.flyerMain {
+  font-size: 15px; color: #dc2626; font-weight: 900;
+  letter-spacing: -0.03em; line-height: 1.1; text-align: center;
+}
+.flyerSub {
+  font-size: 9px; color: #1a1a2e; font-weight: 800; margin-top: 3px;
+  border: 1.5px solid #1a1a2e; padding: 1px 8px; border-radius: 2px; text-align: center;
+}
+.flyerDetail { font-size: 8px; color: #dc2626; margin-top: 2px; font-weight: 600; }
+
+/* 11. 오렌지 가라오케 팝 */
+.archetypeOrangePop {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  border: 2px solid #fde047;
+  box-shadow: inset 0 0 8px rgba(253,224,71,0.25);
+}
+.orangePopMain {
+  font-size: 17px; color: #1a1a2e; font-weight: 900; letter-spacing: -0.02em;
+  text-shadow: 1.5px 1.5px 0 #fde047, -1px -1px 0 #fde047, 0 2px 4px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.orangePopSub {
+  font-size: 8px; color: #ffffff; font-weight: 700; margin-top: 3px;
+  background: rgba(0,0,0,0.25); padding: 1px 6px; border-radius: 3px;
+}

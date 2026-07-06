@@ -1,0 +1,86 @@
+﻿.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a0010 0%, #3d0025 50%, #1a0010 100%);
+  padding: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(233,30,99,0.3);
+  border-radius: 24px;
+  padding: 60px 48px;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 8px 60px rgba(233,30,99,0.25);
+}
+.moonIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.errorCode {
+  font-size: 96px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #e91e63, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 12px;
+}
+.desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin: 0 0 32px;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.homeBtn {
+  background: linear-gradient(135deg, #e91e63, #c2185b);
+  color: #fff;
+  text-decoration: none;
+  padding: 13px 24px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(233,30,99,0.4);
+}
+.homeBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233,30,99,0.5); }
+.jobsBtn {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  text-decoration: none;
+  padding: 13px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.2s;
+}
+.jobsBtn:hover { background: rgba(255,255,255,0.15); }
+.brandTag {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  font-weight: 600;
+}

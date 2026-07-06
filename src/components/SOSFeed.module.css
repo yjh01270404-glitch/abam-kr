@@ -1,0 +1,136 @@
+.sosWrapper {
+  width: 100%;
+  background: linear-gradient(90deg, #dc2626, #ea580c);
+  color: #fff;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.6);
+  border-bottom: 2px solid #fef08a;
+}
+
+.sosInner {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  gap: 0;
+  min-width: 0;
+}
+
+.sosBadge {
+  background: #000;
+  color: #fef08a;
+  font-weight: 900;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 15px;
+  margin-left: 20px;
+  margin-right: 16px;
+  animation: blink 1s infinite;
+  flex-shrink: 0;
+  z-index: 2;
+  border: 1px solid #fef08a;
+  white-space: nowrap;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* ──/* 세로 슬라이드 컨테이너 */
+.tickerContainer {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  height: 34px;
+}
+
+/* 각 아이템: key 변경 시 리마운트 → 아래→위 애니메이션 실행 */
+@keyframes slideUp {
+  0%   { transform: translateY(110%); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+.sosSlide {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  height: 34px;
+  animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.sosCompany {
+  color: #fbbf24;
+  font-weight: 800;
+  font-size: 13px;
+  background: rgba(0,0,0,0.25);
+  padding: 1px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sosTitle {
+  color: #fff;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sosPay {
+  color: #fef08a;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sosLoc {
+  background: rgba(0,0,0,0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.applyBtn {
+  background: #fff;
+  color: #ef4444;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.1s;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.applyBtn:hover {
+  transform: scale(1.05);
+}
+
+/* 모바일 대응: SOS 바 오버플로우 데디케 수정 */
+@media (max-width: 480px) {
+  .sosBadge {
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .sosSlide { gap: 8px; font-size: 12px; }
+  .sosCompany { font-size: 11px; padding: 1px 6px; }
+  .sosTitle { font-size: 12px; }
+  .sosPay { font-size: 12px; }
+  .sosLoc { font-size: 11px; }
+  .applyBtn { font-size: 11px; padding: 3px 8px; margin-right: 8px; }
+}

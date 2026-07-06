@@ -1,64 +1,241 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { useApp } from '../context/AppContext';
+import AbamLogo from './AbamLogo';
 import styles from './AgeGateway.module.css';
 
+type Tab = 'login' | 'signup';
+
 export default function AgeGateway({ children }: { children: React.ReactNode }) {
-  const [isVerified, setIsVerified] = useState<boolean | null>(null);
+  const { currentUser, login, signup } = useApp();
+  const [mounted, setMounted] = useState(false);
+  const [tab, setTab] = useState<Tab>('login');
 
-  useEffect(() => {
-    // Check if user has already verified
-    const verified = localStorage.getItem('isVerified19');
-    if (verified === 'true') {
-      setIsVerified(true);
-    } else {
-      setIsVerified(false);
-    }
-  }, []);
+  // 로그인 폼
+  const [loginId, setLoginId] = useState('');
+  const [loginPw, setLoginPw] = useState('');
+  const [showLoginPw, setShowLoginPw] = useState(false);
+  const [loginError, setLoginError] = useState('');
 
-  const handleVerify = () => {
-    // Mocking the mobile verification process
-    alert('PASS / 간편본인인증 화면이 팝업됩니다. (테스트 환경)');
-    setTimeout(() => {
-      localStorage.setItem('isVerified19', 'true');
-      setIsVerified(true);
-    }, 1000);
+  // 회원가입 폼
+  const [signId, setSignId] = useState('');
+  const [signPw, setSignPw] = useState('');
+  const [signPw2, setSignPw2] = useState('');
+  const [signNick, setSignNick] = useState('');
+  const [signBirth, setSignBirth] = useState('');
+  const [signGender, setSignGender] = useState<'M' | 'F' | ''>('');
+  const [signRole, setSignRole] = useState<'seeker' | 'employer'>('seeker');
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [agreeAge, setAgreeAge] = useState(false);
+  const [showSignPw, setShowSignPw] = useState(false);
+  const [signError, setSignError] = useState('');
+
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!mounted) return null;
+  if (currentUser) return <>{children}</>;
+
+  /* ── 로그인 처리 ── */
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+    if (!loginId || !loginPw) { setLoginError('아이디와 비밀번호를 입력해주세요.'); return; }
+    const result = login(loginId, loginPw);
+    if (result === 'not_found') setLoginError('존재하지 않는 아이디입니다.');
+    else if (result === 'invalid') setLoginError('비밀번호가 올바르지 않습니다.');
   };
 
-  // While checking localStorage, show nothing to prevent flashing
-  if (isVerified === null) return null;
+  /* ── 회원가입 처리 ── */
+  const handleSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSignError('');
+    if (!signId || !signPw || !signNick || !signBirth || !signGender)
+      { setSignError('모든 항목을 입력해주세요.'); return; }
+    if (signPw !== signPw2) { setSignError('비밀번호가 일치하지 않습니다.'); return; }
+    if (signBirth.length !== 8 || !/^\d{8}$/.test(signBirth))
+      { setSignError('생년월일 8자리를 입력해주세요. (예: 19900101)'); return; }
+    if (!agreeTerms || !agreeAge) { setSignError('이용약관 및 연령 확인에 동의해주세요.'); return; }
 
-  if (isVerified) {
-    return <>{children}</>;
-  }
+    const result = signup({ username: signId, password: signPw, nickname: signNick, birthdate: signBirth, gender: signGender, role: signRole });
+    if (result === 'duplicate') setSignError('이미 사용 중인 아이디입니다.');
+    else if (result === 'underage') setSignError('만 19세 미만은 가입하실 수 없습니다.');
+  };
+
+  const formatBirth = (v: string) => v.replace(/\D/g, '').slice(0, 8);
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <div className={styles.iconWrapper}>
-          <ShieldAlert size={48} className={styles.icon} />
+        {/* 헤더 */}
+        <div className={styles.modalHeader}>
+          <div className={styles.logo}>🌙 <AbamLogo fontSize="inherit" /></div>
+          <div className={styles.badge19}>19+</div>
         </div>
-        <h1 className={styles.title}>19세 미만 출입금지</h1>
-        <p className={styles.description}>
-          본 사이트는 청소년 유해 매체물로서<br />
-          정보통신망 이용촉진 및 정보보호 등에 관한 법률 및<br />
-          청소년 보호법의 규정에 의하여<br />
-          <strong>19세 미만의 청소년은 이용할 수 없습니다.</strong>
-        </p>
-        <div className={styles.divider}></div>
-        <p className={styles.subtext}>
-          정보통신망 이용촉진 및 정보보호 등에 관한 법률<br />
-          제 42조의 2에 의거하여 본인인증이 필요합니다.
-        </p>
-        
-        <button className={styles.verifyBtn} onClick={handleVerify}>
-          <CheckCircle2 size={20} />
-          휴대폰 본인인증하기
-        </button>
 
-        <a href="https://www.google.com" className={styles.exitLink}>
-          19세 미만이므로 나가기
+        <p className={styles.headerDesc}>
+          성인 회원 전용 서비스입니다.<br />
+          <strong>로그인</strong> 또는 <strong>회원가입</strong> 후 이용하세요.
+        </p>
+
+        {/* 탭 */}
+        <div className={styles.tabRow}>
+          <button
+            className={`${styles.tabBtn} ${tab === 'login' ? styles.tabBtnActive : ''}`}
+            onClick={() => { setTab('login'); setLoginError(''); }}
+          >로그인</button>
+          <button
+            className={`${styles.tabBtn} ${tab === 'signup' ? styles.tabBtnActive : ''}`}
+            onClick={() => { setTab('signup'); setSignError(''); }}
+          >회원가입</button>
+        </div>
+
+        {/* ── 로그인 탭 ── */}
+        {tab === 'login' && (
+          <form className={styles.form} onSubmit={handleLogin}>
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>아이디</label>
+              <input
+                className={styles.fieldInput}
+                placeholder="아이디 입력"
+                value={loginId}
+                onChange={e => setLoginId(e.target.value)}
+                autoComplete="username"
+              />
+            </div>
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>비밀번호</label>
+              <div className={styles.pwRow}>
+                <input
+                  className={styles.fieldInput}
+                  type={showLoginPw ? 'text' : 'password'}
+                  placeholder="비밀번호 입력"
+                  value={loginPw}
+                  onChange={e => setLoginPw(e.target.value)}
+                  autoComplete="current-password"
+                />
+                <button type="button" className={styles.eyeBtn} onClick={() => setShowLoginPw(v => !v)}>
+                  {showLoginPw ? '🙈' : '👁️'}
+                </button>
+              </div>
+            </div>
+
+            {loginError && <p className={styles.errorTxt}>⚠️ {loginError}</p>}
+
+            <button type="submit" className={styles.submitBtn}>
+              🔓 로그인
+            </button>
+
+            <p className={styles.switchTxt}>
+              계정이 없으신가요?{' '}
+              <button type="button" className={styles.switchLink} onClick={() => setTab('signup')}>
+                회원가입하기
+              </button>
+            </p>
+          </form>
+        )}
+
+        {/* ── 회원가입 탭 ── */}
+        {tab === 'signup' && (
+          <form className={styles.form} onSubmit={handleSignup}>
+            {/* 가입 유형 */}
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>가입 유형</label>
+              <div className={styles.roleRow}>
+                <button type="button"
+                  className={`${styles.roleBtn} ${signRole === 'seeker' ? styles.roleBtnActive : ''}`}
+                  onClick={() => setSignRole('seeker')}>
+                  👩 구직자 (알바생)
+                </button>
+                <button type="button"
+                  className={`${styles.roleBtn} ${signRole === 'employer' ? styles.roleBtnActive : ''}`}
+                  onClick={() => setSignRole('employer')}>
+                  🏢 구인자 (업소)
+                </button>
+              </div>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>아이디</label>
+              <input className={styles.fieldInput} placeholder="영문/숫자 조합" value={signId}
+                onChange={e => setSignId(e.target.value.replace(/[^a-zA-Z0-9_]/g, '').slice(0, 20))} />
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>닉네임</label>
+              <input className={styles.fieldInput} placeholder="사용할 닉네임" value={signNick}
+                onChange={e => setSignNick(e.target.value.slice(0, 12))} />
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>비밀번호</label>
+              <div className={styles.pwRow}>
+                <input className={styles.fieldInput} type={showSignPw ? 'text' : 'password'}
+                  placeholder="8자 이상" value={signPw}
+                  onChange={e => setSignPw(e.target.value)} />
+                <button type="button" className={styles.eyeBtn} onClick={() => setShowSignPw(v => !v)}>
+                  {showSignPw ? '🙈' : '👁️'}
+                </button>
+              </div>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>비밀번호 확인</label>
+              <input className={`${styles.fieldInput} ${signPw2 && signPw !== signPw2 ? styles.inputError : ''}`}
+                type="password" placeholder="비밀번호 재입력" value={signPw2}
+                onChange={e => setSignPw2(e.target.value)} />
+            </div>
+
+            {/* 생년월일 + 성별 */}
+            <div className={styles.twoCol}>
+              <div className={styles.fieldGroup}>
+                <label className={styles.fieldLabel}>생년월일 (8자리)</label>
+                <input className={styles.fieldInput} placeholder="예) 19901225" inputMode="numeric"
+                  value={signBirth} onChange={e => setSignBirth(formatBirth(e.target.value))} maxLength={8} />
+              </div>
+              <div className={styles.fieldGroup}>
+                <label className={styles.fieldLabel}>성별</label>
+                <div className={styles.genderRow}>
+                  {(['F', 'M'] as const).map(g => (
+                    <button key={g} type="button"
+                      className={`${styles.genderBtn} ${signGender === g ? styles.genderBtnActive : ''}`}
+                      onClick={() => setSignGender(g)}>
+                      {g === 'F' ? '여성' : '남성'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* 동의 체크박스 */}
+            <div className={styles.agreeBox}>
+              <label className={styles.checkRow}>
+                <input type="checkbox" checked={agreeAge} onChange={e => setAgreeAge(e.target.checked)} />
+                <span>본인은 <strong>만 19세 이상</strong>이며 성인임을 확인합니다.</span>
+              </label>
+              <label className={styles.checkRow}>
+                <input type="checkbox" checked={agreeTerms} onChange={e => setAgreeTerms(e.target.checked)} />
+                <span>이용약관 및 개인정보처리방침에 동의합니다.</span>
+              </label>
+            </div>
+
+            {signError && <p className={styles.errorTxt}>⚠️ {signError}</p>}
+
+            <button type="submit" className={styles.submitBtn}>
+              ✨ 회원가입
+            </button>
+
+            <p className={styles.switchTxt}>
+              이미 계정이 있으신가요?{' '}
+              <button type="button" className={styles.switchLink} onClick={() => setTab('login')}>
+                로그인하기
+              </button>
+            </p>
+          </form>
+        )}
+
+        <a href="https://www.naver.com" className={styles.exitLink}>
+          미성년자입니다. 사이트를 떠납니다 →
         </a>
       </div>
     </div>

@@ -127,7 +127,7 @@ export default function EmployerPostPage() {
               <div className={`${styles.tierCard} ${tier === 'bot' ? styles.tierActive : ''}`} onClick={() => setTier('bot')}>
                 <div className={styles.tierName}>스탠다드 (하위)</div>
                 <div className={styles.tierPrice}>50,000원</div>
-                <p className={styles.tierDesc}>기본 줄광고 리스트 노출</p>
+                <p className={styles.tierDesc}>기본 퀵광고 리스트 노출</p>
               </div>
             </div>
 

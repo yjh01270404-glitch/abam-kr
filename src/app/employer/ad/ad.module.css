@@ -1,0 +1,789 @@
+.container {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(219, 39, 119, 0.05) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, rgba(234, 179, 8, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.04) 0px, transparent 50%);
+  color: #0f172a;
+  padding: 40px 20px 80px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.breadLink {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadLink:hover {
+  color: #db2777;
+}
+
+.breadCurrent {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+/* Header */
+.header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #b45309 0%, #db2777 50%, #c2185b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.step {
+  font-size: 14px;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: color 0.3s ease;
+}
+
+.activeStep {
+  color: #c2185b;
+  font-weight: 800;
+}
+
+.stepDivider {
+  height: 1px;
+  background: #e2e8f0;
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+/* Form Card */
+.formCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.sectionDesc {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+/* Form Layout */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.input, .select {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #0f172a;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.input:focus, .select:focus {
+  border-color: #db2777;
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+  outline: none;
+  background: #ffffff;
+}
+
+.select option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Archetype Style Grid */
+.archetypeList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+/* Scrollbar Customization */
+.archetypeList::-webkit-scrollbar {
+  width: 6px;
+}
+.archetypeList::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.archetypeList::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.archetypeList::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.archetypeCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.archetypeCard:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.archActive {
+  background: #fff1f2;
+  border-color: #db2777;
+  box-shadow: 0 0 10px rgba(219, 39, 119, 0.08);
+}
+
+.archName {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.archDesc {
+  font-size: 10px;
+  color: #64748b;
+  line-height: 1.3;
+}
+
+/* Checkbox Option styling */
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff1f2;
+  border: 1px dashed rgba(219, 39, 119, 0.4);
+  padding: 14px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.checkbox {
+  margin-top: 3px;
+  accent-color: #db2777;
+}
+
+.checkboxText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.checkboxTitle {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.checkboxDesc {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Button Navigation */
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+.primaryBtn {
+  background: #c2185b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(194, 24, 91, 0.2);
+  transition: all 0.2s ease;
+}
+
+.primaryBtn:hover {
+  background: #880e4f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(194, 24, 91, 0.3);
+}
+
+.outlineBtn {
+  background: #ffffff;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.outlineBtn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+.payBtn {
+  background: linear-gradient(135deg, #d97706 0%, #eab308 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.payBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(217, 119, 6, 0.35);
+}
+
+/* Builder Layout (Step 2 Split Screen) */
+.builderGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+}
+
+.editorPanel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Sticky Preview Panel */
+.previewPanel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 28px;
+  height: fit-content;
+  position: sticky;
+  top: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.previewTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #c2185b;
+  margin-bottom: 4px;
+}
+
+.previewDesc {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.previewContainer {
+  background: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.previewBannerWrapper {
+  width: 100%;
+  max-width: 320px;
+  height: 110px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Price Estimate Panel */
+.priceEstimate {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 16px 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.estimateRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.estimateDivider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 12px 0;
+}
+
+.estimateTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.estimateTotal span:first-child {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.totalPrice {
+  font-size: 18px;
+  font-weight: 900;
+  color: #c2185b;
+}
+
+/* Step 3: Receipt */
+.receipt {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+.receiptGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 32px;
+}
+
+.receiptItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.receiptLabel {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.receiptVal {
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.receiptFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.receiptTotalLabel {
+  font-size: 15px;
+  font-weight: 800;
+  color: #334155;
+}
+
+.receiptTotalVal {
+  font-size: 22px;
+  font-weight: 900;
+  color: #c2185b;
+}
+
+/* Payment Guide */
+.paymentGuideCard {
+  display: flex;
+  gap: 16px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.guideIcon {
+  color: #2563eb;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.paymentGuideCard strong {
+  display: block;
+  font-size: 14px;
+  color: #1e3a8a;
+  margin-bottom: 4px;
+}
+
+.paymentGuideCard p {
+  font-size: 12px;
+  color: #1e40af;
+  margin: 0;
+}
+
+/* Step 4: Success card */
+.successCard {
+  background: #ffffff;
+  border: 1px solid #d1fae5;
+  border-radius: 20px;
+  padding: 48px;
+  text-align: center;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.successIconWrapper {
+  margin: 0 auto 24px auto;
+  background: #ecfdf5;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1.5px solid #a7f3d0;
+}
+
+.successIcon {
+  color: #10b981;
+}
+
+.successTitle {
+  font-size: 24px;
+  font-weight: 900;
+  color: #065f46;
+  margin-bottom: 12px;
+}
+
+.successDesc {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.successActions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .builderGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .previewPanel {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .stepper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .stepDivider {
+    display: none;
+  }
+  
+  .receiptGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.motionLevelGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.motionCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.motionCard:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.motionActive {
+  background: #fff1f2;
+  border-color: #db2777;
+  box-shadow: 0 0 10px rgba(219, 39, 119, 0.08);
+}
+
+.motionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.motionTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.motionPriceTag {
+  font-size: 13px;
+  font-weight: 800;
+  color: #b45309;
+  background-color: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #fde68a;
+}
+
+.motionDesc {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Detailed Recruitment Form Styles */
+.formGroupSeparator {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 28px 0;
+  width: 100%;
+}
+
+.textarea {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #0f172a;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.textarea:focus {
+  border-color: #db2777;
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+  outline: none;
+  background: #ffffff;
+}
+
+/* Job Card Preview Styles */
+.jobCardPreviewContainer {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+.previewCardTitle {
+  font-size: 15px;
+  font-weight: 800;
+  color: #c2185b;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mockJobCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mockJobCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.mockJobSectorBadge {
+  background-color: #db2777;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.mockJobCompanyName {
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.mockJobTitle {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.mockJobGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.mockJobField {
+  font-size: 13px;
+  color: #334155;
+}
+
+.mockJobField strong {
+  color: #64748b;
+  margin-right: 6px;
+}
+
+.highlightText {
+  color: #c2185b;
+  font-weight: 700;
+}
+
+.mockJobDetailsDivider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 16px 0;
+}
+
+.mockJobDetailsBody {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.mockJobDetailsBody strong {
+  color: #64748b;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.mockJobDetailsBody p {
+  color: #334155;
+  margin: 0;
+  white-space: pre-wrap;
+}

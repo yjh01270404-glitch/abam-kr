@@ -3,11 +3,19 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { UploadCloud, CheckCircle2, Building, User, Phone, Briefcase } from 'lucide-react';
+import { useApp } from '../../../context/AppContext';
 import styles from './register.module.css';
 
 export default function EmployerRegisterPage() {
+  const { registerEmployer } = useApp();
   const [step, setStep] = useState(1);
   const [file, setFile] = useState<File | null>(null);
+
+  // Form states
+  const [companyName, setCompanyName] = useState('');
+  const [regNo, setRegNo] = useState('');
+  const [owner, setOwner] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -19,6 +27,13 @@ export default function EmployerRegisterPage() {
     if (step === 1 && !file) {
       alert('사업자등록증을 첨부해주세요.');
       return;
+    }
+    if (step === 2) {
+      if (!companyName || !regNo || !owner || !phone) {
+        alert('모든 필수 항목을 입력해주세요.');
+        return;
+      }
+      registerEmployer(owner, companyName, regNo, phone);
     }
     if (step < 3) setStep(step + 1);
   };
@@ -72,19 +87,43 @@ export default function EmployerRegisterPage() {
             <h2 className={styles.cardTitle}>업체 정보 입력</h2>
             <div className={styles.formGroup}>
               <label><Building size={16}/> 업체명(상호명)</label>
-              <input type="text" placeholder="예: 아름다운밤 라운지" className={styles.input} />
+              <input 
+                type="text" 
+                placeholder="예: 아름다운밤 라운지" 
+                className={styles.input} 
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+              />
             </div>
             <div className={styles.formGroup}>
               <label><Briefcase size={16}/> 사업자등록번호</label>
-              <input type="text" placeholder="예: 123-45-67890" className={styles.input} />
+              <input 
+                type="text" 
+                placeholder="예: 123-45-67890" 
+                className={styles.input} 
+                value={regNo}
+                onChange={(e) => setRegNo(e.target.value)}
+              />
             </div>
             <div className={styles.formGroup}>
               <label><User size={16}/> 담당자명</label>
-              <input type="text" placeholder="예: 홍길동" className={styles.input} />
+              <input 
+                type="text" 
+                placeholder="예: 홍길동" 
+                className={styles.input} 
+                value={owner}
+                onChange={(e) => setOwner(e.target.value)}
+              />
             </div>
             <div className={styles.formGroup}>
               <label><Phone size={16}/> 담당자 연락처</label>
-              <input type="text" placeholder="예: 010-1234-5678" className={styles.input} />
+              <input 
+                type="text" 
+                placeholder="예: 010-1234-5678" 
+                className={styles.input} 
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </div>
 
             <div className={styles.buttonGroup}>
