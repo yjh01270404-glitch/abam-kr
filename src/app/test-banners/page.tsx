@@ -2,7 +2,7 @@ import React from 'react';
 import DynamicBanner from '../../components/DynamicBanner';
 import { JobAd } from '../../lib/mockData';
 
-const MOCK_JOBS: JobAd[] = [
+const MOCK_JOBS: any[] = [
   { id: 't1', type: 'top', title: '에이스 구함', companyName: '아름다운밤 라운지', location: '강남구', pay: '시급 25만', date: '오늘', isNew: true },
   { id: 't2', type: 'top', title: '에이스 구함', companyName: '잠실요정', location: '송파구', pay: '일급 100만', date: '오늘', isNew: true },
   { id: 't3', type: 'top', title: '에이스 구함', companyName: '역삼초이스', location: '강남구', pay: '시급 30만', date: '오늘', isNew: true },

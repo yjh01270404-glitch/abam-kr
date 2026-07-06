@@ -10,17 +10,47 @@ import styles from './page.module.css';
 import { topBanners, priorityJobs, recommendedJobs, generalJobs, forumPosts, talentProfiles } from '../lib/mockData';
 
 
-const demoAds: JobAd[] = [
-  { id: 'demo-v-1', type: 'top', title: '에이스 급구', companyName: '강남텐', location: '강남구', pay: '시급 25만', viewCount: 0, description: '' },
-  { id: 'demo-v-2', type: 'top', title: '당일지급', companyName: '잠실요정', location: '송파구', pay: '일급 100만', viewCount: 0, description: '' },
-  { id: 'demo-v-3', type: 'top', title: '최고대우', companyName: '역삼초이스', location: '강남구', pay: '시급 30만', viewCount: 0, description: '' },
-  { id: 'demo-p-1', type: 'priority', title: '초보환영', companyName: '홍대클럽', location: '마포구', pay: '시급 15만', viewCount: 0, description: '' },
-  { id: 'demo-p-2', type: 'special', title: '꿀알바', companyName: '신촌바', location: '서대문구', pay: '시급 12만', viewCount: 0, description: '' },
-  { id: 'demo-p-3', type: 'priority', title: '단기알바', companyName: '이태원라운지', location: '용산구', pay: '시급 10만', viewCount: 0, description: '' },
-  { id: 'demo-g-1', type: 'general', title: '가족같은분위기', companyName: '수원인계', location: '수원시', pay: '시급 8만', viewCount: 0, description: '' },
-  { id: 'demo-g-2', type: 'general', title: '급구합니다', companyName: '안양1번가', location: '안양시', pay: '시급 7만', viewCount: 0, description: '' },
-  { id: 'demo-g-3', type: 'general', title: '초보가능', companyName: '부천중동', location: '부천시', pay: '시급 9만', viewCount: 0, description: '' },
-  { id: 'demo-g-4', type: 'general', title: '주말알바', companyName: '일산라페', location: '고양시', pay: '시급 8.5만', viewCount: 0, description: '' },
+const baseAds = [
+  ...topBanners.map(ad => ({ ...ad, type: 'top' })),
+  ...priorityJobs.map(ad => ({ ...ad, type: 'priority' }))
+];
+
+const demoAds: any[] = [
+  ...baseAds,
+  ...baseAds.map(ad => ({ ...ad, id: ad.id + '-copy1' })),
+  ...baseAds.map(ad => ({ ...ad, id: ad.id + '-copy2' }))
+];
+
+const fullPriority = [
+  ...priorityJobs,
+  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c1' })),
+  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c2' })),
+  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c3' })),
+  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c4' }))
+];
+
+const fullSpecial = [
+  ...recommendedJobs,
+  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c1' })),
+  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c2' })),
+  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c3' })),
+  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c4' }))
+];
+
+const fullTalent = [
+  ...talentProfiles,
+  ...talentProfiles.map(j => ({ ...j, id: String(j.id) + '-c1' })),
+  ...talentProfiles.map(j => ({ ...j, id: String(j.id) + '-c2' }))
+];
+
+const fullTopBanners = [
+  ...topBanners,
+  ...topBanners.map(j => ({ ...j, id: j.id + '-c1' })),
+  ...topBanners.map(j => ({ ...j, id: j.id + '-c2' })),
+  ...topBanners.map(j => ({ ...j, id: j.id + '-c3' })),
+  ...topBanners.map(j => ({ ...j, id: j.id + '-c4' })),
+  ...topBanners.map(j => ({ ...j, id: j.id + '-c5' })),
+  ...topBanners.map(j => ({ ...j, id: j.id + '-c6' }))
 ];
 
 export default function Home_Page() {
@@ -167,8 +197,12 @@ export default function Home_Page() {
 
             {/* Image Banner Grid (gambling site style - 2 columns fixed height) */}
             <div className={styles.imageBannerGrid}>
-              {demoAds.map((ad) => (
-                <DynamicBanner key={ad.id} jobAd={ad} />
+              {/* VVIP Massive Banner (2x2 equivalent in 2 columns = span 2) */}
+              <DynamicBanner key={demoAds[0].id} jobAd={demoAds[0]} size="vvip" />
+              
+              {/* VIP / Premium Banners (20 small cards) */}
+              {demoAds.slice(1, 21).map((ad) => (
+                <DynamicBanner key={ad.id} jobAd={ad} size="normal" />
               ))}
             </div>
           </section>
@@ -296,9 +330,10 @@ export default function Home_Page() {
           <section className={styles.jobsSection}>
             <h3 className={styles.sectionHeading}>💖 우대 채용 정보 <span className={styles.subHeadingText}>유흥알바 밤알바 여성고소득 추천공고</span></h3>
             <div className={styles.priorityGrid}>
-              {priorityJobs.slice(0, 16).map((job) => (
+              {fullPriority.slice(0, 20).map((job) => (
                 <Link href={`/job/${job.id}`} key={job.id} className={styles.priorityCard}>
                   <div className={styles.priorityBadgeRow}>
+                    <span className={styles.tierBadgePriority}>VIP</span>
                     <span className={styles.priorityLocBadge}>{job.location}</span>
                     {job.tag && <span className={styles.priorityTagBadge}>{job.tag}</span>}
                   </div>
@@ -317,11 +352,15 @@ export default function Home_Page() {
           <section className={styles.jobsSection}>
             <h3 className={styles.sectionHeading}>👑 프리미엄 채용 정보 <span className={styles.subHeadingText}>검증된 고소득 안심 일자리 모음</span></h3>
             <div className={styles.premiumGrid}>
-              {topBanners.map((job) => (
+              {fullTopBanners.slice(0, 20).map((job) => (
                 <Link href={`/job/${job.id}`} key={job.id} className={styles.premiumCard}>
                   <div className={styles.premiumImageWrapper}>
                     <img src={job.image} alt="" className={styles.premiumImg} />
-                    <span className={styles.premiumBadge}>HIT</span>
+                    <div className={styles.imageOverlayText}>{job.companyName}</div>
+                    <div className={styles.badgeContainer}>
+                      <span className={styles.tierBadgePremium}>PREMIUM</span>
+                      <span className={styles.premiumBadge}>HIT</span>
+                    </div>
                   </div>
                   <div className={styles.premiumContent}>
                     <h4 className={styles.premiumTitle}>{job.title}</h4>
@@ -337,7 +376,7 @@ export default function Home_Page() {
           <section className={styles.jobsSection}>
             <h3 className={styles.sectionHeading}>⭐ 실시간 추천 채용 <span className={styles.subHeadingText}>오늘 바로 출근 가능한 특급 채용관</span></h3>
             <div className={styles.specialGrid}>
-              {recommendedJobs.slice(0, 12).map((job) => (
+              {fullSpecial.slice(0, 20).map((job) => (
                 <Link href={`/job/${job.id}`} key={job.id} className={styles.specialCard}>
                   <div className={styles.specialBadgeRow}>
                     <span className={styles.specialLoc}>{job.location}</span>
@@ -421,7 +460,7 @@ export default function Home_Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  {talentProfiles.slice(0, 10).map((talent) => (
+                  {fullTalent.slice(0, 20).map((talent) => (
                     <tr key={talent.id}>
                       <td className={styles.talentNameCol}>
                         <strong>{talent.name}</strong> ({talent.age}/{talent.gender})
