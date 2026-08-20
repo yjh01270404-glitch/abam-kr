@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff5c8a" />
+      <stop offset="100%" stop-color="#ff3366" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#pinkGrad)"/>
+  
+  <!-- Sleek Crescent Moon and Stars Vector -->
+  <g transform="translate(200, 110) scale(0.9)">
+    <!-- Main Crescent Moon -->
+    <path d="M 0,-45 A 45,45 0 1,0 45,0 A 36,36 0 1,1 0,-45 Z" fill="#ffffff"/>
+    
+    <!-- Mini sparkling star 1 -->
+    <path d="M 25,-30 L 27,-25 L 32,-25 L 28,-21 L 30,-16 L 25,-19 L 20,-16 L 22,-21 L 18,-25 L 23,-25 Z" fill="#ffffff" opacity="0.9"/>
+    <!-- Mini sparkling star 2 -->
+    <path d="M -25,-10 L -23,-7 L -20,-7 L -22,-4 L -21,0 L -25,-2 L -29,0 L -28,-4 L -30,-7 L -27,-7 Z" fill="#ffffff" opacity="0.7" transform="scale(0.7) translate(-10, -10)"/>
+  </g>
+
+  <!-- Branded Service Text -->
+  <text x="200" y="210" font-family="system-ui, -apple-system, 'Malgun Gothic', sans-serif" font-size="32" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">아름다운밤</text>
+  <text x="200" y="245" font-family="system-ui, -apple-system, 'Malgun Gothic', sans-serif" font-size="14" font-weight="500" fill="#ffffff" fill-opacity="0.9" text-anchor="middle" letter-spacing="4">아름다운밤 공식 구인인증</text>
+</svg>

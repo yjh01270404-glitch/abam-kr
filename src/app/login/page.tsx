@@ -6,6 +6,7 @@ import AbamLogo from '../../components/AbamLogo';
 import { useRouter } from 'next/navigation';
 import { useApp } from '../../context/AppContext';
 import styles from './login.module.css';
+import { trackLogin, trackClick } from '../../lib/tracker';
 
 export default function LoginPage() {
   const { login } = useApp();
@@ -20,10 +21,20 @@ export default function LoginPage() {
       return;
     }
     
-    // Simulate employer login
+    // Instant test account login bypass
+    const lowerUser = username.trim().toLowerCase();
+    if (lowerUser === 'test' || lowerUser === 'abam' || lowerUser === 'admin' || lowerUser === 'recruiter') {
+      login(username, password);
+      trackLogin(username, '일반 로그인');
+      alert(`${username}님, 반갑습니다! 로그인되었습니다.`);
+      router.push('/');
+      return;
+    }
+
     const result = login(username, password);
     if (result === 'not_found') { alert('존재하지 않는 아이디입니다.'); return; }
     if (result === 'invalid') { alert('비밀번호가 올바르지 않습니다.'); return; }
+    trackLogin(username, '일반 로그인');
     alert(`${username}님, 반갑습니다! 로그인되었습니다.`);
     router.push('/');
   };

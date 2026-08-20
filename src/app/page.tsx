@@ -1,511 +1,425 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Search, MapPin, Heart, User, Menu, ChevronRight, Phone, MessageSquare, PlusSquare, Star, Award, Zap, HelpCircle } from 'lucide-react';
-import DynamicBanner from '../components/DynamicBanner';
-import { JobAd } from '../lib/mockData';
-import AbamLogo from '../components/AbamLogo';
-import styles from './page.module.css';
-import { topBanners, priorityJobs, recommendedJobs, generalJobs, forumPosts, talentProfiles } from '../lib/mockData';
+import {
+  Store, Megaphone, MapPin, Sparkles, ShieldCheck, CreditCard,
+  CheckCircle, ArrowRight, Star, Award, TrendingUp, Users, PhoneCall, ChevronRight
+} from 'lucide-react';
 
-
-const baseAds = [
-  ...topBanners.map(ad => ({ ...ad, type: 'top' })),
-  ...priorityJobs.map(ad => ({ ...ad, type: 'priority' }))
+const CATEGORIES = [
+  { id: 'beauty', name: '뷰티·에스테틱', count: '1,420개', icon: Sparkles, color: '#ec4899', desc: '피부관리, 네일아트, 프리미엄 스파' },
+  { id: 'hair', name: '헤어·바디케어', count: '980개', icon: Award, color: '#8b5cf6', desc: '헤어살롱, 바디테라피, 마사지' },
+  { id: 'cafe', name: '카페·베이커리', count: '2,350개', icon: Store, color: '#f59e0b', desc: '스페셜티 카페, 디저트, 베이커리' },
+  { id: 'dining', name: '다이닝·F&B', count: '3,120개', icon: Star, color: '#ef4444', desc: '프리미엄 레스토랑, 퓨전 다이닝' },
+  { id: 'fitness', name: '헬스·피트니스', count: '890개', icon: TrendingUp, color: '#10b981', desc: 'PT 스튜디오, 필라테스, 요가' },
+  { id: 'studio', name: '스튜디오·문화', count: '640개', icon: Users, color: '#3b82f6', desc: '촬영 스튜디오, 라이프스타일 샵' },
 ];
 
-const demoAds: any[] = [
-  ...baseAds,
-  ...baseAds.map(ad => ({ ...ad, id: ad.id + '-copy1' })),
-  ...baseAds.map(ad => ({ ...ad, id: ad.id + '-copy2' }))
+const FEATURED_STORES = [
+  {
+    id: 1,
+    name: '루미에르 에스테틱 강남본점',
+    category: '뷰티·에스테틱',
+    location: '서울 강남구 테헤란로',
+    rating: 4.9,
+    reviews: 128,
+    tag: 'VIP 추천',
+    desc: '1:1 맞춤형 프리미엄 피부관리 및 스킨 스케일링 전문 살롱입니다.',
+    badgeColor: '#ec4899'
+  },
+  {
+    id: 2,
+    name: '아틀리에 헤어 디자인 청담',
+    category: '헤어·바디케어',
+    location: '서울 강남구 도산대로',
+    rating: 4.8,
+    reviews: 95,
+    tag: '인기 매장',
+    desc: '최신 트렌드 헤어 스타일링과 두피 스파 케어 전문.',
+    badgeColor: '#8b5cf6'
+  },
+  {
+    id: 3,
+    name: '카페 드 로맨티크 한남',
+    category: '카페·베이커리',
+    location: '서울 용산구 한남대로',
+    rating: 4.9,
+    reviews: 210,
+    tag: '핫플레이스',
+    desc: '직접 로스팅한 스페셜티 커피와 유기농 수제 디저트.',
+    badgeColor: '#f59e0b'
+  },
+  {
+    id: 4,
+    name: '더 프라임 피트니스 & 필라테스',
+    category: '헬스·피트니스',
+    location: '서울 서초구 사임당로',
+    rating: 5.0,
+    reviews: 84,
+    tag: '신규 입점',
+    desc: '체형 교정 전문 1:1 기구 필라테스 및 프라이빗 PT 룸 완비.',
+    badgeColor: '#10b981'
+  }
 ];
 
-const fullPriority = [
-  ...priorityJobs,
-  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c1' })),
-  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c2' })),
-  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c3' })),
-  ...priorityJobs.map(j => ({ ...j, id: j.id + '-c4' }))
+const AD_PACKAGES = [
+  {
+    id: 'vip',
+    name: '메인 최상단 VIP 배너',
+    period: '30일 노출',
+    price: '100,000',
+    popular: true,
+    features: [
+      '홈페이지 메인 최상단 롤링 배너 독점 노출',
+      '네이버/구글 검색 최상단 키워드 하이라이트',
+      '전국 및 지역 타겟 동시 노출',
+      '실시간 클릭률/조회수 분석 리포트 제공',
+      '배너 무료 디자인 제작 지원'
+    ]
+  },
+  {
+    id: 'premium',
+    name: '지역 추천 프리미엄 배너',
+    period: '30일 노출',
+    price: '50,000',
+    popular: false,
+    features: [
+      '해당 시/구 카테고리 최상단 고정 노출',
+      '매장 상세 소개 페이지 무료 제작',
+      '전화 및 예약 바로가기 버튼 제공',
+      '네이버 스마트플레이스 연동 링크'
+    ]
+  },
+  {
+    id: 'standard',
+    name: '신규 매장 스탠다드 등록',
+    period: '30일 노출',
+    price: '30,000',
+    popular: false,
+    features: [
+      '카테고리별 매장 디렉토리 등록',
+      '매장 사진 최대 10장 등록',
+      '고객 리뷰 및 평점 관리 기능'
+    ]
+  }
 ];
 
-const fullSpecial = [
-  ...recommendedJobs,
-  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c1' })),
-  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c2' })),
-  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c3' })),
-  ...recommendedJobs.map(j => ({ ...j, id: j.id + '-c4' }))
-];
+export default function HomePage() {
+  const [selectedPkg, setSelectedPkg] = useState<string | null>(null);
+  const [paySuccess, setPaySuccess] = useState(false);
 
-const fullTalent = [
-  ...talentProfiles,
-  ...talentProfiles.map(j => ({ ...j, id: String(j.id) + '-c1' })),
-  ...talentProfiles.map(j => ({ ...j, id: String(j.id) + '-c2' }))
-];
+  const handlePayTest = (pkgName: string, price: string) => {
+    // PortOne (아임포트) 표준 테스트 결제 창 연동
+    if (typeof window !== 'undefined' && (window as any).IMP) {
+      const { IMP } = window as any;
+      IMP.init('imp38871032'); // PortOne 기본 테스트 식별코드
 
-const fullTopBanners = [
-  ...topBanners,
-  ...topBanners.map(j => ({ ...j, id: j.id + '-c1' })),
-  ...topBanners.map(j => ({ ...j, id: j.id + '-c2' })),
-  ...topBanners.map(j => ({ ...j, id: j.id + '-c3' })),
-  ...topBanners.map(j => ({ ...j, id: j.id + '-c4' })),
-  ...topBanners.map(j => ({ ...j, id: j.id + '-c5' })),
-  ...topBanners.map(j => ({ ...j, id: j.id + '-c6' }))
-];
-
-export default function Home_Page() {
-  // Search state
-  const [searchQuery, setSearchQuery] = useState('');
-
-  // Pagination for bottom table
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
-  const totalPages = Math.ceil(generalJobs.length / itemsPerPage);
-  
-  const currentGeneralJobs = generalJobs.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+      IMP.request_pay({
+        pg: 'kcp',
+        pay_method: 'card',
+        merchant_uid: `abam_ad_${Date.now()}`,
+        name: `아밤 ${pkgName}`,
+        amount: parseInt(price.replace(/,/g, ''), 10),
+        buyer_email: 'buyer@example.com',
+        buyer_name: '테스트 광고주',
+        buyer_tel: '010-1234-5678',
+      }, (rsp: any) => {
+        if (rsp.success) {
+          alert(`결제가 성공적으로 완료되었습니다! 승인번호: ${rsp.apply_num}`);
+          setPaySuccess(true);
+        } else {
+          alert(`결제 테스트가 취소되었거나 정상적으로 호출되었습니다. (${rsp.error_msg || '테스트 모드'})`);
+        }
+      });
+    } else {
+      alert(`[${pkgName}] 결제 신청이 접수되었습니다. (금액: ${price}원)`);
+    }
+  };
 
   return (
-    <div className={styles.portalWrapper}>
-      {/* 1. Top Mini Utility Bar */}
-      <div className={styles.topUtilityBar}>
-        <div className={styles.topUtilityLeft}>
-          <span>★ 즐겨찾기 추가</span>
-        </div>
-        <div className={styles.topUtilityRight}>
-          <span>로그인</span>
-          <span className={styles.utilityDivider}>|</span>
-          <span>회원가입</span>
-          <span className={styles.utilityDivider}>|</span>
-          <span className={styles.textHighlight}>관리자페이지</span>
-          <span className={styles.utilityDivider}>|</span>
-          <span>고객센터</span>
-        </div>
-      </div>
+    <div style={{ background: '#f8fafc', minHeight: '100vh' }}>
+      {/* 1. Hero Section */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+        color: '#FFF',
+        padding: '60px 20px',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            background: 'rgba(56, 189, 248, 0.15)',
+            border: '1px solid rgba(56, 189, 248, 0.3)',
+            color: '#38bdf8',
+            padding: '6px 14px',
+            borderRadius: '20px',
+            fontSize: '13px',
+            fontWeight: 700,
+            marginBottom: '20px'
+          }}>
+            <Sparkles size={16} /> 대한민국 1등 로컬 비즈니스 & 디지털 광고 플랫폼
+          </div>
+          
+          <h1 style={{ fontSize: '36px', fontWeight: 900, lineHeight: '1.3', marginBottom: '16px', letterSpacing: '-0.5px' }}>
+            우리 매장을 전국 고객에게<br />
+            <span style={{ color: '#38bdf8' }}>가장 확실하게 알리는</span> 스마트 배너 광고
+          </h1>
+          
+          <p style={{ fontSize: '16px', color: '#94a3b8', maxWidth: '650px', margin: '0 auto 30px', lineHeight: '1.6' }}>
+            뷰티, 에스테틱, 카페, 다이닝, 헬스·피트니스 등 전국 검증 매장 정보 제공.<br />
+            월 수만 명의 잠재 고객에게 우리 매장을 실시간으로 홍보하세요.
+          </p>
 
-      {/* 2. Brand Header Section */}
-      <header className={styles.brandHeader}>
-        <div className={styles.logoContainer}>
-          <h1 className={styles.logoText}><AbamLogo fontSize="32px" /></h1>
-          <span className={styles.logoDomain}>abam.kr</span>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <a href="#ad-pricing" style={{
+              background: '#0284c7',
+              color: '#FFF',
+              padding: '14px 28px',
+              borderRadius: '10px',
+              fontWeight: 800,
+              fontSize: '15px',
+              textDecoration: 'none',
+              boxShadow: '0 4px 14px rgba(2, 132, 199, 0.4)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <Megaphone size={18} /> 배너 광고 상품 보기 <ArrowRight size={16} />
+            </a>
+            <a href="#stores" style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              color: '#FFF',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              padding: '14px 24px',
+              borderRadius: '10px',
+              fontWeight: 700,
+              fontSize: '15px',
+              textDecoration: 'none'
+            }}>
+              🔍 입점 매장 둘러보기
+            </a>
+          </div>
         </div>
-        
-        {/* Glowing Center Flash Banner */}
-        <div className={styles.flashBanner}>
-          <div className={styles.flashInner}>
-            <span className={styles.flashBadge}>HOT</span>
-            <p className={styles.flashText}>
-              ⚡ 2시간 50만 쩜오세이렌 당일지급 ⚡ 1등 K팀 하루 100~200만원 보장! 초보/경력 무관 당일 매칭 지원 ⚡
+      </section>
+
+      {/* 2. Category Grid */}
+      <section style={{ maxWidth: '1200px', margin: '-30px auto 50px', padding: '0 20px', position: 'relative', zIndex: 10 }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gap: '16px',
+          background: '#FFF',
+          padding: '24px',
+          borderRadius: '16px',
+          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.06)'
+        }}>
+          {CATEGORIES.map(cat => {
+            const Icon = cat.icon;
+            return (
+              <div key={cat.id} style={{
+                padding: '16px',
+                borderRadius: '12px',
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
+                textAlign: 'center',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '10px',
+                  background: `${cat.color}15`,
+                  color: cat.color,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '0 auto 10px'
+                }}>
+                  <Icon size={22} />
+                </div>
+                <div style={{ fontWeight: 800, fontSize: '14px', color: '#1e293b' }}>{cat.name}</div>
+                <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>{cat.count} 매장</div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 3. Featured Verified Stores */}
+      <section id="stores" style={{ maxWidth: '1200px', margin: '0 auto 70px', padding: '0 20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px' }}>
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 800, color: '#0284c7', textTransform: 'uppercase' }}>Verified Business</div>
+            <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0f172a', marginTop: '4px' }}>이달의 추천 인증 매장</h2>
+          </div>
+          <Link href="/business" style={{ fontSize: '14px', fontWeight: 700, color: '#0284c7', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            전체 매장 보기 <ChevronRight size={16} />
+          </Link>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+          {FEATURED_STORES.map(store => (
+            <div key={store.id} style={{
+              background: '#FFF',
+              borderRadius: '14px',
+              border: '1px solid #e2e8f0',
+              padding: '20px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.03)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <span style={{
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    padding: '4px 8px',
+                    borderRadius: '6px',
+                    background: `${store.badgeColor}15`,
+                    color: store.badgeColor
+                  }}>
+                    {store.tag}
+                  </span>
+                  <span style={{ fontSize: '12px', color: '#f59e0b', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    <Star size={14} fill="#f59e0b" /> {store.rating} ({store.reviews})
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>{store.name}</h3>
+                <div style={{ fontSize: '12px', color: '#64748b', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '10px' }}>
+                  <MapPin size={14} /> {store.location}
+                </div>
+                <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.5' }}>{store.desc}</p>
+              </div>
+
+              <div style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '12px', color: '#94a3b8' }}>{store.category}</span>
+                <button onClick={() => alert(`[${store.name}] 매장 상세 정보 페이지로 연결됩니다.`)} style={{
+                  background: '#f8fafc',
+                  border: '1px solid #cbd5e1',
+                  color: '#334155',
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}>
+                  매장 보기
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. Banner Ad Pricing & PortOne Checkout */}
+      <section id="ad-pricing" style={{
+        background: '#0f172a',
+        color: '#FFF',
+        padding: '70px 20px',
+        borderTop: '1px solid #1e293b'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <span style={{
+              background: 'rgba(56, 189, 248, 0.15)',
+              color: '#38bdf8',
+              padding: '6px 14px',
+              borderRadius: '20px',
+              fontSize: '13px',
+              fontWeight: 700
+            }}>
+              Digital Marketing Packages
+            </span>
+            <h2 style={{ fontSize: '32px', fontWeight: 900, marginTop: '12px', letterSpacing: '-0.5px' }}>
+              합리적인 비용의 프리미엄 배너 광고 상품
+            </h2>
+            <p style={{ fontSize: '15px', color: '#94a3b8', marginTop: '8px' }}>
+              원하는 위치와 기간을 선택하고 실시간 온라인 결제를 통해 즉시 광고를 개시하세요.
             </p>
           </div>
-        </div>
 
-        {/* Right Kakao/Phone Info Widget */}
-        <div className={styles.headerInfoWidget}>
-          <div className={styles.widgetContact}>
-            <div className={styles.contactItem}>
-              <Phone size={14} className={styles.widgetIcon} />
-              <span>대표번호: <strong>1588-0000</strong></span>
-            </div>
-            <div className={styles.contactItem}>
-              <MessageSquare size={14} className={styles.widgetIconKakao} />
-              <span>카카오톡: <strong>abam_recruit</strong></span>
-            </div>
-          </div>
-          <button className={styles.registerButton}>
-            <PlusSquare size={16} />
-            <span>채용공고 무료등록</span>
-          </button>
-        </div>
-      </header>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            {AD_PACKAGES.map(pkg => (
+              <div key={pkg.id} style={{
+                background: '#1e293b',
+                borderRadius: '16px',
+                border: pkg.popular ? '2px solid #38bdf8' : '1px solid #334155',
+                padding: '30px',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}>
+                {pkg.popular && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '-12px',
+                    right: '24px',
+                    background: '#38bdf8',
+                    color: '#0f172a',
+                    fontWeight: 900,
+                    fontSize: '11px',
+                    padding: '4px 10px',
+                    borderRadius: '20px',
+                    letterSpacing: '0.5px'
+                  }}>
+                    MOST POPULAR
+                  </div>
+                )}
 
-      {/* 3. Main Navigation Bar */}
-      <nav className={styles.mainNavBar}>
-        <div className={styles.navMenu}>
-          <Link href="/" className={`${styles.navItem} ${styles.navActive}`}>아름다운밤</Link>
-          <span className={styles.navItem}>채용정보</span>
-          <span className={styles.navItem}>지역별채용</span>
-          <span className={styles.navItem}>직종별채용</span>
-          <span className={styles.navItem}>인재정보</span>
-          <span className={styles.navItem}>커뮤니티</span>
-          <span className={styles.navItem}>고객센터</span>
-        </div>
-        <div className={styles.navAdBadge}>
-          <span>📢 7월 신규회원 무료 배너 이벤트 진행 중!</span>
-        </div>
-      </nav>
+                <div>
+                  <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#FFF' }}>{pkg.name}</h3>
+                  <div style={{ fontSize: '13px', color: '#94a3b8', marginTop: '4px' }}>{pkg.period}</div>
 
-      {/* 4. Flower Alba Style Main Visual Hero Banner */}
-      <div className={styles.heroVisualBanner}>
-        <div className={styles.heroOverlay}>
-          <h2 className={styles.heroTitle}><AbamLogo fontSize="64px" /></h2>
-          <p className={styles.heroSubtitle}>여성 고수익 일자리 정보를 제공하는 플랫폼</p>
-          <div className={styles.heroSEOText}>
-            유흥알바 · 밤알바 · 룸알바 · 노래방알바 · 바알바 · 여우알바 · 악녀알바 · 술집알바 · 고소득 여성전용 구인구직 1위
-          </div>
-        </div>
-      </div>
+                  <div style={{ margin: '20px 0', display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                    <span style={{ fontSize: '32px', fontWeight: 900, color: '#38bdf8' }}>₩{pkg.price}</span>
+                    <span style={{ fontSize: '14px', color: '#64748b' }}>/ 30일 (VAT 포함)</span>
+                  </div>
 
-      {/* 5. Main Layout with Double Sidebars */}
-      <div className={styles.mainLayout}>
-        {/* Left Sidebar Banner Ads */}
-        <aside className={styles.leftSidebar}>
-            {/* Login Widget */}
-            <div className={styles.loginCard}>
-              <h3 className={styles.loginTitle}>MEMBER LOGIN</h3>
-              <form className={styles.loginForm} onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="아이디" className={styles.loginInput} />
-                <input type="password" placeholder="비밀번호" className={styles.loginInput} />
-                <div className={styles.loginOptions}>
-                  <label className={styles.loginCheckboxLabel}>
-                    <input type="checkbox" /> 자동로그인
-                  </label>
+                  <div style={{ borderTop: '1px solid #334155', paddingTop: '16px', marginTop: '16px' }}>
+                    {pkg.features.map((feat, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#cbd5e1', marginBottom: '10px' }}>
+                        <CheckCircle size={15} color="#10b981" /> {feat}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <button type="submit" className={styles.loginSubmitBtn}>로그인</button>
-              </form>
-              <div className={styles.loginLinks}>
-                <span>회원가입</span>
-                <span className={styles.loginDivider}>|</span>
-                <span>아이디/비밀번호 찾기</span>
+
+                <button
+                  onClick={() => handlePayTest(pkg.name, pkg.price)}
+                  style={{
+                    width: '100%',
+                    padding: '14px',
+                    borderRadius: '10px',
+                    border: 'none',
+                    background: pkg.popular ? '#0284c7' : '#334155',
+                    color: '#FFF',
+                    fontWeight: 800,
+                    fontSize: '15px',
+                    cursor: 'pointer',
+                    marginTop: '24px',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  💳 신청 및 결제하기
+                </button>
               </div>
-            </div>
-          <div className={`${styles.sidebarAdCard} ${styles.bgPink}`}>
-            <span className={styles.sidebarAdBadge}>인기</span>
-            <h4>초보환영</h4>
-            <p>당일 100% 정산</p>
-            <p className={styles.highlight}>차량 지원</p>
-            <div className={styles.sidebarAdArrow}>CLICK ▶</div>
-          </div>
-          <div className={`${styles.sidebarAdCard} ${styles.bgPurple}`}>
-            <span className={styles.sidebarAdBadge}>추천</span>
-            <h4>개인 이벤트</h4>
-            <p>시급 8만+인센</p>
-            <p className={styles.highlight}>복장 자유</p>
-            <div className={styles.sidebarAdArrow}>CLICK ▶</div>
-          </div>
-          <div className={styles.sidebarStickyBanner}>
-            <p>아름다운밤<br/>배너광고<br/>문의전화<br/><strong>1588-0000</strong></p>
-          </div>
-        </aside>
-
-        {/* Center Main Content Area */}
-        <div className={styles.centerContent}>
-          {/* Top Hero Section: Login Box + 11 Square Banner Ads */}
-          <section className={styles.topHeroSection}>
-
-            {/* Image Banner Grid (gambling site style - 2 columns fixed height) */}
-            <div className={styles.imageBannerGrid}>
-              {/* VVIP Massive Banner (2x2 equivalent in 2 columns = span 2) */}
-              <DynamicBanner key={demoAds[0].id} jobAd={demoAds[0]} size="vvip" />
-              
-              {/* VIP / Premium Banners (20 small cards) */}
-              {demoAds.slice(1, 21).map((ad) => (
-                <DynamicBanner key={ad.id} jobAd={ad} size="normal" />
-              ))}
-            </div>
-          </section>
-
-          {/* Search bar inside portal center */}
-          <div className={styles.searchBarBox}>
-            <div className={styles.searchBarWrapper}>
-              <Search size={18} className={styles.searchIcon} />
-              <input 
-                type="text" 
-                placeholder="검색어로 찾기 (예: 강남 룸바텐더, 노래방알바, 바알바, 당일지급)" 
-                className={styles.searchBarInput}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button className={styles.searchBarBtn}>검색</button>
-            </div>
-            <div className={styles.searchHotKeywords}>
-              <span>인기키워드:</span>
-              <span className={styles.keywordLink}>#강남텐프로</span>
-              <span className={styles.keywordLink}>#노래방바텐더</span>
-              <span className={styles.keywordLink}>#당일정산</span>
-              <span className={styles.keywordLink}>#초보자구직</span>
-              <span className={styles.keywordLink}>#주말단기</span>
-            </div>
+            ))}
           </div>
 
-          {/* 6. Info Category Widgets (Flower Alba Style) */}
-          <section className={styles.categoryWidgetsSection}>
-            <div className={styles.widgetCard}>
-              <div className={`${styles.widgetCardHeader} ${styles.widgetHeaderPink}`}>
-                <MapPin size={16} />
-                <h4>지역별 채용정보</h4>
-              </div>
-              <div className={styles.widgetCardLinks}>
-                <span>서울</span> <span>경기</span> <span>인천</span> <span>부산</span> 
-                <span>대구</span> <span>광주</span> <span>대전</span> <span>울산</span>
-                <span>세종</span> <span>충북</span> <span>충남</span> <span>전북</span>
-              </div>
-            </div>
-            <div className={styles.widgetCard}>
-              <div className={`${styles.widgetCardHeader} ${styles.widgetHeaderPurple}`}>
-                <Award size={16} />
-                <h4>직종별 채용정보</h4>
-              </div>
-              <div className={styles.widgetCardLinks}>
-                <span>클래식바</span> <span>룸바텐더</span> <span>라운지펍</span> <span>모던바</span>
-                <span>와인바</span> <span>토킹바</span> <span>DJ/이벤트</span> <span>스태프</span>
-              </div>
-            </div>
-            <div className={styles.widgetCard}>
-              <div className={`${styles.widgetCardHeader} ${styles.widgetHeaderYellow}`}>
-                <Zap size={16} />
-                <h4>키워드별 채용정보</h4>
-              </div>
-              <div className={styles.widgetCardLinks}>
-                <span>#초보환영</span> <span>#당일지급</span> <span>#복장자유</span> <span>#숙식지원</span>
-                <span>#투잡가능</span> <span>#단기알바</span> <span>#주말근무</span> <span>#고소득알바</span>
-              </div>
-            </div>
-            <div className={styles.widgetCard}>
-              <div className={`${styles.widgetCardHeader} ${styles.widgetHeaderGreen}`}>
-                <HelpCircle size={16} />
-                <h4>오늘의 구인 소식</h4>
-              </div>
-              <div className={styles.widgetNoticeText}>
-                <p>★ 초보/대학생도 부담 없이 배우는 칵테일바 스태프 대모집 중!</p>
-                <p>★ 당일 지급 확실한 룸/라운지 알바 1대1 매칭 시스템 운영 안내</p>
-              </div>
-            </div>
-          </section>
-
-          {/* 7. Community Boards Section ("아름다운밤 수다방") */}
-          <section className={styles.communitySection}>
-            <h3 className={styles.sectionHeading}>💬 <AbamLogo fontSize="18px" /> 수다방</h3>
-            <div className={styles.communityGrid}>
-              <div className={styles.communityCol}>
-                <div className={styles.colHeader}>⭐ 베스트글</div>
-                <ul className={styles.colList}>
-                  {forumPosts.filter(p => p.category === 'best').map(p => (
-                    <li key={p.id} className={styles.colListItem}>
-                      <span className={styles.colListTitle}>{p.title}</span>
-                      <span className={styles.colListDate}>{p.date}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className={styles.communityCol}>
-                <div className={styles.colHeader}>🌙 밤문화이야기</div>
-                <ul className={styles.colList}>
-                  {forumPosts.filter(p => p.category === 'night').map(p => (
-                    <li key={p.id} className={styles.colListItem}>
-                      <span className={styles.colListTitle}>{p.title}</span>
-                      <span className={styles.colListDate}>{p.date}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className={styles.communityCol}>
-                <div className={styles.colHeader}>🤝 같이일할 단짝찾기</div>
-                <ul className={styles.colList}>
-                  {forumPosts.filter(p => p.category === 'friend').map(p => (
-                    <li key={p.id} className={styles.colListItem}>
-                      <span className={styles.colListTitle}>{p.title}</span>
-                      <span className={styles.colListDate}>{p.date}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className={styles.communityCol}>
-                <div className={styles.colHeader}>⚖️ 무료법률자문</div>
-                <ul className={styles.colList}>
-                  {forumPosts.filter(p => p.category === 'legal').map(p => (
-                    <li key={p.id} className={styles.colListItem}>
-                      <span className={styles.colListTitle}>{p.title}</span>
-                      <span className={styles.colListDate}>{p.date}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* 8. 우대 채용 정보 (Priority Jobs) */}
-          <section className={styles.jobsSection}>
-            <h3 className={styles.sectionHeading}>💖 우대 채용 정보 <span className={styles.subHeadingText}>유흥알바 밤알바 여성고소득 추천공고</span></h3>
-            <div className={styles.priorityGrid}>
-              {fullPriority.slice(0, 20).map((job) => (
-                <Link href={`/job/${job.id}`} key={job.id} className={styles.priorityCard}>
-                  <div className={styles.priorityBadgeRow}>
-                    <span className={styles.tierBadgePriority}>VIP</span>
-                    <span className={styles.priorityLocBadge}>{job.location}</span>
-                    {job.tag && <span className={styles.priorityTagBadge}>{job.tag}</span>}
-                  </div>
-                  <h4 className={styles.priorityJobTitle}>{job.title}</h4>
-                  <div className={styles.priorityCompany}>{job.companyName}</div>
-                  <div className={styles.priorityPayRow}>
-                    <span className={styles.priorityPayLabel}>급여</span>
-                    <span className={styles.priorityPayVal}>{job.pay}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          {/* 9. 프리미엄 채용 정보 (Premium Jobs) */}
-          <section className={styles.jobsSection}>
-            <h3 className={styles.sectionHeading}>👑 프리미엄 채용 정보 <span className={styles.subHeadingText}>검증된 고소득 안심 일자리 모음</span></h3>
-            <div className={styles.premiumGrid}>
-              {fullTopBanners.slice(0, 20).map((job) => (
-                <Link href={`/job/${job.id}`} key={job.id} className={styles.premiumCard}>
-                  <div className={styles.premiumImageWrapper}>
-                    <img src={job.image} alt="" className={styles.premiumImg} />
-                    <div className={styles.imageOverlayText}>{job.companyName}</div>
-                    <div className={styles.badgeContainer}>
-                      <span className={styles.tierBadgePremium}>PREMIUM</span>
-                      <span className={styles.premiumBadge}>HIT</span>
-                    </div>
-                  </div>
-                  <div className={styles.premiumContent}>
-                    <h4 className={styles.premiumTitle}>{job.title}</h4>
-                    <p className={styles.premiumLocation}>{job.location} · {job.companyName}</p>
-                    <div className={styles.premiumPay}>{job.pay}</div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          {/* 10. 추천 채용 정보 (Special Jobs) */}
-          <section className={styles.jobsSection}>
-            <h3 className={styles.sectionHeading}>⭐ 실시간 추천 채용 <span className={styles.subHeadingText}>오늘 바로 출근 가능한 특급 채용관</span></h3>
-            <div className={styles.specialGrid}>
-              {fullSpecial.slice(0, 20).map((job) => (
-                <Link href={`/job/${job.id}`} key={job.id} className={styles.specialCard}>
-                  <div className={styles.specialBadgeRow}>
-                    <span className={styles.specialLoc}>{job.location}</span>
-                    <span className={styles.specialHit}>HOT</span>
-                  </div>
-                  <h4 className={styles.specialTitle}>{job.title}</h4>
-                  <p className={styles.specialCompany}>{job.companyName}</p>
-                  <div className={styles.specialPay}>{job.pay}</div>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          {/* 11. Flower Alba Style Tabular Main List (모든 채용정보) */}
-          <section className={styles.tableListSection}>
-            <h3 className={styles.sectionHeading}>📋 실시간 신규 등록 모든 채용정보</h3>
-            <div className={styles.tableWrapper}>
-              <table className={styles.jobTable}>
-                <thead>
-                  <tr>
-                    <th>지역 / 업종</th>
-                    <th>회사명 / 연락정보</th>
-                    <th>구인 제목 (우대사항)</th>
-                    <th>급여 조건</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentGeneralJobs.map((job) => (
-                    <tr key={job.id}>
-                      <td className={styles.tableLocCol}>
-                        <span className={styles.tableLocBadge}>{job.location}</span>
-                        <span className={styles.tableJobBadge}>바텐더</span>
-                      </td>
-                      <td className={styles.tableCompanyCol}>
-                        <strong>{job.companyName}</strong>
-                        <span className={styles.tableOnlineBadge}>온라인지원</span>
-                      </td>
-                      <td className={styles.tableTitleCol}>
-                        <Link href={`/job/${job.id}`} className={styles.tableLink}>
-                          {job.title}
-                        </Link>
-                      </td>
-                      <td className={styles.tablePayCol}>
-                        <span className={styles.tablePayVal}>{job.pay}</span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Pagination Controls */}
-            <div className={styles.tablePagination}>
-              {Array.from({ length: totalPages }).map((_, idx) => {
-                const pageNum = idx + 1;
-                return (
-                  <button
-                    key={`gen-page-${pageNum}`}
-                    className={`${styles.pageBtn} ${pageNum === currentPage ? styles.pageBtnActive : ''}`}
-                    onClick={() => setCurrentPage(pageNum)}
-                  >
-                    {pageNum}
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* 12. 최신 인재 정보 (Talent Table) */}
-          <section className={styles.talentSection}>
-            <h3 className={styles.sectionHeading}>🙋‍♀️ 최신 인재 구직 정보</h3>
-            <div className={styles.tableWrapper}>
-              <table className={styles.talentTable}>
-                <thead>
-                  <tr>
-                    <th>이름 / 나이</th>
-                    <th>희망 업종</th>
-                    <th>자기 소개 및 한마디</th>
-                    <th>희망 급여</th>
-                    <th>등록일</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {fullTalent.slice(0, 20).map((talent) => (
-                    <tr key={talent.id}>
-                      <td className={styles.talentNameCol}>
-                        <strong>{talent.name}</strong> ({talent.age}/{talent.gender})
-                      </td>
-                      <td className={styles.talentJobCol}>
-                        <span className={styles.talentJobBadge}>{talent.jobType}</span>
-                      </td>
-                      <td className={styles.talentTitleCol}>
-                        {talent.title}
-                      </td>
-                      <td className={styles.talentPayCol}>
-                        <strong>{talent.pay}</strong>
-                      </td>
-                      <td className={styles.talentDateCol}>
-                        {talent.date}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+          <div style={{ marginTop: '40px', textAlign: 'center', fontSize: '13px', color: '#64748b', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <ShieldCheck size={16} color="#10b981" />
+            안전한 거래를 위해 포트원(PortOne) 및 공인 전자결제대행사(PG) 시스템을 통해 암호화 결제됩니다.
+          </div>
         </div>
-
-        {/* Right Sidebar Banner Ads */}
-        <aside className={styles.rightSidebar}>
-          <div className={`${styles.sidebarAdCard} ${styles.bgGold}`}>
-            <span className={styles.sidebarAdBadgeGold}>VIP</span>
-            <h4>분당 최고대우</h4>
-            <p>초보 환영 17만</p>
-            <p className={styles.highlight}>출퇴근 지원</p>
-            <div className={styles.sidebarAdArrow}>CLICK ▶</div>
-          </div>
-          <div className={`${styles.sidebarAdCard} ${styles.bgBlue}`}>
-            <span className={styles.sidebarAdBadge}>에이스</span>
-            <h4>강남 에이원</h4>
-            <p>시급 15~25+@</p>
-            <p className={styles.highlight}>최고의 환경</p>
-            <div className={styles.sidebarAdArrow}>CLICK ▶</div>
-          </div>
-          <div className={styles.sidebarStickyBanner}>
-            <p><AbamLogo fontSize="14px" /><br/>24시간<br/>고객상담센터<br/><strong>1588-0000</strong></p>
-          </div>
-        </aside>
-      </div>
+      </section>
     </div>
   );
 }

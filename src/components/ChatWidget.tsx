@@ -14,21 +14,18 @@ export default function ChatWidget() {
   const [notif, setNotif] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
   
-  // 익명 세션 ID (로컬스토리지에 저장)
   const [sessionId, setSessionId] = useState('');
 
   useEffect(() => {
-    // 세션 ID 초기화
     let sid = localStorage.getItem('abam_chat_session_id');
     if (currentUser) {
-      sid = `user_${currentUser.id}`; // 로그인 유저는 고정 세션
+      sid = `user_${currentUser.id}`;
     } else if (!sid) {
       sid = `anon_${Math.random().toString(36).substring(2, 9)}`;
       localStorage.setItem('abam_chat_session_id', sid);
     }
     setSessionId(sid);
 
-    // 외부 컴포넌트 호출 리스너 추가
     const handleOpenChat = () => setOpen(true);
     window.addEventListener('abam-open-chat', handleOpenChat);
     return () => window.removeEventListener('abam-open-chat', handleOpenChat);
@@ -68,19 +65,18 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* 플로팅 다이어리 버튼 (채팅 버튼 위) */}
-      <Link href="/diary" className={styles.floatingDiaryBtn} aria-label="내 비밀 장부">
-        <div className={styles.diaryIconWrapper}>
-          <span className={styles.diaryEmoji}>📓</span>
-        </div>
-        <span className={styles.diaryLabel}>내 비밀 장부</span>
-      </Link>
 
-      {/* 플로팅 채팅 버튼 */}
+
+
+      {/* ====================================================
+          RIGHT FLOATING CHAT BUTTON — 우측 채팅 플로팅 버튼
+          (사이드 배너 아래 공간 / 우측 최하단)
+          ==================================================== */}
       <button
         className={styles.floatingBtn}
         onClick={() => setOpen(o => !o)}
         aria-label="채팅 상담"
+        title="채팅 상담"
       >
         {open ? '✕' : '💬'}
         {!open && notif > 0 && <span className={styles.notifBadge}>{notif}</span>}
@@ -133,7 +129,7 @@ export default function ChatWidget() {
           </div>
 
           <div className={styles.chatFooter}>
-            📞 070-8057-6615 &nbsp;|&nbsp; 카카오 abam
+            📞 고객센터 070-8057-6615 (평일 09:30 ~ 19:00)
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 /**
- * AbamLogo — "아름다운밤" 브랜드 로고 컴포넌트
- * 황금 초승달 + 나눔 붓 서명체 (필기/사인 스타일)
+ * AbamLogo — "아름다운밤" 원본 시그니처 시각 로고 컴포넌트
+ * 황금 초승달 + 3D 스케일 캘리그라피 (아 름다운 밤)
  */
 
 import React, { CSSProperties } from 'react';
@@ -11,8 +11,8 @@ interface AbamLogoProps {
   className?: string;
 }
 
-function CrescentMoon({ size }: { size: number }) {
-  const uid = 'abam-moon';
+function CrescentMoon({ size }: { size: string | number }) {
+  const uid = 'abam-moon-orig';
   return (
     <svg
       width={size}
@@ -20,12 +20,12 @@ function CrescentMoon({ size }: { size: number }) {
       viewBox="0 0 40 40"
       fill="none"
       aria-hidden="true"
-      style={{ display: 'block', flexShrink: 0 }}
+      style={{ display: 'block', flexShrink: 0, filter: 'drop-shadow(0 0 8px rgba(253, 224, 71, 0.6))' }}
     >
       <defs>
         <mask id={`${uid}-mask`}>
           <rect width="40" height="40" fill="white" />
-          <circle cx="27" cy="17" r="13" fill="black" />
+          <circle cx="26" cy="16" r="14" fill="black" />
         </mask>
       </defs>
       <circle
@@ -39,44 +39,8 @@ function CrescentMoon({ size }: { size: number }) {
   );
 }
 
-export default function AbamLogo({ fontSize, style, className }: AbamLogoProps) {
-  const iconSize = (() => {
-    if (typeof fontSize === 'number') return Math.max(Math.round(fontSize * 1.3), 16);
-    if (typeof fontSize === 'string' && fontSize !== 'inherit') {
-      const n = parseFloat(fontSize);
-      if (!isNaN(n)) return Math.max(Math.round(n * 1.3), 16);
-    }
-    return 26;
-  })();
-
-  const textStyle: CSSProperties = {
-    // ── 서명 느낌의 붓 필기체 ──
-    fontFamily: "'Nanum Brush Script', 'Black Han Sans', cursive, sans-serif",
-    fontWeight: 400,           // 붓체는 기본 weight 사용
-    fontStyle: 'normal',       // 폰트 자체가 기울어진 느낌
-    letterSpacing: '0.04em',   // 서명처럼 글자 간격 살짝 여유
-    lineHeight: 1,
-
-    // ── 황금 → 핑크 그라디언트 ──
-    background: 'linear-gradient(110deg, #f59e0b 0%, #fbbf24 30%, #e11d48 65%, #be185d 100%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    color: 'transparent',
-
-    // ── 서명처럼 살짝 기울임 + 자연스러운 사선 ──
-    display: 'inline-block',
-    transform: 'skewX(-10deg) rotate(-2deg)',
-    transformOrigin: 'left center',
-
-    // ── 입체감 있는 그림자 (시인성 ↑) ──
-    filter: 'drop-shadow(0px 1px 2px rgba(190,24,93,0.35)) drop-shadow(0px 2px 8px rgba(245,158,11,0.2))',
-
-    whiteSpace: 'nowrap',
-    paddingTop: '0.05em',
-    paddingBottom: '0.05em',
-    paddingRight: '0.1em',   // skew로 잘리지 않도록
-    ...(fontSize ? { fontSize } : {}),
-  };
+export default function AbamLogo({ fontSize = 24, style, className }: AbamLogoProps) {
+  const numericSize = typeof fontSize === 'number' ? fontSize : (fontSize === 'inherit' ? 22 : parseInt(fontSize) || 22);
 
   return (
     <span
@@ -84,15 +48,59 @@ export default function AbamLogo({ fontSize, style, className }: AbamLogoProps) 
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '4px',
+        gap: '6px',
+        userSelect: 'none',
+        verticalAlign: 'middle',
         ...style,
       }}
     >
-      {/* 황금 초승달 심볼 */}
-      <CrescentMoon size={iconSize} />
+      {/* 🌙 황금 글로우 초승달 */}
+      <CrescentMoon size={`${numericSize * 1.25}px`} />
 
-      {/* 서명체 텍스트 — 통일된 크기, 한 덩어리로 */}
-      <span style={textStyle}>아름다운밤</span>
+      {/* 깔끔하고 고급스러운 아름다운밤 시그니처 텍스트 */}
+      <span style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '1px',
+        fontWeight: 900,
+        fontFamily: "'GmarketSansBold', 'Pretendard', 'Noto Sans KR', sans-serif",
+        lineHeight: 1,
+        fontSize: `${numericSize}px`,
+        letterSpacing: '-0.02em',
+        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))'
+      }}>
+        <span style={{
+          color: '#f59e0b',
+          fontSize: '1.15em',
+          fontWeight: 900,
+          background: 'linear-gradient(180deg, #fef08a 0%, #f59e0b 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}>
+          아
+        </span>
+        <span style={{
+          color: '#fb923c',
+          fontSize: '0.95em',
+          fontWeight: 800,
+          background: 'linear-gradient(180deg, #fed7aa 0%, #f97316 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          margin: '0 1px'
+        }}>
+          름다운
+        </span>
+        <span style={{
+          color: '#f43f5e',
+          fontSize: '1.2em',
+          fontWeight: 900,
+          background: 'linear-gradient(180deg, #fecdd3 0%, #e11d48 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}>
+          밤
+        </span>
+      </span>
     </span>
   );
 }

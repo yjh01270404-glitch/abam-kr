@@ -1,7 +1,7 @@
 .bannerContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 1;
+  aspect-ratio: 230 / 114;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,14 +20,12 @@
 
 /* VVIP Scale Modifier */
 .bannerContainer.bannerVVIP {
-  grid-column: span 2;
-  grid-row: span 2;
-  aspect-ratio: auto;
-  min-height: 140px;
-  min-height: 220px;
-  padding: 24px;
-  gap: 20px;
-  border-width: 2px;
+  grid-column: span 4;
+  grid-row: auto;
+  aspect-ratio: 230 / 114;
+  min-height: auto;
+  padding: 0;
+  border-width: 0;
   border-radius: 12px;
   animation: vvipBreath 2s infinite alternate;
   transform: scale(1);
@@ -37,6 +35,12 @@
 .bannerContainer.bannerVVIP:hover {
   transform: scale(1.02);
   z-index: 10;
+}
+
+/* GRAND VIP Scale Modifier */
+.bannerContainer.bannerGrandVIP {
+  grid-column: span 2;
+  aspect-ratio: 230 / 114;
 }
 
 .starryBg {
@@ -125,7 +129,8 @@
   white-space: normal;
   word-break: keep-all;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
+  padding-right: 4px;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -254,13 +259,12 @@
   50% { transform: translateY(-3px); }
 }
 .bannerContainer.bannerVVIP {
-  grid-column: span 2;
-  grid-row: span 2;
-  aspect-ratio: auto;
-  min-height: 180px;
-  padding: 30px 40px;
-  gap: 20px;
-  border-width: 4px;
+  grid-column: span 4;
+  grid-row: auto;
+  aspect-ratio: 3 / 1;
+  min-height: auto;
+  padding: 0;
+  border-width: 0;
   border-radius: 12px;
   animation: vvipBreath 2s infinite alternate;
   transform: scale(1);
@@ -285,3 +289,24 @@
   0% { opacity: 0.9; text-shadow: none; }
   100% { opacity: 1; text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor; }
 }
+
+.heroBgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  z-index: 0;
+  opacity: 0.9;
+}
+.heroBgOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+

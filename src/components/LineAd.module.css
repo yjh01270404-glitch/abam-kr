@@ -1,0 +1,210 @@
+.lineAdContainer {
+  display: flex;
+  align-items: flex-start;
+  padding: 5px 8px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  text-decoration: none;
+  background-color: #ffffff;
+  transition: background-color 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  gap: 6px;
+  min-height: 0;
+}
+
+.lineAdContainer:hover {
+  background-color: #f8fafc;
+}
+
+/* 유료 배경색 강조 */
+.bgHighlightCyan { background-color: #e0f7fa; }
+.bgHighlightCyan:hover { background-color: #b2ebf2; }
+.bgHighlightYellow { background-color: #fffde7; }
+.bgHighlightYellow:hover { background-color: #fff9c4; }
+.bgHighlightPink { background-color: #fce7f3; }
+.bgHighlightPink:hover { background-color: #fbcfe8; }
+
+/* 지역명 컬럼 — 고정 너비 */
+.lineAdLocation {
+  font-size: 10.5px;
+  color: #475569;
+  white-space: nowrap;
+  font-weight: 700;
+  padding-top: 2px;
+  flex-shrink: 0;
+  min-width: 60px;
+  max-width: 78px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 제목 영역 — flex-grow: 1 */
+.lineAdTitleWrapper {
+  flex-grow: 1;
+  min-width: 0;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.lineAdTitle {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.4;
+  /* 최대 2줄 */
+  max-height: calc(1.4em * 2 + 3px);
+  overflow: hidden;
+}
+
+/* 1행 */
+.lineAdRow1 {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  height: 1.4em;
+}
+
+/* 2행 */
+.lineAdRow2 {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  height: 1.4em;
+  margin-top: 1px;
+}
+
+/* 들여쓰기 공간 */
+.lineAdIndent {
+  display: inline-block;
+  width: 10px;
+  flex-shrink: 0;
+}
+
+/* 실제 텍스트 span */
+.lineAdText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  min-width: 0;
+  display: block;
+}
+
+/* 급여 정보 컬럼 */
+.lineAdPay {
+  font-size: 10px;
+  color: #db2777;
+  font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 52px;
+  max-width: 70px;
+  text-align: right;
+  padding-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 급구 배지 */
+.urgentBadge {
+  background: linear-gradient(135deg, #ff4e50, #f9d423);
+  background-color: #ff3d00;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(255,61,0,0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 15px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* 글자색 강조 */
+.textHighlightBlue { color: #0284c7 !important; font-weight: 800; }
+.textHighlightRed { color: #e11d48 !important; font-weight: 800; }
+.textHighlightPurple { color: #7c3aed !important; font-weight: 800; }
+.textNormal { color: #334155; font-weight: 600; }
+
+/* NEW 배지 */
+.newBadge {
+  color: #ff6d00;
+  font-size: 9px;
+  font-weight: 900;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: -0.5px;
+  margin-left: 2px;
+  vertical-align: middle;
+  display: inline;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.newBadgeInline {
+  color: #ff6d00;
+  font-size: 9px;
+  font-weight: 900;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .lineAdContainer {
+    padding: 4px 6px;
+    gap: 4px;
+  }
+  .lineAdLocation {
+    font-size: 10px;
+    min-width: 52px;
+    max-width: 65px;
+  }
+  .lineAdTitle {
+    font-size: 11.5px;
+  }
+  .lineAdPay {
+    font-size: 9px;
+    min-width: 44px;
+  }
+  .urgentBadge {
+    font-size: 9px;
+    padding: 0 3px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lineAdContainer {
+    padding: 3px 5px;
+    gap: 3px;
+  }
+  .lineAdLocation {
+    font-size: 9.5px;
+    min-width: 46px;
+    max-width: 58px;
+  }
+  .lineAdTitle {
+    font-size: 11px;
+  }
+  .lineAdPay {
+    display: none;
+  }
+}

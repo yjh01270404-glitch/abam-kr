@@ -6,6 +6,7 @@ import AbamLogo from '../../components/AbamLogo';
 import { useRouter } from 'next/navigation';
 import { useApp } from '../../context/AppContext';
 import { sendMessage } from '../../lib/messages';
+import { broadcastAdminPush } from '../../lib/audioAlert';
 import {
   SOS_REGIONS,
   registerSosServiceWorker,
@@ -22,6 +23,7 @@ export default function RegisterPage() {
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState<'F' | 'M'>('F');
   const [companyName, setCompanyName] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -56,8 +58,8 @@ export default function RegisterPage() {
       alert('필수 항목을 모두 입력해주세요.');
       return;
     }
-    if (role === 'employer' && !companyName) {
-      alert('업소명을 입력해주세요.');
+    if (role === 'employer' && (!companyName || !phone)) {
+      alert('업소명과 담당자 연락처를 모두 입력해주세요.');
       return;
     }
     if (password !== confirmPassword) {
@@ -69,7 +71,7 @@ export default function RegisterPage() {
       return;
     }
 
-    const result = signup({ username, password, nickname, birthdate, gender, role, sosAlert, sosRegions });
+    const result = signup({ username, password, nickname, birthdate, gender, role, sosAlert, sosRegions, phone });
     if (result === 'duplicate') { alert('이미 사용 중인 아이디입니다.'); return; }
     if (result === 'underage') { alert('만 19세 이상만 가입 가능합니다.'); return; }
 
@@ -81,25 +83,13 @@ export default function RegisterPage() {
 
     // 가입 축하 쪽지
     const userId = `u_${username}`;
-    sendMessage({
-      from: 'admin',
-      fromName: '운영팀',
-      to: userId,
-      toName: nickname || username,
-      subject: `🎉 ${nickname || username}님, 아름다운밤 가입을 환영합니다!`,
-      content: `아름다운밤의 회원이 되신 것을 진심으로 환영합니다.
-당신만의 특별한 프리미엄 구인구직 서비스를 지금 바로 시작해보세요.
 
-[회원 혜택 안내]
-- 7월 신규가입 무료 이벤트 진행 중
-- 구인구직 1대1 매칭 및 안심케어 서비스
-- 실시간 알림 및 쪽지 기능${role === 'seeker' && sosAlert ? `\n- ⚡ SOS 긴급 알림 구독 중 (${sosRegions.join(', ')})` : ''}
-
-문의사항이 있으시면 언제든지 070-8057-6615 고객센터로 연락주세요.
-감사합니다.
-
-- 아름다운밤 운영팀 드림 -`,
-    });
+    // 관리자 PWA 푸시 알림 전송
+    broadcastAdminPush(
+      '🎉 [신규 회원 가입]',
+      `새로운 ${role === 'employer' ? '업소 구인회원' : '일반 구직회원'} (${nickname || username}) 님이 회원가입 하셨습니다!`,
+      '/abam-nightman-2026'
+    );
 
     alert('아름다운밤 회원가입이 성공적으로 완료되었습니다!');
     router.push('/');
@@ -189,17 +179,30 @@ export default function RegisterPage() {
           </div>
 
           {role === 'employer' && (
-            <div className={styles.formGroup}>
-              <label>업소명 (상호명) *</label>
-              <input
-                type="text"
-                className={styles.input}
-                placeholder="예: 아름다운밤 룸라운지"
-                value={companyName}
-                onChange={(e) => setCompanyName(e.target.value)}
-                required
-              />
-            </div>
+            <>
+              <div className={styles.formGroup}>
+                <label>업소명 (상호명) *</label>
+                <input
+                  type="text"
+                  className={styles.input}
+                  placeholder="예: 아름다운밤 룸라운지"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label>담당자 연락처 (휴대폰 번호) *</label>
+                <input
+                  type="text"
+                  className={styles.input}
+                  placeholder="예: 010-8294-6330"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
+              </div>
+            </>
           )}
 
           <div className={styles.formGroup}>

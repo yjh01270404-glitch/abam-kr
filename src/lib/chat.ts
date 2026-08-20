@@ -1,3 +1,5 @@
+import { notifyNewMessage, playDingDongSound } from './audioAlert';
+
 // 실시간 채팅 유틸리티 (localStorage 기반)
 
 export interface ChatMsg {
@@ -55,14 +57,16 @@ export function createOrGetSession(sessionId: string, nickname: string, userId?:
   return newSession;
 }
 
-export function sendChatMsg(sessionId: string, from: '관리자' | '고객', text: string) {
+export function sendChatMsg(sessionId: string, from: '관리자' | '고객' | string, text: string) {
   const sessions = getChatSessions();
   const session = sessions.find(s => s.sessionId === sessionId);
   if (!session) return;
 
+  const senderLabel = from === '관리자' ? '관리자' : (from === '고객' ? '구직회원' : from);
+
   session.msgs.push({
     id: Date.now(),
-    from: from === '관리자' ? '관리자' : (from === '고객' ? '나' : from),
+    from: from === '관리자' ? '관리자' : '나',
     text,
     time: now()
   });
@@ -75,6 +79,33 @@ export function sendChatMsg(sessionId: string, from: '관리자' | '고객', tex
   }
 
   saveChatSessions(sessions);
+
+  // PWA 백그라운드 띵동 알림 트리거 (프로그램을 켜지 않은 상태에서도 상단 알림 바 표시)
+  if (typeof window !== 'undefined') {
+    playDingDongSound();
+
+    const title = from === '관리자' 
+      ? '💬 [아밤 1:1 톡] 관리자님의 대화 메시지' 
+      : `💬 [아밤 1:1 톡] ${session.nickname || '상대방'}님의 1:1 대화 메시지`;
+    const targetUrl = from === '관리자' ? '/' : '/abam-nightman-2026';
+
+    // Service Worker 메시지 전송 (PWA 앱이 백그라운드나 꺼져 있을 때)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.ready.then((reg) => {
+        if (reg.active) {
+          reg.active.postMessage({
+            type: 'ADMIN_PUSH',
+            title,
+            body: text,
+            url: targetUrl,
+          });
+        }
+      }).catch(() => {});
+    }
+
+    notifyNewMessage(title, text, targetUrl);
+    window.dispatchEvent(new CustomEvent('abam_new_chat', { detail: { sessionId, text, from } }));
+  }
 }
 
 export function markSessionRead(sessionId: string, by: '관리자' | '고객') {

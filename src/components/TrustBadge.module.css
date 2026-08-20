@@ -1,0 +1,113 @@
+/* TrustBadge.module.css */
+
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 사이즈 변형 */
+.size_xs .badge { width: 18px; height: 18px; font-size: 11px; border-radius: 5px; }
+.size_sm .badge { width: 24px; height: 24px; font-size: 14px; border-radius: 6px; }
+.size_md .badge { width: 32px; height: 32px; font-size: 18px; border-radius: 8px; }
+.size_lg .badge { width: 44px; height: 44px; font-size: 24px; border-radius: 12px; }
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: help;
+  transition: transform 0.2s;
+  gap: 4px;
+}
+.badge:hover {
+  transform: scale(1.1);
+}
+
+.emoji {
+  line-height: 1;
+}
+
+.labelText {
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Level 4 Diamond 애니메이션 */
+.wrapper[data-level="4"] .badge {
+  animation: diamondGlow 2s ease-in-out infinite alternate;
+}
+@keyframes diamondGlow {
+  from { box-shadow: 0 2px 8px rgba(167,139,250,0.5); }
+  to   { box-shadow: 0 2px 16px rgba(167,139,250,0.9), 0 0 24px rgba(167,139,250,0.4); }
+}
+
+/* Level 3 Gold 빛 반짝임 */
+.wrapper[data-level="3"] .badge {
+  animation: goldShimmer 3s ease-in-out infinite;
+}
+@keyframes goldShimmer {
+  0%, 100% { box-shadow: 0 2px 8px rgba(251,191,36,0.4); }
+  50%       { box-shadow: 0 2px 14px rgba(251,191,36,0.7); }
+}
+
+.ratingText {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.reviewCount {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* 툴팁 */
+.tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  background: #fff;
+  border: 1.5px solid #f0c0d8;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 9000;
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.wrapper:hover .tooltip {
+  display: block;
+  animation: fadeInTooltip 0.15s ease;
+}
+
+@keyframes fadeInTooltip {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.tooltipHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: #fff;
+}
+.tooltipEmoji { font-size: 20px; flex-shrink: 0; }
+.tooltipTitle { font-size: 13px; font-weight: 900; margin-bottom: 2px; }
+.tooltipDesc  { font-size: 11px; opacity: 0.9; line-height: 1.4; }
+
+.tooltipBody { padding: 10px 14px 12px; }
+.tooltipReqTitle { font-size: 10px; font-weight: 900; color: #9ca3af; letter-spacing: 0.05em; margin-bottom: 6px; }
+.tooltipReqs { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.tooltipReqs li { font-size: 11.5px; color: #4b5563; display: flex; align-items: center; gap: 6px; }
+.checkMark { color: #10b981; font-weight: 900; }

@@ -1,0 +1,412 @@
+/* business.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');
+
+.page {
+  min-height: 100vh;
+  background: #faf8f5;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+}
+
+/* ── 업소 헤더 ── */
+.businessHeader {
+  background: linear-gradient(135deg, #fff0f6 0%, #fce7f3 50%, #fff8fc 100%);
+  border-bottom: 2px solid;
+  padding: 28px 24px 24px;
+}
+.businessHeaderInner { max-width: 1000px; margin: 0 auto; }
+
+.businessNameRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.businessName {
+  font-size: 26px;
+  font-weight: 900;
+  color: #1f2937;
+  margin: 0;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  color: #fff;
+}
+.trustBadgeEmoji { font-size: 20px; }
+.trustBadgeLabel { font-size: 13px; font-weight: 900; }
+.trustBadgeDesc { font-size: 11px; opacity: 0.9; margin-top: 2px; }
+
+/* Level 4 Diamond 글로우 */
+.trustBadge[data-level="4"] {
+  animation: diamondGlow 2s ease-in-out infinite alternate;
+}
+@keyframes diamondGlow {
+  from { box-shadow: 0 4px 16px rgba(167,139,250,0.5); }
+  to   { box-shadow: 0 4px 24px rgba(167,139,250,0.9), 0 0 32px rgba(167,139,250,0.4); }
+}
+
+.businessStats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.bStat { display: flex; align-items: center; gap: 5px; }
+.bStatVal { font-size: 17px; font-weight: 900; color: #1f2937; }
+.bStatSub { font-size: 12px; color: #9ca3af; }
+.bStatIcon { font-size: 16px; }
+.bStatDivider { width: 1px; height: 20px; background: #f0c0d8; }
+
+/* ── 레이아웃 ── */
+.layout {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* ── 사이드바 ── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sideCard {
+  background: #fff;
+  border: 1.5px solid #f0c0d8;
+  border-radius: 14px;
+  padding: 16px 14px;
+}
+.sideTitle {
+  font-size: 11px;
+  font-weight: 900;
+  color: #9ca3af;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.verifiedList { display: flex; flex-direction: column; gap: 7px; }
+.verifiedItem { display: flex; align-items: center; gap: 8px; }
+.verifiedLabel { font-size: 12.5px; color: #374151; }
+
+.statsDivider { height: 1px; background: #f0c0d8; margin: 12px 0; }
+
+.trustStat { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.trustStatLabel { font-size: 11.5px; color: #6b7280; width: 55px; flex-shrink: 0; }
+.trustStatBar { flex: 1; height: 5px; background: #f3f4f6; border-radius: 3px; overflow: hidden; }
+.trustStatFill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+.trustStatVal { font-size: 11.5px; font-weight: 700; width: 40px; text-align: right; flex-shrink: 0; }
+
+.avgItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+.avgLabel { font-size: 11.5px; color: #6b7280; width: 55px; flex-shrink: 0; }
+.avgVal { font-size: 11px; font-weight: 700; color: #f59e0b; margin-left: auto; }
+
+.reviewWriteBtn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #e91e63, #c2185b);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(233,30,99,0.35);
+}
+.reviewWriteBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(233,30,99,0.45);
+}
+
+/* ── 메인 ── */
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1.5px solid #f0c0d8;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+.reviewHeaderTitle { font-size: 14px; font-weight: 800; color: #1f2937; flex: 1; }
+
+.sortBtns { display: flex; gap: 6px; }
+.sortBtn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.sortBtnActive { border-color: #c2185b; background: #c2185b; color: #fff; }
+
+/* ── 리뷰 카드 ── */
+.reviewCard {
+  background: #fff;
+  border: 1.5px solid #f0d0e0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s;
+}
+.reviewCard:hover {
+  border-color: #c2185b;
+  box-shadow: 0 4px 14px rgba(194,24,91,0.08);
+}
+
+.reviewTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.reviewRating { font-size: 14px; font-weight: 800; color: #f59e0b; }
+.verifiedBadge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #059669;
+  background: #d1fae5;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.reviewTime { font-size: 11px; color: #9ca3af; margin-left: auto; }
+
+.reviewTags { display: flex; gap: 5px; flex-wrap: wrap; }
+.reviewTag {
+  font-size: 10px;
+  color: #c2185b;
+  background: #fff0f6;
+  border: 1px solid #f0c0d8;
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-weight: 700;
+}
+
+.reviewContent {
+  font-size: 13.5px;
+  color: #374151;
+  line-height: 1.75;
+}
+
+.reviewMiniStats {
+  display: flex;
+  gap: 12px;
+  font-size: 11.5px;
+  color: #9ca3af;
+  flex-wrap: wrap;
+}
+
+.reviewSubRatings {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.subRatingItem { display: flex; align-items: center; gap: 4px; }
+.subRatingLabel { font-size: 11px; color: #6b7280; font-weight: 600; }
+
+.reviewFooter { display: flex; justify-content: flex-end; }
+.helpfulBtn {
+  padding: 5px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.helpfulBtnActive {
+  border-color: #10b981;
+  background: #d1fae5;
+  color: #059669;
+}
+
+.emptyReview {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fff;
+  border-radius: 14px;
+  border: 1.5px dashed #f0c0d8;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* ── 모달 ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modalBox {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1.5px solid #f0c0d8;
+}
+.modalTitle { font-size: 16px; font-weight: 900; color: #1f2937; margin: 0; }
+.modalClose {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 50%;
+  width: 28px; height: 28px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalBody { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.modalNotice {
+  font-size: 12px;
+  color: #6b7280;
+  background: #f0fdf4;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  line-height: 1.5;
+}
+.fieldLabel { font-size: 12px; font-weight: 800; color: #374151; }
+.fieldHint { font-weight: 400; color: #9ca3af; }
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+.ratingLabel { font-size: 12px; color: #6b7280; width: 80px; flex-shrink: 0; }
+.ratingStars { display: flex; gap: 3px; }
+.starBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #e5e7eb;
+  padding: 0;
+  transition: color 0.1s;
+  line-height: 1;
+}
+.starBtnActive { color: #f59e0b; }
+.ratingVal { font-size: 12px; font-weight: 700; color: #f59e0b; width: 24px; }
+
+.ratingGrid { background: #f9fafb; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+
+.wouldReturnRow { display: flex; gap: 10px; }
+.yesBtn, .noBtn {
+  flex: 1; padding: 10px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.yesBtnActive { border-color: #10b981; background: #d1fae5; color: #059669; }
+.noBtnActive { border-color: #ef4444; background: #fee2e2; color: #dc2626; }
+
+.periodRow { display: flex; gap: 7px; flex-wrap: wrap; }
+.periodBtn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+  font-size: 11.5px; font-weight: 700; color: #6b7280;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.15s;
+}
+.periodBtnActive { border-color: #c2185b; background: #fff0f6; color: #c2185b; }
+
+.modalTextarea {
+  width: 100%; padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 13px; font-family: inherit;
+  color: #1f2937; outline: none;
+  resize: vertical; line-height: 1.6;
+  box-sizing: border-box;
+  transition: border 0.15s;
+}
+.modalTextarea:focus { border-color: #c2185b; }
+.contentLen { font-size: 11px; color: #9ca3af; text-align: right; margin-top: -6px; }
+
+.submitBtn {
+  width: 100%; padding: 13px;
+  background: linear-gradient(135deg, #e91e63, #c2185b);
+  color: #fff; border: none;
+  border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(233,30,99,0.35);
+}
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(233,30,99,0.45);
+}
+.submitBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .businessNameRow { flex-direction: column; align-items: flex-start; }
+}

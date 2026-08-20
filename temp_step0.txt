@@ -1,0 +1,31 @@
+<USER_REQUEST>
+띵비엣 서비스페이지에 관한 내용이야 참고해서 수정해줘 1. 후기 조작 티가 너무 난다
+김O석(사위), 이O영(여행), 박O훈(주재원), 정O민(오픽), 최O우(자영업) — 페르소나 5개가 정확히 5개 타겟 세그먼트를 커버한다. 실제 유저 후기라면 이렇게 깔끔하게 분산되지 않는다. 점수 변화(32→88, 38→91, 42→94...)도 전부 그럴듯한 숫자대라 오히려 가짜 냄새가 남. 방문자가 5초만 봐도 "이거 만든 거네" 느낌 든다. 소셜 프루프는 신뢰를 쌓으려고 넣는 건데, 이 버전은 오히려 신뢰를 깎아먹는 역효과.
+2. FAQ가 고장나 있다
+"무료로도 사용할 수 있나요?", "프리미엄 해지 가능한가요?" 등 4개 질문에 답변이 아예 안 보인다. 결제 직전 단계에 있는 섹션인데 정작 결제 관련 궁금증에 답을 안 주는 건 치명적. 아코디언 렌더링 버그거나 콘텐츠 누락 — 전환 직전 이탈 포인트다. 최우선으로 고쳐야 함.
+3. ELSA를 직접 언급한 건 자충수
+"글로벌 탑 어학 앱(ELSA 등)에서만 볼 수 있던 기술" — 이 문장은 두 가지로 다 나쁘다. ① 특정 브랜드명 언급은 법적 리스크(비교광고 관련). ② "쟤네 거 우리도 넣었어요"로 읽혀서, 오히려 후발주자/카피캣 포지션을 스스로 인증하는 꼴. 차별화하려고 쓴 문장이 거꾸로 2등 브랜드 프레임을 씌운다.
+4. 타겟이 5개로 분산 = 브랜드 없음
+결혼 준비자, 여행객, 주재원, 오픽 준비생, 식당 사장 — 전부 다른 니즈, 다른 톤, 다른 구매 트리거인데 한 페이지에 다 우겨넣었다. "성조를 눈으로 본다"는 실제로 좋은 차별점인데, 이 5명짜리 만능 스토리에 묻혀서 안 보인다. 지금 카피는 "누구나 다 되는 앱"처럼 보이는데, 그건 결국 "아무도 필요로 하지 않는 앱"으로 읽힐 위험이 있다.
+5. CTA가 3개
+"무료 1분 레벨 진단", "테스트하러 가기", "코스 시작" — 첫 화면부터 결제 페이지까지 주 액션이 계속 바뀐다. 퍼널 설계상 하나로 통일해야 함.
+6. 노래 가사 저작권 리스크
+실제 베트남 대중가요 가사를 실시간 동기화해서 보여주는 기능 — 유튜브 임베드는 괜찮지만 가사 텍스트 자체를 사이트에 노출하면 저작권 이슈 소지 있음. 트래픽 커지면 문제될 수 있는 부분.
+7. "1인 개발자 표현 금지"인데 페이지 하단엔 다 있음
+콘텐츠 규칙으로 "1인 개발자" 표현을 막아놨는데, 정작 사업자 정보(대표자명, 연락처, 주소)는 전부 노출돼 있고 "학습 콘텐츠·API 무단 수집·재배포 금지" 같은 방어적 문구까지 있다. 트래픽 거의 없는 초기 서비스 치고 과하게 방어적인 문구는 오히려 "이거 작은 개인 서비스구나"를 티 낸다. 숨기려는 포인트와 실제 노출되는 정보가 안 맞다.
+8. 클리셰 카피
+"커피 한 잔보다 싸요" — 국내 구독 서비스 랜딩페이지에서 셀 수 없이 본 문구. 차별화 없음.
+총평: "성조를 눈으로 본다"는 컨셉 자체는 진짜 좋은 훅이다. 근데 지금 페이지는 그 훅을 가짜 후기, FAQ 버그, 경쟁사 언급 자충수, 5개로 쪼개진 타겟이 다 갉아먹고 있다. 우선순위: FAQ 답변 복구 → ELSA 언급 삭제 → 후기를 진짜 유저 것으로 교체하거나 최소 2-3개로 줄이고 문체를 덜 완벽하게 → 타겟 1개(예: 국제결혼 준비자 or 여행객)로 좁혀서 카피 재작성.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-16T22:21:07+09:00.
+
+The user's current state is as follows:
+Active Document: c:\Users\yjh01\.gemini\antigravity-ide\scratch\viet-learn\supabase\sample_blog_posts.sql (LANGUAGE_SQL)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\yjh01\.gemini\antigravity-ide\scratch\viet-learn\supabase\sample_blog_posts.sql (LANGUAGE_SQL)
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.5 Flash (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

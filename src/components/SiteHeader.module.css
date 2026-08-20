@@ -1,0 +1,177 @@
+/* ============================================================
+   아름다운밤 — SiteHeader (토스/애플 감성 슬림 럭셔리 미니멀 테마)
+   ============================================================ */
+
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(16px);
+}
+
+/* ── 1. 상단 유틸리티 바 (딥 다크 버건디 럭셔리) ── */
+.topUtilityBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 24px;
+  background: #0f172a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.topUtilityLeft {
+  font-weight: 700;
+  cursor: pointer;
+  color: #fde68a; /* 샴페인 골드 */
+  letter-spacing: 0.02em;
+  transition: all 0.15s;
+}
+.topUtilityLeft:hover {
+  color: #ffffff;
+}
+
+.topUtilityRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topUtilityRight a {
+  color: #cbd5e1;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.topUtilityRight a:hover {
+  color: #fde68a;
+}
+
+.divider { color: #334155; }
+
+/* ── 2. 메인 네비게이션 (슬림 럭셔리 화이트 & 골드 라인) ── */
+.mainNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 0 24px;
+  height: 54px;
+  border-bottom: 2px solid #e2e8f0;
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.navItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+}
+.navItem:hover {
+  background: #f1f5f9;
+  color: #be185d;
+}
+.navActive {
+  color: #be185d !important;
+  background: #fdf2f8 !important;
+  font-weight: 800 !important;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+/* 알림 벨 버튼 */
+.alertBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  transition: all 0.2s;
+  text-decoration: none;
+  background: #ffffff;
+}
+.alertBtn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+.alertDot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e11d48;
+  border: 1px solid #fff;
+}
+
+.registerBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #be185d 0%, #9f1239 100%);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 7px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(190, 24, 93, 0.25);
+}
+.registerBtn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 12px rgba(190, 24, 93, 0.35);
+}
+
+/* ── 모바일 반응형 ── */
+@media (max-width: 900px) {
+  .mainNav { padding: 0 12px; height: 50px; }
+  .navMenu { gap: 4px; }
+  .navItem { padding: 6px 10px; font-size: 12.5px; }
+  .topUtilityBar { padding: 4px 12px; font-size: 10.5px; }
+}
+
+@media (max-width: 640px) {
+  .topUtilityLeft { display: none; }
+  .registerBtn { padding: 6px 12px; font-size: 11px; }
+}

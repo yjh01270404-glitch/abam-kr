@@ -11,38 +11,24 @@ export interface PremiumOptions {
 
 /** 결제 이력 단건 */
 export interface PaymentRecord {
-  /** 고유 결제 ID */
   id: string;
-  /** 결제 일시 (ISO 8601) */
   date: string;
-  /** 결제한 개월 수 */
   months: number;
-  /** 결제 금액 (원) */
   amount: number;
-  /** 플랜명 (예: 'tier_premium') */
   plan: string;
-  /** 이 결제로 연장된 시작일 */
   periodFrom: string;
-  /** 이 결제로 연장된 종료일 */
   periodTo: string;
 }
 
-/** 환불 정책 — 이용 비율에 따른 공정위 기준 */
 export type RefundStatus = 'pending' | 'approved' | 'rejected';
 
 export interface RefundRequest {
   status: RefundStatus;
-  /** 환불 신청일 (ISO 8601) */
   requestedAt: string;
-  /** 신청 사유 */
   reason: string;
-  /** 환불 예상금액 (원, 공정위 기준 계산) */
   refundAmount: number;
-  /** 환불 비율 설명 */
   refundRatioLabel: string;
-  /** 처리 일시 */
   processedAt?: string;
-  /** 거부 사유 (관리자 입력) */
   rejectedReason?: string;
 }
 
@@ -63,1745 +49,388 @@ export interface JobAd {
     decorations?: boolean;
     containerMotion?: boolean;
   };
-  requirements: string;
-  workHours: string;
-  contactPhone?: string;
-  contactKakao?: string;
-  createdAt?: string;
-  expiresAt?: string;
-  premium?: PremiumOptions;
-  /** 결제 이력 (구독 연장 포함 누적) */
-  paymentHistory?: PaymentRecord[];
-  /** 환불 요청 정보 */
-  refundRequest?: RefundRequest | null;
-  /** 자동으로 생성된 화려한 배너 커스텀 스타일 */
-  customStyle?: any;
-  /** 자동 예약 점프 시간대 (예: [20, 21, 22]) */
-  autoJumpHours?: number[];
-}
-
-export interface ForumPost {
-  id: string;
-  category: 'best' | 'night' | 'friend' | 'legal';
-  title: string;
-  writer: string;
-  date: string;
-  views: number;
 }
 
 export interface TalentProfile {
   id: string;
-  name: string;
-  age: string;
-  gender: string;
-  title: string;
-  jobType: string;
-  pay: string;
-  date: string;
+  nickname: string;
+  age: number;
+  location: string;
+  desiredPay: string;
+  experience: string;
+  introduction: string;
+  availableDays: string;
+  viewCount: number;
+  createdAt: string;
 }
 
-// 날짜 헬퍼
-const makeCreatedAt = (daysAgo: number) => new Date(Date.now() - daysAgo * 86400000).toISOString();
-const makeExpiresAt = (daysFromNow: number = 90) => new Date(Date.now() + daysFromNow * 86400000).toISOString();
-
-/** 초기 결제 이력 생성 헬퍼 (mock 데이터용) */
-function makeInitialPayment(amount: number, plan: string, createdAt: string, expiresAt: string): PaymentRecord[] {
-  return [{
-    id: `pay_init_${Math.random().toString(36).slice(2, 8)}`,
-    date: createdAt,
-    months: 1,
-    amount,
-    plan,
-    periodFrom: createdAt,
-    periodTo: expiresAt,
-  }];
+// 오늘 날짜 기준으로 n일 전 MM-DD 날짜 자동 생성 (매일 새로운 날짜 동적 유지)
+export function getRelativeDate(daysAgo: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${m}-${day}`;
 }
 
+export const generalJobs: JobAd[] = [];
+export const talentProfiles: TalentProfile[] = [];
+
 // ────────────────────────────────────────────────────────────────
-// 1. TOP BANNERS — VIP 프리미엄 (일급 50만~100만, 청담·강남·해운대)
+// 2. 자유게시판 풍성한 댓글 데이터 (인기글 10개 이상, 일반글 1~5개)
 // ────────────────────────────────────────────────────────────────
+export const forumPosts = [
+  // 👑 인기 1위 (댓글 10개)
+  { 
+    id: 1, 
+    category: 'best', 
+    title: '초이스 들어갈 때 반응 좋았던 스타일 및 매너 팁 정리', 
+    content: '1. 들어가자마자 밝게 인사하기 (첫인상이 80% 이상 먹고 들어갑니다)\n2. 손님 멘트 잘 호응해주고 리액션 리듬 맞추기\n3. 진상 조짐 보이면 절대 혼자 해결하려 하지 말고 실장님한테 바로 사인 보내기\n이 세 가지만 지켜도 지명 손님 늘어나는 게 확 보여요!', 
+    replies: [
+      { id: 12, author: '청담동실장', text: '실장 사인 보내는 게 진짜 중요합니다. 혼자 참지 마세요! 저희가 해결해드립니다.' },
+      { id: 13, author: '미소천사', text: '인사성이 진짜 제일 중요한 것 같아요. 눈맞춤 미소 스크랩해갑니다!' },
+      { id: 14, author: '강남에이스', text: '추가로 팁 드리자면, 들어갈 때 어깨 쫙 펴고 자신감 있는 표정이 제일 반응 좋아요!' },
+      { id: 15, author: '핑크다이아', text: '옷차림은 확실히 파스텔 톤이나 밝은 색상이 조명 받았을 때 얼굴 확 살아보입니다.' },
+      { id: 16, author: '샤넬언니', text: '진상 조짐 보일 때 실장님 호출 팁 진짜 공감 ㅋㅋㅋ 혼자 끌려다니면 몸도 맘도 상함 ㅠ' },
+      { id: 17, author: '초보언니', text: '면접 때 이런 팁 미리 알고 갔으면 훨씬 덜 떨었을 텐데 감사해요 저장했습니다!!' },
+      { id: 18, author: '도산대로핑크', text: '리액션 리듬 맞추는 거 연습하니까 확실히 지명 전환율 높아지더라구요 추천!!' },
+      { id: 19, author: '논현동여신', text: '3번 항목 백번 강조해도 부족함. 실장님이 케어 잘해주는 가게가 진짜 좋은 가게예요.' },
+      { id: 20, author: '밤의장미', text: '초이스 문 열릴 때 미소 유지하기!! 이거 하나로 초이스 확률 2배 올라갔어요 ㅎㅎ' },
+      { id: 21, author: '뷰티코치', text: '헤어 메이크업도 너무 과한 빡세팅보다는 깔끔한 드라이에 포인트 메이크업이 반응 좋습니다!' }
+    ], 
+    likes: 18,
+    date: getRelativeDate(0)
+  },
+  // 🥈 인기 2위 (댓글 11개)
+  { 
+    id: 2, 
+    category: 'best', 
+    title: '오늘 비 오는데 손 없네요 ㅠ 언니들은 어떻게 하세요?', 
+    content: '오늘 비 엄청 왔더니 손님이 거의 없었어요. 이런 날은 일찍 퇴근하는 게 나을까요 아니면 막방까지 버티는 게 나을까요?', 
+    replies: [
+      { id: 1, author: '언니쁜', text: '저도 오늘 일찍 퇴근했어요! 비 올 때는 어쩔 수 없더라구요~ 집에서 푹 쉬는 게 답인 듯!' },
+      { id: 2, author: '달빛나비', text: '저희 가게는 오늘 지명 손님 많아서 분위기 완전 살았어요 ㅋㅋ 케바케인 듯!' },
+      { id: 3, author: '청담릴리', text: '비 오는 날은 손님들 이동하기 귀찮아해서 초저녁보단 막방 타임에 몰려오더라구요!' },
+      { id: 4, author: '역삼공주', text: '오늘 진짜 한가해서 대기실에서 언니들이랑 배달 떡볶이 시켜먹고 놀다 나왔어요 ㅋㅋㅋ' },
+      { id: 5, author: '지명왕자스민', text: '비 오는 날 지명 손님 부르면 의외로 잘 와요! "오늘 비 오는데 술 한잔해요 언니 생각나서 연락했어요" 톡 하나 보내보세요 ㅎㅎ' },
+      { id: 6, author: '도산대로핑크', text: '저 3시간 대기하다가 빈손으로 퇴근... 비 올 때는 멘탈 관리가 제일 중요함 ㅠ' },
+      { id: 7, author: '초보탈출하자', text: '저는 비 오는 날 차라리 일찍 잘라 달라고 하고 뷰티데이로 씁니다! 마스크팩하고 꿀잠 자요!' },
+      { id: 8, author: '수원실장님', text: '비 오는 날은 전 룸 세팅 미리 깔끔하게 해놓고 대기시킵니다. 늦은 시간에 한꺼번에 들어오는 경우가 많아요.' },
+      { id: 9, author: '강남베테랑', text: '5년 차 경험상 비 오는 날 막타임에 알짜배기 손님들 꼭 옵니다 ㅋㅋㅋ 포기하지 마세요!' },
+      { id: 10, author: '퇴근길아메리카노', text: '오늘 택시도 안 잡혀서 퇴근길 고생했네요 다들 빗길 조심해서 퇴근하세요 ㅠㅠ' },
+      { id: 11, author: '새내기여우', text: '공감해요 ㅠㅠ 대기실 분위기 다운될까 봐 다 같이 수다 떨면서 버텼어요 파이팅!!' }
+    ], 
+    likes: 12,
+    date: getRelativeDate(0)
+  },
+  // 🥉 인기 3위 (댓글 10개)
+  { 
+    id: 3, 
+    category: 'best', 
+    title: '오늘 방 연속으로 들어가서 막방 찍고 퇴근하네요 ㅎㅎ', 
+    content: '지명 손님이 연속으로 찾아주셔서 쉴 새 없이 일하고 이제 막방 마감했네요! 몸은 피곤한데 보람찬 하루입니다. 언니들도 오늘 고생 많으셨어요!', 
+    replies: [
+      { id: 22, author: '하늘이', text: '우와 연타 뛰셨네요! 축하드려요~ 조심히 퇴근하세요!' },
+      { id: 23, author: '역삼공주', text: '체력 진짜 대단하세요 ㅋㅋㅋ 저는 3타임만 뛰어도 다리 후들거리는데 부러워요!' },
+      { id: 24, author: '지명왕자스민', text: '지명 손님 연속 방문은 진짜 기분 최고죠 ㅋㅋㅋ 고생하신 만큼 맛있는 거 드세요!' },
+      { id: 25, author: '수원언니', text: '수고 많으셨어요! 연타 뛴 날은 집에 가서 족욕하고 꿀잠 자는 게 최고!!' },
+      { id: 26, author: '강남베테랑', text: '마감 찍고 퇴근할 때 통장 든든해지는 그 느낌 알죠 ㅋㅋㅋ 고생하셨습니다 언니!' },
+      { id: 27, author: '달빛나비', text: '저도 오늘 지명 2팀 연속 들어와서 신나게 일했네요 다들 대박 나는 하루 되시길!' },
+      { id: 28, author: '초보탈출하자', text: '부럽습니다 ㅠㅠ 저도 빨리 지명 늘려서 연타 뛰어보고 싶네요 파이팅!!' },
+      { id: 29, author: '청담릴리', text: '맛있는 야식 챙겨 드시고 푹 쉬세요! 다음 출근 때도 대박 나시길 ㅎㅎ' },
+      { id: 30, author: '퇴근길아메리카노', text: '방 연속 들어가면 시간 금방 가죠 ㅋㅋㅋ 고생한 보람 있으시겠어요!!' },
+      { id: 31, author: '실장님나빠요', text: '우리 가게 언니인 줄 ㅋㅋㅋ 오늘 진짜 고생 많았어요 언니 푹 쉬어요!' }
+    ], 
+    likes: 15,
+    date: getRelativeDate(0)
+  },
+  // 오늘 신규글 4
+  { 
+    id: 101, 
+    category: 'best', 
+    title: '오늘 새벽 마감 후 24시 국밥집에서 따뜻하게 혼밥 중 ㅠㅠ', 
+    content: '마감 치고 나오니까 바람이 제법 선선해졌네요! 오늘 지명 언니 손님이 팁도 두둑히 주셔서 기분 좋게 국밥 한 그릇 말아먹고 집에 갑니다. 오늘 하루 다들 고생하셨어요!', 
+    replies: [
+      { id: 101, author: '논현동핑크', text: '혼밥 국밥은 진리죠 ㅋㅋㅋ 수고 많으셨어요 언니 푹 쉬세요!' },
+      { id: 102, author: '퇴근길요정', text: '팁 두둑히 받으신 거 부러워요~ 오늘 밤도 파이팅입니다!!' }
+    ], 
+    likes: 9,
+    date: getRelativeDate(0)
+  },
+  // 일반글 5 (댓글 4개)
+  { 
+    id: 4, 
+    category: 'best', 
+    title: '초보 언니들 처음 면접 갈 때 팁 및 체크포인트', 
+    content: '복장은 본인한테 제일 잘 어울리는 깨끗하고 밝은 톤으로 입으시고, 면접에서 꼭 당일 정산 여부랑 퇴근 차량 지원 여부, 텃세 없는지 분위기 잘 살펴보고 결정하세요!', 
+    replies: [
+      { id: 32, author: '초보집사', text: '와 진짜 필요한 정보네요. 면접 때 꼭 물어봐야겠어요.' },
+      { id: 33, author: '신림동여우', text: '당일 정산 확실하게 선하나 안 긋는 가게로 가야 진짜 안심돼요!' },
+      { id: 34, author: '강남베테랑', text: '퇴근 차량이나 택시비 지원 유무도 첫 달엔 생각보다 지출 커서 중요함!' },
+      { id: 35, author: '새내기일기', text: '저 내일 첫 면접인데 저장해두고 계속 읽는 중입니다 ㅠㅠ 떨려요!' }
+    ], 
+    likes: 8,
+    date: getRelativeDate(1)
+  },
+  // 일반글 6 (댓글 4개)
+  { 
+    id: 6, 
+    category: 'night', 
+    title: '요즘 일하면서 스트레스 해소하는 본인만의 방법?', 
+    content: '매일 사람 상대하다 보면 감정적으로 지칠 때가 있는데, 언니들은 어떻게 스트레스 푸시나요? 좋은 팁 있으면 공유해요!', 
+    replies: [
+      { id: 39, author: '힐링요정', text: '저는 퇴근하고 맛있는 거 먹으면서 유튜브 보는 게 제일 좋아요~' },
+      { id: 40, author: '수원언니', text: '주말에 필라테스 운동 시작했는데 땀 빼고 나면 정신이 엄청 맑아지더라구요!' },
+      { id: 41, author: '샤넬언니', text: '친구들이랑 휴무날 예쁜 카페 탐방 다니면서 수다 떠는 걸로 풀어요 ㅎㅎ' },
+      { id: 42, author: '퇴근길아메리카노', text: '반신욕 하면서 좋아하는 음악 틀어놓으면 스트레스 싹 날아감 추천합니다!' }
+    ], 
+    likes: 5,
+    date: getRelativeDate(1)
+  },
+  // 일반글 7 (댓글 3개)
+  { 
+    id: 7, 
+    category: 'night', 
+    title: '초보는 어떤 가게가 무난할까요? 룸 vs 퍼블릭', 
+    content: '처음 시작해보려고 하는 왕초보인데 대기 분위기 편하고 언니들끼리 분위기 좋은 곳으로 시작하고 싶어요. 조언 부탁드립니다!', 
+    replies: [
+      { id: 46, author: '강남에이스', text: '초보하시면 퍼블릭이나 토킹바 쪽이 초이스 부담 덜하고 적응하기 무난해요!' },
+      { id: 47, author: '초보탈출하자', text: '저도 처음에 퍼블릭에서 한 달 일하면서 분위기 익히고 룸으로 넘어갔는데 괜찮은 코스 같아요.' },
+      { id: 48, author: '청담동실장', text: '면접 오실 때 상세히 분위기 설명해드릴 테니 편하게 상담부터 받아보세요!' },
+      { id: 49, author: '새내기여우', text: '가게 규모 크고 실장님 케어 확실한 데가 첫 스타트로 제일 안전해요!' }
+    ], 
+    likes: 4,
+    date: getRelativeDate(1)
+  },
+  // 2일 전 글 8
+  { 
+    id: 8, 
+    category: 'night', 
+    title: '일주일차인데 실장님이 신경 많이 써주셔서 적응 완료했어요!', 
+    content: '처음엔 대기할 때 많이 떨렸는데 언니들도 텃세 하나도 없고 실장님이 방 배정 차분하게 잘 챙겨주셔서 편하게 일하고 있어요~', 
+    replies: [
+      { id: 53, author: '달빛나비', text: '좋은 가게 만나셨네요! 텃세 없고 실장님 케어 좋은 곳이 장땡입니다 ㅎㅎ 축하드려요!' },
+      { id: 54, author: '새내기일기', text: '부러워요 ㅠㅠ 저도 텃세 없는 클린 한 매장으로 가고 싶네요!' },
+      { id: 55, author: '수원실장님', text: '앞으로도 언니 편하게 일할 수 있게 끝까지 챙겨드릴 테니 파이팅입니다!' }
+    ], 
+    likes: 7,
+    date: getRelativeDate(2)
+  },
+  // 2일 전 글 9
+  { 
+    id: 9, 
+    category: 'night', 
+    title: '비 오니까 확실히 손님 성향이 다들 조용한 편이네요', 
+    content: '오늘 비 와서 그런지 조용조용하게 대화 위주로 즐기시는 손님들 위주였어요. 진상도 없고 대화 잘 통해서 기분 좋게 퇴근했습니다 ㅎㅎ', 
+    replies: [
+      { id: 36, author: '힐링요정', text: '조용한 센스 만점 손님 만나면 진짜 시간 금방 가고 편하죠!' },
+      { id: 37, author: '도산대로핑크', text: '비 오면 분위기가 잔잔해져서 조용한 룸이 많아지는 느낌 저도 들었어요 ㅋㅋㅋ' },
+      { id: 38, author: '밤의장미', text: '진상 없이 편하게 일한 날이 최고의 날입니다 축하드려요~' }
+    ], 
+    likes: 6,
+    date: getRelativeDate(2)
+  },
+  // 2일 전 글 10
+  { 
+    id: 10, 
+    category: 'night', 
+    title: '오늘 저녁에 처음 면접 가는데 같이 가주실 분 계신가요 ㅠㅠ', 
+    content: '강남 쪽 첫 면접인데 너무 떨려서 근처 분위기라도 살필 겸 같이 가주시거나 면접 팁 나누실 언니 계신가요? 맛있는 커피 살게요!', 
+    replies: [
+      { id: 60, author: '역삼동언니', text: '저 강남 쪽 일하는데 시간 맞으시면 커피 한 잔 해요! 오픈채팅이나 쪽지 주세요~' },
+      { id: 61, author: '새내기일기', text: '저도 첫 면접 때 엄청 떨렸는데 막상 가보면 실장님들이 다 친절하세요! 힘내세요 파이팅!' }
+    ], 
+    likes: 3,
+    date: getRelativeDate(2)
+  },
+  // 3일 전 글 11
+  { 
+    id: 11, 
+    category: 'night', 
+    title: '지명 손님 관리할 때 본인만의 노하우 있으신가요?', 
+    content: '특별한 날 소소하게 챙겨드리는 게 효과적인지, 멘트 관리 팁 있으시면 공유해요~', 
+    replies: [
+      { id: 50, author: '지명왕자스민', text: '생일이나 승진 같은 특별한 날에 짧은 감사 손편지나 음료 기프티콘 하나 챙겨드리면 감동하시더라구요!' },
+      { id: 51, author: '역삼공주', text: '너무 자주 연락하기보다 출근하는 날 "오늘 출근했어요 파이팅 하세요!" 한 마디가 최고 ㅋㅋㅋ' },
+      { id: 52, author: '논현동여신', text: '대화할 때 취향이나 하시는 일 기억해뒀다가 다음번에 살짝 언급해주면 엄청 좋아하세요.' }
+    ], 
+    likes: 5,
+    date: getRelativeDate(3)
+  },
+  // 3일 전 글 12
+  { 
+    id: 12, 
+    category: 'night', 
+    title: '당일 정산은 퇴근할 때 바로 챙겨주시는 거 맞나요?', 
+    content: '면접 때 당일 정산이라고 들었는데 실장님이 마감 후 1분 만에 깔끔하게 현금/계좌로 바로 챙겨주시는지 궁금합니다!', 
+    replies: [
+      { id: 65, author: '신림동여우', text: '정식 클린 매장이면 마감하자마자 1원도 안 깎고 즉시 챙겨줍니다! 조금이라도 미루면 바로 나오세요!' },
+      { id: 66, author: '청담릴리', text: '당일 정산 확실한 가게가 최고예요. 수수료나 명목 없는 차감 절대 있으면 안 됨!' }
+    ], 
+    likes: 5,
+    date: getRelativeDate(3)
+  },
+  // 3일 전 글 13
+  { 
+    id: 13, 
+    category: 'night', 
+    title: '초이스 때 첫인상 밝은 원피스 vs 세련된 투피스 추천해주세요', 
+    content: '이번에 분위기 전면 리뉴얼된 가게로 면접 가는데 원피스가 반응이 더 좋을까요 아니면 투피스가 좋을까요?', 
+    replies: [
+      { id: 43, author: '스타일실장', text: '라인 살려주는 라일락이나 아이보리 톤 원피스가 제일 무난하고 호불호 없어요!' },
+      { id: 44, author: '핑크다이아', text: '체형에 맞춰 입는 게 최고인데 보통 핏한 원피스가 실물 반응은 더 슬림해 보여요!' },
+      { id: 45, author: '뷰티코치', text: '본인이 제일 입었을 때 자신감 생기는 옷으로 입고 가시는 게 표정도 밝아집니다.' }
+    ], 
+    likes: 4,
+    date: getRelativeDate(3)
+  },
+  // 4일 전 글 14
+  { 
+    id: 14, 
+    category: 'friend', 
+    title: '야간 일 시작하는 분들끼리 소통방 만들고 싶은데 참여하실 분?', 
+    content: '혼자 일하다 보니 외롭기도 하고 서로 정보도 공유하고 퇴근 후 커피 한잔할 단톡방 만드실 분 구해요!', 
+    replies: [
+      { id: 70, author: '초보집사', text: '저 참여하고 싶어요! 비밀댓글이나 쪽지로 링크 부탁드립니다~' },
+      { id: 71, author: '새내기여우', text: '서로 멘탈 케어 해주고 팁 나누는 소통방 있으면 너무 좋을 것 같아요!' }
+    ], 
+    likes: 4,
+    date: getRelativeDate(4)
+  },
+  // 4일 전 글 15
+  { 
+    id: 15, 
+    category: 'friend', 
+    title: '투잡 다니시는 룸메 구해요 (생활 패턴 비슷한 분)', 
+    content: '낮엔 회사 다니고 밤엔 야간 근무 뛰느라 생활 패턴 비슷한 언니 구합니다! 깨끗하고 예의 바르신 분 환영해요~', 
+    replies: [
+      { id: 75, author: '수원언니', text: '지역이 어디신가요? 강남/서초 쪽이면 관심 있습니다!' }
+    ], 
+    likes: 3,
+    date: getRelativeDate(4)
+  },
+  // 5일 전 글 16
+  { 
+    id: 16, 
+    category: 'night', 
+    title: '지방에서 올라와서 일하려는데 원룸이나 숙식 지원 되나요?', 
+    content: '지방에서 이번에 서울로 올라가서 시작하려고 하는데 숙소 지원이나 보증금 조율 지원해주는 매장이 많은지 궁금합니다!', 
+    replies: [
+      { id: 80, author: '청담동실장', text: '저희 매장은 원룸 숙식 지원 옵션 제공하고 있으니 편하게 문의주세요!' },
+      { id: 81, author: '역삼공주', text: '숙소 지원해주는 친절한 매장 은근 많아요! 아밤 채용공고 꼼꼼히 체크해보세요~' }
+    ], 
+    likes: 3,
+    date: getRelativeDate(5)
+  },
+  // 5일 전 글 17
+  { 
+    id: 17, 
+    category: 'night', 
+    title: '메이크업 샵에서 받고 가나요 아니면 셀프가 무난한가요?', 
+    content: '첫 출근인데 인근 샵에서 받아보고 가야 할지, 본인 메이크업으로 가도 충분한지 궁금해요!', 
+    replies: [
+      { id: 85, author: '뷰티코치', text: '첫날은 샵에서 분위기 한번 보고 따라 해보시는 것 추천하고, 적응되면 셀프 메이크업도 충분해요!' }
+    ], 
+    likes: 3,
+    date: getRelativeDate(5)
+  },
+  // 6일 전 글 18
+  { 
+    id: 18, 
+    category: 'friend', 
+    title: '퇴근 후 같이 택시 타고 가실 언니 계세요?', 
+    content: '새벽 마감 후 퇴근하는데 택시비 아낄 겸 같이 타면 좋을 것 같아서요~ 동선 맞으시는 분 연락주세요!', 
+    replies: [
+      { id: 90, author: '도산대로핑크', text: '저 서초역 쪽인데 동선 맞으시면 같이 타요! 쪽지 주세요~' }
+    ], 
+    likes: 2,
+    date: getRelativeDate(6)
+  },
+  // 6일 전 글 19
+  { 
+    id: 19, 
+    category: 'friend', 
+    title: '주말 야간만 빡세게 같이 일할 메이트 구합니다!', 
+    content: '금토일 주말 야간 타임만 연타 뛰실 메이트 언니 구해요! 서로 의지하면서 빡세게 모아봅시다!', 
+    replies: [
+      { id: 95, author: '강남베테랑', text: '주말 연타 최고죠 ㅋㅋㅋ 응원합니다 파이팅!!' }
+    ], 
+    likes: 2,
+    date: getRelativeDate(6)
+  },
+  // 7일 전 글 20
+  { 
+    id: 20, 
+    category: 'night', 
+    title: '텃세 없는 가게 구분하는 노하우가 있을까요?', 
+    content: '면접 때 매장 대기실 분위기나 언니들 표정 보면 대충 답 나온다는데 어떤 팁이 있을까요?', 
+    replies: [
+      { id: 100, author: '달빛나비', text: '대기실 들어갔을 때 서로 웃으면서 인사해 주고 수다 모드인 곳이 텃세 제로 클린매장이에요!' }
+    ], 
+    likes: 2,
+    date: getRelativeDate(7)
+  }
+];
+
 export const topBanners: JobAd[] = [
   {
-    id: 'top-001', type: 'top',
-    title: '👑 [청담] 하이엔드 멤버십 클럽 ★ 일급 80만 + 인센 ★ VIP 전담 호스티스',
-    companyName: '청담 시그니처 클럽',
-    location: '서울 강남구 청담동',
-    pay: '일급 800,000원 + 인센티브',
-    image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=600&auto=format',
-    tag: '#VIP전용 #고급클럽 #당일정산',
-    viewCount: 3842, createdAt: makeCreatedAt(5), expiresAt: makeExpiresAt(85),
-    contactPhone: '010-2847-3951', contactKakao: 'cdclub_vip',
-    description: '서울 청담동 최상급 멤버십 클럽입니다.\n회원제로 운영되어 최고급 고객만 방문하는 프리미엄 업소입니다.\n\n▶ 업소 특징\n- 국내 top 10 클럽 선정 (2025년)\n- 전담 실장 1:1 케어 시스템\n- 안전하고 깨끗한 근무 환경\n- 청결 철저 관리, CCTV 완비\n\n▶ 급여 시스템\n- 기본 일급 80만원 보장\n- 실적 인센티브 별도 지급\n- 당일 현금 정산 (100% 보장)\n- 주급/월급 선택 가능',
-    requirements: '만 19세 이상 여성, 외모 무관, 초보/경력 모두 환영',
-    workHours: '오후 9시 ~ 새벽 4시 (조절 가능)',
-    premium: { topFixed: true, urgentBadge: true, motionBanner: true, colorBorder: 'gold', vipBadge: true, featuredSection: true, premiumCard: true, stickyAd: true },
-    paymentHistory: makeInitialPayment(300000, 'tier_premium', makeCreatedAt(5), makeExpiresAt(85)),
+    id: "top-1",
+    type: "top",
+    title: "[VVIP 단독] 업계 1위 텐프로 최고대우 모십니다",
+    companyName: "강남 에이스 텐프로",
+    location: "서울 강남구",
+    pay: "월 3000만+ 보장",
+    tag: "#VVIP #최고수익 #텐프로",
+    viewCount: 9999,
+    description: "상세설명",
+    requirements: "20세이상",
+    workHours: "협의"
   },
   {
-    id: 'top-002', type: 'top',
-    title: '💎 [강남 역삼] 5성급 호텔 바 ★ 월 1,000만 이상 ★ 전문 소믈리에 바텐더',
-    companyName: '역삼 로얄 라운지',
-    location: '서울 강남구 역삼동',
-    pay: '월 10,000,000원 이상',
-    image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&auto=format',
-    tag: '#호텔바 #소믈리에 #고급라운지',
-    viewCount: 2951, createdAt: makeCreatedAt(3), expiresAt: makeExpiresAt(87),
-    contactPhone: '010-3849-2741', contactKakao: 'royallounge_vip',
-    description: '강남 역삼동 5성급 호텔 내 프리미엄 라운지입니다.\n\n▶ 업소 특징\n- 5성급 호텔 제휴 고급 라운지\n- 외국인 VIP 고객 다수\n- 안전하고 쾌적한 근무 환경\n\n▶ 급여\n- 월 평균 1,000만원 이상\n- 실적 인센티브 별도',
-    requirements: '만 19세 이상 여성, 영어 가능자 우대',
-    workHours: '오후 7시 ~ 새벽 2시',
-    premium: { topFixed: true, urgentBadge: false, motionBanner: true, colorBorder: 'gold', vipBadge: true, featuredSection: true, premiumCard: true, stickyAd: false },
-    paymentHistory: makeInitialPayment(300000, 'tier_premium', makeCreatedAt(3), makeExpiresAt(87)),
-  },
-  {
-    id: 'top-003', type: 'top',
-    title: '🌊 [해운대] 오션뷰 루프탑 바 ★ 일급 50만 보장 ★ 숙소 제공',
-    companyName: '해운대 오션 클럽',
-    location: '부산 해운대구 우동',
-    pay: '일급 500,000원 + 숙소',
-    image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=600&auto=format',
-    tag: '#해운대 #루프탑바 #숙소제공',
-    viewCount: 1823, createdAt: makeCreatedAt(10), expiresAt: makeExpiresAt(80),
-    contactPhone: '010-5523-8841', contactKakao: 'haeundae_ocean',
-    description: '해운대 오션뷰 최고 루프탑 바입니다.\n\n▶ 업소 특징\n- 해운대 오션뷰 최고 전망\n- 숙소 제공 (원룸 수준)\n- 안전 최우선 업소\n\n▶ 급여\n- 일급 50만원 보장\n- 카드 인센티브 별도',
-    requirements: '만 19세 이상 여성, 외지 지원 환영',
-    workHours: '오후 8시 ~ 새벽 3시',
-    premium: { topFixed: false, urgentBadge: true, motionBanner: false, colorBorder: 'pink', vipBadge: false, featuredSection: true, premiumCard: true, stickyAd: false },
-    paymentHistory: makeInitialPayment(300000, 'tier_premium', makeCreatedAt(10), makeExpiresAt(80)),
-  },
+    id: "top-2",
+    type: "top",
+    title: "[단독/신규] 최상위 텐프로 에이스 대모집",
+    companyName: "청담 플래티넘",
+    location: "서울 강남구",
+    pay: "월 2500만+ 보장",
+    tag: "#VVIP #텐프로",
+    viewCount: 8741,
+    description: "상세설명",
+    requirements: "20세이상",
+    workHours: "협의"
+  }
 ];
 
-// ────────────────────────────────────────────────────────────────
-// 2. PRIORITY JOBS — 우대채용 (일급 30만~45만)
-// ────────────────────────────────────────────────────────────────
 export const priorityJobs: JobAd[] = [
   {
-    id: 'crawled-1783354893546-0', type: 'priority',
-    title: "♥️신림주사장♥...",
-    companyName: "❤신림지정하퍼주사장❤",
+    id: "prio-1",
+    type: "priority",
+    title: "VIP 전담 최고시설 최고페이 보장",
+    companyName: "도곡 골드",
     location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/21/1779344930-752912.gif"
-  },
-  {
-    id: 'crawled-1783354893546-2', type: 'priority',
-    title: "신규오픈⋆◡̎⋆신...",
-    companyName: "신촌 홍대 셔츠 여명",
-    location: "서울 마포구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/01/12/1768200211-40471.gif"
-  },
-  {
-    id: 'crawled-1783354893546-3', type: 'priority',
-    title: "동탄 하이퍼블릭룸 ...",
-    companyName: "스카이 김대표",
-    location: "경기 화성시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/19/1779182269-143716.gif"
-  },
-  {
-    id: 'crawled-1783354893546-9', type: 'priority',
-    title: "♥초보분들도 가능...",
-    companyName: "인스타",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2023/07/25/1690278907-544997.gif"
-  },
-  {
-    id: 'crawled-1783354893546-12', type: 'priority',
-    title: "❤️마곡 골타 발리...",
-    companyName: "골든타워 우빈부장",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/01/21/1768964024-593883.gif"
-  },
-  {
-    id: 'crawled-1783354893546-15', type: 'priority',
-    title: "55분 11만수금♡달토...",
-    companyName: "러닝레빗 가라오케",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/03/18/1773799558-267418.gif"
-  },
-  {
-    id: 'crawled-1783354893546-17', type: 'priority',
-    title: "⭐급전⭐하루2천만...",
-    companyName: "하이쿠키",
-    location: "대전",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/08/12/1754977308-944153.gif"
-  },
-  {
-    id: 'crawled-1783354893546-18', type: 'priority',
-    title: "❤️30분 TC10만❤️ ...",
-    companyName: "구구단S지섭 달토소지섭",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/21/1779326160-383855.gif"
-  },
-  {
-    id: 'crawled-1783354893546-21', type: 'priority',
-    title: "❤️하루100만보장...",
-    companyName: "유흥의세포들",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/26/1782443849-752208.jpg"
-  },
-  {
-    id: 'crawled-1783354893546-23', type: 'priority',
-    title: "❤️하루100만~150만...",
-    companyName: "영앤리치",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/23/1782196042-649181.jpg"
-  },
-  {
-    id: 'crawled-1783354893546-24', type: 'priority',
-    title: "⭕하루100~150만+@⭕...",
-    companyName: "⭕유흥 신세계⭕",
-    location: "서울",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/27/1779875953-360777.gif"
-  },
-  {
-    id: 'crawled-1783354893546-25', type: 'priority',
-    title: "☆☆풀티 이벤트☆...",
-    companyName: "도깨비&워라밸",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/30/1782794938-58296.gif"
-  },
-  {
-    id: 'crawled-1783354893546-28', type: 'priority',
-    title: "⭐보장제,지원금❤...",
-    companyName: "쩜오 구구단 보장제 안대표",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/06/23/1750667363-143980.gif"
-  },
-  {
-    id: 'crawled-1783354893546-29', type: 'priority',
-    title: "★ 업계 1위 ★ 바로...",
-    companyName: "강남 설레임",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/09/1780993712-282055.gif"
-  },
-  {
-    id: 'crawled-1783354893546-30', type: 'priority',
-    title: "❤️에밀리❤️초...",
-    companyName: "❤️에밀리❤️",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/11/19/1763544512-908846.gif"
-  },
-  {
-    id: 'crawled-1783354893546-31', type: 'priority',
-    title: "빠른당일일수",
-    companyName: "당일론대부",
-    location: "서울 강동구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/04/03/1743671111-66375.gif"
-  },
-  {
-    id: 'crawled-1783354893546-34', type: 'priority',
-    title: "❤️50분TC11만+@❤️",
-    companyName: "마포셔츠 트럼프",
-    location: "서울 마포구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/26/1779789273-118642.gif"
-  },
-  {
-    id: 'crawled-1783354893546-36', type: 'priority',
-    title: "도파민 하이퍼블릭 ...",
-    companyName: "도파민석준",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/06/09/1749446090-734373.gif"
-  },
-  {
-    id: 'crawled-1783354893546-37', type: 'priority',
-    title: "♥강서구♥20-40대♥...",
-    companyName: "틴트",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/26/1782459758-434382.gif"
-  },
-  {
-    id: 'crawled-1783354893546-41', type: 'priority',
-    title: "♥손님엄청많아요...",
-    companyName: "❤임팩트❤1등❤",
-    location: "서울 송파구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/19/1779185265-837116.gif"
-  },
-  {
-    id: 'crawled-1783354893546-42', type: 'priority',
-    title: "처음이라 걱정되는 ...",
-    companyName: "⭐초보 알바 투잡 모두환영⭐",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/03/1775162681-979500.png"
-  },
-  {
-    id: 'crawled-1783354893546-44', type: 'priority',
-    title: "❤️강남1등 하루100...",
-    companyName: "폭삭 벌었수다",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/26/1782443864-890571.jpg"
-  },
-  {
-    id: 'crawled-1783354893546-46', type: 'priority',
-    title: "❤️강남최고페이...",
-    companyName: "프롤로그",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/26/1782441517-441348.jpg"
-  },
-  {
-    id: 'crawled-1783354893546-48', type: 'priority',
-    title: "열정으로 일하는 타...",
-    companyName: "마동석대표",
-    location: "서울",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/07/1775551985-785906.gif"
-  },
-  {
-    id: 'crawled-1783354893546-49', type: 'priority',
-    title: "❣️체인소맨프리...",
-    companyName: "❣️체인소맨프리미엄❣️",
-    location: "서울 강북구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/08/1780880506-253439.gif"
-  },
-  {
-    id: 'crawled-1783354893546-50', type: 'priority',
-    title: "❤️천안노래방알...",
-    companyName: "드루와",
-    location: "충남 천안시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/15/1781499611-456225.gif"
-  },
-  {
-    id: 'crawled-1783354893546-51', type: 'priority',
-    title: "킹스맨 소유마담",
-    companyName: "소유마담",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/22/1782124206-970115.gif"
-  },
-  {
-    id: 'crawled-1783354893546-54', type: 'priority',
-    title: "청주 ❤️신규오...",
-    companyName: "리젠시",
-    location: "충북 청주시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/07/02/1782986244-710175.gif"
-  },
-  {
-    id: 'crawled-1783354893546-55', type: 'priority',
-    title: "★마곡★60분TC13만3...",
-    companyName: "소풍마곡대표",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/01/09/1767958862-132126.gif"
-  },
-  {
-    id: 'crawled-1783354893546-61', type: 'priority',
-    title: "❤️시간 없는 분들...",
-    companyName: "화류대장",
-    location: "충북 청주시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/10/1781080226-723897.gif"
-  },
-  {
-    id: 'crawled-1783354893546-62', type: 'priority',
-    title: "⭐️❤️대구1등 체...",
-    companyName: "▶황금동열정실장◀",
-    location: "대구 수성구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/11/05/1762329987-402013.gif"
-  },
-  {
-    id: 'crawled-1783354893546-65', type: 'priority',
-    title: "⏰ 24시간 자율 출퇴...",
-    companyName: "노실장",
-    location: "서울 송파구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/22/1761100812-925935.gif"
-  },
-  {
-    id: 'crawled-1783354893546-67', type: 'priority',
-    title: "✅놀면뭐하니✅일...",
-    companyName: "✅놀면뭐하니✅일해야지✅",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/22/1779451347-254202.gif"
-  },
-  {
-    id: 'crawled-1783354893546-71', type: 'priority',
-    title: "쩜오&카페&돈벌수있...",
-    companyName: "정현부장 쩜오&텐카페",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/07/02/1782979471-938335.gif"
-  },
-  {
-    id: 'crawled-1783354893546-73', type: 'priority',
-    title: "골든타워 발리팀 태...",
-    companyName: "골든타워 태준",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/23/1782208149-449140.gif"
-  },
-  {
-    id: 'crawled-1783354893546-75', type: 'priority',
-    title: "대구유일 사이트홍...",
-    companyName: "버디버디 아로마",
-    location: "대구 동구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/01/09/1736413597-438614.gif"
-  },
-  {
-    id: 'crawled-1783354893546-76', type: 'priority',
-    title: "❤️가락동❤️24시...",
-    companyName: "❤️샤샤❤️",
-    location: "서울 송파구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/14/1778749202-147943.gif"
-  },
-  {
-    id: 'crawled-1783354893546-77', type: 'priority',
-    title: "부산 해운대 더그랜...",
-    companyName: "해운대더그랜드",
-    location: "부산 해운대구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/11/1781158159-911724.gif"
-  },
-  {
-    id: 'crawled-1783354893546-81', type: 'priority',
-    title: "특별대우 업계 최고 대우...",
-    companyName: "로얄 태주&종민",
-    location: "경기 성남시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/23/1782192163-902375.gif"
-  },
-  {
-    id: 'crawled-1783354893546-82', type: 'priority',
-    title: "매니저모집중❤️...",
-    companyName: "1등",
-    location: "대구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2024/04/22/1713765370-82970.gif"
-  },
-  {
-    id: 'crawled-1783354893546-85', type: 'priority',
-    title: "●첫날찡대X●일 진...",
-    companyName: "허니실장",
-    location: "서울 노원구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/21/1779338089-67977.gif"
-  },
-  {
-    id: 'crawled-1783354893546-88', type: 'priority',
-    title: "구구단 김도진",
-    companyName: "구구단 김도진",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/10/1781055105-787340.gif"
-  },
-  {
-    id: 'crawled-1783354893546-94', type: 'priority',
-    title: "⭐첫날부터 탑수익 ...",
-    companyName: "신림큐브",
-    location: "서울 관악구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/02/1780377931-875228.gif"
-  },
-  {
-    id: 'crawled-1783354893546-95', type: 'priority',
-    title: "경기 최대규모 수원...",
-    companyName: "아우라동해부장",
-    location: "경기 수원시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/10/1781053662-485894.png"
-  },
-  {
-    id: 'crawled-1783354893546-97', type: 'priority',
-    title: "♥핵바쁨♥분당1등 ...",
-    companyName: "☆분당철수이사☆",
-    location: "경기 성남시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/24/1782294555-961344.gif"
+    pay: "일급 150만+ 보장",
+    tag: "#VVIP #최고시설",
+    viewCount: 7654,
+    description: "상세설명",
+    requirements: "20세이상",
+    workHours: "협의"
   }
 ];
 
-// ────────────────────────────────────────────────────────────────
-// 3. RECOMMENDED JOBS — 스페셜 (일급 25만~35만)
-// ────────────────────────────────────────────────────────────────
 export const recommendedJobs: JobAd[] = [
   {
-    id: 'crawled-1783354893546-1', type: 'recommended',
-    title: "♥강남벤틀리스웨...",
-    companyName: "강남벤틀리스웨디시",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/19/1781855736-156991.gif"
-  },
-  {
-    id: 'crawled-1783354893546-6', type: 'recommended',
-    title: "TC8만원━완전무찡...",
-    companyName: "모모 완전무찡출퇴차",
-    location: "경기 부천시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/23/1782179423-997221.gif"
-  },
-  {
-    id: 'crawled-1783354893546-16', type: 'recommended',
-    title: "강남보스턴호빠❤...",
-    companyName: "✅강남호빠보스턴해태✅강남...",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/25/1782382288-169940.gif"
-  },
-  {
-    id: 'crawled-1783354893546-20', type: 'recommended',
-    title: "개인이벤트중) 일100...",
-    companyName: "유앤미 임대표",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/25/1782377149-679831.gif"
-  },
-  {
-    id: 'crawled-1783354893546-22', type: 'recommended',
-    title: "❤️하루150만보장...",
-    companyName: "야르",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/23/1782195823-907836.jpg"
-  },
-  {
-    id: 'crawled-1783354893546-27', type: 'recommended',
-    title: "★일산 업계 최고 대우★...",
-    companyName: "★보스 스타사장★",
-    location: "경기 고양시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/24/1777023539-586860.gif"
-  },
-  {
-    id: 'crawled-1783354893546-32', type: 'recommended',
-    title: "❤️퍼블13/셔츠14❤...",
-    companyName: "토끼 퍼블릭&셔츠 영주실장",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/02/23/1771834167-911666.gif"
-  },
-  {
-    id: 'crawled-1783354893546-33', type: 'recommended',
-    title: "신림하이퍼블릭 60...",
-    companyName: "신림 P9",
-    location: "서울 관악구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/21/1776731909-685006.gif"
-  },
-  {
-    id: 'crawled-1783354893546-35', type: 'recommended',
-    title: "#쩜오#돈벌쟈#임팩...",
-    companyName: "임팩트",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/03/19/1773903907-517817.gif"
-  },
-  {
-    id: 'crawled-1783354893546-39', type: 'recommended',
-    title: "1시간20분  TC 16  갯...",
-    companyName: "플렉스",
-    location: "제주 제주시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/27/1779849161-232236.gif"
-  },
-  {
-    id: 'crawled-1783354893546-40', type: 'recommended',
-    title: "갤럭시 이현",
-    companyName: "♥️잠실 갤럭시 가라오케♥...",
-    location: "서울 송파구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/07/1778138396-55963.gif"
-  },
-  {
-    id: 'crawled-1783354893546-43', type: 'recommended',
-    title: "❤TC인상❤급구❤7T~...",
-    companyName: "♥The Day♥",
-    location: "서울 송파구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2022/05/16/1652676802-744132.gif"
-  },
-  {
-    id: 'crawled-1783354893546-45', type: 'recommended',
-    title: "❤️강남최대갯수...",
-    companyName: "❤️최대페이핑구❤️",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/07/1778132628-680784.jpg"
-  },
-  {
-    id: 'crawled-1783354893546-47', type: 'recommended',
-    title: "☀️초보 환영☀️...",
-    companyName: "☀️봄을 만나다☀️",
-    location: "서울",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/27/1779875890-163630.gif"
-  },
-  {
-    id: 'crawled-1783354893546-53', type: 'recommended',
-    title: "♥당일 정산 확실!!♥먹자...",
-    companyName: "백지수표",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/09/1780990000-618071.gif"
-  },
-  {
-    id: 'crawled-1783354893546-58', type: 'recommended',
-    title: "강남 퍼펙트 강하늘...",
-    companyName: "퍼펙트 강하늘사장",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/22/1782095456-5137.gif"
-  },
-  {
-    id: 'crawled-1783354893546-63', type: 'recommended',
-    title: "❤️ 고페이 하루 50...",
-    companyName: "늘봄ENT",
-    location: "서울",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/29/1782717441-841671.gif"
-  },
-  {
-    id: 'crawled-1783354893546-64', type: 'recommended',
-    title: "강남 역삼 선릉★ ...",
-    companyName: "멤버쉽치트키",
-    location: "서울",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/07/1775548157-775913.gif"
-  },
-  {
-    id: 'crawled-1783354893546-66', type: 'recommended',
-    title: "⭕프리미엄1등⭕잼...",
-    companyName: "잼믹스",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/02/20/1771564578-375797.gif"
-  },
-  {
-    id: 'crawled-1783354893546-68', type: 'recommended',
-    title: "❤️카지노❤️무...",
-    companyName: "❤️카지노❤️",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/11/19/1763541607-786894.gif"
-  },
-  {
-    id: 'crawled-1783354893546-69', type: 'recommended',
-    title: "★강남기타★한교...",
-    companyName: "한교동",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/11/19/1763541177-309752.gif"
-  },
-  {
-    id: 'crawled-1783354893546-70', type: 'recommended',
-    title: "★푸오빠★ 하루100~...",
-    companyName: "강남 프리미엄 1등은 푸오빠",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/08/1780883669-811480.gif"
-  },
-  {
-    id: 'crawled-1783354893546-78', type: 'recommended',
-    title: "♥♥항상언니들 부...",
-    companyName: "착한시은언니",
-    location: "부산 연제구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/18/1781754688-14879.gif"
-  },
-  {
-    id: 'crawled-1783354893546-79', type: 'recommended',
-    title: "(달토) 안수정",
-    companyName: "달토안수정)강원",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/07/02/1782970601-840558.gif"
-  },
-  {
-    id: 'crawled-1783354893546-86', type: 'recommended',
-    title: "도파민 직원 가족 ...",
-    companyName: "도파민 이승기(기문)",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/07/14/1752480773-271765.gif"
-  },
-  {
-    id: 'crawled-1783354893546-87', type: 'recommended',
-    title: "엑셀/BJ/성형,숙소,...",
-    companyName: "HC엔터테인먼트",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/18/1781772942-178477.gif"
-  },
-  {
-    id: 'crawled-1783354893546-89', type: 'recommended',
-    title: "★강남1등고페이★ ...",
-    companyName: "강남1등고페이",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/15/1760493334-823853.gif"
-  },
-  {
-    id: 'crawled-1783354893546-90', type: 'recommended',
-    title: "★PREMIUM+★ 하루 200 ...",
-    companyName: "Premium+",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/15/1760493023-193945.gif"
-  },
-  {
-    id: 'crawled-1783354893546-93', type: 'recommended',
-    title: "●황실24시 일가장...",
-    companyName: "●황실●",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/02/10/1770704784-572326.gif"
-  },
-  {
-    id: 'crawled-1783354893546-98', type: 'recommended',
-    title: "건대호빠 W.프리미...",
-    companyName: "건대 W 프리미엄",
-    location: "서울 성동구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/01/14/1768371192-922170.gif"
-  }
-];
-
-
-// ────────────────────────────────────────────────────────────────
-// 4. GENERAL JOBS — 일반 채용
-// ────────────────────────────────────────────────────────────────
-export const generalJobs: JobAd[] = [
-  {
-    id: 'crawled-1783354893546-4', type: 'general',
-    title: "제대로 벌고 싶은 ...",
-    companyName: "술❌️ 짧은테이블",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/29/1777407618-915411.png"
-  },
-  {
-    id: 'crawled-1783354893546-5', type: 'general',
-    title: "셔츠&퍼블릭 TC 당일...",
-    companyName: "Shirt",
-    location: "제주 제주시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/24/1761293377-238333.gif"
-  },
-  {
-    id: 'crawled-1783354893546-7', type: 'general',
-    title: "항상 첫콜 입니다!...",
-    companyName: "서초1등 달이홍",
+    id: "rec-1",
+    type: "general",
+    title: "[독점] 강남권 넘버원 업소 특별모집",
+    companyName: "서초 다이아몬드",
     location: "서울 서초구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/25/1782374527-91400.gif"
-  },
-  {
-    id: 'crawled-1783354893546-8', type: 'general',
-    title: "솔직한 광고글 입니...",
-    companyName: "부천 여시",
-    location: "경기 부천시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/30/1782809596-92472.gif"
-  },
-  {
-    id: 'crawled-1783354893546-10', type: 'general',
-    title: "❤️⭐️관리사모...",
-    companyName: "H",
-    location: "대구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/12/08/1765188249-935578.gif"
-  },
-  {
-    id: 'crawled-1783354893546-11', type: 'general',
-    title: "서울 전지역가능 중...",
-    companyName: "머무는 곳",
-    location: "서울 중구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/21/1779356407-686236.gif"
-  },
-  {
-    id: 'crawled-1783354893546-13', type: 'general',
-    title: "강서루나 우지호 셔...",
-    companyName: "강서루나우지호",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/22/1779444088-454138.gif"
-  },
-  {
-    id: 'crawled-1783354893546-14', type: 'general',
-    title: "❤️텐카페❤️더...",
-    companyName: "더 갤러리",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/01/1780280091-399740.gif"
-  },
-  {
-    id: 'crawled-1783354893546-19', type: 'general',
-    title: "❤️ 대구 1등 ❤️...",
-    companyName: "투데이",
-    location: "대구 수성구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2024/09/09/1725845572-361001.gif"
-  },
-  {
-    id: 'crawled-1783354893546-26', type: 'general',
-    title: "분당NO.1 TC13차비지...",
-    companyName: "▣분당바니바니▣",
-    location: "경기 성남시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/22/1782093554-67935.gif"
-  },
-  {
-    id: 'crawled-1783354893546-38', type: 'general',
-    title: "◀진상NO텨치▶출퇴...",
-    companyName: "서면노래방 ♥초코오빠♥",
-    location: "부산 부산진구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/29/1777442249-357693.gif"
-  },
-  {
-    id: 'crawled-1783354893546-52', type: 'general',
-    title: "❤️매일5만지급❤...",
-    companyName: "루이즈 사랑",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/24/1782278656-529588.gif"
-  },
-  {
-    id: 'crawled-1783354893546-56', type: 'general',
-    title: "★외국인손님★서...",
-    companyName: "❤️서울❤️에스코트❤️",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/02/24/1771908134-740273.gif"
-  },
-  {
-    id: 'crawled-1783354893546-57', type: 'general',
-    title: "구디 셔츠룸 레이스...",
-    companyName: "구디셔츠룸레이스",
-    location: "서울 구로구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/21/1761014304-732139.gif"
-  },
-  {
-    id: 'crawled-1783354893546-59', type: 'general',
-    title: "❤️통장에억찍게...",
-    companyName: "물감",
-    location: "광주 서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/01/1759294762-89223.gif"
-  },
-  {
-    id: 'crawled-1783354893546-60', type: 'general',
-    title: "♥1시간10만원돈벌...",
-    companyName: "서면 헤븐",
-    location: "부산 부산진구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/07/11/1752218417-717817.gif"
-  },
-  {
-    id: 'crawled-1783354893546-72', type: 'general',
-    title: "?밤일에 지치신 그...",
-    companyName: "에이치 에이전시",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/07/02/1782980689-334379.gif"
-  },
-  {
-    id: 'crawled-1783354893546-74', type: 'general',
-    title: "★ 고페이 플레이★...",
-    companyName: "플레이",
-    location: "서울",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/15/1760492356-778151.gif"
-  },
-  {
-    id: 'crawled-1783354893546-80', type: 'general',
-    title: "순수퍼블릭 순수테...",
-    companyName: "초콜릿",
-    location: "서울 광진구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/24/1782280328-84528.gif"
-  },
-  {
-    id: 'crawled-1783354893546-83', type: 'general',
-    title: "갯수 보장  안전한 ...",
-    companyName: "정통 프리미엄 천송이실장",
-    location: "서울",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/19/1781836309-819475.gif"
-  },
-  {
-    id: 'crawled-1783354893546-84', type: 'general',
-    title: "출근 첫날부터 갯수...",
-    companyName: "역삼지젤",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/05/22/1779415369-381314.gif"
-  },
-  {
-    id: 'crawled-1783354893546-91', type: 'general',
-    title: "★☆강남1등업소 [...",
-    companyName: "야놀자",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/04/14/1776146828-713283.gif"
-  },
-  {
-    id: 'crawled-1783354893546-92', type: 'general',
-    title: "●화곡24시운영●출...",
-    companyName: "❤️아트24❤️강서화곡《《...",
-    location: "서울 강서구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2026/06/29/1782719599-283050.gif"
-  },
-  {
-    id: 'crawled-1783354893546-96', type: 'general',
-    title: "부천 실수령 1등!!! ...",
-    companyName: "부천 탑 가라오케",
-    location: "경기 부천시",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/10/02/1759380261-755147.gif"
-  },
-  {
-    id: 'crawled-1783354893546-99', type: 'general',
-    title: "강남 유앤미 태수 ...",
-    companyName: "유앤미",
-    location: "서울 강남구",
-    pay: '협의 (당일지급)',
-    tag: '#신규 #고수익',
-    viewCount: Math.floor(Math.random() * 500) + 50,
-    createdAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
-    contactPhone: "010-0000-0000",
-    description: "상세 문의 부탁드립니다.",
-    requirements: '만 19세 이상',
-    workHours: '협의',
-    image: "https://queenalba.net/upload/happy_member/2025/12/09/1765247448-611795.gif"
+    pay: "일급 120만+ 보장",
+    tag: "#VVIP #강남넘버원",
+    viewCount: 9112,
+    description: "상세설명",
+    requirements: "20세이상",
+    workHours: "협의"
   }
 ];
 
-// ────────────────────────────────────────────────────────────────
-// 5. TALENT PROFILES — 인재 프로필
-// ────────────────────────────────────────────────────────────────
-export const talentProfiles: TalentProfile[] = [
-  { id: 'talent-001', name: '이**', age: '26세', gender: '여성', title: '부산 거주, 경력 2년, 룸/하이퍼 경험 있어요', jobType: '룸살롱/하이퍼블릭', pay: '일급 35만원 이상', date: '2026-07-03' },
-  { id: 'talent-002', name: '박**', age: '22세', gender: '여성', title: '대학생 주말 알바 찾아요, 강남/홍대 선호', jobType: '노래방/바', pay: '시급 4만원 이상', date: '2026-07-04' },
-  { id: 'talent-003', name: '김**', age: '24세', gender: '여성', title: '경력 3년, 텐프로 근무 가능, 당일 정산 필수', jobType: '텐프로/룸살롱', pay: '일급 50만원 이상', date: '2026-07-02' },
-];
 
-export const forumPosts: ForumPost[] = [
-  { id: 'f-001', category: 'best', title: '강남 에이스에서 처음 일해봤는데 진짜 좋아요', writer: '익명', date: '07-04', views: 342 },
-  { id: 'f-002', category: 'night', title: '분당 글렘 솔직 후기 (feat. 실장님 친절)', writer: '알바녀', date: '07-03', views: 218 },
-  { id: 'f-003', category: 'friend', title: '같이 일할 친구 구해요 (강남권)', writer: '하이하이', date: '07-04', views: 156 },
-  { id: 'f-004', category: 'legal', title: '미지급 급여 받는 방법 공유합니다', writer: '법률팀', date: '07-02', views: 891 },
-];

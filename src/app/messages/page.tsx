@@ -30,8 +30,17 @@ export default function MessagesPage() {
   useEffect(() => {
     if (!currentUser) { router.push('/'); return; }
     refresh();
+
+    const handleNewMsg = () => {
+      refresh();
+    };
+
+    window.addEventListener('abam_new_message', handleNewMsg);
     const t = setInterval(refresh, 3000);
-    return () => clearInterval(t);
+    return () => {
+      window.removeEventListener('abam_new_message', handleNewMsg);
+      clearInterval(t);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 

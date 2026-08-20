@@ -58,7 +58,7 @@
    ============================================================ */
 .portalWrapper {
   width: 100%;
-  max-width: 1420px;
+  max-width: 1780px;
   margin: 0 auto;
   font-family: 'Noto Sans KR', -apple-system, system-ui, sans-serif;
   background: #ffffff;
@@ -74,9 +74,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 24px;
-  background: linear-gradient(135deg, #4a0020 0%, #880e4f 50%, #4a0020 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 8s ease infinite;
+  background: #880e4f;
   font-size: 11.5px;
   color: rgba(255,255,255,0.85);
   border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -118,9 +116,7 @@
   position: absolute;
   bottom: -2px; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #e91e63 25%, #c2185b 50%, #e91e63 75%, transparent 100%);
-  background-size: 200% 100%;
-  animation: gradientShift 4s ease infinite;
+  background: #880e4f;
 }
 
 .logoContainer {
@@ -212,49 +208,96 @@
 }
 
 /* ============================================================
-   4. 메인 네비게이션 — 딥 핑크 그라디언트
+   4. 메인 네비게이션 — 아름다운밤 스타일
    ============================================================ */
 .mainNavBar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(135deg, #880e4f 0%, #c2185b 50%, #880e4f 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 10s ease infinite;
+  align-items: center; /* Center children vertically */
+  background: rgba(30, 27, 75, 0.85); /* Semi-transparent midnight navy */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 0 24px;
-  height: 48px;
-  box-shadow: 0 4px 16px rgba(136,14,79,0.35);
+  height: 68px; /* Sleeker, less blocky height */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
+  border-bottom: 3.5px solid #d97706; /* Golden glow border */
+  box-sizing: border-box;
 }
 .navMenu {
   display: flex;
+  align-items: center; /* Center capsule items vertically */
   height: 100%;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 12px; /* Gap between capsules */
 }
 .navItem {
-  display: flex; align-items: center;
-  padding: 0 18px;
-  font-size: 13px; font-weight: 700;
-  color: rgba(255,255,255,0.85);
-  cursor: pointer; height: 100%;
-  transition: all 0.2s;
+  display: flex;
+  flex-direction: row; /* Horizontal capsule: Icon next to text */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px; /* Capsule padding */
+  font-size: 13.5px;
+  font-weight: 900;
+  color: #cbd5e1; /* Off-white text */
+  cursor: pointer;
+  height: auto; /* Fits contents */
+  border-radius: 30px; /* Rounded pill shape */
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
-  position: relative;
-  letter-spacing: -0.01em;
+  box-sizing: border-box;
+  border: 1px solid transparent;
 }
 .navItem:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
 }
 .navActive {
-  color: #fff !important;
-  background: rgba(0,0,0,0.2) !important;
+  color: #fbbf24 !important; /* Glowing Gold text */
+  background: rgba(217, 119, 6, 0.18) !important;
+  border-color: rgba(251, 191, 36, 0.45) !important;
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.25);
 }
 .navActive::after {
-  content: '';
-  position: absolute; bottom: 0; left: 14px; right: 14px;
-  height: 3px;
-  background: linear-gradient(90deg, #fde047, #fbbf24);
-  border-radius: 3px;
+  display: none; /* Hide bottom line as capsule shape is used */
 }
+.navRegisterButtons {
+  display: flex;
+  align-items: center; /* Center registration buttons */
+  height: 100%;
+  gap: 8px;
+}
+.navRegisterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 14px;
+  height: 36px;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+.navRegisterBtn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+}
+.navRegisterBtnYellow1 {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); /* Gold/Orange Premium gradient */
+}
+.navRegisterBtnYellow2 {
+  background: linear-gradient(180deg, #ffe01a 0%, #f5ab00 100%);
+}
+
 .navMsgBtn {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -282,7 +325,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 3px;
-  animation: pulse 2s ease-in-out infinite;
+  /* animation: pulse 2s ease-in-out infinite; */
   border: 1.5px solid #c2185b;
 }
 .navAdBadge {
@@ -292,99 +335,169 @@
   padding: 5px 14px; border-radius: 20px;
   white-space: nowrap;
   font-weight: 700;
-  animation: float 3s ease-in-out infinite;
 }
 
 /* ============================================================
-   5. 히어로 배너 — 파티클 느낌 다크
+   5. 히어로 배너 — 어두운 야경 프리미엄
    ============================================================ */
 .heroVisualBanner {
   width: 100%;
-  height: 260px;
-  background-image: linear-gradient(to bottom, rgba(10, 0, 24, 0.35) 0%, rgba(10, 0, 24, 0.8) 100%), url('/abam_hero_bg.png');
-  background-size: cover;
-  background-position: center 35%;
+  height: 300px;
+  /* 서울 강남 도심 저녁/야경 프리미엄 배경 이미지 */
+  background:
+    linear-gradient(180deg, rgba(15,5,25,0.25) 0%, rgba(20,5,35,0.40) 60%, rgba(15,5,25,0.55) 100%),
+    url('https://images.unsplash.com/photo-1546874177-9e664107314e?w=1600&h=400&fit=crop&crop=center&q=85&auto=format') center/cover no-repeat;
   position: relative;
   overflow: hidden;
-  border-bottom: 3px solid #e91e63;
+  border-bottom: 2px solid #4a1040;
 }
 
-
+/* 배경 데코: 보라/핑크 글로우 */
 .heroVisualBanner::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(233,30,99,0.25) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(194,24,91,0.2) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(136,14,79,0.3) 0%, transparent 50%);
+  top: -60px; right: -60px;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233,30,99,0.18) 0%, transparent 65%);
   pointer-events: none;
 }
 .heroVisualBanner::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(233,30,99,0.8), rgba(255,255,255,0.4), rgba(233,30,99,0.8), transparent);
+  bottom: -50px; left: -50px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155,89,182,0.14) 0%, transparent 65%);
+  pointer-events: none;
 }
 .heroOverlay {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   text-align: center; padding: 20px;
-  animation: fadeIn 1s ease;
+  padding-top: 20px !important;
+}
+.heroLogoComponent {
+  font-size: 100px;
+  filter: drop-shadow(0 0 20px rgba(255,105,180,0.6));
 }
 .heroTitle {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 80px;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -0.02em;
   margin: 0;
-  filter: drop-shadow(0 4px 12px rgba(233,30,99,0.5)) drop-shadow(0 0 30px rgba(233,30,99,0.6));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 3px 12px rgba(255,80,140,0.55));
 }
 .heroSubtitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: #f9fafb;
+  margin-top: 10px;
+  margin-bottom: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+.heroSubtitleHighlight {
+  color: #f9a8d4;
+  font-weight: 900;
+  text-shadow: 0 0 12px rgba(249,168,212,0.8);
+}
+.heroSubcopy {
   font-size: 13px;
   font-weight: 600;
-  color: rgba(253,164,175,0.9);
-  margin-top: 8px;
-  letter-spacing: 0.04em;
+  color: rgba(243,232,255,0.85);
+  margin-top: 6px;
+  margin-bottom: 0;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+.heroSubcopyHighlight {
+  color: #fbcfe8;
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(251,207,232,0.7);
+}
+.topSubtitleContainer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+.topSubtitleText {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #fce7f3;
+  background: rgba(30, 10, 50, 0.65);
+  border: 1.5px solid rgba(249,168,212,0.45);
+  padding: 7px 20px;
+  border-radius: 30px;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 .heroSEOText {
   font-size: 10.5px;
-  color: rgba(255,255,255,0.5);
-  margin-top: 10px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 5px 18px;
-  border-radius: 20px;
-  backdrop-filter: blur(8px);
+  color: rgba(253,232,255,0.75);
+  margin-top: 8px;
+  background: rgba(20,5,40,0.55);
+  border: 1px solid rgba(249,168,212,0.3);
+  padding: 4px 14px;
+  border-radius: 16px;
   letter-spacing: 0.02em;
 }
 
-/* ============================================================
-   6. 메인 레이아웃
-   ============================================================ */
+/* ── 메인 레이아웃 (좌 6개 / 우 6개 클래식 사이드바 레이아웃) ── */
 .mainLayout {
   display: flex;
-  background: #f8f0f5;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #FAF8F5;
+  position: relative;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: 0 8px;
 }
 
-/* ── 사이드바 공통 ── */
-.leftSidebar, .rightSidebar {
-  width: 200px;
-  flex-shrink: 0;
-  padding: 16px 12px;
-  background: #ffffff;
-  border-right: 1px solid #f0e0ea;
+/* ── 사이드바 공통 (데스크톱/노트북 화면에서 100% 표출 & 본문 겹침 방지 격리) ── */
+.leftSidebar {
+  position: relative;
+  align-self: flex-start;
+  z-index: 100;
+  width: 175px;
+  flex: 0 0 175px;
+  min-width: 175px;
+  padding: 0;
+  background: transparent;
+  border: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 4px;
+  align-items: stretch;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 .rightSidebar {
-  border-right: none;
-  border-left: 1px solid #f0e0ea;
-  width: 245px;
+  position: relative;
+  align-self: flex-start;
+  z-index: 100;
+  width: 175px;
+  flex: 0 0 175px;
+  min-width: 175px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+@media (max-width: 992px) {
+  .leftSidebar,
+  .rightSidebar {
+    display: none !important;
+  }
 }
 
 /* 사이드바 카드 */
@@ -409,7 +522,7 @@
   position: absolute; top: 0; left: -100%;
   width: 60%; height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-  animation: shimmer 2.8s ease-in-out infinite;
+  /* animation: shimmer 2.8s ease-in-out infinite; */
   pointer-events: none;
 }
 .sidebarAdCardFlashRed {
@@ -429,7 +542,7 @@
   background: #e11d48;
   padding: 3px 10px; border-radius: 10px;
   display: inline-block; margin-bottom: 8px;
-  animation: pulse 2s ease-in-out infinite;
+  /* animation: pulse 2s ease-in-out infinite; */
   letter-spacing: 0.05em;
   box-shadow: 0 2px 6px rgba(225,29,72,0.4);
 }
@@ -472,7 +585,7 @@
   flex-direction: column;
   gap: 18px;
   min-width: 0;
-  background: #f8f0f5;
+  background: #FAF8F5;
 }
 
 /* ============================================================
@@ -480,6 +593,7 @@
    ============================================================ */
 .topHeroSection {
   display: flex;
+  flex-direction: column;
   gap: 14px;
   align-items: stretch;
 }
@@ -498,11 +612,11 @@
 }
 .loginTitle {
   font-size: 11px; font-weight: 900; color: #fff;
-  background: linear-gradient(135deg, #e91e63, #c2185b);
+  background: #880e4f;
   padding: 8px 10px; margin-bottom: 14px;
   text-align: center; letter-spacing: 0.08em;
   border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(233,30,99,0.3);
+  box-shadow: 0 2px 6px rgba(136,14,79,0.15);
 }
 .loginForm {
   display: flex;
@@ -533,16 +647,16 @@
 
 .loginSubmitBtn {
   width: 100%; padding: 11px;
-  background: linear-gradient(135deg, #e91e63, #c2185b);
+  background: #880e4f;
   color: #fff; border: none; border-radius: 8px;
   font-size: 13.5px; font-weight: 900; cursor: pointer;
   transition: all 0.2s; font-family: inherit;
-  box-shadow: 0 4px 14px rgba(233,30,99,0.4);
+  box-shadow: 0 3px 6px rgba(136,14,79,0.1);
   letter-spacing: 0.02em;
 }
 .loginSubmitBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(233,30,99,0.5);
+  background: #4a0020;
+  box-shadow: 0 4px 8px rgba(136,14,79,0.15);
 }
 
 .loginLinks {
@@ -806,10 +920,45 @@
 .imageBannerGrid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  
-  gap: 0;
-  margin: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.imageBannerGrid3 {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.imageBannerGrid4 {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.imageBannerGrid5 {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.imageBannerGrid6 {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 10px 0;
   padding: 0;
 }
 
@@ -819,8 +968,8 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 1;
-  border-radius: 0;
+  aspect-ratio: 240 / 117;
+  border-radius: 4px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.15s ease;
@@ -855,59 +1004,62 @@
    9. 검색 바 — 프리미엄
    ============================================================ */
 .searchBarBox {
-  background: linear-gradient(135deg, #fff 0%, #fdf2f8 100%);
-  border: 1.5px solid rgba(233,30,99,0.15);
-  border-radius: 16px;
-  padding: 14px 18px;
-  box-shadow: 0 4px 16px rgba(233,30,99,0.08);
+  background: linear-gradient(135deg, #ffffff 0%, #fff1f2 50%, #fce7f3 100%);
+  border: 1.5px solid #fbcfe8;
+  border-radius: 18px;
+  padding: 16px 20px;
+  box-shadow: 0 6px 22px rgba(190, 24, 93, 0.08);
+  margin-bottom: 20px;
 }
 .searchBarWrapper {
   display: flex; align-items: center; gap: 10px;
-  background: #fff; border: 2px solid rgba(233,30,99,0.2);
-  border-radius: 12px; padding: 3px 3px 3px 14px;
+  background: #ffffff; border: 2px solid #f472b6;
+  border-radius: 12px; padding: 4px 4px 4px 16px;
   transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 10px rgba(190, 24, 93, 0.08);
 }
 .searchBarWrapper:focus-within {
-  border-color: #e91e63;
-  box-shadow: 0 0 0 4px rgba(233,30,99,0.1), 0 4px 16px rgba(233,30,99,0.15);
+  border-color: #be185d;
+  box-shadow: 0 0 0 4px rgba(190, 24, 93, 0.15), 0 6px 20px rgba(190, 24, 93, 0.2);
 }
-.searchIcon { color: #e91e63; flex-shrink: 0; }
+.searchIcon { color: #be185d; flex-shrink: 0; }
 .searchBarInput {
   flex: 1; border: none; outline: none;
   font-size: 13.5px; font-family: inherit; background: transparent;
-  color: #1f2937; padding: 8px 0;
+  color: #0f172a; padding: 8px 0; font-weight: 700;
 }
-.searchBarInput::placeholder { color: #c0b0b8; }
+.searchBarInput::placeholder { color: #94a3b8; font-weight: 500; }
 .searchBarBtn {
-  background: linear-gradient(135deg, #e91e63, #c2185b);
-  color: #fff; border: none; border-radius: 9px;
-  padding: 10px 20px; font-size: 13px; font-weight: 800;
+  background: linear-gradient(135deg, #be185d 0%, #9f1239 100%);
+  color: #ffffff; border: none; border-radius: 10px;
+  padding: 11px 24px; font-size: 13.5px; font-weight: 900;
   cursor: pointer; font-family: inherit; transition: all 0.2s;
-  box-shadow: 0 3px 10px rgba(233,30,99,0.4);
+  box-shadow: 0 4px 12px rgba(190, 24, 93, 0.3);
   letter-spacing: 0.02em;
 }
 .searchBarBtn:hover {
-  transform: translateX(2px);
-  box-shadow: 0 5px 16px rgba(233,30,99,0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(190, 24, 93, 0.45);
 }
 .searchHotKeywords {
   display: flex; flex-wrap: wrap; gap: 8px;
-  margin-top: 10px; font-size: 12px; color: #9ca3af; align-items: center;
+  margin-top: 12px; font-size: 12px; color: #881337; align-items: center; font-weight: 800;
 }
 .keywordLink {
   cursor: pointer;
-  background: rgba(233,30,99,0.07);
-  border: 1px solid rgba(233,30,99,0.15);
-  color: #c2185b;
-  padding: 3px 10px; border-radius: 20px;
-  font-size: 11.5px; font-weight: 700;
-  transition: all 0.2s;
+  background: #fff1f2;
+  border: 1px solid #fbcfe8;
+  color: #be185d;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 800;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 4px rgba(190, 24, 93, 0.04);
 }
 .keywordLink:hover, .activeKeyword {
-  background: #e91e63; color: #fff;
-  border-color: #e91e63;
-  box-shadow: 0 3px 10px rgba(233,30,99,0.3);
+  background: #be185d; color: #ffffff;
+  border-color: #be185d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(190, 24, 93, 0.25);
 }
 
 /* ============================================================
@@ -1020,7 +1172,7 @@
    12. 커뮤니티 섹션
    ============================================================ */
 .sectionHeading {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 900;
   color: #111827;
   margin: 0 0 14px;
@@ -1034,7 +1186,7 @@
 }
 
 .subHeadingText {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   color: #9ca3af;
   background: #f3f4f6;
@@ -1150,8 +1302,8 @@
 }
 .priorityGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
 }
 .priorityCard {
   background: linear-gradient(145deg, #111111 0%, #2b001a 100%);
@@ -1161,7 +1313,7 @@
   transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
   display: flex; flex-direction: column; gap: 8px;
   position: relative; overflow: hidden;
-  animation: priorityCardGlow 2.5s ease-in-out infinite;
+  /* animation: priorityCardGlow 2.5s ease-in-out infinite; */
 }
 .priorityCard::before {
   content: '';
@@ -1231,7 +1383,7 @@
   color: inherit; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
   background: #111;
   border: 2px solid rgba(255, 215, 0, 0.4);
-  animation: premiumCardGlow 3s infinite;
+  /* animation: premiumCardGlow 3s infinite; */
   display: flex; flex-direction: column;
 }
 .premiumCard:hover {
@@ -1247,7 +1399,7 @@
   position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
   background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
   transform: skewX(-25deg);
-  animation: shineSweep 4s infinite;
+  /* animation: shineSweep 4s infinite; */
 }
 
 .imageOverlayText {
@@ -1284,7 +1436,7 @@
   padding: 3px 8px; border-radius: 6px;
   box-shadow: 0 2px 8px rgba(245,158,11,0.5);
   letter-spacing: 0.05em;
-  animation: pulse 2s ease-in-out infinite;
+  /* animation: pulse 2s ease-in-out infinite; */
 }
 .premiumContent { padding: 14px 16px; background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); flex: 1; }
 .premiumTitle {
@@ -1314,7 +1466,7 @@
   background: linear-gradient(145deg, #0f172a, #1e293b);
   border: 1px solid rgba(0, 255, 255, 0.3);
   padding: 14px; display: flex; flex-direction: column; gap: 8px;
-  animation: neonPulse 3s infinite;
+  /* animation: neonPulse 3s infinite; */
 }
 .specialCard:hover {
   transform: translateY(-5px);
@@ -1414,7 +1566,60 @@
   box-shadow: none;
 }
 
-.lineAdList { padding: 2px 0; }
+.lineAdList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px 16px;
+  padding: 2px 0;
+}
+
+/* Horizontal zebra rows on 2-column grid (Rows 2, 4, 6... are striped) */
+.lineAdList > div:nth-child(4n+3) > a,
+.lineAdList > div:nth-child(4n+4) > a {
+  background-color: #f8fafc !important;
+}
+
+.lineAdList > div:nth-child(4n+3) > a:hover,
+.lineAdList > div:nth-child(4n+4) > a:hover {
+  background-color: #f1f5f9 !important;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .lineAdList {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .lineAdList {
+    grid-template-columns: 1fr;
+    gap: 8px 0;
+  }
+  /* Reset 2-column zebra stripes */
+  .lineAdList > div:nth-child(4n+3) > a,
+  .lineAdList > div:nth-child(4n+4) > a {
+    background-color: #ffffff !important;
+  }
+  .lineAdList > div:nth-child(4n+3) > a:hover,
+  .lineAdList > div:nth-child(4n+4) > a:hover {
+    background-color: #f8fafc !important;
+  }
+  /* Apply 1-column zebra stripes */
+  .lineAdList > div:nth-child(even) > a {
+    background-color: #f8fafc !important;
+  }
+  .lineAdList > div:nth-child(even) > a:hover {
+    background-color: #f1f5f9 !important;
+  }
+
+  .flashBanner {
+    max-width: 100%;
+    width: 100%;
+    margin: 8px 0 0 0;
+    order: 10;
+  }
+}
 
 .lineAdEntry {
   display: flex;
@@ -1639,10 +1844,10 @@
 .mobileNavActive { color: #e91e63 !important; }
 
 /* ============================================================
-   18. 반응형 미디어 쿼리
+   18. 반응형 미디어 쿼리 (Clean, Flexible Responsive System)
    ============================================================ */
 
-/* ── 1280px 이하 (넓은 태블릿 가로) ── */
+/* ── 1280px 이하 (넓은 태블릿) ── */
 @media (max-width: 1280px) {
   .portalWrapper { max-width: 100%; }
 }
@@ -1650,338 +1855,838 @@
 /* ── 1100px 이하 (태블릿 가로) ── */
 @media (max-width: 1100px) {
   .leftSidebar,
-  .rightSidebar { width: 170px; }
-
-  .imageBannerGrid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  .rightSidebar {
+    width: 160px;
+  }
   
-  gap: 0;
-  margin: 0;
-  padding: 0;
-}
-
-
-
+  .imageBannerGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
   .premiumGrid,
-  .priorityGrid { grid-template-columns: repeat(3, 1fr); }
-
-  .specialGrid { grid-template-columns: repeat(4, 1fr); }
-
-  .categoryWidgetsSection { grid-template-columns: repeat(3, 1fr); }
+  .priorityGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .specialGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .categoryWidgetsSection {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .communityGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
 
-/* ── 900px 이하 ── */
+/* ── 900px 이하 (작은 태블릿 가로) ── */
 @media (max-width: 900px) {
   .leftSidebar,
-  .rightSidebar { width: 150px; }
-
-  .brandHeader { padding: 12px 18px; }
-
-  .navItem { padding: 0 12px; font-size: 12px; }
-
-  .premiumGrid,
-  .priorityGrid { grid-template-columns: repeat(3, 1fr); }
-
-  .specialGrid { grid-template-columns: repeat(3, 1fr); }
+  .rightSidebar {
+    width: 140px;
+  }
+  .brandHeader {
+    padding: 12px 18px;
+  }
+  .navItem {
+    padding: 0 10px;
+    font-size: 12px;
+  }
 }
 
-/* ── 768px 이하 (태블릿 세로 / 모바일) ── */
-@media (max-width: 768px) {
+/* ── 1024px 이하 (태블릿 세로 및 모든 모바일 공통) ── */
+@media (max-width: 1024px) {
+  .heroOverlay {
+    padding-top: 15px !important;
+  }
   /* 사이드바 숨김 */
   .leftSidebar,
-  .rightSidebar { display: none; }
-
-  /* 유틸리티 바 */
-  .topUtilityBar { padding: 5px 14px; }
-  .topUtilityLeft { display: none; }
-
-  /* 브랜드 헤더 슬림 유지 — 상호명 숨김 */
-  .brandHeader {
-    padding: 10px 16px;
-    gap: 8px;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+  .rightSidebar {
+    display: none;
   }
 
-  /* 모바일에서 연락체 숨김 — 로고 + 버튼만 보여줌 */
-  .widgetContact { display: none; }
+  /* 탑 유틸리티 바 */
+  .topUtilityBar {
+    padding: 5px 12px;
+  }
+  .topUtilityLeft {
+    display: none;
+  }
 
+  /* 브랜드 헤더 */
+  .brandHeader {
+    padding: 10px 14px;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .widgetContact {
+    display: none;
+  }
   .headerInfoWidget {
     width: auto;
     gap: 8px;
   }
-
   .headerButtonRow {
-    flex-direction: column;
     gap: 6px;
   }
-
   .registerButton, .adButton {
-    padding: 9px 13px;
-    font-size: 12px;
+    padding: 8px 12px;
+    font-size: 11.5px;
   }
 
-  /* 네비게이션 — 가로 스크롤 */
+  /* 네비게이션 가로 스크롤 활성화 */
   .mainNavBar {
     padding: 0 8px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .mainNavBar::-webkit-scrollbar { display: none; }
-  .navMenu { flex-shrink: 0; }
+  .mainNavBar::-webkit-scrollbar {
+    display: none;
+  }
+  .navMenu {
+    flex-shrink: 0;
+  }
   .navItem {
-    padding: 0 12px;
+    padding: 0 10px;
     font-size: 12px;
     white-space: nowrap;
   }
 
-  /* 히어로 배너 — 더 크고 선명하게 */
-  .heroVisualBanner { height: 180px; }
-  .heroTitle { font-size: 38px; }
-  .heroSubtitle { font-size: 13px; }
-  .heroSEOText { font-size: 11px; padding: 5px 16px; }
+  /* 히어로 배너 크기 조절 */
+  .heroVisualBanner {
+    height: 190px;
+    background-image: url('/images/mobile_night_sky_bg.png');
+    background-size: cover;
+    background-position: center;
+  }
+  .heroLogoComponent {
+    font-size: 64px;
+  }
+  .heroTitle {
+    filter: drop-shadow(0 1px 4px rgba(255,255,255,0.85)) drop-shadow(0 0 8px rgba(253,224,71,0.5));
+  }
+  .heroSubtitle {
+    font-size: 11.5px;
+    margin-top: 6px;
+    text-shadow: 0 1.5px 3px rgba(0,0,0,0.9);
+  }
+  .heroSubcopy {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  .topSubtitleContainer {
+    margin-top: 8px;
+  }
+  .topSubtitleText {
+    font-size: 10px;
+    padding: 4px 12px;
+  }
+  .heroSEOText {
+    font-size: 10px;
+    padding: 4px 12px;
+  }
 
   /* 센터 콘텐츠 */
   .centerContent {
-    padding: 14px;
-    padding-bottom: 80px;
-    gap: 16px;
+    padding: 12px;
+    padding-bottom: 80px; /* 모바일 하단바 여백 */
+    gap: 14px;
   }
 
-  /* 상단 히어로 섹션 — 세로 스택 */
-  .topHeroSection { flex-direction: column; }
-  .loginCard { width: 100%; }
+  /* 히어로 섹션 스택 */
+  .topHeroSection {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .loginCard {
+    width: 100%;
+  }
 
-  .imageBannerGrid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  
-  gap: 0;
-  margin: 0;
-  padding: 0;
-}
-
-
-  .imageBannerItem {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 1;
-  border-radius: 0;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s ease;
-  line-height: 0;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-  .adHighlight { font-size: 20px; }
-  .adLeft { width: 82px; }
-
-  /* 악센트 스타일 섹션 제목 */
-  .sectionHeading { font-size: 16px; }
-
-  /* 채용 그리드 */
+  /* 그리드들을 2열로 조정하여 찌그러짐 방지 */
+  .imageBannerGrid,
+  .imageBannerGrid3,
+  .imageBannerGrid4,
+  .imageBannerGrid5,
+  .imageBannerGrid6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
   .premiumGrid,
-  .priorityGrid { grid-template-columns: repeat(3, 1fr); }
-  .specialGrid { grid-template-columns: repeat(3, 1fr); }
+  .priorityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .specialGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .categoryWidgetsSection {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .communityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 
-  /* 카테고리 위젯 */
-  .categoryWidgetsSection { grid-template-columns: 1fr 1fr; }
-
-  /* 커뮤니티 */
-  .communityGrid { grid-template-columns: repeat(3, 1fr); }
-
-  /* 필터 인디케이터 */
+  /* 필터 바 */
   .filterIndicatorBar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
   }
-  .filterClearBtn { align-self: flex-end; }
+  .filterClearBtn {
+    align-self: flex-end;
+  }
 
   /* 줄광고 헤더 */
-  .lineAdSectionHeader { flex-wrap: wrap; gap: 8px; }
-  .lineAdSectionTitle { width: 100%; order: 2; }
+  .lineAdSectionHeader {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .lineAdSectionTitle {
+    width: 100%;
+    order: 2;
+  }
 
-  /* 채용 테이블 — 좌우 열 숨김 */
-  .tablePayCol,
-  .tableCompanyCol { display: none; }
-  .tableLocCol { width: auto; }
-
-  /* 인재 테이블 */
-  .talentPayCol,
-  .talentDateCol { display: none; }
-
-  /* 모바일 하단 네비 표시 */
-  .mobileBottomNav { display: flex; }
+  /* 모바일 하단 네비게이션 활성화 */
+  .mobileBottomNav {
+    display: flex;
+  }
 }
 
-/* ── 480px 이하 (소형 모바일) — 시인성 강화 ── */
-@media (max-width: 480px) {
-  /* 유틸리티 바 */
-  .topUtilityBar { padding: 4px 12px; font-size: 10px; }
-  .topUtilityRight { gap: 8px; }
+/* ── 540px 이하 (모바일 세로 전용 - 아주 깔끔하게 리스트화) ── */
+@media (max-width: 540px) {
+  .heroOverlay {
+    padding-top: 10px !important;
+  }
+  .heroVisualBanner {
+    height: 170px;
+  }
+  .heroLogoComponent {
+    font-size: 48px;
+  }
+  .heroTitle {
+    filter: drop-shadow(0 1px 4px rgba(255,255,255,0.85)) drop-shadow(0 0 6px rgba(253,224,71,0.5));
+  }
+  .heroSubtitle {
+    font-size: 10.5px;
+    margin-top: 4px;
+  }
+  .heroSubcopy {
+    font-size: 9px;
+    margin-top: 4px;
+  }
+  .topSubtitleContainer {
+    margin-top: 6px;
+  }
+  .topSubtitleText {
+    font-size: 9px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+  }
+  
+  /* 540px 이하 모바일 화면에서는 카드들을 2열로 구성하여 시인성 최적화 및 스크롤 단축 */
+  .imageBannerGrid,
+  .imageBannerGrid3,
+  .imageBannerGrid4,
+  .imageBannerGrid5,
+  .imageBannerGrid6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .premiumGrid,
+  .priorityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .specialGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .categoryWidgetsSection {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .communityGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 
-  /* 브랜드 헤더 — 최소화, 로고 + 핵심 CTA만 */
-  .brandHeader { padding: 10px 12px; align-items: center; }
-  .logoText {
-  margin: 0;
+  /* 줄광고 모바일 스타일 */
+  .lineAdEntry {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .lineAdJobTitle {
+    font-size: 12px;
+  }
+  .lineAdPay {
+    font-size: 12.5px;
+    font-weight: 850;
+  }
+  .lineAdLoc {
+    font-size: 10.5px;
+  }
+  .lineAdDate {
+    display: none;
+  }
+
+  /* 테이블 세부 컬럼 숨기기 */
+  .tablePayCol,
+  .tableCompanyCol {
+    display: none;
+  }
+  .tableLocCol {
+    width: auto;
+  }
+  .talentPayCol,
+  .talentDateCol {
+    display: none;
+  }
+}
+
+/* ── 360px 이하 (초소형 모바일) ── */
+@media (max-width: 360px) {
+  .heroTitle {
+    font-size: 26px;
+  }
+  .navItem {
+    padding: 0 8px;
+    font-size: 11px;
+  }
+  .loginCard {
+    padding: 10px;
+  }
+}
+
+
+
+/* ============================================================
+   5. SOS 긴급콜 틱커 및 깜빡임 애니메이션
+   ============================================================ */
+.flashBanner {
+  flex-grow: 1;
+  max-width: none;
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  border: 2.5px solid #f43f5e;
+  border-radius: 12px;
+  padding: 8px 16px;
+  margin: 0 20px;
+  box-sizing: border-box;
+  animation: alertPulse 2.5s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes alertPulse {
+  0% {
+    box-shadow: 0 0 6px rgba(244, 63, 94, 0.4), inset 0 1px 2px rgba(244, 63, 94, 0.1);
+    border-color: #f43f5e;
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(244, 63, 94, 0.8), 0 0 10px rgba(244, 63, 94, 0.4), inset 0 1px 2px rgba(244, 63, 94, 0.2);
+    border-color: #be185d;
+    background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(244, 63, 94, 0.4), inset 0 1px 2px rgba(244, 63, 94, 0.1);
+    border-color: #f43f5e;
+  }
+}
+
+.flashInner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.flashBadge {
+  font-family: '"Black Han Sans", sans-serif';
+  font-size: 16px;
+  font-weight: 900;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ef4444, #be185d);
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   display: flex;
   align-items: center;
-}
-  .logoDomain { font-size: 9px; }
-  .widgetContact { display: none; }
-
-  .headerInfoWidget {
-    width: auto;
-    flex-direction: row;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .headerButtonRow { flex-direction: column; gap: 5px; }
-
-  .registerButton {
-    padding: 8px 12px;
-    font-size: 11.5px;
-    border-radius: 8px;
-  }
-
-  .adButton {
-    padding: 7px 12px;
-    font-size: 11px;
-    border-radius: 8px;
-  }
-
-  /* 히어로 배너 — 선명하게 크게 */
-  .heroVisualBanner { height: 160px; }
-  .heroTitle { font-size: 30px; letter-spacing: -0.03em; }
-  .heroSubtitle { font-size: 12px; margin-top: 4px; }
-  .heroSEOText { font-size: 10px; padding: 4px 12px; }
-
-  /* 센터 콘텐츠 */
-  .centerContent { padding: 10px; padding-bottom: 76px; gap: 12px; }
-
-  /* 섹션 제목 — 더 크고 선명하게 */
-  .sectionHeading { font-size: 16px; font-weight: 900; }
-  .subHeadingText { display: none; }
-
-  /* 광고 카드 — 더 크고 시인성 강화 */
-  .adTag { font-size: 11.5px; padding: 3px 10px; font-weight: 900; }
-  .adHighlight { font-size: 16px; font-weight: 900; line-height: 1.3; }
-  
-  .adCompany { font-size: 13px !important; font-weight: 800; }
-  .imageBannerGrid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  
-  gap: 0;
-  margin: 0;
-  padding: 0;
+  justify-content: center;
+  animation: badgeFlash 1.2s infinite alternate ease-in-out;
+  line-height: 1.2;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+  margin-right: 12px;
+  white-space: nowrap;
 }
 
-
-  
-
-  /* 우대/프리미엄 카드 폰트 강화 */
-  .premiumGrid,
-  .specialGrid { grid-template-columns: 1fr; gap: 12px; }
-  .priorityGrid { grid-template-columns: 1fr; gap: 10px; }
-  .priorityCard {
-    padding: 14px 15px;
-    flex-direction: row !important;
-    align-items: center;
-    gap: 12px;
+@keyframes badgeFlash {
+  0% {
+    background: linear-gradient(135deg, #ef4444, #be185d);
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+    transform: scale(1);
   }
-  .priorityCard::before {
-    width: 4px;
+  100% {
+    background: linear-gradient(135deg, #f43f5e, #db2777);
+    box-shadow: 0 0 14px rgba(244, 63, 94, 0.9);
+    transform: scale(1.04);
   }
-  .priorityBadgeRow {
-    flex-direction: column;
-    gap: 4px;
-    width: 75px;
-    flex-shrink: 0;
-  }
-  .priorityLocBadge, .priorityTagBadge { white-space: nowrap;
-    text-align: center;
-    width: 100%;
-    font-size: 10px;
-    padding: 2px 4px;
-  }
-  .priorityJobTitle { font-size: 13.5px; font-weight: 800; line-height: 1.4; flex: 1; margin: 0; }
-  .priorityCompany { display: none; }
-  .priorityPayRow {
-    flex-shrink: 0;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-  }
-  .priorityPayLabel { white-space: nowrap; font-size: 9px; padding: 2px 6px; }
-  .priorityPayVal { white-space: nowrap; font-size: 14px; font-weight: 900; }
-
-  /* 카테고리 위젯 — 더 큰 터치 타겟 */
-  .categoryWidgetsSection { grid-template-columns: 1fr; }
-
-  /* 커뮤니티 */
-  .communityGrid { grid-template-columns: 1fr; }
-
-  /* 검색바 — 더 크고 선명하게 */
-  .searchBarBox { padding: 12px 14px; border-radius: 14px; }
-  .searchBarInput { font-size: 13px; }
-  .searchBarBtn { padding: 10px 16px; font-size: 13px; font-weight: 900; border-radius: 10px; }
-
-  /* 줄광고 */
-  .lineAdJobTitle { font-size: 13.5px; font-weight: 700; }
-  .lineAdPay { font-size: 14px; font-weight: 900; }
-  .lineAdLoc { font-size: 11.5px; }
-  .lineAdEntry { padding: 9px 12px; gap: 7px; }
-  .lineAdDate { display: none; }
-
-  /* 테이블 링크 — 시인성 */
-  .tableLink { font-size: 13.5px; font-weight: 700; }
-  .tablePayVal { font-size: 15px; font-weight: 900; }
-
-  /* 테이블 섹션 */
-  .tableListSection { padding: 14px; }
-  .talentSection { padding: 14px; }
-  .jobsSection { padding: 14px; }
-
-  /* MY PORTAL 카드 */
-  .loginCard { padding: 14px; border-radius: 16px; }
 }
 
-/* ── 360px 이하 (극소형) ── */
-@media (max-width: 360px) {
-  .imageBannerGrid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  
-  gap: 0;
-  margin: 0;
-  padding: 0;
+.flashTextContainer {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
+.flashText {
+  color: #be185d;
+  font-size: 16px;
+  font-weight: 900;
+  text-decoration: none;
+  transition: color 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  text-shadow: 0 0 1px rgba(219,39,119,0.1);
+}
+.flashText:hover {
+  color: #991b1b;
+  text-decoration: underline;
+}
 
-  .adTag { font-size: 11px; }
-  .adHighlight { font-size: 13px; }
-  
-  
+@keyframes sosBlinkRed {
+  0% {
+    color: #ef4444;
+    text-shadow: 0 0 8px #ef4444, 0 0 20px #ef4444;
+    transform: scale(1);
+  }
+  50% {
+    color: #facc15;
+    text-shadow: 0 0 12px #facc15, 0 0 25px #facc15;
+    transform: scale(1.08);
+  }
+  100% {
+    color: #ef4444;
+    text-shadow: 0 0 8px #ef4444, 0 0 20px #ef4444;
+    transform: scale(1);
+  }
+}
 
+/* ── Galaxy Fold / Narrow Screens (max-width: 340px) ── */
+@media (max-width: 340px) {
+  .imageBannerGrid,
+  .imageBannerGrid3,
+  .imageBannerGrid4,
+  .imageBannerGrid5,
+  .imageBannerGrid6,
   .premiumGrid,
   .priorityGrid,
-  .specialGrid { grid-template-columns: 1fr; }
+  .specialGrid,
+  .categoryWidgetsSection {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  .registerButton, .adButton {
+    padding: 6px 8px !important;
+    font-size: 10px !important;
+  }
+  .flashBadge {
+    font-size: 11px !important;
+    padding: 3px 6px !important;
+  }
+  .flashText {
+    font-size: 10.5px !important;
+  }
+}
 
-  .navItem { padding: 0 9px; font-size: 11px; }
+/* ── 모바일 최하단 배너 그리드 스타일 ── */
+.mobileBottomBannersSection {
+  display: none;
+  width: 100%;
+  margin-top: 24px;
+  background: #ffffff;
+  border: 1px solid #e8e3df;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+}
 
-  .loginCard { padding: 12px; }
+.mobileBannersHeading {
+  font-size: 14px;
+  font-weight: 850;
+  color: #880e4f;
+  margin-top: 0;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobileBannersGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mobileBannerLink {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  border: 1.5px solid #db2777;
+  background: #000000;
+}
+
+.mobileBannerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobileBottomBannersSection {
+    display: block;
+  }
+}
+
+/* ============================================================
+   Category Widgets Section Redesign (6 Cards Grid)
+   ============================================================ */
+.categoryWidgetsSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.widgetCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 220px;
+}
+
+.widgetCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+}
+
+.widgetCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14.5px;
+}
+
+/* Header colors */
+.widgetHeaderPink { background: linear-gradient(135deg, #f43f5e 0%, #db2777 100%); }
+.widgetHeaderPurple { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+.widgetHeaderIndigo { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+.widgetHeaderRed { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); }
+.widgetHeaderBlue { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); }
+.widgetHeaderTeal { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); }
+
+.widgetCardLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px;
+  overflow-y: auto;
+  flex-grow: 1;
+  align-content: flex-start;
+}
+
+.filterSpan {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 12px;
+  transition: all 0.15s;
+}
+
+.filterSpan:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.widgetNoticeText {
+  padding: 12px;
+  overflow-y: auto;
+  flex-grow: 1;
+  font-size: 13px;
+  color: #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.widgetNoticeItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: color 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.widgetNoticeItem:hover {
+  color: #db2777;
+}
+
+.widgetNoticeTitle {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 80%;
+  text-align: left;
+}
+
+.widgetNoticeDate {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.widgetPropList {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  flex-grow: 1;
+  font-size: 13px;
+}
+
+.widgetPropItem {
+  display: flex;
+  justify-content: space-between;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 4px;
+  text-decoration: none;
+}
+
+.widgetPropTitle {
+  font-weight: 700;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
+  text-align: left;
+}
+
+.widgetPropPrice {
+  font-weight: 800;
+  color: #ef4444;
+}
+
+.widgetPartnerBody {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 40px);
+  box-sizing: border-box;
+}
+
+.widgetPartnerText {
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+}
+
+.widgetPartnerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #db2777;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.15s;
+  margin-top: 8px;
+}
+
+.widgetPartnerBtn:hover {
+  background: #be185d;
+}
+
+/* 태블릿 화면 대응 (갤럭시탭, 아이패드 등 768px ~ 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .imageBannerGrid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .imageBannerGrid4 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .imageBannerGrid5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .imageBannerGrid6 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .categoryWidgetsSection {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .widgetCard {
+    min-width: 280px;
+    width: 280px;
+    scroll-snap-align: start;
+    height: 180px; /* Reduced height on mobile */
+  }
+
+  /* 히어로 비주얼 배너 크기 축소 */
+  .heroVisualBanner {
+    height: 120px !important;
+    padding: 10px 0 !important;
+    min-height: 120px !important;
+  }
+  .heroTitle {
+    font-size: 20px !important;
+    margin-bottom: 4px !important;
+  }
+  .heroLogoComponent {
+    max-width: 140px !important;
+    height: auto !important;
+  }
+  .heroSubtitle {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+  }
+  .heroSubcopy {
+    display: none !important; /* Hide long text on mobile to save vertical space! */
+  }
+  .topSubtitleContainer {
+    display: none !important; /* Hide on mobile to save space */
+  }
+
+  /* 모바일 구인 리스트 정보 밀도 2배 이상 상향 */
+  .imageBannerGrid3,
+  .imageBannerGrid4,
+  .imageBannerGrid5,
+  .imageBannerGrid6,
+  .imageBannerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* Force 2-columns on mobile! */
+    gap: 8px !important;
+    padding: 0 4px !important;
+  }
+  
+  .abam-fox-box-card {
+    height: 160px !important; /* Reduced from 200px to 160px! */
+  }
+  
+  .abam-fox-box-card > div:first-child {
+    height: 75px !important; /* Upper banner: 75px instead of 100px */
+  }
+  
+  .abam-fox-box-card > div:last-child {
+    height: 85px !important; /* Lower text: 85px instead of 100px */
+    padding: 6px 8px !important;
+  }
+
+  /* Font size compressions */
+  .abam-fox-box-card > div:last-child > div:first-child {
+    font-size: 13.5px !important; /* Company name 13.5px */
+  }
+  .abam-fox-box-card > div:last-child > div:nth-child(2) {
+    font-size: 12px !important; /* Description 12px */
+  }
+}
+
+/* 갤럭시 폴드 초협소 화면 대응 */
+@media (max-width: 350px) {
+  .imageBannerGrid3,
+  .imageBannerGrid4,
+  .imageBannerGrid5,
+  .imageBannerGrid6,
+  .imageBannerGrid {
+    grid-template-columns: 1fr !important; /* 1-column fallback for Fold outer display */
+  }
+  .widgetCard {
+    min-width: 240px;
+    width: 240px;
+  }
 }
 
 
 
+/* Home hierarchy reset: keep attention on search and jobs, not decorative side ads. */
+.mainLayout {
+  display: block;
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: 24px 20px 56px;
+  box-sizing: border-box;
+}
+
+.leftSidebar,
+.rightSidebar {
+  display: none !important;
+}
+
+.centerContent {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+.searchBarBox {
+  max-width: 860px;
+  margin: 0 auto 28px;
+  padding: 20px 22px;
+}
+
+.searchBarWrapper {
+  min-height: 54px;
+}
+
+@media (max-width: 640px) {
+  .mainLayout { padding: 12px 12px 84px; }

@@ -1,0 +1,26 @@
+{
+  "id": "/abam-admin-app",
+  "name": "👑 아름다운밤 사장님 관리자 전용 앱 (ABAM ADMIN)",
+  "short_name": "👑아밤관리자",
+  "description": "아름다운밤 (abam.kr) 최고 관리자 전용 독립 모바일 PWA 앱",
+  "start_url": "/abam-nightman-2026/?utm_source=admin_pwa",
+  "scope": "/abam-nightman-2026/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#030712",
+  "theme_color": "#fbbf24",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -301,8 +301,10 @@
 .floatingActionBar {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 720px;
   display: flex;
   gap: 10px;
   padding: 12px 20px;
@@ -458,4 +460,252 @@
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+}
+
+@media (max-width: 480px) {
+  .contactRow {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .callBtn, .kakaoBtn {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+    margin-top: 4px;
+    padding: 10px 16px;
+  }
+}
+
+/* Crazy Dynamic Ad Banner Overlay inside the flyer card (Light Theme) */
+.flyerWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  container-type: inline-size; /* Enable container query for cqw units */
+}
+
+.neonOverlay {
+  position: absolute;
+  left: 4.2cqw; /* Adjusted to completely cover the static border underneath */
+  width: 91.6cqw; /* Adjusted to completely cover the static border underneath */
+  top: 22.2cqw; /* Adjusted to completely cover the static border underneath */
+  height: 20.2cqw; /* Adjusted to completely cover the static border underneath */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff; /* Clean white background for high-contrast light theme */
+  border: 4px solid #ff007f;
+  border-radius: 16px;
+  padding: 1.5cqw 2.5cqw;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.4), inset 0 0 10px rgba(255, 0, 127, 0.2), 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  z-index: 10;
+  overflow: hidden;
+  cursor: pointer;
+  animation: crazyBorderPulse 1s infinite linear, crazyWiggle 0.4s infinite alternate;
+}
+
+.bannerTopBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.bannerBadge {
+  font-size: 2.2cqw;
+  font-weight: 900;
+  color: #0284c7;
+  text-shadow: 0 0 2px rgba(2, 132, 199, 0.3);
+  letter-spacing: 0.05em;
+}
+
+.bannerBrand {
+  font-size: 2.2cqw;
+  font-weight: 900;
+  color: #ff007f;
+  text-shadow: 0 0 2px rgba(255, 0, 127, 0.3);
+}
+
+.bannerCenterArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 8cqw;
+  position: relative;
+}
+
+/* Alternate loop text CSS keyframe animation */
+.bannerTextLoop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.loopText1, .loopText2, .loopText3 {
+  position: absolute;
+  font-family: 'Jua', 'Noto Sans KR', sans-serif;
+  font-size: 6.8cqw;
+  font-weight: 900;
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Loop Text 1: Company Name (shows at 0% to 30%) */
+.loopText1 {
+  color: #ff007f;
+  text-shadow: 0 0 3px rgba(255, 0, 127, 0.3);
+  animation: textLoopSlide1 6s infinite ease-in-out;
+}
+
+/* Loop Text 2: Location (shows at 33% to 63%) */
+.loopText2 {
+  color: #0284c7;
+  text-shadow: 0 0 3px rgba(2, 132, 199, 0.3);
+  animation: textLoopSlide2 6s infinite ease-in-out;
+}
+
+/* Loop Text 3: Pay Rate (shows at 66% to 96%) */
+.loopText3 {
+  color: #d97706;
+  text-shadow: 0 0 3px rgba(217, 119, 6, 0.3);
+  animation: textLoopSlide3 6s infinite ease-in-out;
+}
+
+@keyframes textLoopSlide1 {
+  0%, 30% {
+    opacity: 1;
+    transform: scale(1) rotate(-1deg);
+  }
+  32%, 100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0);
+  }
+}
+
+@keyframes textLoopSlide2 {
+  0%, 30% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0);
+  }
+  33%, 63% {
+    opacity: 1;
+    transform: scale(1) rotate(1deg);
+  }
+  65%, 100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0);
+  }
+}
+
+@keyframes textLoopSlide3 {
+  0%, 63% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0);
+  }
+  66%, 96% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  98%, 100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0);
+  }
+}
+
+/* Bottom badges container */
+.bannerBadges {
+  display: flex;
+  justify-content: center;
+  gap: 1.5cqw;
+  width: 100%;
+}
+
+.badgeItem {
+  font-size: 2cqw;
+  font-weight: 800;
+  padding: 0.4cqw 1.8cqw;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  animation: badgePulse 1s infinite alternate;
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.03);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Floating Sparkle stars */
+.sparkle {
+  position: absolute;
+  color: #ff007f; /* Colored stars to show up on white background */
+  font-size: 3.2cqw;
+  animation: spinSparkle 1.5s infinite linear, blinkSparkle 0.5s infinite alternate;
+}
+
+/* Keyframes for crazy flashy neon sign */
+@keyframes crazyBorderPulse {
+  0% {
+    border-color: #ff007f;
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.3), inset 0 0 8px rgba(255, 0, 127, 0.2);
+  }
+  25% {
+    border-color: #0284c7;
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.3), inset 0 0 9px rgba(2, 132, 199, 0.2);
+  }
+  50% {
+    border-color: #d97706;
+    box-shadow: 0 0 10px rgba(217, 119, 6, 0.3), inset 0 0 8px rgba(217, 119, 6, 0.2);
+  }
+  75% {
+    border-color: #7c3aed;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.3), inset 0 0 9px rgba(124, 58, 237, 0.2);
+  }
+  100% {
+    border-color: #ff007f;
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.3), inset 0 0 8px rgba(255, 0, 127, 0.2);
+  }
+}
+
+@keyframes crazyWiggle {
+  0% {
+    transform: rotate(-0.8deg) scale(0.99);
+  }
+  100% {
+    transform: rotate(0.8deg) scale(1.01);
+  }
+}
+
+@keyframes spinSparkle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blinkSparkle {
+  0% {
+    opacity: 0.2;
+    scale: 0.7;
+  }
+  100% {
+    opacity: 1;
+    scale: 1.3;
+  }
 }

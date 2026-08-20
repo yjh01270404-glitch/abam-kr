@@ -1,112 +1,96 @@
+'use client';
+
 import Link from 'next/link';
-import AbamLogo from './AbamLogo';
 import styles from './Footer.module.css';
-import { Phone, MessageSquare, BookOpen, Headset, CreditCard, Monitor, HelpCircle } from 'lucide-react';
+import { Phone, MessageSquare, BookOpen, Headset, CreditCard, HelpCircle, ShieldCheck } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      {/* 1. Upper Four-Column Dashboard */}
-      <div className={styles.upperFooter}>
-        <div className={styles.container}>
-          <div className={styles.footerGrid}>
+    <footer className={styles.footer} style={{ background: '#0f172a', color: '#94a3b8', borderTop: '1px solid #1e293b' }}>
+      {/* 1. Upper Footer Dashboard */}
+      <div className={styles.upperFooter} style={{ padding: '30px 0', borderBottom: '1px solid #1e293b' }}>
+        <div className={styles.container} style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
+          <div className={styles.footerGrid} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px' }}>
             {/* Column 1: Customer Center */}
             <div className={styles.gridCol}>
-              <div className={styles.csHeader}>
-                <div className={styles.phoneIconCircle}>
-                  <Phone size={20} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                <div style={{ background: '#0284c7', color: '#FFF', padding: '8px', borderRadius: '8px' }}>
+                  <Phone size={18} />
                 </div>
-                <div className={styles.csNumbers}>
-                  <div className={styles.mainPhone}>070-8057-6615</div>
-                  <div className={styles.csHours}>평일 10:00~19:00 점심 12:00~13:30</div>
-                  <div className={styles.csSub}>* 주말 및 공휴일은 근무하지 않습니다.</div>
+                <div>
+                  <div style={{ fontSize: '18px', fontWeight: 800, color: '#f8fafc' }}>070-8057-6615</div>
+                  <div style={{ fontSize: '12px', color: '#94a3b8' }}>평일 09:30~18:30 (점심 12:00~13:30)</div>
                 </div>
               </div>
-              <div className={styles.csBanner} style={{ cursor: 'pointer' }} onClick={() => window.dispatchEvent(new Event('abam-open-chat'))}>
-                업무시간 외 실시간 문의 남기기 (클릭)
-              </div>
+              <div style={{ fontSize: '11px', color: '#64748b' }}>* 주말 및 공휴일은 1:1 온라인 문의를 이용해 주세요.</div>
             </div>
 
-            {/* Column 2: Quick Links A */}
-            <div className={styles.gridColCenter}>
-              <div className={styles.quickLinkItem} onClick={() => window.dispatchEvent(new Event('abam-open-chat'))} style={{ cursor: 'pointer' }}>
-                <MessageSquare size={16} className={styles.linkIcon} />
-                <span>제휴/광고문의</span>
-              </div>
-              <Link href="/employer/post" className={styles.quickLinkItem} style={{ textDecoration: 'none' }}>
-                <BookOpen size={16} className={styles.linkIcon} />
-                <span>광고등록안내</span>
-              </Link>
-            </div>
-
-            {/* Column 3: Quick Links B */}
-            <div className={styles.gridColCenter}>
-              <div className={styles.quickLinkItem} onClick={() => window.dispatchEvent(new Event('abam-open-chat'))} style={{ cursor: 'pointer' }}>
-                <Headset size={16} className={styles.linkIcon} />
-                <span>고객지원센터</span>
-              </div>
-              <div className={styles.quickLinkItem} onClick={() => alert('Q. 가상계좌 입금 확인은 얼마나 걸리나요?\nA. 포트원 결제 연동을 통해 가상계좌 입금 완료 즉시 1초 만에 실시간 자동으로 구인 광고 등록 승인이 처리됩니다.')} style={{ cursor: 'pointer' }}>
-                <HelpCircle size={16} className={styles.linkIcon} />
-                <span>자주묻는질문</span>
-              </div>
-            </div>
-
-            {/* Column 4: Portone Virtual Account Guide */}
+            {/* Column 2: Service Links */}
             <div className={styles.gridCol}>
-              <div className={styles.bankTitle}>
-                <CreditCard size={14} />
-                <span>가상계좌 안전 결제 안내</span>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc', marginBottom: '10px' }}>서비스 바로가기</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px' }}>
+                <Link href="/business" style={{ color: '#cbd5e1', textDecoration: 'none' }}>전국 매장 디렉토리</Link>
+                <Link href="/partnership" style={{ color: '#cbd5e1', textDecoration: 'none' }}>배너 광고 상품 안내</Link>
+                <Link href="/community" style={{ color: '#cbd5e1', textDecoration: 'none' }}>자주 묻는 질문 (FAQ)</Link>
               </div>
-              <div className={styles.bankList} style={{ fontSize: '11.5px', color: '#64748b', lineHeight: '1.5' }}>
-                <p style={{ margin: 0, fontWeight: 700, color: '#334155', marginBottom: '4px' }}>💳 포트원(PortOne) 가상계좌 발급</p>
-                <p style={{ margin: 0 }}>구인 공고 및 광고 배너 비용 결제 시, 각 주문건별로 전용 가상계좌가 발급됩니다. 카드 안전 결제 및 가상계좌 실시간 입금 확인을 지원합니다.</p>
+            </div>
+
+            {/* Column 3: Legal Terms */}
+            <div className={styles.gridCol}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc', marginBottom: '10px' }}>약관 및 정책</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px' }}>
+                <Link href="/terms" style={{ color: '#38bdf8', fontWeight: 700, textDecoration: 'none' }}>서비스 이용약관</Link>
+                <Link href="/privacy" style={{ color: '#38bdf8', fontWeight: 700, textDecoration: 'none' }}>개인정보 처리방침</Link>
+                <Link href="/refund" style={{ color: '#38bdf8', fontWeight: 700, textDecoration: 'none' }}>전자상거래 환불/취소 규정</Link>
+              </div>
+            </div>
+
+            {/* Column 4: Payment Escrow Guarantee */}
+            <div className={styles.gridCol}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <CreditCard size={16} /> 안전 결제 시스템
+              </div>
+              <div style={{ fontSize: '12px', color: '#94a3b8', lineHeight: '1.5' }}>
+                <p style={{ margin: 0, fontWeight: 700, color: '#e2e8f0' }}>💳 포트원(PortOne) PG사 연동</p>
+                <p style={{ margin: '4px 0 0' }}>신용카드 및 실시간 가상계좌 에스크로를 통해 안전한 전자상거래 결제를 보장합니다.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 2. Middle Navigation Link Bar */}
-      <div className={styles.middleBar}>
-        <div className={styles.container}>
-          <div className={styles.middleContent}>
-            <div className={styles.middleLinks}>
-              <span onClick={() => alert('아름다운밤(abam)은 고품격 프리미엄 여성 구인구직 정보를 제공하는 1위 전문 매칭 서비스 플랫폼입니다.')}>회사소개</span>
-              <span className={styles.boldLink} onClick={() => alert('개인정보처리방침: 아밤은 회원의 소중한 개인정보 보호를 최우선 가치로 여기며, 암호화 통신을 통해 절대 외부로 노출되지 않음을 보장합니다.')}>개인정보처리방침</span>
-              <span onClick={() => alert('이용약관: 본 서비스는 만 19세 이상만 가입 및 열람이 가능하며, 대리 등록이나 불법 구인 행위 적발 시 민형사상 조치가 행해질 수 있습니다.')}>이용약관</span>
-              <span onClick={() => alert('공지사항: 7월 구인광고 신규 가입 무료 이벤트 및 가상계좌 결제 간소화 패치가 완료되었습니다. 공지 게시글을 확인하세요.')}>공지사항</span>
-              <span onClick={() => document.getElementById('community-section')?.scrollIntoView({ behavior: 'smooth' })}>커뮤니티</span>
-              <span onClick={() => window.dispatchEvent(new Event('abam-open-chat'))}>고객의견게시판</span>
+      {/* 2. Bottom Corporate Info */}
+      <div className={styles.bottomSection} style={{ padding: '24px 0', fontSize: '12px', color: '#64748b' }}>
+        <div className={styles.container} style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+            <div style={{ lineHeight: '1.8' }}>
+              <div style={{ color: '#94a3b8', fontWeight: 600 }}>
+                <span>상호명: 제이에이치스토어 (서비스명: 아밤 ABAM)</span> <span style={{ margin: '0 6px' }}>|</span>
+                <span>대표자: 양정호</span> <span style={{ margin: '0 6px' }}>|</span>
+                <span>사업자등록번호: 541-09-03234</span> <span style={{ margin: '0 6px' }}>|</span>
+                <span>통신판매업신고번호: 제2026-서울서대문-0168호</span>
+              </div>
+              <div>
+                <span>사업장 주소: 서울특별시 서대문구 거북골로 18가길 23</span> <span style={{ margin: '0 6px' }}>|</span>
+                <span>직업정보제공사업 신고번호: 제2026-서울서대문-0001호</span>
+              </div>
+              <div>
+                <span>대표전화: 070-8057-6615</span> <span style={{ margin: '0 6px' }}>|</span>
+                <span>이메일 문의: <a href="mailto:help@abam.kr" style={{ color: '#38bdf8', textDecoration: 'none' }}>help@abam.kr</a></span> <span style={{ margin: '0 6px' }}>|</span>
+                <span>개인정보보호책임자: 양정호</span>
+              </div>
+              <div style={{ marginTop: '10px', fontSize: '11px', color: '#475569' }}>
+                아밤(ABAM)은 전국 로컬 매장 정보 및 디지털 배너 광고 플랫폼이며, 전자상거래 등에서의 소비자보호에 관한 법률 및 직업안정법 등 관련 법규를 엄격히 준수합니다.
+              </div>
+              <div style={{ marginTop: '6px', fontSize: '11px', color: '#475569' }}>
+                Copyright © 2026 ABAM Business Portal. All rights reserved.
+              </div>
             </div>
-            <button className={styles.resolutionBtn} onClick={() => alert('해상도가 최적화되었습니다.')}>
-              <Monitor size={12} />
-              <span>모니터 해상도 조절</span>
-            </button>
-          </div>
-        </div>
-      </div>
 
-      {/* 3. Bottom Corporate Information Section */}
-      <div className={styles.bottomSection}>
-        <div className={styles.container}>
-          <div className={styles.bottomFlex}>
-            <div className={styles.corpInfo}>
-              <p>상호: <AbamLogo fontSize="12px" />(abam) | 대표자: 양정호 | 사업자등록번호: 541-09-03234 | 통신판매업신고: 제2026-서울서대문-0168호</p>
-              <p>주소: 서울 서대문구 거북골로 18가길 23 | 직업정보제공사업 신고번호: 제2026-서울서대문-</p>
-              <p>TEL: 070-8057-6615 | E-mail: help@abam.kr | 개인정보관리책임자: 양정호</p>
-              <div style={{ marginTop: '10px', fontSize: '11px', color: '#64748b', lineHeight: '1.4', wordBreak: 'keep-all' }}>
-                아름다운밤은 유흥알바, 밤알바, 노래방알바, 바알바, 퀸알바, 악녀알바, 여우알바, 텐프로, 룸알바 등 고수익 여성 구인구직 정보를 제공하는 안전한 일자리 플랫폼입니다. 당사는 직업안정법 등 관련 법규를 준수하며 불건전한 직업 소개 및 알선을 엄격히 금지합니다.
-              </div>
-              <p className={styles.copyright} style={{ marginTop: '10px' }}>Copyright(c) 2026 <AbamLogo fontSize="12px" />.kr Net, <AbamLogo fontSize="12px" />. All rights reserved.</p>
-            </div>
-            
-            {/* Adult Safety Badges */}
-            <div className={styles.badgeWrapper}>
-              <div className={styles.adultBadge}>
-                <span>19</span>
-              </div>
-              <div className={styles.secureBadge}>
-                <span>CLEAN<br/>SERVICE</span>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ border: '1px solid #334155', borderRadius: '8px', padding: '8px 12px', textAlign: 'center', background: '#1e293b' }}>
+                <ShieldCheck size={20} color="#10b981" style={{ margin: '0 auto 4px' }} />
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#10b981' }}>CLEAN B2B<br/>VERIFIED</div>
               </div>
             </div>
           </div>

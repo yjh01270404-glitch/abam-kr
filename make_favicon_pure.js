@@ -1,0 +1,42 @@
+const fs = require('fs');
+
+const svgMoonFavicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="url(#bgGrad)" stroke="#f43f5e" stroke-width="20" />
+
+  <!-- Moon Crescent 🌙 -->
+  <path d="M 290 120 C 180 120 110 200 110 300 C 110 400 190 460 300 460 C 230 440 180 370 180 290 C 180 200 240 140 330 130 C 316 123 303 120 290 120 Z" fill="url(#moonGrad)" filter="url(#glow)" />
+
+  <!-- Sparkling Stars ✨ -->
+  <path d="M 370 160 L 380 180 L 400 190 L 380 200 L 370 220 L 360 200 L 340 190 L 360 180 Z" fill="#fef08a" />
+  <path d="M 170 160 L 176 172 L 188 178 L 176 184 L 170 196 L 164 184 L 152 178 L 164 172 Z" fill="#f43f5e" />
+</svg>`;
+
+const targetFiles = [
+  'C:/Users/yjh01/.gemini/antigravity-ide/scratch/abam-kr/public/favicon.svg',
+  'C:/Users/yjh01/.gemini/antigravity-ide/scratch/abam-kr/public/favicon.ico',
+  'C:/Users/yjh01/.gemini/antigravity-ide/scratch/abam-kr/src/app/favicon.ico',
+  'C:/Users/yjh01/.gemini/antigravity-ide/scratch/abam-kr/src/app/icon.svg',
+];
+
+targetFiles.forEach(file => {
+  fs.writeFileSync(file, svgMoonFavicon);
+  console.log('Saved SVG icon:', file);
+});

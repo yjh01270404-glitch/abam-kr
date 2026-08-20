@@ -1,3 +1,5 @@
+import { notifyNewMessage } from './audioAlert';
+
 // 쪽지 시스템 유틸리티
 
 export interface Message {
@@ -37,6 +39,17 @@ export function sendMessage(msg: Omit<Message, 'id' | 'createdAt' | 'read'>): Me
   };
   messages.push(newMsg);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+
+  // 띵동 사운드 + PWA 알림 트리거
+  if (typeof window !== 'undefined') {
+    const isToAdmin = msg.to === 'admin';
+    const targetUrl = isToAdmin ? '/abam-nightman-2026' : '/messages';
+    const notificationTitle = isToAdmin ? '🔔 [아밤 관리자] 이용자 1:1 대화 수신!' : `🔔 [아밤 1:1 톡] ${msg.fromName}님의 답장`;
+    
+    notifyNewMessage(notificationTitle, msg.content, targetUrl);
+    window.dispatchEvent(new CustomEvent('abam_new_message', { detail: newMsg }));
+  }
+
   return newMsg;
 }
 

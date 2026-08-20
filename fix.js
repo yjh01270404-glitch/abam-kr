@@ -1,0 +1,1 @@
+const fs = require('fs'); const lines = fs.readFileSync('src/app/page.tsx', 'utf8').split('\n'); if (lines[167].includes('use client')) { lines.splice(167, 77); fs.writeFileSync('src/app/page.tsx', lines.join('\n')); console.log('Fixed page.tsx'); }
