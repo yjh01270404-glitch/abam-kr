@@ -16,7 +16,7 @@ const MATCH_DATA: Record<string, MatchResult> = {
   '부산': { region: '부산', avgDailyWage: 245000, matchScore: 87, openings: 743, demand: 'high', topRoles: ['해운대 바', '해변 클럽', 'VIP 라운지'] },
   '인천': { region: '인천', avgDailyWage: 255000, matchScore: 81, openings: 512, demand: 'medium', topRoles: ['공항 라운지', '호텔 바', '카지노 서비스'] },
   '대구': { region: '대구', avgDailyWage: 230000, matchScore: 76, openings: 384, demand: 'medium', topRoles: ['나이트 클럽', 'KTV', '풀살롱'] },
-  '수원': { region: '수원', avgDailyWage: 240000, matchScore: 79, openings: 298, demand: 'medium', topRoles: ['바 서빙', '룸살롱', '가라오케'] },
+  '수원': { region: '수원', avgDailyWage: 240000, matchScore: 79, openings: 298, demand: 'medium', topRoles: ['바 서빙', '룸살롱', '라이브 카페'] },
   '제주': { region: '제주', avgDailyWage: 260000, matchScore: 89, openings: 421, demand: 'high', topRoles: ['리조트 바', '클럽', 'VIP 풀파티'] },
 };
 

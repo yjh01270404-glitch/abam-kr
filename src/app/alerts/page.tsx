@@ -61,7 +61,7 @@ const mockAlerts = [
     pay: '별점 4.8 / 34개', tag: '⭐ 리뷰', time: '어제 오후 7시', isNew: false,
   },
   {
-    id: 'al-5', type: 'salary', score: 0, title: '오션 쩜오 — 급여 인상 공지',
+    id: 'al-5', type: 'salary', score: 0, title: '오션 하이엔드 스튜디오 — 급여 인상 공지',
     pay: '협의 → 월 1847만+', tag: '💰 급여변동', time: '2일 전', isNew: false,
   },
   {

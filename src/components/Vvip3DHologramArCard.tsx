@@ -71,7 +71,7 @@ export default function Vvip3DHologramArCard() {
 
           <div style={{ margin: '20px 0', textAlign: 'center' }}>
             <h4 style={{ margin: 0, fontSize: '24px', fontWeight: 900, color: '#fff', textShadow: '0 0 10px #ffd700' }}>
-              강남 에이스 텐프로 (SPECIAL)
+              강남 에이스 프리미엄 살롱 (SPECIAL)
             </h4>
             <p style={{ margin: '6px 0 0 0', fontSize: '13px', color: '#fed7aa' }}>
               마우스 이동 시 3D 홀로그램 입체 회전 · 당일 정산 100% 보장 약서

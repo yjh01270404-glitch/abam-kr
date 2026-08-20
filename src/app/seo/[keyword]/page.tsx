@@ -303,7 +303,7 @@ export default async function SeoLandingPage({ params }: Props) {
             <h3 className={styles.sidebarTitle} style={{ color: '#880e4f' }}>👑 아름다운밤(아밤) 바로가기</h3>
             <p style={{ fontSize: '12.5px', color: '#6b4c5e', lineHeight: '1.6', margin: '0 0 12px 0' }}>
               대한민국 1등 여성 고수익 일자리 전문 플랫폼.<br/>
-              밤알바·유흥알바·룸알바 전국 검증 채용정보.
+              로컬 채용·매장 채용·비즈니스 채용 전국 검증 채용정보.
             </p>
             <Link href="/jobs" style={{ display: 'block', background: 'linear-gradient(135deg, #c2185b, #e91e63)', color: '#fff', textAlign: 'center', padding: '10px', borderRadius: '8px', textDecoration: 'none', fontWeight: '800', fontSize: '13px' }}>
               🔥 전체 채용공고 보기

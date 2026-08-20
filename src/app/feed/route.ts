@@ -25,7 +25,7 @@ export async function GET() {
   <channel>
     <title>아름다운밤(아밤) - 실시간 여성 고수익 일자리 정보</title>
     <link>https://abam.kr</link>
-    <description>유흥알바, 밤알바, 노래방알바, 바알바, 룸알바 전문 구인구직 플랫폼 아밤</description>
+    <description>매장 채용, 로컬 채용, 카페 스태프, 바알바, 비즈니스 채용 전문 구인구직 플랫폼 아밤</description>
     <language>ko</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     ${rssItems}

@@ -33,12 +33,12 @@ export default function JobMapPage() {
     {
       id: 'crawled-2',
       companyName: '마포 시크릿 셔츠',
-      title: '당일지급 확실한 마포역 셔츠룸 스태프 모집',
+      title: '당일지급 확실한 마포역 프라이빗 라운지 스태프 모집',
       pay: '일급 600,000원',
       location: '서울 마포구 공덕동 456',
       lat: 180,
       lng: 220,
-      category: '룸알바'
+      category: '비즈니스 채용'
     },
     {
       id: 'crawled-3',
@@ -52,13 +52,13 @@ export default function JobMapPage() {
     },
     {
       id: 'crawled-4',
-      companyName: '신림 텐프로 벨벳',
-      title: '정통 텐프로 하이퍼블릭 여직원 모집',
+      companyName: '신림 프리미엄 살롱 벨벳',
+      title: '정통 프리미엄 살롱 하이퍼블릭 여직원 모집',
       pay: '일급 700,000원',
       location: '서울 관악구 신림동 1420',
       lat: 250,
       lng: 110,
-      category: '텐프로'
+      category: '프리미엄 살롱'
     }
   ];
 

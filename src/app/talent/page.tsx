@@ -22,7 +22,7 @@ export default function TalentPage() {
   const [nickname, setNickname] = useState('');
   const [age, setAge] = useState('20대 초반');
   const [region, setRegion] = useState('서울 강남구');
-  const [category, setCategory] = useState('룸/가라오케');
+  const [category, setCategory] = useState('룸/라이브 카페');
   const [payTarget, setPayTarget] = useState('일급 50만원 이상');
   const [intro, setIntro] = useState('');
   const [contact, setContact] = useState('');
@@ -269,11 +269,11 @@ export default function TalentPage() {
               }}
             >
               <option value="전체">전체 업종</option>
-              <option value="룸">룸알바 / 룸살롱</option>
-              <option value="가라오케">가라오케 / 하이퍼블릭</option>
-              <option value="텐프로">텐프로 / 텐카페</option>
+              <option value="룸">비즈니스 채용 / 룸살롱</option>
+              <option value="라이브 카페">라이브 카페 / 하이퍼블릭</option>
+              <option value="프리미엄 살롱">프리미엄 살롱 / 텐카페</option>
               <option value="바">토킹바 / 칵테일바</option>
-              <option value="노래방">노래방 / 셔츠룸</option>
+              <option value="노래방">노래방 / 프라이빗 라운지</option>
             </select>
           </div>
         </div>
@@ -347,7 +347,7 @@ export default function TalentPage() {
                   📍 <strong>희망지역:</strong> {item.region || item.location || '서울 강남'}
                 </div>
                 <div style={{ background: '#fdfafc', padding: '6px 10px', borderRadius: '8px', color: '#4b5563', border: '1px solid #f3e2eb' }}>
-                  👠 <strong>희망업종:</strong> {item.category || item.tag || '룸/가라오케'}
+                  👠 <strong>희망업종:</strong> {item.category || item.tag || '룸/라이브 카페'}
                 </div>
                 <div style={{ background: '#fff1f2', padding: '6px 10px', borderRadius: '8px', color: '#be185d', gridColumn: 'span 2', fontWeight: 900, border: '1px solid #fecdd3' }}>
                   💰 <strong>희망 페이:</strong> {item.payTarget || item.pay || '일급 45만원 이상'}
@@ -552,9 +552,9 @@ export default function TalentPage() {
                 <div>
                   <label style={{ fontSize: '13px', fontWeight: 800, color: '#374151', display: 'block', marginBottom: '4px' }}>희망 업종</label>
                   <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: '100%', padding: '10px', background: '#fdfafc', border: '1px solid #f3e2eb', borderRadius: '8px', color: '#1f2937', fontSize: '14px', outline: 'none' }}>
-                    <option value="룸/가라오케">룸 / 가라오케</option>
-                    <option value="하이퍼블릭">하이퍼블릭 / 셔츠룸</option>
-                    <option value="텐프로/텐카페">텐프로 / 텐카페</option>
+                    <option value="룸/라이브 카페">룸 / 라이브 카페</option>
+                    <option value="하이퍼블릭">하이퍼블릭 / 프라이빗 라운지</option>
+                    <option value="프리미엄 살롱/텐카페">프리미엄 살롱 / 텐카페</option>
                     <option value="토킹바/바">토킹바 / 칵테일바</option>
                   </select>
                 </div>

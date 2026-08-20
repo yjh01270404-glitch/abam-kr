@@ -29,10 +29,10 @@ const VVIP_BG_IMAGES = [
   '/banners/vvip/bg_vvip_6.png',   // 오렌지 골드 파티
   '/banners/vvip/bg_vvip_7.png',   // 에메랄드 바
   '/banners/vvip/bg_vvip_8.png',   // 스카이바 야경
-  '/banners/vvip/bg_vvip_9.png',   // 다크 셔츠룸
+  '/banners/vvip/bg_vvip_9.png',   // 다크 프라이빗 라운지
   '/banners/vvip/bg_vvip_10.png',  // 그랜드 볼룸
   '/banners/vvip/bg_vvip_11.png',  // 하이퍼블릭 모던
-  '/banners/vvip/bg_vvip_12.png',  // 텐프로 버건디
+  '/banners/vvip/bg_vvip_12.png',  // 프리미엄 살롱 버건디
 ];
 
 // ─── fallback CSS 그라디언트 (이미지 로드 실패 시) ───────────────

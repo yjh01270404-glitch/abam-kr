@@ -177,7 +177,7 @@ export const mockBusinessTrust: BusinessTrust[] = [
   },
   {
     businessId: 'biz-004',
-    businessName: '오션 쩜오',
+    businessName: '오션 비즈니스',
     level: 3,
     avgRating: 3.9,
     reviewCount: 12,

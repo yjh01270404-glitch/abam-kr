@@ -20,7 +20,7 @@ const ARCHETYPES = [
   { id: 7, name: '룸 바 골드 배지', desc: '라운지/룸바에 어울리는 배지 형태' },
   { id: 8, name: '퍼플 네온 튜브', desc: '강렬한 3D 보라 네온 튜브 라이트' },
   { id: 9, name: '전단지 프린트', desc: '가독성이 극대화된 전단지 인쇄 스타일' },
-  { id: 10, name: '오렌지 가라오케 팝', desc: '통통 튀는 캐주얼 복고풍 가라오케 스타일' },
+  { id: 10, name: '오렌지 라이브 카페 팝', desc: '통통 튀는 캐주얼 복고풍 라이브 카페 스타일' },
 ];
 
 export default function AdAccountPage() {
@@ -394,7 +394,7 @@ export default function AdAccountPage() {
                   className={styles.input} 
                   value={jobSector} 
                   onChange={(e) => setJobSector(e.target.value)}
-                  placeholder="예: 바텐더 / 룸알바 / 가라오케" 
+                  placeholder="예: 바텐더 / 비즈니스 채용 / 라이브 카페" 
                 />
               </div>
 

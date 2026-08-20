@@ -108,7 +108,7 @@ export default function LogoBanner({ companyName, themeIdx, subText, payText, mo
           {subText && <span className={styles.flyerDetail}>{subText}</span>}
         </div>
       );
-    case 10: // 11. 오렌지 가라오케 팝 (비타민 느낌)
+    case 10: // 11. 오렌지 라이브 카페 팝 (비타민 느낌)
       return (
         <div className={`${styles.customBanner} ${styles.archetypeOrangePop} ${motionClass}`}>
           <span className={styles.orangePopMain}>{companyName}</span>

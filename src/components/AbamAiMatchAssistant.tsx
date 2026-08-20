@@ -5,7 +5,7 @@ import { Bot, Sparkles, MapPin, Send, ShieldCheck } from 'lucide-react';
 import JobMatchScoreCard from './JobMatchScoreCard';
 
 const REGIONS = ['강남/역삼', '홍대/신촌', '수원/인계', '인천/부평', '부산/해운대', '대구/동성로', '대전/둔산', '광주/상무'];
-const CATEGORIES = ['하이퍼블릭', '텐프로/쩜오', '셔츠룸', '클래식/모던바', '가라오케', '노래방바'];
+const CATEGORIES = ['하이퍼블릭', '프리미엄 살롱/하이엔드 스튜디오', '프라이빗 라운지', '클래식/모던바', '라이브 카페', '노래방바'];
 const PAY_OPTIONS = ['일 20만원 이상', '일 30만원 이상', '일 50만원 이상', '시급 6만원 이상', '월 1,000만원 이상'];
 
 interface Recommendation {

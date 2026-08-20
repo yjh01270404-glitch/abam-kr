@@ -53,7 +53,7 @@ export function getVBankOrders(): VBankOrder[] {
           orderId: 'order-vbank-1002',
           impUid: 'imp_9401827402',
           merchantUid: 'abam_vbank_178486002',
-          companyName: '강남 텐프로 클럽',
+          companyName: '강남 프리미엄 살롱 클럽',
           ownerName: '김대표',
           phone: '010-9876-5432',
           adSlot: 'special',

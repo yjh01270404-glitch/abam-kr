@@ -285,9 +285,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const sanitizeText = (text: string | undefined) => {
       if (!text) return '';
       return text
-        .replace(/여우알바/gi, '아름다운밤')
-        .replace(/퀸알바/gi, '아름다운밤')
-        .replace(/밤알바/gi, '여성알바')
+        .replace(/아밤 비즈니스/gi, '아름다운밤')
+        .replace(/아밤 비즈니스/gi, '아름다운밤')
+        .replace(/로컬 채용/gi, '여성알바')
         .replace(/여우/gi, '아밤')
         .replace(/퀸/gi, '아밤')
         .replace(/queenalba\.net/gi, 'abam.kr')
@@ -447,7 +447,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const cleanList = (list: any[]) => {
       return list.filter((job: any) => {
         if (!job || !job.companyName) return false;
-        const cleanName = job.companyName.replace(/\[여우알바\]/gi, '').replace(/\[퀸알바\]/gi, '').trim();
+        const cleanName = job.companyName.replace(/\[아밤 비즈니스\]/gi, '').replace(/\[아밤 비즈니스\]/gi, '').trim();
         if (seenNamesGlobal.has(cleanName)) return false;
 
         const cleanImg = (job.image || '').trim();

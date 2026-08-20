@@ -10,9 +10,9 @@ export const dynamicParams = true;
 const sanitizeText = (text: string | undefined) => {
   if (!text) return '';
   return text
-    .replace(/여우알바/gi, '아름다운밤')
-    .replace(/퀸알바/gi, '아름다운밤')
-    .replace(/밤알바/gi, '여성알바')
+    .replace(/아밤 비즈니스/gi, '아름다운밤')
+    .replace(/아밤 비즈니스/gi, '아름다운밤')
+    .replace(/로컬 채용/gi, '여성알바')
     .replace(/여우/gi, '아밤')
     .replace(/퀸/gi, '아밤')
     .replace(/queenalba\.net/gi, 'abam.kr')

@@ -31,7 +31,7 @@ export const VIP_POOL: BannerStylePool = {
   copyTemplates: [
     { label: '{companyName}', main: '{pay} 100% 보장', sub: '초보/경력 무관 · 에이스 특별 대우' },
     { label: 'VIP {location}', main: '업계 1위 최고대우', sub: '당일 {pay} 현금 지급 · 출퇴근 지원' },
-    { label: '에이스 특별', main: '{pay}+@ 맞춤 케어', sub: '24시간 상담환영 · 텐프로급 대우' },
+    { label: '에이스 특별', main: '{pay}+@ 맞춤 케어', sub: '24시간 상담환영 · 프리미엄 살롱급 대우' },
   ],
 };
 

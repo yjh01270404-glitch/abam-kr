@@ -143,7 +143,7 @@ export default function PortOneVBankModal({
                   <span>🔞 [성인 19금 서비스 가상계좌 출금/환불 불가 서약서]</span>
                 </div>
                 <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '11.5px', color: '#9f1239', lineHeight: 1.5 }}>
-                  <li>본 서비스는 야간/유흥 구인구직 19세 이상 성인 전용 플랫폼입니다.</li>
+                  <li>본 서비스는 야간/비즈니스 구인구직 19세 이상 성인 전용 플랫폼입니다.</li>
                   <li>포트원을 통해 발급되는 가상계좌는 입금 즉시 광고 노출 자원이 할당되므로, <strong>입금 후 현금 출금 및 환불이 엄격히 금지</strong>됩니다.</li>
                   <li>타인 명의 입금 및 불법 대포통장 거래 시 즉시 수사기관에 세부 로그가 통보됩니다.</li>
                 </ul>

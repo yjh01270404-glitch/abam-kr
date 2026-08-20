@@ -7,7 +7,7 @@ import { Zap } from 'lucide-react';
 
 const MOCK_SOS_DATA = [
   { id: 1, loc: '강남역', company: '강남 에이스 클럽', title: '오늘 10시~2시 급구 (경력무관)', pay: '30만+@ 당일지급' },
-  { id: 2, loc: '선릉역', company: '청담 시그니처', title: '쩜오 펑크 대타 구함 (차량지원)', pay: '50만 보장' },
+  { id: 2, loc: '선릉역', company: '청담 시그니처', title: '하이엔드 스튜디오 펑크 대타 구함 (차량지원)', pay: '50만 보장' },
   { id: 3, loc: '홍대',   company: '마포 노래바',   title: '노래방 도우미 2시간만', pay: '시급 10만' },
   { id: 4, loc: '해운대', company: '해운대 오션 클럽', title: '모던바 주말 에이스 급구', pay: '협의+당일지급' },
 ];

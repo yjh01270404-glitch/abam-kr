@@ -157,8 +157,8 @@ export function generateRandomBannerStyle(seed: string): BannerStyle {
 
 export function getDefaultTheme(jobType: string): BannerTheme {
   const map: Record<string, BannerTheme> = {
-    '텐프로':     'theme_strawberry',
-    '쩜오':       'theme_cherry',
+    '프리미엄 살롱':     'theme_strawberry',
+    '하이엔드 스튜디오':       'theme_cherry',
     '하이퍼블릭': 'theme_rosegold',
     '퍼블릭':     'theme_peach',
     '룸살롱':     'theme_lavender',
@@ -167,7 +167,7 @@ export function getDefaultTheme(jobType: string): BannerTheme {
     '와인바':     'theme_cherry',
     '노래방':     'theme_coral',
     '클럽/이벤트':'theme_coral',
-    '가라오케':   'theme_peach',
+    '라이브 카페':   'theme_peach',
     '일반주점':   'theme_strawberry',
   };
   return map[jobType] ?? 'theme_strawberry';
