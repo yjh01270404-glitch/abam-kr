@@ -32,7 +32,7 @@ function JobsContent() {
 
   // Constants
   const regions = ['서울', '경기', '인천', '부산', '대구', '광주', '대전', '울산', '세종', '충북', '충남', '전북'];
-  const sectors = ['클래식바', '바텐더', '라운지펍', '모던바', '와인바', '토킹바', '노래방', '비즈니스 채용', '프리미엄 살롱', 'DJ/이벤트', '스태프', '기타'];
+  const sectors = ['뷰티·에스테틱', '헤어·바디케어', '카페·베이커리', '다이닝·F&B', '피트니스·운동', '스튜디오·촬영', '매장 매니저', '기타'];
 
   // Match helpers
   const matchRegion = (location: string, region: string) => {
@@ -52,19 +52,14 @@ function JobsContent() {
 
   const matchJobSector = (title: string, sector: string) => {
     const lowerTitle = title.toLowerCase();
-    if (sector === '클래식바') return lowerTitle.includes('클래식') || lowerTitle.includes('정통');
-    if (sector === '바텐더') return lowerTitle.includes('바텐더') || lowerTitle.includes('에이스');
-    if (sector === '라운지펍') return lowerTitle.includes('라운지') || lowerTitle.includes('펍');
-    if (sector === '모던바') return lowerTitle.includes('모던') || lowerTitle.includes('바텐더');
-    if (sector === '와인바') return lowerTitle.includes('와인');
-    if (sector === '토킹바') return lowerTitle.includes('토킹') || lowerTitle.includes('바텐더');
-    if (sector === '노래방') return lowerTitle.includes('노래방') || lowerTitle.includes('노래');
-    if (sector === '비즈니스 채용') return lowerTitle.includes('룸') || lowerTitle.includes('하이퍼블릭') || lowerTitle.includes('퍼블릭');
-    if (sector === '프리미엄 살롱') return lowerTitle.includes('텐') || lowerTitle.includes('하이엔드 스튜디오') || lowerTitle.includes('프리미엄 살롱');
-    if (sector === 'DJ/이벤트') return lowerTitle.includes('dj') || lowerTitle.includes('이벤트') || lowerTitle.includes('모델');
-    if (sector === '스태프') return lowerTitle.includes('스태프') || lowerTitle.includes('서빙');
-    if (sector === '기타') return !['클래식', '정통', '룸', '프리미엄 살롱', '에이스', '라운지', '펍', '모던', '와인', '토킹', 'dj', '이벤트', '모델', '스태프', '서빙', '노래방', '노래', '하이퍼블릭', '퍼블릭', '하이엔드 스튜디오'].some(k => lowerTitle.includes(k));
-    return false;
+    if (sector === '뷰티·에스테틱') return lowerTitle.includes('뷰티') || lowerTitle.includes('에스테틱') || lowerTitle.includes('피부');
+    if (sector === '헤어·바디케어') return lowerTitle.includes('헤어') || lowerTitle.includes('바디') || lowerTitle.includes('스파');
+    if (sector === '카페·베이커리') return lowerTitle.includes('카페') || lowerTitle.includes('베이커리') || lowerTitle.includes('바리스타');
+    if (sector === '다이닝·F&B') return lowerTitle.includes('다이닝') || lowerTitle.includes('레스토랑') || lowerTitle.includes('셰프');
+    if (sector === '피트니스·운동') return lowerTitle.includes('피트니스') || lowerTitle.includes('필라테스') || lowerTitle.includes('트레이너');
+    if (sector === '스튜디오·촬영') return lowerTitle.includes('스튜디오') || lowerTitle.includes('촬영') || lowerTitle.includes('포토');
+    if (sector === '매장 매니저') return lowerTitle.includes('매니저') || lowerTitle.includes('점장');
+    return true;
   };
 
   // 3-Stage Filtering Logic

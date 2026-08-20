@@ -57,7 +57,7 @@ export default function EmployerPostPage() {
   const [location, setLocation] = useState('서울 강남구 역삼동');
   const [pay, setPay] = useState('일급 300,000원');
   const [workHours, setWorkHours] = useState('오후 8시 ~ 오전 3시 (자율조정)');
-  const [requirements, setRequirements] = useState('만 20세 이상 성인 여성');
+  const [requirements, setRequirements] = useState('만 20세 이상 회원 여성');
   const [contactPhone, setContactPhone] = useState('010-1234-5678');
   const [contactKakao, setContactKakao] = useState('acevip77');
 
@@ -257,7 +257,7 @@ export default function EmployerPostPage() {
         // 관리자 PWA 실시간 결제 완료 알림 전송
         broadcastAdminPush(
           '💳 [신규 결제 완료]',
-          `업소 (${companyName})에서 ${selectedTier.toUpperCase()} 등급 광고 결제 (${calculateTotal().toLocaleString()}원)가 등록되었습니다!`,
+          `매장 (${companyName})에서 ${selectedTier.toUpperCase()} 등급 광고 결제 (${calculateTotal().toLocaleString()}원)가 등록되었습니다!`,
           '/abam-nightman-2026'
         );
 
@@ -319,7 +319,7 @@ export default function EmployerPostPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div style={{ display: 'flex', gap: '12px' }}>
                 <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px' }}>상호명 (업소명) *</label>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px' }}>상호명 (매장명) *</label>
                   <input 
                     type="text" 
                     value={companyName}
@@ -382,10 +382,10 @@ export default function EmployerPostPage() {
               {/* 3 New Self-PR Fields Section */}
               <div style={{ background: '#f5f3ff', border: '1.5px solid #ddd6fe', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 <h3 style={{ margin: 0, fontSize: '14px', fontWeight: 900, color: '#6d28d9', borderBottom: '1px solid #c084fc', paddingBottom: '6px' }}>
-                  ⭐ 우리 업소만의 특별한 매력 & PR (자기소개 고도화)
+                  ⭐ 우리 매장만의 특별한 매력 & PR (자기소개 고도화)
                 </h3>
                 <p style={{ margin: 0, fontSize: '12px', color: '#4b5563', lineHeight: '1.4' }}>
-                  타 업소와 차별화되는 고유의 강점이나 혜택, 실장님의 각오를 자세히 기재해 주세요.
+                  타 매장와 차별화되는 고유의 강점이나 혜택, 실장님의 각오를 자세히 기재해 주세요.
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <div>
@@ -445,7 +445,7 @@ export default function EmployerPostPage() {
                   💼 사업자등록증 첨부 (필수) *
                 </label>
                 <p style={{ margin: 0, fontSize: '12px', color: '#14532d', lineHeight: '1.4' }}>
-                  허위 구인을 차단하고 안심인증 업소 신뢰도를 증명하기 위해 사업자등록증 첨부가 의무화되었습니다. 첨부된 문서는 외부로 노출되지 않고 내부 확인용으로만 안전하게 암호화 보관됩니다.
+                  허위 구인을 차단하고 안심인증 매장 신뢰도를 증명하기 위해 사업자등록증 첨부가 의무화되었습니다. 첨부된 문서는 외부로 노출되지 않고 내부 확인용으로만 안전하게 암호화 보관됩니다.
                 </p>
 
                 {licenseFileName ? (
@@ -579,7 +579,7 @@ export default function EmployerPostPage() {
 
               {/* 3 PR fields review */}
               <div style={{ background: '#f5f3ff', border: '1px solid #ddd6fe', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <h4 style={{ margin: 0, fontSize: '13px', fontWeight: 900, color: '#6d28d9' }}>정제된 업소 강점 및 상세 PR</h4>
+                <h4 style={{ margin: 0, fontSize: '13px', fontWeight: 900, color: '#6d28d9' }}>정제된 매장 강점 및 상세 PR</h4>
                 <div>
                   <label style={{ display: 'block', fontSize: '11px', color: '#7c3aed', marginBottom: '2px' }}>정제된 복지 혜택</label>
                   <textarea 

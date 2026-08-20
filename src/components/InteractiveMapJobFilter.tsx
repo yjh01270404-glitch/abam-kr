@@ -30,7 +30,7 @@ export default function InteractiveMapJobFilter() {
           <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#f43f5e', margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
             🗺️ 전국 지오로케이션(Geolocation) 인터랙티브 구인 맵
           </h3>
-          <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '3px 0 0' }}>실시간 지역별 업소 핀 클릭 시 맞춤형 급여/공고 실시간 소켓 필터링</p>
+          <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '3px 0 0' }}>실시간 지역별 매장 핀 클릭 시 맞춤형 급여/공고 실시간 소켓 필터링</p>
         </div>
         <span style={{ fontSize: '11px', background: '#e11d48', color: '#fff', padding: '3px 10px', borderRadius: '12px', fontWeight: 900 }}>
           LIVE 핀 792개 가동 중

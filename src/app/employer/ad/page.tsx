@@ -10,7 +10,7 @@ import { useApp } from '../../../context/AppContext';
 import styles from './ad.module.css';
 
 const ARCHETYPES = [
-  { id: 0, name: '핑크 블라썸', desc: '1인샵/여성전용 부드러운 분홍' },
+  { id: 0, name: '핑크 블라썸', desc: '1인샵/맞춤형 부드러운 분홍' },
   { id: 1, name: '글로시 크롬 3D', desc: '고급 크롬 텍스처 및 입체 쉐도우' },
   { id: 2, name: '클래식 블랙 품격', desc: '동양적 미감의 한문 스탬프 블랙' },
   { id: 3, name: '골든 스타 라이트', desc: 'VVIP 전용 밤하늘 골드스타 테마' },
@@ -219,7 +219,7 @@ export default function AdAccountPage() {
             
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
-                <label>업소 상호명 <span className={styles.req}>*</span></label>
+                <label>매장 상호명 <span className={styles.req}>*</span></label>
                 <input 
                   type="text" 
                   className={styles.input} 

@@ -113,7 +113,7 @@ function ReviewModal({ business, onClose, onSubmit }: {
         </div>
         <div className={styles.modalBody}>
           <div className={styles.modalNotice}>
-            🔒 완전 익명 처리됩니다. 업소 이름 외 개인 식별 정보는 노출되지 않습니다.
+            🔒 완전 익명 처리됩니다. 매장 이름 외 개인 식별 정보는 노출되지 않습니다.
           </div>
 
           <div className={styles.fieldLabel}>종합 평점</div>
@@ -153,7 +153,7 @@ function ReviewModal({ business, onClose, onSubmit }: {
   );
 }
 
-// ─── 메인 업소 프로필 페이지 ─────────────────────────────────────
+// ─── 메인 매장 프로필 페이지 ─────────────────────────────────────
 export default function BusinessPage({ params }: { params: { id: string } }) {
   const business = mockBusinessTrust.find(b => b.businessId === params.id) ?? mockBusinessTrust[0];
   const cfg = TRUST_BADGE_CONFIGS[business.level];
@@ -202,7 +202,7 @@ export default function BusinessPage({ params }: { params: { id: string } }) {
 
   return (
     <div className={styles.page}>
-      {/* 업소 헤더 */}
+      {/* 매장 헤더 */}
       <div className={styles.businessHeader} style={{ borderBottomColor: cfg.gradientFrom }}>
         <div className={styles.businessHeaderInner}>
           <div className={styles.businessNameRow}>

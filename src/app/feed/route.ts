@@ -16,7 +16,7 @@ export async function GET() {
       <link>https://abam.kr/jobs</link>
       <guid isPermaLink="true">https://abam.kr/job/${job.id}</guid>
       <description><![CDATA[급여: ${job.pay} | 지역: ${job.location} | 근무 조건: ${job.tag || '고수익 알바'}]]></description>
-      <pubDate>${new Date(job.createdAt || Date.now()).toUTCString()}</pubDate>
+      <pubDate>${new Date(job.createdAt || Date.now()).toU일급String()}</pubDate>
     </item>
   `).join('');
 
@@ -27,7 +27,7 @@ export async function GET() {
     <link>https://abam.kr</link>
     <description>매장 채용, 로컬 채용, 카페 스태프, 바알바, 비즈니스 채용 전문 구인구직 플랫폼 아밤</description>
     <language>ko</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${new Date().toU일급String()}</lastBuildDate>
     ${rssItems}
   </channel>
 </rss>`;

@@ -43,7 +43,7 @@ const CLUB_LASER_BGS = [
   { bg1: '#180018', bg2: '#3c003c', laser1: '#e040fb', laser2: '#ff9100', glow: '#f50057' }  // Club Strobe Sunset
 ];
 
-const SLANTED_CATCHPHRASES = [
+const SLANTED_CA일급HPHRASES = [
   '🔥 엉덩일 흔들어봐!',
   '⚡ PARTY WITHOUT ME',
   '👑 HIP SONG EXCLUSIVE',
@@ -59,7 +59,7 @@ const SLANTED_CATCHPHRASES = [
 ];
 
 export function generateAbamBannerSvg(info: BannerInfo): string {
-  const company = info.companyName || '아름다운밤 럭셔리 업소';
+  const company = info.companyName || '아름다운밤 럭셔리 매장';
   const pay = info.pay || '일급 50만원 이상';
   const loc = (info.location || '서울 강남').split(' ')[0] + ' ' + ((info.location || '').split(' ')[1] || '');
   const phone = info.contactPhone || '010-8057-6615';
@@ -68,7 +68,7 @@ export function generateAbamBannerSvg(info: BannerInfo): string {
 
   const seed = hashString(`${company}_${pay}_${loc}_${info.id || 1}`);
   const theme = CLUB_LASER_BGS[seed % CLUB_LASER_BGS.length];
-  const catchphrase = SLANTED_CATCHPHRASES[seed % SLANTED_CATCHPHRASES.length];
+  const catchphrase = SLANTED_CA일급HPHRASES[seed % SLANTED_CA일급HPHRASES.length];
   const numberTag = 1300 + (seed % 600);
 
   // 👑 1. VVIP TIER: 600x320 3D 시네마틱 클럽 스테이지 구조
@@ -140,7 +140,7 @@ export function generateAbamBannerSvg(info: BannerInfo): string {
       <rect x="0" y="0" width="130" height="28" rx="14" fill="${theme.glow}" />
       <text x="65" y="19" font-family="'Pretendard', sans-serif" font-weight="900" font-size="12" fill="#ffffff" text-anchor="middle">📍 ${loc}</text>
       <rect x="140" y="0" width="190" height="28" rx="14" fill="#0f172a" stroke="${theme.laser2}" stroke-width="1.5" />
-      <text x="235" y="19" font-family="'Pretendard', sans-serif" font-weight="900" font-size="12" fill="${theme.laser2}" text-anchor="middle">👑 VVIP 100% 검증업소</text>
+      <text x="235" y="19" font-family="'Pretendard', sans-serif" font-weight="900" font-size="12" fill="${theme.laser2}" text-anchor="middle">👑 VVIP 100% 검증매장</text>
     </g>
     <g transform="translate(240, 105) skewX(-8)" className="anim-text-neon">
       <text x="3" y="33" font-family="'Impact', 'Pretendard', sans-serif" font-weight="900" font-size="34" fill="#000000" stroke="#000000" stroke-width="6" stroke-linejoin="round">${catchphrase}</text>
@@ -191,7 +191,7 @@ export function generateAbamBannerSvg(info: BannerInfo): string {
     <text x="300" y="130" font-family="'Pretendard', sans-serif" font-weight="800" font-size="16" fill="#e9d5ff" text-anchor="middle">${catchphrase}</text>
     <rect x="100" y="152" width="400" height="42" rx="10" fill="#581c87" stroke="#e040fb" stroke-width="2" />
     <text x="300" y="180" font-family="'Pretendard', sans-serif" font-weight="900" font-size="18" fill="#4ade80" text-anchor="middle">💰 ${pay} (당일정산)</text>
-    <text x="300" y="222" font-family="'Pretendard', sans-serif" font-weight="800" font-size="13" fill="#fef08a" text-anchor="middle">📞 ${phone} · 아밤 추천업소</text>
+    <text x="300" y="222" font-family="'Pretendard', sans-serif" font-weight="800" font-size="13" fill="#fef08a" text-anchor="middle">📞 ${phone} · 아밤 추천매장</text>
     </svg>`;
   }
 

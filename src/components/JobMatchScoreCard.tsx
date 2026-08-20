@@ -11,7 +11,7 @@ interface MatchResult {
   topRoles: string[];
 }
 
-const MATCH_DATA: Record<string, MatchResult> = {
+const MA일급H_DATA: Record<string, MatchResult> = {
   '서울': { region: '서울', avgDailyWage: 280000, matchScore: 94, openings: 1842, demand: 'high', topRoles: ['클럽 MD', 'VIP 룸 서빙', '카지노 딜러'] },
   '부산': { region: '부산', avgDailyWage: 245000, matchScore: 87, openings: 743, demand: 'high', topRoles: ['해운대 바', '해변 클럽', 'VIP 라운지'] },
   '인천': { region: '인천', avgDailyWage: 255000, matchScore: 81, openings: 512, demand: 'medium', topRoles: ['공항 라운지', '호텔 바', '카지노 서비스'] },
@@ -42,7 +42,7 @@ export default function JobMatchScoreCard({
     setIsAnimating(true);
     setResult(null);
     setTimeout(() => {
-      setResult(MATCH_DATA[selectedRegion] ?? MATCH_DATA['서울']);
+      setResult(MA일급H_DATA[selectedRegion] ?? MA일급H_DATA['서울']);
       setIsAnimating(false);
     }, 1400);
   };
@@ -115,7 +115,7 @@ export default function JobMatchScoreCard({
 
       {/* Region Selector */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
-        {Object.keys(MATCH_DATA).map(reg => (
+        {Object.keys(MA일급H_DATA).map(reg => (
           <button
             key={reg}
             onClick={() => setSelectedRegion(reg)}
@@ -191,7 +191,7 @@ export default function JobMatchScoreCard({
             <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginBottom: '8px', fontWeight: '600' }}>
               📊 인접 지역 공고 현황 비교
             </p>
-            {Object.values(MATCH_DATA).slice(0, 4).map((d) => (
+            {Object.values(MA일급H_DATA).slice(0, 4).map((d) => (
               <SparkBar key={d.region} label={d.region} val={d.openings} max={2000} color={d.region === r.region ? '#8b5cf6' : '#60a5fa'} />
             ))}
           </div>

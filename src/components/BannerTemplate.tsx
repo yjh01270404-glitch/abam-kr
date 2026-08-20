@@ -214,7 +214,7 @@ export default function BannerTemplate({ data, compact }: BannerTemplateProps) {
       ? `${payType} ${Number(payAmount).toLocaleString('ko-KR')}원`
       : '';
 
-  const displayName = companyName || '업소명';
+  const displayName = companyName || '매장명';
   const displayRegion = region || '지역 미설정';
   const displayJob = jobType || '업종';
 

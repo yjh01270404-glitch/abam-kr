@@ -3,7 +3,7 @@
  * 
  * 2단계 설계:
  * - 신뢰 레벨이 검색 노출 순위에 영향
- * - 업소가 좋은 리뷰를 받으면 자동으로 레벨 상승
+ * - 매장가 좋은 리뷰를 받으면 자동으로 레벨 상승
  * - 선순환 구조: 신뢰↑ → 노출↑ → 지원자↑ → 매출↑
  */
 
@@ -12,7 +12,7 @@ export type TrustLevel = 1 | 2 | 3 | 4;
 export interface BusinessTrust {
   /** 사업체 ID (JobAd.id와 매핑) */
   businessId: string;
-  /** 업소명 */
+  /** 매장명 */
   businessName: string;
   /** 신뢰 레벨 1-4 */
   level: TrustLevel;
@@ -53,46 +53,46 @@ export interface TrustBadgeConfig {
 export const TRUST_BADGE_CONFIGS: Record<TrustLevel, TrustBadgeConfig> = {
   1: {
     level: 1,
-    label: '등록 업소',
+    label: '등록 매장',
     emoji: '🔵',
     color: '#3b82f6',
     gradientFrom: '#3b82f6',
     gradientTo: '#1d4ed8',
     glowColor: 'rgba(59,130,246,0.4)',
-    description: '아밤에 등록된 업소입니다.',
+    description: '아밤에 등록된 매장입니다.',
     requirements: ['기본 정보 등록'],
   },
   2: {
     level: 2,
-    label: '검증 업소',
+    label: '검증 매장',
     emoji: '🥈',
     color: '#6b7280',
     gradientFrom: '#9ca3af',
     gradientTo: '#4b5563',
     glowColor: 'rgba(156,163,175,0.5)',
-    description: '신원 인증을 완료한 신뢰 업소입니다.',
+    description: '신원 인증을 완료한 신뢰 매장입니다.',
     requirements: ['신원 인증', '3개월 이상 활동', '리뷰 3개 이상'],
   },
   3: {
     level: 3,
-    label: '우수 업소',
+    label: '우수 매장',
     emoji: '🥇',
     color: '#d97706',
     gradientFrom: '#fbbf24',
     gradientTo: '#d97706',
     glowColor: 'rgba(251,191,36,0.5)',
-    description: '높은 평점의 검증된 우수 업소입니다.',
+    description: '높은 평점의 검증된 우수 매장입니다.',
     requirements: ['사업자 등록 인증', '6개월 이상 활동', '평점 3.5이상', '응답률 80%이상'],
   },
   4: {
     level: 4,
-    label: '최우수 업소',
+    label: '최우수 매장',
     emoji: '💎',
     color: '#7c3aed',
     gradientFrom: '#a78bfa',
     gradientTo: '#7c3aed',
     glowColor: 'rgba(167,139,250,0.6)',
-    description: '아밤이 인정한 최고 신뢰 업소입니다. 모든 인증 완료 + 최고 평점.',
+    description: '아밤이 인정한 최고 신뢰 매장입니다. 모든 인증 완료 + 최고 평점.',
     requirements: ['모든 인증 완료', '12개월 이상 활동', '평점 4.5이상', '응답률 90%이상', '재취업률 70%이상'],
   },
 };
@@ -128,7 +128,7 @@ export function calculateTrustLevel(trust: Partial<BusinessTrust>): TrustLevel {
   return 1;
 }
 
-/** Mock 업소 신뢰 데이터 */
+/** Mock 매장 신뢰 데이터 */
 export const mockBusinessTrust: BusinessTrust[] = [
   {
     businessId: 'biz-001',
@@ -237,7 +237,7 @@ export const mockBusinessTrust: BusinessTrust[] = [
   },
 ];
 
-/** 업소명으로 신뢰 데이터 검색 (부분 일치) */
+/** 매장명으로 신뢰 데이터 검색 (부분 일치) */
 export function getTrustByName(name: string): BusinessTrust | undefined {
   return mockBusinessTrust.find(b => name.includes(b.businessName) || b.businessName.includes(name));
 }

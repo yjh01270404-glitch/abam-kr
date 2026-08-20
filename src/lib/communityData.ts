@@ -5,13 +5,13 @@
  * - 5개 전문 채널로 정보 품질 세분화
  * - 정보 신뢰도 레이어: 검증된 경험자 게시물에 배지
  * - 핫 알고리즘: (좋아요 × 2 + 댓글 × 3) ÷ 시간가중치
- * - 구직자만 글 작성 가능, 업소 광고 금지
+ * - 구직자만 글 작성 가능, 매장 광고 금지
  */
 
 export type CommunityChannel =
   | 'all'       // 전체
   | 'chat'      // 수다방 (일상/잡담)
-  | 'review'    // 업소 후기 (익명)
+  | 'review'    // 매장 후기 (익명)
   | 'safety'    // 안전 정보 (중요)
   | 'salary'    // 급여 정보 (팩트)
   | 'tips';     // 취업 팁 (노하우)
@@ -61,7 +61,7 @@ const anon = (prefix: string, n: number) => `${prefix}${n}호`;
 export const CHANNEL_META: Record<CommunityChannel, { label: string; emoji: string; desc: string; color: string }> = {
   all:    { label: '전체',     emoji: '🏠', desc: '모든 게시글',             color: '#6b7280' },
   chat:   { label: '수다방',   emoji: '💬', desc: '일상 대화, 잡담',         color: '#8b5cf6' },
-  review: { label: '업소 후기', emoji: '⭐', desc: '익명 업소 경험 공유',     color: '#f59e0b' },
+  review: { label: '매장 후기', emoji: '⭐', desc: '익명 매장 경험 공유',     color: '#f59e0b' },
   safety: { label: '안전 정보', emoji: '🛡️', desc: '피해 예방, 주의 정보',   color: '#ef4444' },
   salary: { label: '급여 정보', emoji: '💰', desc: '실제 급여, 조건 정보',   color: '#10b981' },
   tips:   { label: '취업 팁',   emoji: '💡', desc: '근무 노하우, 조언',       color: '#3b82f6' },
@@ -79,7 +79,7 @@ export const mockCommunityPosts: CommunityPost[] = [
   {
     id: 'post-pinned-1', channel: 'safety', isPinned: true,
     title: '⚠️ 아밤 커뮤니티 이용 규칙 (필독)',
-    content: '커뮤니티는 구직자 여러분의 안전한 정보 공유를 위한 공간입니다.\n\n✅ 허용: 업무 조언, 안전 팁, 초보 질문, 일상 수다\n❌ 금지: 업소 광고, 개인정보 공유, 타인 비방, 미확인 정보\n\n특정 업소·인물은 절대 명시하지 마세요. 확인 불가한 후기는 게시 불가합니다.\n신고 누적 게시글은 즉시 삭제 처리됩니다.',
+    content: '커뮤니티는 구직자 여러분의 안전한 정보 공유를 위한 공간입니다.\n\n✅ 허용: 업무 조언, 안전 팁, 초보 질문, 일상 수다\n❌ 금지: 매장 광고, 개인정보 공유, 타인 비방, 미확인 정보\n\n특정 매장·인물은 절대 명시하지 마세요. 확인 불가한 후기는 게시 불가합니다.\n신고 누적 게시글은 즉시 삭제 처리됩니다.',
     anonymousId: '아밤 운영팀', createdAt: ago(30), views: 4823, likes: 234,
     comments: [], tags: ['공지'], verified: true, helpful: 312, region: '전국',
   },
@@ -93,14 +93,14 @@ export const mockCommunityPosts: CommunityPost[] = [
     comments: [
       { id: 'c1', anonymousId: '소주한잔하쥬🍶', content: '나 이거 당해봤는데 진짜 그냥 멍하더라고요... 말도 못 하고 그냥 받고 나왔어 ㅠ 다음엔 절대 그러지 말자 싶었음', createdAt: ago(2), likes: 145 },
       { id: 'c2', anonymousId: '강남언니✨', content: '세팅비는 진짜 처음 듣는 소리였는데 나중에 떼가더라고. 씨X 진짜 말이 나오질 않았음. 그냥 바로 안 나간 내가 바보지', createdAt: ago(1, 18), likes: 238 },
-      { id: 'c3', anonymousId: '달빛아가씨🌙', content: '기록 진짜 중요해요 언니들. 저 사진 찍어뒀다가 그걸로 해결했어요. 안 찍었으면 그냥 날린 거였음', createdAt: ago(1, 6), likes: 89 },
+      { id: 'c3', anonymousId: '달빛스태프🌙', content: '기록 진짜 중요해요 언니들. 저 사진 찍어뒀다가 그걸로 해결했어요. 안 찍었으면 그냥 날린 거였음', createdAt: ago(1, 6), likes: 89 },
     ],
     tags: ['주의', '경험담'], verified: true, helpful: 634, region: '전국',
   },
   {
     id: 'post-safety-2', channel: 'safety',
-    title: '면접 때 이런 분위기면 바로 나오세요 (블랙리스트 업소 특징)',
-    content: '여러 가게 면접 다녀보면서 느낀 \"피해야 할 매장 패턴\" 정리해봤어요.\n\n🚨 위험 신호:\n- \"처음이니까 조건 조금 낮추고 나중에 올려줄게\" → 나중에도 안 올려줌\n- \"계약 및 조건 안내는 출근하고 말해주겠다\" → 불명확함\n- \"언니들 다 유연하게 일해\" → 구체적인 일정/방식 안 가르쳐줌\n- \"초이스 및 세팅 기준이 애매함\" → 첫 단추가 중요함\n\n처음 면접 때 지켜지는 조건인지 꼭 확실하게 짚고 가세요.',
+    title: '면접 때 이런 분위기면 바로 나오세요 (블랙리스트 매장 특징)',
+    content: '여러 가게 면접 다녀보면서 느낀 \"피해야 할 매장 패턴\" 정리해봤어요.\n\n🚨 위험 신호:\n- \"처음이니까 조건 조금 낮추고 나중에 올려줄게\" → 나중에도 안 올려줌\n- \"계약 및 조건 안내는 출근하고 말해주겠다\" → 불명확함\n- \"언니들 다 유연하게 일해\" → 구체적인 일정/방식 안 가르쳐줌\n- \"매칭 및 세팅 기준이 애매함\" → 첫 단추가 중요함\n\n처음 면접 때 지켜지는 조건인지 꼭 확실하게 짚고 가세요.',
     anonymousId: '핑크다이아💎', createdAt: ago(5), views: 8234, likes: 1023,
     comments: [
       { id: 'c4', anonymousId: '서면의여왕👑', content: '\"나중에 올려줄게\"라는 말 저도 들었는데 그게 3개월 뒤에도 똑같더라고요. 그냥 처음부터 거짓말인 거예요 진짜', createdAt: ago(4), likes: 167 },
@@ -127,13 +127,13 @@ export const mockCommunityPosts: CommunityPost[] = [
   // ── 취업 팁 ──
   {
     id: 'post-tips-1', channel: 'tips',
-    title: '초보 언니들 초이스 들어갈 때 첫인상 잡는 법',
-    content: '초보일 때 제일 긴장되는 게 초이스 문 열릴 때잖아요 ㅎㅎ 팁 몇 개 드릴게요.\n\n1. 들어갈 때 자신감 있는 미소로 자연스럽게 인사\n2. 자세는 바르게, 눈맞춤 1~2초 자연스럽게\n3. 옷차림은 본인 체형 살려주는 깔끔한 톤 원피스 추천\n4. 표정이 경직되어 있으면 손님도 어색해하니 편안한 마음가짐!\n\n이것만 연습해도 반응이 확실히 달라집니다.',
+    title: '초보 언니들 매칭 들어갈 때 첫인상 잡는 법',
+    content: '초보일 때 제일 긴장되는 게 매칭 문 열릴 때잖아요 ㅎㅎ 팁 몇 개 드릴게요.\n\n1. 들어갈 때 자신감 있는 미소로 자연스럽게 인사\n2. 자세는 바르게, 눈맞춤 1~2초 자연스럽게\n3. 옷차림은 본인 체형 살려주는 깔끔한 톤 원피스 추천\n4. 표정이 경직되어 있으면 손님도 어색해하니 편안한 마음가짐!\n\n이것만 연습해도 반응이 확실히 달라집니다.',
     anonymousId: '비비드핑크💗', createdAt: ago(15), views: 11234, likes: 1089,
     comments: [
       { id: 'c9', anonymousId: '첫날설레임🦋', content: '저 첫날 너무 긴장해서 인사 목소리가 기어들어가더라고요ㅋㅋㅋ 손님이 \"괜찮아요 편하게~\" 해줬는데 그게 더 부끄러웠음ㅋㅋ 연습이 정답이에요', createdAt: ago(14), likes: 223 },
       { id: 'c10', anonymousId: '눈웃음장인😊', content: '눈맞춤 진짜 중요해요. 처음엔 무서워서 바닥만 봤는데 그러면 손님도 불편해하더라고. 몇 번 하면 돼요!', createdAt: ago(13), likes: 167 },
-      { id: 'c10-1', anonymousId: '설레는밤이야🌃', content: '솔직히 초이스 처음 들어갈 때 다리 떨렸어요... 근데 몇 번 하면 오히려 설레는 느낌도 있어요ㅋㅋ 적응되면 완전 달라져요', createdAt: ago(12), likes: 88 },
+      { id: 'c10-1', anonymousId: '설레는밤이야🌃', content: '솔직히 매칭 처음 들어갈 때 다리 떨렸어요... 근데 몇 번 하면 오히려 설레는 느낌도 있어요ㅋㅋ 적응되면 완전 달라져요', createdAt: ago(12), likes: 88 },
     ],
     tags: ['팁', '초보환영', '조언'], verified: true, helpful: 856, region: '전국',
   },
@@ -177,7 +177,7 @@ export const mockCommunityPosts: CommunityPost[] = [
   {
     id: 'post-chat-3', channel: 'chat',
     title: '오늘 처음 출근했는데 생각보다 적응이 빨리 됐어요!',
-    content: '긴장 엄청 했는데 실장님이 초이스 전에 미리 설명 잘 해주시고, 언니들도 텃세 없이 잘 챙겨줘서 금방 적응했어요. 처음엔 무섭다고 들었는데 잘 찾아가면 괜찮은 것 같아요. 화이팅!',
+    content: '긴장 엄청 했는데 실장님이 매칭 전에 미리 설명 잘 해주시고, 언니들도 텃세 없이 잘 챙겨줘서 금방 적응했어요. 처음엔 무섭다고 들었는데 잘 찾아가면 괜찮은 것 같아요. 화이팅!',
     anonymousId: '새벽이슬이🌿', createdAt: ago(0, 3), views: 2340, likes: 312,
     comments: [
       { id: 'c50', anonymousId: '첫날화장실💦', content: '저도 첫날 화장실에서 울뻔했어요ㅋㅋㅋ 근데 언니들이 옆에서 챙겨주니까 금방 괜찮아지더라고요. 좋은 가게 잘 고르셨네요!', createdAt: ago(0, 2), likes: 131 },

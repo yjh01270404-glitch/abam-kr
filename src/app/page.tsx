@@ -9,7 +9,7 @@ import {
 
 const CATEGORIES = [
   { id: 'beauty', name: '뷰티·에스테틱', count: '1,420개', icon: Sparkles, color: '#ec4899', desc: '피부관리, 네일아트, 프리미엄 스파' },
-  { id: 'hair', name: '헤어·바디케어', count: '980개', icon: Award, color: '#8b5cf6', desc: '헤어살롱, 바디테라피, 마사지' },
+  { id: 'hair', name: '헤어·바디케어', count: '980개', icon: Award, color: '#8b5cf6', desc: '헤어살롱, 바디테라피, 스파 테라피' },
   { id: 'cafe', name: '카페·베이커리', count: '2,350개', icon: Store, color: '#f59e0b', desc: '스페셜티 카페, 디저트, 베이커리' },
   { id: 'dining', name: '다이닝·F&B', count: '3,120개', icon: Star, color: '#ef4444', desc: '프리미엄 레스토랑, 퓨전 다이닝' },
   { id: 'fitness', name: '헬스·피트니스', count: '890개', icon: TrendingUp, color: '#10b981', desc: 'PT 스튜디오, 필라테스, 요가' },

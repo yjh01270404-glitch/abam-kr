@@ -51,7 +51,7 @@ type Tab = 'dashboard' | 'activitylog' | 'users' | 'ads' | 'employers' | 'pendin
 const ACT_COLORS: Record<string, string> = {
   '회원가입': '#3b82f6', '로그인': '#10b981', '광고클릭': '#f59e0b', '검색': '#8b5cf6',
   '광고승인': '#16a34a', '광고거절': '#ef4444', '광고삭제': '#ef4444', '광고수정': '#f59e0b',
-  '쪽지발송': '#3b82f6', '일괄쪽지': '#3b82f6', '업소승인': '#16a34a', '업소거절': '#ef4444',
+  '쪽지발송': '#3b82f6', '일괄쪽지': '#3b82f6', '매장승인': '#16a34a', '매장거절': '#ef4444',
   '환불승인': '#16a34a', '환불거절': '#ef4444', '회원삭제': '#ef4444', '재접속': '#ec4899',
   '탭 전환': '#6366f1', '체류 시간': '#14b8a6', '페이지 방문': '#0ea5e9',
 };
@@ -135,7 +135,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     const stored: ActivityLog[] = JSON.parse(localStorage.getItem('abam_activity_logs') ?? '[]');
     const base: ActivityLog[] = raw.flatMap(u => {
       const arr: ActivityLog[] = [];
-      if (u.joinDate)  arr.push({ id: `join-${u.id}`, sessionId: `sess-user-${u.id}`, userId: u.id, userNick: u.nickname||u.username, type: '회원가입', action: '신규 회원 가입', detail: `아이디: ${u.username} / 역할: ${u.role==='employer'?'업소':'구직자'}`, ip: u.lastIp||'121.130.14.88', device: u.lastDevice||'Windows PC', browser: 'Chrome', at: u.joinDate });
+      if (u.joinDate)  arr.push({ id: `join-${u.id}`, sessionId: `sess-user-${u.id}`, userId: u.id, userNick: u.nickname||u.username, type: '회원가입', action: '신규 회원 가입', detail: `아이디: ${u.username} / 역할: ${u.role==='employer'?'매장':'구직자'}`, ip: u.lastIp||'121.130.14.88', device: u.lastDevice||'Windows PC', browser: 'Chrome', at: u.joinDate });
       if (u.lastLogin) arr.push({ id: `login-${u.id}`, sessionId: `sess-user-${u.id}`, userId: u.id, userNick: u.nickname||u.username, type: '로그인', action: '정상 로그인 성공', detail: `IP: ${u.lastIp||'121.130.14.88'} / 기기: ${u.lastDevice||'Windows PC'}`, ip: u.lastIp||'121.130.14.88', device: u.lastDevice||'Windows PC', browser: 'Chrome', at: u.lastLogin });
       return arr;
     });
@@ -218,7 +218,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     const key = ad.type === 'top' ? 'abam_top_banners' : ad.type === 'priority' ? 'abam_priority_jobs' : 'abam_general_jobs';
     const prev = JSON.parse(localStorage.getItem(key) ?? '[]');
     localStorage.setItem(key, JSON.stringify([{ ...ad, payment_status: 'paid' }, ...prev]));
-    logAct('광고승인', `광고 승인: ${ad.title}`, `업소: ${ad.companyName}`);
+    logAct('광고승인', `광고 승인: ${ad.title}`, `매장: ${ad.companyName}`);
     setViewingAd(null);
     showToast(`✅ '${ad.companyName}' 광고 승인 완료`);
     loadData();
@@ -227,7 +227,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
   const rejectAd = (ad: JobAd) => {
     localStorage.setItem('abam_pending_ads', JSON.stringify(pendingAds.filter(a => a.id !== ad.id)));
-    logAct('광고거절', `광고 거절: ${ad.title}`, `업소: ${ad.companyName}`);
+    logAct('광고거절', `광고 거절: ${ad.title}`, `매장: ${ad.companyName}`);
     setViewingAd(null);
     showToast(`❌ '${ad.companyName}' 광고 거절 완료`);
     loadData();
@@ -271,7 +271,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
       const idx = list.findIndex((x: JobAd) => x.id === editingAd.id);
       if (idx !== -1) { list[idx] = updated; localStorage.setItem(key, JSON.stringify(list)); break; }
     }
-    logAct('광고수정', `광고 수정: ${editFields.title}`, `업소: ${editFields.company}`);
+    logAct('광고수정', `광고 수정: ${editFields.title}`, `매장: ${editFields.company}`);
     setEditingAd(null);
     showToast('💾 광고 정보 수정 완료');
     loadData();
@@ -280,18 +280,18 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
   const approveEmp = (emp: EmployerReq) => {
     localStorage.setItem('abam_employers', JSON.stringify(employers.map(e => e.id === emp.id ? { ...e, status: 'approved' } : e)));
-    logAct('업소승인', `업소 승인: ${emp.name}`, `사업자: ${emp.regNumber}`);
+    logAct('매장승인', `매장 승인: ${emp.name}`, `사업자: ${emp.regNumber}`);
     setViewingEmp(null);
-    showToast(`🏢 '${emp.name}' 업소 승인 완료`);
+    showToast(`🏢 '${emp.name}' 매장 승인 완료`);
     loadData();
     notifySync();
   };
 
   const rejectEmp = (emp: EmployerReq) => {
     localStorage.setItem('abam_employers', JSON.stringify(employers.map(e => e.id === emp.id ? { ...e, status: 'rejected' } : e)));
-    logAct('업소거절', `업소 거절: ${emp.name}`, `사업자: ${emp.regNumber}`);
+    logAct('매장거절', `매장 거절: ${emp.name}`, `사업자: ${emp.regNumber}`);
     setViewingEmp(null);
-    showToast(`❌ '${emp.name}' 업소 거절 완료`);
+    showToast(`❌ '${emp.name}' 매장 거절 완료`);
     loadData();
     notifySync();
   };
@@ -363,8 +363,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             count++;
           }
         });
-        logAct('일괄쪽지', `모든 구인자/업소 (${count}곳) 일괄 쪽지`, `제목: ${msgSubject}`);
-        showToast(`📢 모든 구인자/업소 회원 (${count}곳)에게 전체 쪽지 전송 완료`);
+        logAct('일괄쪽지', `모든 구인자/매장 (${count}곳) 일괄 쪽지`, `제목: ${msgSubject}`);
+        showToast(`📢 모든 구인자/매장 회원 (${count}곳)에게 전체 쪽지 전송 완료`);
       } else if (targetAudience === 'all_seekers') {
         const seekers = users.filter(u => u.role !== 'employer');
         seekers.forEach(u => {
@@ -474,7 +474,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     showToast(`📥 ${type.toUpperCase()} CSV 파일 다운로드 시작`);
   };
 
-  /* ────────── 필터 (이용자명, 업소명 실시간 통합 검색 지원) ────────── */
+  /* ────────── 필터 (이용자명, 매장명 실시간 통합 검색 지원) ────────── */
   const q = globalSearch.trim().toLowerCase();
   const filtUsers = users.filter(u => {
     const matchUser = !userSearch || u.username.toLowerCase().includes(userSearch.toLowerCase()) || (u.nickname??'').toLowerCase().includes(userSearch.toLowerCase());
@@ -516,7 +516,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
       label: '사용자',
       items: [
         { key: 'users',       icon: '👥', label: '사용자 관리', badge: stats.totalUsers },
-        { key: 'employers',   icon: '🏢', label: '베타/업소 신청', badge: stats.empReqs },
+        { key: 'employers',   icon: '🏢', label: '베타/매장 신청', badge: stats.empReqs },
         { key: 'livechat',    icon: '💬', label: '문의사항/상담', badge: chatSessions.reduce((s,c)=>s+c.unreadAdmin,0) },
       ],
     },
@@ -684,12 +684,12 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
         <div style={{ paddingBottom:'4px', paddingTop:'4px' }}><AdminPwaInstallPrompt /></div>
 
-        {/* 🔍 이용자명 / 업소명 / 공고 실시간 통합 검색바 */}
+        {/* 🔍 이용자명 / 매장명 / 공고 실시간 통합 검색바 */}
         <div style={{ background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '6px', padding: '4px 8px', margin: '4px 0 6px 0', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
           <span style={{ fontSize: '12px', color: '#64748b' }}>🔍</span>
           <input
             type="text"
-            placeholder="이용자명, 닉네임, 업소명, 공고 제목 실시간 통합 검색..."
+            placeholder="이용자명, 닉네임, 매장명, 공고 제목 실시간 통합 검색..."
             value={globalSearch}
             onChange={(e) => setGlobalSearch(e.target.value)}
             style={{ flex: 1, border: 'none', outline: 'none', fontSize: '11px', background: 'transparent', color: '#0f172a', fontWeight: 600 }}
@@ -697,7 +697,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
           {globalSearch && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               <span style={{ fontSize: '9.5px', color: '#2563eb', fontWeight: 800, background: '#eff6ff', padding: '2px 6px', borderRadius: '3px', border: '1px solid #bfdbfe' }}>
-                회원 {filtUsers.length}명 / 업소 {employers.filter(e=>e.name.toLowerCase().includes(globalSearch.toLowerCase())||e.owner.toLowerCase().includes(globalSearch.toLowerCase())).length}개 / 공고 {filtAds.length}건
+                회원 {filtUsers.length}명 / 매장 {employers.filter(e=>e.name.toLowerCase().includes(globalSearch.toLowerCase())||e.owner.toLowerCase().includes(globalSearch.toLowerCase())).length}개 / 공고 {filtAds.length}건
               </span>
               <button
                 type="button"
@@ -722,7 +722,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                 <button className={styles.bulkBtn} style={{ background: '#f8fafc', color: '#1e293b', border: '1px solid #cbd5e1' }} onClick={() => { loadData(); showToast('↻ 데이터 새로고침 완료'); }}>
                   ↻ 새로고침
                 </button>
-                <button className={styles.bulkBtn} style={{ background: '#c2185b' }} onClick={openEmpMessageModal}>🏢 구인자(업소) 쪽지/알림</button>
+                <button className={styles.bulkBtn} style={{ background: '#c2185b' }} onClick={openEmpMessageModal}>🏢 구인자(매장) 쪽지/알림</button>
                 <button className={styles.bulkBtn} style={{ background: '#2563eb' }} onClick={openSeekerMessageModal}>👤 구직자(회원) 쪽지/알림</button>
                 <button className={styles.bulkBtn} style={{ background:'#059669' }} onClick={()=>exportCSV('users')}>📥 회원 CSV</button>
                 <button className={styles.bulkBtn} style={{ background:'#7c3aed' }} onClick={()=>exportCSV('logs')}>📥 로그 CSV</button>
@@ -736,8 +736,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <div className={styles.statsGrid}>
               {[
                 { label: '전체 사용자', value: `${stats.totalUsers}명`, sub: '오늘 +0명', icon: '👥', color: '#2563eb', trend: '+100% ↑', trendPos: true, bars: [30, 45, 60, 80, 100], action: () => setTab('users') },
-                { label: '업소 회원', value: `${stats.empCount}명`, sub: `인증 대기 ${stats.empReqs}건`, icon: '🏢', color: '#16a34a', trend: '+100% ↑', trendPos: true, bars: [20, 30, 50, 70, 100], action: () => setTab('employers') },
-                { label: '7일 활성', value: '1명', sub: '최근 7일 구직자/업소', icon: '⚡', color: '#d97706', trend: '100% 활성', trendPos: true, bars: [50, 60, 70, 80, 100], action: () => setTab('activitylog') },
+                { label: '매장 회원', value: `${stats.empCount}명`, sub: `인증 대기 ${stats.empReqs}건`, icon: '🏢', color: '#16a34a', trend: '+100% ↑', trendPos: true, bars: [20, 30, 50, 70, 100], action: () => setTab('employers') },
+                { label: '7일 활성', value: '1명', sub: '최근 7일 구직자/매장', icon: '⚡', color: '#d97706', trend: '100% 활성', trendPos: true, bars: [50, 60, 70, 80, 100], action: () => setTab('activitylog') },
                 { label: '순 방문자 (UV)', value: '2,533명', sub: '총 2,533 명 누적', icon: '👾', color: '#7c3aed', trend: '+14.2% ↑', trendPos: true, bars: [40, 55, 75, 90, 100], action: () => setTab('activitylog') },
               ].map(item => (
                 <button key={item.label} type="button" className={styles.statCard} onClick={item.action}>
@@ -809,7 +809,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               {[
                 { label: '실시간 게재 광고', value: `${stats.totalAds.toLocaleString()}개`, sub: '풀 데이터 가동 중', icon: '👑', color: '#7c3aed', trend: '실시간 가동', trendPos: true, bars: [85, 90, 95, 98, 100], action: () => setTab('ads') },
                 { label: '광고 승인 대기', value: `${stats.pendingCount}건`, sub: '실시간 광고 심사', icon: '⏳', color: '#2563eb', trend: '0건 대기', trendPos: true, bars: [100, 80, 50, 20, 0], action: () => setTab('pending') },
-                { label: '업소 인증 신청', value: `${stats.empReqs}건`, sub: '사업자등록 심사', icon: '🏢', color: '#059669', trend: '0건 대기', trendPos: true, bars: [100, 70, 40, 10, 0], action: () => setTab('employers') },
+                { label: '매장 인증 신청', value: `${stats.empReqs}건`, sub: '사업자등록 심사', icon: '🏢', color: '#059669', trend: '0건 대기', trendPos: true, bars: [100, 70, 40, 10, 0], action: () => setTab('employers') },
                 { label: '1:1 안심톡 상담', value: `${chatSessions.length}건`, sub: `총 ${messages.length}건 쪽지`, icon: '💬', color: '#0284c7', trend: '실시간', trendPos: true, bars: [30, 50, 70, 90, 100], action: () => setTab('livechat') },
               ].map(item => (
                 <button key={item.label} type="button" className={styles.statCard} onClick={item.action}>
@@ -841,7 +841,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                 </div>
                 {[
                   { label: '구직자 회원', count: stats.seekers, pct: ((stats.seekers / (stats.totalUsers || 1)) * 100).toFixed(1), color: '#3b82f6' },
-                  { label: '업소 회원', count: stats.empCount, pct: ((stats.empCount / (stats.totalUsers || 1)) * 100).toFixed(1), color: '#10b981' },
+                  { label: '매장 회원', count: stats.empCount, pct: ((stats.empCount / (stats.totalUsers || 1)) * 100).toFixed(1), color: '#10b981' },
                   { label: '비로그인 손님', count: 2533, pct: '98.5', color: '#8b5cf6' },
                   { label: '관리자 계정', count: 1, pct: '0.1', color: '#ef4444' },
                 ].map(r => (
@@ -941,7 +941,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <div className={styles.quickNavGrid}>
               {[
                 { title: '👥 사용자 관리', sub: '가입자 전체 목록', action: () => setTab('users') },
-                { title: '🏢 업소 신청', sub: '사업자 인증 심사', action: () => setTab('employers') },
+                { title: '🏢 매장 신청', sub: '사업자 인증 심사', action: () => setTab('employers') },
                 { title: '📈 활동 로그', sub: '실시간 이용자 추적', action: () => setTab('activitylog') },
                 { title: '🔧 시스템 로그', sub: 'API 오류 추적', action: () => showToast('🔧 시스템 오류 로그 정상 작동 중 (오류 0건)') },
                 { title: '🎯 KPI 퍼널', sub: '전환율/매출 분석', action: () => showToast('🎯 KPI 퍼널 분석 데이터 정상 집계 중') },
@@ -1113,7 +1113,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               <h1 className={styles.pageTitle}>👥 회원 관리</h1>
               <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
                 <button className={styles.bulkBtn} style={{ background:'#2563eb' }} onClick={()=>exportCSV('users')}>📥 CSV</button>
-                <button className={styles.bulkBtn} style={{ background:'#c2185b' }} onClick={openEmpMessageModal}>🏢 구인자(업소) 전체 쪽지/알림</button>
+                <button className={styles.bulkBtn} style={{ background:'#c2185b' }} onClick={openEmpMessageModal}>🏢 구인자(매장) 전체 쪽지/알림</button>
                 <button className={styles.bulkBtn} style={{ background:'#2563eb' }} onClick={openSeekerMessageModal}>👤 구직자(회원) 전체 쪽지/알림</button>
               </div>
             </div>
@@ -1133,7 +1133,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                           <strong>{u.nickname||'-'}</strong>
                         </td>
                         <td className={styles.tdMono}>{u.username}</td>
-                        <td><span className={u.role==='employer'?styles.badgeEmployer:styles.badgeSeeker}>{u.role==='employer'?'업소':'구직자'}</span></td>
+                        <td><span className={u.role==='employer'?styles.badgeEmployer:styles.badgeSeeker}>{u.role==='employer'?'매장':'구직자'}</span></td>
                         <td>{u.gender==='F'?'👩 여':'👨 남'}</td>
                         <td className={styles.tdMono}>{u.joinDate?new Date(u.joinDate).toLocaleDateString('ko-KR'):'-'}</td>
                         <td className={styles.tdMono}>{u.lastLogin?new Date(u.lastLogin).toLocaleString('ko-KR'):'미접속'}</td>
@@ -1168,7 +1168,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               <button className={styles.bulkBtn} style={{ background:'#2563eb' }} onClick={()=>exportCSV('ads')}>📥 광고 CSV</button>
             </div>
             <div className={styles.searchBar}>
-              <input className={styles.searchInput} placeholder="🔍 공고명 / 업소명 검색" value={adSearch} onChange={e=>setAdSearch(e.target.value)} />
+              <input className={styles.searchInput} placeholder="🔍 공고명 / 매장명 검색" value={adSearch} onChange={e=>setAdSearch(e.target.value)} />
               <select value={adCat} onChange={e=>setAdCat(e.target.value)}
                 style={{ padding:'10px 14px', borderRadius:'10px', border:'1.5px solid #e5e7eb', fontSize:'13.5px', fontWeight:700, background:'#fff', color:'#111827', outline:'none' }}>
                 <option value="all">전체 등급 유형 (2,980개)</option>
@@ -1182,7 +1182,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <div className={styles.tableSection}>
               <div className={styles.tableWrapper}>
                 <table className={styles.table}>
-                  <thead><tr><th>#</th><th>유형</th><th>공고명</th><th>업소명</th><th>남은기간 (D-Day)</th><th>지역</th><th>급여</th><th>연락처</th><th>조회</th><th>상세보기</th><th>조치</th></tr></thead>
+                  <thead><tr><th>#</th><th>유형</th><th>공고명</th><th>매장명</th><th>남은기간 (D-Day)</th><th>지역</th><th>급여</th><th>연락처</th><th>조회</th><th>상세보기</th><th>조치</th></tr></thead>
                   <tbody>
                     {filtAds.slice(0,100).map((ad,i) => {
                       const dDay = getDDayBadge(ad);
@@ -1233,7 +1233,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               <h2 className={styles.sectionTitle}>광고 심사 대기 ({pendingAds.length}건)</h2>
               <div className={styles.tableWrapper}>
                 <table className={styles.table}>
-                  <thead><tr><th>유형</th><th>공고명</th><th>업소명</th><th>지역</th><th>급여</th><th>연락처</th><th>상세보기</th><th>조치</th></tr></thead>
+                  <thead><tr><th>유형</th><th>공고명</th><th>매장명</th><th>지역</th><th>급여</th><th>연락처</th><th>상세보기</th><th>조치</th></tr></thead>
                   <tbody>
                     {pendingAds.map(ad => (
                       <tr key={ad.id} style={{ cursor: 'pointer' }} onClick={()=>setViewingAd(ad)}>
@@ -1262,14 +1262,14 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
           </div>
         )}
 
-        {/* ═══ 업소 관리 ═══ */}
+        {/* ═══ 매장 관리 ═══ */}
         {tab==='employers' && (
           <div>
-            <h1 className={styles.pageTitle}>🏢 업소 관리</h1>
+            <h1 className={styles.pageTitle}>🏢 매장 관리</h1>
             <div className={styles.tableSection}>
               <div className={styles.tableWrapper}>
                 <table className={styles.table}>
-                  <thead><tr><th>상태</th><th>업소명</th><th>사업자번호</th><th>대표자</th><th>연락처</th><th>신청일</th><th>상세보기</th><th>조치</th></tr></thead>
+                  <thead><tr><th>상태</th><th>매장명</th><th>사업자번호</th><th>대표자</th><th>연락처</th><th>신청일</th><th>상세보기</th><th>조치</th></tr></thead>
                   <tbody>
                     {employers.map(emp => (
                       <tr key={emp.id} style={{ cursor: 'pointer' }} onClick={()=>setViewingEmp(emp)}>
@@ -1297,7 +1297,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                         </td>
                       </tr>
                     ))}
-                    {employers.length===0 && <tr><td colSpan={8} className={styles.emptyRow}>신청 업소 없음</td></tr>}
+                    {employers.length===0 && <tr><td colSpan={8} className={styles.emptyRow}>신청 매장 없음</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -1319,7 +1319,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               ) : (
                 <div className={styles.tableWrapper}>
                   <table className={styles.table}>
-                    <thead><tr><th>업소명</th><th>공고명</th><th>요청 사유</th><th>결제액</th><th>환불 예정</th><th>상세보기</th><th>조치</th></tr></thead>
+                    <thead><tr><th>매장명</th><th>공고명</th><th>요청 사유</th><th>결제액</th><th>환불 예정</th><th>상세보기</th><th>조치</th></tr></thead>
                     <tbody>
                       {refundAds.map(ad=>(
                         <tr key={ad.id} style={{ cursor: 'pointer' }} onClick={()=>setViewingRefund(ad)}>
@@ -1464,7 +1464,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <div style={{ background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: '10px', padding: '12px 16px', marginBottom: '16px', color: '#9f1239', fontSize: '12px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span>🔞</span>
               <span>
-                <strong>[포트원 19금 가상계좌 관리 정책]</strong> 모든 발급 가상계좌는 19세 이상 성인 본인 확인 및 입금 후 현금 출금/환불 불가에 동의한 주문입니다. 입금 확인 시 1클릭으로 즉시 광고 승인 처리할 수 있습니다.
+                <strong>[포트원 19금 가상계좌 관리 정책]</strong> 모든 발급 가상계좌는 19세 이상 회원 본인 확인 및 입금 후 현금 출금/환불 불가에 동의한 주문입니다. 입금 확인 시 1클릭으로 즉시 광고 승인 처리할 수 있습니다.
               </span>
             </div>
 
@@ -1474,7 +1474,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   <thead>
                     <tr>
                       <th>주문ID / 포트원 UID</th>
-                      <th>업소명 (대표자)</th>
+                      <th>매장명 (대표자)</th>
                       <th>연락처</th>
                       <th>신청 광고 상품</th>
                       <th>가상계좌 (은행)</th>
@@ -1570,7 +1570,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                 ['회원 고유 ID', viewingUser.id],
                 ['로그인 아이디', viewingUser.username],
                 ['활동 닉네임', viewingUser.nickname || '-'],
-                ['회원 구분', viewingUser.role === 'employer' ? '🏢 업소 회원' : '👤 구직자 회원'],
+                ['회원 구분', viewingUser.role === 'employer' ? '🏢 매장 회원' : '👤 구직자 회원'],
                 ['성별', viewingUser.gender === 'F' ? '여성 (F)' : '남성 (M)'],
                 ['생년월일', viewingUser.birthdate || '-'],
                 ['가입 일시', viewingUser.joinDate ? new Date(viewingUser.joinDate).toLocaleString('ko-KR') : '미기록'],
@@ -1647,7 +1647,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               {[
                 ['광고 고유 ID', viewingAd.id],
                 ['게재 등급', viewingAd.type],
-                ['업소명', viewingAd.companyName],
+                ['매장명', viewingAd.companyName],
                 ['근무 지역', viewingAd.location],
                 ['급여 조건', viewingAd.pay],
                 ['연락처', viewingAd.contactPhone || '-'],
@@ -1721,19 +1721,19 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         </div>
       )}
 
-      {/* 3. 업소 신청 상세 모달 */}
+      {/* 3. 매장 신청 상세 모달 */}
       {viewingEmp && (
         <div className={styles.modalOverlay} onClick={e=>{if(e.target===e.currentTarget)setViewingEmp(null);}}>
           <div className={styles.msgModal} style={{ maxWidth:'550px' }}>
             <div className={styles.msgModalHeader}>
-              <h3>🏢 업소 인증 신청 상세 — {viewingEmp.name}</h3>
+              <h3>🏢 매장 인증 신청 상세 — {viewingEmp.name}</h3>
               <button className={styles.modalClose} onClick={()=>setViewingEmp(null)}>✕</button>
             </div>
 
             <div className={styles.detailDrawer} style={{ marginTop: 0 }}>
               {[
                 ['신청 고유 ID', viewingEmp.id],
-                ['업소명', viewingEmp.name],
+                ['매장명', viewingEmp.name],
                 ['사업자등록번호', viewingEmp.regNumber],
                 ['대표자명', viewingEmp.owner],
                 ['대표 연락처', viewingEmp.phone],
@@ -1750,7 +1750,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             {viewingEmp.status === 'pending' && (
               <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
                 <button className={styles.btnApprove} style={{ flex: 1, padding: '12px' }} onClick={() => approveEmp(viewingEmp)}>
-                  ✅ 업소 인증 승인
+                  ✅ 매장 인증 승인
                 </button>
                 <button className={styles.btnReject} style={{ flex: 1, padding: '12px' }} onClick={() => rejectEmp(viewingEmp)}>
                   ❌ 거절 처리
@@ -1773,7 +1773,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <div className={styles.detailDrawer} style={{ marginTop: 0 }}>
               {[
                 ['공고명', viewingRefund.title],
-                ['업소명', viewingRefund.companyName],
+                ['매장명', viewingRefund.companyName],
                 ['등록 유형', viewingRefund.type],
                 ['환불 요청 사유', viewingRefund.refundRequest?.reason || '-'],
                 ['신청 일시', viewingRefund.refundRequest?.requestedAt ? new Date(viewingRefund.refundRequest.requestedAt).toLocaleString('ko-KR') : '-'],
@@ -1916,8 +1916,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   <div style={{ fontWeight: 800, color: '#2563eb', marginBottom: 10 }}>총 가입 회원: {stats.totalUsers} 명</div>
                   {[
                     ['구직자 회원', `${stats.seekers} 명`],
-                    ['업소 회원', `${stats.empCount} 명`],
-                    ['업소 인증 대기', `${stats.empReqs} 건`],
+                    ['매장 회원', `${stats.empCount} 명`],
+                    ['매장 인증 대기', `${stats.empReqs} 건`],
                     ['이메일 본인인증 완료', `${users.filter(u=>u.verified).length} 명`],
                   ].map(([k,v])=>(
                     <div key={k} className={styles.detailRow}><span className={styles.detailKey}>{k}</span><span className={styles.detailVal}>{v}</span></div>
@@ -2112,7 +2112,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                     textAlign: 'left'
                   }}
                 >
-                  🏢 모든 구인자/업소 회원 ({stats.empCount + Array.from(new Set(ads.map(a=>a.companyName))).length}곳)
+                  🏢 모든 구인자/매장 회원 ({stats.empCount + Array.from(new Set(ads.map(a=>a.companyName))).length}곳)
                 </button>
 
                 <button
@@ -2173,7 +2173,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               <span className={styles.templateLabel}>빠른 템플릿:</span>
               {[
                 { label:'가입 축하', s:'🎉 아름다운밤 가입을 축하합니다!', c:'안녕하세요!\n아름다운밤에 가입해주셔서 감사드립니다.\n궁금한 점은 고객센터로 연락 주세요.\n- 아름다운밤 운영팀' },
-                { label:'구인자 공지', s:'📢 [구인업소 전용] 아름다운밤 광고 게재 및 노출 안내', c:'안녕하세요 구인 사장님!\n아름다운밤에서는 24시간 실시간 광고 노출과 구직자 매칭을 지원합니다.\n추가 혜택 및 공고 수정은 고객센터로 문의해주세요.\n- 아름다운밤 운영팀' },
+                { label:'구인자 공지', s:'📢 [구인매장 전용] 아름다운밤 광고 게재 및 노출 안내', c:'안녕하세요 구인 사장님!\n아름다운밤에서는 24시간 실시간 광고 노출과 구직자 매칭을 지원합니다.\n추가 혜택 및 공고 수정은 고객센터로 문의해주세요.\n- 아름다운밤 운영팀' },
                 { label:'수정 요청', s:'📝 광고 정보 수정 요청', c:'안녕하세요.\n등록하신 광고에 수정이 필요한 사항이 있습니다.\n빠른 시일 내에 수정 부탁드립니다.\n- 아름다운밤 운영팀' },
                 { label:'경고', s:'⚠️ 이용 약관 위반 경고', c:'안녕하세요.\n이용 약관 위반이 감지되었습니다.\n반복 시 계정이 정지될 수 있습니다.\n- 아름다운밤 운영팀' },
               ].map(t=>(
@@ -2194,7 +2194,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   `📱 [PWA 푸시] ${targetAudience === 'all_employers' ? '모든 구인자' : targetAudience === 'all_seekers' ? '모든 구직자' : targetAudience === 'all_users' ? '플랫폼 전체' : (sendTarget?.nickname || sendTarget?.username || '지정 대상')} 스마트폰 상단 알림 전송`
                 ) : (
                   <>
-                    {targetAudience === 'all_employers' && '📢 모든 구인자/업소 전체 쪽지 전송'}
+                    {targetAudience === 'all_employers' && '📢 모든 구인자/매장 전체 쪽지 전송'}
                     {targetAudience === 'all_seekers' && '📢 모든 구직자 전체 쪽지 전송'}
                     {targetAudience === 'all_users' && `📢 전체 회원 (${stats.totalUsers}명) 쪽지 전송`}
                     {targetAudience === 'specific' && `✉️ '${sendTarget?.nickname || sendTarget?.username || '지정 대상'}'에게 쪽지 전송`}
@@ -2223,7 +2223,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                     <option value="special">Special</option><option value="general">General</option>
                   </select>
                 </div>
-                <div className={styles.msgField}><label>업소명</label><input value={editFields.company} onChange={e=>setEditFields(f=>({...f,company:e.target.value}))} className={styles.msgInput} /></div>
+                <div className={styles.msgField}><label>매장명</label><input value={editFields.company} onChange={e=>setEditFields(f=>({...f,company:e.target.value}))} className={styles.msgInput} /></div>
               </div>
               <div className={styles.msgField}><label>공고명</label><input value={editFields.title} onChange={e=>setEditFields(f=>({...f,title:e.target.value}))} className={styles.msgInput} /></div>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'10px' }}>

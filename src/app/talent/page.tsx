@@ -75,7 +75,7 @@ export default function TalentPage() {
 
     if (isPaidFlag || totalPaidCount > 0 || hasPaidAd) {
       // 결제 사장님 ➔ 연락처 & 1:1 대화 허용
-      alert(`✅ [결제 완료 업소 인증] ${item.name || item.nickname} 님의 1:1 비밀 연락처:\n\n📞 ${item.contact || '카톡 ID: abam_talent_01 (연락 시 "아밤 보고 연락드렸습니다"라고 말씀해주세요)'}`);
+      alert(`✅ [결제 완료 매장 인증] ${item.name || item.nickname} 님의 1:1 비밀 연락처:\n\n📞 ${item.contact || '카톡 ID: abam_talent_01 (연락 시 "아밤 보고 연락드렸습니다"라고 말씀해주세요)'}`);
     } else {
       // 미결제 사장님 ➔ 철통 잠금 안내 모달 팝업
       setSelectedTalentContact(item);
@@ -110,7 +110,7 @@ export default function TalentPage() {
     const storedCustoms = JSON.parse(localStorage.getItem('abam_user_talents') || '[]');
     localStorage.setItem('abam_user_talents', JSON.stringify([newTalent, ...storedCustoms]));
 
-    alert('✨ 인재 등록이 성공적으로 완료되었습니다! 유료 공고를 결제한 업소 대표님들에게 인재 프로필이 우선 노출됩니다.');
+    alert('✨ 인재 등록이 성공적으로 완료되었습니다! 유료 공고를 결제한 매장 대표님들에게 인재 프로필이 우선 노출됩니다.');
     setShowRegisterModal(false);
     setNickname('');
     setIntro('');
@@ -187,13 +187,13 @@ export default function TalentPage() {
       }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <span style={{ background: '#fce7f3', border: '1px solid #fbcfe8', color: '#be185d', fontSize: '12.5px', fontWeight: 900, padding: '4px 14px', borderRadius: '20px', letterSpacing: '0.02em' }}>
-            🔒 유료 채용공고 결제 업소 전용 1:1 인재 스카우트
+            🔒 유료 채용공고 결제 매장 전용 1:1 인재 스카우트
           </span>
           <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#1f2937', margin: '12px 0 6px', letterSpacing: '-0.02em' }}>
             검증된 전국 여성 알바 구직자 실시간 매칭
           </h2>
           <p style={{ fontSize: '14.5px', color: '#6b7280', margin: 0, lineHeight: 1.6 }}>
-            결제가 완료된 정식 업소 회원만 구직자의 비밀 연락처 열람 및 1:1 스카우트 대화가 가능합니다.
+            결제가 완료된 정식 매장 회원만 구직자의 비밀 연락처 열람 및 1:1 스카우트 대화가 가능합니다.
           </p>
 
           {/* Search & Filter Bar */}
@@ -338,7 +338,7 @@ export default function TalentPage() {
                 border: '1px solid #f3e2eb',
                 fontWeight: 500
               }}>
-                "{item.intro || '밝고 성실한 성격으로 즉시 출근 가능합니다. 당일 일급 확실한 업소 우대합니다.'}"
+                "{item.intro || '밝고 성실한 성격으로 즉시 출근 가능합니다. 당일 일급 확실한 매장 우대합니다.'}"
               </p>
 
               {/* Specs Grid */}
@@ -375,7 +375,7 @@ export default function TalentPage() {
                 }}
               >
                 {hasPaidAd ? <MessageSquare size={16} /> : <Lock size={16} />}
-                <span>{hasPaidAd ? '1:1 인재 스카우트 문의하기' : '🔒 1:1 연락처 열람 (결제 업소 전용)'}</span>
+                <span>{hasPaidAd ? '1:1 인재 스카우트 문의하기' : '🔒 1:1 연락처 열람 (결제 매장 전용)'}</span>
               </button>
             </div>
           ))}
@@ -423,12 +423,12 @@ export default function TalentPage() {
             </div>
 
             <h3 style={{ fontSize: '20px', fontWeight: 900, color: '#1f2937', margin: '0 0 8px 0' }}>
-              유료 구인공고 결제 업소 전용 기능입니다
+              유료 구인공고 결제 매장 전용 기능입니다
             </h3>
             
             <p style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.6, margin: '0 0 20px 0' }}>
               아름다운밤 무분별한 스팸 방지 및 안심 채용을 위해,<br />
-              <strong style={{ color: '#be185d' }}>채용공고를 게시/결제하신 결제 업소 회원님만</strong><br />
+              <strong style={{ color: '#be185d' }}>채용공고를 게시/결제하신 결제 매장 회원님만</strong><br />
               구직자 1:1 비밀 연락처 열람 및 스카우트가 가능합니다.
             </p>
 
@@ -572,7 +572,7 @@ export default function TalentPage() {
                 <label style={{ fontSize: '13px', fontWeight: 800, color: '#374151', display: 'block', marginBottom: '4px' }}>한줄 소개 *</label>
                 <textarea
                   rows={3}
-                  placeholder="업소 대표님에게 어필할 매력이나 출근 조건, 스타일을 자유롭게 적어주세요."
+                  placeholder="매장 대표님에게 어필할 매력이나 출근 조건, 스타일을 자유롭게 적어주세요."
                   value={intro}
                   onChange={(e) => setIntro(e.target.value)}
                   style={{ width: '100%', padding: '10px', background: '#fdfafc', border: '1px solid #f3e2eb', borderRadius: '8px', color: '#1f2937', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}

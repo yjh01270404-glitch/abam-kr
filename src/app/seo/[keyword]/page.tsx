@@ -118,7 +118,7 @@ export default async function SeoLandingPage({ params }: Props) {
           name: `${decoded} 초보 지원 시 무엇을 준비해야 하나요?`,
           acceptedAnswer: {
             '@type': 'Answer',
-            text: '신분증 지참 외에 특별한 기술이나 경력은 요구되지 않으며, 업소별로 1:1 안심 오리엔테이션 및 유니폼 코칭을 무료로 제공하므로 누구나 부담 없이 근무를 시작할 수 있습니다.'
+            text: '신분증 지참 외에 특별한 기술이나 경력은 요구되지 않으며, 매장별로 1:1 안심 오리엔테이션 및 유니폼 코칭을 무료로 제공하므로 누구나 부담 없이 근무를 시작할 수 있습니다.'
           }
         },
         {
@@ -196,7 +196,7 @@ export default async function SeoLandingPage({ params }: Props) {
             <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13.5px', color: '#475569', lineHeight: '1.8' }}>
               <li><strong>철저한 프라이버시 약속:</strong> 전화번호나 개인 SNS 아이디 노출 없이 안심 톡을 우선적으로 사용하여 문의를 조율하세요.</li>
               <li><strong>당일 정산 원칙 확인:</strong> 근무 종료 후 급여가 당일 현금 또는 당일 송금으로 칼같이 이뤄지는지 사전 확인이 필요합니다.</li>
-              <li><strong>면접 시 강요 행위 주의:</strong> 과한 복장 규정이나 강요가 없는 자율적인 근무 여건을 약속하는 업소를 선택하는 것이 중요합니다.</li>
+              <li><strong>면접 시 강요 행위 주의:</strong> 과한 복장 규정이나 강요가 없는 자율적인 근무 여건을 약속하는 매장를 선택하는 것이 중요합니다.</li>
             </ul>
           </div>
 
@@ -206,7 +206,7 @@ export default async function SeoLandingPage({ params }: Props) {
               {decoded} 급여 및 근무 조건 최적화 안내
             </h2>
             <p style={{ fontSize: '14.5px', color: '#475569', lineHeight: '1.7', margin: '0 0 16px 0', wordBreak: 'keep-all' }}>
-              보통 초보자의 경우 근무 시간 선택에 어려움을 겪으시는 경우가 많습니다. 아밤에 등재된 업소들은 주말 단기 스태프, 하루 4시간 파트타임 등 **완전 자율 근무제**를 시행하고 있어 구직자의 스케줄 상황에 맞춘 조율이 가능합니다.
+              보통 초보자의 경우 근무 시간 선택에 어려움을 겪으시는 경우가 많습니다. 아밤에 등재된 매장들은 주말 단기 스태프, 하루 4시간 파트타임 등 **완전 자율 근무제**를 시행하고 있어 구직자의 스케줄 상황에 맞춘 조율이 가능합니다.
             </p>
           </div>
 
@@ -266,13 +266,13 @@ export default async function SeoLandingPage({ params }: Props) {
               <div className={styles.faqItem}>
                 <h4 className={styles.faqQuestion}>초보나 직장인 투잡도 가능합니까?</h4>
                 <p className={styles.faqAnswer}>
-                  네, 아름다운밤의 구인 업소들은 경력 여부와 상관없이 초보자를 위한 1:1 맞춤 교육 및 안심 근무를 지원합니다. 자율 출퇴근제로 주말이나 야간 투잡도 용이합니다.
+                  네, 아름다운밤의 구인 매장들은 경력 여부와 상관없이 초보자를 위한 1:1 맞춤 교육 및 안심 근무를 지원합니다. 자율 출퇴근제로 주말이나 야간 투잡도 용이합니다.
                 </p>
               </div>
               <div className={styles.faqItem}>
                 <h4 className={styles.faqQuestion}>나이나 복장 제한이 심한가요?</h4>
                 <p className={styles.faqAnswer}>
-                  만 19세 성인 여성이시라면 누구나 지원이 가능하며, 억압적인 유니폼 규정 대신 자신만의 매력을 뽐낼 수 있는 깔끔한 자유 복장을 보장하는 업소들이 다수입니다.
+                  만 19세 회원 여성이시라면 누구나 지원이 가능하며, 억압적인 유니폼 규정 대신 자신만의 매력을 뽐낼 수 있는 깔끔한 자유 복장을 보장하는 매장들이 다수입니다.
                 </p>
               </div>
             </div>

@@ -213,7 +213,7 @@ export default function PropertySalePage() {
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#94a3b8', textDecoration: 'none', fontSize: '14.5px', fontWeight: '800' }}>
               <ArrowLeft size={16} /> 홈으로 이동
             </Link>
-            <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#38bdf8', margin: 0 }}>🏢 업소 양도양수 매매 센터</h1>
+            <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#38bdf8', margin: 0 }}>🏢 매장 양도양수 매매 센터</h1>
             <button
               onClick={handleOpenForm}
               style={{
@@ -257,7 +257,7 @@ export default function PropertySalePage() {
           }}>
             💡 <strong>아름다운밤(아밤) 회원 전용 직거래 매장 장터</strong>
             <p style={{ margin: '6px 0 0 0' }}>
-              본 센터는 업소 사장님과 인수 희망자 간의 안전한 직거래를 지원합니다. 등록하신 매물 정보는 관리자 검토를 통해 실시간으로 노출되며, 불법적이거나 사칭성 정보는 제재 대상이 될 수 있습니다.
+              본 센터는 매장 사장님과 인수 희망자 간의 안전한 직거래를 지원합니다. 등록하신 매물 정보는 관리자 검토를 통해 실시간으로 노출되며, 불법적이거나 사칭성 정보는 제재 대상이 될 수 있습니다.
             </p>
           </div>
 
@@ -292,7 +292,7 @@ export default function PropertySalePage() {
                     <option value="노래방">노래방</option>
                     <option value="라운지펍">라운지펍</option>
                     <option value="토킹바">토킹바</option>
-                    <option value="기타">기타 업소</option>
+                    <option value="기타">기타 매장</option>
                   </select>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>

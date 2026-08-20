@@ -420,7 +420,7 @@ const allJobsRaw = [
 
 // Helper function to auto-highlight key selling points (pay, benefits, accommodation) inside description
 function renderHighlightedText(text: string, textColor: string, highlightColor: string) {
-  const highlightRegex = /(TC\s*\d+만[+@]*|\d+만[+@]*|\d+만원|당일\s*정산|당일\s*지급|당일\s*100%|만근\s*보너스|인센티브|출퇴근\s*차량|차량\s*지원|숙소\s*지원|숙식\s*제공|1인\s*1실|자율\s*출퇴근|초보[자]*\s*대환영|초보\s*대환영|초보[자]*\s*환영|무조건\s*합격|고수익|자유\s*복장|강요하지\s*않으니|안심보증|안심번호)/i;
+  const highlightRegex = /(일급\s*\d+만[+@]*|\d+만[+@]*|\d+만원|당일\s*정산|당일\s*지급|당일\s*100%|만근\s*보너스|인센티브|출퇴근\s*차량|차량\s*지원|숙소\s*지원|숙식\s*제공|1인\s*1실|자율\s*출퇴근|초보[자]*\s*대환영|초보\s*대환영|초보[자]*\s*환영|무조건\s*합격|고수익|자유\s*복장|강요하지\s*않으니|안심보증|안심번호)/i;
   
   const parts = text.split(highlightRegex);
   
@@ -612,7 +612,7 @@ export async function GET(
   const location = searchParams.get('location') || source?.location || '서울 강남구';
   const pay = searchParams.get('pay') || source?.pay || '시급 협의';
   const workHours = searchParams.get('workHours') || source?.workHours || '협의 (자율출퇴근)';
-  const requirements = searchParams.get('requirements') || source?.requirements || '만 20세 이상 성인 여성';
+  const requirements = searchParams.get('requirements') || source?.requirements || '만 20세 이상 회원 여성';
   const highlightSentence = source?.highlightSentence || '';
   const hideCard = searchParams.get('hideCard') === 'true';
   
@@ -682,7 +682,7 @@ export async function GET(
   // 5. Description mapping & Sanitation
   let rawDesc = source?.description || '';
   if (!rawDesc || rawDesc.trim().length === 0) {
-    rawDesc = `${companyName}은(는) 안전이 검증된 여성 고소득알바 추천 업소입니다. 최고의 시설 and 쾌적한 환경, 그리고 철저한 익명성을 보장합니다. 당일 지급을 기본으로 하며 출퇴근 시간을 자유롭게 조율하실 수 있는 자율근무 시스템을 운영하고 있습니다.`;
+    rawDesc = `${companyName}은(는) 안전이 검증된 여성 고소득알바 추천 매장입니다. 최고의 시설 and 쾌적한 환경, 그리고 철저한 익명성을 보장합니다. 당일 지급을 기본으로 하며 출퇴근 시간을 자유롭게 조율하실 수 있는 자율근무 시스템을 운영하고 있습니다.`;
   }
 
   // Replace placeholder contacts in rawDesc with actual database values
@@ -1233,11 +1233,11 @@ export async function GET(
             </div>
           </div>
 
-          {/* ⭐ 우리 업소만의 특별한 강점 & PR */}
+          {/* ⭐ 우리 매장만의 특별한 강점 & PR */}
           {(welfare || atmosphere || prMessage) ? (
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginBottom: '24px' }}>
               <span style={{ fontSize: '23px', color: theme.sectionHeaderColor, fontWeight: 900, marginBottom: '10px', borderLeft: theme.sectionHeaderBorderLeft, paddingLeft: '8px', display: 'flex' }}>
-                [우리 업소만의 특별한 강점 & PR]
+                [우리 매장만의 특별한 강점 & PR]
               </span>
               <div
                 style={{
@@ -1449,7 +1449,7 @@ export async function GET(
             [아밤 안심보증 200% 신뢰 구인광고]
           </span>
           <span style={{ fontSize: '13px', color: theme.footerTextColor, textAlign: 'center', display: 'flex', fontFamily: 'Gaegu', fontWeight: 700 }}>
-            본 구인 공고는 등록 절차 준수 및 사전 신원 확인이 완료된 검증된 안심 업소입니다.
+            본 구인 공고는 등록 절차 준수 및 사전 신원 확인이 완료된 검증된 안심 매장입니다.
           </span>
         </div>
 

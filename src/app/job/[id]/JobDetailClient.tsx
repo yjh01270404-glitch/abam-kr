@@ -19,7 +19,7 @@ export default function JobDetailClient({ job, currentUser }: { job: JobAd; curr
 
   const phone = (job as any).contactPhone ?? '010-7925-8874';
   const kakao = (job as any).contactKakao ?? 'SUPER8874';
-  const company = job.companyName || '아름다운밤 추천업소';
+  const company = job.companyName || '아름다운밤 추천매장';
   const loc = job.location || '서울 강남구';
   const pay = job.pay || '일급 50만원 이상';
   const rawDesc = job.description || '안녕하세요! 최고 우대 조건으로 언니들을 모시고 있습니다. 자율 출퇴근, 당일 100% 현금정산, 초보환영!';
@@ -27,7 +27,7 @@ export default function JobDetailClient({ job, currentUser }: { job: JobAd; curr
   // 고도화된 정밀 HTML 포맷팅 (어색함 0% 완벽판)
   const formattedHtml = formatDetailHtml(rawDesc);
 
-  /* ── 안심톡: 업소별 1:1 채팅 세션 개설 ── */
+  /* ── 안심톡: 매장별 1:1 채팅 세션 개설 ── */
   function openChat() {
     let anonId = localStorage.getItem('abam_chat_session_id');
     if (!anonId) { anonId = Math.random().toString(36).slice(2, 9); localStorage.setItem('abam_chat_session_id', anonId); }
@@ -120,7 +120,7 @@ export default function JobDetailClient({ job, currentUser }: { job: JobAd; curr
             justifyContent: 'center',
             gap: '8px'
           }}>
-            <span>🌙 아름다운밤 [안심보증 1위 추천업소]</span>
+            <span>🌙 아름다운밤 [안심보증 1위 추천매장]</span>
           </div>
 
           {/* Main Title Banner Box (타이틀 겹침 0% + 럭셔리 네온 하이라이트) */}

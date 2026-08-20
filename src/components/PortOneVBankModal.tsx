@@ -41,7 +41,7 @@ export default function PortOneVBankModal({
   // 가상계좌 실시간 발급 요청 (포트원 실 연동 SDK 호출)
   const handleGenerateVBank = async () => {
     if (!adultAgreed) {
-      alert('🔞 19세 이상 성인 확인 및 가상계좌 출금/환불 불가 필수 조항에 동의해주세요.');
+      alert('🔞 19세 이상 회원 확인 및 가상계좌 출금/환불 불가 필수 조항에 동의해주세요.');
       return;
     }
 
@@ -63,7 +63,7 @@ export default function PortOneVBankModal({
       orderId: `order-${Date.now()}`,
       impUid: res.imp_uid || `imp_${Math.floor(100000000 + Math.random() * 900000000)}`,
       merchantUid: res.merchant_uid || merchantUid,
-      companyName: companyName || '아름다운밤 업소',
+      companyName: companyName || '아름다운밤 매장',
       ownerName: ownerName || '사장님',
       phone: phone || '010-0000-0000',
       adSlot,
@@ -121,7 +121,7 @@ export default function PortOneVBankModal({
             <>
               {/* 결제 건명 및 금액 서머리 */}
               <div style={{ background: '#fdf2f8', border: '1px solid #fbcfe8', borderRadius: '10px', padding: '14px', marginBottom: '16px' }}>
-                <div style={{ fontSize: '12px', color: '#831843', fontWeight: 600 }}>신청 구인 배너 / 업소명</div>
+                <div style={{ fontSize: '12px', color: '#831843', fontWeight: 600 }}>신청 구인 배너 / 매장명</div>
                 <div style={{ fontSize: '15px', color: '#9d174d', fontWeight: 800, marginTop: '2px' }}>
                   {adSlotName} ({companyName})
                 </div>
@@ -136,14 +136,14 @@ export default function PortOneVBankModal({
                 </div>
               </div>
 
-              {/* 🔞 19금 성인 인증 및 출금 금지 모달 서약서 */}
+              {/* 🔞 19금 회원 인증 및 출금 금지 모달 서약서 */}
               <div style={{ background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: '10px', padding: '14px', marginBottom: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#be123c', fontWeight: 800, fontSize: '13px', marginBottom: '6px' }}>
                   <ShieldAlert size={16} />
-                  <span>🔞 [성인 19금 서비스 가상계좌 출금/환불 불가 서약서]</span>
+                  <span>🔞 [회원 19금 서비스 가상계좌 출금/환불 불가 서약서]</span>
                 </div>
                 <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '11.5px', color: '#9f1239', lineHeight: 1.5 }}>
-                  <li>본 서비스는 야간/비즈니스 구인구직 19세 이상 성인 전용 플랫폼입니다.</li>
+                  <li>본 서비스는 야간/비즈니스 구인구직 19세 이상 회원 전용 플랫폼입니다.</li>
                   <li>포트원을 통해 발급되는 가상계좌는 입금 즉시 광고 노출 자원이 할당되므로, <strong>입금 후 현금 출금 및 환불이 엄격히 금지</strong>됩니다.</li>
                   <li>타인 명의 입금 및 불법 대포통장 거래 시 즉시 수사기관에 세부 로그가 통보됩니다.</li>
                 </ul>

@@ -15,7 +15,7 @@ interface AlertPrefs {
   frequency: 'realtime' | 'daily' | 'weekly';
   /** SOS 긴급 알림 수신 */
   sosAlert: boolean;
-  /** 관심 업소 추적 */
+  /** 관심 매장 추적 */
   savedBusinesses: string[];
   /** 알림 활성화 */
   enabled: boolean;
@@ -36,7 +36,7 @@ const SCORE_FACTORS = [
   { icon: '💰', label: '급여 조건 일치', weight: '40%', desc: '설정한 최소 일급 이상의 공고 우선' },
   { icon: '📍', label: '지역 일치도', weight: '30%', desc: '선호 지역과 가까울수록 높은 점수' },
   { icon: '🏷️', label: '직종 적합도', weight: '20%', desc: '선호 직종과 일치하는 공고 상위 노출' },
-  { icon: '🔐', label: '업소 신뢰 레벨', weight: '10%', desc: '신뢰도 높은 업소 공고 추가 가산점' },
+  { icon: '🔐', label: '매장 신뢰 레벨', weight: '10%', desc: '신뢰도 높은 매장 공고 추가 가산점' },
 ];
 
 const REGIONS = ['서울 강남', '서울 마포/홍대', '서울 기타', '경기 성남', '경기 일산', '부산 서면', '대구', '광주', '기타 지방'];
@@ -46,7 +46,7 @@ const JOB_TYPES = ['모던바', '룸살롱', '노래방', '나이트클럽', '�
 const mockAlerts = [
   {
     id: 'al-1', type: 'match', score: 94, title: '로즈 모던바 — 서울 관악구',
-    pay: '시급 4만5천', tag: '💎 최우수 업소', time: '2시간 전', isNew: true,
+    pay: '시급 4만5천', tag: '💎 최우수 매장', time: '2시간 전', isNew: true,
   },
   {
     id: 'al-2', type: 'sos', score: 88, title: 'SOS! 세인트 클럽 즉시 매칭',
@@ -54,10 +54,10 @@ const mockAlerts = [
   },
   {
     id: 'al-3', type: 'match', score: 81, title: '스타 클럽 — 경기 성남시',
-    pay: '일급 54만+', tag: '🥇 우수 업소', time: '어제 오후 3시', isNew: false,
+    pay: '일급 54만+', tag: '🥇 우수 매장', time: '어제 오후 3시', isNew: false,
   },
   {
-    id: 'al-4', type: 'review', score: 0, title: '관심 업소: 로즈 모던바 새 리뷰 등록',
+    id: 'al-4', type: 'review', score: 0, title: '관심 매장: 로즈 모던바 새 리뷰 등록',
     pay: '별점 4.8 / 34개', tag: '⭐ 리뷰', time: '어제 오후 7시', isNew: false,
   },
   {
@@ -66,7 +66,7 @@ const mockAlerts = [
   },
   {
     id: 'al-6', type: 'match', score: 77, title: '엔젤 서츠룸 — 서울 마포구',
-    pay: 'TC 14만+', tag: '🥈 검증 업소', time: '3일 전', isNew: false,
+    pay: '일급 14만+', tag: '🥈 검증 매장', time: '3일 전', isNew: false,
   },
 ];
 

@@ -60,7 +60,7 @@ export async function GET(
   <!-- 1. Header Bar (y: 20 ~ 90) -->
   <rect x="20" y="20" width="660" height="70" rx="16" fill="url(#headerGrad)" />
   <text x="350" y="62" font-family="'Noto Sans KR', sans-serif" font-weight="900" font-size="26" fill="#ffffff" text-anchor="middle">
-    🌙 아름다운밤 [안심보증 1위 추천업소]
+    🌙 아름다운밤 [안심보증 1위 추천매장]
   </text>
 
   <!-- 2. Main Banner Box (y: 105 ~ 255) - Perfectly Positioned, NO OVERLAP -->

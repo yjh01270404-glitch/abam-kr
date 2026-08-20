@@ -1,14 +1,14 @@
 {
   "id": "/abam-service-app",
-  "name": "아름다운밤 (abam.kr) 공식 모바일 앱",
-  "short_name": "아름다운밤",
-  "description": "여성 고수익 밤알바·유흥알바·룸알바 1위 전문 구인구직 서비스",
+  "name": "아밤(ABAM) 공식 비즈니스 앱",
+  "short_name": "아밤",
+  "description": "대한민국 1등 로컬 비즈니스 매장 정보 & 프리미엄 디지털 배너 광고 플랫폼",
   "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fcf6f9",
-  "theme_color": "#db2777",
+  "background_color": "#0f172a",
+  "theme_color": "#0284c7",
   "icons": [
     {
       "src": "/icon.png",

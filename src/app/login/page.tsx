@@ -83,7 +83,7 @@ export default function LoginPage() {
         <div className={styles.links}>
           <Link href="/register" className={styles.link}>일반 회원가입</Link>
           <span className={styles.divider}>|</span>
-          <Link href="/employer/register" className={styles.link}>업소/기업 가입</Link>
+          <Link href="/employer/register" className={styles.link}>매장/기업 가입</Link>
         </div>
       </div>
     </div>

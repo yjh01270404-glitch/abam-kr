@@ -26,7 +26,7 @@ export default function LogoBanner({ companyName, themeIdx, subText, payText, mo
     case 0: // 1. 핑크 블라썸 (청라여자친구 느낌)
       return (
         <div className={`${styles.customBanner} ${styles.archetypePink} ${motionClass}`}>
-          <span className={styles.pinkSub}>{subText || '여성전용 1인샵'}</span>
+          <span className={styles.pinkSub}>{subText || '맞춤형 1인샵'}</span>
           <span className={styles.pinkMain}>{companyName}</span>
           {payText && <span className={styles.pinkPay}>{payText}</span>}
         </div>
@@ -38,7 +38,7 @@ export default function LogoBanner({ companyName, themeIdx, subText, payText, mo
           <span className={styles.chromeBadge}>{payText || subText || 'HIGHCLASS'}</span>
         </div>
       );
-    case 2: // 3. 클래식 블랙 품격 (고품격스웨디시 느낌)
+    case 2: // 3. 클래식 블랙 품격 (고품격아로마 테라피 느낌)
       const leftText = payText && payText.length <= 4 ? payText : '1인\n샵';
       return (
         <div className={`${styles.customBanner} ${styles.archetypeTraditional} ${motionClass}`}>

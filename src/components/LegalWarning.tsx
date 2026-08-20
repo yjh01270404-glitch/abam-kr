@@ -44,7 +44,7 @@ export default function LegalWarning() {
             <li>방송통신위원회 고시 제2023-5호</li>
           </ul>
           <p className={styles.lawNote}>
-            본 사이트는 성인 회원가입 시 본인인증을 통해 연령을 확인하며,<br />
+            본 사이트는 회원 회원가입 시 본인인증을 통해 연령을 확인하며,<br />
             미성년자의 허위 접속으로 인한 법적 책임은 이용자 본인에게 있습니다.
           </p>
         </div>

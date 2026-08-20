@@ -92,7 +92,7 @@ function PostModal({ onClose, onSubmit, authorNickname }: { onClose: () => void;
           <div className={styles.fieldLabel}>내용 <span className={styles.fieldHint}>(최소 20자)</span></div>
           <textarea
             className={styles.modalTextarea}
-            placeholder="솔직한 경험을 공유해주세요. 업소 이름은 이니셜로 표현해주세요."
+            placeholder="솔직한 경험을 공유해주세요. 매장 이름은 이니셜로 표현해주세요."
             value={content}
             onChange={e => setContent(e.target.value)}
             rows={7}
@@ -101,7 +101,7 @@ function PostModal({ onClose, onSubmit, authorNickname }: { onClose: () => void;
 
 
           <div className={styles.modalNotice}>
-            ⚠️ 특정 업소 비방, 개인정보 노출, 광고성 글은 관리팀이 즉시 삭제합니다.
+            ⚠️ 특정 매장 비방, 개인정보 노출, 광고성 글은 관리팀이 즉시 삭제합니다.
           </div>
 
           <button
@@ -351,7 +351,7 @@ export default function CommunityPage() {
             <div className={styles.sideTitle}>🏆 커뮤니티 가이드</div>
             <div className={styles.guideList}>
               <div className={styles.guideItem}>✓ 익명으로 안전하게 글쓰기</div>
-              <div className={styles.guideItem}>✓ 업소 이름은 이니셜만 가능</div>
+              <div className={styles.guideItem}>✓ 매장 이름은 이니셜만 가능</div>
               <div className={styles.guideItem}>✓ 검증된 경험자 게시글 신뢰</div>
               <div className={styles.guideItem}>✓ 도움됐어요로 좋은 정보 상승</div>
             </div>

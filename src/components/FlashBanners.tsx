@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './FlashBanners.module.css';
 
-// 각 업소마다 완전히 다른 디자인 테마를 적용
+// 각 매장마다 완전히 다른 디자인 테마를 적용
 const BANNER_CONFIGS = [
   {
     id: 'b1',
@@ -65,10 +65,10 @@ const BANNER_CONFIGS = [
     id: 'b5',
     theme: 'electric_blue',
     name: '잠실 플러스',
-    badge: '플러스 업소',
+    badge: '플러스 매장',
     line1: '매너 손님 100% 보장',
     line2: '블랙 관리 철저',
-    line3: '잠실 랜드마크 업소',
+    line3: '잠실 랜드마크 매장',
     emoji: '🏆',
     stars: '⭐⭐⭐⭐⭐',
     region: '송파구/잠실동',

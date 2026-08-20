@@ -17,10 +17,10 @@ export default function VIPVerifiedRecruiterPassCard() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '12px' }}>
         <div>
           <span style={{ fontSize: '11px', background: '#be185d', color: '#fff', padding: '3px 10px', borderRadius: '12px', fontWeight: 900, letterSpacing: '0.05em' }}>
-            🔐 100% 안심 검증 업소 VIP 보장 패스
+            🔐 100% 안심 검증 매장 VIP 보장 패스
           </span>
           <h3 style={{ fontSize: '18px', fontWeight: 900, color: '#f43f5e', margin: '6px 0 0' }}>
-            에스크로 예치금 검증 업소 & 비밀 수입 장부 안심 솔루션
+            에스크로 예치금 검증 매장 & 비밀 수입 장부 안심 솔루션
           </h3>
         </div>
         <span style={{ fontSize: '12px', background: 'rgba(233,30,99,0.2)', color: '#f43f5e', padding: '4px 14px', borderRadius: '14px', fontWeight: 900, border: '1px solid rgba(233,30,99,0.4)' }}>

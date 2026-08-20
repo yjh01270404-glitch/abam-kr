@@ -1,5 +1,5 @@
 /**
- * 아밤 무기명 업소 리뷰 데이터 (Review System)
+ * 아밤 무기명 매장 리뷰 데이터 (Review System)
  * 
  * 2단계 설계:
  * - 단순 별점이 아닌 6개 차원 평가
@@ -62,7 +62,7 @@ const ago = (days: number) => new Date(Date.now() - days * 86400000).toISOString
 
 /** 샘플 리뷰 데이터 */
 export const mockReviews: Review[] = [
-  // 로즈 모던바 (biz-001) — 최우수 업소
+  // 로즈 모던바 (biz-001) — 최우수 매장
   {
     id: 'rev-001', businessId: 'biz-001', businessName: '로즈 모던바',
     category: 'modern_bar', workRegion: '서울 관악구',
@@ -143,12 +143,12 @@ export const mockReviews: Review[] = [
   },
 ];
 
-/** 특정 업소의 리뷰 목록 조회 */
+/** 특정 매장의 리뷰 목록 조회 */
 export function getReviewsByBusiness(businessId: string): Review[] {
   return mockReviews.filter(r => r.businessId === businessId);
 }
 
-/** 업소 평균 평점 계산 */
+/** 매장 평균 평점 계산 */
 export function getAvgRating(businessId: string): { avg: number; count: number } {
   const reviews = getReviewsByBusiness(businessId);
   if (reviews.length === 0) return { avg: 0, count: 0 };

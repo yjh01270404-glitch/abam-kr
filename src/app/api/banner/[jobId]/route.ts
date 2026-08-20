@@ -24,7 +24,7 @@ export async function GET(
 
   const targetAd = allAds.find(item => String(item.id) === String(jobId));
 
-  const companyName = companyNameParam || targetAd?.companyName || targetAd?.title || '아름다운밤 럭셔리 업소';
+  const companyName = companyNameParam || targetAd?.companyName || targetAd?.title || '아름다운밤 럭셔리 매장';
   const title = targetAd?.title || '당일100%정산 / 럭셔리 근무환경 / 초보환영';
   const pay = payParam || targetAd?.pay || '일급 50만원 이상';
   const location = locationParam || targetAd?.location || '서울 강남';

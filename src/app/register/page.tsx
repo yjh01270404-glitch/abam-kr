@@ -59,7 +59,7 @@ export default function RegisterPage() {
       return;
     }
     if (role === 'employer' && (!companyName || !phone)) {
-      alert('업소명과 담당자 연락처를 모두 입력해주세요.');
+      alert('매장명과 담당자 연락처를 모두 입력해주세요.');
       return;
     }
     if (password !== confirmPassword) {
@@ -87,7 +87,7 @@ export default function RegisterPage() {
     // 관리자 PWA 푸시 알림 전송
     broadcastAdminPush(
       '🎉 [신규 회원 가입]',
-      `새로운 ${role === 'employer' ? '업소 구인회원' : '일반 구직회원'} (${nickname || username}) 님이 회원가입 하셨습니다!`,
+      `새로운 ${role === 'employer' ? '매장 구인회원' : '일반 구직회원'} (${nickname || username}) 님이 회원가입 하셨습니다!`,
       '/abam-nightman-2026'
     );
 
@@ -181,7 +181,7 @@ export default function RegisterPage() {
           {role === 'employer' && (
             <>
               <div className={styles.formGroup}>
-                <label>업소명 (상호명) *</label>
+                <label>매장명 (상호명) *</label>
                 <input
                   type="text"
                   className={styles.input}

@@ -169,7 +169,7 @@ export default function AdManagePage() {
                     style={inputStyle}
                     value={form.companyName}
                     onChange={e => setForm(f => ({ ...f, companyName: e.target.value }))}
-                    placeholder="업소명을 입력하세요"
+                    placeholder="매장명을 입력하세요"
                     required
                   />
                 </label>

@@ -21,7 +21,7 @@ export default function InstantPayBannerCard() {
           name: `[아밤] ${planName} 즉시 노출권`,
           amount: price,
           buyer_email: 'recruiter@abam.kr',
-          buyer_name: '아밤 업소 사장님',
+          buyer_name: '아밤 매장 사장님',
           buyer_tel: '010-0000-0000',
         },
         (rsp: any) => {

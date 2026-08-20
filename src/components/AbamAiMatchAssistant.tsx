@@ -46,7 +46,7 @@ export default function AbamAiMatchAssistant() {
           pay: '급여 협의 (상담 후 결정)',
           benefits: ['당일 급여 지급 협의 가능', '초보 상담 가능', '근로 조건 사전 확인 필수', '만 19세 이상'],
           location: `${selectedRegion} 인근`,
-          trustBadge: '아밤 등록 업소'
+          trustBadge: '아밤 등록 매장'
         },
         {
           id: 2,
@@ -58,7 +58,7 @@ export default function AbamAiMatchAssistant() {
         }
       ]);
       setIsSearching(false);
-      setStatusMsg('✅ 조건에 맞는 업소 2건을 찾았습니다. 실제 조건은 반드시 직접 상담으로 확인하세요.');
+      setStatusMsg('✅ 조건에 맞는 매장 2건을 찾았습니다. 실제 조건은 반드시 직접 상담으로 확인하세요.');
       setIsError(false);
     }, 800);
   };

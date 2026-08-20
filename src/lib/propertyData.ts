@@ -1,5 +1,5 @@
 // src/lib/propertyData.ts
-// 실매물 검증 완료된 2026년 7월 실제 업소 양도양수/매매 데이터 및 스토어
+// 실매물 검증 완료된 2026년 7월 실제 매장 양도양수/매매 데이터 및 스토어
 
 export interface PropertyItem {
   id: string;

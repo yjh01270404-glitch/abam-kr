@@ -27,8 +27,8 @@ function parsePay(pay: string) {
     badge = '일급'; text = payStr.replace(/^(일급|일당)\s*/, '');
   } else if (payStr.includes('월급')) {
     badge = '월급'; text = payStr.replace(/^월급\s*/, '');
-  } else if (payStr.toUpperCase().includes('TC') || payStr.includes('보장')) {
-    badge = 'TC'; text = payStr.replace(/^(TC|T\/C|보장)\s*/i, '');
+  } else if (payStr.toUpperCase().includes('일급') || payStr.includes('보장')) {
+    badge = '일급'; text = payStr.replace(/^(일급|T\/C|보장)\s*/i, '');
   }
 
   return { badge, text: text || payStr };

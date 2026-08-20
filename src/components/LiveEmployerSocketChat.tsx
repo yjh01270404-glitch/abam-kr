@@ -29,7 +29,7 @@ export default function LiveEmployerSocketChat() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>
         <div>
           <h3 style={{ fontSize: '16px', fontWeight: 900, color: '#f43f5e', margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
-            💬 업소-구직자 1:1 실시간 P2P 소켓 톡
+            💬 매장-구직자 1:1 실시간 P2P 소켓 톡
           </h3>
           <p style={{ fontSize: '11.5px', color: '#94a3b8', margin: '3px 0 0' }}>전화번호 노출 없이 안전한 1:1 라이브 메신저 소통</p>
         </div>

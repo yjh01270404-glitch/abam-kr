@@ -160,7 +160,7 @@ export function trackAdClick(adId: string, adTitle: string, adType: string, posi
 
 /** 구인글 상세 조회 */
 export function trackJobView(jobId: string, jobTitle: string, company: string): void {
-  track('구인글 조회', `구인글 상세보기: ${jobTitle}`, `업소: ${company} | ID: ${jobId}`);
+  track('구인글 조회', `구인글 상세보기: ${jobTitle}`, `매장: ${company} | ID: ${jobId}`);
 }
 
 /** 검색 */
@@ -170,7 +170,7 @@ export function trackSearch(keyword: string, resultCount: number): void {
 
 /** 연락처 클릭 */
 export function trackContact(type: 'phone' | 'kakao', company: string): void {
-  track('연락처 클릭', `${type === 'phone' ? '전화번호' : '카카오톡'} 클릭`, `업소: ${company}`);
+  track('연락처 클릭', `${type === 'phone' ? '전화번호' : '카카오톡'} 클릭`, `매장: ${company}`);
 }
 
 /** 로그인 */
@@ -185,7 +185,7 @@ export function trackLogout(username: string): void {
 
 /** 회원가입 */
 export function trackRegister(username: string, role: string): void {
-  track('회원가입', `신규 가입: ${username}`, `역할: ${role === 'employer' ? '업소' : '구직자'}`);
+  track('회원가입', `신규 가입: ${username}`, `역할: ${role === 'employer' ? '매장' : '구직자'}`);
 }
 
 /** 채팅 시작 */

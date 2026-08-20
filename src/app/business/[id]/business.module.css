@@ -7,7 +7,7 @@
   font-family: 'Noto Sans KR', system-ui, sans-serif;
 }
 
-/* ── 업소 헤더 ── */
+/* ── 매장 헤더 ── */
 .businessHeader {
   background: linear-gradient(135deg, #fff0f6 0%, #fce7f3 50%, #fff8fc 100%);
   border-bottom: 2px solid;
