@@ -14,39 +14,22 @@ const PHONE_NUM  = '010-6607-2239';
 const WA_LINK    = 'https://wa.me/821066072239?text=Hello%20Abam%20Spa';
 
 /* ─────────────────────────────────────────────
-   디자인 토큰
+   디자인 토큰 (100% 화이트/라이트 모드 · 하이엔드 미니멀)
 ───────────────────────────────────────────── */
 const C = {
-  bg:      '#f9f8f6',
-  white:   '#ffffff',
-  dark:    '#1a1a2e',
-  mid:     '#4a4a6a',
-  muted:   '#8b8ba7',
-  border:  '#e8e6e1',
-  accent:  '#c8a96e',   // warm gold
-  accentBg:'#fdf8f0',
+  bg:      '#ffffff',
+  bgSoft:  '#f8f9fa',
+  dark:    '#111827',   // 짙은 텍스트
+  mid:     '#4b5563',   // 보조 텍스트
+  muted:   '#9ca3af',   // 연한 텍스트
+  border:  '#f1f2f4',   // 극도로 은은한 구분선
+  accent:  '#92400e',   // 웜 골드/앰버
+  accentBg:'#fffbeb',
   kakao:   '#FEE500',
   kakaoBr: '#181600',
-  green:   '#2d7a4f',
-  greenBg: '#edf7f1',
+  green:   '#15803d',
+  greenBg: '#f0fdf4',
 };
-
-/* ─────────────────────────────────────────────
-   SEO 마사지 키워드 클러스터 데이터 (구글 상위노출 네트워크)
-───────────────────────────────────────────── */
-const SEO_KEYWORD_TAGS = [
-  '강남출장마사지', '강남홈타이', '역삼출장마사지', '논현출장마사지', '선릉출장마사지', '청담출장마사지', '압구정출장마사지',
-  '서초출장마사지', '서초홈타이', '반포출장마사지', '방배출장마사지', '교대출장마사지',
-  '송파출장마사지', '잠실출장마사지', '잠실홈타이', '문정출장마사지', '천호출장마사지',
-  '마포출장마사지', '마포홈타이', '홍대출장마사지', '합정출장마사지', '공덕출장마사지', '상암출장마사지',
-  '용산출장마사지', '용산홈타이', '한남출장마사지', '이태원출장마사지', '용산역출장마사지',
-  '영등포출장마사지', '여의도출장마사지', '여의도홈타이', '신도림출장마사지', '당산출장마사지',
-  '성수출장마사지', '건대출장마사지', '왕십리출장마사지', '종로출장마사지', '명동출장마사지', '을지로출장마사지',
-  '동작출장마사지', '사당출장마사지', '관악출장마사지', '신림출장마사지', '봉천출장마사지',
-  '강서출장마사지', '마곡출장마사지', '목동출장마사지', '노원출장마사지', '수유출장마사지',
-  '호텔출장마사지', '모텔출장마사지', '오피스텔출장마사지', '24시출장마사지', '선입금없는출장마사지', '대면결제출장마사지',
-  '서울홈타이', '왓포출장마사지', '아로마출장마사지', '스웨디시마사지', '감성힐링테라피'
-];
 
 /* ─────────────────────────────────────────────
    데이터
@@ -54,32 +37,35 @@ const SEO_KEYWORD_TAGS = [
 const THERAPISTS = [
   {
     name: '민서',
-    age: 23,
+    age: '23세',
     spec: '166cm · 47kg · C컵 슬림',
     badge: '지명 1위',
     specialty: '감미로운 밀착 림프 순환 & 센슈얼 VIP 특화',
-    desc: '상냥하고 매혹적인 눈웃음과 섬세한 손길. 지명 예약률 독보적 1위의 대표 에이스.',
-    available: true,
+    desc: '상냥하고 매혹적인 눈웃음과 극상의 섬세한 손길. 지명 예약률 독보적 1위의 대표 에이스.',
+    status: '즉시 배차 가능',
+    isAvailable: true,
     img: '/images/ace_yuna.jpg',
   },
   {
     name: '채원',
-    age: 24,
+    age: '24세',
     spec: '168cm · 49kg · S라인 글래머',
     badge: '예약 폭주',
-    specialty: '정통 왓포 딥티슈 지압 + 아로마 힐링',
-    desc: '도회적인 분위기와 깊이 있는 압의 조화. 건식과 오일 케어를 완벽히 소화.',
-    available: false,
+    specialty: '정통 왓포 딥티슈 지압 + 황홀한 아로마 힐링',
+    desc: '도회적인 분위기와 깊이 있는 압의 조화. 시원한 건식과 매혹적인 오일 케어를 완벽히 소화.',
+    status: '심야 예약 접수 중',
+    isAvailable: false,
     img: '/images/ace_seoa.jpg',
   },
   {
     name: '예린',
-    age: 22,
+    age: '22세',
     spec: '165cm · 46kg · 꿀피부 슬렌더',
     badge: '에이스 힐러',
     specialty: '부드러운 손길과 섬세한 미세 근막 이완',
-    desc: '살결을 스치는 감각적인 온기. 굳어있던 심신의 긴장을 완전히 녹여내는 힐러.',
-    available: true,
+    desc: '살결을 스치는 조심스럽고 감각적인 온기. 굳어있던 심신의 긴장을 완전히 녹여내는 힐러.',
+    status: '즉시 배차 가능',
+    isAvailable: true,
     img: '/images/ace_jia.jpg',
   },
 ];
@@ -87,204 +73,165 @@ const THERAPISTS = [
 const COURSES = [
   {
     name: '타이 정통 코스',
-    sub: '왓포 왕실 정통 건식 수기 지압',
-    prices: [{ t:'60분', p:'80,000원' }, { t:'90분', p:'100,000원', best:true }, { t:'120분', p:'120,000원' }],
-    img: '/images/thai.jpg',
+    subtitle: '왓포 왕실 정통 건식 수기 지압',
+    desc: '순면 관리복 착용 후 진행되는 왓포 정통 건식 지압. 뭉친 승모근, 척추, 골반의 피로를 시원하게 이완합니다.',
     badge: null,
+    prices: [
+      { time: '60분', price: '80,000원' },
+      { time: '90분', price: '100,000원', isBest: true },
+      { time: '120분', price: '120,000원' },
+    ],
   },
   {
     name: '아로마 힐링 코스',
-    sub: '100% 천연 식물성 에센셜 오일 케어',
-    prices: [{ t:'60분', p:'90,000원' }, { t:'90분', p:'110,000원', best:true }, { t:'120분', p:'140,000원' }],
-    img: '/images/aroma.jpg',
+    subtitle: '100% 천연 식물성 에센셜 오일 케어',
+    desc: '체온에 녹아드는 최고급 천연 오일로 전신 림프를 부드럽게 이완하여 부종 완화와 깊은 숙면을 선사합니다.',
     badge: null,
+    prices: [
+      { time: '60분', price: '90,000원' },
+      { time: '90분', price: '110,000원', isBest: true },
+      { time: '120분', price: '140,000원' },
+    ],
   },
   {
     name: '감성힐링 테라피',
-    sub: '섬세하고 감미로운 미세 근막 이완',
-    prices: [{ t:'60분', p:'90,000원' }, { t:'90분', p:'120,000원', best:true }, { t:'120분', p:'150,000원' }],
-    img: '/images/sensual_touch.jpg',
+    subtitle: '섬세하고 감미로운 미세 근막 이완',
+    desc: '심신의 긴장과 일상의 스트레스를 녹여내는 섬세한 터치와 따뜻한 손길로 극상의 심신 안정을 제공합니다.',
     badge: '추천',
+    prices: [
+      { time: '60분', price: '90,000원' },
+      { time: '90분', price: '120,000원', isBest: true },
+      { time: '120분', price: '150,000원' },
+    ],
   },
   {
     name: '스페셜 듀얼 코스',
-    sub: '건식 지압 + 아로마 림프 믹스',
-    prices: [{ t:'60분', p:'100,000원' }, { t:'90분', p:'140,000원', best:true }, { t:'120분', p:'170,000원' }],
-    img: '/images/sensual_care.jpg',
+    subtitle: '정통 건식 지압 + 아로마 림프 믹스',
+    desc: '시원한 타이 수기로 대근육을 먼저 풀어준 뒤, 아로마 오일 테라피로 전환하는 만족도 1위 복합 프로그램.',
     badge: '만족도 1위',
+    prices: [
+      { time: '60분', price: '100,000원' },
+      { time: '90분', price: '140,000원', isBest: true },
+      { time: '120분', price: '170,000원' },
+    ],
   },
   {
     name: '프리미엄 VIP 시그니처',
-    sub: '전신 수기 + 최고급 오일 + 림프 풀코스',
-    prices: [{ t:'60분', p:'120,000원' }, { t:'90분', p:'160,000원', best:true }, { t:'120분', p:'200,000원' }],
-    img: '/images/hero_sensual_goddess.jpg',
+    subtitle: '전신 수기 + 최고급 천연 오일 + 림프 풀코스',
+    desc: '에이스 테라피스트 전담 배정. 전신 건식 수기부터 천연 힐링 오일, 림프 집중 케어까지 전 과정을 정성껏 진행합니다.',
     badge: 'BEST',
+    prices: [
+      { time: '60분', price: '120,000원' },
+      { time: '90분', price: '160,000원', isBest: true },
+      { time: '120분', price: '200,000원' },
+    ],
   },
 ];
 
 const REVIEWS = [
   {
     author: '김*호 님',
-    area: '강남 역삼동 호텔',
-    course: 'VIP 시그니처 90분 · 민서 지명',
-    text: '출장 중 깊은 피로를 상담부터 친절히 안내받고 말끔히 풀었습니다. 선입금 없이 도착 후 결제해서 정말 안심할 수 있었어요.',
+    area: '강남구 역삼동 호텔',
+    course: 'VIP 시그니처 90분 (민서 쌤)',
+    text: '서울 출장 중 이용했습니다. 사전 예약금 없이 직접 도착하신 후 결제하는 방식이라 안심할 수 있었고, 민서 관리사님의 정성 어린 손길 덕분에 출장 피로가 말끔히 풀렸습니다.',
   },
   {
     author: '박*훈 님',
     area: '마포구 공덕동 자택',
-    course: '스페셜 듀얼 90분',
-    text: '25분 만에 방문해 주셔서 감동이었어요. 순면 관리복과 천연 오일을 챙겨오셔서 제 방이 바로 스파로 변신했습니다.',
+    course: '스페셜 듀얼 테라피 90분',
+    text: '마포 집까지 25분 만에 정확히 방문해 주셨습니다. 순면 관리복과 천연 오일을 챙겨오셔서 제 방이 순식간에 호텔 스파로 변신했네요. 깊은 숙면을 취했습니다.',
   },
   {
     author: '조*현 님',
     area: '여의도 콘래드 호텔',
-    course: 'VIP 시그니처 120분 · 채원 지명',
-    text: '채원 테라피스트님의 단아하고 품격 있는 매너에 깊은 인상을 받았습니다. 완전한 프라이버시 속에서 진정한 힐링을 누렸어요.',
-  },
-  {
-    author: '최*민 님',
-    area: '용산구 한남동 레지던스',
-    course: '아로마 릴렉싱 90분 · 예린 지명',
-    text: '새벽 늦은 시간에도 20분 만에 도착해 주셔서 감사했습니다. 한 주간 쌓인 피로가 완전히 가셨어요.',
+    course: 'VIP 시그니처 120분 (채원 쌤)',
+    text: '채원 테라피스트님의 단아한 매너와 섬세한 테크닉에 깊은 인상을 받았습니다. 철저한 프라이버시 속에서 진정한 힐링을 누렸습니다.',
   },
 ];
 
 const FAQS = [
   {
-    q: '서울 어디든 방문 가능한가요?',
-    a: '네, 서울 25개 자치구 전지역에 방문합니다. 서울 외 지역은 이동이 불가합니다. 매일 저녁 7시~새벽 5시 운영합니다.',
+    q: '서울 전지역 모두 방문 가능한가요?',
+    a: '네, 서울특별시 25개 자치구 전지역 모두 정성껏 찾아뵙고 있습니다. 최상의 서비스 품질과 20~30분 내외 신속 방문을 위해 서울 전역에 집중 배차하며, 매일 저녁 7시부터 새벽 5시까지 운영합니다.',
   },
   {
-    q: '예약금이나 선입금이 필요한가요?',
-    a: '아닙니다. 단 1원도 사전 입금을 요구하지 않습니다. 전문 테라피스트가 도착 후 직접 뵙고 결제하는 100% 현장 대면결제만을 원칙으로 합니다.',
+    q: '예약 시 선입금이나 예약금을 요구하나요?',
+    a: '아닙니다. 아름다운 밤은 사전 예약금, 보증금 등을 일체 요구하지 않습니다. 전문 테라피스트가 고객님 계신 곳에 도착하여 직접 인사드린 후 결제하는 100% 현장 대면결제 원칙만을 고수합니다.',
   },
   {
-    q: '도착까지 얼마나 걸리나요?',
-    a: '서울 전역에 상시 대기 중으로, 예약 확정 후 평균 20~30분 내외로 방문합니다. 출발 시 예상 도착 시간을 미리 알려드립니다.',
+    q: '예약 후 도착까지 시간은 얼마나 걸리나요?',
+    a: '서울 전역 주요 거점에 전문 테라피스트가 상시 대기하고 있어, 예약 확정 후 평균 20~30분 내외로 신속하게 방문합니다. 출발 시 예상 도착 시간을 미리 친절히 안내해 드립니다.',
   },
   {
-    q: '어떤 결제 수단이 가능한가요?',
-    a: '국내외 신용·체크카드(Visa, Master, Amex, JCB), 현금(원화·달러), 계좌이체 모두 가능합니다. 현장에서 영수증도 즉시 발급됩니다.',
+    q: '결제는 어떤 수단으로 가능한가요? (카드/현금)',
+    a: '국내외 모든 신용카드 및 체크카드(Visa, Master, Amex, JCB), 현금(원화·달러), 계좌이체 결제가 모두 가능하며, 현장에서 영수증 증빙도 즉시 발급됩니다.',
   },
   {
-    q: '호텔·오피스텔·자택 모두 방문 가능한가요?',
-    a: '고객님만의 독립된 공간이라면 모두 가능합니다. 호텔은 객실 호수만 알려주시면 조용히 찾아갑니다.',
+    q: '호텔, 레지던스, 오피스텔, 일반 자택 모두 방문이 가능한가요?',
+    a: '네, 고객님만의 독립된 공간이라면 어디든 방문 가능합니다. 일반 자택(아파트·빌라)은 물론 서울 전역 호텔, 레지던스, 오피스텔 모두 가능하며, 호텔의 경우 객실 호수만 알려주시면 규정에 맞춰 조용히 찾아갑니다.',
   },
   {
-    q: '프로필 속 관리사가 실제로 오나요?',
-    a: '네, 실물 프로필 100% 일치를 철저한 원칙으로 운영합니다. 서울 전역 권역별 거점에 상시 대기 중인 30여 명의 엄선된 20대 전문 테라피스트(민서, 채원, 예린 등 대표 에이스를 비롯하여 다양한 스타일의 전문 힐러진)를 보유하고 있으며, 원하시는 스타일과 테라피스트를 편안하게 지정하시면 반드시 해당 관리사가 직접 방문합니다.',
+    q: '프로필 속 관리사분이 실제로 직접 오시나요?',
+    a: '네, 실물 프로필 100% 일치를 철저한 원칙으로 운영합니다. 서울 전역 권역별 거점에 상시 대기 중인 30여 명의 엄선된 20대 전문 테라피스트(민서, 채원, 예린 등 대표 에이스를 비롯하여 다양한 스타일의 전문 힐러진)를 보유하고 있으며, 원하시는 테라피스트를 지정하시면 반드시 해당 관리사가 직접 방문합니다.',
   },
 ];
 
-/* ─────────────────────────────────────────────
-   재사용 컴포넌트
-───────────────────────────────────────────── */
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{
-      display: 'inline-block',
-      fontSize: '11px',
-      fontWeight: 700,
-      color: C.accent,
-      letterSpacing: '1.2px',
-      textTransform: 'uppercase',
-      marginBottom: '6px',
-    }}>
-      {children}
-    </div>
-  );
-}
-
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 style={{
-      fontSize: '22px',
-      fontWeight: 900,
-      color: C.dark,
-      lineHeight: 1.3,
-      margin: '0 0 8px',
-      letterSpacing: '-0.3px',
-    }}>
-      {children}
-    </h2>
-  );
-}
-
-function Divider() {
-  return <div style={{ height: '1px', backgroundColor: C.border, margin: '40px 0' }} />;
-}
+// 서울 주요 지역 SEO 키워드
+const POPULAR_AREAS = [
+  '강남출장마사지', '강남홈타이', '역삼출장마사지', '논현출장마사지', '선릉출장마사지', '청담출장마사지', '압구정출장마사지',
+  '서초출장마사지', '서초홈타이', '반포출장마사지', '송파출장마사지', '잠실출장마사지', '마포출장마사지', '홍대출장마사지',
+  '공덕출장마사지', '용산출장마사지', '한남출장마사지', '이태원출장마사지', '여의도출장마사지', '영등포출장마사지',
+  '성수출장마사지', '종로출장마사지', '명동출장마사지', '동작출장마사지', '사당출장마사지', '관악출장마사지', '신림출장마사지',
+  '호텔출장마사지', '24시출장마사지', '선입금없는출장마사지', '대면결제출장마사지'
+];
 
 /* ─────────────────────────────────────────────
    메인 컴포넌트
 ───────────────────────────────────────────── */
 export default function HomePage() {
-  const [openFaq, setOpenFaq]   = useState<number | null>(null);
-  const [kakaoOpen, setKakaoOpen] = useState(false);
-  const [toast, setToast]       = useState<string | null>(null);
+  const [openFaq, setOpenFaq]     = useState<number | null>(null);
+  const [kakaoModal, setKakaoModal] = useState(false);
+  const [toast, setToast]         = useState<string | null>(null);
 
-  const kakaoConnect = (e: React.MouseEvent) => {
+  const handleKakao = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard?.writeText(KAKAO_ID).catch(() => {});
-    setKakaoOpen(true);
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(KAKAO_ID).catch(() => {});
+    }
+    setKakaoModal(true);
   };
 
-  const copyKakao = () => {
-    navigator.clipboard?.writeText(KAKAO_ID).catch(() => {});
+  const copyId = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(KAKAO_ID).catch(() => {});
+    }
     setToast(`카톡 ID [${KAKAO_ID}] 복사 완료`);
-    setTimeout(() => setToast(null), 2200);
+    setTimeout(() => setToast(null), 2000);
   };
-
-  /* ── 스타일 헬퍼 ── */
-  const pill = (bg: string, color: string, extra?: React.CSSProperties): React.CSSProperties => ({
-    display: 'inline-block',
-    padding: '2px 8px',
-    borderRadius: '4px',
-    fontSize: '10.5px',
-    fontWeight: 700,
-    backgroundColor: bg,
-    color,
-    ...extra,
-  });
-
-  const btn = (bg: string, color: string, extra?: React.CSSProperties): React.CSSProperties => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '6px',
-    padding: '13px 20px',
-    borderRadius: '10px',
-    fontWeight: 800,
-    fontSize: '14px',
-    backgroundColor: bg,
-    color,
-    cursor: 'pointer',
-    border: 'none',
-    ...extra,
-  });
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: C.bg, paddingBottom: '80px' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: C.bg, color: C.dark, paddingBottom: '90px' }}>
 
       {/* ── 토스트 ── */}
       {toast && (
         <div style={{
           position: 'fixed', top: '16px', left: '50%', transform: 'translateX(-50%)',
-          backgroundColor: C.dark, color: '#fff',
-          padding: '9px 20px', borderRadius: '30px',
-          fontSize: '12.5px', fontWeight: 700, zIndex: 99999,
-          boxShadow: '0 6px 20px rgba(0,0,0,0.18)',
+          backgroundColor: C.dark, color: '#ffffff',
+          padding: '10px 22px', borderRadius: '30px',
+          fontSize: '13px', fontWeight: 700, zIndex: 99999,
+          boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
         }}>
           {toast}
         </div>
       )}
 
-      {/* ── 카카오 모달 ── */}
-      {kakaoOpen && (
+      {/* ── 카카오톡 상담 모달 ── */}
+      {kakaoModal && (
         <div
-          onClick={() => setKakaoOpen(false)}
+          onClick={() => setKakaoModal(false)}
           style={{
             position: 'fixed', inset: 0,
-            backgroundColor: 'rgba(26,26,46,0.5)',
+            backgroundColor: 'rgba(17, 24, 39, 0.45)',
             backdropFilter: 'blur(4px)',
             zIndex: 99998,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -292,70 +239,46 @@ export default function HomePage() {
           }}
         >
           <div
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             style={{
-              backgroundColor: C.white, borderRadius: '20px',
-              maxWidth: '400px', width: '100%',
-              padding: '28px 24px',
-              boxShadow: '0 24px 48px rgba(0,0,0,0.14)',
+              backgroundColor: '#ffffff', borderRadius: '20px',
+              maxWidth: '380px', width: '100%',
+              padding: '28px 22px', textAlign: 'center',
+              boxShadow: '0 24px 48px rgba(0,0,0,0.12)',
             }}
           >
-            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-              <div style={{
-                width: '48px', height: '48px', borderRadius: '50%',
-                backgroundColor: C.kakao,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                margin: '0 auto 12px',
-              }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill={C.kakaoBr}/>
-                </svg>
-              </div>
-              <div style={{ fontSize: '17px', fontWeight: 900, color: C.dark }}>카카오톡 1:1 예약</div>
-              <div style={{ fontSize: '12.5px', color: C.muted, marginTop: '4px', lineHeight: 1.5 }}>
-                친구 추가 후 희망 코스와 방문 장소를<br />말씀해 주시면 즉시 안내해 드립니다.
-              </div>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: C.kakao, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill={C.kakaoBr}/></svg>
             </div>
+            <h3 style={{ fontSize: '18px', fontWeight: 900, color: C.dark, margin: '0 0 6px' }}>카카오톡 1:1 예약 상담</h3>
+            <p style={{ fontSize: '13px', color: C.mid, margin: '0 0 18px', lineHeight: 1.5 }}>
+              친구 추가 후 희망 코스와 방문 장소를<br />말씀해 주시면 즉시 친절히 안내해 드립니다.
+            </p>
 
-            <div style={{
-              backgroundColor: C.bg, borderRadius: '10px',
-              padding: '14px 16px', marginBottom: '14px',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            }}>
-              <div>
-                <div style={{ fontSize: '10.5px', color: C.muted, fontWeight: 600 }}>카카오톡 공식 ID</div>
-                <div style={{ fontSize: '20px', fontWeight: 900, color: C.dark, marginTop: '2px' }}>{KAKAO_ID}</div>
+            <div style={{ backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, borderRadius: '12px', padding: '14px 16px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontSize: '11px', color: C.muted, fontWeight: 600 }}>카카오톡 공식 ID</div>
+                <div style={{ fontSize: '18px', fontWeight: 900, color: C.dark }}>{KAKAO_ID}</div>
               </div>
               <button
-                onClick={copyKakao}
-                style={{
-                  backgroundColor: C.kakao, color: C.kakaoBr,
-                  padding: '7px 14px', borderRadius: '7px',
-                  fontSize: '12px', fontWeight: 800,
-                }}
+                onClick={copyId}
+                style={{ backgroundColor: C.kakao, color: C.kakaoBr, padding: '7px 14px', borderRadius: '7px', fontSize: '12px', fontWeight: 800 }}
               >
-                복사
+                ID 복사
               </button>
             </div>
 
             <div style={{ display: 'flex', gap: '8px' }}>
               <a
                 href={KAKAO_LINK}
-                onClick={() => setKakaoOpen(false)}
-                style={{
-                  flex: 1, ...btn(C.kakao, C.kakaoBr),
-                  borderRadius: '10px', textDecoration: 'none',
-                }}
+                onClick={() => setKakaoModal(false)}
+                style={{ flex: 1, backgroundColor: C.kakao, color: C.kakaoBr, fontWeight: 900, fontSize: '14px', padding: '13px 0', borderRadius: '10px', textDecoration: 'none' }}
               >
                 카카오톡 열기
               </a>
               <button
-                onClick={() => setKakaoOpen(false)}
-                style={{
-                  padding: '13px 18px', borderRadius: '10px',
-                  backgroundColor: '#f1f0ee', color: C.mid,
-                  fontWeight: 700, fontSize: '13px',
-                }}
+                onClick={() => setKakaoModal(false)}
+                style={{ padding: '13px 18px', backgroundColor: '#f3f4f6', color: C.mid, borderRadius: '10px', fontWeight: 700, fontSize: '13px' }}
               >
                 닫기
               </button>
@@ -364,599 +287,339 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ══════════════════════════════════════════
-          상단 안내 띠
-      ══════════════════════════════════════════ */}
-      <div style={{
-        backgroundColor: C.dark, color: '#c8c8e0',
-        textAlign: 'center', padding: '8px 16px',
-        fontSize: '11.5px', fontWeight: 500,
-      }}>
-        운영시간 <strong style={{ color: '#fff' }}>저녁 7시 ~ 새벽 5시</strong>
-        &ensp;·&ensp;서울 25개 구 평균 <strong style={{ color: '#fff' }}>20~30분 도착</strong>
-        &ensp;·&ensp;<strong style={{ color: C.kakao }}>선입금 0원</strong>
+      {/* ── 상단 띠 (초간결) ── */}
+      <div style={{ backgroundColor: C.bgSoft, borderBottom: `1px solid ${C.border}`, padding: '8px 16px', textAlign: 'center', fontSize: '12px', color: C.mid }}>
+        서울 전지역 20~30분 도착 · <strong style={{ color: C.dark }}>100% 현장 대면결제 (선입금 0원)</strong>
       </div>
 
-      {/* ══════════════════════════════════════════
-          헤더
-      ══════════════════════════════════════════ */}
-      <header style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        backgroundColor: 'rgba(255,255,255,0.97)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: `1px solid ${C.border}`,
-      }}>
-        <div style={{
-          maxWidth: '680px', margin: '0 auto',
-          padding: '11px 18px',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          {/* 로고 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
-            <div style={{
-              width: '32px', height: '32px', borderRadius: '8px',
-              backgroundColor: C.dark,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0,
-            }}>
-              <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
-                <path d="M 27 12 C 18 12 13 19 13 27 C 13 35 20 40 29 40 C 23.5 38 19.5 32 19.5 26 C 19.5 18 24.5 13.5 32 12.8 C 30.5 12.2 28.8 12 27 12 Z" fill="#f3e5ab"/>
-                <path d="M36 10 L37 13 L40 14 L37 15 L36 18 L35 15 L32 14 L35 13 Z" fill="#d4af37" opacity="0.9"/>
-              </svg>
+      {/* ── 헤더 ── */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 40, backgroundColor: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(12px)', borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '12px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ fontSize: '17px', fontWeight: 900, color: C.dark, letterSpacing: '-0.3px' }}>
+              아름다운 밤 <span style={{ fontSize: '11px', fontWeight: 700, color: C.accent }}>Abam</span>
             </div>
-            <div>
-              <div style={{ fontSize: '15px', fontWeight: 900, color: C.dark, letterSpacing: '-0.3px' }}>
-                아름다운 밤 <span style={{ fontSize: '10px', fontWeight: 700, color: C.accent }}>Abam</span>
-              </div>
-              <div style={{ fontSize: '10.5px', color: C.muted, fontWeight: 500 }}>
-                프라이빗 1:1 방문 홈케어
-              </div>
-            </div>
+            <div style={{ fontSize: '11px', color: C.muted }}>프라이빗 심야 1:1 방문 홈케어</div>
           </div>
 
-          {/* 헤더 CTA (데스크탑) */}
-          <div className="desktop-only" style={{ display: 'flex', gap: '6px' }}>
-            <a href={KAKAO_LINK} onClick={kakaoConnect} style={{
-              ...pill(C.kakao, C.kakaoBr, { padding: '7px 13px', fontSize: '12px', fontWeight: 900, borderRadius: '7px' }),
-              display: 'inline-block',
-            }}>
-              카톡: {KAKAO_ID}
-            </a>
-            <a href={PHONE_TEL} style={{
-              ...pill(C.dark, '#fff', { padding: '7px 13px', fontSize: '12px', fontWeight: 800, borderRadius: '7px' }),
-              display: 'inline-block',
-            }}>
-              {PHONE_NUM}
-            </a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 800, color: C.dark, backgroundColor: C.bgSoft, padding: '3px 7px', borderRadius: '4px' }}>KR</span>
+            <Link href="/en" style={{ fontSize: '11px', color: C.muted, padding: '3px 5px' }}>EN</Link>
+            <Link href="/jp" style={{ fontSize: '11px', color: C.muted, padding: '3px 5px' }}>JP</Link>
+            <Link href="/cn" style={{ fontSize: '11px', color: C.muted, padding: '3px 5px' }}>CN</Link>
           </div>
         </div>
       </header>
 
-      {/* ══════════════════════════════════════════
-          메인
-      ══════════════════════════════════════════ */}
-      <main style={{ maxWidth: '680px', margin: '0 auto', padding: '0 18px' }}>
+      {/* ── 본문 ── */}
+      <main style={{ maxWidth: '640px', margin: '0 auto', padding: '0 18px' }}>
 
-        {/* ── 섹션 1: 히어로 ── */}
-        <section style={{ padding: '32px 0 0', textAlign: 'center' }}>
-
-          {/* 태그라인 */}
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '6px',
-            backgroundColor: C.accentBg, border: `1px solid #f0e0c0`,
-            borderRadius: '20px', padding: '4px 12px',
-            fontSize: '11.5px', fontWeight: 700, color: C.accent,
-            marginBottom: '18px',
-          }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#2d7a4f', flexShrink: 0 }} />
-            서울 전지역 · 심야 1:1 방문 홈케어
+        {/* ── 1. 히어로 ── */}
+        <section style={{ paddingTop: '32px', textAlign: 'center' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px', fontWeight: 700, color: C.accent, backgroundColor: C.accentBg, padding: '4px 12px', borderRadius: '20px', marginBottom: '16px' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: C.green }} />
+            서울 전지역 20~30분 신속 방문 · 100% 현장 대면결제
           </div>
 
-          {/* H1 */}
-          <h1 style={{
-            fontSize: 'clamp(24px, 6vw, 34px)',
-            fontWeight: 900,
-            color: C.dark,
-            lineHeight: 1.35,
-            letterSpacing: '-0.5px',
-            margin: '0 0 14px',
-          }}>
+          <h1 style={{ fontSize: '28px', fontWeight: 900, lineHeight: 1.35, color: C.dark, margin: '0 0 14px', letterSpacing: '-0.5px' }}>
             지친 하루의 끝,<br />
-            가장 편안한 밤을<br />
-            선물합니다
+            가장 아늑한 밤을 선물합니다
           </h1>
 
-          {/* 서브 카피 */}
-          <p style={{
-            fontSize: '14px', color: C.mid,
-            lineHeight: 1.75, margin: '0 auto 24px',
-            maxWidth: '420px',
-          }}>
-            엄선된 20대 전문 테라피스트가 서울 전지역
-            <strong style={{ color: C.dark }}> 20~30분 내외</strong>로
-            고객님의 프라이빗 공간(호텔·자택·오피스텔)으로 찾아갑니다.
-            <br />
-            <span style={{ color: C.green, fontWeight: 700 }}>
-              사전 예약금 없이 도착 후 직접 확인하고 결제하세요.
-            </span>
+          <p style={{ fontSize: '14px', color: C.mid, lineHeight: 1.7, margin: '0 auto 24px', maxWidth: '440px' }}>
+            도메인 <strong>abam.kr</strong> 그대로, 엄선된 20대 전문 테라피스트가 고객님의 프라이빗 룸(호텔, 자택, 오피스텔)으로 직접 찾아갑니다.
+            사전 예약금 없는 100% 현장 대면결제로 안심하고 편안한 휴식을 누리세요.
           </p>
 
-          {/* CTA 버튼 2개 */}
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
+          {/* 2대 메인 CTA 버튼 */}
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '28px' }}>
             <a
               href={KAKAO_LINK}
-              onClick={kakaoConnect}
+              onClick={handleKakao}
               style={{
-                ...btn(C.kakao, C.kakaoBr),
-                flex: 1, maxWidth: '200px',
-                borderRadius: '10px', boxShadow: '0 4px 14px rgba(254,229,0,0.3)',
+                flex: 1, maxWidth: '210px',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                backgroundColor: C.kakao, color: C.kakaoBr,
+                fontWeight: 900, fontSize: '14.5px', padding: '14px 0', borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(254, 229, 0, 0.25)',
                 textDecoration: 'none',
               }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill={C.kakaoBr}/>
-              </svg>
-              카카오 상담
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill={C.kakaoBr}/></svg>
+              카카오톡 1:1 상담
             </a>
             <a
               href={PHONE_TEL}
               style={{
-                ...btn(C.dark, '#fff'),
-                flex: 1, maxWidth: '200px',
-                borderRadius: '10px', boxShadow: '0 4px 14px rgba(26,26,46,0.18)',
+                flex: 1, maxWidth: '210px',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                backgroundColor: C.dark, color: '#ffffff',
+                fontWeight: 800, fontSize: '14.5px', padding: '14px 0', borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(17, 24, 39, 0.15)',
                 textDecoration: 'none',
               }}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#fff"/>
-              </svg>
-              전화 예약
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
+              010-6607-2239
             </a>
           </div>
 
-          {/* 3대 신뢰 지표 */}
-          <div style={{
-            display: 'flex', justifyContent: 'center', gap: '0',
-            flexWrap: 'wrap',
-            marginBottom: '28px',
-          }}>
-            {[
-              '선입금 0원',
-              '30여 명 20대 엄선 테라피스트',
-              '서울 전지역 20~30분',
-            ].map((txt, i) => (
-              <React.Fragment key={i}>
-                <span style={{ fontSize: '12px', color: C.mid, fontWeight: 600 }}>
-                  ✓ {txt}
-                </span>
-                {i < 2 && (
-                  <span style={{ color: C.border, margin: '0 8px', fontSize: '12px' }}>|</span>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-
-          {/* 히어로 이미지 */}
-          <div style={{
-            position: 'relative', width: '100%', height: '280px',
-            borderRadius: '16px', overflow: 'hidden',
-            boxShadow: '0 8px 28px rgba(0,0,0,0.08)',
-          }}>
-            <Image
-              src="/images/hero_sensual_goddess.jpg"
-              alt="아름다운 밤 · 프라이빗 홈케어"
-              fill style={{ objectFit: 'cover' }}
-              priority
-            />
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0,
-              background: 'linear-gradient(transparent, rgba(26,26,46,0.72))',
-              padding: '20px 18px',
-            }}>
-              <div style={{ fontSize: '10.5px', color: C.accent, fontWeight: 700, letterSpacing: '0.8px' }}>
-                PRIVATE IN-ROOM SPA · SEOUL
-              </div>
-              <div style={{ fontSize: '15px', fontWeight: 900, color: '#fff', marginTop: '2px' }}>
-                살결을 타고 흐르는 은은한 아로마와 따뜻한 손길
-              </div>
+          {/* 대형 호텔 스파 비주얼 */}
+          <div style={{ position: 'relative', width: '100%', height: '240px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+            <Image src="/images/hero_sensual_goddess.jpg" alt="아름다운 밤 타이 홈케어" fill style={{ objectFit: 'cover' }} priority />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '16px', background: 'linear-gradient(to top, rgba(17, 24, 39, 0.75), transparent)', color: '#ffffff', textAlign: 'left' }}>
+              <div style={{ fontSize: '11px', color: '#fef08a', fontWeight: 700 }}>SEOUL PRIVATE IN-ROOM SPA</div>
+              <div style={{ fontSize: '15px', fontWeight: 900 }}>살결을 타고 흐르는 은은한 아로마와 따뜻한 손길</div>
             </div>
           </div>
         </section>
 
-        <Divider />
+        {/* ── 구분선 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '44px 0 36px' }} />
 
-        {/* ── 섹션 2: 오늘 밤 테라피스트 ── */}
+        {/* ── 2. 오늘 밤 테라피스트 (30여 명 인력풀) ── */}
         <section>
-          <div style={{ marginBottom: '20px' }}>
-            <SectionLabel>TODAY'S THERAPIST</SectionLabel>
-            <SectionTitle>오늘 밤 출근 대표 테라피스트</SectionTitle>
+          <div style={{ marginBottom: '18px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>TODAY'S THERAPISTS</div>
+            <h2 style={{ fontSize: '20px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>오늘 밤 출근 대표 테라피스트</h2>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: C.green, fontWeight: 700 }}>
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: C.green }} />
               서울 권역별 30여 명 전문 힐러 상시 대기 중
             </div>
           </div>
 
-          {/* 모바일: 세로 스택, 데스크탑: 3열 그리드 */}
+          {/* 3인 테라피스트 프로필 리스트 (모바일 최적화 세로형 카드) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {THERAPISTS.map((t, idx) => (
-              <div key={idx} style={{
-                backgroundColor: C.white,
-                border: `1px solid ${C.border}`,
-                borderRadius: '14px',
-                overflow: 'hidden',
-                display: 'flex',
-                gap: '0',
-              }}>
-                {/* 좌측: 사진 (정사각형 고정) */}
-                <div style={{ position: 'relative', width: '110px', minHeight: '140px', flexShrink: 0 }}>
+            {THERAPISTS.map((t, i) => (
+              <div
+                key={i}
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: `1px solid ${C.border}`,
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
+                }}
+              >
+                {/* 사진 */}
+                <div style={{ position: 'relative', width: '100%', height: '260px' }}>
                   <Image src={t.img} alt={t.name} fill style={{ objectFit: 'cover' }} />
-                  {/* 배지 */}
-                  <div style={{
-                    position: 'absolute', top: '8px', left: '8px',
-                    backgroundColor: 'rgba(26,26,46,0.82)',
-                    color: '#fde68a', fontSize: '10px', fontWeight: 700,
-                    padding: '2px 6px', borderRadius: '4px',
-                    backdropFilter: 'blur(3px)',
-                  }}>
+                  <div style={{ position: 'absolute', top: '12px', left: '12px', backgroundColor: 'rgba(17, 24, 39, 0.8)', color: '#fef08a', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px', backdropFilter: 'blur(4px)' }}>
                     {t.badge}
                   </div>
                 </div>
 
-                {/* 우측: 정보 */}
-                <div style={{ flex: 1, padding: '14px 14px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '3px' }}>
-                      <span style={{ fontSize: '16px', fontWeight: 900, color: C.dark }}>{t.name}</span>
-                      <span style={{ fontSize: '12px', color: C.muted, fontWeight: 500 }}>{t.age}세</span>
+                {/* 프로필 정보 */}
+                <div style={{ padding: '16px 16px 12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <div style={{ fontSize: '18px', fontWeight: 900, color: C.dark }}>
+                      {t.name} <span style={{ fontSize: '13px', color: C.muted, fontWeight: 500 }}>({t.age})</span>
                     </div>
-                    <div style={{ fontSize: '11.5px', color: C.accent, fontWeight: 700, marginBottom: '5px' }}>{t.spec}</div>
-                    <div style={{ fontSize: '12px', color: C.mid, fontWeight: 700, marginBottom: '3px' }}>{t.specialty}</div>
-                    <div style={{ fontSize: '11.5px', color: C.muted, lineHeight: 1.55 }}>{t.desc}</div>
+                    <div style={{ fontSize: '12.5px', fontWeight: 800, color: C.accent }}>{t.spec}</div>
                   </div>
 
-                  {/* 가용 상태 + 버튼 */}
-                  <div style={{ marginTop: '10px' }}>
-                    <div style={{
-                      fontSize: '11px', fontWeight: 700,
-                      color: t.available ? C.green : '#c2851a',
-                      marginBottom: '8px',
-                    }}>
-                      {t.available ? '● 즉시 배차 가능' : '○ 심야 예약 접수 중'}
-                    </div>
-                    <div style={{ display: 'flex', gap: '6px' }}>
-                      <a href={KAKAO_LINK} onClick={kakaoConnect} style={{
-                        flex: 1, ...btn(C.kakao, C.kakaoBr, { padding: '8px 0', fontSize: '12px', borderRadius: '7px', textDecoration: 'none' }),
-                      }}>
-                        {t.name} 카톡지명
-                      </a>
-                      <a href={PHONE_TEL} style={{
-                        flex: 1, ...btn(C.dark, '#fff', { padding: '8px 0', fontSize: '12px', borderRadius: '7px', textDecoration: 'none' }),
-                      }}>
-                        전화지명
-                      </a>
-                    </div>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: C.dark, margin: '6px 0 3px' }}>{t.specialty}</div>
+                  <p style={{ fontSize: '12px', color: C.mid, lineHeight: 1.55, margin: '0 0 10px' }}>{t.desc}</p>
+
+                  <div style={{ fontSize: '11.5px', fontWeight: 700, color: t.isAvailable ? C.green : '#d97706', marginBottom: '12px' }}>
+                    {t.isAvailable ? '●' : '○'} {t.status}
+                  </div>
+
+                  {/* 지명 버튼 */}
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    <a
+                      href={KAKAO_LINK}
+                      onClick={handleKakao}
+                      style={{
+                        flex: 1.2,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px',
+                        backgroundColor: C.kakao, color: C.kakaoBr,
+                        fontWeight: 900, fontSize: '13px', padding: '11px 0', borderRadius: '8px',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill={C.kakaoBr}/></svg>
+                      {t.name} 카톡지명
+                    </a>
+                    <a
+                      href={PHONE_TEL}
+                      style={{
+                        flex: 1,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        backgroundColor: C.dark, color: '#ffffff',
+                        fontWeight: 800, fontSize: '13px', padding: '11px 0', borderRadius: '8px',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      전화지명
+                    </a>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* 전체 30여 명 테라피스트 인력풀 안내 배너 */}
-          <div style={{
-            marginTop: '14px',
-            backgroundColor: C.white,
-            border: `1px solid ${C.border}`,
-            borderRadius: '12px',
-            padding: '14px 16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '12px',
-            flexWrap: 'wrap',
-          }}>
-            <div style={{ flex: 1, minWidth: '220px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 900, color: C.dark, marginBottom: '3px' }}>
-                ✨ 서울 전역 30여 명의 20대 전문 테라피스트 상시 대기
-              </div>
-              <div style={{ fontSize: '11.5px', color: C.muted, lineHeight: 1.5 }}>
-                대표 에이스 테라피스트 외에도 각 권역 거점에 다양한 매력과 맞춤 힐링 스타일(슬렌더, 글래머, 딥티슈 압 조절 등)의 전문 힐러진이 상시 근무 중입니다. 예약 시 원하시는 스타일을 편안하게 말씀해 주세요.
-              </div>
-            </div>
-            <a
-              href={KAKAO_LINK}
-              onClick={kakaoConnect}
-              style={{
-                backgroundColor: C.accentBg,
-                border: `1px solid #f0e0c0`,
-                color: C.accent,
-                padding: '8px 14px',
-                borderRadius: '8px',
-                fontSize: '12px',
-                fontWeight: 800,
-                textDecoration: 'none',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              맞춤 스타일 상담
-            </a>
+          {/* 30여 명 인력풀 정갈한 안내 박스 */}
+          <div style={{ marginTop: '16px', padding: '14px 16px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, borderRadius: '12px', fontSize: '12.5px', color: C.mid, lineHeight: 1.6 }}>
+            <strong style={{ color: C.dark }}>서울 전역 30여 명의 20대 전문 테라피스트 상시 대기</strong><br />
+            소개된 대표 에이스 외에도 각 권역 거점에 다양한 매력과 스타일(슬렌더, 글래머, 딥티슈 압 조절 등)의 전문 힐러진이 대기 중입니다. 예약 시 희망하시는 스타일을 편안하게 말씀해 주세요.
           </div>
         </section>
 
-        <Divider />
+        {/* ── 구분선 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '44px 0 36px' }} />
 
-        {/* ── 섹션 3: 코스 & 가격표 ── */}
+        {/* ── 3. 코스 및 정찰제 가격표 (호텔 스파 메뉴판 스타일) ── */}
         <section>
-          <div style={{ marginBottom: '20px' }}>
-            <SectionLabel>MENU & PRICING</SectionLabel>
-            <SectionTitle>시그니처 코스 · 투명 정찰제</SectionTitle>
-            <p style={{ fontSize: '12.5px', color: C.muted }}>
-              선입금 0원 · 도착 후 현장 결제 (카드·현금·계좌이체)
+          <div style={{ marginBottom: '18px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>SPA MENU &amp; PRICING</div>
+            <h2 style={{ fontSize: '20px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>시그니처 코스 및 투명 정찰제</h2>
+            <p style={{ fontSize: '12.5px', color: C.muted, margin: 0 }}>
+              선입금 0원 · 전 코스 도착 후 직접 뵙고 현장 결제 (카드 / 현금 / 계좌이체)
             </p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {COURSES.map((c, idx) => (
-              <div key={idx} style={{
-                backgroundColor: C.white,
-                border: `1px solid ${C.border}`,
-                borderRadius: '12px',
-                padding: '14px 16px',
-                display: 'flex', gap: '14px', alignItems: 'center',
-              }}>
-                {/* 썸네일 */}
-                <div style={{ position: 'relative', width: '56px', height: '56px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0 }}>
-                  <Image src={c.img} alt={c.name} fill style={{ objectFit: 'cover' }} />
-                </div>
-
-                {/* 내용 */}
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-                    <span style={{ fontSize: '15px', fontWeight: 900, color: C.dark }}>{c.name}</span>
-                    {c.badge && (
-                      <span style={pill('#dc2626', '#fff', { padding: '1px 6px', borderRadius: '3px' })}>{c.badge}</span>
+            {COURSES.map((course, i) => (
+              <div
+                key={i}
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: `1px solid ${C.border}`,
+                  borderRadius: '14px',
+                  padding: '16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '16px', fontWeight: 900, color: C.dark }}>{course.name}</span>
+                    {course.badge && (
+                      <span style={{ fontSize: '10px', fontWeight: 800, color: '#ffffff', backgroundColor: '#dc2626', padding: '1px 6px', borderRadius: '4px' }}>
+                        {course.badge}
+                      </span>
                     )}
                   </div>
-                  <div style={{ fontSize: '11.5px', color: C.muted, marginBottom: '8px' }}>{c.sub}</div>
+                  <span style={{ fontSize: '11px', color: C.accent, fontWeight: 700 }}>{course.subtitle}</span>
+                </div>
 
-                  {/* 가격 행 */}
-                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                    {c.prices.map((p, pi) => (
-                      <div key={pi} style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '10.5px', color: C.muted, fontWeight: 500 }}>{p.t}</div>
-                        <div style={{
-                          fontSize: '13px', fontWeight: 900,
-                          color: (p as any).best ? '#dc2626' : C.dark,
-                        }}>{p.p}</div>
+                <p style={{ fontSize: '12px', color: C.mid, lineHeight: 1.5, margin: 0 }}>
+                  {course.desc}
+                </p>
+
+                {/* 가격표 3단 (군더더기 없는 가로 정렬) */}
+                <div style={{ display: 'flex', gap: '8px', paddingTop: '8px', borderTop: `1px solid ${C.border}`, marginTop: '4px' }}>
+                  {course.prices.map((p, pi) => (
+                    <div key={pi} style={{ flex: 1, backgroundColor: C.bgSoft, padding: '7px 8px', borderRadius: '8px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '10.5px', color: C.muted }}>{p.time}</div>
+                      <div style={{ fontSize: '13px', fontWeight: 900, color: p.isBest ? '#dc2626' : C.dark }}>
+                        {p.price}
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
           </div>
 
-          <div style={{
-            marginTop: '14px', padding: '12px 16px',
-            backgroundColor: C.accentBg, borderRadius: '10px',
-            fontSize: '12px', color: C.mid, textAlign: 'center',
-          }}>
-            ※ 모든 코스 · 순면 관리복 + 1회용 위생 패드 무상 제공 · 서울 출장비 포함
+          <div style={{ marginTop: '12px', textAlign: 'center', fontSize: '12px', color: C.muted }}>
+            ※ 모든 코스는 순면 관리복 및 1회용 위생 소독 패드가 무상 제공됩니다. (서울 전지역 출장비 포함)
           </div>
         </section>
 
-        <Divider />
+        {/* ── 구분선 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '44px 0 36px' }} />
 
-        {/* ── 섹션 4: 이용 3단계 ── */}
+        {/* ── 4. 간편 이용 3단계 & 100% 안심 보장 ── */}
         <section>
-          <div style={{ marginBottom: '20px' }}>
-            <SectionLabel>HOW TO USE</SectionLabel>
-            <SectionTitle>이용 3단계</SectionTitle>
-            <p style={{ fontSize: '12.5px', color: C.muted }}>
-              가입 없이 30초 만에 예약 완료
-            </p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {[
-              { no: '01', title: '예약 접수', desc: '카카오톡 또는 전화로 원하시는 코스와 방문 장소를 알려주세요.' },
-              { no: '02', title: '20~30분 내 도착', desc: '담당 테라피스트가 위생 비품을 지참하여 신속하게 방문합니다.' },
-              { no: '03', title: '도착 확인 후 결제', desc: '관리사를 직접 확인하신 후 안전하게 결제하고 힐링을 즐기세요.' },
-            ].map((s, i) => (
-              <div key={i} style={{
-                backgroundColor: C.white,
-                border: `1px solid ${C.border}`,
-                borderRadius: '12px', padding: '16px 18px',
-                display: 'flex', alignItems: 'flex-start', gap: '14px',
-              }}>
-                <div style={{
-                  fontSize: '18px', fontWeight: 900,
-                  color: C.accent, lineHeight: 1,
-                  flexShrink: 0, minWidth: '28px',
-                }}>
-                  {s.no}
-                </div>
-                <div>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: C.dark, marginBottom: '4px' }}>{s.title}</div>
-                  <div style={{ fontSize: '12.5px', color: C.mid, lineHeight: 1.6 }}>{s.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* 선입금 0원 안심 박스 */}
-          <div style={{
-            marginTop: '14px',
-            backgroundColor: C.greenBg,
-            border: `1px solid #a7dfc0`,
-            borderRadius: '12px', padding: '16px 18px',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
-          }}>
-            <div>
-              <div style={{ fontSize: '13.5px', fontWeight: 900, color: C.green }}>선입금 없는 100% 현장 대면 결제</div>
-              <div style={{ fontSize: '12px', color: '#1e5038', marginTop: '3px' }}>
-                방문 전 단 1원도 요구하지 않습니다. 안심하고 예약하세요.
-              </div>
-            </div>
-            <a href={PHONE_TEL} style={{
-              backgroundColor: C.green, color: '#fff',
-              padding: '9px 14px', borderRadius: '8px',
-              fontSize: '12px', fontWeight: 800, flexShrink: 0,
-              textDecoration: 'none',
-            }}>
-              전화 예약
-            </a>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* ── 섹션 5: 장소별 이용 안내 ── */}
-        <section>
-          <div style={{ marginBottom: '20px' }}>
-            <SectionLabel>LOCATION GUIDE</SectionLabel>
-            <SectionTitle>장소별 안심 이용 안내</SectionTitle>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {[
-              {
-                title: '🏨 호텔 · 레지던스',
-                desc: '호텔명과 객실 호수만 알려주시면 규정에 맞춰 조용히 룸으로 찾아갑니다.',
-              },
-              {
-                title: '🏢 오피스텔 · 원룸',
-                desc: '공동현관 출입 안내를 메모에 남겨주시면 대기 없이 신속하게 입실합니다.',
-              },
-              {
-                title: '🏠 아파트 · 일반 자택',
-                desc: '동·호수와 주차장 게이트를 미리 알려주시면 더욱 신속하게 방문 드립니다.',
-              },
-            ].map((item, i) => (
-              <div key={i} style={{
-                backgroundColor: C.white,
-                border: `1px solid ${C.border}`,
-                borderRadius: '12px', padding: '14px 18px',
-              }}>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: C.dark, marginBottom: '5px' }}>{item.title}</div>
-                <div style={{ fontSize: '12.5px', color: C.mid, lineHeight: 1.65 }}>{item.desc}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* ── 섹션 6: 서울 배차 권역 ── */}
-        <section>
-          <div style={{ marginBottom: '20px' }}>
-            <SectionLabel>SERVICE AREA</SectionLabel>
-            <SectionTitle>서울 25개 구 전지역 배차</SectionTitle>
-            <p style={{ fontSize: '12px', color: C.muted }}>※ 서울 외 지역은 이동이 불가합니다</p>
+          <div style={{ marginBottom: '18px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>HOW TO USE</div>
+            <h2 style={{ fontSize: '20px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>간편 이용 3단계</h2>
+            <p style={{ fontSize: '12.5px', color: C.muted, margin: 0 }}>가입 없이 30초 만에 예약 완료</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {[
-              { name: '강남·서초·송파', time: '20~25분', areas: '강남구, 서초구, 송파구, 강동구' },
-              { name: '마포·여의도·영등포', time: '20~25분', areas: '영등포구, 마포구, 구로구, 동작구, 강서구, 관악구, 양천구' },
-              { name: '용산·도심·종로', time: '25~30분', areas: '용산구, 중구, 종로구, 서대문구, 은평구' },
-              { name: '성수·동대문·동북권', time: '25~30분', areas: '성동구, 광진구, 동대문구, 중랑구, 성북구, 노원구, 강북구, 도봉구' },
-            ].map((r, i) => (
-              <div key={i} style={{
-                backgroundColor: C.white,
-                border: `1px solid ${C.border}`,
-                borderRadius: '10px', padding: '12px 16px',
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
-              }}>
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontSize: '14px', fontWeight: 800, color: C.dark }}>{r.name}</div>
-                  <div style={{ fontSize: '11.5px', color: C.muted, marginTop: '2px', lineHeight: 1.5 }}>{r.areas}</div>
-                </div>
-                <div style={{
-                  flexShrink: 0,
-                  fontSize: '12px', fontWeight: 800,
-                  color: C.green, backgroundColor: C.greenBg,
-                  padding: '4px 10px', borderRadius: '6px',
-                }}>
-                  {r.time}
+              { no: '01', title: '실시간 예약 접수', desc: '카카오톡 또는 전화로 희망 코스와 방문 장소(자택, 호텔, 오피스텔)를 말씀해 주세요.' },
+              { no: '02', title: '20~30분 내 도착', desc: '가장 가까운 권역의 전담 테라피스트가 위생 비품을 지참하여 신속히 방문합니다.' },
+              { no: '03', title: '대면 확인 후 결제', desc: '관리사가 도착한 것을 직접 확인하신 후 안전하게 결제하시고 편안한 힐링을 누리세요.' },
+            ].map((s, i) => (
+              <div key={i} style={{ backgroundColor: '#ffffff', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '14px 16px', display: 'flex', gap: '14px', alignItems: 'center' }}>
+                <div style={{ fontSize: '16px', fontWeight: 900, color: C.accent, minWidth: '24px' }}>{s.no}</div>
+                <div>
+                  <div style={{ fontSize: '14px', fontWeight: 800, color: C.dark }}>{s.title}</div>
+                  <div style={{ fontSize: '12px', color: C.mid, marginTop: '2px' }}>{s.desc}</div>
                 </div>
               </div>
             ))}
           </div>
-        </section>
 
-        <Divider />
-
-        {/* ── 섹션 7: 고객 후기 ── */}
-        <section>
-          <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+          {/* 선입금 없는 안심 결제 배너 */}
+          <div style={{ marginTop: '12px', padding: '14px 16px', backgroundColor: C.greenBg, border: '1px solid #bbf7d0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
             <div>
-              <SectionLabel>REVIEWS</SectionLabel>
-              <SectionTitle>실제 고객 후기</SectionTitle>
+              <div style={{ fontSize: '13px', fontWeight: 900, color: '#166534' }}>선입금 없는 100% 현장 대면 안심결제 원칙</div>
+              <div style={{ fontSize: '11.5px', color: '#14532d', marginTop: '2px' }}>방문 전 사전 입금은 단 1원도 요구하지 않으므로 안심하고 예약하세요.</div>
             </div>
-            <div style={{ fontSize: '12.5px', color: C.accent, fontWeight: 800 }}>★ 5.0</div>
+            <a href={PHONE_TEL} style={{ backgroundColor: '#166534', color: '#ffffff', padding: '8px 14px', borderRadius: '8px', fontSize: '12px', fontWeight: 800, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+              전화예약
+            </a>
+          </div>
+        </section>
+
+        {/* ── 구분선 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '44px 0 36px' }} />
+
+        {/* ── 5. 고객 리얼 후기 ── */}
+        <section>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '16px' }}>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>REVIEWS</div>
+              <h2 style={{ fontSize: '20px', fontWeight: 900, color: C.dark, margin: '2px 0 0' }}>실제 고객 솔직 후기</h2>
+            </div>
+            <div style={{ fontSize: '12px', color: C.accent, fontWeight: 800 }}>★ 평점 5.0 만점</div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {REVIEWS.map((r, i) => (
-              <div key={i} style={{
-                backgroundColor: C.white,
-                border: `1px solid ${C.border}`,
-                borderRadius: '12px', padding: '16px 18px',
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
-                  <div>
-                    <span style={{ fontSize: '13.5px', fontWeight: 800, color: C.dark }}>{r.author}</span>
-                    <span style={{ fontSize: '11px', color: C.muted, marginLeft: '6px' }}>{r.area}</span>
-                  </div>
-                  <span style={{ fontSize: '11.5px', color: C.accent, fontWeight: 700, flexShrink: 0 }}>★★★★★</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {REVIEWS.map((rev, i) => (
+              <div key={i} style={{ backgroundColor: '#ffffff', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '14px 16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 800, color: C.dark }}>{rev.author} <span style={{ fontSize: '11px', color: C.muted, fontWeight: 500 }}>({rev.area})</span></span>
+                  <span style={{ fontSize: '11px', color: '#eab308' }}>★★★★★</span>
                 </div>
-                <div style={{ fontSize: '11px', color: C.accent, fontWeight: 700, marginBottom: '7px' }}>{r.course}</div>
-                <p style={{ fontSize: '12.5px', color: C.mid, lineHeight: 1.65, margin: 0 }}>
-                  "{r.text}"
-                </p>
+                <div style={{ fontSize: '11px', color: C.accent, fontWeight: 700, marginBottom: '6px' }}>{rev.course}</div>
+                <p style={{ fontSize: '12.5px', color: C.mid, lineHeight: 1.55, margin: 0 }}>"{rev.text}"</p>
               </div>
             ))}
           </div>
         </section>
 
-        <Divider />
+        {/* ── 구분선 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '44px 0 36px' }} />
 
-        {/* ── 섹션 8: FAQ ── */}
-        <section style={{ paddingBottom: '8px' }}>
-          <div style={{ marginBottom: '20px' }}>
-            <SectionLabel>FAQ</SectionLabel>
-            <SectionTitle>자주 묻는 질문</SectionTitle>
+        {/* ── 6. 자주 묻는 질문 (FAQ) ── */}
+        <section>
+          <div style={{ marginBottom: '18px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>FAQ</div>
+            <h2 style={{ fontSize: '20px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>자주 묻는 질문</h2>
+            <p style={{ fontSize: '12.5px', color: C.muted, margin: 0 }}>궁금하신 점을 빠르게 확인하세요.</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {FAQS.map((faq, i) => {
-              const open = openFaq === i;
+              const isOpen = openFaq === i;
               return (
-                <div key={i} style={{
-                  backgroundColor: C.white,
-                  border: `1px solid ${open ? C.accent : C.border}`,
-                  borderRadius: '10px', overflow: 'hidden',
-                  transition: 'border-color 0.2s',
-                }}>
+                <div key={i} style={{ border: `1px solid ${C.border}`, borderRadius: '10px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
                   <button
-                    onClick={() => setOpenFaq(open ? null : i)}
-                    style={{
-                      width: '100%', padding: '14px 16px',
-                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                      textAlign: 'left', gap: '10px',
-                    }}
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    style={{ width: '100%', padding: '13px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left' }}
                   >
-                    <span style={{ fontSize: '13.5px', fontWeight: 700, color: C.dark, flex: 1 }}>{faq.q}</span>
-                    <span style={{ fontSize: '12px', color: C.muted, flexShrink: 0 }}>{open ? '▲' : '▼'}</span>
+                    <span style={{ fontSize: '13.5px', fontWeight: 800, color: C.dark }}>{faq.q}</span>
+                    <span style={{ fontSize: '12px', color: C.muted }}>{isOpen ? '▲' : '▼'}</span>
                   </button>
-                  {open && (
-                    <div style={{
-                      padding: '0 16px 14px',
-                      fontSize: '12.5px', color: C.mid,
-                      lineHeight: 1.7,
-                      borderTop: `1px solid ${C.border}`,
-                      paddingTop: '12px',
-                    }}>
+                  {isOpen && (
+                    <div style={{ padding: '0 16px 14px', fontSize: '12.5px', color: C.mid, lineHeight: 1.65, borderTop: `1px solid ${C.border}`, paddingTop: '10px' }}>
                       {faq.a}
                     </div>
                   )}
@@ -966,152 +629,74 @@ export default function HomePage() {
           </div>
         </section>
 
-        <Divider />
+        {/* ── 구분선 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '44px 0 36px' }} />
 
-        {/* ── 외국인 컨시어지 ── */}
-        <section style={{ paddingBottom: '16px' }}>
-          <div style={{
-            backgroundColor: C.dark,
-            borderRadius: '14px',
-            padding: '24px 20px',
-            color: '#fff',
-          }}>
-            <div style={{ fontSize: '10.5px', color: C.accent, fontWeight: 700, letterSpacing: '1px', marginBottom: '8px' }}>
-              GLOBAL TRAVELER CONCIERGE
-            </div>
-            <div style={{ fontSize: '16px', fontWeight: 900, marginBottom: '10px' }}>
-              Seoul Hotel In-Room Massage
-            </div>
-            <p style={{ fontSize: '12.5px', color: '#c8c8e0', lineHeight: 1.7, marginBottom: '18px' }}>
-              Visiting Seoul? Our professional therapist arrives at your hotel room in 30 minutes.{' '}
-              <strong style={{ color: '#fff' }}>100% Pay On Arrival</strong> — zero advance payment.
-              Cash, credit card, and overseas cards accepted.
-            </p>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              <a href={WA_LINK} target="_blank" rel="noreferrer" style={{
-                display: 'inline-flex', alignItems: 'center', gap: '6px',
-                backgroundColor: '#25D366', color: '#fff',
-                padding: '10px 16px', borderRadius: '8px',
-                fontSize: '13px', fontWeight: 800, textDecoration: 'none',
-              }}>
-                💬 WhatsApp
-              </a>
-              <a href="tel:+82-10-6607-2239" style={{
-                display: 'inline-flex', alignItems: 'center', gap: '6px',
-                backgroundColor: 'rgba(255,255,255,0.12)', color: '#fff',
-                border: '1px solid rgba(255,255,255,0.25)',
-                padding: '10px 16px', borderRadius: '8px',
-                fontSize: '13px', fontWeight: 700, textDecoration: 'none',
-              }}>
-                📞 +82-10-6607-2239
-              </a>
-            </div>
+        {/* ── 7. 서울 전지역 마사지 서비스 네트워크 (정갈한 텍스트 풋노트 링크) ── */}
+        <section style={{ paddingBottom: '20px' }}>
+          <div style={{ fontSize: '12px', fontWeight: 800, color: C.dark, marginBottom: '8px' }}>
+            서울 전지역 출장마사지 &amp; 홈타이 네트워크
           </div>
-        </section>
-
-        <Divider />
-
-        {/* ── 9. 서울 전지역 출장마사지 & 홈타이 SEO 서비스 네트워크 허브 ── */}
-        <section style={{ paddingBottom: '24px' }}>
-          <div style={{ marginBottom: '14px' }}>
-            <SectionLabel>SEOUL SERVICE NETWORK</SectionLabel>
-            <SectionTitle>서울 전지역 출장마사지 &amp; 홈타이 네트워크</SectionTitle>
-            <p style={{ fontSize: '12px', color: C.muted, margin: 0, lineHeight: 1.6 }}>
-              아름다운 밤 타이 홈케어는 서울 25개 자치구 및 주요 역세권 어디든 20~30분 내외로 방문 드립니다.
-            </p>
-          </div>
-
-          {/* 키워드 태그 칩 그리드 */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '6px',
-            backgroundColor: C.white,
-            border: `1px solid ${C.border}`,
-            borderRadius: '14px',
-            padding: '16px',
-          }}>
-            {SEO_KEYWORD_TAGS.map((kw, i) => (
-              <Link
-                key={i}
-                href={`/seo/${encodeURIComponent(kw)}`}
-                style={{
-                  display: 'inline-block',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  color: C.mid,
-                  backgroundColor: C.bg,
-                  border: `1px solid ${C.border}`,
-                  padding: '4px 10px',
-                  borderRadius: '6px',
-                  textDecoration: 'none',
-                  transition: 'all 0.15s ease',
-                }}
-              >
-                #{kw}
+          <p style={{ fontSize: '11.5px', color: C.muted, lineHeight: 1.6, margin: '0 0 10px' }}>
+            강남, 서초, 송파, 마포, 용산, 여의도, 성수, 영등포 등 서울 25개 자치구 어디든 20~30분 내외로 신속 방문합니다.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 10px', fontSize: '11px', color: C.mid }}>
+            {POPULAR_AREAS.map((area, i) => (
+              <Link key={i} href={`/seo/${encodeURIComponent(area)}`} style={{ textDecoration: 'none', color: '#6b7280' }}>
+                {area}
               </Link>
             ))}
           </div>
 
-          {/* 법적 고지 및 100% 대면결제 신뢰 푸터 */}
-          <div style={{
-            marginTop: '16px',
-            padding: '14px 16px',
-            backgroundColor: '#f1f0ec',
-            borderRadius: '10px',
-            fontSize: '11px',
-            color: '#71718a',
-            lineHeight: 1.6,
-          }}>
-            <strong>아름다운 밤 타이 홈케어 (Abam)</strong> · 서울특별시 25개 자치구 전역 심야 프라이빗 1:1 방문 힐링 케어 · 왓포 정통 건식 수기 지압 &amp; 천연 아로마 림프 케어 · 100% 사전 예약금 없는 현장 대면결제 원칙 준수 · 24시간 연중무휴 안심 예약 (010-6607-2239)
+          <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: `1px solid ${C.border}`, fontSize: '11px', color: C.muted, lineHeight: 1.6 }}>
+            <strong>아름다운 밤 타이 홈케어 (Abam)</strong> · 서울특별시 25개 구 전역 심야 1:1 방문 힐링 케어 · 왓포 정통 건식 &amp; 천연 아로마 케어 · 100% 현장 대면결제 (선입금 0원) · 문의 010-6607-2239
           </div>
         </section>
 
       </main>
 
-      {/* ══════════════════════════════════════════
-          하단 고정 퀵 예약바
-      ══════════════════════════════════════════ */}
-      <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0,
-        backgroundColor: 'rgba(255,255,255,0.97)',
-        backdropFilter: 'blur(14px)',
-        borderTop: `1px solid ${C.border}`,
-        padding: '10px 16px',
-        zIndex: 50,
-        boxShadow: '0 -4px 18px rgba(0,0,0,0.06)',
-      }}>
-        <div style={{ maxWidth: '680px', margin: '0 auto', display: 'flex', gap: '8px' }}>
-          <a href={KAKAO_LINK} onClick={kakaoConnect} style={{
-            flex: 1.3, ...btn(C.kakao, C.kakaoBr, {
-              padding: '13px 0', borderRadius: '10px',
-              boxShadow: '0 2px 10px rgba(254,229,0,0.25)',
+      {/* ── 하단 고정 모바일 퀵 예약바 ── */}
+      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(12px)', borderTop: `1px solid ${C.border}`, padding: '9px 16px', zIndex: 50, boxShadow: '0 -4px 16px rgba(0,0,0,0.04)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <a
+            href={KAKAO_LINK}
+            onClick={handleKakao}
+            style={{
+              flex: 1.2,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+              backgroundColor: C.kakao, color: C.kakaoBr,
+              fontWeight: 900, fontSize: '14px', padding: '12px 0', borderRadius: '10px',
               textDecoration: 'none',
-            }),
-          }}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-              <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill={C.kakaoBr}/>
-            </svg>
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill={C.kakaoBr}/></svg>
             카톡: {KAKAO_ID}
           </a>
-          <a href={PHONE_TEL} style={{
-            flex: 1, ...btn(C.dark, '#fff', {
-              padding: '13px 0', borderRadius: '10px',
+          <a
+            href={PHONE_TEL}
+            style={{
+              flex: 1,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px',
+              backgroundColor: C.dark, color: '#ffffff',
+              fontWeight: 800, fontSize: '14px', padding: '12px 0', borderRadius: '10px',
               textDecoration: 'none',
-            }),
-          }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#fff"/>
-            </svg>
-            전화 예약
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
+            전화예약
           </a>
-          <a href={WA_LINK} target="_blank" rel="noreferrer" style={{
-            width: '46px', height: '46px', flexShrink: 0,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            backgroundColor: '#25D366', borderRadius: '10px',
-            textDecoration: 'none',
-          }}>
-            <span style={{ fontSize: '20px' }}>💬</span>
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              width: '44px', height: '44px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              backgroundColor: '#25D366', color: '#ffffff',
+              borderRadius: '10px', flexShrink: 0, textDecoration: 'none',
+            }}
+          >
+            <span style={{ fontSize: '18px' }}>💬</span>
           </a>
         </div>
       </div>
