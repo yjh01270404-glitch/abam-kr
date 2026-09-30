@@ -1,8 +1,7 @@
-/* Black Han Sans — 기존 UI 폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+/* 프리미엄 비즈니스 폰트 시스템 (Pretendard & Inter) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');
 
-/* Nanum Brush Script — 아름다운밤 로고 전용 서명체 */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
-
-/* Bemin Jua & Gaegu — 여성향 제목 및 본문 폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&display=swap');
+:root {
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Segoe UI', Roboto, sans-serif;
+}

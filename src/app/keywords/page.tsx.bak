@@ -1,0 +1,243 @@
+﻿import { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowLeft, MapPin, Search, Flame } from 'lucide-react';
+import { SEO_KEYWORDS } from '../../lib/seo-keywords';
+
+export const metadata: Metadata = {
+  title: '?꾨쫫?ㅼ슫諛?| 吏??퀎쨌?낆쥌蹂?寃?됱뼱 紐⑥쓬',
+  description: '?꾨쫫?ㅼ슫諛??꾨갇) ?쒖슱 媛뺣궓, ?띾?, 留덊룷, ?곷벑?? 寃쎄린, 遺?? ?援????꾧뎅 二쇱슂 吏??퀎 諛??낆쥌蹂?怨좎닔??濡쒖뺄 梨꾩슜쨌留ㅼ옣 梨꾩슜 ?멸린 寃?됱뼱 紐⑥쓬?낅땲??',
+  keywords: '媛뺣궓濡쒖뺄 梨꾩슜, ?쒖슱留ㅼ옣 梨꾩슜, 吏??퀎濡쒖뺄 梨꾩슜, ?낆쥌蹂꾨줈而?梨꾩슜, ?꾨쫫?ㅼ슫諛? ?꾨갇',
+};
+
+// 寃쎌웳?낆껜 ?곹샇 ?쒖쇅 ?꾪꽣
+const isCleanKeyword = (kw: string) => !kw.includes('?ъ슦') && !kw.includes('??);
+
+// ?듭떖 吏곸쥌 ?ㅼ썙??(吏??챸 誘명룷??諛?寃쎌웳???곹샇 ?쒖쇅)
+const CORE_KW = SEO_KEYWORDS
+  .filter(isCleanKeyword)
+  .filter(kw =>
+    !kw.includes('媛뺣궓') && !kw.includes('??궪') && !kw.includes('?좊쫱') && !kw.includes('?쒖큹') &&
+    !kw.includes('諛섑룷') && !kw.includes('?쇳쁽') && !kw.includes('留덊룷') && !kw.includes('?띾?') &&
+    !kw.includes('?좎큿') && !kw.includes('?⑹젙') && !kw.includes('?곕궓') && !kw.includes('媛뺤꽌') &&
+    !kw.includes('?곷벑??) && !kw.includes('?≫뙆') && !kw.includes('?좎떎') && !kw.includes('?ъ쓽??) &&
+    !kw.includes('?섏썝') && !kw.includes('?몄쿇') && !kw.includes('遺泥?) && !kw.includes('?쇱궛') &&
+    !kw.includes('遺꾨떦') && !kw.includes('?됲깮') && !kw.includes('?붿꽦') && !kw.includes('?덉궛') &&
+    !kw.includes('?덉뼇') && !kw.includes('?⑹씤') && !kw.includes('遺??) && !kw.includes('?援?) &&
+    !kw.includes('愿묒＜') && !kw.includes('???) && !kw.includes('?몄궛') && !kw.includes('泥쒖븞') &&
+    !kw.includes('泥?＜') && !kw.includes('?꾩＜') && !kw.includes('?쒖＜') && !kw.includes('李쎌썝') &&
+    !kw.includes('?ы빆') && !kw.includes('援щ?') && !kw.includes('異섏쿇') && !kw.includes('媛뺣쫱')
+  );
+
+// 吏??퀎 洹몃９ ?뺤쓽
+const REGION_GROUPS = [
+  { label: '?뱧 ?쒖슱 媛뺣궓 / ?쒖큹 / ??궪', keys: ['媛뺣궓', '媛뺣궓援?, '??궪', '?좊쫱', '?쒖큹', '?쇳쁽', '?좊끉??] },
+  { label: '?뱧 ?쒖슱 留덊룷 / ?띾? / ?좎큿', keys: ['留덊룷', '?띾?', '?좎큿', '?⑹젙', '?곕궓', '?곸닔', '留앹썝'] },
+  { label: '?뱧 ?쒖슱 ?곷벑??/ ?≫뙆 / 媛뺤꽌', keys: ['?곷벑??, '?ъ쓽??, '?≫뙆', '?좎떎', '媛뺣룞', '媛뺤꽌', '諛쒖궛'] },
+  { label: '?뱧 寃쎄린 / ?몄쿇 ?섎룄沅?, keys: ['?섏썝', '?섏썝??, '遺꾨떦', '?쇱궛', '?쇱궛?숆뎄', '?쇱궛?쒓뎄', '遺泥?, '遺泥쒖뿭', '?⑹씤', '?덉궛', '?덉뼇', '?됲깮', '?붿꽦', '?몄쿇'] },
+  { label: '?뱧 遺??/ ?援?/ 愿묒＜ / ???/ ?몄궛', keys: ['遺??, '遺?곗쭊援?, '?援?, '愿묒＜', '???, '?몄궛'] },
+  { label: '?뱧 吏諛?二쇱슂 ?꾩떆', keys: ['泥쒖븞', '泥?＜', '?꾩＜', '?쒖＜', '?쒖＜??, '?쒓???, '李쎌썝', '?ы빆', '援щ?', '源??, '異섏쿇', '媛뺣쫱', '?먯＜', '?쒖쿇', '紐⑺룷'] },
+];
+
+export default function KeywordsPage() {
+  return (
+    <div style={{
+      minHeight: '100vh',
+      background: '#f8fafc',
+      color: '#1e293b',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      padding: '32px 16px 60px 16px',
+    }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        
+        {/* ?곷떒 ?ㅻ퉬寃뚯씠??*/}
+        <div style={{ marginBottom: '24px' }}>
+          <Link href="/" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            color: '#64748b',
+            textDecoration: 'none',
+            fontSize: '14px',
+            fontWeight: '600',
+            padding: '6px 12px',
+            borderRadius: '6px',
+            background: '#ffffff',
+            border: '1px solid #e2e8f0',
+          }}>
+            <ArrowLeft size={16} /> 硫붿씤 ?덉쑝濡??뚯븘媛湲?
+          </Link>
+        </div>
+
+        {/* ?ㅻ뜑 ??댄? & ?댁쟾 ?명꽣 ?곸꽭 ?ㅻ챸 諛곗튂 */}
+        <div style={{
+          background: 'linear-gradient(135deg, #be185d 0%, #880e4f 100%)',
+          borderRadius: '16px',
+          padding: '32px 24px',
+          color: '#ffffff',
+          marginBottom: '32px',
+          boxShadow: '0 10px 25px rgba(190, 24, 93, 0.15)',
+        }}>
+          <h1 style={{
+            fontSize: '26px',
+            fontWeight: '900',
+            margin: '0 0 12px 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+          }}>
+            <MapPin size={28} color="#fbcfe8" /> 吏??퀎 & ?낆쥌蹂?寃?됱뼱 紐⑥쓬
+          </h1>
+          <p style={{ margin: '0 0 12px 0', fontSize: '15px', color: '#fce7f3', opacity: 0.95, lineHeight: '1.6' }}>
+            ?꾧뎅 二쇱슂 鍮꾩쫰?덉뒪?곴텒 諛??낆쥌蹂??멸린 寃?됱뼱瑜??쒕늿???뺤씤?섍퀬 ?먰븯?쒕뒗 ?쇱옄由??뺣낫瑜?鍮좊Ⅴ寃?李얠븘蹂댁꽭??
+          </p>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '8px',
+            padding: '12px 16px',
+            fontSize: '13.5px',
+            color: '#fbe8f3',
+            lineHeight: '1.6',
+            borderLeft: '4px solid #f472b6',
+          }}>
+            ?꾨쫫?ㅼ슫諛??꾨갇)? 濡쒖뺄 梨꾩슜, 留ㅼ옣 梨꾩슜, 鍮꾩쫰?덉뒪 梨꾩슜, 諛붿븣諛? 移댄럹 ?ㅽ깭?? F&B ?ㅽ깭?? ?대읇?뚮컮, ?섏씠?쇰툝由?븣諛? ?붿툩鍮꾩쫰?덉뒪 梨꾩슜, ?꾨━誘몄뾼 ?대”?뚮컮, ?섏씠?붾뱶 ?ㅽ뒠?붿삤?뚮컮, ??쒕━?뚮컮, ?덉뒪?좊옉?뚮컮 ???ъ꽦 怨좎닔??援ъ씤援ъ쭅 ?뺣낫瑜??쒓났?섎뒗 ?꾨Ц ?뚮옯?쇱엯?덈떎. ?쒖슱 媛뺣궓, ?띾?, 留덊룷, ?좎큿, ?곷벑?? ?섏썝, ?몄쿇, 遺?? ?援? ??? 愿묒＜, ?쒖＜ ???꾧뎅 寃利?留ㅼ옣 梨꾩슜?뺣낫瑜??ㅼ떆媛??쒓났?⑸땲??
+          </div>
+        </div>
+
+        {/* 1. ?멸린 ???吏곸쥌 ?ㅼ썙??*/}
+        <section style={{
+          background: '#ffffff',
+          borderRadius: '12px',
+          border: '1px solid #e2e8f0',
+          padding: '24px',
+          marginBottom: '24px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+        }}>
+          <h2 style={{
+            fontSize: '18px',
+            fontWeight: '800',
+            color: '#be185d',
+            margin: '0 0 16px 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}>
+            <Flame size={20} color="#be185d" /> ?뵦 ?멸린 吏곸쥌 / ?쒓렇?덉쿂 寃?됱뼱
+          </h2>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '8px',
+          }}>
+            {CORE_KW.slice(0, 50).map((kw) => (
+              <Link
+                key={kw}
+                href={`/seo/${encodeURIComponent(kw.replace(/\s+/g, '-'))}`}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '20px',
+                  background: '#fdf2f8',
+                  color: '#be185d',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  textDecoration: 'none',
+                  border: '1px solid #fbcfe8',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {kw}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* 2. 吏??퀎 ?ㅼ썙??由ъ뒪??洹몃９ */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {REGION_GROUPS.map((group) => {
+            const keywords = SEO_KEYWORDS
+              .filter(isCleanKeyword)
+              .filter(kw => group.keys.some(k => kw.startsWith(k + ' ') || (kw.startsWith(k) && (kw[k.length] === undefined || !'媛?섎떎?쇰쭏諛붿궗?꾩옄李⑥뭅??뚰븯'.includes(kw[k.length])))))
+              .slice(0, 200);
+
+            if (keywords.length === 0) return null;
+
+            return (
+              <section
+                key={group.label}
+                style={{
+                  background: '#ffffff',
+                  borderRadius: '12px',
+                  border: '1px solid #e2e8f0',
+                  padding: '24px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                }}
+              >
+                <h3 style={{
+                  fontSize: '17px',
+                  fontWeight: '800',
+                  color: '#1e293b',
+                  margin: '0 0 16px 0',
+                  paddingBottom: '10px',
+                  borderBottom: '2px solid #f1f5f9',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}>
+                  {group.label}
+                  <span style={{ fontSize: '13px', fontWeight: '500', color: '#94a3b8', marginLeft: 'auto' }}>
+                    珥?{keywords.length}媛??ㅼ썙??
+                  </span>
+                </h3>
+
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '6px 10px',
+                }}>
+                  {keywords.map((kw) => (
+                    <Link
+                      key={kw}
+                      href={`/seo/${encodeURIComponent(kw.replace(/\s+/g, '-'))}`}
+                      style={{
+                        fontSize: '13px',
+                        color: '#475569',
+                        textDecoration: 'none',
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        background: '#f8fafc',
+                        border: '1px solid #f1f5f9',
+                        transition: 'all 0.12s ease',
+                      }}
+                    >
+                      {kw}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
+
+        {/* ?섎떒 ?명꽣 ?곌껐 */}
+        <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          <Link href="/" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: '#1e293b',
+            color: '#ffffff',
+            padding: '12px 28px',
+            borderRadius: '30px',
+            fontSize: '14px',
+            fontWeight: '700',
+            textDecoration: 'none',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}>
+            <Search size={16} /> 硫붿씤 ?섏씠吏濡??대룞?섏뿬 梨꾩슜?뺣낫 寃?됲븯湲?
+          </Link>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
