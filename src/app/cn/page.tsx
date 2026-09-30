@@ -1,409 +1,677 @@
-import type { Metadata } from 'next';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: '首尔酒店上门按摩・首尔上门精油SPA | 中文WhatsApp咨询・30分钟到达・100%见面付款 (Abam)',
-  description:
-    '首尔江南、明洞、东大门、弘大及京畿道全境酒店客房上门按摩服务。无任何预付款定金（100%到达后当面现金/银联信用卡结账）。WhatsApp快速预约，严选20代年轻专业技师30分钟内急速到达。',
-  keywords: [
-    '首尔上门按摩',
-    '首尔酒店上门SPA',
-    '江南酒店按摩',
-    '明洞酒店上门按摩',
-    '首尔精油上门按摩',
-    '京畿道机场酒店按摩',
-    '首尔晚上7点至凌晨4点可预约上门按摩',
-    '首尔出差按摩 中文',
-    '韩国酒店客房SPA'
-  ].join(', '),
-  alternates: {
-    canonical: 'https://abam.kr/cn',
-    languages: {
-      'ko-KR': 'https://abam.kr',
-      'en-US': 'https://abam.kr/en',
-      'ja-JP': 'https://abam.kr/jp',
-      'zh-CN': 'https://abam.kr/cn',
-    },
-  },
-  openGraph: {
-    title: '首尔酒店上门按摩・首尔上门SPA (Abam)',
-    description:
-      '首尔全境酒店30分钟到达。先付款0元・完全到达后当面付款（现金/银联信用卡均可）。WhatsApp支持。',
-    url: 'https://abam.kr/cn',
-    siteName: 'Abam Thai Homecare Seoul',
-    images: [{ url: 'https://abam.kr/images/hero_sensual_goddess.jpg', width: 730, height: 620, alt: '首尔酒店上门按摩' }],
-  },
+/* ─────────────────────────────────────────────
+   常量
+───────────────────────────────────────────── */
+const PHONE_TEL     = 'tel:+82-10-6607-2239';
+const PHONE_DISPLAY = '+82 10-6607-2239';
+const WA_LINK       = 'https://wa.me/821066072239?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E5%92%A8%E8%AF%A2%E9%A6%96%E5%B0%94%E9%85%92%E5%BA%97%E4%B8%8A%E9%97%A8%E6%8C%89%E6%91%A9%E6%9C%8D%E5%8A%A1%E3%80%82';
+
+/* ─────────────────────────────────────────────
+   设计风格 (100% 纯白/浅色高级精品极简)
+───────────────────────────────────────────── */
+const C = {
+  bg:       '#ffffff',
+  bgSoft:   '#f8fafc',
+  dark:     '#0f172a',
+  mid:      '#334155',
+  muted:    '#64748b',
+  border:   '#e2e8f0',
+  borderLt: '#f1f5f9',
+  accent:   '#b45309',
+  accentBg: '#fef3c7',
+  green:    '#16a34a',
+  greenBg:  '#f0fdf4',
+  greenBd:  '#bbf7d0',
 };
 
-const WHATSAPP_LINK = 'https://wa.me/821066072239?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E5%92%A8%E8%AF%A2%E9%A6%96%E5%B0%94%E9%85%92%E5%BA%97%E4%B8%8A%E9%97%A8%E6%8C%89%E6%91%A9%E6%9C%8D%E5%8A%A1%E3%80%82';
-const PHONE_TEL = 'tel:+82-10-6607-2239';
-const PHONE_DISPLAY = '+82 10-6607-2239';
-
-const CN_COURSES = [
-  {
-    id: 'thai',
-    name: '正统泰式干式指压理疗',
-    tag: '卧佛寺皇家指压·全身经络拉伸',
-    badge: '不涂精油·穿纯棉管理服',
-    img: '/images/thai.jpg',
-    desc: '不使用精油，换上舒适纯棉管理服进行的卧佛寺正统干式理疗。深层缓解旅途劳顿，改善骨盆肩颈疲劳。',
-    prices: [
-      { time: '60分钟', price: '130,000韩元 (约¥680)' },
-      { time: '90分钟', price: '150,000韩元 (约¥790)', isBest: true },
-      { time: '120分钟 (2小时)', price: '170,000韩元 (约¥890)' },
-    ],
-  },
-  {
-    id: 'healing',
-    name: '感性舒缓治愈理疗',
-    tag: '细腻触感·深层心灵舒缓',
-    badge: '调理自律神经·减压放松',
-    img: '/images/sensual_touch.jpg',
-    desc: '采用柔和细腻的理疗手法，深层舒缓紧绷神经，释放日常压力与倦怠，带来极致宁静的感性治愈。',
-    prices: [
-      { time: '60分钟', price: '140,000韩元 (约¥740)' },
-      { time: '90分钟', price: '170,000韩元 (约¥890)', isBest: true },
-      { time: '120分钟 (2小时)', price: '200,000韩元 (约¥1,050)' },
-    ],
-  },
-  {
-    id: 'aroma',
-    name: '纯天然芳香淋巴SPA',
-    tag: '100%纯植物顶级天然精油',
-    badge: '全身淋巴循环·水嫩美肤',
-    img: '/images/aroma.jpg',
-    desc: '选用随体温融化的顶级天然植物精油，温和疏通全身淋巴，带来芳香与温热交织的梦幻级放松体验。',
-    prices: [
-      { time: '60分钟', price: '140,000韩元 (约¥740)' },
-      { time: '90分钟', price: '160,000韩元 (约¥840)', isBest: true },
-      { time: '120分钟 (2小时)', price: '190,000韩元 (约¥1,000)' },
-    ],
-  },
-  {
-    id: 'special',
-    name: '特选双重融合全效套餐',
-    tag: '泰式干压 ＋ 芳香精油双效合一',
-    badge: '性价比之王·人气首选',
-    img: '/images/sensual_care.jpg',
-    desc: '先以正统泰式手法充分松解僵硬大肌肉群，随后转入芳香精油淋巴疏通，体验双重舒畅的超值精选。',
-    prices: [
-      { time: '60分钟', price: '150,000韩元 (约¥790)' },
-      { time: '90分钟', price: '190,000韩元 (约¥1,000)', isBest: true },
-      { time: '120分钟 (2小时)', price: '220,000韩元 (约¥1,150)' },
-    ],
-  },
-  {
-    id: 'vip',
-    name: '尊享VIP皇家全套疗程',
-    tag: '👑 最高端私人尊享·回头率第一',
-    badge: '王牌技师优先派遣',
-    isVip: true,
-    img: '/images/hero_sensual_goddess.jpg',
-    desc: '阿夜SPA倾力呈现的最高殿堂级疗程。全身深度干压+顶级精油+密集淋巴护理，为您奉献无可挑剔的私密奢享。',
-    prices: [
-      { time: '60分钟', price: '170,000韩元 (约¥890)' },
-      { time: '90分钟', price: '210,000韩元 (约¥1,100)', isBest: true },
-      { time: '120分钟 (2小时)', price: '250,000韩元 (约¥1,300)' },
-    ],
-  },
-];
-
+/* ─────────────────────────────────────────────
+   技师数据 (精简精品名录)
+───────────────────────────────────────────── */
 const CN_ACES = [
   {
     name: '尤娜 (Yuna)',
     age: '23岁',
-    specs: '166cm · 47kg · 甜美苗条',
-    role: '点单率第1 · 细腻温感淋巴特化',
+    spec: '166cm · 47kg · 甜美苗条',
+    badge: '点单率第1',
+    specialty: '细腻温感淋巴特化 & 浪漫感性VIP护理',
+    desc: '温柔甜美的笑容与极尽轻柔细腻的指尖触感。客户复购率第一的代表招牌技师。',
+    status: '专车随时待命',
+    isAvailable: true,
     img: '/images/ace_yuna.jpg',
-    badge: '招牌推荐',
   },
   {
-    name: '瑞儿 (Seoa)',
+    name: '瑞雅 (Seoa)',
     age: '24岁',
-    specs: '168cm · 49kg · S型曲线好身材',
-    role: '深层肌肉放松与高级精油推拿',
+    spec: '168cm · 49kg · S曲线身材',
+    badge: '预约爆满',
+    specialty: '正统泰式深层指压 + 芳香精油温热理疗',
+    desc: '都市优雅气质与恰到好处的力道融合。完美兼顾泰式松骨与精油深层舒缓。',
+    status: '深夜预约中',
+    isAvailable: false,
     img: '/images/ace_seoa.jpg',
-    badge: '人气火爆',
   },
   {
-    name: '知雅 (Jia)',
+    name: '智雅 (Jia)',
     age: '22岁',
-    specs: '165cm · 46kg · 白皙水嫩美肌',
-    role: '柔和细腻触感·极度舒缓放松',
+    spec: '165cm · 46kg · 白皙水嫩',
+    badge: '王牌治愈',
+    specialty: '柔和指法与细腻微细筋膜松解',
+    desc: '温润舒适的手掌温度。彻底舒缓旅途中的全身紧绷感与精神倦怠。',
+    status: '专车随时待命',
+    isAvailable: true,
     img: '/images/ace_jia.jpg',
-    badge: '疗愈王牌',
   },
 ];
 
-export default function ChinesePage() {
+/* ─────────────────────────────────────────────
+   服务套餐·透明明码标价
+   (韩国基准价 + 50,000韩元 / 人民币换算折合)
+───────────────────────────────────────────── */
+const CN_COURSES = [
+  {
+    name: '正统泰式干式指压理疗',
+    subtitle: '卧佛寺皇家指压·全身经络拉伸',
+    desc: '不使用精油，换上舒适纯棉管理服进行的卧佛寺正统干式理疗。深层缓解旅途劳顿，改善骨盆肩颈疲劳。',
+    badge: null,
+    prices: [
+      { time: '60分钟', price: '130,000韩元 (约¥680)' },
+      { time: '90分钟', price: '150,000韩元 (约¥790)', isBest: true },
+      { time: '120分钟', price: '170,000韩元 (约¥890)' },
+    ],
+  },
+  {
+    name: '纯天然芳香淋巴SPA',
+    subtitle: '100%纯植物顶级天然精油',
+    desc: '选用随体温融化的顶级天然植物精油，温和疏通全身淋巴，带来芳香与温热交织的梦幻级放松体验。',
+    badge: null,
+    prices: [
+      { time: '60分钟', price: '140,000韩元 (约¥740)' },
+      { time: '90分钟', price: '160,000韩元 (约¥840)', isBest: true },
+      { time: '120分钟', price: '190,000韩元 (约¥1,000)' },
+    ],
+  },
+  {
+    name: '感性舒缓治愈理疗',
+    subtitle: '细腻触感·调理神经舒压放松',
+    desc: '采用柔和细腻的理疗手法，深层舒缓紧绷神经，释放日常压力与倦怠，带来极致宁静的感性治愈。',
+    badge: '推荐',
+    prices: [
+      { time: '60分钟', price: '140,000韩元 (约¥740)' },
+      { time: '90分钟', price: '170,000韩元 (约¥890)', isBest: true },
+      { time: '120分钟', price: '200,000韩元 (约¥1,050)' },
+    ],
+  },
+  {
+    name: '特选双重融合全效套餐',
+    subtitle: '泰式干压 ＋ 芳香精油双效合一',
+    desc: '先以正统泰式手法充分松解僵硬大肌肉群，随后转入芳香精油淋巴疏通，体验双重舒畅的超值精选。',
+    badge: '人气第1',
+    prices: [
+      { time: '60分钟', price: '150,000韩元 (约¥790)' },
+      { time: '90分钟', price: '190,000韩元 (约¥1,000)', isBest: true },
+      { time: '120分钟', price: '220,000韩元 (约¥1,150)' },
+    ],
+  },
+  {
+    name: '尊享VIP皇家全套疗程',
+    subtitle: '全身深度干压 + 顶级精油 + 密集淋巴护理',
+    desc: '阿夜SPA倾力呈现的最高殿堂级疗程。王牌技师专职派遣，为您奉献无可挑剔的私密奢享。',
+    badge: 'BEST',
+    prices: [
+      { time: '60分钟', price: '170,000韩元 (约¥890)' },
+      { time: '90分钟', price: '210,000韩元 (约¥1,100)', isBest: true },
+      { time: '120分钟', price: '250,000韩元 (约¥1,300)' },
+    ],
+  },
+];
+
+/* ─────────────────────────────────────────────
+   真实客户评价
+───────────────────────────────────────────── */
+const CN_REVIEWS = [
+  {
+    author: '王先生',
+    area: '江南区五星级酒店',
+    course: 'VIP皇家全套 90分钟 (尤娜)',
+    text: '首尔出差入住酒店体验。无需预付定金这点让人非常放心。尤娜技师25分钟就到了，携带全套消毒用品，手法极其专业细致，彻底解除了长途飞行的疲惫。',
+  },
+  {
+    author: '张女士',
+    area: '明洞商圈酒店',
+    course: '特选双重融合 90分钟',
+    text: '先干压后精油的搭配太舒服了。完全不需要韩国电话卡，用WhatsApp就能用中文流畅沟通，到达后刷银联卡付款，非常安全便利。',
+  },
+  {
+    author: '刘先生',
+    area: '汝矣岛酒店',
+    course: 'VIP皇家全套 120分钟 (瑞雅)',
+    text: '深夜预约响应非常迅速，技师相貌气质和照片完全一致。环境安静，服务周到，强烈推荐给在首尔旅行出差的朋友。',
+  },
+];
+
+/* ─────────────────────────────────────────────
+   常见问题 (FAQ)
+───────────────────────────────────────────── */
+const CN_FAQS = [
+  {
+    q: '首尔市内的所有酒店客房都可以上门吗？',
+    a: '是的，江南、明洞、东大门、弘大、汝矣岛、梨泰院等首尔特别市全部25个区域的酒店、公寓式客房、Airbnb均可服务，专车约20~30分钟急速送达。',
+  },
+  {
+    q: '预约需要提前支付定金或押金吗？',
+    a: '绝对不需要！我们严格实行“100%到达后当面付款”原则。技师到达您的客房并核实后才进行结算，彻底杜绝任何网络欺诈风险。',
+  },
+  {
+    q: '预约后多久可以到达客房？',
+    a: '我们在首尔各核心商圈均设有待命调度中心，预约确认后通常20~30分钟内即可送达。出发时会通过WhatsApp告知您准确预计到达时间。',
+  },
+  {
+    q: '支持哪些付款方式？',
+    a: '支持各类国际信用卡（Visa, MasterCard, 银联UnionPay, Amex, JCB）、韩币现金、人民币现金均可。现场可提供正规收据凭证。',
+  },
+  {
+    q: '照片上的技师是否为本人出勤？',
+    a: '是的，我们严格执行实物照片100%一致原则。若您指定了特定技师（尤娜、瑞雅、智雅等），必由该技师本人亲自上门服务。',
+  },
+  {
+    q: '在客房内需要自行准备什么吗？',
+    a: '无需准备任何物品。技师上门自带一次性卫生消毒床垫（绝不弄脏酒店床单）、纯棉专属管理服、顶级天然精油等全套专业备品。',
+  },
+];
+
+/* ─────────────────────────────────────────────
+   热门搜索区域
+───────────────────────────────────────────── */
+const SEO_AREAS = [
+  '首尔 酒店上门按摩', '江南 酒店SPA', '明洞 酒店上门按摩', '弘大 精油按摩',
+  '东大门 酒店上门', '汝矣岛 上门按摩', '首尔 中文预约 按摩', '首尔 无定金 酒店按摩',
+  '首尔 深夜 24小时SPA', '韩国 酒店客房按摩'
+];
+
+/* ─────────────────────────────────────────────
+   主页面组件
+───────────────────────────────────────────── */
+export default function CnPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundImage: 'url(/images/seoul_night_sky.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center top',
-      backgroundAttachment: 'fixed',
-      backgroundRepeat: 'no-repeat',
-      color: '#18181b',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif',
-      paddingBottom: '90px',
-    }}>
-      {/* Top Banner */}
-      <div style={{ background: '#070a10', borderBottom: '1px solid rgba(212, 175, 55, 0.45)', color: '#f3e5ab', padding: '10px 20px', textAlign: 'center', fontSize: '12px', fontWeight: 800 }}>
-        🇨🇳 首尔全境及京畿道五星级酒店/公寓上门SPA · 绝无预付款（100%到达当面结账） · 30分钟急速到达 · WhatsApp快速预约
+    <div style={{ minHeight: '100vh', backgroundColor: C.bg, color: C.dark, paddingBottom: '96px' }}>
+
+      {/* ── 顶部公告栏 ── */}
+      <div style={{ backgroundColor: C.bgSoft, borderBottom: `1px solid ${C.border}`, padding: '8px 16px', textAlign: 'center', fontSize: '12px', color: C.mid }}>
+        首尔全境20~30分钟到达 · <strong style={{ color: C.dark }}>无任何预付定金（100%到达后当面结账）</strong>
       </div>
 
-      {/* Header */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, backgroundColor: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(16px)', borderBottom: '1.5px solid rgba(212, 175, 55, 0.35)', boxShadow: '0 4px 22px rgba(0,0,0,0.18)' }}>
-        <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-          <Link href="/cn" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #090d16, #1e293b)', border: '1px solid #d4af37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f3e5ab', fontWeight: 900, fontSize: '18px' }}>
-              🌙
+      {/* ── 顶部导航栏 ── */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 40, backgroundColor: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(12px)', borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '12px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ fontSize: '17px', fontWeight: 900, color: C.dark, letterSpacing: '-0.3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span>美丽之夜 Abam</span>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: C.accent, backgroundColor: C.accentBg, padding: '2px 6px', borderRadius: '4px' }}>阿夜</span>
             </div>
-            <div>
-              <div style={{ fontSize: '17px', fontWeight: 950, color: '#090d16', letterSpacing: '-0.3px' }}>
-                美丽之夜 <span style={{ color: '#b38728' }}>Abam (首尔高端上门SPA)</span>
-              </div>
-              <span style={{ fontSize: '10.5px', color: '#64748b', fontWeight: 700 }}>
-                首尔酒店客房上门按摩 · 中文WhatsApp预约
-              </span>
-            </div>
-          </Link>
-
-          {/* Language Switcher */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#f1f5f9', padding: '4px', borderRadius: '8px' }}>
-            <Link href="/" style={{ padding: '4px 10px', fontSize: '12px', fontWeight: 700, color: '#475569', textDecoration: 'none', borderRadius: '6px' }}>🇰🇷 KR</Link>
-            <Link href="/en" style={{ padding: '4px 10px', fontSize: '12px', fontWeight: 700, color: '#475569', textDecoration: 'none', borderRadius: '6px' }}>🇺🇸 EN</Link>
-            <Link href="/jp" style={{ padding: '4px 10px', fontSize: '12px', fontWeight: 700, color: '#475569', textDecoration: 'none', borderRadius: '6px' }}>🇯🇵 JP</Link>
-            <span style={{ padding: '4px 10px', fontSize: '12px', fontWeight: 900, color: '#090d16', background: '#ffffff', borderRadius: '6px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>🇨🇳 CN</span>
+            <div style={{ fontSize: '10.5px', color: C.muted, fontWeight: 500 }}>首尔高端酒店客房VIP上门精油SPA</div>
           </div>
 
-          {/* Quick Contact Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12.5px', fontWeight: 900, color: '#ffffff', backgroundColor: '#25D366', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', boxShadow: '0 2px 8px rgba(37,211,102,0.35)' }}>
-              💬 WhatsApp
-            </a>
-            <a href={PHONE_TEL} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12.5px', fontWeight: 800, color: '#090d16', backgroundColor: '#f3e5ab', border: '1px solid #d4af37', padding: '8px 14px', borderRadius: '6px', textDecoration: 'none' }}>
-              📞 电话咨询
-            </a>
+          {/* 语言切换 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '3px', backgroundColor: C.bgSoft, padding: '3px', borderRadius: '6px' }}>
+            <Link href="/" style={{ fontSize: '11px', color: C.muted, padding: '3px 6px', textDecoration: 'none' }}>KR</Link>
+            <Link href="/en" style={{ fontSize: '11px', color: C.muted, padding: '3px 6px', textDecoration: 'none' }}>EN</Link>
+            <Link href="/jp" style={{ fontSize: '11px', color: C.muted, padding: '3px 6px', textDecoration: 'none' }}>JP</Link>
+            <span style={{ fontSize: '11px', fontWeight: 900, color: C.dark, backgroundColor: '#ffffff', padding: '3px 7px', borderRadius: '4px', boxShadow: '0 1px 2px rgba(0,0,0,0.06)' }}>CN</span>
           </div>
+        </div>
+
+        {/* ── 快捷导航锚点栏 ── */}
+        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 18px 8px', display: 'flex', gap: '6px', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <button
+            onClick={() => scrollTo('courses')}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+          >
+            📋 套餐·价目表
+          </button>
+          <button
+            onClick={() => scrollTo('therapists')}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+          >
+            👤 技师介绍
+          </button>
+          <button
+            onClick={() => scrollTo('how-it-works')}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+          >
+            🛡️ 预约流程
+          </button>
+          <button
+            onClick={() => scrollTo('faq')}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+          >
+            ❓ 常见问题
+          </button>
         </div>
       </header>
 
-      {/* Main Container */}
-      <main style={{ maxWidth: '1080px', margin: '24px auto', padding: '0 16px', display: 'flex', flexDirection: 'column', gap: '26px' }}>
-        
-        {/* Hero Card */}
-        <section style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#ffffff', borderRadius: '22px', border: '1.5px solid rgba(212, 175, 55, 0.45)', boxShadow: '0 0 35px rgba(212, 175, 55, 0.16), 0 22px 50px rgba(0, 0, 0, 0.36)', padding: '44px 32px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '36px', alignItems: 'center' }}>
-            
-            {/* Left Content */}
-            <div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#090d16', border: '1px solid rgba(212, 175, 55, 0.45)', padding: '6px 14px', borderRadius: '20px', marginBottom: '16px' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#f3e5ab' }}>● 20代年轻S级管理师在岗 · 30分钟急速上门</span>
-              </div>
+      {/* ── 主体内容 ── */}
+      <main style={{ maxWidth: '640px', margin: '0 auto', padding: '0 18px' }}>
 
-              <div style={{ fontSize: '13px', fontWeight: 900, color: '#b38728', letterSpacing: '1px', marginBottom: '8px' }}>
-                ✦ SEOUL VIP HOTEL IN-ROOM SPA ESCAPE
-              </div>
+        {/* ── 1. 首屏视觉 ── */}
+        <section style={{ paddingTop: '24px', textAlign: 'center' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 800, color: C.accent, backgroundColor: C.accentBg, padding: '4px 12px', borderRadius: '20px', marginBottom: '14px' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: C.green }} />
+            首尔全境20~30分钟到达 · 100%到达后当面结账
+          </div>
 
-              <h1 style={{ fontSize: '28px', fontWeight: 950, lineHeight: 1.35, letterSpacing: '-0.5px', margin: '0 0 16px', color: '#090d16' }}>
-                在您下榻的五星级酒店客房内<br />
-                <span style={{
-                  background: 'linear-gradient(135deg, #b8860b 0%, #e6ca65 35%, #d4af37 70%, #996e1e 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontWeight: 950,
-                  display: 'inline-block'
-                }}>享受私密浪漫的极上精油SPA</span><br />
-                首尔全境30分钟专车送达
-              </h1>
+          <h1 style={{ fontSize: '26px', fontWeight: 950, lineHeight: 1.35, color: C.dark, margin: '0 0 10px', letterSpacing: '-0.5px' }}>
+            首尔旅途疲惫尽消，<br />
+            尽享私密尊贵客房SPA
+          </h1>
 
-              <p style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.7, margin: '0 0 24px' }}>
-                无需韩国手机号，使用WhatsApp即可一键预约。我们严选年轻高颜值20代专业管理师，带齐高级精油与卫生用品直达您的客房。<strong>100%到达当面结账，绝无任何提前汇款风险！</strong>
-              </p>
+          <p style={{ fontSize: '13.5px', color: C.mid, lineHeight: 1.65, margin: '0 auto 20px', maxWidth: '440px' }}>
+            严选高颜值20代年轻专业技师直达您的客房。
+            坚持<strong>100%到达当面结账（零定金、无预付）</strong>原则，安全放心。
+          </p>
 
-              {/* 4 Guarantees */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px', marginBottom: '26px' }}>
-                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px 14px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>🛡️ 零定金·无任何先付</div>
-                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>技师到达确认后当面结账</div>
-                </div>
-                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px 14px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>💳 现金/银联/Visa均可</div>
-                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>支持人民币现金/韩币/外卡刷卡</div>
-                </div>
-                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px 14px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>🏨 首尔全境酒店覆盖</div>
-                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>江南、明洞、东大门、弘大、京畿道</div>
-                </div>
-                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px 14px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>💬 WhatsApp即时沟通</div>
-                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>WhatsApp一键沟通 立即预约</div>
-                </div>
-              </div>
+          {/* 2大核心CTA */}
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '22px' }}>
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                flex: 1, maxWidth: '210px',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                backgroundColor: '#25D366', color: '#ffffff',
+                fontWeight: 900, fontSize: '14px', padding: '13px 0', borderRadius: '12px',
+                boxShadow: '0 2px 10px rgba(37, 211, 102, 0.35)',
+                textDecoration: 'none',
+              }}
+            >
+              💬 WhatsApp 中文预约
+            </a>
+            <a
+              href={PHONE_TEL}
+              style={{
+                flex: 1, maxWidth: '210px',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                backgroundColor: C.dark, color: '#ffffff',
+                fontWeight: 800, fontSize: '14px', padding: '13px 0', borderRadius: '12px',
+                boxShadow: '0 2px 10px rgba(15, 23, 42, 0.12)',
+                textDecoration: 'none',
+              }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
+              {PHONE_DISPLAY}
+            </a>
+          </div>
 
-              {/* Action Buttons */}
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#25D366', color: '#ffffff', fontWeight: 900, fontSize: '15px', padding: '14px 28px', borderRadius: '10px', textDecoration: 'none', boxShadow: '0 4px 16px rgba(37,211,102,0.45)' }}>
-                  💬 WhatsApp 立即预约 (晚上7点至凌晨4点可预约中文对应)
-                </a>
-                <a href={PHONE_TEL} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#090d16', color: '#f3e5ab', fontWeight: 900, fontSize: '15px', padding: '14px 24px', borderRadius: '10px', textDecoration: 'none', border: '1px solid #d4af37', boxShadow: '0 4px 14px rgba(0,0,0,0.2)' }}>
-                  📞 电话: {PHONE_DISPLAY}
-                </a>
-              </div>
-            </div>
-
-            {/* Right Photo Card */}
-            <div style={{ position: 'relative', borderRadius: '18px', overflow: 'hidden', height: '420px', boxShadow: '0 16px 36px rgba(0,0,0,0.22)', border: '1.5px solid rgba(212, 175, 55, 0.4)' }}>
-              <Image
-                src="/images/hero_sensual_goddess.jpg"
-                alt="首尔酒店上门精油按摩"
-                fill
-                style={{ objectFit: 'cover' }}
-                priority
-              />
-              <div style={{ position: 'absolute', top: '14px', left: '14px', backgroundColor: 'rgba(9, 13, 22, 0.88)', border: '1px solid #d4af37', color: '#f3e5ab', padding: '6px 12px', borderRadius: '6px', fontSize: '11px', fontWeight: 900 }}>
-                👑 1:1 酒店客房 尊享私人SPA
-              </div>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '24px 20px 16px', background: 'linear-gradient(to top, rgba(9, 13, 22, 0.95) 0%, rgba(9, 13, 22, 0.6) 70%, transparent 100%)', color: '#ffffff' }}>
-                <div style={{ fontSize: '11px', color: '#e6ca65', fontWeight: 900 }}>MIDNIGHT VIP SENSUAL SPA</div>
-                <div style={{ fontSize: '16px', fontWeight: 950, color: '#ffffff', margin: '4px 0 2px' }}>温热芳香精油与细腻舒缓的手法</div>
-                <div style={{ fontSize: '11.5px', color: '#cbd5e1' }}>真人匹配100%保证 · 100%到达当面结账</div>
-              </div>
+          {/* 视觉图 */}
+          <div style={{ position: 'relative', width: '100%', height: '220px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+            <Image src="/images/hero_sensual_goddess.jpg" alt="首尔酒店客房上门按摩" fill style={{ objectFit: 'cover' }} priority />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '14px 16px', background: 'linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent)', color: '#ffffff', textAlign: 'left' }}>
+              <div style={{ fontSize: '11px', color: '#fef08a', fontWeight: 800, letterSpacing: '0.5px' }}>SEOUL VIP HOTEL SPA</div>
+              <div style={{ fontSize: '14.5px', fontWeight: 900 }}>温润高级精油与细腻舒压的极致呵护</div>
             </div>
           </div>
         </section>
 
-        {/* Tonight's Ace Lineup */}
-        <section style={{ backgroundColor: '#ffffff', borderRadius: '20px', border: '1px solid #e8e0d0', padding: '32px 28px', boxShadow: '0 12px 32px rgba(0, 0, 0, 0.28)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', flexWrap: 'wrap', gap: '10px' }}>
-            <div>
-              <div style={{ fontSize: '11px', fontWeight: 900, color: '#b38728', backgroundColor: '#faf6ee', border: '1px solid #d4af37', padding: '3px 8px', borderRadius: '4px', display: 'inline-block', marginBottom: '6px' }}>
-                ✦ TONIGHT'S VIP ACE ROSTER
-              </div>
-              <h2 style={{ fontSize: '20px', fontWeight: 950, color: '#090d16', margin: 0 }}>
-                今日在岗 20代年轻S级王牌管理师
-              </h2>
-              <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0' }}>
-                在WhatsApp预约时，您可以直接指定您心仪的管理师。
-              </p>
-            </div>
-            <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', color: '#166534', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>
-              ● 专车随时待命（约30分钟送达酒店房间）
-            </div>
-          </div>
+        {/* ── 分割线 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '36px 0 28px' }} />
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '18px' }}>
-            {CN_ACES.map((ace, i) => (
-              <div key={i} style={{ border: '1px solid #e2e8f0', borderRadius: '16px', padding: '18px', background: '#fafbfc', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                  <div style={{ position: 'relative', width: '74px', height: '74px', borderRadius: '12px', overflow: 'hidden', border: '1.5px solid #d4af37', flexShrink: 0 }}>
-                    <Image src={ace.img} alt={ace.name} fill style={{ objectFit: 'cover' }} />
-                  </div>
-                  <div>
-                    <span style={{ fontSize: '10px', fontWeight: 900, color: '#b38728', background: '#faf6ee', border: '1px solid #d4af37', padding: '2px 6px', borderRadius: '4px' }}>
-                      {ace.badge}
-                    </span>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: '#090d16', marginTop: '3px' }}>
-                      {ace.name} <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 700 }}>({ace.age})</span>
-                    </div>
-                    <div style={{ fontSize: '11.5px', color: '#475569', fontWeight: 700 }}>
-                      {ace.specs}
-                    </div>
-                  </div>
-                </div>
-                <div style={{ fontSize: '12px', color: '#334155', background: '#ffffff', padding: '10px 12px', borderRadius: '8px', border: '1px solid #f1f5f9', fontWeight: 600 }}>
-                  ✦ {ace.role}
-                </div>
-                <a href={`${WHATSAPP_LINK}&text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E7%82%B9%E6%92%AD${encodeURIComponent(ace.name)}%E7%AE%A1%E7%90%86%E5%B8%88`} target="_blank" rel="noopener noreferrer" style={{ textAlign: 'center', backgroundColor: '#25D366', color: '#ffffff', fontSize: '12px', fontWeight: 900, padding: '9px 0', borderRadius: '6px', textDecoration: 'none', marginTop: 'auto' }}>
-                  💬 WhatsApp点单预约 {ace.name}
-                </a>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Spa Menu & Pricing */}
-        <section style={{ backgroundColor: '#ffffff', borderRadius: '20px', border: '1px solid #e8e0d0', padding: '32px 28px', boxShadow: '0 12px 32px rgba(0, 0, 0, 0.28)' }}>
-          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-            <span style={{ fontSize: '11px', fontWeight: 900, color: '#b38728', backgroundColor: '#faf6ee', border: '1px solid #d4af37', padding: '3px 8px', borderRadius: '4px' }}>
-              ✦ 明码实价・无任何隐形附加费
-            </span>
-            <h2 style={{ fontSize: '22px', fontWeight: 950, color: '#090d16', margin: '8px 0 4px' }}>
-              酒店客房 SPA服务项目及价格
-            </h2>
-            <p style={{ fontSize: '13.5px', color: '#64748b' }}>
-              包含全部车费与深夜服务费。技师到达房间后当面现金/信用卡结算。
+        {/* ── 2. 服务套餐·价目表 ── */}
+        <section id="courses">
+          <div style={{ marginBottom: '16px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>SPA MENU &amp; TRANSPARENT RATES</div>
+            <h2 style={{ fontSize: '19px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>精选套餐·明码标价</h2>
+            <p style={{ fontSize: '12px', color: C.muted, margin: 0 }}>
+              零预付定金 · 技师到达客房当面结账（支持刷卡 / 现金 / 银联 / 韩币）
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '22px' }}>
-            {CN_COURSES.map((course, idx) => (
-              <div key={idx} style={{ border: course.isVip ? '2px solid #d4af37' : '1px solid #e2e8f0', borderRadius: '18px', overflow: 'hidden', background: course.isVip ? '#fffdf7' : '#ffffff', display: 'flex', flexDirection: 'column', boxShadow: course.isVip ? '0 8px 24px rgba(212,175,55,0.18)' : '0 2px 10px rgba(0,0,0,0.04)' }}>
-                <div style={{ position: 'relative', height: '170px' }}>
-                  <Image src={course.img} alt={course.name} fill style={{ objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', top: '10px', left: '10px', backgroundColor: '#090d16', color: '#f3e5ab', fontSize: '10.5px', fontWeight: 900, padding: '3px 8px', borderRadius: '4px', border: '1px solid #d4af37' }}>
-                    {course.badge}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {CN_COURSES.map((course, i) => (
+              <div
+                key={i}
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: `1px solid ${C.border}`,
+                  borderRadius: '14px',
+                  padding: '16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.02)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '15.5px', fontWeight: 900, color: C.dark }}>{course.name}</span>
+                    {course.badge && (
+                      <span style={{ fontSize: '10px', fontWeight: 800, color: '#ffffff', backgroundColor: '#dc2626', padding: '1px 6px', borderRadius: '4px' }}>
+                        {course.badge}
+                      </span>
+                    )}
                   </div>
+                  <span style={{ fontSize: '11.5px', color: C.accent, fontWeight: 700 }}>{course.subtitle}</span>
                 </div>
-                <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#b38728', marginBottom: '4px' }}>{course.tag}</div>
-                  <h3 style={{ fontSize: '18px', fontWeight: 950, color: '#090d16', margin: '0 0 10px' }}>{course.name}</h3>
-                  <p style={{ fontSize: '12.5px', color: '#64748b', lineHeight: 1.6, margin: '0 0 18px', flex: 1 }}>
-                    {course.desc}
-                  </p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '18px' }}>
-                    {course.prices.map((p, pi) => (
-                      <div key={pi} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', background: p.isBest ? '#faf6ee' : '#f8fafc', borderRadius: '8px', border: p.isBest ? '1px solid #d4af37' : '1px solid #f1f5f9' }}>
-                        <span style={{ fontSize: '13px', fontWeight: 800, color: '#090d16' }}>
-                          {p.time} {p.isBest && <span style={{ fontSize: '10px', color: '#b38728', fontWeight: 900 }}>[热门推荐]</span>}
-                        </span>
-                        <span style={{ fontSize: '14.5px', fontWeight: 950, color: '#b38728' }}>{p.price}</span>
+
+                <p style={{ fontSize: '12px', color: C.mid, lineHeight: 1.5, margin: 0 }}>
+                  {course.desc}
+                </p>
+
+                {/* 3段价格按钮 (点击直接打开WhatsApp) */}
+                <div style={{ display: 'flex', gap: '6px', paddingTop: '8px', borderTop: `1px solid ${C.borderLt}`, marginTop: '4px' }}>
+                  {course.prices.map((p, pi) => (
+                    <a
+                      key={pi}
+                      href={`https://wa.me/821066072239?text=${encodeURIComponent(`你好，我想预约【${course.name}】(${p.time})。`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        flex: 1,
+                        backgroundColor: p.isBest ? '#fffbeb' : C.bgSoft,
+                        border: p.isBest ? '1px solid #fde68a' : `1px solid ${C.borderLt}`,
+                        padding: '8px 6px',
+                        borderRadius: '8px',
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                        color: 'inherit',
+                      }}
+                    >
+                      <div style={{ fontSize: '10.5px', color: p.isBest ? C.accent : C.muted, fontWeight: 600 }}>
+                        {p.time} {p.isBest && '★人气'}
                       </div>
-                    ))}
-                  </div>
-                  <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ display: 'block', textAlign: 'center', backgroundColor: '#25D366', color: '#ffffff', fontWeight: 900, fontSize: '13px', padding: '11px 0', borderRadius: '8px', textDecoration: 'none' }}>
-                    立即预约该套餐
-                  </a>
+                      <div style={{ fontSize: '12px', fontWeight: 900, color: p.isBest ? '#dc2626' : C.dark, marginTop: '1px' }}>
+                        {p.price}
+                      </div>
+                    </a>
+                  ))}
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 3大清洁卫生保障 */}
+          <div style={{ marginTop: '14px', padding: '14px 16px', backgroundColor: C.bgSoft, borderRadius: '12px', border: `1px solid ${C.border}` }}>
+            <div style={{ fontSize: '12px', fontWeight: 900, color: C.dark, marginBottom: '6px', textAlign: 'center' }}>
+              ✨ 3大安心清洁与卫生承诺
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '6px', fontSize: '11.5px', color: C.mid, lineHeight: 1.5 }}>
+              <div>• <strong>携带一次性卫生消毒床垫</strong>（绝不弄脏酒店床单）</div>
+              <div>• <strong>100%水溶性天然植物精油</strong>（清爽温和易洗净）</div>
+              <div>• <strong>提供舒适纯棉管理服</strong>（包含首尔全境出车费）</div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 分割线 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '36px 0 28px' }} />
+
+        {/* ── 3. 今夜在岗王牌技师 ── */}
+        <section id="therapists">
+          <div style={{ marginBottom: '16px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>TONIGHT'S THERAPISTS</div>
+            <h2 style={{ fontSize: '19px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>今夜出勤 代表技师</h2>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: C.green, fontWeight: 700 }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: C.green }} />
+              首尔各片区30余名专业技师常时待命
+            </div>
+          </div>
+
+          {/* 精简横向卡片 (手机端优化) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {CN_ACES.map((t, i) => (
+              <div
+                key={i}
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: `1px solid ${C.border}`,
+                  borderRadius: '14px',
+                  padding: '12px',
+                  display: 'flex',
+                  gap: '12px',
+                  alignItems: 'center',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.02)',
+                }}
+              >
+                {/* 缩略图 */}
+                <div style={{ position: 'relative', width: '92px', height: '115px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0 }}>
+                  <Image src={t.img} alt={t.name} fill style={{ objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', top: '6px', left: '6px', backgroundColor: 'rgba(15, 23, 42, 0.85)', color: '#fef08a', fontSize: '9.5px', fontWeight: 800, padding: '2px 5px', borderRadius: '4px' }}>
+                    {t.badge}
+                  </div>
+                </div>
+
+                {/* 技师详情与预约 */}
+                <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: C.dark }}>
+                      {t.name} <span style={{ fontSize: '12px', color: C.muted, fontWeight: 500 }}>({t.age})</span>
+                    </div>
+                    <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent }}>{t.spec}</div>
+                  </div>
+
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: C.dark, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {t.specialty}
+                  </div>
+                  <div style={{ fontSize: '11px', color: C.muted, lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    {t.desc}
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '4px' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: t.isAvailable ? C.green : '#d97706' }}>
+                      {t.isAvailable ? '● 即可出车' : '○ 预约排班'}
+                    </span>
+
+                    <div style={{ display: 'flex', gap: '4px' }}>
+                      <a
+                        href={`https://wa.me/821066072239?text=${encodeURIComponent(`你好，我想指定【${t.name}】技师预约酒店客房按摩。`)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          backgroundColor: '#25D366', color: '#ffffff',
+                          fontSize: '11px', fontWeight: 900, padding: '5px 9px', borderRadius: '6px',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        指定预约
+                      </a>
+                      <a
+                        href={PHONE_TEL}
+                        style={{
+                          backgroundColor: C.dark, color: '#ffffff',
+                          fontSize: '11px', fontWeight: 800, padding: '5px 9px', borderRadius: '6px',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        致电
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 30名待命提示 */}
+          <div style={{ marginTop: '12px', padding: '12px 14px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, borderRadius: '10px', fontSize: '12px', color: C.mid, lineHeight: 1.55 }}>
+            <strong style={{ color: C.dark }}>首尔全境常驻30余名专业理疗师随时候命</strong><br />
+            除上述展示的代表招牌技师外，各商圈据点还有多位不同风格（泰式深层重压、温柔感性等）的技师在岗。预约时可随时告知您偏好的类型。
+          </div>
+        </section>
+
+        {/* ── 分割线 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '36px 0 28px' }} />
+
+        {/* ── 4. 轻松预约3步流程 ── */}
+        <section id="how-it-works">
+          <div style={{ marginBottom: '16px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>HOW IT WORKS</div>
+            <h2 style={{ fontSize: '19px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>轻松预约 3步完成</h2>
+            <p style={{ fontSize: '12px', color: C.muted, margin: 0 }}>无需韩国手机号码 · 30秒即可完成预约</p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {[
+              { no: '01', title: '通过WhatsApp咨询', desc: '发送您的酒店名称、房间号与心仪套餐，客服将立即为您确认并调度。' },
+              { no: '02', title: '20~30分钟送达客房', desc: '就近区域专属技师随身携带全套消毒备品，专车静音送达客房门前。' },
+              { no: '03', title: '见面核实后当面结算', desc: '确认技师本人到达后当面付款（现金或刷卡），安心享受尊贵放松护理。' },
+            ].map((s, i) => (
+              <div key={i} style={{ backgroundColor: '#ffffff', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '13px 15px', display: 'flex', gap: '12px', alignItems: 'center' }}>
+                <div style={{ fontSize: '15px', fontWeight: 900, color: C.accent, minWidth: '22px' }}>{s.no}</div>
+                <div>
+                  <div style={{ fontSize: '13.5px', fontWeight: 800, color: C.dark }}>{s.title}</div>
+                  <div style={{ fontSize: '12px', color: C.mid, marginTop: '2px' }}>{s.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 零定金保证横幅 */}
+          <div style={{ marginTop: '12px', padding: '13px 15px', backgroundColor: C.greenBg, border: `1px solid ${C.greenBd}`, borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+            <div>
+              <div style={{ fontSize: '12.5px', fontWeight: 900, color: '#166534' }}>绝无提前定金·100%见面付款保证</div>
+              <div style={{ fontSize: '11px', color: '#14532d', marginTop: '2px' }}>到达前绝不收取哪怕1分钱预付款，杜绝任何风险。</div>
+            </div>
+            <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ backgroundColor: '#166534', color: '#ffffff', padding: '7px 12px', borderRadius: '7px', fontSize: '11.5px', fontWeight: 800, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+              WhatsApp
+            </a>
+          </div>
+        </section>
+
+        {/* ── 分割线 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '36px 0 28px' }} />
+
+        {/* ── 5. 真实客户评价 ── */}
+        <section>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '14px' }}>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>GUEST REVIEWS</div>
+              <h2 style={{ fontSize: '19px', fontWeight: 900, color: C.dark, margin: '2px 0 0' }}>真实房客口碑评价</h2>
+            </div>
+            <div style={{ fontSize: '12px', color: C.accent, fontWeight: 800 }}>★ 5.0满分好评</div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {CN_REVIEWS.map((rev, i) => (
+              <div key={i} style={{ backgroundColor: '#ffffff', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '13px 15px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 800, color: C.dark }}>{rev.author} <span style={{ fontSize: '11px', color: C.muted, fontWeight: 500 }}>({rev.area})</span></span>
+                  <span style={{ fontSize: '11px', color: '#eab308' }}>★★★★★</span>
+                </div>
+                <div style={{ fontSize: '11px', color: C.accent, fontWeight: 700, marginBottom: '5px' }}>{rev.course}</div>
+                <p style={{ fontSize: '12px', color: C.mid, lineHeight: 1.5, margin: 0 }}>"{rev.text}"</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Global Messengers */}
-        <section style={{ backgroundColor: '#090d16', borderRadius: '20px', border: '1.5px solid #d4af37', padding: '36px 28px', color: '#ffffff', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '22px', fontWeight: 950, color: '#f3e5ab', margin: '0 0 10px' }}>
-            今夜在首尔，让温暖与极上香薰伴您入眠
-          </h2>
-          <p style={{ fontSize: '14px', color: '#cbd5e1', maxWidth: '640px', margin: '0 auto 24px', lineHeight: 1.6 }}>
-            无需韩国手机号码，通过 WhatsApp 发送您的“酒店名称、房间号与心仪套餐”，即可极速安排专车送达。
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#25D366', color: '#ffffff', fontWeight: 900, fontSize: '15px', padding: '14px 28px', borderRadius: '10px', textDecoration: 'none', boxShadow: '0 4px 14px rgba(37,211,102,0.4)' }}>
-              💬 WhatsApp: +82 10-6607-2239
-            </a>
-            <a href={PHONE_TEL} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#1e293b', border: '1px solid #d4af37', color: '#f3e5ab', fontWeight: 900, fontSize: '15px', padding: '14px 28px', borderRadius: '10px', textDecoration: 'none' }}>
-              📞 国际电话: {PHONE_DISPLAY}
-            </a>
+        {/* ── 分割线 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '36px 0 28px' }} />
+
+        {/* ── 6. 常见问题 (FAQ折叠面板) ── */}
+        <section id="faq">
+          <div style={{ marginBottom: '16px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '0.8px' }}>FREQUENTLY ASKED QUESTIONS</div>
+            <h2 style={{ fontSize: '19px', fontWeight: 900, color: C.dark, margin: '2px 0 4px' }}>常见问题解答 (FAQ)</h2>
+            <p style={{ fontSize: '12px', color: C.muted, margin: 0 }}>针对在韩商旅及观光住客的快速答疑。</p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {CN_FAQS.map((faq, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div key={i} style={{ border: `1px solid ${C.border}`, borderRadius: '10px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    style={{ width: '100%', padding: '13px 15px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left' }}
+                  >
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: C.dark }}>{faq.q}</span>
+                    <span style={{ fontSize: '11px', color: C.muted }}>{isOpen ? '▲' : '▼'}</span>
+                  </button>
+                  {isOpen && (
+                    <div style={{ padding: '0 15px 13px', fontSize: '12px', color: C.mid, lineHeight: 1.6, borderTop: `1px solid ${C.borderLt}`, paddingTop: '10px' }}>
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </section>
+
+        {/* ── 分割线 ── */}
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '32px 0 24px' }} />
+
+        {/* ── 7. 区域服务网络页脚 ── */}
+        <footer style={{ paddingBottom: '24px' }}>
+          <div style={{ fontSize: '12px', fontWeight: 800, color: C.dark, marginBottom: '6px' }}>
+            首尔全境 酒店客房VIP上门精油SPA 网络
+          </div>
+          <p style={{ fontSize: '11px', color: C.muted, lineHeight: 1.6, margin: '0 0 10px' }}>
+            覆盖江南、明洞、东大门、弘大、汝矣岛、梨泰院等首尔全部25区，专车20~30分钟急速到达。
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px 8px', fontSize: '11px' }}>
+            {SEO_AREAS.map((area, i) => (
+              <span key={i} style={{ color: '#64748b' }}>
+                {area}
+              </span>
+            ))}
+          </div>
+
+          <div style={{ marginTop: '18px', paddingTop: '14px', borderTop: `1px solid ${C.border}`, fontSize: '10.5px', color: C.muted, lineHeight: 1.6 }}>
+            <strong>美丽之夜 Abam (阿夜SPA)</strong> · 首尔特别市全境五星级酒店客房上门服务 · 100%到达见面结账（无先付） · WhatsApp中文客服 &amp; 电话 {PHONE_DISPLAY}
+          </div>
+        </footer>
+
       </main>
 
-      {/* Fixed Bottom Bar */}
-      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(16px)', borderTop: '1.5px solid rgba(212, 175, 55, 0.4)', padding: '10px 16px', zIndex: 50, boxShadow: '0 -6px 25px rgba(0,0,0,0.18)' }}>
-        <div style={{ maxWidth: '1080px', margin: '0 auto', display: 'flex', gap: '10px' }}>
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ flex: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', backgroundColor: '#25D366', color: '#ffffff', fontWeight: 900, fontSize: '15px', padding: '14px 0', borderRadius: '10px', textDecoration: 'none', boxShadow: '0 2px 10px rgba(37,211,102,0.35)' }}>
-            💬 WhatsApp 晚上7点至凌晨4点可预约咨询
+      {/* ── 底部固定快捷预约栏 ── */}
+      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(12px)', borderTop: `1px solid ${C.border}`, padding: '8px 16px', zIndex: 50, boxShadow: '0 -4px 16px rgba(0,0,0,0.06)' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              flex: 1.6,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+              backgroundColor: '#25D366', color: '#ffffff',
+              fontWeight: 900, fontSize: '14px', padding: '12px 0', borderRadius: '10px',
+              textDecoration: 'none',
+              boxShadow: '0 2px 8px rgba(37, 211, 102, 0.3)',
+            }}
+          >
+            💬 WhatsApp 中文即时预约
           </a>
-          <a href={PHONE_TEL} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', backgroundColor: '#090d16', color: '#f3e5ab', fontWeight: 900, fontSize: '14.5px', padding: '14px 0', borderRadius: '10px', textDecoration: 'none', border: '1px solid #d4af37' }}>
-            📞 直接致电
+          <a
+            href={PHONE_TEL}
+            style={{
+              flex: 1,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px',
+              backgroundColor: C.dark, color: '#ffffff',
+              fontWeight: 800, fontSize: '13.5px', padding: '12px 0', borderRadius: '10px',
+              textDecoration: 'none',
+              boxShadow: '0 2px 8px rgba(15, 23, 42, 0.15)',
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
+            致电咨询
           </a>
         </div>
       </div>
+
     </div>
   );
 }
