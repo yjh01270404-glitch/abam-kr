@@ -53,9 +53,9 @@ const EN_COURSES = [
     img: '/images/thai.jpg',
     desc: 'Relieves intense travel fatigue, stiff neck, and jet lag through rhythmic acupressure and full-body passive yoga stretching.',
     prices: [
-      { time: '60 min', price: '₩80,000 (~$60)' },
-      { time: '90 min', price: '₩100,000 (~$75)', isBest: true },
-      { time: '120 min (2h)', price: '₩120,000 (~$90)' },
+      { time: '60 min', price: '₩130,000 (~$98)' },
+      { time: '90 min', price: '₩150,000 (~$115)', isBest: true },
+      { time: '120 min (2h)', price: '₩170,000 (~$128)' },
     ],
   },
   {
@@ -66,9 +66,9 @@ const EN_COURSES = [
     img: '/images/sensual_touch.jpg',
     desc: 'Deeply relaxing Swedish-style soothing strokes to calm your autonomic nerves, releasing mental burnout and daily tension.',
     prices: [
-      { time: '60 min', price: '₩90,000 (~$68)' },
-      { time: '90 min', price: '₩120,000 (~$90)', isBest: true },
-      { time: '120 min (2h)', price: '₩150,000 (~$113)' },
+      { time: '60 min', price: '₩140,000 (~$105)' },
+      { time: '90 min', price: '₩170,000 (~$128)', isBest: true },
+      { time: '120 min (2h)', price: '₩200,000 (~$150)' },
     ],
   },
   {
@@ -79,9 +79,9 @@ const EN_COURSES = [
     img: '/images/aroma.jpg',
     desc: 'Soothing body strokes with warm natural essential oils designed to release muscle tension, stimulate lymphatic drainage, and melt away travel stress.',
     prices: [
-      { time: '60 min', price: '₩90,000 (~$68)' },
-      { time: '90 min', price: '₩110,000 (~$83)', isBest: true },
-      { time: '120 min (2h)', price: '₩140,000 (~$105)' },
+      { time: '60 min', price: '₩140,000 (~$105)' },
+      { time: '90 min', price: '₩160,000 (~$120)', isBest: true },
+      { time: '120 min (2h)', price: '₩190,000 (~$145)' },
     ],
   },
   {
@@ -92,9 +92,9 @@ const EN_COURSES = [
     img: '/images/sensual_care.jpg',
     desc: 'First relieves deep muscular knots with dry acupressure, then transitions into smooth aromatic oil lymphatic therapy.',
     prices: [
-      { time: '60 min', price: '₩100,000 (~$75)' },
-      { time: '90 min', price: '₩140,000 (~$105)', isBest: true },
-      { time: '120 min (2h)', price: '₩170,000 (~$128)' },
+      { time: '60 min', price: '₩150,000 (~$115)' },
+      { time: '90 min', price: '₩190,000 (~$145)', isBest: true },
+      { time: '120 min (2h)', price: '₩220,000 (~$165)' },
     ],
   },
   {
@@ -106,9 +106,9 @@ const EN_COURSES = [
     img: '/images/hero_sensual_goddess.jpg',
     desc: 'The ultimate luxury spa experience: deep acupressure release for fatigued muscles followed by warm aromatic sensual touch and intensive lymphatic care.',
     prices: [
-      { time: '60 min', price: '₩120,000 (~$90)' },
-      { time: '90 min', price: '₩160,000 (~$120)', isBest: true },
-      { time: '120 min (2h)', price: '₩200,000 (~$150)' },
+      { time: '60 min', price: '₩170,000 (~$128)' },
+      { time: '90 min', price: '₩210,000 (~$160)', isBest: true },
+      { time: '120 min (2h)', price: '₩250,000 (~$190)' },
     ],
   },
 ];
