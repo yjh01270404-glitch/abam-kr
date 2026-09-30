@@ -1,0 +1,252 @@
+        <div style={{ maxWidth: '1080px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '38px', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          
+          {/* 좌측: 매혹적인 밤문화 & 섹시 센슈얼 헤드라인 & 시크릿 프라이빗 케어 & CTA 버튼 */}
+          <div>
+            {/* 실시간 심야 배차 펄스 뱃지 (새벽 5시 마감) */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#090d16', border: '1px solid rgba(212, 175, 55, 0.45)', padding: '6px 14px', borderRadius: '20px', marginBottom: '16px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#eab308', display: 'inline-block', boxShadow: pulse ? '0 0 0 4px rgba(234,179,8,0.3)' : '0 0 0 0px rgba(234,179,8,0)', transition: 'box-shadow 0.6s ease' }} />
+              <span style={{ fontSize: '12px', fontWeight: 800, color: '#f3e5ab', letterSpacing: '-0.2px' }}>🔥 20대 S급 비주얼 테라피스트 출근 완료 · 심야 30분 도착</span>
+            </div>
+
+            <div style={{ fontSize: '13px', fontWeight: 900, color: '#b38728', letterSpacing: '1px', marginBottom: '8px', textTransform: 'uppercase' }}>
+              ✦ GANGNAM MIDNIGHT VIP ESCAPE · 1:1 밀착 센슈얼 케어
+            </div>
+
+            {/* 세련되고 화려한 메탈릭 골드 헤드라인 */}
+            <h1 style={{ fontSize: '33px', fontWeight: 950, lineHeight: 1.32, letterSpacing: '-1px', margin: '0 0 16px', color: '#090d16' }}>
+              숨결이 닿는 순간 시작되는<br />
+              <span style={{
+                background: 'linear-gradient(135deg, #b8860b 0%, #e6ca65 35%, #d4af37 70%, #996e1e 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontWeight: 950,
+                display: 'inline-block'
+              }}>가장 은밀하고 섹시한 밤</span><br />
+              20대 S급 테라피스트의 밀착 센슈얼 힐링
+            </h1>
+
+            <div style={{ fontSize: '15px', color: '#334155', lineHeight: 1.8, margin: '0 0 28px', wordBreak: 'keep-all' }}>
+              <p style={{ margin: '0 0 12px', fontWeight: 800, color: '#090d16', fontSize: '15.5px', letterSpacing: '-0.3px', lineHeight: 1.6 }}>
+                도메인 <strong>abam.kr</strong>의 의미 그대로,<br />
+                오늘 밤 당신만을 위한 가장 매혹적이고 감미로운 '아름다운 밤'을 선물합니다.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '12px', borderLeft: '3px solid #d4af37', margin: '10px 0 0 2px' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                  <span style={{ color: '#b38728', fontWeight: 950, lineHeight: 1.6, fontSize: '15px' }}>•</span>
+                  <span style={{ lineHeight: 1.65 }}>
+                    타인의 시선 없는 고객님의 프라이빗 룸(자택·호텔·오피스텔)이<br />
+                    달빛 아래 단둘이 누리는 <strong>은밀하고 화려한 최고급 럭셔리 스파</strong>로 바뀝니다.
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                  <span style={{ color: '#b38728', fontWeight: 950, lineHeight: 1.6, fontSize: '15px' }}>•</span>
+                  <span style={{ lineHeight: 1.65 }}>
+                    살결을 타고 흐르는 은은한 천연 아로마 향과 섬세하고 감미로운 손길이<br />
+                    온몸의 감각을 깨우며 <strong>깊어가는 밤 잊지 못할 극상의 전율</strong>을 선사합니다.
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                  <span style={{ color: '#b38728', fontWeight: 950, lineHeight: 1.6, fontSize: '15px' }}>•</span>
+                  <span style={{ lineHeight: 1.65 }}>
+                    엄선된 20대 S급 에이스 관리사가 새벽 5시 마감 전까지 수도권 전지역<br />
+                    <strong style={{ color: '#090d16', backgroundColor: '#faf6ee', padding: '1px 5px', borderRadius: '4px', border: '1px solid #e7ded1' }}>30분 내외</strong> 즉시 은밀하고 빠르게 찾아갑니다.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* 일관된 순서: 카카오톡 바로연결 (좌) ➔ 전화예약 (우) */}
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '30px' }}>
+              <a href={KAKAO_LINK} onClick={handleKakaoConnect}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#FEE500', color: '#181600', fontWeight: 900, fontSize: '15px', padding: '14px 26px', borderRadius: '8px', textDecoration: 'none', boxShadow: '0 4px 14px rgba(254,229,0,0.32)', cursor: 'pointer' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#181600"/></svg>
+                카카오톡 바로연결 (ID: {KAKAO_ID})
+              </a>
+              <a href={PHONE_TEL} onClick={handlePhoneCall}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#090d16', color: '#ffffff', fontWeight: 800, fontSize: '15px', padding: '14px 26px', borderRadius: '8px', textDecoration: 'none', border: '1px solid #d4af37', boxShadow: '0 4px 14px rgba(0,0,0,0.35)', cursor: 'pointer' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
+                {PHONE_NUM} 즉시 전화연결
+              </a>
+            </div>
+
+            {/* 핵심 수치 3종 카드 (골드 앰비언트 프레임) */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+              {[
+                { num: '20대 S급', label: '에이스 실물 매칭', sub: '내상 ZERO 100% 보증' },
+                { num: '30분 도착', label: '수도권 심야 총알배차', sub: '새벽 5시 마감까지' },
+                { num: '선입금 0원', label: '100% 현장 대면결제', sub: '직접 확인 후 안심 정산' },
+              ].map((item, i) => (
+                <div key={i} style={{ backgroundColor: '#faf9f6', border: '1px solid #e8e0d0', borderRadius: '10px', padding: '12px 10px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '18px', fontWeight: 950, color: '#090d16', letterSpacing: '-0.5px' }}>{item.num}</div>
+                  <div style={{ fontSize: '12px', color: '#b38728', fontWeight: 900, marginTop: '2px' }}>{item.label}</div>
+                  <div style={{ fontSize: '11px', color: '#64748b', marginTop: '1px' }}>{item.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 우측: 섹시 & 글래머러스 대형 여신 비주얼 쇼케이스 (골드 앰비언트 프레임) */}
+          <div>
+            {/* 상단 뱃지 바 */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: '#faf6ee', border: '1px solid #d4af37', padding: '5px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 900, color: '#b38728' }}>
+                ✨ 20대 S급 비주얼 에이스 상시 대기
+              </span>
+              <span style={{ background: '#090d16', color: '#f3e5ab', border: '1px solid #d4af37', padding: '5px 12px', borderRadius: '6px', fontSize: '11.5px', fontWeight: 900, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
+                100% 대면결제 · 내상 ZERO
+              </span>
+            </div>
+
+            {/* 대형 여신 메인 비주얼 (실크 가운 & 펜트하우스 스파) */}
+            <div style={{ position: 'relative', width: '100%', height: '420px', borderRadius: '18px', overflow: 'hidden', border: '1.5px solid rgba(212, 175, 55, 0.75)', boxShadow: '0 12px 35px rgba(212, 175, 55, 0.25)' }}>
+              <Image src="/images/hero_sensual_goddess.jpg" alt="아름다운 밤 타이 홈케어 20대 S급 테라피스트 매혹적인 센슈얼 힐링" fill style={{ objectFit: 'cover' }} priority />
+              
+              {/* 이미지 상단 플로팅 뱃지 */}
+              <div style={{ position: 'absolute', top: '14px', left: '14px', backgroundColor: 'rgba(9, 13, 22, 0.88)', backdropFilter: 'blur(8px)', border: '1px solid rgba(212, 175, 55, 0.8)', color: '#f3e5ab', padding: '5px 12px', borderRadius: '20px', fontSize: '11.5px', fontWeight: 900 }}>
+                👑 1:1 밀착 VIP 센슈얼 스파
+              </div>
+
+              {/* 이미지 하단 매혹적인 그라디언트 텍스트 오버레이 */}
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(9,13,22,0.92) 0%, rgba(9,13,22,0.6) 65%, transparent 100%)', padding: '24px 18px 16px', color: '#ffffff' }}>
+                <div style={{ fontSize: '11px', fontWeight: 900, color: '#facc15', letterSpacing: '0.8px', marginBottom: '4px', textTransform: 'uppercase' }}>
+                  MIDNIGHT VIP SENSUAL ESCAPE
+                </div>
+                <div style={{ fontSize: '16.5px', fontWeight: 950, letterSpacing: '-0.3px', lineHeight: 1.4, color: '#ffffff' }}>
+                  살결을 타고 흐르는 은은한 온기와 감미로운 손길
+                </div>
+                <div style={{ fontSize: '12px', color: '#cbd5e1', marginTop: '4px', fontWeight: 600 }}>
+                  20대 에이스 전원 엄선 · 실물 100% 보증 · 타인의 시선 없는 완전 프라이빗 케어
+                </div>
+              </div>
+            </div>
+
+            {/* 보조 비주얼 2종 듀얼 갤러리 */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '10px' }}>
+              <div style={{ backgroundColor: '#ffffff', border: '1px solid #e8e0d0', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                <div style={{ position: 'relative', width: '100%', height: '115px' }}>
+                  <Image src="/images/ace_seoa.jpg" alt="매혹적인 실크 아로마 림프 케어" fill style={{ objectFit: 'cover' }} />
+                </div>
+                <div style={{ padding: '8px 10px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '12.5px', fontWeight: 900, color: '#090d16' }}>센슈얼 림프 케어</div>
+                  <div style={{ fontSize: '11px', color: '#b38728', fontWeight: 700, marginTop: '1px' }}>감미로운 밀착 릴렉싱</div>
+                </div>
+              </div>
+
+              <div style={{ backgroundColor: '#ffffff', border: '1px solid #e8e0d0', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                <div style={{ position: 'relative', width: '100%', height: '115px' }}>
+                  <Image src="/images/ace_jia.jpg" alt="매끄러운 실크 바디라인 테라피" fill style={{ objectFit: 'cover' }} />
+                </div>
+                <div style={{ padding: '8px 10px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '12.5px', fontWeight: 900, color: '#090d16' }}>실크 바디라인</div>
+                  <div style={{ fontSize: '11px', color: '#b38728', fontWeight: 700, marginTop: '1px' }}>달빛 아래 프라이빗 스파</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── [신규 추가] 오늘 밤 출근 20대 S급 에이스 테라피스트 실시간 라인업 ── */}
+        <div style={{ marginTop: '36px', paddingTop: '28px', borderTop: '1.5px solid rgba(212, 175, 55, 0.35)', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px', flexWrap: 'wrap', gap: '10px' }}>
+            <div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 900, color: '#b38728', backgroundColor: '#faf6ee', border: '1px solid #d4af37', padding: '3px 10px', borderRadius: '4px', letterSpacing: '0.6px' }}>
+                ✦ TONIGHT'S VIP ACE ROSTER
+              </div>
+              <h2 style={{ fontSize: '21px', fontWeight: 950, color: '#090d16', margin: '6px 0 2px', letterSpacing: '-0.5px' }}>
+                오늘 밤 출근 20대 S급 에이스 테라피스트 실시간 라인업
+              </h2>
+              <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>
+                프로필 실물 100% 매칭 보증 · 마음에 드시는 관리사를 직접 지정하여 예약하실 수 있습니다.
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 800, color: '#16a34a', backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', padding: '6px 12px', borderRadius: '20px' }}>
+              <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
+              전원 실시간 배차 가능 (수도권 30분 도착)
+            </div>
+          </div>
+
+          {/* 3인 에이스 프로필 카드 그리드 */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            {[
+              {
+                name: '에이스 유나',
+                age: '23세',
+                spec: '166cm · 47kg · C컵 슬림',
+                badge: '👑 지명 1위 · 러블리 베이글',
+                specialty: '감미로운 밀착 림프 순환 & 센슈얼 VIP 특화',
+                desc: '상냥하고 매혹적인 눈웃음과 극상의 섬세한 손길. 지명 예약률 독보적 1위의 대표 에이스.',
+                status: '🟢 현재 즉시 배차 가능',
+                img: '/images/ace_yuna.jpg',
+              },
+              {
+                name: '에이스 서아',
+                age: '24세',
+                spec: '168cm · 49kg · S라인 글래머',
+                badge: '🔥 예약 폭주 · 청순 글래머',
+                specialty: '정통 왓포 딥티슈 지압 + 황홀한 아로마 힐링',
+                desc: '도회적인 분위기와 깊이 있는 압의 조화. 시원한 건식과 매혹적인 오일 케어를 완벽히 소화.',
+                status: '🟡 심야 지명 예약 접수 중',
+                img: '/images/ace_seoa.jpg',
+              },
+              {
+                name: '에이스 지아',
+                age: '22세',
+                spec: '165cm · 46kg · 꿀피부 슬렌더',
+                badge: '✨ 에이스 힐러 · 청순 피지컬',
+                specialty: '부드러운 손길과 섬세한 미세 근막 이완',
+                desc: '살결을 스치는 조심스럽고 감각적인 온기. 굳어있던 심신의 긴장을 완전히 녹여내는 힐러.',
+                status: '🟢 현재 즉시 배차 가능',
+                img: '/images/ace_jia.jpg',
+              },
+            ].map((ace, idx) => (
+              <div key={idx} style={{ backgroundColor: '#faf9f6', border: '1.5px solid #e8e0d0', borderRadius: '16px', padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 14px rgba(0,0,0,0.06)' }}>
+                <div>
+                  <div style={{ display: 'flex', gap: '14px', alignItems: 'center', marginBottom: '12px' }}>
+                    <div style={{ position: 'relative', width: '80px', height: '80px', borderRadius: '14px', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(212, 175, 55, 0.65)', boxShadow: '0 4px 12px rgba(212, 175, 55, 0.2)' }}>
+                      <Image src={ace.img} alt={ace.name} fill style={{ objectFit: 'cover' }} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '11px', fontWeight: 900, color: '#b38728', backgroundColor: '#faf6ee', border: '1px solid #d4af37', padding: '2px 8px', borderRadius: '4px', display: 'inline-block', marginBottom: '4px' }}>
+                        {ace.badge}
+                      </div>
+                      <div style={{ fontSize: '17px', fontWeight: 950, color: '#090d16' }}>
+                        {ace.name} <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 700 }}>({ace.age})</span>
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#b38728', fontWeight: 800, marginTop: '2px' }}>
+                        {ace.spec}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px 12px', marginBottom: '12px', fontSize: '12px' }}>
+                    <div style={{ fontWeight: 900, color: '#090d16', marginBottom: '3px' }}>
+                      ✦ {ace.specialty}
+                    </div>
+                    <div style={{ color: '#64748b', lineHeight: 1.5, fontSize: '11.5px' }}>
+                      {ace.desc}
+                    </div>
+                  </div>
+
+                  <div style={{ fontSize: '11.5px', fontWeight: 800, color: ace.status.includes('🟢') ? '#16a34a' : '#ca8a04', marginBottom: '12px' }}>
+                    {ace.status}
+                  </div>
+                </div>
+
+                {/* 지명 퀵 예약 버튼 */}
+                <div style={{ display: 'flex', gap: '6px' }}>
+                  <a href={KAKAO_LINK} onClick={handleKakaoConnect}
+                    style={{ flex: 1.2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', backgroundColor: '#FEE500', color: '#181600', fontWeight: 900, fontSize: '12.5px', padding: '10px 0', borderRadius: '6px', textDecoration: 'none', boxShadow: '0 2px 6px rgba(254,229,0,0.25)', cursor: 'pointer' }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#181600"/></svg>
+                    {ace.name.split(' ')[1]} 카톡지명
+                  </a>
+                  <a href={PHONE_TEL} onClick={handlePhoneCall}
+                    style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', backgroundColor: '#090d16', color: '#ffffff', fontWeight: 800, fontSize: '12.5px', padding: '10px 0', borderRadius: '6px', textDecoration: 'none', border: '1px solid #d4af37', cursor: 'pointer' }}>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
+                    전화지명
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
