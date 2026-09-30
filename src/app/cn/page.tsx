@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: '首尔酒店上门按摩・首尔上门精油SPA | 中文微信咨询・30分钟到达・100%见面付款 (Abam)',
+  title: '首尔酒店上门按摩・首尔上门精油SPA | 中文WhatsApp咨询・30分钟到达・100%见面付款 (Abam)',
   description:
-    '首尔江南、明洞、东大门、弘大及京畿道全境酒店客房上门按摩服务。无任何预付款定金（100%到达后当面现金/银联信用卡结账）。微信/WhatsApp/LINE快速预约，严选20代年轻专业技师30分钟内急速到达。',
+    '首尔江南、明洞、东大门、弘大及京畿道全境酒店客房上门按摩服务。无任何预付款定金（100%到达后当面现金/银联信用卡结账）。WhatsApp快速预约，严选20代年轻专业技师30分钟内急速到达。',
   keywords: [
     '首尔上门按摩',
     '首尔酒店上门SPA',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '首尔酒店上门按摩・首尔上门SPA (Abam)',
     description:
-      '首尔全境酒店30分钟到达。先付款0元・完全到达后当面付款（现金/银联信用卡均可）。微信/WhatsApp支持。',
+      '首尔全境酒店30分钟到达。先付款0元・完全到达后当面付款（现金/银联信用卡均可）。WhatsApp支持。',
     url: 'https://abam.kr/cn',
     siteName: 'Abam Thai Homecare Seoul',
     images: [{ url: 'https://abam.kr/images/hero_sensual_goddess.jpg', width: 730, height: 620, alt: '首尔酒店上门按摩' }],
@@ -151,7 +151,7 @@ export default function ChinesePage() {
     }}>
       {/* Top Banner */}
       <div style={{ background: '#070a10', borderBottom: '1px solid rgba(212, 175, 55, 0.45)', color: '#f3e5ab', padding: '10px 20px', textAlign: 'center', fontSize: '12px', fontWeight: 800 }}>
-        🇨🇳 首尔全境及京畿道五星级酒店/公寓上门SPA · 绝无预付款（100%到达当面结账） · 30分钟急速到达 · 微信/WhatsApp/LINE均可预约
+        🇨🇳 首尔全境及京畿道五星级酒店/公寓上门SPA · 绝无预付款（100%到达当面结账） · 30分钟急速到达 · WhatsApp快速预约
       </div>
 
       {/* Header */}
@@ -166,7 +166,7 @@ export default function ChinesePage() {
                 美丽之夜 <span style={{ color: '#b38728' }}>Abam (首尔高端上门SPA)</span>
               </div>
               <span style={{ fontSize: '10.5px', color: '#64748b', fontWeight: 700 }}>
-                首尔酒店客房上门按摩 · 中文微信预约
+                首尔酒店客房上门按摩 · 中文WhatsApp预约
               </span>
             </div>
           </Link>
@@ -222,7 +222,7 @@ export default function ChinesePage() {
               </h1>
 
               <p style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.7, margin: '0 0 24px' }}>
-                无需韩国手机号，使用微信或WhatsApp即可一键预约。我们严选年轻高颜值20代专业管理师，带齐高级精油与卫生用品直达您的客房。<strong>100%到达当面结账，绝无任何提前汇款风险！</strong>
+                无需韩国手机号，使用WhatsApp即可一键预约。我们严选年轻高颜值20代专业管理师，带齐高级精油与卫生用品直达您的客房。<strong>100%到达当面结账，绝无任何提前汇款风险！</strong>
               </p>
 
               {/* 4 Guarantees */}
@@ -240,8 +240,8 @@ export default function ChinesePage() {
                   <div style={{ fontSize: '11.5px', color: '#64748b' }}>江南、明洞、东大门、弘大、京畿道</div>
                 </div>
                 <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px 14px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>💬 微信即时沟通</div>
-                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>添加微信 Abam1004 立即预约</div>
+                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>💬 WhatsApp即时沟通</div>
+                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>WhatsApp一键沟通 立即预约</div>
                 </div>
               </div>
 
@@ -288,7 +288,7 @@ export default function ChinesePage() {
                 今日在岗 20代年轻S级王牌管理师
               </h2>
               <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0' }}>
-                在微信或WhatsApp预约时，您可以直接指定您心仪的管理师。
+                在WhatsApp预约时，您可以直接指定您心仪的管理师。
               </p>
             </div>
             <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', color: '#166534', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'ソウル出張マッサージ・ホテル客室VIPアロマSPA | 日本語対応・30分到着・完全現地払い (Abam)',
   description:
-    'ソウル全域専属（25区100%対応）のホテル客室へ30分でお伺いする高級出張マッサージ。先払い・前受金一切なし（完全現地払い・各種クレジットカード＆日本円/ウォン対応）。LINE＆WhatsAppで簡単日本語予約可能。20代厳選セラピスト在籍。',
+    'ソウル全域専属（25区100%対応）のホテル客室へ30分でお伺いする高級出張マッサージ。先払い・前受金一切なし（完全現地払い・各種クレジットカード＆日本円/ウォン対応）。WhatsAppで簡単日本語予約可能。20代厳選セラピスト在籍。',
   keywords: [
     'ソウル 出張マッサージ',
     'ソウル ホテル マッサージ',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ソウル出張マッサージ・ホテル客室VIPアロマSPA (Abam)',
     description:
-      'ソウル全域・首都圏のホテル客室へ30分到着。先払いゼロ・完全現地対面決済。LINE日本語予約対応。',
+      'ソウル全域・首都圏のホテル客室へ30分到着。先払いゼロ・完全現地対面決済。WhatsApp日本語予約対応。',
     url: 'https://abam.kr/jp',
     siteName: 'Abam Thai Homecare Seoul',
     images: [{ url: 'https://abam.kr/images/hero_sensual_goddess.jpg', width: 730, height: 620, alt: 'ソウル ホテル 出張マッサージ' }],
@@ -153,7 +153,7 @@ export default function JapanesePage() {
     }}>
       {/* Top Banner */}
       <div style={{ background: '#070a10', borderBottom: '1px solid rgba(212, 175, 55, 0.45)', color: '#f3e5ab', padding: '10px 20px', textAlign: 'center', fontSize: '12px', fontWeight: 800 }}>
-        🇯🇵 ソウル全域専属（25区100%対応） ホテル客室VIP出張マッサージ · 先払い一切なし（完全現地払い） · 30分スピード到着 · LINE日本語対応
+        🇯🇵 ソウル全域専属（25区100%対応） ホテル客室VIP出張マッサージ · 先払い一切なし（完全現地払い） · 30分スピード到着 · WhatsApp日本語対応
       </div>
 
       {/* Header */}
@@ -181,10 +181,10 @@ export default function JapanesePage() {
             <Link href="/cn" style={{ padding: '4px 10px', fontSize: '12px', fontWeight: 700, color: '#475569', textDecoration: 'none', borderRadius: '6px' }}>🇨🇳 CN</Link>
           </div>
 
-          {/* LINE Contact */}
+          {/* WhatsApp Contact */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12.5px', fontWeight: 900, color: '#ffffff', backgroundColor: '#25D366', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', boxShadow: '0 2px 8px rgba(6,199,85,0.35)' }}>
-              LINEで簡単予約 (abam1004)
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12.5px', fontWeight: 900, color: '#ffffff', backgroundColor: '#25D366', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none', boxShadow: '0 2px 8px rgba(37,211,102,0.35)' }}>
+              WhatsApp予約
             </a>
           </div>
         </div>
@@ -221,7 +221,7 @@ export default function JapanesePage() {
               </h1>
 
               <p style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.7, margin: '0 0 24px' }}>
-                ソウル滞在中のホテル客室・レジデンス・Airbnbへ、お電話・LINEひとつで<strong>約30分</strong>でお伺いします。安心の<strong>「完全現地対面決済（先払い一切なし）」</strong>で、日本人の旅行者様・出張者様も安心してご利用いただけます。
+                ソウル滞在中のホテル客室・レジデンス・Airbnbへ、お電話・WhatsAppひとつで<strong>約30分</strong>でお伺いします。安心の<strong>「完全現地対面決済（先払い一切なし）」</strong>で、日本人の旅行者様・出張者様も安心してご利用いただけます。
               </p>
 
               {/* 4 Guarantees */}
@@ -239,8 +239,8 @@ export default function JapanesePage() {
                   <div style={{ fontSize: '11.5px', color: '#64748b' }}>江南、明洞、東大門、弘大、汝矣島</div>
                 </div>
                 <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px 14px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>🇯🇵 LINE日本語サポート</div>
-                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>韓国の電話番号不要でLINE予約完了</div>
+                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#090d16' }}>💬 WhatsApp日本語サポート</div>
+                  <div style={{ fontSize: '11.5px', color: '#64748b' }}>韓国の電話番号不要でWhatsApp予約完了</div>
                 </div>
               </div>
 
@@ -287,7 +287,7 @@ export default function JapanesePage() {
                 本日出勤 20代S級エース セラピスト一覧
               </h2>
               <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0' }}>
-                LINE予約時にお好みのセラピストをご指名いただけます。
+                WhatsApp予約時にお好みのセラピストをご指名いただけます。
               </p>
             </div>
             <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', color: '#166534', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>

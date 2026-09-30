@@ -292,7 +292,7 @@ export default function EnglishPage() {
                 Tonight's S-Class Ace Therapists on Duty
               </h2>
               <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0' }}>
-                You may request your preferred therapist when making your reservation via WhatsApp or LINE.
+                You may request your preferred therapist when making your reservation via WhatsApp.
               </p>
             </div>
             <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', color: '#166534', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>
@@ -390,7 +390,7 @@ export default function EnglishPage() {
               <div style={{ fontSize: '28px', marginBottom: '8px' }}>💬</div>
               <div style={{ fontSize: '14px', fontWeight: 900, color: '#090d16', marginBottom: '4px' }}>1. Send Message</div>
               <div style={{ fontSize: '12px', color: '#64748b' }}>
-                Contact us via WhatsApp or LINE with your hotel name, room number, and preferred course.
+                Contact us via WhatsApp with your hotel name, room number, and preferred course.
               </div>
             </div>
             <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '20px', textAlign: 'center' }}>
