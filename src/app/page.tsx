@@ -524,8 +524,16 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div style={{ marginTop: '12px', textAlign: 'center', fontSize: '12px', color: C.muted }}>
-            ※ 모든 코스는 순면 관리복 및 1회용 위생 소독 패드가 무상 제공됩니다. (서울 전지역 출장비 포함)
+          {/* 3대 위생 & 청결 안심 약속 (군더더기 없는 정갈한 텍스트 그리드) */}
+          <div style={{ marginTop: '16px', padding: '16px', backgroundColor: C.bgSoft, borderRadius: '12px', border: `1px solid ${C.border}` }}>
+            <div style={{ fontSize: '12px', fontWeight: 800, color: C.dark, marginBottom: '8px', textAlign: 'center' }}>
+              ✨ 아름다운 밤 3대 청결 &amp; 위생 안심 원칙
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '8px', fontSize: '11.5px', color: C.mid, lineHeight: 1.5 }}>
+              <div>• <strong>1회용 청결 소독 패드</strong> 완비 (침구 오염 원천 방지)</div>
+              <div>• <strong>100% 최고급 천연 수용성 오일</strong> (끈적임·얼룩 없음)</div>
+              <div>• <strong>순면 고급 관리복 무상 제공</strong> (서울 전지역 출장비 포함)</div>
+            </div>
           </div>
         </section>
 
@@ -629,8 +637,18 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ── 글로벌 외국인 호텔 투숙객 1줄 컨시어지 ── */}
+        <div style={{ marginTop: '20px', padding: '12px 16px', backgroundColor: C.dark, borderRadius: '10px', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+          <div style={{ fontSize: '12px' }}>
+            <span style={{ color: '#fde68a', fontWeight: 700 }}>GLOBAL TRAVELER</span> &nbsp;Visiting Seoul? Hotel in-room massage within 30 mins. 100% Pay on Arrival.
+          </div>
+          <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ backgroundColor: '#25D366', color: '#ffffff', padding: '5px 12px', borderRadius: '6px', fontSize: '11.5px', fontWeight: 800, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            💬 WhatsApp
+          </a>
+        </div>
+
         {/* ── 구분선 ── */}
-        <div style={{ height: '1px', backgroundColor: C.border, margin: '44px 0 36px' }} />
+        <div style={{ height: '1px', backgroundColor: C.border, margin: '36px 0 28px' }} />
 
         {/* ── 7. 서울 전지역 마사지 서비스 네트워크 (정갈한 텍스트 풋노트 링크) ── */}
         <section style={{ paddingBottom: '20px' }}>
