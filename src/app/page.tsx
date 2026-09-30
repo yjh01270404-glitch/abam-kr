@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 /* ─────────────────────────────────────────────
    상수
@@ -29,6 +30,23 @@ const C = {
   green:   '#2d7a4f',
   greenBg: '#edf7f1',
 };
+
+/* ─────────────────────────────────────────────
+   SEO 마사지 키워드 클러스터 데이터 (구글 상위노출 네트워크)
+───────────────────────────────────────────── */
+const SEO_KEYWORD_TAGS = [
+  '강남출장마사지', '강남홈타이', '역삼출장마사지', '논현출장마사지', '선릉출장마사지', '청담출장마사지', '압구정출장마사지',
+  '서초출장마사지', '서초홈타이', '반포출장마사지', '방배출장마사지', '교대출장마사지',
+  '송파출장마사지', '잠실출장마사지', '잠실홈타이', '문정출장마사지', '천호출장마사지',
+  '마포출장마사지', '마포홈타이', '홍대출장마사지', '합정출장마사지', '공덕출장마사지', '상암출장마사지',
+  '용산출장마사지', '용산홈타이', '한남출장마사지', '이태원출장마사지', '용산역출장마사지',
+  '영등포출장마사지', '여의도출장마사지', '여의도홈타이', '신도림출장마사지', '당산출장마사지',
+  '성수출장마사지', '건대출장마사지', '왕십리출장마사지', '종로출장마사지', '명동출장마사지', '을지로출장마사지',
+  '동작출장마사지', '사당출장마사지', '관악출장마사지', '신림출장마사지', '봉천출장마사지',
+  '강서출장마사지', '마곡출장마사지', '목동출장마사지', '노원출장마사지', '수유출장마사지',
+  '호텔출장마사지', '모텔출장마사지', '오피스텔출장마사지', '24시출장마사지', '선입금없는출장마사지', '대면결제출장마사지',
+  '서울홈타이', '왓포출장마사지', '아로마출장마사지', '스웨디시마사지', '감성힐링테라피'
+];
 
 /* ─────────────────────────────────────────────
    데이터
@@ -988,6 +1006,64 @@ export default function HomePage() {
                 📞 +82-10-6607-2239
               </a>
             </div>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* ── 9. 서울 전지역 출장마사지 & 홈타이 SEO 서비스 네트워크 허브 ── */}
+        <section style={{ paddingBottom: '24px' }}>
+          <div style={{ marginBottom: '14px' }}>
+            <SectionLabel>SEOUL SERVICE NETWORK</SectionLabel>
+            <SectionTitle>서울 전지역 출장마사지 &amp; 홈타이 네트워크</SectionTitle>
+            <p style={{ fontSize: '12px', color: C.muted, margin: 0, lineHeight: 1.6 }}>
+              아름다운 밤 타이 홈케어는 서울 25개 자치구 및 주요 역세권 어디든 20~30분 내외로 방문 드립니다.
+            </p>
+          </div>
+
+          {/* 키워드 태그 칩 그리드 */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '6px',
+            backgroundColor: C.white,
+            border: `1px solid ${C.border}`,
+            borderRadius: '14px',
+            padding: '16px',
+          }}>
+            {SEO_KEYWORD_TAGS.map((kw, i) => (
+              <Link
+                key={i}
+                href={`/seo/${encodeURIComponent(kw)}`}
+                style={{
+                  display: 'inline-block',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  color: C.mid,
+                  backgroundColor: C.bg,
+                  border: `1px solid ${C.border}`,
+                  padding: '4px 10px',
+                  borderRadius: '6px',
+                  textDecoration: 'none',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                #{kw}
+              </Link>
+            ))}
+          </div>
+
+          {/* 법적 고지 및 100% 대면결제 신뢰 푸터 */}
+          <div style={{
+            marginTop: '16px',
+            padding: '14px 16px',
+            backgroundColor: '#f1f0ec',
+            borderRadius: '10px',
+            fontSize: '11px',
+            color: '#71718a',
+            lineHeight: 1.6,
+          }}>
+            <strong>아름다운 밤 타이 홈케어 (Abam)</strong> · 서울특별시 25개 자치구 전역 심야 프라이빗 1:1 방문 힐링 케어 · 왓포 정통 건식 수기 지압 &amp; 천연 아로마 림프 케어 · 100% 사전 예약금 없는 현장 대면결제 원칙 준수 · 24시간 연중무휴 안심 예약 (010-6607-2239)
           </div>
         </section>
 
