@@ -15,18 +15,22 @@ const WA_LINK       = 'https://wa.me/821066072239?text=Hello%20Abam%20Spa,%20I%2
    Design Tokens (100% White/Light Mode · Boutique Minimal)
 ───────────────────────────────────────────── */
 const C = {
-  bg:       '#ffffff',
-  bgSoft:   '#f8fafc',
-  dark:     '#0f172a',
-  mid:      '#334155',
-  muted:    '#64748b',
-  border:   '#e2e8f0',
-  borderLt: '#f1f5f9',
-  accent:   '#b45309',
-  accentBg: '#fef3c7',
-  green:    '#16a34a',
-  greenBg:  '#f0fdf4',
-  greenBd:  '#bbf7d0',
+  bg:          'transparent',
+  card:        'rgba(15, 23, 42, 0.75)',
+  cardHover:   'rgba(30, 41, 59, 0.85)',
+  border:      'rgba(255, 255, 255, 0.12)',
+  borderLt:    'rgba(255, 255, 255, 0.08)',
+  dark:        '#ffffff',
+  mid:         '#e2e8f0',
+  muted:       '#94a3b8',
+  accent:      '#fbbf24',
+  accentBg:    'rgba(245, 158, 11, 0.18)',
+  accentBd:    'rgba(245, 158, 11, 0.35)',
+  kakao:       '#FEE500',
+  kakaoBr:     '#181600',
+  green:       '#22c55e',
+  greenBg:     'rgba(34, 197, 94, 0.15)',
+  greenBd:     'rgba(34, 197, 94, 0.35)',
 };
 
 /* ─────────────────────────────────────────────
@@ -207,15 +211,25 @@ export default function EnPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: C.bg, color: C.dark, paddingBottom: '96px' }}>
+    <div style={{
+      minHeight: '100vh',
+      backgroundColor: 'transparent',
+      backgroundImage: "linear-gradient(180deg, rgba(6, 9, 19, 0.42) 0%, rgba(6, 9, 19, 0.62) 50%, rgba(6, 9, 19, 0.84) 100%), url('/images/seoul_night_sky.jpg')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center top',
+      backgroundAttachment: 'fixed',
+      backgroundRepeat: 'no-repeat',
+      color: '#f8fafc',
+      paddingBottom: '96px',
+    }}>
 
       {/* ── Top Announcement Bar ── */}
-      <div style={{ backgroundColor: C.bgSoft, borderBottom: `1px solid ${C.border}`, padding: '8px 16px', textAlign: 'center', fontSize: '12px', color: C.mid }}>
+      <div style={{ backgroundColor: 'rgba(10, 15, 29, 0.78)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: `1px solid ${C.border}`, padding: '8px 16px', textAlign: 'center', fontSize: '12px', color: C.mid }}>
         Seoul All 25 Districts 20~30 Min Arrival · <strong style={{ color: C.dark }}>100% Pay on Arrival (Zero Advance Deposit)</strong>
       </div>
 
       {/* ── Header ── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 40, backgroundColor: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(12px)', borderBottom: `1px solid ${C.border}` }}>
+      <header style={{ position: 'sticky', top: 0, zIndex: 40, backgroundColor: 'rgba(10, 15, 29, 0.85)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderBottom: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '12px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
             <div style={{ fontSize: '17px', fontWeight: 900, color: C.dark, letterSpacing: '-0.3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -226,9 +240,9 @@ export default function EnPage() {
           </div>
 
           {/* Language Switcher */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '3px', backgroundColor: C.bgSoft, padding: '3px', borderRadius: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '3px', backgroundColor: 'rgba(255, 255, 255, 0.08)', padding: '3px', borderRadius: '6px' }}>
             <Link href="/" style={{ fontSize: '11px', color: C.muted, padding: '3px 6px', textDecoration: 'none' }}>KR</Link>
-            <span style={{ fontSize: '11px', fontWeight: 900, color: C.dark, backgroundColor: '#ffffff', padding: '3px 7px', borderRadius: '4px', boxShadow: '0 1px 2px rgba(0,0,0,0.06)' }}>EN</span>
+            <span style={{ fontSize: '11px', fontWeight: 900, color: C.dark, backgroundColor: C.card, backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', padding: '3px 7px', borderRadius: '4px', boxShadow: '0 1px 2px rgba(0,0,0,0.06)' }}>EN</span>
             <Link href="/jp" style={{ fontSize: '11px', color: C.muted, padding: '3px 6px', textDecoration: 'none' }}>JP</Link>
             <Link href="/cn" style={{ fontSize: '11px', color: C.muted, padding: '3px 6px', textDecoration: 'none' }}>CN</Link>
           </div>
@@ -238,25 +252,25 @@ export default function EnPage() {
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 18px 8px', display: 'flex', gap: '6px', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
           <button
             onClick={() => scrollTo('courses')}
-            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: 'rgba(255, 255, 255, 0.08)', border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
           >
             📋 Spa Menu &amp; Rates
           </button>
           <button
             onClick={() => scrollTo('therapists')}
-            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: 'rgba(255, 255, 255, 0.08)', border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
           >
             👤 Therapists
           </button>
           <button
             onClick={() => scrollTo('how-it-works')}
-            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: 'rgba(255, 255, 255, 0.08)', border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
           >
             🛡️ How It Works
           </button>
           <button
             onClick={() => scrollTo('faq')}
-            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
+            style={{ padding: '5px 11px', borderRadius: '20px', backgroundColor: 'rgba(255, 255, 255, 0.08)', border: `1px solid ${C.border}`, fontSize: '11.5px', fontWeight: 800, color: C.mid, whiteSpace: 'nowrap' }}
           >
             ❓ FAQs
           </button>
@@ -344,7 +358,7 @@ export default function EnPage() {
               <div
                 key={i}
                 style={{
-                  backgroundColor: '#ffffff',
+                  backgroundColor: C.card, backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
                   border: `1px solid ${C.border}`,
                   borderRadius: '14px',
                   padding: '16px',
@@ -403,7 +417,7 @@ export default function EnPage() {
           </div>
 
           {/* 3-Pillar Hygiene & Comfort Guarantee */}
-          <div style={{ marginTop: '14px', padding: '14px 16px', backgroundColor: C.bgSoft, borderRadius: '12px', border: `1px solid ${C.border}` }}>
+          <div style={{ marginTop: '14px', padding: '14px 16px', backgroundColor: 'rgba(255, 255, 255, 0.08)', borderRadius: '12px', border: `1px solid ${C.border}` }}>
             <div style={{ fontSize: '12px', fontWeight: 900, color: C.dark, marginBottom: '6px', textAlign: 'center' }}>
               ✨ 3-Pillar Hygiene &amp; Room Protection Guarantee
             </div>
@@ -435,7 +449,7 @@ export default function EnPage() {
               <div
                 key={i}
                 style={{
-                  backgroundColor: '#ffffff',
+                  backgroundColor: C.card, backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
                   border: `1px solid ${C.border}`,
                   borderRadius: '14px',
                   padding: '12px',
@@ -505,7 +519,7 @@ export default function EnPage() {
           </div>
 
           {/* Standby Pool Note */}
-          <div style={{ marginTop: '12px', padding: '12px 14px', backgroundColor: C.bgSoft, border: `1px solid ${C.border}`, borderRadius: '10px', fontSize: '12px', color: C.mid, lineHeight: 1.55 }}>
+          <div style={{ marginTop: '12px', padding: '12px 14px', backgroundColor: 'rgba(255, 255, 255, 0.08)', border: `1px solid ${C.border}`, borderRadius: '10px', fontSize: '12px', color: C.mid, lineHeight: 1.55 }}>
             <strong style={{ color: C.dark }}>30+ Professional Healers on Standby Across Seoul</strong><br />
             In addition to our featured aces, we maintain a large roster of skilled therapists stationed across all districts. Feel free to specify your preferred style (firm acupressure, gentle sensual touch, etc.) when booking.
           </div>
@@ -528,7 +542,7 @@ export default function EnPage() {
               { no: '02', title: '20~30 Min Arrival', desc: 'Your designated therapist arrives quietly at your hotel room with sanitized equipment.' },
               { no: '03', title: '100% Pay in Person', desc: 'Pay directly on arrival after greeting your therapist. Cash or credit cards accepted.' },
             ].map((s, i) => (
-              <div key={i} style={{ backgroundColor: '#ffffff', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '13px 15px', display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <div key={i} style={{ backgroundColor: C.card, backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '13px 15px', display: 'flex', gap: '12px', alignItems: 'center' }}>
                 <div style={{ fontSize: '15px', fontWeight: 900, color: C.accent, minWidth: '22px' }}>{s.no}</div>
                 <div>
                   <div style={{ fontSize: '13.5px', fontWeight: 800, color: C.dark }}>{s.title}</div>
@@ -565,7 +579,7 @@ export default function EnPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {EN_REVIEWS.map((rev, i) => (
-              <div key={i} style={{ backgroundColor: '#ffffff', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '13px 15px' }}>
+              <div key={i} style={{ backgroundColor: C.card, backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: `1px solid ${C.border}`, borderRadius: '12px', padding: '13px 15px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
                   <span style={{ fontSize: '13px', fontWeight: 800, color: C.dark }}>{rev.author} <span style={{ fontSize: '11px', color: C.muted, fontWeight: 500 }}>({rev.area})</span></span>
                   <span style={{ fontSize: '11px', color: '#eab308' }}>★★★★★</span>
@@ -592,7 +606,7 @@ export default function EnPage() {
             {EN_FAQS.map((faq, i) => {
               const isOpen = openFaq === i;
               return (
-                <div key={i} style={{ border: `1px solid ${C.border}`, borderRadius: '10px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
+                <div key={i} style={{ border: `1px solid ${C.border}`, borderRadius: '10px', overflow: 'hidden', backgroundColor: C.card, backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : i)}
                     style={{ width: '100%', padding: '13px 15px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left' }}
@@ -638,7 +652,7 @@ export default function EnPage() {
       </main>
 
       {/* ── Fixed Bottom Quick Booking Bar ── */}
-      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(12px)', borderTop: `1px solid ${C.border}`, padding: '8px 16px', zIndex: 50, boxShadow: '0 -4px 16px rgba(0,0,0,0.06)' }}>
+      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(10, 15, 29, 0.92)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderTop: `1px solid ${C.border}`, padding: '8px 16px', zIndex: 50, boxShadow: '0 -4px 24px rgba(0,0,0,0.4)' }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
           <a
             href={WA_LINK}

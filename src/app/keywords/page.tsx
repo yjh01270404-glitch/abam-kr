@@ -58,36 +58,36 @@ export default function KeywordsPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff', color: '#0f172a', fontFamily: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Pretendard", sans-serif', WebkitFontSmoothing: 'antialiased' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#0f172a', fontFamily: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Pretendard", sans-serif', WebkitFontSmoothing: 'antialiased' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       
       {/* 1. 상단 클린 헤더 */}
-      <header style={{ background: 'rgba(255, 255, 255, 0.98)', backdropFilter: 'blur(12px)', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, zIndex: 50 }}>
+      <header style={{ background: 'rgba(10, 15, 29, 0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255, 255, 255, 0.12)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '12px 18px 10px' }}>
           
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
             <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '17px', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.3px' }}>아름다운 밤</span>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#b45309', backgroundColor: '#fef3c7', padding: '2px 6px', borderRadius: '4px' }}>Abam</span>
+              <span style={{ fontSize: '17px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.3px' }}>아름다운 밤</span>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#fbbf24', backgroundColor: 'rgba(245, 158, 11, 0.18)', border: '1px solid rgba(245, 158, 11, 0.35)', padding: '2px 6px', borderRadius: '4px' }}>Abam</span>
             </Link>
-            <Link href="/" style={{ fontSize: '12px', color: '#0f172a', fontWeight: 800, textDecoration: 'none', padding: '4px 10px', borderRadius: '6px', backgroundColor: '#f1f5f9' }}>
+            <Link href="/" style={{ fontSize: '12px', color: '#0f172a', fontWeight: 800, textDecoration: 'none', padding: '4px 10px', borderRadius: '6px', backgroundColor: '#ffffff' }}>
               메인홈
             </Link>
           </div>
 
           {/* 브레드크럼 */}
           <nav aria-label="breadcrumb">
-            <ol style={{ display: 'flex', gap: '6px', listStyle: 'none', margin: 0, padding: 0, fontSize: '11.5px', color: '#64748b' }}>
-              <li><Link href="/" style={{ color: '#64748b', textDecoration: 'none' }}>홈</Link></li>
+            <ol style={{ display: 'flex', gap: '6px', listStyle: 'none', margin: 0, padding: 0, fontSize: '11.5px', color: '#94a3b8' }}>
+              <li><Link href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>홈</Link></li>
               <li>›</li>
-              <li style={{ color: '#0f172a', fontWeight: 800 }}>서비스 지역 디렉터리</li>
+              <li style={{ color: '#ffffff', fontWeight: 800 }}>서비스 지역 디렉터리</li>
             </ol>
           </nav>
         </div>
       </header>
 
       {/* 2. 메인 컨테이너 */}
-      <main style={{ maxWidth: '640px', margin: '0 auto', background: '#ffffff', padding: '0 18px 120px' }}>
+      <main style={{ maxWidth: '640px', margin: '16px auto', background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(20px)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.3)', padding: '18px 18px 120px', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
         
         {/* 상단 개요 */}
         <section style={{ padding: '20px 0', borderBottom: '1px solid #f1f5f9' }}>
