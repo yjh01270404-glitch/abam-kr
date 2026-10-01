@@ -59,6 +59,7 @@ const urls = [
   `${SITE_URL}/en`,
   `${SITE_URL}/jp`,
   `${SITE_URL}/cn`,
+  `${SITE_URL}/keywords`,
   ...Array.from(allKeywords).map(kw => `${SITE_URL}/seo/${encodeURIComponent(kw.replace(/\s+/g, '-'))}`)
 ];
 

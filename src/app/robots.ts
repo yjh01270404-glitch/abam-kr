@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         // 구글봇 — SEO 페이지 최우선, 관리자 차단
         userAgent: 'Googlebot',
-        allow: ['/', '/seo/', '/keywords', '/keywords/', '/sitemap.xml'],
+        allow: ['/', '/en', '/jp', '/cn', '/seo/', '/keywords', '/keywords/', '/sitemap.xml'],
         disallow: [
           '/abam-nightman-2026',
           '/api/',
@@ -29,13 +29,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         // 네이버 SEO봇 (Yeti)
         userAgent: 'Yeti',
-        allow: ['/', '/seo/', '/keywords'],
+        allow: ['/', '/en', '/jp', '/cn', '/seo/', '/keywords'],
         disallow: ['/abam-nightman-2026', '/api/', '/admin', '/mgnt-vault'],
       },
       {
         // 빙봇
         userAgent: 'Bingbot',
-        allow: ['/', '/seo/', '/keywords'],
+        allow: ['/', '/en', '/jp', '/cn', '/seo/', '/keywords'],
         disallow: ['/abam-nightman-2026', '/api/', '/admin', '/mgnt-vault'],
       },
       {

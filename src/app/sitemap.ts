@@ -12,6 +12,7 @@ const CORE_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/en`,                 lastModified: new Date(), changeFrequency: 'daily',   priority: 0.95 },
   { url: `${BASE_URL}/jp`,                 lastModified: new Date(), changeFrequency: 'daily',   priority: 0.95 },
   { url: `${BASE_URL}/cn`,                 lastModified: new Date(), changeFrequency: 'daily',   priority: 0.95 },
+  { url: `${BASE_URL}/keywords`,           lastModified: new Date(), changeFrequency: 'daily',   priority: 0.9 },
   { url: `${BASE_URL}/job`,                lastModified: new Date(), changeFrequency: 'daily',   priority: 0.9 },
   { url: `${BASE_URL}/community`,          lastModified: new Date(), changeFrequency: 'hourly',  priority: 0.85 },
   { url: `${BASE_URL}/register`,           lastModified: new Date(), changeFrequency: 'weekly',  priority: 0.8 },

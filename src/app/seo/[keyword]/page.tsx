@@ -17,9 +17,9 @@ const PHONE_NUM = "010-6607-2239";
 const COMPARISON_ROWS = [
   {
     category: "기본 가격대",
-    thai: "70,000원 ~ 110,000원",
-    aroma: "80,000원 ~ 140,000원",
-    vip: "100,000원 ~ 180,000원",
+    thai: "80,000원 ~ 120,000원",
+    aroma: "90,000원 ~ 140,000원",
+    vip: "120,000원 ~ 200,000원",
   },
   {
     category: "압의 세기",
@@ -53,12 +53,12 @@ const COURSES = [
     name: "타이 테라피 (건식)",
     badge: "인기",
     img: "/images/thai.jpg",
-    priceSummary: "70,000원 ~ 110,000원",
-    desc: "오일을 사용하지 않고 편안한 관리복으로 진행되는 정통 건식 수기 관리. 전신 스트레칭과 경혈 압박으로 뭉친 근육을 부드럽게 이완합니다.",
+    priceSummary: "80,000원 ~ 120,000원",
+    desc: "오일을 사용하지 않고 편안한 순면 관리복으로 진행되는 왓포 정통 건식 수기 관리. 전신 스트레칭과 경혈 압박으로 뭉친 근육을 시원하게 이완합니다.",
     prices: [
-      { time: "60분", price: "70,000원" },
-      { time: "90분", price: "90,000원" },
-      { time: "120분", price: "110,000원" },
+      { time: "60분", price: "80,000원" },
+      { time: "90분", price: "100,000원", isBest: true },
+      { time: "120분", price: "120,000원" },
     ],
   },
   {
@@ -66,25 +66,25 @@ const COURSES = [
     name: "아로마 테라피 (천연오일)",
     badge: "추천",
     img: "/images/aroma.jpg",
-    priceSummary: "80,000원 ~ 140,000원",
-    desc: "식물성 천연 에센셜 오일을 도포하여 림프 순환을 돕고, 부드러운 압으로 전신 긴장과 피로를 풀어주는 순환 릴렉싱 케어입니다.",
+    priceSummary: "90,000원 ~ 140,000원",
+    desc: "100% 최고급 천연 에센셜 오일을 도포하여 림프 순환을 돕고, 부드러운 압으로 전신 긴장과 피로를 풀어주는 순환 릴렉싱 케어입니다.",
     prices: [
-      { time: "60분", price: "80,000원" },
-      { time: "90분", price: "110,000원" },
+      { time: "60분", price: "90,000원" },
+      { time: "90분", price: "110,000원", isBest: true },
       { time: "120분", price: "140,000원" },
     ],
   },
   {
     id: "vip",
-    name: "힐링 VIP 테라피 (건식+오일)",
+    name: "프리미엄 VIP 시그니처",
     badge: "대표 코스",
-    img: "/images/flower_spa.jpg",
-    priceSummary: "100,000원 ~ 180,000원",
-    desc: "정통 건식 지압으로 큰 근육을 선이완한 뒤 프리미엄 천연 오일로 림프와 근막을 섬세하게 관리하는 시그니처 결합 프로그램입니다.",
+    img: "/images/hero_sensual_goddess.jpg",
+    priceSummary: "120,000원 ~ 200,000원",
+    desc: "에이스 테라피스트 전담 배정. 정통 건식 지압으로 큰 근육을 선이완한 뒤 천연 오일로 림프와 미세 근막을 섬세하게 관리하는 최고급 풀코스 프로그램입니다.",
     prices: [
-      { time: "60분", price: "100,000원" },
-      { time: "90분", price: "140,000원" },
-      { time: "120분", price: "180,000원" },
+      { time: "60분", price: "120,000원" },
+      { time: "90분", price: "160,000원", isBest: true },
+      { time: "120분", price: "200,000원" },
     ],
   },
 ];
@@ -173,83 +173,86 @@ export default async function SeoLandingPage({ params }: Props) {
       image: `${SITE_URL}/og-image.png`,
       telephone: PHONE_NUM,
       areaServed: data.region,
-      priceRange: "₩70,000 - ₩180,000",
+      priceRange: "₩80,000 - ₩200,000",
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-        opens: "00:00",
-        closes: "24:00",
+        opens: "19:00",
+        closes: "05:00",
       },
     },
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#ffffff", color: "#202124", fontFamily: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Pretendard", sans-serif', WebkitFontSmoothing: "antialiased" }}>
+    <div style={{ minHeight: "100vh", background: "#ffffff", color: "#0f172a", fontFamily: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Pretendard", sans-serif', WebkitFontSmoothing: "antialiased" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* 1. 포털 검색 헤더 */}
-      <header style={{ background: "#ffffff", borderBottom: "1px solid #ebebeb", position: "sticky", top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: "640px", margin: "0 auto", padding: "12px 16px 8px" }}>
+      {/* 1. 상단 클린 헤더 */}
+      <header style={{ background: "rgba(255, 255, 255, 0.98)", backdropFilter: "blur(12px)", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, zIndex: 50 }}>
+        <div style={{ maxWidth: "640px", margin: "0 auto", padding: "12px 18px 10px" }}>
           
-          <div style={{ display: "flex", alignItems: "center", background: "#ffffff", border: "1px solid #dfe1e5", borderRadius: "24px", padding: "8px 14px", gap: "10px", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
-            <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-              <span style={{ fontSize: "16px", fontWeight: 800, color: "#03c75a", letterSpacing: "-0.02em" }}>N</span>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
+            <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
+              <span style={{ fontSize: "17px", fontWeight: 900, color: "#0f172a", letterSpacing: "-0.3px" }}>아름다운 밤</span>
+              <span style={{ fontSize: "11px", fontWeight: 800, color: "#b45309", backgroundColor: "#fef3c7", padding: "2px 6px", borderRadius: "4px" }}>Abam</span>
             </Link>
-            <div style={{ flex: 1, fontSize: "14px", fontWeight: 600, color: "#202124", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {decoded}
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Link href="/keywords" style={{ fontSize: "12px", color: "#64748b", fontWeight: 700, textDecoration: "none", padding: "4px 8px", borderRadius: "6px", backgroundColor: "#f8fafc", border: "1px solid #e2e8f0" }}>
+                전체지역
+              </Link>
+              <Link href="/" style={{ fontSize: "12px", color: "#0f172a", fontWeight: 800, textDecoration: "none", padding: "4px 8px", borderRadius: "6px", backgroundColor: "#f1f5f9" }}>
+                메인홈
+              </Link>
             </div>
-            <Link href="/keywords" style={{ fontSize: "13px", color: "#1a73e8", fontWeight: 600, textDecoration: "none" }}>
-              지역목록
-            </Link>
           </div>
 
           {/* 브레드크럼 */}
-          <nav aria-label="breadcrumb" style={{ padding: "8px 2px 2px" }}>
-            <ol style={{ display: "flex", gap: "6px", listStyle: "none", margin: 0, padding: 0, fontSize: "11px", color: "#70757a" }}>
-              <li><Link href="/" style={{ color: "#70757a", textDecoration: "none" }}>홈</Link></li>
+          <nav aria-label="breadcrumb">
+            <ol style={{ display: "flex", gap: "6px", listStyle: "none", margin: 0, padding: 0, fontSize: "11.5px", color: "#64748b" }}>
+              <li><Link href="/" style={{ color: "#64748b", textDecoration: "none" }}>홈</Link></li>
               <li>›</li>
-              <li><Link href="/keywords" style={{ color: "#70757a", textDecoration: "none" }}>서비스 지역</Link></li>
+              <li><Link href="/keywords" style={{ color: "#64748b", textDecoration: "none" }}>서비스 지역</Link></li>
               <li>›</li>
-              <li style={{ color: "#202124", fontWeight: 600 }}>{decoded}</li>
+              <li style={{ color: "#0f172a", fontWeight: 800 }}>{decoded}</li>
             </ol>
           </nav>
         </div>
       </header>
 
-      {/* 2. 본문 검색 결과 (박스 없는 순백색 포털 리스트) */}
-      <main style={{ maxWidth: "640px", margin: "0 auto", background: "#ffffff", padding: "0 16px 120px" }}>
+      {/* 2. 본문 컨테이너 */}
+      <main style={{ maxWidth: "640px", margin: "0 auto", background: "#ffffff", padding: "0 18px 120px" }}>
         
-        {/* 상단: 구글 1등 노출형 대표 전단지 포스터 카드 */}
-        <section style={{ padding: "16px 0 12px" }}>
+        {/* 상단: 대표 포스터 카드 */}
+        <section style={{ padding: "18px 0 12px" }}>
           <a
             href={PHONE_TEL}
             style={{
               display: "block",
               textDecoration: "none",
-              borderRadius: "8px",
+              borderRadius: "14px",
               overflow: "hidden",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+              boxShadow: "0 4px 18px rgba(0,0,0,0.06)",
               background: "#ffffff",
-              border: "1px solid #e8eaed",
+              border: "1px solid #e2e8f0",
             }}
           >
-            <div style={{ position: "relative", width: "100%", height: "230px", background: "#f8f9fa" }}>
+            <div style={{ position: "relative", width: "100%", height: "220px", background: "#f8fafc" }}>
               <Image
-                src="/images/hero.jpg"
-                alt={`${decoded} 아밤 젠틀맨 홈타이 대표 포스터`}
+                src="/images/hero_sensual_goddess.jpg"
+                alt={`${decoded} 아름다운 밤 타이 홈케어`}
                 fill
                 sizes="(max-width: 640px) 100vw, 640px"
                 style={{ objectFit: "cover" }}
                 priority
               />
-              <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(255,255,255,0.95)", padding: "4px 10px", borderRadius: "4px", border: "1px solid #e0e0e0", fontSize: "11px", fontWeight: 800, color: "#b45309" }}>
-                BEST HIGH CLASS THERAPY
+              <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(15,23,42,0.85)", padding: "3px 8px", borderRadius: "4px", fontSize: "10.5px", fontWeight: 800, color: "#fef08a" }}>
+                100% 현장 대면결제 · 선입금 0원
               </div>
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px 10px", background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 70%, transparent 100%)", color: "#ffffff" }}>
-                <div style={{ fontSize: "12px", fontWeight: 600, color: "#facc15", marginBottom: "2px" }}>
-                  {data.region} NO.1 프리미엄 홈케어
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px 10px", background: "linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.3) 70%, transparent 100%)", color: "#ffffff" }}>
+                <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#fde68a", marginBottom: "2px" }}>
+                  {data.region} 20~30분 신속 방문
                 </div>
-                <div style={{ fontSize: "20px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.25 }}>
+                <div style={{ fontSize: "19px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.25 }}>
                   {decoded} 아밤 타이 홈케어
                 </div>
               </div>
@@ -533,15 +536,15 @@ export default async function SeoLandingPage({ params }: Props) {
         bottom: 0,
         left: 0,
         right: 0,
-        background: "#ffffff",
-        borderTop: "1px solid #dadce0",
-        padding: "10px 16px calc(10px + env(safe-area-inset-bottom, 0px))",
+        background: "rgba(255, 255, 255, 0.98)",
+        backdropFilter: "blur(12px)",
+        borderTop: "1px solid #e2e8f0",
+        padding: "8px 16px calc(8px + env(safe-area-inset-bottom, 0px))",
         zIndex: 100,
-        boxShadow: "0 -2px 6px rgba(0,0,0,0.04)",
+        boxShadow: "0 -4px 16px rgba(0,0,0,0.06)",
       }}>
-        <div style={{ maxWidth: "640px", margin: "0 auto", display: "flex", gap: "10px" }}>
+        <div style={{ maxWidth: "640px", margin: "0 auto", display: "flex", gap: "8px", alignItems: "center" }}>
           
-          {/* 일관된 순서 1: 카카오톡 바로연결 */}
           <a
             href={KAKAO_LINK}
             style={{
@@ -553,19 +556,17 @@ export default async function SeoLandingPage({ params }: Props) {
               background: "#FEE500",
               color: "#181600",
               padding: "12px 0",
-              borderRadius: "6px",
-              fontWeight: 800,
+              borderRadius: "10px",
+              fontWeight: 900,
               fontSize: "14px",
               textDecoration: "none",
-              boxShadow: "0 2px 6px rgba(254,229,0,0.3)",
-              cursor: "pointer",
+              boxShadow: "0 2px 8px rgba(254,229,0,0.25)",
             }}
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#181600"/></svg>
-            <span>카톡 바로연결 (ID: {KAKAO_ID})</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#181600"/></svg>
+            <span>카톡: {KAKAO_ID}</span>
           </a>
 
-          {/* 일관된 순서 2: 즉시 전화연결 */}
           <a
             href={PHONE_TEL}
             style={{
@@ -574,20 +575,40 @@ export default async function SeoLandingPage({ params }: Props) {
               alignItems: "center",
               justifyContent: "center",
               gap: "5px",
-              background: "#090d16",
+              background: "#0f172a",
               color: "#ffffff",
               padding: "12px 0",
-              borderRadius: "6px",
-              fontWeight: 700,
-              fontSize: "14px",
+              borderRadius: "10px",
+              fontWeight: 800,
+              fontSize: "13.5px",
               textDecoration: "none",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-              border: "1px solid #d4af37",
-              cursor: "pointer",
+              boxShadow: "0 2px 8px rgba(15,23,42,0.15)",
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
-            <span>즉시 전화연결</span>
+            <span>전화예약</span>
+          </a>
+
+          <a
+            href="https://wa.me/821066072239?text=Hello%20Abam%20Spa"
+            target="_blank"
+            rel="noreferrer"
+            title="WhatsApp"
+            style={{
+              width: "42px",
+              height: "42px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#25D366",
+              color: "#ffffff",
+              borderRadius: "10px",
+              flexShrink: 0,
+              textDecoration: "none",
+              boxShadow: "0 2px 8px rgba(37,211,102,0.3)",
+            }}
+          >
+            <span style={{ fontSize: "18px" }}>💬</span>
           </a>
 
         </div>
