@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "submit:search": "node scripts/submit-search-engines.js",
+    "submit:search": "node scripts/submit-indexnow.mjs",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "lint": "eslint"
   },
   "dependencies": {

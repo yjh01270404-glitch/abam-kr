@@ -7,6 +7,9 @@ import JobDetailClient from './JobDetailClient';
 export const revalidate = 86400;
 export const dynamicParams = true;
 
+// 구인 상세 페이지는 검색 색인 대상이 아닙니다. (출장마사지 서비스 주제와 무관한 대량 페이지가 사이트 품질 평가를 희석하는 것을 방지)
+
+
 const sanitizeText = (text: string | undefined) => {
   if (!text) return '';
   return text
@@ -89,6 +92,7 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${cleanTitle} - ${job.companyName} 채용공고 | 아름다운밤`,
     description: desc,
+    robots: { index: false, follow: false },
     alternates: {
       canonical: `https://abam.kr/job/${job.id}`,
     },

@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '首尔酒店上门按摩・首尔上门精油SPA | 中文WhatsApp咨询・30分钟到达・100%见面付款 (Abam)',
+  title: 'Abam.kr | 私密1:1上门居家护理・首尔全境 住宅・酒店',
   description:
-    '首尔江南、明洞、东大门、弘大及京畿道全境酒店客房上门按摩服务。无任何预付款定金（100%到达后当面现金/银联信用卡结账）。WhatsApp快速预约，严选20代年轻专业技师30分钟内急速到达。',
+    '美丽的夜晚，专属于您的特别时光。Abam.kr 私密1:1上门居家护理。首尔全境住宅、酒店上门。预约从18:00开始（营业 19:00~05:00）。泰式、芳香、特别三种课程，60分钟/90分钟/120分钟。',
   keywords: [
-    '首尔上门按摩',
-    '首尔酒店上门SPA',
-    '江南酒店按摩',
-    '明洞酒店上门按摩',
-    '首尔精油上门按摩',
-    '京畿道机场酒店按摩',
-    '首尔出差按摩 中文',
-    '韩国酒店客房SPA'
+    'Abam.kr',
+    '首尔上门居家护理',
+    '首尔酒店上门按摩',
+    '首尔泰式按摩',
+    '首尔芳香精油按摩',
   ].join(', '),
   alternates: {
     canonical: 'https://abam.kr/cn',
@@ -24,12 +21,12 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: '首尔酒店上门按摩・首尔上门SPA (Abam)',
+    title: 'Abam.kr | 美丽的夜晚，专属于您的特别时光',
     description:
-      '首尔全境酒店30分钟到达。先付款0元・完全到达后当面付款（现金/银联信用卡均可）。WhatsApp支持。',
+      '私密1:1上门居家护理。首尔全境 · 住宅 · 酒店。预约从18:00开始 (营业 19:00 ~ 05:00)。',
     url: 'https://abam.kr/cn',
-    siteName: 'Abam Thai Homecare Seoul',
-    images: [{ url: 'https://abam.kr/images/hero_sensual_goddess.jpg', width: 730, height: 620, alt: '首尔酒店上门按摩' }],
+    siteName: 'Abam.kr',
+    images: [{ url: 'https://abam.kr/og-image.png', width: 1200, height: 630, alt: 'Abam.kr 私密1:1上门居家护理' }],
   },
 };
 

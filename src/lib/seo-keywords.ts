@@ -1,3 +1,5 @@
+import { DISTRICTS, getDistrictFromRegion, hubKeywordFor, type DistrictInfo } from './region-data';
+
 // ── 출장마사지 SEO 키워드 라이브러리 (강화 버전 v3 — 동 단위 확장) ──────────────
 
 // 서울 지역별 (구 단위 + 동 단위 + 역세권 + 호텔 밀집지)
@@ -207,6 +209,9 @@ export const ALL_SEO_SLUGS = SEO_KEYWORDS.map(k => ({
 }));
 
 function detectRegion(kw: string): string {
+  // 서비스 접미어를 제거한 뒤 지역명만 매칭합니다. (예: '출장안마'의 '장안'이 수원 장안구로 오탐되는 문제 방지)
+  const core = kw.replace(/출장안마|출장마사지|출장홈타이|출장서비스|출장스파|출장테라피|출장케어|출장홈케어|방문안마|방문마사지|방문케어|홈마사지|홈케어마사지|홈케어|홈타이|마사지|안마|서비스|출장/g, '');
+  if (!core) return '서울 전지역';
   const regionMap: Record<string, string> = {
     '강남역': '서울 강남구 강남역', '강남': '서울 강남구', '역삼': '서울 강남구 역삼동',
     '논현': '서울 강남구 논현동', '서초': '서울 서초구', '반포': '서울 서초구 반포동',
@@ -232,6 +237,13 @@ function detectRegion(kw: string): string {
     '강서': '서울 강서구', '화곡': '서울 강서구 화곡동', '마곡': '서울 강서구 마곡동',
     '양천': '서울 양천구', '목동': '서울 양천구 목동',
     '구로': '서울 구로구', '금천': '서울 금천구', '중랑': '서울 중랑구', '면목': '서울 중랑구 면목동',
+    '동대문': '서울 동대문구', '남대문': '서울 중구 남대문', '선릉': '서울 강남구 선릉', '청담': '서울 강남구 청담동',
+    '압구정': '서울 강남구 압구정동', '도산공원': '서울 강남구 도산공원', '교대': '서울 서초구 교대역',
+    '고속터미널': '서울 서초구 고속터미널', '뚝섬': '서울 성동구 뚝섬', '가산': '서울 금천구 가산동',
+    '당산': '서울 영등포구 당산동', '암사': '서울 강동구 암사동', '명일': '서울 강동구 명일동',
+    '가락': '서울 송파구 가락동', '공덕': '서울 마포구 공덕동', '연남': '서울 마포구 연남동',
+    '망우': '서울 중랑구 망우동', '이대': '서울 서대문구 이대역', '문래': '서울 영등포구 문래동',
+    '신정': '서울 양천구 신정동', '녹번': '서울 은평구 녹번동', '창경궁': '서울 종로구 창경궁',
     '분당': '경기 성남시 분당구', '판교': '경기 성남시 분당구 판교',
     '정자': '경기 성남시 분당구 정자', '서현': '경기 성남시 분당구 서현',
     '이매': '경기 성남시 분당구 이매', '야탑': '경기 성남시 야탑동',
@@ -265,9 +277,9 @@ function detectRegion(kw: string): string {
     '청라': '인천 서구 청라', '계양': '인천 계양구', '작전': '인천 계양구 작전동',
   };
   for (const [key, val] of Object.entries(regionMap)) {
-    if (kw.includes(key)) return val;
+    if (core.includes(key)) return val;
   }
-  return '서울·경기 전 지역';
+  return '서울 전지역';
 }
 
 function detectCourse(kw: string): string {
@@ -280,48 +292,120 @@ function detectCourse(kw: string): string {
   return '타이 · 아로마 · 힐링 VIP 전 코스';
 }
 
+// ── 서비스 지역 정책 ────────────────────────────────────────────────────────
+// 아름다운 밤(아밤)은 서울특별시 25개 자치구 전용 서비스입니다.
+// 경기·인천·수도권 키워드는 실제 서비스 범위와 달라 허위·과장 안내가 되므로 페이지를 생성하지 않습니다.
+
+// 검색 상위 노출을 위한 대표(헤드) 키워드 — 색인(indexable) 대상
+const HEAD_TERMS = [
+  '출장마사지', '출장안마', '출장홈타이', '출장서비스', '서울출장홈타이', '서울출장서비스',
+  '방문마사지', '방문안마', '홈타이', '홈케어마사지', '출장홈케어', '출장스파', '출장테라피',
+  '24시간출장마사지', '24시출장마사지', '24시출장안마', '24시출장홈타이', '심야출장마사지', '야간출장마사지', '새벽출장마사지',
+  '호텔출장마사지', '호텔출장안마', '호텔출장홈타이', '오피스텔출장마사지', '모텔출장마사지', '자택출장마사지',
+  '대면결제출장마사지', '선입금없는출장마사지', '후불출장마사지', '현장결제출장마사지',
+  '출장마사지가격표', '출장마사지가격', '출장안마가격', '출장홈타이가격', '출장마사지추천', '출장마사지후기', '출장마사지예약',
+  '출장홈타이추천', '출장홈타이후기', '출장서비스추천',
+  '아로마출장마사지', '타이출장마사지', '타이마사지출장', '스웨디시출장', '힐링VIP출장마사지',
+  '서울출장마사지', '서울출장안마', '서울마사지추천', '서울홈타이',
+  '아밤출장마사지', '아밤출장안마', '아밤출장홈타이', '아밤홈케어', '왓포출장마사지', '왓포홈케어',
+];
+
+const DISTRICT_KEYWORDS = DISTRICTS.flatMap((d) => [
+  `${d.short}출장마사지`,
+  `${d.short}출장안마`,
+  `${d.short}홈타이`,
+  `${d.short}출장홈타이`,
+  `${d.short}출장서비스`,
+]);
+
+const CANDIDATE_POOL: string[] = Array.from(
+  new Set([
+    ...DISTRICT_KEYWORDS,
+    ...HEAD_TERMS,
+    ...SEOUL_SEO,
+    ...COURSE_SEO,
+    ...SITUATION_SEO,
+    ...INFO_SEO,
+    ...HOMECARE_WATPHO_SEO,
+  ]),
+);
+const CANDIDATE_SET = new Set(CANDIDATE_POOL);
+
+export function isServedKeyword(kw: string): boolean {
+  const k = kw.replace(/\s+/g, '');
+  if (!CANDIDATE_SET.has(k)) return false;
+  if (/경기|인천|수도권|%/.test(k)) return false;
+  const region = detectRegion(k);
+  return !(region.startsWith('경기') || region.startsWith('인천'));
+}
+
+const INDEXABLE_SET = new Set<string>([...HEAD_TERMS, ...DISTRICT_KEYWORDS]);
+
+/** 서비스 지역 + 대표 키워드만 색인. 동/역 단위 등 세부 키워드는 noindex,follow (중복·얇은 콘텐츠 방지) */
+export function isIndexableKeyword(kw: string): boolean {
+  return isServedKeyword(kw) && INDEXABLE_SET.has(kw.replace(/\s+/g, ''));
+}
+
+/** 지역 랜딩 페이지가 생성되는 서울 서비스 키워드 */
+export const SERVED_KEYWORDS: string[] = CANDIDATE_POOL.filter((k) => isServedKeyword(k));
+
+/** 사이트맵·내부링크에 쓰는 색인 대상 키워드 목록 */
+export const INDEXABLE_KEYWORDS: string[] = SERVED_KEYWORDS.filter((k) => INDEXABLE_SET.has(k));
+
+export function getDistrictForKeyword(kw: string): DistrictInfo | undefined {
+  const region = detectRegion(kw);
+  return getDistrictFromRegion(region);
+}
+
 export function generateSeoPageData(keyword: string) {
   const kw = decodeURIComponent(keyword).replace(/-/g, ' ');
   const region = detectRegion(kw);
   const course = detectCourse(kw);
+  const district = getDistrictFromRegion(region);
 
-  const isRegionPage = [...SEOUL_SEO, ...GYEONGGI_SEO, ...INCHEON_SEO].some(k => k === kw);
-  const isCoursePage = COURSE_SEO.some(k => k === kw);
+  const isSeoulKw = SEOUL_SEO.some((k) => k === kw);
+  const isCoursePage = COURSE_SEO.some((k) => k === kw);
 
   let title = '';
   let description = '';
   let h1 = '';
 
-  if (isRegionPage) {
-    title = `${kw} | ${region} 24시간 100% 대면결제 출장안마`;
-    description = `${region} 출장마사지 서비스. 선입금 0원, 관리사 도착 후 현장 결제. 30~45분 내 총알 도착 보장. 타이·아로마·힐링 VIP 전 코스 24시간 즉시 예약.`;
-    h1 = `${region} 출장마사지 — 선입금 없는 100% 대면결제 서비스`;
+  if (district && (isSeoulKw || region !== '서울 전지역')) {
+    const place = region.replace('서울 ', '');
+    title = `${kw} | ${district.short} 프라이빗 1:1 방문 홈케어 Abam.kr`;
+    description = `${place} ${kw} — Abam.kr(아름다운 밤). ${district.stations.slice(0, 3).join('·')} 인근 자택·호텔로 방문하는 프라이빗 1:1 홈케어. 예약은 18:00부터 (영업 19:00~05:00).`;
+    h1 = `${district.gu} ${kw} — 프라이빗 1:1 방문 홈케어 Abam.kr`;
   } else if (isCoursePage) {
-    title = `${kw} | 서울·경기 전 지역 24시간 당일 예약`;
-    description = `${kw} 전문 출장마사지 서비스. ${course} 코스 60·90·120분 운영. 선입금 0원, 관리사 도착 후 현장 결제. 서울·경기 30분 내 방문.`;
-    h1 = `${kw} 전문 출장마사지 — ${course}`;
+    title = `${kw} | 서울 프라이빗 1:1 방문 홈케어 ${course} Abam.kr`;
+    description = `${kw} — Abam.kr(아름다운 밤). ${course} 60·90·120분 코스, 서울 전역 자택·호텔 방문, 예약은 18:00부터 (영업 19:00~05:00).`;
+    h1 = `${kw} — ${course}`;
   } else {
-    title = `${kw} | 서울·경기 24시간 100% 대면결제 출장마사지`;
-    description = `${kw} 서비스. 선입금 없는 100% 현장 대면결제. 서울·경기 전 지역 30분 내 방문. 타이·아로마·힐링 VIP 코스 전문 관리사 즉시 매칭.`;
-    h1 = `${kw} — 선입금 0원 · 100% 현장 대면결제`;
+    title = `${kw} | 서울 프라이빗 1:1 방문 홈케어 Abam.kr`;
+    description = `${kw} 안내. Abam.kr(아름다운 밤)은 서울 전역 자택·호텔로 방문하는 프라이빗 1:1 홈케어입니다. 예약은 18:00부터, 영업 19:00~05:00.`;
+    h1 = `${kw} — 서울 프라이빗 1:1 방문 홈케어 Abam.kr`;
   }
 
   return {
     keyword: kw,
     region,
     course,
+    district,
     title,
     description,
     h1,
     keywords: [
-      kw, `${kw} 가격`, `${kw} 후기`, `${kw} 추천`, `${kw} 예약`, `${kw} 이용방법`,
-      '선입금없는출장마사지', '대면결제출장마사지', '24시간출장마사지',
-      '서울출장마사지', '경기출장마사지', '출장안마',
-      ...(region !== '서울·경기 전 지역' ? [`${region} 마사지`, `${region} 출장`, `${region} 안마`] : []),
+      kw, `${kw} 가격`, `${kw} 후기`, `${kw} 추천`, `${kw} 예약`,
+      '서울출장마사지', '서울출장안마', '출장마사지', '출장안마',
+      ...(district ? [`${district.short} 출장마사지`, `${district.short} 출장안마`, `${district.short} 마사지`] : []),
     ],
-    relatedKeywords: SEO_KEYWORDS
-      .filter(k => k !== kw)
-      .filter(k => detectRegion(k) === region || detectCourse(k) === course)
+    relatedKeywords: INDEXABLE_KEYWORDS
+      .filter((k) => k !== kw)
+      .filter((k) => {
+        const d = getDistrictForKeyword(k);
+        return (district && d?.gu === district.gu) || detectCourse(k) === course;
+      })
       .slice(0, 8),
   };
 }
+
+export { hubKeywordFor };

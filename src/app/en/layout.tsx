@@ -1,21 +1,16 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Seoul Outcall Massage & Hotel In-Room VIP Spa | English 24/7 Concierge (Abam)',
+  title: 'Abam.kr | Private 1:1 Home Visit Care · Seoul Home & Hotel',
   description:
-    'Premium English-friendly hotel in-room outcall massage across all 25 Seoul districts. 30-minute arrival, 100% pay-on-arrival (Cash or Card). No advance deposit. Instant booking via WhatsApp (+82 10-6607-2239).',
+    'A beautiful night, a special time just for you. Abam.kr private 1:1 home visit care across Seoul — home and hotel. Booking from 18:00 (open 19:00~05:00). Thai, Aroma and Special courses in 60/90/120 minutes.',
   keywords: [
-    'Seoul outcall massage',
+    'Abam.kr',
+    'Seoul home visit care',
+    'Seoul private home care',
     'Seoul hotel massage',
-    'Seoul in-room massage',
-    'Gangnam hotel outcall spa',
-    'Myeongdong hotel massage',
-    'Itaewon massage English',
-    'Hongdae hotel massage',
-    'Seoul 5 star hotel massage',
-    'English speaking massage Seoul',
-    'Seoul 24 hour massage',
-    'Seoul VIP sensory massage'
+    'Thai massage Seoul',
+    'Aroma massage Seoul',
   ].join(', '),
   alternates: {
     canonical: 'https://abam.kr/en',
@@ -27,12 +22,12 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Seoul Outcall Massage & Hotel In-Room VIP Spa (Abam)',
+    title: 'Abam.kr | A beautiful night, a special time just for you',
     description:
-      'Seoul All 25 Districts Hotel In-Room Massage. 30-min arrival, 100% pay on arrival (Visa/Master/Amex/Cash). English concierge via WhatsApp (+82 10-6607-2239).',
+      'Private 1:1 home visit care. All of Seoul · Home · Hotel. Booking from 18:00 (open 19:00 ~ 05:00).',
     url: 'https://abam.kr/en',
-    siteName: 'Abam Thai Homecare Seoul',
-    images: [{ url: 'https://abam.kr/images/hero_sensual_goddess.jpg', width: 730, height: 620, alt: 'Seoul VIP Hotel Massage' }],
+    siteName: 'Abam.kr',
+    images: [{ url: 'https://abam.kr/og-image.png', width: 1200, height: 630, alt: 'Abam.kr Private 1:1 Home Visit Care' }],
   },
 };
 

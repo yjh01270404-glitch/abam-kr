@@ -1,12 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SEO_KEYWORDS, generateSeoPageData } from "../../../lib/seo-keywords";
+import { notFound } from "next/navigation";
+import {
+  SERVED_KEYWORDS,
+  INDEXABLE_KEYWORDS,
+  generateSeoPageData,
+  isIndexableKeyword,
+  isServedKeyword,
+  hubKeywordFor,
+} from "../../../lib/seo-keywords";
+import { DISTRICTS } from "../../../lib/region-data";
 
 type Props = { params: Promise<{ keyword: string }> };
 
 export const dynamic = "force-static";
 export const revalidate = 86400; // 24시간 캐시
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 const SITE_URL  = "https://abam.kr";
 const KAKAO_ID  = "Abam1004";
@@ -19,42 +28,42 @@ const COMPARISON_ROWS = [
     category: "기본 가격대",
     thai: "80,000원 ~ 120,000원",
     aroma: "90,000원 ~ 140,000원",
-    vip: "120,000원 ~ 200,000원",
+    vip: "100,000원 ~ 160,000원",
   },
   {
     category: "압의 세기",
     thai: "시원하고 강함 ★★★★☆",
     aroma: "부드러움~중간 ★★☆☆☆",
-    vip: "맞춤 압 (지압+부드러움) ★★★★★",
+    vip: "시원한 지압 + 부드러운 오일 ★★★☆☆",
   },
   {
     category: "오일 여부",
     thai: "오일 없음 (건식)",
     aroma: "천연 에센셜 오일",
-    vip: "식물성 천연 오일 + 수기 지압",
+    vip: "타이 지압 + 천연 아로마 오일",
   },
   {
     category: "주요 효과",
     thai: "척추·골반 이완, 뭉친 근육통 완화",
     aroma: "숙면 유도, 피부 보습, 피로 회복",
-    vip: "전신 림프 순환, 심신 안정, 감성 힐링",
+    vip: "지압과 오일 관리를 동시에 받는 복합 케어",
   },
   {
     category: "추천 고객",
     thai: "운동 후 뻐근함, 강한 지압 선호",
     aroma: "만성 피로, 부드러운 케어 희망",
-    vip: "극심한 스트레스, 프리미엄 힐링 선호",
+    vip: "타이와 아로마를 함께 원하는 분",
   },
 ];
 
 const COURSES = [
   {
     id: "thai",
-    name: "타이 테라피 (건식)",
+    name: "타이",
     badge: "인기",
     img: "/images/thai.jpg",
     priceSummary: "80,000원 ~ 120,000원",
-    desc: "오일을 사용하지 않고 편안한 순면 관리복으로 진행되는 왓포 정통 건식 수기 관리. 전신 스트레칭과 경혈 압박으로 뭉친 근육을 시원하게 이완합니다.",
+    desc: "전통 건식 지압 · 시원한 압. 왓포 전통 방식의 건식 지압으로 뭉친 근육을 시원하게 풀어주고 스트레칭으로 몸의 균형을 잡아줍니다.",
     prices: [
       { time: "60분", price: "80,000원" },
       { time: "90분", price: "100,000원", isBest: true },
@@ -63,11 +72,11 @@ const COURSES = [
   },
   {
     id: "aroma",
-    name: "아로마 테라피 (천연오일)",
+    name: "아로마",
     badge: "추천",
     img: "/images/aroma.jpg",
     priceSummary: "90,000원 ~ 140,000원",
-    desc: "100% 최고급 천연 에센셜 오일을 도포하여 림프 순환을 돕고, 부드러운 압으로 전신 긴장과 피로를 풀어주는 순환 릴렉싱 케어입니다.",
+    desc: "천연 아로마 오일 · 부드러운 케어. 천연 식물성 아로마 오일을 사용하여 부드럽게 전신을 케어하고 림프 순환과 깊은 휴식을 돕습니다.",
     prices: [
       { time: "60분", price: "90,000원" },
       { time: "90분", price: "110,000원", isBest: true },
@@ -75,23 +84,23 @@ const COURSES = [
     ],
   },
   {
-    id: "vip",
-    name: "프리미엄 VIP 시그니처",
-    badge: "대표 코스",
-    img: "/images/hero_sensual_goddess.jpg",
-    priceSummary: "120,000원 ~ 200,000원",
-    desc: "에이스 테라피스트 전담 배정. 정통 건식 지압으로 큰 근육을 선이완한 뒤 천연 오일로 림프와 미세 근막을 섬세하게 관리하는 최고급 풀코스 프로그램입니다.",
+    id: "special",
+    name: "스페셜",
+    badge: "프리미엄",
+    img: "/images/flower_spa.jpg",
+    priceSummary: "100,000원 ~ 160,000원",
+    desc: "타이 + 아로마 복합 케어. 타이의 시원한 지압과 아로마의 부드러운 오일 관리를 동시에 받을 수 있는 프리미엄 코스입니다.",
     prices: [
-      { time: "60분", price: "120,000원" },
-      { time: "90분", price: "160,000원", isBest: true },
-      { time: "120분", price: "200,000원" },
+      { time: "60분", price: "100,000원" },
+      { time: "90분", price: "120,000원", isBest: true },
+      { time: "120분", price: "160,000원" },
     ],
   },
 ];
 
 export async function generateStaticParams() {
-  return SEO_KEYWORDS.map((keyword) => ({
-    keyword: encodeURIComponent(keyword.replace(/\s+/g, "-")),
+  return SERVED_KEYWORDS.map((keyword) => ({
+    keyword: keyword.replace(/\s+/g, "-"),
   }));
 }
 
@@ -102,34 +111,36 @@ export async function generateMetadata({ params }: Props) {
   const canonicalUrl = `${SITE_URL}/seo/${encodeURIComponent(decoded.replace(/\s+/g, "-"))}`;
 
   return {
-    title: `${decoded} | 선입금 0원 · 100% 현장 대면결제 · 아밤 공식`,
-    description: `${decoded} 안내 센터. 선입금 0원, 관리사 도착 후 현장 결제. 서울·경기 수도권 30분 내외 방문. 타이 70,000원~힐링 VIP 140,000원 정찰제.`,
+    title: { absolute: data.title },
+    description: data.description,
     keywords: [
       ...data.keywords,
       `${decoded} 가격`, `${decoded} 코스`, `${decoded} 비용`,
       `${decoded} 안마`, `${decoded} 마사지`,
-      "선입금없는출장안마", "대면결제출장마사지", "24시간출장마사지",
+      "프라이빗 1:1 방문 홈케어", "Abam.kr",
       "출장마사지가격", "출장안마가격",
     ].join(", "),
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" as const, "max-video-preview": -1 },
-    },
+    robots: isIndexableKeyword(decoded)
+      ? {
+          index: true,
+          follow: true,
+          googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" as const, "max-video-preview": -1 },
+        }
+      : { index: false, follow: true },
     alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: `${decoded} — 선입금 0원 100% 현장 대면결제`,
-      description: `${decoded} 24시간 상시 운영. 관리사 도착 후 현장 결제. 30분 내외 방문. 타이·아로마·힐링 VIP.`,
+      title: `${decoded} — Abam.kr 프라이빗 1:1 방문 홈케어`,
+      description: data.description,
       type: "website" as const,
       url: canonicalUrl,
-      siteName: "아밤 출장안마",
+      siteName: "Abam.kr",
       locale: "ko_KR",
-      images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630, alt: `${decoded} 아밤 출장안마` }],
+      images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630, alt: `${decoded} Abam.kr 프라이빗 1:1 방문 홈케어` }],
     },
     twitter: {
       card: "summary_large_image" as const,
-      title: `${decoded} — 선입금 0원 100% 현장 대면결제`,
-      description: `${decoded} 24시간 연중무휴 상시 운영.`,
+      title: `${decoded} — Abam.kr 프라이빗 1:1 방문 홈케어`,
+      description: `${decoded} 예약은 18:00부터 (영업 19:00 ~ 05:00).`,
       images: [`${SITE_URL}/og-image.png`],
     },
   };
@@ -139,24 +150,47 @@ export default async function SeoLandingPage({ params }: Props) {
   const { keyword } = await params;
   const data = generateSeoPageData(keyword);
   const decoded = decodeURIComponent(keyword).replace(/-/g, " ");
+  if (!isServedKeyword(decoded)) notFound();
+  const district = data.district;
   const canonicalUrl = `${SITE_URL}/seo/${encodeURIComponent(decoded.replace(/\s+/g, "-"))}`;
 
-  const relatedKeywords = SEO_KEYWORDS
+  // 내부 링크: 같은 자치구·인접 키워드를 우선 노출하고, 부족하면 전체 자치구 허브로 채웁니다.
+  const hubLinks = DISTRICTS.map((d) => hubKeywordFor(d)).filter((k) => k !== decoded);
+  const relatedKeywords = Array.from(
+    new Set([...data.relatedKeywords, ...hubLinks, ...INDEXABLE_KEYWORDS.slice(0, 12)]),
+  )
     .filter((k) => k !== decoded)
-    .slice(0, 18);
+    .slice(0, 30);
+
+  const localFaq = [
+    {
+      q: `${decoded} 예약은 어떻게 하나요?`,
+      a: "전화 또는 카카오톡으로 코스(타이·아로마·스페셜)와 방문 장소를 알려 주세요. 예약은 18:00부터 가능하며, 1시간 전에 예약해 주시면 더욱 편안하게 이용하실 수 있습니다.",
+    },
+    {
+      q: district ? `${district.gu}에서는 어떤 장소로 방문하나요?` : "어떤 장소로 방문하나요?",
+      a: district
+        ? `${district.gu} 내 자택·호텔 등 원하시는 공간으로 방문합니다. ${district.stations.slice(0, 3).join(", ")} 인근 주소도 안내해 주시면 됩니다.`
+        : "자택·호텔 등 원하시는 공간으로 서울 전역 방문합니다.",
+    },
+    {
+      q: "운영 시간은 어떻게 되나요?",
+      a: "예약은 18:00부터 가능하며, 영업 시간은 19:00부터 05:00까지입니다. 1시간 전에 예약해 주시면 더욱 편안하게 이용하실 수 있습니다.",
+    },
+  ];
 
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "@id": `${canonicalUrl}#webpage`,
-      name: `${decoded} — 선입금 0원 100% 현장 대면결제`,
+      name: `${decoded} — Abam.kr 프라이빗 1:1 방문 홈케어`,
       description: data.description,
       url: canonicalUrl,
       breadcrumb: {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "아밤 홈", item: SITE_URL },
+          { "@type": "ListItem", position: 1, name: "Abam.kr 홈", item: SITE_URL },
           { "@type": "ListItem", position: 2, name: "서비스 지역", item: `${SITE_URL}/keywords` },
           { "@type": "ListItem", position: 3, name: decoded, item: canonicalUrl },
         ],
@@ -164,22 +198,34 @@ export default async function SeoLandingPage({ params }: Props) {
     },
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": `${SITE_URL}/#localbusiness`,
-      name: `아밤 홈타이·테라피 (${decoded})`,
-      alternateName: [`${decoded} 출장안마`, `${decoded} 출장마사지`, "아밤홈케어"],
-      description: `${decoded} 지역 24시간 100% 현장 대면결제 출장홈케어. 선입금 0원, 관리사 도착 후 현장 대면결제.`,
+      "@type": ["HealthAndBeautyBusiness", "LocalBusiness"],
+      "@id": `${SITE_URL}/#business`,
+      name: `Abam.kr 프라이빗 1:1 방문 홈케어 (${decoded})`,
+      alternateName: [`${decoded} 출장안마`, `${decoded} 출장마사지`, "Abam.kr"],
+      description: `${decoded} 지역 프라이빗 1:1 방문 홈케어. 자택·호텔 방문, 예약은 18:00부터 (영업 19:00 ~ 05:00).`,
       url: SITE_URL,
       image: `${SITE_URL}/og-image.png`,
       telephone: PHONE_NUM,
-      areaServed: data.region,
-      priceRange: "₩80,000 - ₩200,000",
+      areaServed: district
+        ? { "@type": "AdministrativeArea", name: `서울특별시 ${district.gu}` }
+        : { "@type": "AdministrativeArea", name: "서울 전역" },
+      priceRange: "₩80,000 - ₩160,000",
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
         opens: "19:00",
         closes: "05:00",
       },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      mainEntity: localFaq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
     },
   ];
 
@@ -193,8 +239,7 @@ export default async function SeoLandingPage({ params }: Props) {
           
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
             <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ fontSize: "17px", fontWeight: 900, color: "#ffffff", letterSpacing: "-0.3px" }}>아름다운 밤</span>
-              <span style={{ fontSize: "11px", fontWeight: 800, color: "#fbbf24", backgroundColor: "rgba(245, 158, 11, 0.18)", border: "1px solid rgba(245, 158, 11, 0.35)", padding: "2px 6px", borderRadius: "4px" }}>Abam</span>
+              <span style={{ fontSize: "17px", fontWeight: 900, color: "#ffffff", letterSpacing: "-0.3px" }}>🌙 Abam<span style={{ color: "#e0b04a" }}>.kr</span></span>
             </Link>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <Link href="/keywords" style={{ fontSize: "12px", color: "#cbd5e1", fontWeight: 700, textDecoration: "none", padding: "4px 8px", borderRadius: "6px", backgroundColor: "rgba(255, 255, 255, 0.08)", border: "1px solid rgba(255, 255, 255, 0.15)" }}>
@@ -238,37 +283,37 @@ export default async function SeoLandingPage({ params }: Props) {
           >
             <div style={{ position: "relative", width: "100%", height: "220px", background: "#f8fafc" }}>
               <Image
-                src="/images/hero_sensual_goddess.jpg"
-                alt={`${decoded} 아름다운 밤 타이 홈케어`}
+                src="/images/thai.jpg"
+                alt={`${decoded} Abam.kr 프라이빗 1:1 방문 홈케어`}
                 fill
                 sizes="(max-width: 640px) 100vw, 640px"
                 style={{ objectFit: "cover" }}
                 priority
               />
               <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(15,23,42,0.85)", padding: "3px 8px", borderRadius: "4px", fontSize: "10.5px", fontWeight: 800, color: "#fef08a" }}>
-                100% 현장 대면결제 · 선입금 0원
+                예약은 18:00부터 (영업 19:00 ~ 05:00)
               </div>
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px 10px", background: "linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.3) 70%, transparent 100%)", color: "#ffffff" }}>
                 <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#fde68a", marginBottom: "2px" }}>
-                  {data.region} 20~30분 신속 방문
+                  {data.region} 자택 · 호텔 방문
                 </div>
-                <div style={{ fontSize: "19px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.25 }}>
-                  {decoded} 아밤 타이 홈케어
-                </div>
+                <h1 style={{ fontSize: "19px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0, color: "#ffffff" }}>
+                  {data.h1}
+                </h1>
               </div>
             </div>
 
             <div style={{ padding: "16px 14px 14px", background: "#ffffff", textAlign: "center" }}>
               <div style={{ fontSize: "14px", fontWeight: 800, color: "#dc2626", marginBottom: "6px" }}>
-                고객만족 1위 & 재방문율 1위
+                프라이빗 1:1 방문 홈케어
               </div>
               <div style={{ fontSize: "24px", fontWeight: 900, color: "#111827", letterSpacing: "-0.02em", margin: "4px 0 10px 0" }}>
                 {PHONE_NUM}
               </div>
               <div style={{ fontSize: "13px", lineHeight: 1.6, color: "#4b5563", margin: "0 0 12px 0" }}>
-                엄선된 20대 전문 테라피스트 상시 대기<br />
-                <strong>선입금 0원</strong> · 관리사 도착 후 <strong>100% 현장 대면결제</strong><br />
-                {data.region} 전 지역 <strong>30분 내외 빠른 방문</strong>
+                아름다운 밤, 당신을 위한 특별한 시간<br />
+                <strong>예약은 18:00부터</strong> · 영업 19:00 ~ 05:00<br />
+                {data.region} 전 지역 <strong>자택 · 호텔 방문</strong>
               </div>
               <div style={{ background: "#1a73e8", color: "#ffffff", padding: "12px 0", borderRadius: "6px", fontWeight: 800, fontSize: "14px" }}>
                 사진 클릭 → 즉시 전화연결 / 예약 상담
@@ -342,10 +387,10 @@ export default async function SeoLandingPage({ params }: Props) {
             <div>
               <a href="#guide-section" style={{ textDecoration: "none" }}>
                 <div style={{ fontSize: "14px", fontWeight: 600, color: "#1a0dab", marginBottom: "2px" }}>
-                  선입금 0원 안심수칙
+                  예약 · 영업 안내
                 </div>
                 <div style={{ fontSize: "12px", color: "#008744", fontWeight: 600 }}>
-                  100% 현장 대면결제
+                  예약 18:00부터 (영업 19:00 ~ 05:00)
                 </div>
               </a>
             </div>
@@ -384,10 +429,10 @@ export default async function SeoLandingPage({ params }: Props) {
         <section id="menu-section" style={{ padding: "20px 0", borderBottom: "1px solid #f1f3f4" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
             <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#202124", margin: 0 }}>
-              {decoded} 코스별 정찰 가격표
+              {decoded} COURSE & PRICE
             </h2>
             <span style={{ fontSize: "12px", color: "#1a73e8", fontWeight: 600 }}>
-              선입금 0원 · 현장 대면결제
+              60분 · 90분 · 120분
             </span>
           </div>
 
@@ -444,10 +489,10 @@ export default async function SeoLandingPage({ params }: Props) {
         <section style={{ padding: "24px 0 18px", borderBottom: "1px solid #f1f3f4" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
             <h2 style={{ fontSize: "15px", fontWeight: 700, color: "#202124", margin: 0 }}>
-              3대 코스 특성 한눈에 비교하기
+              3가지 코스 한눈에 비교하기
             </h2>
             <span style={{ fontSize: "11px", color: "#5f6368" }}>
-              정찰 요금 기준
+              COURSE & PRICE 기준
             </span>
           </div>
 
@@ -456,9 +501,9 @@ export default async function SeoLandingPage({ params }: Props) {
               <thead>
                 <tr style={{ background: "#f8f9fa", borderBottom: "1px solid #e8eaed" }}>
                   <th style={{ padding: "10px 8px", fontWeight: 700, color: "#5f6368", width: "22%" }}>구분</th>
-                  <th style={{ padding: "10px 8px", fontWeight: 700, color: "#1a73e8", width: "26%" }}>타이 건식 (실속)</th>
-                  <th style={{ padding: "10px 8px", fontWeight: 700, color: "#008744", width: "26%" }}>아로마 릴렉싱 (균형)</th>
-                  <th style={{ padding: "10px 8px", fontWeight: 700, color: "#b45309", width: "26%" }}>힐링 VIP (시그니처 1위)</th>
+                  <th style={{ padding: "10px 8px", fontWeight: 700, color: "#1a73e8", width: "26%" }}>타이</th>
+                  <th style={{ padding: "10px 8px", fontWeight: 700, color: "#008744", width: "26%" }}>아로마</th>
+                  <th style={{ padding: "10px 8px", fontWeight: 700, color: "#b45309", width: "26%" }}>스페셜</th>
                 </tr>
               </thead>
               <tbody>
@@ -475,6 +520,43 @@ export default async function SeoLandingPage({ params }: Props) {
           </div>
         </section>
 
+        {/* 지역 고유 안내 + 지역 FAQ (페이지별 고유 콘텐츠) */}
+        <section id="local-guide" style={{ padding: "20px 0", borderBottom: "1px solid #f1f3f4" }}>
+          <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#202124", margin: "0 0 12px 0" }}>
+            {district ? `${district.gu} 출장안마·출장마사지·출장홈타이·출장서비스 이용 안내` : `${decoded} 이용 안내`}
+          </h2>
+          {district ? (
+            <div style={{ fontSize: "13px", color: "#3c4043", lineHeight: 1.75 }}>
+              <p style={{ margin: "0 0 10px 0" }}>
+                Abam.kr(아름다운 밤)은 {district.gu}의 {district.areas.join(", ")} 일대를 포함해 {district.stations.join(", ")} 주변으로 방문하는
+                프라이빗 1:1 방문 홈케어입니다. {district.gu}은(는) {district.note}입니다.
+              </p>
+              <p style={{ margin: "0 0 10px 0" }}>
+                주요 방문 환경은 {district.stay}이며, 호텔은 객실 호수를, 자택은 정확한 주소와 출입 방법을 알려 주시면
+                조용히 방문합니다. 예약은 18:00부터 가능하며 영업 시간은 19:00부터 05:00까지입니다.
+              </p>
+              <p style={{ margin: 0 }}>
+                타이(80,000원~), 아로마(90,000원~), 스페셜(100,000원~) 3가지 코스를 60·90·120분으로
+                선택하실 수 있습니다. 1시간 전에 예약해 주시면 더욱 편안하게 이용하실 수 있습니다.
+              </p>
+            </div>
+          ) : (
+            <p style={{ fontSize: "13px", color: "#3c4043", lineHeight: 1.75, margin: 0 }}>
+              {decoded}에 관한 안내입니다. Abam.kr(아름다운 밤)은 서울 전역 자택·호텔로 방문하는 프라이빗 1:1 방문 홈케어이며,
+              예약은 18:00부터 가능하고 영업 시간은 19:00부터 05:00까지입니다.
+            </p>
+          )}
+
+          <div style={{ marginTop: "16px", display: "flex", flexDirection: "column", gap: "10px" }}>
+            {localFaq.map((f) => (
+              <div key={f.q}>
+                <h3 style={{ fontSize: "13.5px", fontWeight: 700, color: "#202124", margin: "0 0 3px 0" }}>{f.q}</h3>
+                <p style={{ fontSize: "12.5px", color: "#5f6368", lineHeight: 1.65, margin: 0 }}>{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* 이용 수칙 안내 */}
         <section id="guide-section" style={{ padding: "20px 0", borderBottom: "1px solid #f1f3f4" }}>
           <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#202124", margin: "0 0 14px 0" }}>
@@ -483,13 +565,13 @@ export default async function SeoLandingPage({ params }: Props) {
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", fontSize: "13px", color: "#3c4043", lineHeight: 1.6 }}>
             <div>
-              <strong>1. 코스 및 시간 선택:</strong> 원하시는 코스(타이, 아로마, 힐링 VIP)와 관리 시간을 선택 후 메신저나 전화로 접수합니다.
+              <strong>1. 코스 및 시간 선택:</strong> 원하시는 코스(타이, 아로마, 스페셜)와 관리 시간(60·90·120분)을 선택 후 메신저나 전화로 접수합니다.
             </div>
             <div>
-              <strong>2. 방문 장소 확인:</strong> {data.region} 내 정확한 방문 주소(아파트, 빌라, 오피스텔, 호텔명)를 전달합니다.
+              <strong>2. 방문 장소 확인:</strong> {data.region} 내 정확한 방문 장소(자택 주소 또는 호텔명)를 전달합니다.
             </div>
             <div>
-              <strong>3. 100% 현장 대면결제:</strong> 관리사 도착 확인 후 직접 현금 또는 계좌이체로 결제하시고 편안하게 관리를 받으시면 됩니다.
+              <strong>3. 프라이빗 1:1 케어:</strong> 예약은 18:00부터, 1시간 전에 예약하시면 더욱 편안하게 원하시는 공간에서 케어를 받으실 수 있습니다.
             </div>
           </div>
         </section>
@@ -497,7 +579,7 @@ export default async function SeoLandingPage({ params }: Props) {
         {/* 수도권 연관 서비스 지역 */}
         <section style={{ padding: "20px 0", borderBottom: "1px solid #f1f3f4" }}>
           <div style={{ fontSize: "14px", fontWeight: 700, color: "#202124", marginBottom: "10px" }}>
-            수도권 관련 서비스 지역
+            서울 지역별 출장마사지 바로가기
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 12px" }}>
             {relatedKeywords.map((kw) => (
@@ -519,10 +601,10 @@ export default async function SeoLandingPage({ params }: Props) {
         {/* 푸터 */}
         <footer style={{ padding: "24px 0", fontSize: "11px", color: "#70757a", lineHeight: 1.7 }}>
           <div style={{ fontWeight: 700, color: "#202124", fontSize: "12px", marginBottom: "4px" }}>
-            아밤 (ABAM) 홈타이·테라피 공식 온라인 센터
+            Abam.kr · 아름다운 밤, 당신을 위한 특별한 시간
           </div>
-          <div>대표 상담 전화: {PHONE_NUM} · 24시간 연중무휴 상시 운영</div>
-          <div>결제 정책: 선입금 0원 · 관리사 방문 후 100% 현장 대면결제 준수</div>
+          <div>대표 상담 전화: {PHONE_NUM} · 예약은 18:00부터 (영업 19:00 ~ 05:00)</div>
+          <div>코스: 타이 · 아로마 · 스페셜 (60분 / 90분 / 120분)</div>
           <div style={{ marginTop: "8px" }}>
             © ABAM. All rights reserved.
           </div>

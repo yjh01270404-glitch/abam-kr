@@ -1,62 +1,30 @@
 import { MetadataRoute } from 'next';
 
+const PRIVATE_PATHS = [
+  '/abam-nightman-2026',
+  '/api/',
+  '/admin',
+  '/mgnt-vault',
+  '/login',
+  '/messages',
+  '/alerts',
+  '/diary',
+  '/employer/',
+  '/job/',
+  '/jobs',
+  '/talent',
+  '/test-banners',
+];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      {
-        // 구글봇 — SEO 페이지 최우선, 관리자 차단
-        userAgent: 'Googlebot',
-        allow: ['/', '/en', '/jp', '/cn', '/seo/', '/keywords', '/keywords/', '/sitemap.xml'],
-        disallow: [
-          '/abam-nightman-2026',
-          '/api/',
-          '/admin',
-          '/admin/',
-          '/mgnt-vault',
-          '/mgnt-vault/',
-          '/login',
-          '/messages',
-          '/alerts',
-          '/diary',
-        ],
-      },
-      {
-        // 구글 이미지 봇 — 전체 허용 (이미지 검색 노출)
-        userAgent: 'Googlebot-Image',
-        allow: '/',
-        disallow: ['/abam-nightman-2026', '/api/'],
-      },
-      {
-        // 네이버 SEO봇 (Yeti)
-        userAgent: 'Yeti',
-        allow: ['/', '/en', '/jp', '/cn', '/seo/', '/keywords'],
-        disallow: ['/abam-nightman-2026', '/api/', '/admin', '/mgnt-vault'],
-      },
-      {
-        // 빙봇
-        userAgent: 'Bingbot',
-        allow: ['/', '/en', '/jp', '/cn', '/seo/', '/keywords'],
-        disallow: ['/abam-nightman-2026', '/api/', '/admin', '/mgnt-vault'],
-      },
-      {
-        // 다음 카카오봇
-        userAgent: 'DaumWebDocumentBot',
-        allow: '/',
-        disallow: ['/abam-nightman-2026', '/api/', '/admin'],
-      },
-      {
-        // 나머지 모든 크롤러
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/abam-nightman-2026', '/api/', '/admin', '/mgnt-vault'],
-      },
+      // 모든 주요 크롤러 동일 정책: 공개 페이지 전체 허용, 관리·내부 경로만 차단
+      { userAgent: '*', allow: '/', disallow: PRIVATE_PATHS },
+      // 구글 이미지 검색 노출 허용
+      { userAgent: 'Googlebot-Image', allow: '/', disallow: ['/abam-nightman-2026', '/api/'] },
     ],
-    // 복수 사이트맵 — 구글 크롤 버짓 분산 최적화
-    sitemap: [
-      'https://abam.kr/sitemap.xml',
-      'https://abam.kr/sitemap-seoul.xml',
-      'https://abam.kr/sitemap-gyeonggi.xml',
-    ],
+    sitemap: ['https://abam.kr/sitemap.xml'],
     host: 'https://abam.kr',
   };
 }

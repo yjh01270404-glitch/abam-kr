@@ -1,18 +1,18 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { SEOUL_SEO, GYEONGGI_SEO, INCHEON_SEO, COURSE_SEO, SITUATION_SEO } from '../../lib/seo-keywords';
+import { SERVED_KEYWORDS } from '../../lib/seo-keywords';
 
 export const metadata: Metadata = {
-  title: '수도권 출장 홈타이·테라피 지역별 안내 | 아밤 공식 포털',
-  description: '서울·경기·인천 399개동 출장 홈케어 테라피 지역별 안내. 선입금 0원, 관리사 도착 후 100% 현장 대면결제. 타이·아로마·힐링 VIP 정찰제.',
-  keywords: '출장홈케어,홈타이,방문마사지,선입금없는출장,현장대면결제,서울출장마사지,경기출장홈타이,인천출장안마',
+  title: '서울 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
+  description: '강남·서초·송파·마포·용산·영등포 등 서울 전역 지역별 안내. 자택·호텔 방문, 예약은 18:00부터 (영업 19:00~05:00). 타이·아로마·스페셜 코스.',
+  keywords: '서울출장안마,서울출장마사지,서울출장홈타이,강남출장안마,강남출장마사지,강남출장홈타이,호텔출장안마,출장서비스,방문마사지,홈타이,Abam.kr',
   alternates: { canonical: 'https://abam.kr/keywords' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1 } },
   openGraph: {
-    title: '수도권 출장 홈타이·테라피 지역별 안내 | 아밤 공식 포털',
-    description: '서울·경기·인천 출장 홈케어. 선입금 0원 100% 현장 대면결제.',
+    title: '서울 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
+    description: '서울 전역 · 자택 · 호텔. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
     url: 'https://abam.kr/keywords',
-    siteName: '아밤 공식 포털',
+    siteName: 'Abam.kr',
     locale: 'ko_KR',
   },
 };
@@ -29,29 +29,24 @@ const GROUPS: Group[] = [
   { label: '서울 마포·용산·영등포', keys: ['마포','홍대','합정','상암','망원','용산','이태원','한남'] },
   { label: '서울 성동·광진·동작·관악', keys: ['성동','성수','왕십리','광진','건대','동작','사당','관악','신림'] },
   { label: '서울 노원·도봉·강북·강서', keys: ['노원','상계','도봉','강북','미아','강서','마곡','화곡','목동'] },
-  { label: '경기 분당·판교·성남', keys: ['분당','판교','성남','정자','서현','야탑','모란'] },
-  { label: '경기 수원·용인·화성·동탄', keys: ['수원','광교','영통','용인','수지','기흥','동탄','화성'] },
-  { label: '경기 일산·고양·부천·안양', keys: ['일산','고양','화정','부천','중동','안양','평촌','범계'] },
-  { label: '경기 하남·구리·남양주·파주·김포', keys: ['하남','미사','구리','남양주','다산','별내','파주','운정','김포'] },
-  { label: '경기 평택·오산·의정부·군포·안산', keys: ['평택','송탄','오산','의정부','군포','산본','안산','고잔','시흥'] },
-  { label: '인천 전지역 (송도·청라·부평)', keys: ['인천','송도','청라','부평','계양','연수','구월'] },
-  { label: '코스별 전문 서비스', keys: ['힐링','VIP','아로마','타이','천연오일','건식','지압','림프','스트레칭'] },
-  { label: '이용 환경 및 상황별', keys: ['호텔','모텔','오피스텔','원룸','자택','선입금없는','대면결제','24시','심야','야간'] },
+  { label: '서울 종로·중구·서대문·은평·성북·중랑·양천·구로·금천', keys: ['종로','광화문','명동','을지로','동대문','서대문','신촌','은평','연신내','성북','중랑','양천','구로','금천','가산'] },
+  { label: '코스별 전문 서비스', keys: ['스페셜','아로마','타이','천연오일','건식','지압','림프','스트레칭'] },
+  { label: '이용 환경 및 상황별', keys: ['호텔','자택','심야','야간'] },
 ];
 
 export default function KeywordsPage() {
-  const ALL_POOL = [...SEOUL_SEO, ...GYEONGGI_SEO, ...INCHEON_SEO, ...COURSE_SEO, ...SITUATION_SEO];
+  const ALL_POOL = SERVED_KEYWORDS;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     '@id': `${SITE_URL}/keywords#cp`,
-    name: '수도권 출장 홈타이·테라피 지역별 안내 아밤',
+    name: '서울 지역별 프라이빗 1:1 방문 홈케어 안내 Abam.kr',
     url: `${SITE_URL}/keywords`,
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: '아밤 홈', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Abam.kr 홈', item: SITE_URL },
         { '@type': 'ListItem', position: 2, name: '서비스 지역', item: `${SITE_URL}/keywords` },
       ],
     },
@@ -67,8 +62,7 @@ export default function KeywordsPage() {
           
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
             <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '17px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.3px' }}>아름다운 밤</span>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#fbbf24', backgroundColor: 'rgba(245, 158, 11, 0.18)', border: '1px solid rgba(245, 158, 11, 0.35)', padding: '2px 6px', borderRadius: '4px' }}>Abam</span>
+              <span style={{ fontSize: '17px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.3px' }}>🌙 Abam<span style={{ color: '#e0b04a' }}>.kr</span></span>
             </Link>
             <Link href="/" style={{ fontSize: '12px', color: '#0f172a', fontWeight: 800, textDecoration: 'none', padding: '4px 10px', borderRadius: '6px', backgroundColor: '#ffffff' }}>
               메인홈
@@ -93,15 +87,15 @@ export default function KeywordsPage() {
         <section style={{ padding: '20px 0', borderBottom: '1px solid #f1f5f9' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 800, color: '#b45309', backgroundColor: '#fef3c7', padding: '4px 12px', borderRadius: '20px', marginBottom: '12px' }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16a34a' }} />
-            서울 전역 20~30분 신속 방문 · 선입금 0원 100% 현장 대면결제
+            서울 전역 · 자택 · 호텔 · 예약은 18:00부터 (영업 19:00 ~ 05:00)
           </div>
 
           <h1 style={{ fontSize: '22px', fontWeight: 900, margin: '0 0 8px 0', lineHeight: 1.35, color: '#0f172a' }}>
-            수도권 출장 홈타이·테라피 지역별 안내
+            서울 지역별 프라이빗 1:1 방문 홈케어 안내
           </h1>
 
           <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#475569', margin: 0, wordBreak: 'keep-all' }}>
-            원하시는 지역을 선택하시면 해당 지역의 상세 정찰 가격표 및 24시간 실시간 배차 도착 시간을 확인하실 수 있습니다.
+            원하시는 지역을 선택하시면 해당 지역의 주요 역·생활권 정보와 코스 요금표, 이용 절차를 확인하실 수 있습니다. Abam.kr(아름다운 밤)은 서울 전역 자택·호텔로 방문하는 프라이빗 1:1 홈케어입니다.
           </p>
         </section>
 
@@ -150,9 +144,9 @@ export default function KeywordsPage() {
 
         {/* 푸터 */}
         <footer style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #e2e8f0', fontSize: '11px', color: '#64748b', lineHeight: 1.7 }}>
-          <div><strong>아름다운 밤 타이 홈케어 (Abam)</strong> · 수도권 전역 24시간 1:1 방문 홈케어</div>
-          <div>대표 상담 전화: {PHONE_NUM} · 연중무휴 상시 운영</div>
-          <div>결제 정책: 선입금 0원 · 관리사 방문 후 100% 현장 대면결제 준수</div>
+          <div><strong>Abam.kr</strong> · 아름다운 밤, 당신을 위한 특별한 시간 · 서울 전역 프라이빗 1:1 방문 홈케어</div>
+          <div>대표 상담 전화: {PHONE_NUM} · 예약은 18:00부터 (영업 19:00 ~ 05:00)</div>
+          <div>코스: 타이 · 아로마 · 스페셜 (60분 / 90분 / 120분)</div>
           <div style={{ marginTop: '6px' }}>
             © ABAM. All rights reserved.
           </div>
