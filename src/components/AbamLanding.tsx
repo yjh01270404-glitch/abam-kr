@@ -340,6 +340,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {c.reviews.map((rev, i) => (
               <figure key={i} style={{ ...glass, margin: 0, padding: '14px 16px' }}>
+                <div style={{ color: C.gold, fontSize: '11px', marginBottom: '6px', letterSpacing: '2px' }}>★★★★★</div>
                 <blockquote style={{ margin: 0, fontSize: '13.5px', color: C.ink, lineHeight: 1.65 }}>{rev.text}</blockquote>
                 <figcaption style={{ fontSize: '12px', color: C.sub, marginTop: '8px' }}>
                   <span style={{ color: C.goldLt, fontWeight: 700 }}>{rev.author}</span> · {rev.area} · {rev.course}
