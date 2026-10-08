@@ -102,6 +102,8 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-capable': 'yes',
     'geo.region': 'KR-11',
     'geo.placename': '서울특별시',
+    'geo.position': '37.5665;126.9780',
+    'ICBM': '37.5665, 126.9780',
   },
 };
 
