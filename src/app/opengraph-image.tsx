@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-export const alt = '아름다운밤 | 여성 고수익 일자리 정보 플랫폼';
+export const alt = 'Abam.kr 아름다운 밤 | 프라이빗 1:1 방문 홈케어 · 서울 전역';
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -15,7 +15,7 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #0d001f 0%, #1a0035 40%, #3d0060 100%)',
+          background: 'linear-gradient(135deg, #04070b 0%, #0a0f15 50%, #1a1408 100%)',
           position: 'relative',
           gap: 24,
         }}
@@ -27,7 +27,7 @@ export default function OpenGraphImage() {
             width: 500,
             height: 500,
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(233,30,99,0.18) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(224,176,74,0.22) 0%, transparent 70%)',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -42,7 +42,7 @@ export default function OpenGraphImage() {
           style={{
             fontSize: 96,
             fontWeight: 900,
-            color: '#fde047',
+            color: '#e0b04a',
             letterSpacing: '-4px',
           }}
         >
@@ -53,19 +53,19 @@ export default function OpenGraphImage() {
         <div
           style={{
             fontSize: 36,
-            color: 'rgba(253, 164, 175, 0.9)',
+            color: 'rgba(242, 244, 242, 0.92)',
             letterSpacing: '2px',
             marginTop: -8,
           }}
         >
-          여성 고수익 일자리 정보 플랫폼
+          프라이빗 1:1 방문 홈케어 · 서울 전역
         </div>
 
         {/* URL */}
         <div
           style={{
             fontSize: 28,
-            color: 'rgba(253, 224, 71, 0.6)',
+            color: 'rgba(243, 213, 142, 0.7)',
             letterSpacing: '4px',
             marginTop: 8,
           }}
