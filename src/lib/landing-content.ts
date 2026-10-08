@@ -19,6 +19,12 @@ export interface LandingContent {
     img: string; icon: string; tint: string; prices: string[];
   }[];
   priceSection: { title: string; head: string; durations: string[] };
+  priceNotice?: {
+    tag: string;
+    title: string;
+    desc: string;
+    reasons: { icon: string; title: string; desc: string }[];
+  };
   therapistSection: { label: string; title: string; note: string; kakaoBtn: string; callBtn: string };
   therapists: { name: string; age: string; spec: string; badge: string; specialty: string; desc: string; available: boolean; img: string }[];
   reviewSection: { label: string; title: string };
@@ -195,6 +201,33 @@ export const EN: LandingContent = {
     { no: 3, name: 'Special', subtitle: 'Thai + Aroma combination care', desc: 'A premium course that combines the refreshing acupressure of Thai and the gentle oil treatment of Aroma at the same time.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_GLOBAL.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: 'Course', durations: ['60 min', '90 min', '120 min'] },
+  priceNotice: {
+    tag: 'VIP HOSPITALITY & PRICING POLICY',
+    title: 'Why International Guest VIP Rates Apply',
+    desc: 'Our international guest pricing is an all-inclusive VIP rate specifically structured to guarantee seamless luxury, complete safety, and barrier-free communication for overseas visitors in Seoul.',
+    reasons: [
+      {
+        icon: '🌐',
+        title: 'Dedicated Multilingual Concierge (24/7)',
+        desc: 'Real-time English booking coordination, hotel front desk and room liaison, and 24/7 dedicated support via WhatsApp with zero language barrier.',
+      },
+      {
+        icon: '👑',
+        title: 'Priority Top-Tier Ace Therapists',
+        desc: 'Exclusive priority assignment of our highest-rated 20s Korean therapists with verified technique, refined hospitality etiquette, and foreign guest experience.',
+      },
+      {
+        icon: '🚕',
+        title: 'All-Inclusive Hotel Dispatch & Rapid Transit',
+        desc: 'Covers private rapid transit across all 25 districts of Seoul directly to your hotel suite with zero hidden late-night or distance delivery fees.',
+      },
+      {
+        icon: '🛡️',
+        title: '100% Pay-on-Arrival Scam Protection & Sealed Amenities',
+        desc: 'Strict zero-advance-deposit policy to protect international travelers against online scams; pay directly upon therapist arrival. Includes sealed single-use hygienic sheets and premium imported natural oils.',
+      },
+    ],
+  },
   therapistSection: { label: "TODAY'S THERAPISTS", title: 'Featured Therapists Tonight', note: 'Professional therapists on standby across Seoul', kakaoBtn: 'WhatsApp', callBtn: 'Call' },
   therapists: [
     { name: 'Gabin', age: '24 yrs', spec: '168cm · Slender tall model proportions', badge: 'Tall Ace', specialty: 'Thai + Aroma combination care', desc: 'Stunning tall model proportions with deep, revitalizing acupressure to dissolve all fatigue.', available: true, img: '/images/t_gabin.jpg' },
@@ -238,7 +271,7 @@ export const EN: LandingContent = {
     },
     {
       q: 'How much is each course?',
-      a: 'Transparent flat-rate VIP pricing across all courses:\n\n• Thai Care (Dry)\n  -  60 min : ₩150,000\n  -  90 min : ₩180,000\n  - 120 min : ₩220,000\n\n• Aroma Care (Oil)\n  -  60 min : ₩160,000\n  -  90 min : ₩200,000\n  - 120 min : ₩250,000\n\n• Special Care (Thai + Aroma)\n  -  60 min : ₩180,000\n  -  90 min : ₩230,000\n  - 120 min : ₩280,000',
+      a: 'Transparent flat-rate VIP pricing across all courses:\n\n• Thai Care (Dry)\n  -  60 min : ₩150,000\n  -  90 min : ₩180,000\n  - 120 min : ₩220,000\n\n• Aroma Care (Oil)\n  -  60 min : ₩160,000\n  -  90 min : ₩200,000\n  - 120 min : ₩250,000\n\n• Special Care (Thai + Aroma)\n  -  60 min : ₩180,000\n  -  90 min : ₩230,000\n  - 120 min : ₩280,000\n\n※ International VIP pricing includes dedicated multilingual concierge support, priority dispatch of top-tier therapists, hotel rapid transit, and 100% pay-on-arrival scam protection.',
     },
     {
       q: 'Can I use it at both home and hotel?',
@@ -258,7 +291,7 @@ export const EN: LandingContent = {
   },
   cta: { primary: 'whatsapp', kakao: 'KakaoTalk', whatsapp: 'WhatsApp Booking', call: '', callBar: 'Call' },
   modal: { title: '', body: '', idLabel: '', copy: '', open: '', close: '', copied: '' },
-  globalLine: '한국어 · 日本語 · 中文 · WhatsApp',
+  globalLine: 'English · 日本語 · 中文 · WhatsApp 24/7 Concierge',
 };
 
 /* ───────────── 日本語 ───────────── */
@@ -287,6 +320,33 @@ export const JP: LandingContent = {
     { no: 3, name: 'スペシャル', subtitle: 'タイ + アロマ 複合ケア', desc: 'タイの爽快な指圧とアロマのやさしいオイルトリートメントを同時に受けられるプレミアムコースです。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_JP.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: 'コース', durations: ['60分', '90分', '120分'] },
+  priceNotice: {
+    tag: 'VIP HOSPITALITY & PRICING POLICY',
+    title: '外国人・ホテルVIP特別料金についてのご案内',
+    desc: '外国人観光客・出張者の皆様へ、言葉の不安やトラブルのない最高峰の癒しをお届けするため、出張諸費用・専任通訳サポートを全て含んだVIP定額料金制を採用しております。',
+    reasons: [
+      {
+        icon: '🌐',
+        title: '専任日本語コンシェルジュ・LINE/WhatsApp対応',
+        desc: 'リアルタイムでの日本語予約受付、ホテル入室やフロント対応の完全サポートを行い、言語の壁を感じさせません。',
+      },
+      {
+        icon: '👑',
+        title: '特選20代エースセラピストの最優先手配',
+        desc: '外国人のお客様対応に精通し、高い接客マナーと確かな技術を誇る当店最高ランクのセラピストを優先配属いたします。',
+      },
+      {
+        icon: '🚕',
+        title: 'ソウル全域ホテル出張交通費・深夜諸費用一式込み',
+        desc: 'ソウル全域（江南・明洞・東大門・汝矣島等）のホテル・レジデンスへの迅速な移動交通費が全て含まれており、追加請求は一切ございません。',
+      },
+      {
+        icon: '🛡️',
+        title: '100% 完全現地後払い保証＆個別滅菌衛生アメニティ',
+        desc: '観光客を狙った前受金詐欺を徹底排除。セラピスト到着後の完全後払い決済です。使い捨て衛生シーツと高級天然アロマオイルを完備してお伺いします。',
+      },
+    ],
+  },
   therapistSection: { label: "TODAY'S THERAPISTS", title: '今夜の代表セラピスト', note: 'ソウル各エリアに専門セラピストが待機中', kakaoBtn: 'WhatsApp', callBtn: '電話指名' },
   therapists: [
     { name: 'ガビン', age: '24歳', spec: '168cm · スレンダー美脚モデル体型', badge: '長身エース', specialty: 'タイ + アロマ 複合ケア', desc: 'すらりと伸びた長身モデル体型と深みのある的確な圧で、疲労を芯から解消。', available: true, img: '/images/t_gabin.jpg' },
@@ -330,7 +390,7 @@ export const JP: LandingContent = {
     },
     {
       q: 'コース別の料金を教えてください。',
-      a: '全コース明朗会計のVIP定額料金制です。\n\n• タイコース (乾式指圧)\n  -  60分 : 150,000ウォン\n  -  90分 : 180,000ウォン\n  - 120分 : 220,000ウォン\n\n• アロマコース (天然オイル)\n  -  60分 : 160,000ウォン\n  -  90分 : 200,000ウォン\n  - 120分 : 250,000ウォン\n\n• スペシャルコース (タイ + アロマ)\n  -  60分 : 180,000ウォン\n  -  90分 : 230,000ウォン\n  - 120分 : 280,000ウォン',
+      a: '全コース明朗会計のVIP定額料金制です。\n\n• タイコース (乾式指圧)\n  -  60分 : 150,000ウォン\n  -  90分 : 180,000ウォン\n  - 120分 : 220,000ウォン\n\n• アロマコース (天然オイル)\n  -  60分 : 160,000ウォン\n  -  90分 : 200,000ウォン\n  - 120分 : 250,000ウォン\n\n• スペシャルコース (タイ + アロマ)\n  -  60分 : 180,000ウォン\n  -  90分 : 230,000ウォン\n  - 120分 : 280,000ウォン\n\n※ 外国人・ホテルVIP料金には、専任日本語対応、特選エース優先配属、ソウル全域ホテル出張交通費、100%完全後払い保証が全て含まれております。',
     },
     {
       q: 'ご自宅とホテルのどちらも利用できますか？',
@@ -350,7 +410,7 @@ export const JP: LandingContent = {
   },
   cta: { primary: 'whatsapp', kakao: 'KakaoTalk', whatsapp: 'WhatsAppで予約', call: '', callBar: '電話' },
   modal: { title: '', body: '', idLabel: '', copy: '', open: '', close: '', copied: '' },
-  globalLine: '한국어 · English · 中文 · WhatsApp',
+  globalLine: 'English · 日本語 · 中文 · WhatsApp 24/7 Concierge',
 };
 
 /* ───────────── 中文 ───────────── */
@@ -379,6 +439,33 @@ export const CN: LandingContent = {
     { no: 3, name: '特别', subtitle: '泰式 + 芳香 复合护理', desc: '可同时享受泰式清爽指压与芳香温柔精油护理的高级课程。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_CN.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: '课程', durations: ['60分钟', '90分钟', '120分钟'] },
+  priceNotice: {
+    tag: 'VIP HOSPITALITY & PRICING POLICY',
+    title: '关于国际宾客 VIP 专属定价说明',
+    desc: '为确保海外游客及商务出差人士在首尔享有零语言障碍、绝对安全及高标准的奢华体验，本服务采取全包式国际VIP统一定价。',
+    reasons: [
+      {
+        icon: '🌐',
+        title: '专属中文/微信实时客服无缝对接',
+        desc: '提供全中文一对一预约协助、酒店客房指引与沟通协调，全程无语言阻碍。',
+      },
+      {
+        icon: '👑',
+        title: '特选20代顶级王牌理疗师优先派单',
+        desc: '优先派遣通过涉外高端礼仪培训、手法精湛且深获好评的资深王牌理疗师。',
+      },
+      {
+        icon: '🚕',
+        title: '首尔全境酒店专车快速上门交通费全包',
+        desc: '包含前往江南、明洞、汝矣岛等首尔各大酒店、商务公寓的专车交通调度费，明码实价无任何隐形附加费。',
+      },
+      {
+        icon: '🛡️',
+        title: '100% 见面现场后付款 & 独立密封卫生耗材',
+        desc: '坚决杜绝定金诈骗，理疗师到店当面结算；配备独立包装一次性卫生床单、纯天然植物精油及齐全专业护理备品。',
+      },
+    ],
+  },
   therapistSection: { label: "TODAY'S THERAPISTS", title: '今夜代表理疗师', note: '首尔各区域专业理疗师随时待命', kakaoBtn: 'WhatsApp', callBtn: '电话指名' },
   therapists: [
     { name: '佳彬', age: '24岁', spec: '168cm · 纤细长腿模特身材', badge: '高挑王牌', specialty: '泰式 + 芳香 复合护理', desc: '修长高挑的黄金比例，以深透沉稳的力度彻底扫除全身疲劳。', available: true, img: '/images/t_gabin.jpg' },
@@ -422,7 +509,7 @@ export const CN: LandingContent = {
     },
     {
       q: '各课程的价格是多少？',
-      a: '全课程明码标价，透明公开:\n\n• 泰式课程 (干式指压)\n  -  60分钟 : 150,000韩元\n  -  90分钟 : 180,000韩元\n  - 120分钟 : 220,000韩元\n\n• 芳香课程 (天然精油)\n  -  60分钟 : 160,000韩元\n  -  90分钟 : 200,000韩元\n  - 120分钟 : 250,000韩元\n\n• 特别课程 (泰式 + 芳香)\n  -  60分钟 : 180,000韩元\n  -  90分钟 : 230,000韩元\n  - 120分钟 : 280,000韩元',
+      a: '全课程明码标价，透明公开:\n\n• 泰式课程 (干式指压)\n  -  60分钟 : 150,000韩元\n  -  90分钟 : 180,000韩元\n  - 120分钟 : 220,000韩元\n\n• 芳香课程 (天然精油)\n  -  60分钟 : 160,000韩元\n  -  90分钟 : 200,000韩元\n  - 120分钟 : 250,000韩元\n\n• 特别课程 (泰式 + 芳香)\n  -  60分钟 : 180,000韩元\n  -  90分钟 : 230,000韩元\n  - 120分钟 : 280,000韩元\n\n※ 国际宾客专属VIP价格已全包中文专职客服、顶级王牌优先派遣、首尔酒店快速上门交通费及100%现场后付保障。',
     },
     {
       q: '住宅和酒店都可以使用吗？',
@@ -442,5 +529,5 @@ export const CN: LandingContent = {
   },
   cta: { primary: 'whatsapp', kakao: 'KakaoTalk', whatsapp: 'WhatsApp 预约', call: '', callBar: '电话' },
   modal: { title: '', body: '', idLabel: '', copy: '', open: '', close: '', copied: '' },
-  globalLine: '한국어 · English · 日本語 · WhatsApp',
+  globalLine: 'English · 日本語 · 中文 · WhatsApp 24/7 Concierge',
 };

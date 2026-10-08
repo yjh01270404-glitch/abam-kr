@@ -197,7 +197,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ display: 'flex', gap: '9px', fontSize: '12px' }}>
-              {LANGS.map((l) =>
+              {(isKo ? LANGS : LANGS.filter((l) => l.code !== 'ko')).map((l) =>
                 l.code === c.lang ? (
                   <span key={l.code} style={{ color: C.gold, fontWeight: 800 }}>{l.label}</span>
                 ) : (
@@ -288,6 +288,41 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </article>
             ))}
           </div>
+
+          {/* 외국인 전용 VIP 요금 정책 및 할증 사유 명시 (외국인 페이지에만 노출) */}
+          {c.priceNotice && (
+            <div
+              style={{
+                ...glass,
+                marginTop: '18px',
+                padding: '20px 18px',
+                border: `1px solid ${C.goldLine}`,
+                background: 'linear-gradient(180deg, rgba(224,176,74,0.09) 0%, rgba(10,15,21,0.88) 100%)',
+                borderRadius: '12px',
+              }}
+            >
+              <div style={{ display: 'inline-block', fontSize: '11px', fontWeight: 800, letterSpacing: '1.5px', color: C.gold, background: 'rgba(224,176,74,0.18)', padding: '3px 8px', borderRadius: '4px', marginBottom: '8px' }}>
+                {c.priceNotice.tag}
+              </div>
+              <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#fff', margin: '0 0 8px', lineHeight: 1.4 }}>
+                {c.priceNotice.title}
+              </h3>
+              <p style={{ fontSize: '13px', color: C.sub, margin: '0 0 14px', lineHeight: 1.6 }}>
+                {c.priceNotice.desc}
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {c.priceNotice.reasons.map((r, ri) => (
+                  <div key={ri} style={{ display: 'flex', gap: '11px', alignItems: 'flex-start', background: 'rgba(255,255,255,0.04)', padding: '11px 13px', borderRadius: '8px', borderLeft: `3px solid ${C.gold}` }}>
+                    <span style={{ fontSize: '16px', lineHeight: 1.2 }}>{r.icon}</span>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontSize: '13.5px', fontWeight: 700, color: C.goldLt, marginBottom: '3px' }}>{r.title}</div>
+                      <div style={{ fontSize: '12.5px', color: '#d1d5db', lineHeight: 1.55 }}>{r.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         {/* 3. 이용 안내 — 영업 정보 4가지 + 3단계 */}
