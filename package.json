@@ -28,6 +28,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "googleapis": "^184.0.0",
     "puppeteer": "^25.3.0",
     "typescript": "^5"
   }

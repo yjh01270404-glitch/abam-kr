@@ -26,15 +26,16 @@ const BING_VERIFICATION = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL('https://abam.kr'),
   title: {
-    default: '서울 출장마사지 · 출장안마 | Abam.kr 프라이빗 1:1 방문 홈케어',
-    template: '%s | 서울 출장마사지 · 출장안마 Abam.kr',
+    default: '서울 출장마사지 · 출장안마 [20대 ACE 총출동] | 아밤 Abam.kr',
+    template: '%s | 20대 ACE 총출동 서울 출장마사지 아밤 Abam.kr',
   },
   description:
-    '서울 출장마사지 · 출장안마 No.1 Abam.kr(아밤). 서울 전역 자택·호텔로 방문하는 프라이빗 1:1 맞춤 홈케어. 예약 18:00부터 (영업 19:00~05:00). 타이·아로마·스페셜 코스 60분/90분/120분.',
+    '서울 출장마사지 · 출장안마 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울 전역 자택·호텔 30분 총알도착, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스 60분/90분/120분.',
   keywords: [
+    '20대ACE총출동', '20대출장마사지', '20대출장안마', '20대에이스', '20대홈타이',
     '출장안마', '출장마사지', '출장홈타이', '출장서비스', '서울출장안마', '서울출장마사지', '서울출장홈타이', '서울출장서비스',
     '방문마사지', '방문안마', '홈타이', '홈케어마사지', '출장홈케어', '호텔출장마사지', '호텔출장안마',
-    '24시간출장마사지', '24시출장안마', '24시출장홈타이', 'Abam.kr', '프라이빗 1:1 방문 홈케어',
+    '후불제출장마사지', '선입금없는출장안마', '대면결제출장마사지', 'Abam.kr', '프라이빗 1:1 방문 홈케어',
     '아름다운밤', '아밤', '아밤출장안마', '아밤출장마사지', '강남출장안마', '강남출장마사지', '강남출장홈타이', '송파출장마사지', '마포출장마사지',
     'Seoul outcall massage', 'Seoul hotel massage',
   ].join(', '),
@@ -67,9 +68,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: '서울 출장마사지 · 출장안마 | Abam.kr 아름다운 밤',
+    title: '서울 출장마사지 · 출장안마 [20대 ACE 총출동] | 아밤 Abam.kr',
     description:
-      '서울 전역 자택·호텔로 방문하는 프라이빗 1:1 출장마사지 & 출장안마. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
+      '서울 전역 자택·호텔 30분 총알도착! 전원 20대 에이스 관리사 라인업, 사전 예약금 없는 100% 현장 후불제 출장마사지 & 출장안마. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
     type: 'website',
     locale: 'ko_KR',
     url: 'https://abam.kr',
@@ -79,14 +80,14 @@ export const metadata: Metadata = {
         url: 'https://abam.kr/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Abam.kr 프라이빗 1:1 방문 홈케어',
+        alt: 'Abam.kr 20대 ACE 총출동 서울 출장마사지',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '서울 출장마사지 · 출장안마 | Abam.kr 프라이빗 방문 홈케어',
-    description: '서울 전역 자택·호텔 1:1 방문. 예약 18:00부터 (영업 19:00 ~ 05:00).',
+    title: '서울 출장마사지 · 출장안마 [20대 ACE 총출동] | 아밤 Abam.kr',
+    description: '서울 전역 자택·호텔 30분 총알도착! 전원 20대 ACE 관리사 라인업, 100% 현장 후불제. 예약 18:00부터 (영업 19:00 ~ 05:00).',
     images: ['https://abam.kr/og-image.png'],
   },
   verification: {
@@ -113,9 +114,9 @@ const jsonLdData = {
     {
       '@type': ['HealthAndBeautyBusiness', 'LocalBusiness'],
       '@id': 'https://abam.kr/#business',
-      name: 'Abam.kr 서울 출장마사지 · 출장안마',
-      alternateName: ['아밤', '아름다운 밤', 'Abam Private Home Care', '서울출장마사지', '서울출장안마', '아밤출장마사지'],
-      description: '서울 전역 자택·호텔로 방문하는 1:1 프라이빗 출장마사지, 출장안마, 홈케어 서비스.',
+      name: 'Abam.kr 서울 출장마사지 · 출장안마 [20대 ACE 총출동]',
+      alternateName: ['아밤', '아름다운 밤', '20대 ACE 총출동', '서울출장마사지', '서울출장안마', '아밤출장마사지'],
+      description: '전원 20대 에이스 관리사 라인업! 서울 전역 자택·호텔로 30분 내 방문하는 100% 후불제 1:1 프라이빗 출장마사지, 출장안마.',
       url: 'https://abam.kr',
       telephone: '010-6607-2239',
       image: 'https://abam.kr/images/thai.jpg',
@@ -131,9 +132,9 @@ const jsonLdData = {
       },
       sameAs: [
         'https://telegra.ph/서울-출장마사지출장안마-완벽-가이드--선입금-사기-예방과-정찰-요금표-10-08',
-        'https://telegra.ph/강남출장마사지강남출장안마-24시-호텔자택-프라이빗-11-홈케어-완벽-안내-10-08',
+        'https://telegra.ph/강남출장마사지강남출장안마-호텔자택-프라이빗-11-홈케어-완벽-안내-10-08',
         'https://telegra.ph/송파출장마사지잠실출장안마-롯데월드타워방이동-호텔-홈케어-정찰제-10-08',
-        'https://telegra.ph/마포출장마사지홍대출장안마-합정상암-24시간-안심-대면결제-가이드-10-08'
+        'https://telegra.ph/마포출장마사지홍대출장안마-합정상암-안심-대면결제-가이드-10-08'
       ],
       address: {
         '@type': 'PostalAddress',
