@@ -26,11 +26,11 @@ const BING_VERIFICATION = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL('https://abam.kr'),
   title: {
-    default: 'Abam.kr | 프라이빗 1:1 방문 홈케어 · 서울 전역 자택·호텔',
-    template: '%s | Abam.kr 프라이빗 1:1 방문 홈케어',
+    default: '서울 출장마사지 · 출장안마 | Abam.kr 프라이빗 1:1 방문 홈케어',
+    template: '%s | 서울 출장마사지 · 출장안마 Abam.kr',
   },
   description:
-    '아름다운 밤, 당신을 위한 특별한 시간. Abam.kr 프라이빗 1:1 방문 홈케어. 서울 전역 자택·호텔 방문, 예약은 18:00부터(영업 19:00~05:00). 타이·아로마·스페셜 코스 60분/90분/120분.',
+    '서울 출장마사지 · 출장안마 No.1 Abam.kr(아밤). 서울 전역 자택·호텔로 방문하는 프라이빗 1:1 맞춤 홈케어. 예약 18:00부터 (영업 19:00~05:00). 타이·아로마·스페셜 코스 60분/90분/120분.',
   keywords: [
     '출장안마', '출장마사지', '출장홈타이', '출장서비스', '서울출장안마', '서울출장마사지', '서울출장홈타이', '서울출장서비스',
     '방문마사지', '방문안마', '홈타이', '홈케어마사지', '출장홈케어', '호텔출장마사지', '호텔출장안마',
@@ -67,9 +67,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Abam.kr | 아름다운 밤, 당신을 위한 특별한 시간',
+    title: '서울 출장마사지 · 출장안마 | Abam.kr 아름다운 밤',
     description:
-      '프라이빗 1:1 방문 홈케어. 서울 전역 · 자택 · 호텔. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
+      '서울 전역 자택·호텔로 방문하는 프라이빗 1:1 출장마사지 & 출장안마. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
     type: 'website',
     locale: 'ko_KR',
     url: 'https://abam.kr',
@@ -85,8 +85,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Abam.kr | 프라이빗 1:1 방문 홈케어',
-    description: '서울 전역 · 자택 · 호텔. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
+    title: '서울 출장마사지 · 출장안마 | Abam.kr 프라이빗 방문 홈케어',
+    description: '서울 전역 자택·호텔 1:1 방문. 예약 18:00부터 (영업 19:00 ~ 05:00).',
     images: ['https://abam.kr/og-image.png'],
   },
   verification: {
@@ -111,9 +111,9 @@ const jsonLdData = {
     {
       '@type': ['HealthAndBeautyBusiness', 'LocalBusiness'],
       '@id': 'https://abam.kr/#business',
-      name: 'Abam.kr',
-      alternateName: ['아밤', '아름다운 밤', 'Abam Private Home Care'],
-      description: '아름다운 밤, 당신을 위한 특별한 시간. 서울 전역 자택·호텔로 방문하는 프라이빗 1:1 방문 홈케어.',
+      name: 'Abam.kr 서울 출장마사지 · 출장안마',
+      alternateName: ['아밤', '아름다운 밤', 'Abam Private Home Care', '서울출장마사지', '서울출장안마', '아밤출장마사지'],
+      description: '서울 전역 자택·호텔로 방문하는 1:1 프라이빗 출장마사지, 출장안마, 홈케어 서비스.',
       url: 'https://abam.kr',
       telephone: '010-6607-2239',
       image: 'https://abam.kr/images/thai.jpg',

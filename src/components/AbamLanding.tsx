@@ -228,7 +228,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
           )}
 
-          <div style={{ fontFamily: SERIF, fontSize: '11.5px', letterSpacing: '5px', color: C.gold, fontWeight: 700, marginTop: '26px' }}>{c.hero.badge}</div>
+          <div style={{ fontFamily: SERIF, fontSize: '11.5px', letterSpacing: isKo ? '2.5px' : '5px', color: C.gold, fontWeight: 700, marginTop: '26px' }}>
+            {isKo ? '서울 출장마사지 · 출장안마 · ' + c.hero.badge : c.hero.badge}
+          </div>
           <h1 style={{ fontSize: '33px', fontWeight: 800, lineHeight: 1.3, color: '#fff', margin: '12px 0 12px', letterSpacing: '-0.8px', textShadow: '0 2px 20px rgba(0,0,0,0.75)' }}>
             {x.h1a}<br /><span style={GOLD_TEXT}>{x.h1b}</span>
           </h1>
