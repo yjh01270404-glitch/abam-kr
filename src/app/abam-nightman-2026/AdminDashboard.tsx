@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { getAllMessages, sendMessage, deleteMessage, formatDate, Message, getMessagesForUser } from '../../lib/messages';
 import { getChatSessions, sendChatMsg, markSessionRead, createOrGetSession, ChatSession } from '../../lib/chat';
 import { sendPwaPushAlert } from '../../lib/audioAlert';
@@ -624,6 +625,30 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
           >
             <span>📲 PWA 스마트폰 앱 다운로드</span>
           </button>
+        </div>
+
+        <div style={{ padding: '0 12px 12px' }}>
+          <Link
+            href="/abam-nightman-2026/dispatch"
+            style={{
+              width: '100%',
+              background: 'linear-gradient(135deg, #e0b04a 0%, #b48528 100%)',
+              color: '#000000',
+              borderRadius: '10px',
+              padding: '11px 12px',
+              fontSize: '13px',
+              fontWeight: 900,
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              boxShadow: '0 4px 14px rgba(224, 176, 74, 0.4)',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <span>⚡ 스마트 관제탑 (장기판 배차)</span>
+          </Link>
         </div>
 
         <nav className={styles.sidebarNav}>
