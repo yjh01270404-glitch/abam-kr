@@ -108,7 +108,13 @@ export async function generateMetadata({ params }: Props) {
   const { keyword } = await params;
   const data = generateSeoPageData(keyword);
   const decoded = decodeURIComponent(keyword).replace(/-/g, " ");
-  const canonicalUrl = `${SITE_URL}/seo/${encodeURIComponent(decoded.replace(/\s+/g, "-"))}`;
+  const selfUrl = `${SITE_URL}/seo/${encodeURIComponent(decoded.replace(/\s+/g, "-"))}`;
+  // 색인 대상이 아닌 변형 페이지는 자치구 허브(없으면 홈)로 신호를 모읍니다.
+  const canonicalUrl = isIndexableKeyword(decoded)
+    ? selfUrl
+    : data.district
+      ? `${SITE_URL}/seo/${encodeURIComponent(hubKeywordFor(data.district))}`
+      : SITE_URL;
 
   return {
     title: { absolute: data.title },

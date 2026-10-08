@@ -339,7 +339,14 @@ export function isServedKeyword(kw: string): boolean {
   return !(region.startsWith('경기') || region.startsWith('인천'));
 }
 
-const INDEXABLE_SET = new Set<string>([...HEAD_TERMS, ...DISTRICT_KEYWORDS]);
+// 얇은 중복 페이지가 색인 품질을 떨어뜨리므로, 색인 대상은 '자치구 허브(25) + 핵심 키워드'로 한정합니다.
+const CORE_INDEX_TERMS = [
+  '출장마사지', '출장안마', '출장홈타이', '서울출장마사지', '서울출장안마',
+  '호텔출장마사지', '24시간출장마사지', '심야출장마사지',
+  '아로마출장마사지', '타이출장마사지', '출장마사지가격표', '아밤출장마사지',
+];
+const DISTRICT_HUBS = DISTRICTS.map((d) => hubKeywordFor(d));
+const INDEXABLE_SET = new Set<string>([...CORE_INDEX_TERMS, ...DISTRICT_HUBS]);
 
 /** 서비스 지역 + 대표 키워드만 색인. 동/역 단위 등 세부 키워드는 noindex,follow (중복·얇은 콘텐츠 방지) */
 export function isIndexableKeyword(kw: string): boolean {
