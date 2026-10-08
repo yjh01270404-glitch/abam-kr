@@ -237,7 +237,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
           {/* 코스별 60분 요금 — 누르면 요금 섹션으로 */}
           <a href="#price" style={{ display: 'block', marginTop: '26px', textDecoration: 'none' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', ...glass, borderColor: C.goldLine, overflow: 'hidden' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', ...glass, borderColor: C.goldLine, overflow: 'hidden' }}>
               {c.courses.map((course, i) => (
                 <div key={course.no} style={{ padding: '12px 4px', borderLeft: i ? `1px solid ${C.line}` : 'none' }}>
                   <div style={{ fontSize: '12.5px', color: C.sub, fontWeight: 600 }}>{course.name}</div>
@@ -274,7 +274,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 </div>
                 <div style={{ padding: '12px 16px 16px' }}>
                   <p style={{ fontSize: '13px', color: C.sub, margin: '0 0 12px', lineHeight: 1.6 }}>{course.desc}</p>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '8px' }}>
                     {course.prices.map((pr, pi) => (
                       <a key={pi} href={bookHref} {...bookExtra} onClick={handleBook} style={{ textAlign: 'center', textDecoration: 'none', border: `1px solid ${C.goldLine}`, background: C.goldBg, borderRadius: '8px', padding: '9px 2px' }}>
                         <div style={{ fontSize: '12px', color: C.sub }}>{c.priceSection.durations[pi]}</div>
@@ -291,7 +291,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         {/* 3. 이용 안내 — 영업 정보 4가지 + 3단계 */}
         <section id="guide" style={section}>
           {head('HOW TO BOOK', x.guideTitle)}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px' }}>
             {c.info.map((p, i) => (
               <div key={i} style={{ ...glass, borderLeft: `3px solid ${C.gold}`, padding: '12px' }}>
                 <div style={{ fontSize: '14px', fontWeight: 800, color: '#fff', lineHeight: 1.3 }}>{p.title}</div>
@@ -299,7 +299,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </div>
             ))}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginTop: '10px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '8px', marginTop: '10px' }}>
             {x.steps.map((s, i) => (
               <div key={i} style={{ ...glass, padding: '12px 8px', textAlign: 'center' }}>
                 <div style={{ width: '26px', height: '26px', borderRadius: '50%', background: C.gold, color: C.btnFg, fontWeight: 800, fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px' }}>{i + 1}</div>

@@ -12,6 +12,8 @@ const notoSansKr = Noto_Sans_KR({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 5,
   themeColor: '#0a0f1d',
 };
 
