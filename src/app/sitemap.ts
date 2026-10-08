@@ -4,8 +4,8 @@ import { GUIDES } from '../lib/guides';
 
 const BASE_URL = 'https://abam.kr';
 
-// 콘텐츠 실제 수정일(배포 시 갱신). 요청마다 new Date()를 쓰면 구글이 lastmod 신뢰도를 낮춥니다.
-const LAST_MODIFIED = new Date('2026-10-03T00:00:00+09:00');
+// 콘텐츠 최신 배포 갱신일
+const LAST_MODIFIED = new Date('2026-10-08T17:30:00+09:00');
 
 // 존재하는 핵심 페이지만 포함 (404 URL 금지)
 const CORE_PAGES: MetadataRoute.Sitemap = [
