@@ -56,6 +56,25 @@ const PRICES = {
   special: ['100,000원', '120,000원', '160,000원'],
 };
 
+/* 외국인 전용 VIP 프리미엄 요금표 (업계 표준 호텔·방문 단가) */
+const PRICES_GLOBAL = {
+  thai: ['₩150,000', '₩180,000', '₩220,000'],
+  aroma: ['₩160,000', '₩200,000', '₩250,000'],
+  special: ['₩180,000', '₩230,000', '₩280,000'],
+};
+
+const PRICES_JP = {
+  thai: ['150,000ウォン', '180,000ウォン', '220,000ウォン'],
+  aroma: ['160,000ウォン', '200,000ウォン', '250,000ウォン'],
+  special: ['180,000ウォン', '230,000ウォン', '280,000ウォン'],
+};
+
+const PRICES_CN = {
+  thai: ['150,000韩元', '180,000韩元', '220,000韩元'],
+  aroma: ['160,000韩元', '200,000韩元', '250,000韩元'],
+  special: ['180,000韩元', '230,000韩元', '280,000韩元'],
+};
+
 const INFO_ICONS = ['🕕', '📅', '🏠', '🛡️'];
 
 /* ───────────── 한국어 ───────────── */
@@ -171,9 +190,9 @@ export const EN: LandingContent = {
   ],
   courseSection: { label: 'COURSE', title: 'Thai · Aroma · Special' },
   courses: [
-    { no: 1, name: 'Thai', subtitle: 'Traditional dry acupressure · Refreshing pressure', desc: 'Traditional Wat Pho-style dry acupressure releases tight muscles, and stretching restores your body’s balance.', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES.thai },
-    { no: 2, name: 'Aroma', subtitle: 'Natural aroma oil · Gentle care', desc: 'Using natural plant-based aroma oils, we gently care for your whole body and support lymphatic circulation and deep rest.', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES.aroma },
-    { no: 3, name: 'Special', subtitle: 'Thai + Aroma combination care', desc: 'A premium course that combines the refreshing acupressure of Thai and the gentle oil treatment of Aroma at the same time.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
+    { no: 1, name: 'Thai', subtitle: 'Traditional dry acupressure · Refreshing pressure', desc: 'Traditional Wat Pho-style dry acupressure releases tight muscles, and stretching restores your body’s balance.', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES_GLOBAL.thai },
+    { no: 2, name: 'Aroma', subtitle: 'Natural aroma oil · Gentle care', desc: 'Using natural plant-based aroma oils, we gently care for your whole body and support lymphatic circulation and deep rest.', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_GLOBAL.aroma },
+    { no: 3, name: 'Special', subtitle: 'Thai + Aroma combination care', desc: 'A premium course that combines the refreshing acupressure of Thai and the gentle oil treatment of Aroma at the same time.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_GLOBAL.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: 'Course', durations: ['60 min', '90 min', '120 min'] },
   therapistSection: { label: "TODAY'S THERAPISTS", title: 'Featured Therapists Tonight', note: 'Professional therapists on standby across Seoul', kakaoBtn: 'WhatsApp', callBtn: 'Call' },
@@ -219,7 +238,7 @@ export const EN: LandingContent = {
     },
     {
       q: 'How much is each course?',
-      a: 'Transparent flat-rate pricing across all courses:\n\n• Thai Care (Dry)\n  -  60 min :  ₩80,000\n  -  90 min : ₩100,000\n  - 120 min : ₩120,000\n\n• Aroma Care (Oil)\n  -  60 min :  ₩90,000\n  -  90 min : ₩110,000\n  - 120 min : ₩140,000\n\n• Special Care (Thai + Aroma)\n  -  60 min : ₩100,000\n  -  90 min : ₩120,000\n  - 120 min : ₩160,000',
+      a: 'Transparent flat-rate VIP pricing across all courses:\n\n• Thai Care (Dry)\n  -  60 min : ₩150,000\n  -  90 min : ₩180,000\n  - 120 min : ₩220,000\n\n• Aroma Care (Oil)\n  -  60 min : ₩160,000\n  -  90 min : ₩200,000\n  - 120 min : ₩250,000\n\n• Special Care (Thai + Aroma)\n  -  60 min : ₩180,000\n  -  90 min : ₩230,000\n  - 120 min : ₩280,000',
     },
     {
       q: 'Can I use it at both home and hotel?',
@@ -230,7 +249,7 @@ export const EN: LandingContent = {
   about: {
     title: 'About Abam.kr Private 1:1 Home Visit Care',
     p1: 'Abam.kr (A Beautiful Night) is a private 1:1 home visit care service delivered to the space of your choice across Seoul, such as your home or hotel. Booking is available from 18:00 and we are open from 19:00 to 05:00. Booking 1 hour ahead lets you enjoy an even more comfortable experience.',
-    p2: 'Choose from 3 courses — Thai (from ₩80,000 / 60 min), Aroma (from ₩90,000 / 60 min) and Special (from ₩100,000 / 60 min) — in 60, 90 or 120 minutes.',
+    p2: 'Choose from 3 VIP courses — Thai (from ₩150,000 / 60 min), Aroma (from ₩160,000 / 60 min) and Special (from ₩180,000 / 60 min) — in 60, 90 or 120 minutes.',
   },
   footer: {
     title: 'Private 1:1 Home Visit Care across Seoul',
@@ -263,9 +282,9 @@ export const JP: LandingContent = {
   ],
   courseSection: { label: 'COURSE', title: 'タイ · アロマ · スペシャル' },
   courses: [
-    { no: 1, name: 'タイ', subtitle: '伝統的な乾式指圧 · 爽快な圧', desc: 'ワットポー伝統式の乾式指圧で凝り固まった筋肉をすっきりほぐし、ストレッチで体のバランスを整えます。', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES.thai },
-    { no: 2, name: 'アロマ', subtitle: '天然アロマオイル · やさしいケア', desc: '天然植物性アロマオイルを使用して全身をやさしくケアし、リンパの流れと深いリラックスをサポートします。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES.aroma },
-    { no: 3, name: 'スペシャル', subtitle: 'タイ + アロマ 複合ケア', desc: 'タイの爽快な指圧とアロマのやさしいオイルトリートメントを同時に受けられるプレミアムコースです。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
+    { no: 1, name: 'タイ', subtitle: '伝統的な乾式指圧 · 爽快な圧', desc: 'ワットポー伝統式の乾式指圧で凝り固まった筋肉をすっきりほぐし、ストレッチで体のバランスを整えます。', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES_JP.thai },
+    { no: 2, name: 'アロマ', subtitle: '天然アロマオイル · やさしいケア', desc: '天然植物性アロマオイルを使用して全身をやさしくケアし、リンパの流れと深いリラックスをサポートします。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_JP.aroma },
+    { no: 3, name: 'スペシャル', subtitle: 'タイ + アロマ 複合ケア', desc: 'タイの爽快な指圧とアロマのやさしいオイルトリートメントを同時に受けられるプレミアムコースです。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_JP.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: 'コース', durations: ['60分', '90分', '120分'] },
   therapistSection: { label: "TODAY'S THERAPISTS", title: '今夜の代表セラピスト', note: 'ソウル各エリアに専門セラピストが待機中', kakaoBtn: 'WhatsApp', callBtn: '電話指名' },
@@ -311,7 +330,7 @@ export const JP: LandingContent = {
     },
     {
       q: 'コース別の料金を教えてください。',
-      a: '全コース明朗会計の定額料金制です。\n\n• タイコース (乾式指圧)\n  -  60分 :  80,000ウォン\n  -  90分 : 100,000ウォン\n  - 120分 : 120,000ウォン\n\n• アロマコース (天然オイル)\n  -  60分 :  90,000ウォン\n  -  90分 : 110,000ウォン\n  - 120分 : 140,000ウォン\n\n• スペシャルコース (タイ + アロマ)\n  -  60分 : 100,000ウォン\n  -  90分 : 120,000ウォン\n  - 120分 : 160,000ウォン',
+      a: '全コース明朗会計のVIP定額料金制です。\n\n• タイコース (乾式指圧)\n  -  60分 : 150,000ウォン\n  -  90分 : 180,000ウォン\n  - 120分 : 220,000ウォン\n\n• アロマコース (天然オイル)\n  -  60分 : 160,000ウォン\n  -  90分 : 200,000ウォン\n  - 120分 : 250,000ウォン\n\n• スペシャルコース (タイ + アロマ)\n  -  60分 : 180,000ウォン\n  -  90分 : 230,000ウォン\n  - 120分 : 280,000ウォン',
     },
     {
       q: 'ご自宅とホテルのどちらも利用できますか？',
@@ -322,7 +341,7 @@ export const JP: LandingContent = {
   about: {
     title: 'Abam.kr プライベート1:1訪問ホームケアのご案内',
     p1: 'Abam.kr(美しい夜)は、ソウル全域のご自宅・ホテルなどご希望の空間で受けられるプライベート1:1訪問ホームケアです。ご予約は18:00から可能で、営業時間は19:00から05:00までです。1時間前にご予約いただくと、より快適にご利用いただけます。',
-    p2: 'タイ(60分 80,000ウォン〜)、アロマ(60分 90,000ウォン〜)、スペシャル(60分 100,000ウォン〜)の3コースを、60・90・120分からお選びいただけます。',
+    p2: 'タイ(60分 150,000ウォン〜)、アロマ(60分 160,000ウォン〜)、スペシャル(60分 180,000ウォン〜)の3コースを、60・90・120分からお選びいただけます。',
   },
   footer: {
     title: 'ソウル全域 プライベート1:1訪問ホームケア',
@@ -355,9 +374,9 @@ export const CN: LandingContent = {
   ],
   courseSection: { label: 'COURSE', title: '泰式 · 芳香 · 特别' },
   courses: [
-    { no: 1, name: '泰式', subtitle: '传统干式指压 · 清爽力度', desc: '以卧佛寺传统方式进行干式指压，舒缓僵硬的肌肉，并通过拉伸调整身体的平衡。', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES.thai },
-    { no: 2, name: '芳香', subtitle: '天然芳香精油 · 温柔护理', desc: '使用天然植物性芳香精油温柔护理全身，帮助淋巴循环并获得深度放松。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES.aroma },
-    { no: 3, name: '特别', subtitle: '泰式 + 芳香 复合护理', desc: '可同时享受泰式清爽指压与芳香温柔精油护理的高级课程。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
+    { no: 1, name: '泰式', subtitle: '传统干式指压 · 清爽力度', desc: '以卧佛寺传统方式进行干式指压，舒缓僵硬的肌肉，并通过拉伸调整身体的平衡。', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES_CN.thai },
+    { no: 2, name: '芳香', subtitle: '天然芳香精油 · 温柔护理', desc: '使用天然植物性芳香精油温柔护理全身，帮助淋巴循环并获得深度放松。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_CN.aroma },
+    { no: 3, name: '特别', subtitle: '泰式 + 芳香 复合护理', desc: '可同时享受泰式清爽指压与芳香温柔精油护理的高级课程。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_CN.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: '课程', durations: ['60分钟', '90分钟', '120分钟'] },
   therapistSection: { label: "TODAY'S THERAPISTS", title: '今夜代表理疗师', note: '首尔各区域专业理疗师随时待命', kakaoBtn: 'WhatsApp', callBtn: '电话指名' },
@@ -403,7 +422,7 @@ export const CN: LandingContent = {
     },
     {
       q: '各课程的价格是多少？',
-      a: '全课程明码标价，透明公开:\n\n• 泰式课程 (干式指压)\n  -  60分钟 :  80,000韩元\n  -  90分钟 : 100,000韩元\n  - 120分钟 : 120,000韩元\n\n• 芳香课程 (天然精油)\n  -  60分钟 :  90,000韩元\n  -  90分钟 : 110,000韩元\n  - 120分钟 : 140,000韩元\n\n• 特别课程 (泰式 + 芳香)\n  -  60分钟 : 100,000韩元\n  -  90分钟 : 120,000韩元\n  - 120分钟 : 160,000韩元',
+      a: '全课程明码标价，透明公开:\n\n• 泰式课程 (干式指压)\n  -  60分钟 : 150,000韩元\n  -  90分钟 : 180,000韩元\n  - 120分钟 : 220,000韩元\n\n• 芳香课程 (天然精油)\n  -  60分钟 : 160,000韩元\n  -  90分钟 : 200,000韩元\n  - 120分钟 : 250,000韩元\n\n• 特别课程 (泰式 + 芳香)\n  -  60分钟 : 180,000韩元\n  -  90分钟 : 230,000韩元\n  - 120分钟 : 280,000韩元',
     },
     {
       q: '住宅和酒店都可以使用吗？',
@@ -414,7 +433,7 @@ export const CN: LandingContent = {
   about: {
     title: 'Abam.kr 私密1:1上门居家护理说明',
     p1: 'Abam.kr(美丽的夜晚)是前往首尔全境住宅、酒店等您指定空间的私密1:1上门居家护理服务。预约从18:00开始，营业时间为19:00至05:00。提前1小时预约可享受更加舒适的体验。',
-    p2: '泰式(60分钟 80,000韩元起)、芳香(60分钟 90,000韩元起)、特别(60分钟 100,000韩元起)三种课程，可选择60、90、120分钟。',
+    p2: '泰式(60分钟 150,000韩元起)、芳香(60分钟 160,000韩元起)、特别(60分钟 180,000韩元起)三种课程，可选择60、90、120分钟。',
   },
   footer: {
     title: '首尔全境 私密1:1上门居家护理',

@@ -1,16 +1,18 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Abam.kr | Private 1:1 Home Visit Care · Seoul Home & Hotel',
+  title: 'Abam.kr | Seoul Outcall Massage · Hotel & Home 1:1 Private Care',
   description:
-    'A beautiful night, a special time just for you. Abam.kr private 1:1 home visit care across Seoul — home and hotel. Booking from 18:00 (open 19:00~05:00). Thai, Aroma and Special courses in 60/90/120 minutes.',
+    'Premium Seoul outcall massage & in-room hotel service. Top 20s ACE therapists on standby across all of Seoul. 20-30 min fast arrival, 100% pay-on-arrival (no advance deposit). Booking from 18:00 (open 19:00~05:00).',
   keywords: [
-    'Abam.kr',
-    'Seoul home visit care',
-    'Seoul private home care',
+    'Seoul outcall massage',
     'Seoul hotel massage',
+    'Seoul in-room massage',
+    'Gangnam hotel massage',
+    'Seoul private home care',
     'Thai massage Seoul',
     'Aroma massage Seoul',
+    'Abam.kr',
   ].join(', '),
   alternates: {
     canonical: 'https://abam.kr/en',
