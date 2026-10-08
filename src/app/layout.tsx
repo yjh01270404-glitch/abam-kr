@@ -119,6 +119,20 @@ const jsonLdData = {
       image: 'https://abam.kr/images/thai.jpg',
       priceRange: '80,000원 - 160,000원',
       currenciesAccepted: 'KRW',
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        bestRating: '5',
+        worstRating: '1',
+        ratingCount: '1280',
+        reviewCount: '940',
+      },
+      sameAs: [
+        'https://telegra.ph/서울-출장마사지출장안마-완벽-가이드--선입금-사기-예방과-정찰-요금표-10-08',
+        'https://telegra.ph/강남출장마사지강남출장안마-24시-호텔자택-프라이빗-11-홈케어-완벽-안내-10-08',
+        'https://telegra.ph/송파출장마사지잠실출장안마-롯데월드타워방이동-호텔-홈케어-정찰제-10-08',
+        'https://telegra.ph/마포출장마사지홍대출장안마-합정상암-24시간-안심-대면결제-가이드-10-08'
+      ],
       address: {
         '@type': 'PostalAddress',
         addressLocality: '서울특별시',

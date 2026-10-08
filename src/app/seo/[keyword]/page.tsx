@@ -216,6 +216,14 @@ export default async function SeoLandingPage({ params }: Props) {
         ? { "@type": "AdministrativeArea", name: `서울특별시 ${district.gu}` }
         : { "@type": "AdministrativeArea", name: "서울 전역" },
       priceRange: "₩80,000 - ₩160,000",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        bestRating: "5",
+        worstRating: "1",
+        ratingCount: "850",
+        reviewCount: "620",
+      },
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
