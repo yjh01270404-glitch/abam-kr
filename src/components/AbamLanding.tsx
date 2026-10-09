@@ -126,6 +126,32 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     setTimeout(() => setToast(null), 2000);
   };
 
+  const BOOKING_TEMPLATE = `[아밤(Abam) 1:1 빠른 예약 신청]
+• 희망 코스: (타이 / 아로마 / 스페셜 / 시간)
+• 방문 주소: (예: 강남구 역삼동 OOO)
+• 주차장 유무: (있음 / 없음 / 주차장 도착시 호출 요망)
+• 공동현관: (비밀번호 기재 또는 도착 시 세대 호출벨)
+• 호텔·모텔: (1층 로비 픽업 희망 or 객실 앞 방문)`;
+
+  const SMS_BODY = encodeURIComponent(
+`[아밤 예약신청]
+1. 코스: 
+2. 방문주소/호수: 
+3. 주차장유무(도착시호출): 
+4. 현관비번(세대호출): 
+5. 호텔1층 픽업여부: 
+(차량 이동 특성상 주차장 도착시 호출드리며 호텔은 1층 픽업 및 결제 가능합니다)`
+  );
+  const SMS_HREF = `sms:01066072239?body=${SMS_BODY}`;
+
+  const copyTemplate = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(BOOKING_TEMPLATE).catch(() => {});
+      setToast('📋 예약 양식이 복사되었습니다. 카톡/문자에 붙여넣어 주세요.');
+      setTimeout(() => setToast(null), 2500);
+    }
+  };
+
   const bookHref = isKo ? KAKAO_LINK : WA_LINK;
   const bookExtra = isKo ? {} : { target: '_blank', rel: 'noreferrer' };
   const bookBg = isKo ? C.kakao : '#25D366';
@@ -169,21 +195,71 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       )}
 
       {kakaoModal && (
-        <div onClick={() => setKakaoModal(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.65)', zIndex: 99998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-          <div onClick={(e) => e.stopPropagation()} style={{ background: '#121a1f', border: `1px solid ${C.line}`, borderRadius: '14px', maxWidth: '360px', width: '100%', padding: '24px 20px', textAlign: 'center' }}>
+        <div onClick={() => setKakaoModal(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 99998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: '#121a1f', border: `1px solid ${C.goldLine}`, borderRadius: '16px', maxWidth: '410px', width: '100%', padding: '22px 18px', textAlign: 'center', boxShadow: '0 12px 36px rgba(0,0,0,0.65)' }}>
+            <div style={{ display: 'inline-block', background: 'rgba(224,176,74,0.14)', border: `1px solid ${C.goldLine}`, color: C.goldLt, fontSize: '11px', fontWeight: 800, padding: '3px 10px', borderRadius: '20px', marginBottom: '8px' }}>
+              🚗 전담 기사 차량 신속 방문
+            </div>
             <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', margin: '0 0 6px' }}>{isKo ? c.modal.title : x.modalTitle}</h3>
-            <p style={{ fontSize: '13px', color: C.sub, margin: '0 0 16px' }}>{isKo ? c.modal.body : x.modalBody}</p>
-            {isKo && <div style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${C.line}`, borderRadius: '10px', padding: '12px 14px', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ textAlign: 'left' }}>
-                <div style={{ fontSize: '11px', color: C.sub }}>{c.modal.idLabel}</div>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: C.goldLt }}>{KAKAO_ID}</div>
+            <p style={{ fontSize: '12.5px', color: C.sub, margin: '0 0 14px', lineHeight: 1.5 }}>{isKo ? c.modal.body : x.modalBody}</p>
+
+            {/* 3대 현장 필독 안내 카드 */}
+            {isKo && (
+              <div style={{ background: 'rgba(4,7,11,0.7)', border: '1px solid rgba(224,176,74,0.25)', borderRadius: '10px', padding: '11px 12px', marginBottom: '14px', textAlign: 'left', fontSize: '12px', lineHeight: 1.55 }}>
+                <div style={{ fontWeight: 800, color: C.goldLt, marginBottom: '6px', fontSize: '12px' }}>
+                  📢 방문 전 필독 사전 안내 (추가 번거로움 방지)
+                </div>
+                <div style={{ display: 'flex', gap: '6px', marginBottom: '4px', color: '#e2e8f0' }}>
+                  <span style={{ flexShrink: 0 }}>🚗</span>
+                  <span><b>주차장 안내:</b> 건물에 주차장이 있는 경우 도착 후 <b>주차장에서 연락(호출)</b>드립니다.</span>
+                </div>
+                <div style={{ display: 'flex', gap: '6px', marginBottom: '4px', color: '#e2e8f0' }}>
+                  <span style={{ flexShrink: 0 }}>🔔</span>
+                  <span><b>공동현관 비번:</b> 비번을 미리 남겨주시거나 도착 시 <b>세대 호출벨을 호출</b>합니다.</span>
+                </div>
+                <div style={{ display: 'flex', gap: '6px', color: '#e2e8f0' }}>
+                  <span style={{ flexShrink: 0 }}>🏨</span>
+                  <span><b>호텔·모텔·숙박:</b> 객실 앞은 물론 <b>1층 로비/정문에서 픽업 및 현장 결제 가능</b>합니다.</span>
+                </div>
               </div>
-              <button onClick={copyId} style={{ background: C.gold, color: C.btnFg, padding: '8px 14px', borderRadius: '6px', fontSize: '12px', fontWeight: 800 }}>{c.modal.copy}</button>
-            </div>}
+            )}
+
+            {/* 카카오톡 ID 및 양식 복사 */}
+            {isKo && (
+              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px', marginBottom: '12px' }}>
+                <div style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${C.line}`, borderRadius: '10px', padding: '8px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: '10px', color: C.sub }}>카톡 공식 ID</div>
+                    <div style={{ fontSize: '15px', fontWeight: 800, color: C.goldLt }}>{KAKAO_ID}</div>
+                  </div>
+                  <button onClick={copyId} style={{ background: C.gold, color: C.btnFg, padding: '6px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: 800, border: 'none', cursor: 'pointer' }}>복사</button>
+                </div>
+
+                <button onClick={copyTemplate} style={{ background: 'rgba(224,176,74,0.12)', border: `1px solid ${C.goldLine}`, color: C.goldLt, borderRadius: '10px', padding: '8px 10px', fontSize: '12px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', cursor: 'pointer' }}>
+                  📋 양식 복사
+                </button>
+              </div>
+            )}
+
+            {/* 메인 버튼군: 카톡열기 / 문자 간편예약 / 전화연결 */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <a href={bookHref} {...bookExtra} onClick={() => setKakaoModal(false)} style={{ ...btn, background: bookBg, color: bookFg, fontSize: '15px', padding: '14px 0' }}>{isKo ? c.modal.open : c.cta.whatsapp}</a>
-              <a href={c.contact.tel} onClick={() => setKakaoModal(false)} style={isKo ? { ...btn, background: C.gold, color: C.btnFg, fontSize: '15px', padding: '14px 0' } : { ...btn, background: 'transparent', color: C.sub, border: `1px solid ${C.line}`, fontSize: '13px', padding: '10px 0', fontWeight: 600 }}>{isKo ? `전화 연결 · ${c.contact.phone}` : `${x.callNow} · ${c.contact.phone}`}</a>
-              <button onClick={() => setKakaoModal(false)} style={{ padding: '11px 18px', background: 'rgba(255,255,255,0.1)', color: C.ink, borderRadius: '10px', fontWeight: 700, fontSize: '13px' }}>{c.modal.close}</button>
+              <a href={bookHref} {...bookExtra} onClick={() => setKakaoModal(false)} style={{ ...btn, background: bookBg, color: bookFg, fontSize: '14.5px', padding: '12px 0' }}>
+                {isKo ? <><KakaoIcon size={16} />카카오톡 1:1 상담 열기</> : c.cta.whatsapp}
+              </a>
+
+              {isKo && (
+                <a href={SMS_HREF} onClick={() => setKakaoModal(false)} style={{ ...btn, background: 'rgba(30,58,138,0.3)', border: '1px solid #3b82f6', color: '#93c5fd', fontSize: '13.5px', padding: '11px 0' }}>
+                  💬 문자(SMS) 간편 예약하기 (양식 자동입력)
+                </a>
+              )}
+
+              <a href={c.contact.tel} onClick={() => setKakaoModal(false)} style={isKo ? { ...btn, background: C.gold, color: C.btnFg, fontSize: '14.5px', padding: '12px 0' } : { ...btn, background: 'transparent', color: C.sub, border: `1px solid ${C.line}`, fontSize: '13px', padding: '10px 0', fontWeight: 600 }}>
+                {isKo ? `📞 전화 바로 연결 · ${c.contact.phone}` : `${x.callNow} · ${c.contact.phone}`}
+              </a>
+
+              <button onClick={() => setKakaoModal(false)} style={{ padding: '9px 18px', background: 'rgba(255,255,255,0.08)', color: C.ink, borderRadius: '10px', fontWeight: 700, fontSize: '12.5px', border: 'none', cursor: 'pointer' }}>
+                {c.modal.close}
+              </button>
             </div>
           </div>
         </div>
@@ -479,7 +555,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: 'rgba(5,9,13,0.95)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', borderTop: `1px solid ${C.line}`, padding: '8px 16px', zIndex: 50 }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', gap: '8px' }}>
           <a href={bookHref} {...bookExtra} onClick={handleMain} style={{ ...btn, flex: isKo ? 1.3 : 2, background: bookBg, color: bookFg, fontSize: '14px', padding: '12px 0' }}>
-            {isKo ? <><KakaoIcon size={16} />카톡 상담</> : c.cta.whatsapp}
+            {isKo ? <><KakaoIcon size={16} />카톡 · 문자 예약</> : c.cta.whatsapp}
           </a>
           <a href={c.contact.tel} style={{ ...btn, flex: 1, background: isKo ? C.gold : 'transparent', color: isKo ? C.btnFg : C.sub, border: isKo ? 'none' : `1px solid ${C.line}`, fontSize: '14px', padding: '12px 0' }}>
             {c.cta.callBar}
