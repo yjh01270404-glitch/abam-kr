@@ -1,0 +1,3 @@
+﻿# Disavow spam links for abam.kr
+domain:xn--9m1bk40at5kpyb.com
+
