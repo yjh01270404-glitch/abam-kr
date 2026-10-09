@@ -206,7 +206,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 <div style={{ color: C.goldLt, fontWeight: 700, marginBottom: '6px', fontSize: '12px' }}>※ 방문 전 확인사항</div>
                 <div>• <b>주차</b>: 건물 주차장 있으시면 도착해서 전화 드립니다.</div>
                 <div>• <b>공동현관</b>: 비번 미리 남겨주시거나 도착 시 호출 누릅니다.</div>
-                <div>• <b>호텔·모텔</b>: 1층 로비에서 직접 픽업 및 결제 가능합니다.</div>
+                <div>• <b>호텔·모텔</b>: 도착 전 기사가 미리 전화드립니다. 1층 로비로 내려오셔서 결제하고 만나시면 됩니다.</div>
               </div>
             )}
 

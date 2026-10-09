@@ -2379,7 +2379,7 @@ export default function DispatcherTerminal() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
               <button
                 onClick={() => {
-                  const text = `[출동지령] ${dispatchOrderModal.carNum}·${dispatchOrderModal.driverName}\n1. 픽업: ${dispatchOrderModal.managerName} (${dispatchOrderModal.managerLoc}) [${dispatchOrderModal.step1Eta}분]\n2. 목적지: ${dispatchOrderModal.destAddress} (${dispatchOrderModal.room}) [${dispatchOrderModal.step2Eta}분]\n총 ${dispatchOrderModal.totalEta}분 소요 | 코스: ${dispatchOrderModal.course}\n메모: ${dispatchOrderModal.memo}\n※ 필독수칙: 주차장 유무 확인 후 도착 시 주차장 호출 / 현관비번 확인(또는 세대호출) / 호텔·모텔은 1층 로비 픽업 및 현장결제 가능`;
+                  const text = `[출동지령] ${dispatchOrderModal.carNum}·${dispatchOrderModal.driverName}\n1. 픽업: ${dispatchOrderModal.managerName} (${dispatchOrderModal.managerLoc}) [${dispatchOrderModal.step1Eta}분]\n2. 목적지: ${dispatchOrderModal.destAddress} (${dispatchOrderModal.room}) [${dispatchOrderModal.step2Eta}분]\n총 ${dispatchOrderModal.totalEta}분 소요 | 코스: ${dispatchOrderModal.course}\n메모: ${dispatchOrderModal.memo}\n※ 안내: 주차장 도착시 호출 / 현관비번 확인 / 호텔·모텔은 도착전 전화 후 1층 로비 미팅`;
                   navigator.clipboard.writeText(text);
                   alert('기사 전송용 지령 메시지가 복사되었습니다.');
                 }}
