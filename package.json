@@ -8,6 +8,7 @@
     "start": "next start",
     "submit:search": "node scripts/submit-indexnow.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "index:push": "node scripts/auto-indexing-engine.js",
     "lint": "eslint"
   },
   "dependencies": {
