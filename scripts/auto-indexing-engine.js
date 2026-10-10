@@ -189,4 +189,15 @@ async function main() {
   console.log('=====================================================');
 }
 
-main().catch(console.error);
+const isDaemon = process.argv.includes('--daemon');
+const INTERVAL_MS = 6 * 60 * 60 * 1000; // 6시간 주기 자동 핑
+
+async function runLoop() {
+  await main();
+  if (isDaemon) {
+    console.log(`\n[데몬 모드] 백그라운드 상주 중... 다음 검색엔진 핑 전송은 6시간 후 실행됩니다.`);
+    setTimeout(runLoop, INTERVAL_MS);
+  }
+}
+
+runLoop().catch(console.error);

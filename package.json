@@ -9,6 +9,7 @@
     "submit:search": "node scripts/submit-indexnow.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "index:push": "node scripts/auto-indexing-engine.js",
+    "index:daemon": "node scripts/auto-indexing-engine.js --daemon",
     "lint": "eslint"
   },
   "dependencies": {
