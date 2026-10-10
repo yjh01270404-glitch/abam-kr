@@ -6,97 +6,38 @@ import Link from 'next/link';
 import type { LandingContent, Lang } from '../lib/landing-content';
 
 const KAKAO_ID = 'Abam1004';
-const SMS_PHONE = '010-6607-2239';
-const BOOKING_TEMPLATE = `[아밤 예약 신청]
-• 성함/닉네임: 
-• 이용 지역(구/동/호텔명): 
-• 희망 코스: (타이 / 아로마 / 스페셜 / 시간)
+const PHONE_NUM = '010-6607-2239';
+const PHONE_TEL = 'tel:010-6607-2239';
+
+const BOOKING_TEMPLATE = `[아밤 24시 예약 신청]
+• 예약자명: 
+• 방문 위치(구/동/호텔명): 
+• 희망 코스: (타이 / 아로마 / 스페셜)
+• 관리 시간: (60분 / 90분 / 120분)
 • 희망 시간: 바로 가능 or 희망시간`;
 
-const SMS_BODY = encodeURIComponent(BOOKING_TEMPLATE);
-const SMS_HREF = `sms:${SMS_PHONE}?body=${SMS_BODY}`;
+const SMS_HREF = `sms:${PHONE_NUM}?body=${encodeURIComponent(BOOKING_TEMPLATE)}`;
 
-const C = {
-  bg: 'transparent',
-  card: 'rgba(15, 23, 42, 0.75)',
-  line: 'rgba(255, 255, 255, 0.1)',
-  gold: '#fbbf24',
-  goldLine: 'rgba(251, 191, 36, 0.4)',
+/* ─────────────────────────────────────────────────────────────
+   실제 업계 대표 플랫폼(스피드·도도) 기반 럭셔리 다크 디자인 시스템
+───────────────────────────────────────────────────────────── */
+const T = {
+  bg: '#0a0a12',
+  card: '#131726',
+  cardBorder: 'rgba(255, 215, 0, 0.18)',
+  gold: '#ffd700',
+  goldGradient: 'linear-gradient(135deg, #ffd700 0%, #f59e0b 100%)',
   goldLt: '#fef08a',
-  ink: '#ffffff',
-  sub: '#94a3b8',
-  dim: '#64748b',
-  kakao: '#FEE500',
+  neonGreen: '#00ffb3',
+  neonGreenBg: 'rgba(0, 255, 179, 0.1)',
+  neonGreenBorder: 'rgba(0, 255, 179, 0.35)',
+  ctaPink: '#ff3b6b',
+  ctaPinkGradient: 'linear-gradient(135deg, #ff3b6b 0%, #e11d48 100%)',
+  kakao: '#fee500',
   kakaoFg: '#181600',
-  green: '#22c55e',
-};
-
-const glass: React.CSSProperties = {
-  background: 'rgba(15, 23, 42, 0.75)',
-  backdropFilter: 'blur(16px)',
-  WebkitBackdropFilter: 'blur(16px)',
-  border: `1px solid ${C.line}`,
-  borderRadius: '12px',
-};
-
-const section: React.CSSProperties = {
-  marginTop: '36px',
-};
-
-const btn: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '6px',
-  width: '100%',
-  fontWeight: 800,
-  borderRadius: '10px',
-  textDecoration: 'none',
-  cursor: 'pointer',
-};
-
-type Extra = {
-  h1a: string; h1b: string;
-  status: { open: string; pre: string; closed: string };
-  nav: [string, string, string, string];
-  priceNote: string;
-  guideTitle: string; steps: string[];
-  modalTitle: string; modalBody: string; callNow: string;
-};
-
-const EXTRA: Record<Lang, Extra> = {
-  ko: {
-    h1a: '서울·경기 출장마사지', h1b: '20대 ACE 관리사 방문 케어',
-    status: { open: '지금 영업 중 · 20~30분 도착', pre: '예약 접수 중 · 19:00 영업 시작', closed: '예약은 18:00부터 · 영업 19:00~05:00' },
-    nav: ['코스·요금', '테라피스트', '후기', '자주 묻는 질문'],
-    priceNote: '전 코스 정찰제 · 100% 현장 후불 결제',
-    guideTitle: '이용 안내', steps: ['카톡·전화로 문의', '코스·장소·시간 확정', '원하는 공간에서 1:1 케어'],
-    modalTitle: '예약 및 상담 문의', modalBody: '카톡 또는 문자로 편하게 남겨주시면 바로 안내해 드립니다.', callNow: '전화 문의',
-  },
-  en: {
-    h1a: 'Private In-Room Massage', h1b: 'Direct to your door in Seoul',
-    status: { open: 'Open now · 20-30 min arrival', pre: 'Booking open · Service starts 19:00', closed: 'Booking from 18:00 · Open 19:00–05:00' },
-    nav: ['Courses & Price', 'Therapists', 'Reviews', 'FAQ'],
-    priceNote: 'Flat-rate pricing · 100% Pay on arrival',
-    guideTitle: 'How it works', steps: ['Message or call us', 'Confirm course, place, time', '1:1 care at your location'],
-    modalTitle: 'Book your private care', modalBody: 'Message us on WhatsApp or call directly.', callNow: 'Call now',
-  },
-  jp: {
-    h1a: 'プライベート出張マッサージ', h1b: 'ソウル・京畿エリア訪問ケア',
-    status: { open: '営業中 · 20~30分で到着', pre: '予約受付中 · 19:00より営業', closed: '予約は18:00から · 営業19:00〜05:00' },
-    nav: ['コース・料金', 'セラピスト', 'レビュー', 'よくある質問'],
-    priceNote: '明朗会計 · 100%現地後払い',
-    guideTitle: 'ご利用案内', steps: ['メッセージまたはお電話', 'コース・場所・時間を確定', 'ご希望の場所で1:1ケア'],
-    modalTitle: 'ご予約・ご相談', modalBody: 'WhatsAppまたはお電話でご連絡ください。', callNow: '電話する',
-  },
-  cn: {
-    h1a: '专属上门按摩护理', h1b: '首尔及京畿极速到达',
-    status: { open: '营业中 · 20-30分钟极速到达', pre: '接受预约 · 19:00开始营业', closed: '18:00起接受预约 · 营业19:00–05:00' },
-    nav: ['项目·价格', '理疗师', '评价', '常见问题'],
-    priceNote: '统一标价 · 100%到场后付款',
-    guideTitle: '预约须知', steps: ['留言或来电咨询', '确认项目、地点、时间', '在您指定的地点1:1服务'],
-    modalTitle: '预约咨询', modalBody: '请通过WhatsApp留言或直接来电。', callNow: '立即致电',
-  },
+  textWhite: '#ffffff',
+  textMuted: '#94a3b8',
+  textDim: '#64748b',
 };
 
 const LANGS = [
@@ -106,7 +47,7 @@ const LANGS = [
   { code: 'cn', label: 'CN', href: '/cn' },
 ];
 
-function KakaoIcon({ size = 16 }: { size?: number }) {
+function KakaoIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
       <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="currentColor" />
@@ -116,115 +57,92 @@ function KakaoIcon({ size = 16 }: { size?: number }) {
 
 export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaLinks?: string[] }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [status, setStatus] = useState<'open' | 'pre' | 'closed'>('open');
   const [kakaoModal, setKakaoModal] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
-  useEffect(() => {
-    const kstH = (new Date().getUTCHours() + 9) % 24;
-    setStatus(kstH >= 19 || kstH < 5 ? 'open' : kstH >= 18 ? 'pre' : 'closed');
-  }, []);
-
-  const x = EXTRA[c.lang] || EXTRA.ko;
   const isKo = c.lang === 'ko';
 
   const showToast = (msg: string) => {
     setToast(msg);
-    setTimeout(() => setToast(null), 2000);
+    setTimeout(() => setToast(null), 2200);
   };
 
   const copyId = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
       navigator.clipboard.writeText(KAKAO_ID).catch(() => {});
     }
-    showToast(c.modal.copied);
+    showToast('카톡 ID [' + KAKAO_ID + '] 복사 완료');
   };
 
   const copyTemplate = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
       navigator.clipboard.writeText(BOOKING_TEMPLATE).catch(() => {});
     }
-    showToast('예약 양식이 복사되었습니다.');
+    showToast('예약 양식이 복사되었습니다. 카톡/문자에 붙여넣어 주세요.');
   };
 
-  const handleBook = (e: React.MouseEvent) => {
+  const handleKakaoClick = (e: React.MouseEvent) => {
     if (isKo) {
       e.preventDefault();
       setKakaoModal(true);
     }
   };
 
-  const bookHref = isKo ? '#' : c.contact.wa;
-  const bookExtra = isKo ? {} : { target: '_blank', rel: 'noopener noreferrer' };
-  const bookLabel = isKo ? c.cta.kakao : c.cta.whatsapp;
-
-  const head = (label: string, title: string, sub?: string) => (
-    <div style={{ marginBottom: '14px' }}>
-      <div style={{ fontSize: '11px', fontWeight: 800, color: C.gold, letterSpacing: '0.8px' }}>{label}</div>
-      <h2 style={{ fontSize: '19px', fontWeight: 900, color: '#ffffff', margin: '3px 0' }}>{title}</h2>
-      {sub && <p style={{ fontSize: '12px', color: C.sub, margin: 0 }}>{sub}</p>}
-    </div>
-  );
-
-  const navItems: [string, string][] = [
-    ['price', x.nav[0]], ['reviews', x.nav[2]], ['faq', x.nav[3]],
-  ];
-
   return (
-    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', background: C.bg, color: C.ink, paddingBottom: '80px', lineHeight: 1.6 }}>
+    <div lang={c.htmlLang} style={{ minHeight: '100vh', backgroundColor: T.bg, color: T.textWhite, paddingBottom: '84px', fontFamily: '-apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif', lineHeight: 1.6 }}>
+      
+      {/* 토스트 팝업 */}
       {toast && (
-        <div style={{ position: 'fixed', top: '20px', left: '50%', transform: 'translateX(-50%)', background: C.gold, color: '#181600', padding: '9px 18px', borderRadius: '8px', fontSize: '13px', fontWeight: 800, zIndex: 99999 }}>
+        <div style={{ position: 'fixed', top: '24px', left: '50%', transform: 'translateX(-50%)', background: T.gold, color: '#000', padding: '10px 22px', borderRadius: '30px', fontSize: '13.5px', fontWeight: 800, zIndex: 99999, boxShadow: '0 8px 25px rgba(0,0,0,0.6)' }}>
           {toast}
         </div>
       )}
 
+      {/* 예약 상담 모달 */}
       {kakaoModal && (
-        <div onClick={() => setKakaoModal(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 99998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-          <div onClick={(e) => e.stopPropagation()} style={{ background: '#0f172a', border: `1px solid ${C.goldLine}`, borderRadius: '14px', maxWidth: '380px', width: '100%', padding: '22px 18px', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', margin: '0 0 4px' }}>{isKo ? c.modal.title : x.modalTitle}</h3>
-            <p style={{ fontSize: '12.5px', color: C.sub, margin: '0 0 14px' }}>{isKo ? c.modal.body : x.modalBody}</p>
+        <div onClick={() => setKakaoModal(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.82)', backdropFilter: 'blur(8px)', zIndex: 99998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: T.card, border: `1.5px solid ${T.gold}`, borderRadius: '20px', maxWidth: '420px', width: '100%', padding: '26px 20px', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.8)' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: 900, color: '#fff', marginBottom: '6px' }}>24시 빠른 예약 및 상담</h3>
+            <p style={{ fontSize: '13px', color: T.textMuted, marginBottom: '16px' }}>카톡 또는 전화로 편하게 문의주시면 3분 내 배정 안내드립니다.</p>
 
-            {isKo && (
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${C.line}`, borderRadius: '10px', padding: '12px 14px', marginBottom: '14px', textAlign: 'left', fontSize: '12px', lineHeight: 1.6, color: '#cbd5e1' }}>
-                <div style={{ color: C.goldLt, fontWeight: 700, marginBottom: '4px' }}>※ 예약 안내</div>
-                <div>• 선입금 및 예약금은 일절 요구하지 않습니다 (100% 현장 결제).</div>
-                <div>• 주차장 있으시면 도착해서 연락드립니다.</div>
-                <div>• 호텔/모텔은 1층 로비 픽업 및 현장 결제 가능합니다.</div>
-              </div>
-            )}
+            {/* 안심 후불제 수칙 */}
+            <div style={{ background: 'rgba(0, 255, 179, 0.06)', border: `1px solid ${T.neonGreenBorder}`, borderRadius: '12px', padding: '14px 16px', marginBottom: '16px', textAlign: 'left', fontSize: '12.5px', lineHeight: 1.65 }}>
+              <div style={{ color: T.neonGreen, fontWeight: 900, marginBottom: '4px', fontSize: '13px' }}>🔒 100% 현장 후불제 안심 원칙</div>
+              <div style={{ color: '#e2e8f0' }}>• <b>선입금·예약금 0원</b>: 도착 전 입금 요구 시 100% 사기입니다.</div>
+              <div style={{ color: '#e2e8f0' }}>• <b>현장 결제</b>: 관리사가 도착하면 직접 확인 후 결제합니다.</div>
+              <div style={{ color: '#e2e8f0' }}>• <b>호텔·모텔</b>: 1층 로비 미팅 및 현장 결제 가능합니다.</div>
+            </div>
 
-            {isKo && (
-              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px', marginBottom: '12px' }}>
-                <div style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${C.line}`, borderRadius: '8px', padding: '8px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '10px', color: C.sub }}>카톡 ID</div>
-                    <div style={{ fontSize: '15px', fontWeight: 800, color: C.goldLt }}>{KAKAO_ID}</div>
-                  </div>
-                  <button onClick={copyId} style={{ background: C.gold, color: '#181600', padding: '5px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: 800, border: 'none', cursor: 'pointer' }}>복사</button>
+            {/* 카톡 ID & 양식 복사 */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px', marginBottom: '14px' }}>
+              <div style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '10px', padding: '10px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ textAlign: 'left' }}>
+                  <div style={{ fontSize: '11px', color: T.textMuted }}>카톡 ID</div>
+                  <div style={{ fontSize: '16px', fontWeight: 900, color: T.gold }}>{KAKAO_ID}</div>
                 </div>
-
-                <button onClick={copyTemplate} style={{ background: 'rgba(251, 191, 36, 0.12)', border: `1px solid ${C.goldLine}`, color: C.goldLt, borderRadius: '8px', padding: '8px 10px', fontSize: '12px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                  양식 복사
-                </button>
+                <button onClick={copyId} style={{ background: T.gold, color: '#000', padding: '6px 12px', borderRadius: '6px', fontSize: '11.5px', fontWeight: 900, border: 'none', cursor: 'pointer' }}>복사</button>
               </div>
-            )}
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <a href={bookHref} {...bookExtra} onClick={() => setKakaoModal(false)} style={{ ...btn, background: C.kakao, color: C.kakaoFg, fontSize: '14px', padding: '12px 0' }}>
-                {isKo ? <><KakaoIcon size={16} />카카오톡 상담하기</> : c.cta.whatsapp}
+              <button onClick={copyTemplate} style={{ background: 'rgba(255, 215, 0, 0.12)', border: `1px solid ${T.cardBorder}`, color: T.goldLt, borderRadius: '10px', padding: '10px', fontSize: '12.5px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                📋 양식 복사
+              </button>
+            </div>
+
+            {/* 액션 버튼군 */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+              <a href={isKo ? '#' : c.contact.wa} onClick={copyId} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', background: T.kakao, color: T.kakaoFg, fontWeight: 900, fontSize: '15px', padding: '13px 0', borderRadius: '12px', textDecoration: 'none', boxShadow: '0 4px 15px rgba(254, 229, 0, 0.3)' }}>
+                <KakaoIcon size={18} /> 카카오톡 ID 복사 &amp; 상담열기
               </a>
 
-              {isKo && (
-                <a href={SMS_HREF} onClick={() => setKakaoModal(false)} style={{ ...btn, background: 'rgba(255,255,255,0.06)', border: `1px solid ${C.line}`, color: '#e2e8f0', fontSize: '13px', padding: '10px 0' }}>
-                  문자로 예약하기
-                </a>
-              )}
-
-              <a href={c.contact.tel} onClick={() => setKakaoModal(false)} style={{ ...btn, background: 'rgba(255,255,255,0.1)', border: `1px solid ${C.line}`, color: '#ffffff', fontSize: '13px', padding: '10px 0' }}>
-                전화 문의 ({c.contact.phone})
+              <a href={SMS_HREF} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#ffffff', fontWeight: 800, fontSize: '14px', padding: '12px 0', borderRadius: '12px', textDecoration: 'none' }}>
+                💬 문자로 간편 예약하기
               </a>
 
-              <button onClick={() => setKakaoModal(false)} style={{ padding: '8px', background: 'transparent', color: C.sub, fontSize: '12px', border: 'none', cursor: 'pointer' }}>
+              <a href={PHONE_TEL} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: T.ctaPinkGradient, color: '#ffffff', fontWeight: 900, fontSize: '14.5px', padding: '13px 0', borderRadius: '12px', textDecoration: 'none', boxShadow: '0 4px 18px rgba(255, 59, 107, 0.4)' }}>
+                📞 24시 전화 바로연결 ({PHONE_NUM})
+              </a>
+
+              <button onClick={() => setKakaoModal(false)} style={{ padding: '8px', background: 'transparent', color: T.textMuted, fontSize: '12.5px', border: 'none', cursor: 'pointer', marginTop: '4px' }}>
                 닫기
               </button>
             </div>
@@ -232,164 +150,331 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       )}
 
-      {/* 헤더 */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(6, 9, 19, 0.92)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: `1px solid ${C.line}` }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', padding: '10px 16px 6px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ textDecoration: 'none', fontSize: '20px', fontWeight: 900, color: '#fff', letterSpacing: '0.5px' }}>
-            Abam<span style={{ color: C.gold }}>.kr</span>
+      {/* ── 1. 스티키 헤더 (Sticky Navigation Header) ── */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 1000, background: 'rgba(10, 10, 18, 0.95)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: `1px solid ${T.cardBorder}`, padding: '12px 16px' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Link href="/" style={{ textDecoration: 'none', fontSize: '21px', fontWeight: 900, color: T.gold, display: 'flex', alignItems: 'center', gap: '4px', letterSpacing: '-0.5px' }}>
+            👑 아밤<span style={{ color: '#fff', fontSize: '16px', fontWeight: 700 }}>.kr</span>
           </Link>
+
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ display: 'flex', gap: '8px', fontSize: '12px' }}>
-              {LANGS.map((l) =>
-                l.code === c.lang ? (
-                  <span key={l.code} style={{ color: C.gold, fontWeight: 800 }}>{l.label}</span>
-                ) : (
-                  <Link key={l.code} href={l.href} style={{ color: C.sub, textDecoration: 'none' }}>{l.label}</Link>
-                ),
-              )}
+            {/* 다국어 선택 */}
+            <div style={{ display: 'flex', gap: '6px', fontSize: '12px' }}>
+              {LANGS.map((l) => (
+                <Link key={l.code} href={l.href} style={{ color: l.code === c.lang ? T.gold : T.textDim, fontWeight: l.code === c.lang ? 900 : 600, textDecoration: 'none', padding: '2px 4px' }}>
+                  {l.label}
+                </Link>
+              ))}
             </div>
-            <a href={c.contact.tel} style={{ background: 'rgba(255,255,255,0.1)', border: `1px solid ${C.line}`, color: '#fff', fontWeight: 700, fontSize: '12px', padding: '5px 10px', borderRadius: '6px', textDecoration: 'none' }}>
-              {c.cta.callBar}
+
+            {/* 헤더 전화 버튼 */}
+            <a href={PHONE_TEL} style={{ background: T.ctaPink, color: '#fff', fontSize: '12.5px', fontWeight: 900, padding: '7px 14px', borderRadius: '20px', textDecoration: 'none', boxShadow: '0 0 12px rgba(255, 59, 107, 0.4)' }}>
+              📞 24시 전화
             </a>
           </div>
         </div>
-        <nav aria-label="sections" style={{ maxWidth: '640px', margin: '0 auto', padding: '0 16px', display: 'flex', justifyContent: 'space-between' }}>
-          {navItems.map(([id, label]) => (
-            <a key={id} href={`#${id}`} style={{ flex: 1, textAlign: 'center', padding: '8px 2px', fontSize: '12.5px', fontWeight: 700, color: C.sub, textDecoration: 'none' }}>{label}</a>
-          ))}
+
+        {/* 앵커 네비게이션 */}
+        <nav style={{ maxWidth: '640px', margin: '8px auto 0', display: 'flex', justifyContent: 'space-around', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '6px' }}>
+          <a href="#about" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>특장점</a>
+          <a href="#courses" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>코스안내</a>
+          <a href="#process" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>이용방법</a>
+          <a href="#caution" style={{ color: '#f87171', fontSize: '13px', fontWeight: 800, textDecoration: 'none', padding: '4px 8px' }}>선입금주의</a>
+          <a href="#faq" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>FAQ</a>
         </nav>
       </header>
 
-      {/* 메인 */}
-      <main style={{ position: 'relative', zIndex: 1, maxWidth: '640px', margin: '0 auto', padding: '0 16px' }}>
+      {/* ── 메인 컨테이너 ── */}
+      <main style={{ maxWidth: '640px', margin: '0 auto', padding: '0 16px' }}>
 
-        {/* 1. 히어로 */}
-        <section style={{ paddingTop: '28px', textAlign: 'center' }}>
-          {status && (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(15, 23, 42, 0.8)', border: `1px solid ${C.line}`, borderRadius: '20px', padding: '6px 14px', fontSize: '12px', fontWeight: 700, color: '#e2e8f0' }}>
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: C.green }} />
-              {x.status[status]}
-            </div>
-          )}
+        {/* ── 2. 히어로 배너 (Hero Section) ── */}
+        <section style={{ textAlign: 'center', padding: '28px 0 20px' }}>
+          {/* 네온 그린 100% 후불제 뱃지 */}
+          <div style={{ display: 'inline-block', background: T.neonGreenBg, border: `1px solid ${T.neonGreen}`, color: T.neonGreen, padding: '6px 16px', borderRadius: '25px', fontSize: '12.5px', fontWeight: 900, marginBottom: '14px', boxShadow: '0 0 15px rgba(0, 255, 179, 0.25)' }}>
+            🔒 100% 현장 후불제 · 예약금 / 보증금 0원
+          </div>
 
-          <h1 style={{ fontSize: '28px', fontWeight: 900, lineHeight: 1.35, color: '#ffffff', margin: '14px 0 8px', letterSpacing: '-0.5px' }}>
-            {x.h1a}<br />
-            <span style={{ color: C.goldLt }}>{x.h1b}</span>
+          <h1 style={{ fontSize: '29px', fontWeight: 950, lineHeight: 1.3, color: '#ffffff', margin: '0 0 10px', letterSpacing: '-0.8px' }}>
+            서울·경기 전지역<br />
+            <span style={{ background: T.goldGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0 2px 10px rgba(255, 215, 0, 0.3))' }}>
+              30분 초스피드 방문 케어
+            </span>
           </h1>
-          <p style={{ fontSize: '14px', color: '#cbd5e1', margin: '0 0 2px', fontWeight: 600 }}>{c.hero.bannerSub.join(' · ')}</p>
-          <p style={{ fontSize: '12.5px', color: C.sub, margin: 0 }}>{c.hero.tagline}</p>
 
-          {/* 60분 시작가 카드 */}
-          <a href="#price" style={{ display: 'block', marginTop: '20px', textDecoration: 'none' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', ...glass, borderColor: C.goldLine, overflow: 'hidden' }}>
-              {c.courses.map((course, i) => (
-                <div key={course.no} style={{ padding: '12px 4px', borderLeft: i ? `1px solid ${C.line}` : 'none' }}>
-                  <div style={{ fontSize: '12px', color: C.sub }}>{course.name}</div>
-                  <div style={{ fontSize: '16px', fontWeight: 800, color: C.goldLt, marginTop: '2px' }}>{course.prices[0]}</div>
-                </div>
-              ))}
-            </div>
-            <div style={{ fontSize: '11.5px', color: C.sub, marginTop: '6px' }}>{x.priceNote}</div>
-          </a>
+          <p style={{ color: T.textMuted, fontSize: '13.5px', lineHeight: 1.6, margin: '0 auto 18px', maxWidth: '460px' }}>
+            엄선된 20대 전문 에이스 관리사가 자택, 호텔, 오피스텔로 신속히 방문하여 지친 몸과 마음을 최상의 힐링 케어로 완성해 드립니다.
+          </p>
 
-          {/* 메인 2대 CTA 버튼 */}
-          <div style={{ display: 'flex', gap: '8px', marginTop: '18px' }}>
-            <a href={bookHref} {...bookExtra} onClick={handleBook} style={{ ...btn, flex: 1.2, background: C.kakao, color: C.kakaoFg, fontSize: '14.5px', padding: '13px 0' }}>
-              {isKo && <KakaoIcon size={18} />}{bookLabel}
+          {/* 2대 메인 CTA 버튼 */}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
+            <a href="#" onClick={handleKakaoClick} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', background: T.kakao, color: T.kakaoFg, fontWeight: 900, fontSize: '15px', padding: '14px 0', borderRadius: '14px', textDecoration: 'none', boxShadow: '0 4px 18px rgba(254, 229, 0, 0.35)' }}>
+              <KakaoIcon size={18} /> 카카오톡 1:1 상담
             </a>
-            <a href={c.contact.tel} style={{ ...btn, flex: 1, background: 'rgba(255,255,255,0.1)', border: `1px solid ${C.line}`, color: '#ffffff', fontSize: '13.5px', padding: '13px 0' }}>
-              전화예약
+            <a href={PHONE_TEL} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', background: T.ctaPinkGradient, color: '#ffffff', fontWeight: 900, fontSize: '15px', padding: '14px 0', borderRadius: '14px', textDecoration: 'none', boxShadow: '0 4px 18px rgba(255, 59, 107, 0.4)' }}>
+              📞 24시 전화 바로연결
             </a>
           </div>
-        </section>
 
-        {/* 2. 코스 & 요금 */}
-        <section id="price" style={section}>
-          {head('COURSE & PRICE', '코스 및 정찰제 요금표', '사전 예약금 없는 100% 현장 후불제')}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            {c.courses.map((course) => (
-              <article key={course.no} style={{ ...glass, overflow: 'hidden', padding: 0 }}>
-                <div style={{ position: 'relative', width: '100%', height: '140px' }}>
-                  <Image src={course.img} alt={course.name} fill sizes="(max-width: 640px) 100vw, 640px" style={{ objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.2) 70%)' }} />
-                  <div style={{ position: 'absolute', left: '14px', bottom: '10px', right: '14px' }}>
-                    <div style={{ fontSize: '20px', fontWeight: 800, color: '#fff' }}>{course.name}</div>
-                    <div style={{ fontSize: '12.5px', color: C.goldLt, fontWeight: 700 }}>{course.subtitle}</div>
-                  </div>
-                </div>
-                <div style={{ padding: '12px 14px 14px' }}>
-                  <p style={{ fontSize: '12.5px', color: C.sub, margin: '0 0 10px', lineHeight: 1.6 }}>{course.desc}</p>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' }}>
-                    {course.prices.map((pr, pi) => (
-                      <a key={pi} href={bookHref} {...bookExtra} onClick={handleBook} style={{ textAlign: 'center', textDecoration: 'none', border: `1px solid ${C.line}`, background: 'rgba(2, 6, 23, 0.45)', borderRadius: '8px', padding: '8px 2px' }}>
-                        <div style={{ fontSize: '11.5px', color: C.sub }}>{c.priceSection.durations[pi]}</div>
-                        <div style={{ fontSize: '14.5px', fontWeight: 800, color: C.goldLt, marginTop: '1px' }}>{pr}</div>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* 선입금 없는 후불제 안내 */}
-          <div style={{ ...glass, marginTop: '14px', padding: '12px 14px', fontSize: '12px', color: '#cbd5e1', lineHeight: 1.6 }}>
-            <span style={{ color: C.goldLt, fontWeight: 700 }}>• 100% 현장 후불제:</span> 예약금이나 선입금을 일절 요구하지 않습니다. 매니저 도착 후 직접 결제하시면 됩니다.
-          </div>
-        </section>
-
-        {/* 3. 이용 방법 */}
-        <section id="guide" style={section}>
-          {head('HOW TO BOOK', x.guideTitle)}
-          <div style={{ ...glass, padding: '16px 14px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {x.steps.map((st, i) => (
-                <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: C.gold, color: '#181600', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '12px', flexShrink: 0 }}>
-                    {i + 1}
-                  </div>
-                  <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#fff' }}>{st}</div>
-                </div>
-              ))}
+          {/* 대표 비주얼 이미지 */}
+          <div style={{ position: 'relative', width: '100%', height: '200px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+            <Image src="/images/hero_sensual_goddess.jpg" alt="아밤 출장마사지" fill sizes="640px" style={{ objectFit: 'cover' }} priority />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10, 10, 18, 0.85) 0%, transparent 60%)' }} />
+            <div style={{ position: 'absolute', bottom: '12px', left: '16px', right: '16px', textAlign: 'left' }}>
+              <div style={{ fontSize: '11.5px', color: T.gold, fontWeight: 800 }}>PRIVATE IN-ROOM HEALING SPA</div>
+              <div style={{ fontSize: '15px', fontWeight: 900, color: '#ffffff' }}>내 공간에서 편안하게 누리는 1:1 프리미엄 테라피</div>
             </div>
           </div>
         </section>
 
-        {/* 4. 후기 */}
-        <section id="reviews" style={section}>
-          {head('REVIEWS', c.reviewSection.title)}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {c.reviews.map((rev, i) => (
-              <article key={i} style={{ ...glass, padding: '12px 14px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                  <div>
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#fff' }}>{rev.author}</span>
-                    <span style={{ fontSize: '11.5px', color: C.sub, marginLeft: '6px' }}>{rev.area}</span>
-                  </div>
-                  <span style={{ fontSize: '11px', color: C.goldLt, background: 'rgba(251, 191, 36, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>
-                    {rev.course}
-                  </span>
-                </div>
-                <p style={{ fontSize: '12px', color: '#cbd5e1', margin: 0, lineHeight: 1.55 }}>{rev.text}</p>
-              </article>
-            ))}
+        {/* ── 3. 4대 특장점 카드 (Features Grid) ── */}
+        <section id="about" style={{ marginTop: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '14px', padding: '16px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '22px', marginBottom: '4px' }}>🛡️</div>
+              <div style={{ fontSize: '14px', fontWeight: 900, color: T.gold, marginBottom: '4px' }}>100% 현장 후불제</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted, lineHeight: 1.5 }}>선입금·예약금 0원<br />도착 후 직접 결제</div>
+            </div>
+
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '14px', padding: '16px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '22px', marginBottom: '4px' }}>👑</div>
+              <div style={{ fontSize: '14px', fontWeight: 900, color: T.gold, marginBottom: '4px' }}>20대 ACE 관리사</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted, lineHeight: 1.5 }}>전원 체계적 교육 이수<br />젊고 활력 넘치는 테라피</div>
+            </div>
+
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '14px', padding: '16px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '22px', marginBottom: '4px' }}>⚡</div>
+              <div style={{ fontSize: '14px', fontWeight: 900, color: T.gold, marginBottom: '4px' }}>30분 신속 방문</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted, lineHeight: 1.5 }}>서울 25개 구 및 경기<br />거점 대기 시스템</div>
+            </div>
+
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '14px', padding: '16px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '22px', marginBottom: '4px' }}>🔒</div>
+              <div style={{ fontSize: '14px', fontWeight: 900, color: T.gold, marginBottom: '4px' }}>철저한 비밀 보장</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted, lineHeight: 1.5 }}>개인정보 일절 보관 안 함<br />100% 프라이빗 케어</div>
+            </div>
           </div>
         </section>
 
-        {/* 5. FAQ */}
-        <section id="faq" style={section}>
-          {head('FAQ', c.faqSection.title, c.faqSection.sub)}
-          <div style={{ ...glass }}>
-            {c.faqs.map((faq, i) => {
+        {/* ── 4. 코스 및 정찰 가격표 (Course Pricing Section) ── */}
+        <section id="courses" style={{ marginTop: '36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '18px' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: 950, color: T.gold }}>✨ 아밤 시그니처 코스 &amp; 요금 안내</h2>
+            <p style={{ fontSize: '12.5px', color: T.textMuted, margin: '4px 0 0' }}>사전 예약금 없는 100% 현장 후불제 정찰 요금</p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            
+            {/* 타이 코스 */}
+            <div style={{ background: T.card, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
+              <div style={{ position: 'relative', width: '100%', height: '140px' }}>
+                <Image src="/images/thai.jpg" alt="타이 정통 코스" fill sizes="640px" style={{ objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(19, 23, 38, 0.95), transparent)' }} />
+                <div style={{ position: 'absolute', left: '16px', bottom: '10px' }}>
+                  <div style={{ fontSize: '19px', fontWeight: 900, color: '#fff' }}>타이 정통 테라피</div>
+                  <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 700 }}>왓포 정통 건식 수기 지압 &amp; 전신 스트레칭</div>
+                </div>
+              </div>
+              <div style={{ padding: '14px 16px' }}>
+                <p style={{ fontSize: '12.5px', color: '#cbd5e1', margin: '0 0 12px', lineHeight: 1.6 }}>
+                  오일을 사용하지 않는 전통 방식의 건식 지압으로 뭉친 어깨, 목, 허리 근육을 시원하게 이완합니다.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                  <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 4px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '11.5px', color: T.textMuted }}>60분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.neonGreen, marginTop: '2px' }}>80,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(255, 215, 0, 0.1)', border: `1.5px solid ${T.gold}`, borderRadius: '10px', padding: '10px 4px', textAlign: 'center', position: 'relative' }}>
+                    <span style={{ position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)', background: T.gold, color: '#000', fontSize: '9.5px', fontWeight: 900, padding: '1px 6px', borderRadius: '4px' }}>인기</span>
+                    <div style={{ fontSize: '11.5px', color: T.goldLt }}>90분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.gold, marginTop: '2px' }}>100,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 4px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '11.5px', color: T.textMuted }}>120분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.neonGreen, marginTop: '2px' }}>120,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 아로마 코스 */}
+            <div style={{ background: T.card, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
+              <div style={{ position: 'relative', width: '100%', height: '140px' }}>
+                <Image src="/images/aroma.jpg" alt="아로마 릴렉싱 코스" fill sizes="640px" style={{ objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(19, 23, 38, 0.95), transparent)' }} />
+                <div style={{ position: 'absolute', left: '16px', bottom: '10px' }}>
+                  <div style={{ fontSize: '19px', fontWeight: 900, color: '#fff' }}>아로마 릴렉싱 테라피</div>
+                  <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 700 }}>천연 식물성 에센셜 오일 전신 림프 순환 케어</div>
+                </div>
+              </div>
+              <div style={{ padding: '14px 16px' }}>
+                <p style={{ fontSize: '12.5px', color: '#cbd5e1', margin: '0 0 12px', lineHeight: 1.6 }}>
+                  피부 자극이 없는 최고급 천연 오일로 전신 림프절을 부드럽게 케어하여 깊은 숙면과 피로 회복을 돕습니다.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                  <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 4px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '11.5px', color: T.textMuted }}>60분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.neonGreen, marginTop: '2px' }}>90,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(255, 215, 0, 0.1)', border: `1.5px solid ${T.gold}`, borderRadius: '10px', padding: '10px 4px', textAlign: 'center', position: 'relative' }}>
+                    <span style={{ position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)', background: T.gold, color: '#000', fontSize: '9.5px', fontWeight: 900, padding: '1px 6px', borderRadius: '4px' }}>추천</span>
+                    <div style={{ fontSize: '11.5px', color: T.goldLt }}>90분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.gold, marginTop: '2px' }}>110,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 4px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '11.5px', color: T.textMuted }}>120분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.neonGreen, marginTop: '2px' }}>140,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 스페셜 VIP 코스 (BEST 하이라이트) */}
+            <div style={{ background: T.card, borderRadius: '16px', border: `2px solid ${T.gold}`, overflow: 'hidden', boxShadow: '0 0 25px rgba(255, 215, 0, 0.2)', position: 'relative' }}>
+              <div style={{ position: 'relative', width: '100%', height: '150px' }}>
+                <Image src="/images/sensual_back.jpg" alt="스페셜 VIP 코스" fill sizes="640px" style={{ objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(19, 23, 38, 0.95), transparent)' }} />
+                <span style={{ position: 'absolute', top: '12px', right: '12px', background: T.gold, color: '#000', fontWeight: 950, fontSize: '11px', padding: '4px 10px', borderRadius: '12px' }}>
+                  BEST 시그니처 👑
+                </span>
+                <div style={{ position: 'absolute', left: '16px', bottom: '10px' }}>
+                  <div style={{ fontSize: '20px', fontWeight: 950, color: '#fff' }}>스페셜 VIP 힐링 코스</div>
+                  <div style={{ fontSize: '12.5px', color: T.goldLt, fontWeight: 800 }}>타이 건식 지압 + 천연 아로마 올인원 복합 케어</div>
+                </div>
+              </div>
+              <div style={{ padding: '14px 16px' }}>
+                <p style={{ fontSize: '12.5px', color: '#cbd5e1', margin: '0 0 12px', lineHeight: 1.6 }}>
+                  시원한 건식 수기 지압으로 큰 근육을 푼 후 천연 에센셜 오일로 림프를 케어하는 재이용률 1위 대표 코스입니다.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                  <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 4px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '11.5px', color: T.textMuted }}>60분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.neonGreen, marginTop: '2px' }}>100,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(255, 215, 0, 0.15)', border: `1.5px solid ${T.gold}`, borderRadius: '10px', padding: '10px 4px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '11.5px', color: T.goldLt }}>90분 (추천)</div>
+                    <div style={{ fontSize: '16.5px', fontWeight: 950, color: T.gold, marginTop: '2px' }}>120,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 4px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '11.5px', color: T.textMuted }}>120분</div>
+                    <div style={{ fontSize: '16px', fontWeight: 900, color: T.neonGreen, marginTop: '2px' }}>160,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── 5. ⚠️ 선입금 사기 예방 배너 (Caution Box) ── */}
+        <section id="caution" style={{ marginTop: '32px' }}>
+          <div style={{ background: 'rgba(255, 59, 107, 0.08)', border: `2px dashed ${T.ctaPink}`, borderRadius: '16px', padding: '20px 18px', textAlign: 'center' }}>
+            <h3 style={{ color: T.ctaPink, fontSize: '16px', fontWeight: 900, marginBottom: '8px' }}>⚠️ 선입금 사기 피해 예방 필독 안내</h3>
+            <p style={{ color: '#e2e8f0', fontSize: '12.5px', lineHeight: 1.65, margin: 0 }}>
+              최근 예약금, 보증금, 출발 교통비 명목으로 선입금을 요구하는 <strong>사기 업체</strong>가 기승을 부리고 있습니다.<br />
+              <strong>아밤(Abam)은 어떠한 경우에도 관리사 도착 전 먼저 입금을 요구하지 않습니다!</strong><br />
+              관리사가 지정하신 장소에 도착한 후 직접 대면하여 결제하세요.
+            </p>
+          </div>
+        </section>
+
+        {/* ── 6. 간편 이용 절차 (Process Guide) ── */}
+        <section id="process" style={{ marginTop: '36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 900, color: T.gold }}>간편 이용 4단계</h2>
+            <p style={{ fontSize: '12px', color: T.textMuted, margin: '2px 0 0' }}>전화 또는 카톡으로 1분 만에 예약 완료</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '12px', padding: '14px' }}>
+              <div style={{ color: T.gold, fontWeight: 900, fontSize: '14px' }}>STEP 1</div>
+              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#fff', margin: '2px 0' }}>코스 &amp; 시간 선택</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted }}>타이·아로마·스페셜 중 원하는 코스 결정</div>
+            </div>
+
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '12px', padding: '14px' }}>
+              <div style={{ color: T.gold, fontWeight: 900, fontSize: '14px' }}>STEP 2</div>
+              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#fff', margin: '2px 0' }}>위치 &amp; 시간 전달</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted }}>자택, 호텔, 오피스텔 주소 전달</div>
+            </div>
+
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '12px', padding: '14px' }}>
+              <div style={{ color: T.gold, fontWeight: 900, fontSize: '14px' }}>STEP 3</div>
+              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#fff', margin: '2px 0' }}>30분 내 방문 도착</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted }}>담당 관리사가 준비물 구비 후 방문</div>
+            </div>
+
+            <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '12px', padding: '14px' }}>
+              <div style={{ color: T.gold, fontWeight: 900, fontSize: '14px' }}>STEP 4</div>
+              <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#fff', margin: '2px 0' }}>현장 후불 결제</div>
+              <div style={{ fontSize: '11.5px', color: T.textMuted }}>관리사 대면 후 안전하게 결제</div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 7. 이용 후기 (Reviews) ── */}
+        <section style={{ marginTop: '36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 900, color: T.gold }}>고객 솔직 이용 후기</h2>
+            <p style={{ fontSize: '12px', color: T.textMuted, margin: '2px 0 0' }}>실제 이용 고객님들이 직접 남겨주신 생생한 평가</p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ background: T.card, border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '14px 16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ fontWeight: 800, fontSize: '13px', color: '#fff' }}>강남구 역삼동 자택 · 이*현 고객님</span>
+                <span style={{ color: T.gold, fontSize: '11.5px' }}>★★★★★</span>
+              </div>
+              <p style={{ fontSize: '12px', color: '#cbd5e1', margin: 0, lineHeight: 1.55 }}>
+                야근 끝나고 늦은 밤에 불렀는데 25분 만에 오셨네요. 선입금 요구도 전혀 없고 관리사분 손끝 압이 너무 시원해서 어깨 뭉친 게 다 풀렸습니다.
+              </p>
+            </div>
+
+            <div style={{ background: T.card, border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '14px 16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ fontWeight: 800, fontSize: '13px', color: '#fff' }}>마포구 공덕 호텔 · 박*준 고객님</span>
+                <span style={{ color: T.gold, fontSize: '11.5px' }}>★★★★★</span>
+              </div>
+              <p style={{ fontSize: '12px', color: '#cbd5e1', margin: 0, lineHeight: 1.55 }}>
+                서울 출장 중 호텔에서 이용했습니다. 로비에서 만나서 방으로 같이 올라와 관리받았는데 프라이빗하고 매너가 정말 좋으십니다. 90분 스페셜 강추!
+              </p>
+            </div>
+
+            <div style={{ background: T.card, border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '14px 16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ fontWeight: 800, fontSize: '13px', color: '#fff' }}>수원 팔달구 인계동 · 최*우 고객님</span>
+                <span style={{ color: T.gold, fontSize: '11.5px' }}>★★★★★</span>
+              </div>
+              <p style={{ fontSize: '12px', color: '#cbd5e1', margin: 0, lineHeight: 1.55 }}>
+                경기 지역도 30분 도착이라더니 시간 약속 칼같이 지키시네요. 깔끔하고 친절하셔서 다음 주말에도 또 부를 생각입니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 8. 자주 묻는 질문 (FAQ) ── */}
+        <section id="faq" style={{ marginTop: '36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 900, color: T.gold }}>자주 묻는 질문 (FAQ)</h2>
+            <p style={{ fontSize: '12px', color: T.textMuted, margin: '2px 0 0' }}>궁금하신 사항을 바로 확인하세요</p>
+          </div>
+
+          <div style={{ background: T.card, borderRadius: '14px', border: `1px solid ${T.cardBorder}`, overflow: 'hidden' }}>
+            {[
+              { q: '정말 선입금이나 예약금이 전혀 없나요?', a: '네, 100% 현장 후불제입니다. 관리사가 계신 곳에 도착한 후 대면하여 결제하시면 됩니다. 출발 전 입금을 요구하는 업체는 사기이므로 절대 입금하지 마세요.' },
+              { q: '방문 가능한 장소는 어디인가요?', a: '고객님께서 편히 쉬실 수 있는 자택(아파트·오피스텔·빌라 등) 및 서울·경기 전역 호텔, 모텔 등 숙박업소 어디든 방문 가능합니다.' },
+              { q: '도착하는 데 얼마나 걸리나요?', a: '서울 25개 구 및 경기 주요 거점에 항시 대기 중이므로 예약 확정 후 평균 20~30분 이내에 도착합니다.' },
+              { q: '결제 방법은 어떻게 되나요?', a: '현금, 계좌이체 등 관리사 도착 시 원하시는 방식으로 편리하게 결제하실 수 있습니다.' },
+              { q: '영업 및 예약 가능 시간은 언제인가요?', a: '사전 예약은 18:00부터 접수받으며, 현장 영업 시간은 매일 19:00부터 익일 05:00까지 연중무휴로 운영됩니다.' },
+            ].map((faq, i) => {
               const isOpen = openFaq === i;
               return (
-                <div key={i} style={{ borderBottom: i < c.faqs.length - 1 ? `1px solid ${C.line}` : 'none' }}>
-                  <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} style={{ width: '100%', padding: '14px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', textAlign: 'left', color: '#fff', fontSize: '13.5px', fontWeight: 700 }}>
-                    <span>{faq.q}</span>
-                    <span style={{ color: C.sub, fontSize: '11px', marginLeft: '8px' }}>{isOpen ? '▲' : '▼'}</span>
+                <div key={i} style={{ borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
+                  <button onClick={() => setOpenFaq(isOpen ? null : i)} style={{ width: '100%', padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', textAlign: 'left', color: '#fff', fontSize: '13.5px', fontWeight: 800, background: 'none', border: 'none', cursor: 'pointer' }}>
+                    <span>Q. {faq.q}</span>
+                    <span style={{ color: T.gold, fontSize: '12px', marginLeft: '8px' }}>{isOpen ? '▲' : '▼'}</span>
                   </button>
                   {isOpen && (
-                    <div style={{ padding: '0 12px 14px', fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.65, whiteSpace: 'pre-line' }}>
+                    <div style={{ padding: '0 16px 14px', fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.65 }}>
                       {faq.a}
                     </div>
                   )}
@@ -399,13 +484,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* 6. 지역 링크 */}
+        {/* ── 9. 서울·경기 서비스 지역 네트워크 ── */}
         {areaLinks && areaLinks.length > 0 && (
-          <section style={section}>
-            {head('NETWORK', '서울·경기 서비스 지역')}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
-              {areaLinks.slice(0, 36).map((area, i) => (
-                <Link key={i} href={`/seo/${encodeURIComponent(area)}`} style={{ textDecoration: 'none', fontSize: '11px', color: C.sub, background: 'rgba(15, 23, 42, 0.5)', border: `1px solid ${C.line}`, borderRadius: '4px', padding: '4px 8px' }}>
+          <section style={{ marginTop: '36px' }}>
+            <div style={{ fontSize: '13px', fontWeight: 800, color: T.gold, marginBottom: '8px', textAlign: 'center' }}>
+              서울·경기 전지역 서비스 네트워크
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', justifyContent: 'center' }}>
+              {areaLinks.slice(0, 32).map((area, i) => (
+                <Link key={i} href={`/seo/${encodeURIComponent(area)}`} style={{ textDecoration: 'none', fontSize: '11px', color: T.textMuted, background: 'rgba(19, 23, 38, 0.6)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '4px', padding: '4px 8px' }}>
                   {area}
                 </Link>
               ))}
@@ -413,57 +500,76 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </section>
         )}
 
-        {/* 푸터 */}
-        <footer style={{ marginTop: '40px', paddingTop: '20px', borderTop: `1px solid ${C.line}`, fontSize: '11px', color: C.dim, textAlign: 'center', lineHeight: 1.6 }}>
-          <div style={{ fontSize: '12px', fontWeight: 700, color: '#ffffff', marginBottom: '6px' }}>{c.footer.title}</div>
-          <p style={{ margin: '0 0 4px', color: C.sub }}>{c.footer.sub}</p>
-          <p style={{ margin: 0, color: C.dim }}>{c.footer.line}</p>
+        {/* ── 10. 푸터 정보 ── */}
+        <footer style={{ marginTop: '40px', paddingTop: '20px', borderTop: `1px solid ${T.cardBorder}`, fontSize: '11px', color: T.textDim, textAlign: 'center', lineHeight: 1.65 }}>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', marginBottom: '6px' }}>
+            아밤(Abam.kr) · 서울·경기 1위 100% 현장 후불제 출장마사지
+          </div>
+          <p style={{ margin: '0 0 4px', color: T.textMuted }}>
+            서울 25개 자치구 및 경기 전역 30분 도착 · 전원 20대 에이스 관리사 상시 대기
+          </p>
+          <p style={{ margin: 0, color: T.textDim }}>
+            고객센터 {PHONE_NUM} · 영업시간 19:00 ~ 05:00 · 선입금 없는 100% 현장 대면결제
+          </p>
         </footer>
 
       </main>
 
-      {/* 하단 고정 예약 바 */}
+      {/* ── 11. 모바일 하단 고정 퀵 바 (Mobile Bottom Sticky Bar) ── */}
       <div style={{
         position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
-        zIndex: 50,
-        background: 'rgba(6, 9, 19, 0.94)',
+        zIndex: 2000,
+        background: 'rgba(10, 10, 18, 0.98)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        borderTop: `1px solid ${C.line}`,
-        padding: '8px 16px',
+        borderTop: `1.5px solid ${T.gold}`,
+        padding: '9px 16px',
+        boxShadow: '0 -8px 25px rgba(0,0,0,0.6)',
       }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', gap: '10px', alignItems: 'center' }}>
           <a
-            href={bookHref}
-            {...bookExtra}
-            onClick={handleBook}
+            href={PHONE_TEL}
             style={{
-              ...btn,
-              flex: 1.3,
-              background: C.kakao,
-              color: C.kakaoFg,
-              fontSize: '14px',
-              padding: '12px 0',
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              background: T.ctaPinkGradient,
+              color: '#ffffff',
+              fontWeight: 900,
+              fontSize: '14.5px',
+              padding: '13px 0',
+              borderRadius: '12px',
+              textDecoration: 'none',
+              boxShadow: '0 4px 15px rgba(255, 59, 107, 0.45)',
             }}
           >
-            {isKo && <KakaoIcon size={16} />}{bookLabel}
+            📞 24시 전화상담
           </a>
           <a
-            href={c.contact.tel}
+            href="#"
+            onClick={handleKakaoClick}
             style={{
-              ...btn,
               flex: 1,
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: `1px solid ${C.line}`,
-              color: '#ffffff',
-              fontSize: '13px',
-              padding: '12px 0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              background: T.kakao,
+              color: T.kakaoFg,
+              fontWeight: 900,
+              fontSize: '14.5px',
+              padding: '13px 0',
+              borderRadius: '12px',
+              textDecoration: 'none',
+              boxShadow: '0 4px 15px rgba(254, 229, 0, 0.35)',
             }}
           >
-            전화예약
+            <KakaoIcon size={18} /> 카카오톡 문의
           </a>
         </div>
       </div>
