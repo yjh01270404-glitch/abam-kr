@@ -513,7 +513,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               {isKo && (
                 <>
                   {' '}지역별 이용 안내는
-                  <Link href="/keywords" style={{ color: C.goldLt, fontWeight: 700 }}> 서울 지역별 안내</Link>에서,
+                  <Link href="/keywords" style={{ color: C.goldLt, fontWeight: 700 }}> 서울·경기·인천 수도권 지역별 안내</Link>에서,
                   코스 및 예약 방법은
                   <Link href="/guide" style={{ color: C.goldLt, fontWeight: 700 }}> 이용 가이드</Link>에서 확인하실 수 있습니다.
                 </>

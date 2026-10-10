@@ -239,7 +239,7 @@ export const ALL_SEO_SLUGS = SEO_KEYWORDS.map(k => ({
 function detectRegion(kw: string): string {
   // 서비스 접미어를 제거한 뒤 지역명만 매칭합니다. (예: '출장안마'의 '장안'이 수원 장안구로 오탐되는 문제 방지)
   const core = kw.replace(/출장안마|출장마사지|출장홈타이|출장서비스|출장스파|출장테라피|출장케어|출장홈케어|방문안마|방문마사지|방문케어|홈마사지|홈케어마사지|홈케어|홈타이|마사지|안마|서비스|출장/g, '');
-  if (!core) return '서울 전지역';
+  if (!core) return '서울·경기·인천 수도권 전지역';
   const regionMap: Record<string, string> = {
     '강남역': '서울 강남구 강남역', '강남': '서울 강남구', '역삼': '서울 강남구 역삼동',
     '논현': '서울 강남구 논현동', '서초': '서울 서초구', '반포': '서울 서초구 반포동',
@@ -307,7 +307,7 @@ function detectRegion(kw: string): string {
   for (const [key, val] of Object.entries(regionMap)) {
     if (core.includes(key)) return val;
   }
-  return '서울 전지역';
+  return '서울·경기·인천 수도권 전지역';
 }
 
 function detectCourse(kw: string): string {

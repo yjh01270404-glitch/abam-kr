@@ -177,7 +177,7 @@ export default async function SeoLandingPage({ params }: Props) {
       q: district ? `${district.gu}에서는 어떤 장소로 방문하나요?` : "어떤 장소로 방문하나요?",
       a: district
         ? `${district.gu} 내 자택·호텔 등 원하시는 공간으로 방문합니다. ${district.stations.slice(0, 3).join(", ")} 인근 주소도 안내해 주시면 됩니다.`
-        : "자택·호텔 등 원하시는 공간으로 서울 전역 방문합니다.",
+        : "자택·호텔 등 원하시는 공간으로 서울·경기·인천 수도권 전역 방문합니다.",
     },
     {
       q: "운영 시간은 어떻게 되나요?",
@@ -214,7 +214,7 @@ export default async function SeoLandingPage({ params }: Props) {
       telephone: PHONE_NUM,
       areaServed: district
         ? { "@type": "AdministrativeArea", name: `서울특별시 ${district.gu}` }
-        : { "@type": "AdministrativeArea", name: "서울 전역" },
+        : { "@type": "AdministrativeArea", name: "서울·경기·인천 수도권 전역" },
       priceRange: "₩80,000 - ₩160,000",
       aggregateRating: {
         "@type": "AggregateRating",
@@ -556,7 +556,7 @@ export default async function SeoLandingPage({ params }: Props) {
             </div>
           ) : (
             <p style={{ fontSize: "13px", color: "#3c4043", lineHeight: 1.75, margin: 0 }}>
-              {decoded}에 관한 안내입니다. Abam.kr(아름다운 밤)은 서울 전역 자택·호텔로 방문하는 프라이빗 1:1 방문 홈케어이며,
+              {decoded}에 관한 안내입니다. Abam.kr(아름다운 밤)은 서울·경기·인천 수도권 전역 자택·호텔로 방문하는 프라이빗 1:1 방문 홈케어이며,
               예약은 18:00부터 가능하고 영업 시간은 19:00부터 05:00까지입니다.
             </p>
           )}

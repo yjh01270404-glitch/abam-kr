@@ -4,7 +4,7 @@ import { GUIDES } from '../../lib/guides';
 
 export const metadata: Metadata = {
   title: { absolute: '출장마사지 이용 가이드 — 가격·예약·호텔 총정리 | Abam.kr' },
-  description: '출장마사지 가격, 이용 방법, 호텔 이용 팁, 코스 선택까지. Abam.kr 프라이빗 1:1 방문 홈케어(서울 전역 자택·호텔)의 이용 가이드 모음.',
+  description: '출장마사지 가격, 이용 방법, 호텔 이용 팁, 코스 선택까지. Abam.kr 프라이빗 1:1 방문 홈케어(서울·경기·인천 수도권 전역 자택·호텔)의 이용 가이드 모음.',
   alternates: { canonical: 'https://abam.kr/guide' },
 };
 
@@ -30,7 +30,7 @@ export default function GuideIndexPage() {
       <main style={{ maxWidth: 640, margin: '16px auto', background: 'rgba(255,255,255,0.95)', borderRadius: 16, padding: '22px 18px 120px' }}>
         <h1 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 8px', lineHeight: 1.35 }}>출장마사지 이용 가이드</h1>
         <p style={{ fontSize: 13, lineHeight: 1.7, color: '#475569', margin: '0 0 18px' }}>
-          서울 전역 자택·호텔 프라이빗 1:1 방문 홈케어를 처음 이용하는 분들이 자주 궁금해하는 가격, 예약 방법, 호텔 이용, 코스 선택을 정리했습니다.
+          서울·경기·인천 수도권 전역 자택·호텔 프라이빗 1:1 방문 홈케어를 처음 이용하는 분들이 자주 궁금해하는 가격, 예약 방법, 호텔 이용, 코스 선택을 정리했습니다.
         </p>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
           {GUIDES.map((g) => (
@@ -41,7 +41,7 @@ export default function GuideIndexPage() {
           ))}
         </ul>
         <p style={{ marginTop: 22, fontSize: 13 }}>
-          예약·문의: <a href={PHONE_TEL} style={{ fontWeight: 800 }}>010-6607-2239</a> · 예약은 18:00부터 (영업 19:00 ~ 05:00) · 서울 전역 자택·호텔 방문
+          예약·문의: <a href={PHONE_TEL} style={{ fontWeight: 800 }}>010-6607-2239</a> · 예약은 18:00부터 (영업 19:00 ~ 05:00) · 서울·경기·인천 수도권 전역 자택·호텔 방문
         </p>
       </main>
     </div>

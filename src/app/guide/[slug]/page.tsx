@@ -89,9 +89,9 @@ export default async function GuidePage({ params }: Props) {
         </article>
 
         <section style={{ marginTop: 28, padding: '16px', background: '#f8fafc', borderRadius: 12, border: '1px solid #e2e8f0' }}>
-          <h2 style={{ fontSize: 15, fontWeight: 800, margin: '0 0 6px' }}>서울 출장마사지·출장안마 예약</h2>
+          <h2 style={{ fontSize: 15, fontWeight: 800, margin: '0 0 6px' }}>서울·경기·인천 출장마사지·출장안마 예약</h2>
           <p style={{ fontSize: 13, lineHeight: 1.7, color: '#475569', margin: '0 0 10px' }}>
-            서울 전역 자택·호텔 방문 · 예약은 18:00부터 (영업 19:00 ~ 05:00) · 프라이빗 1:1 케어
+            서울·경기·인천 수도권 전역 자택·호텔 방문 · 예약은 18:00부터 (영업 19:00 ~ 05:00) · 프라이빗 1:1 케어
           </p>
           <a href="tel:010-6607-2239" style={{ display: 'inline-block', background: '#0f172a', color: '#fff', padding: '10px 16px', borderRadius: 8, fontWeight: 800, fontSize: 13 }}>
             전화 예약 010-6607-2239
