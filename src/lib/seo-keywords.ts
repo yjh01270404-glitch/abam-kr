@@ -173,6 +173,33 @@ export const INFO_SEO = [
 ];
 
 
+// 국내 주요 출장마사지·출장안마 대표 브랜드 및 플랫폼 비교 검색어
+export const COMPETITOR_SEO = [
+  // 1. 대표 브랜드 비교군
+  '도도출장마사지', '도도출장안마', '도도홈타이',
+  '스피드출장마사지', '스피드출장안마', '스피드홈타이',
+  '나비출장마사지', '나비출장안마', '나비홈타이',
+  '황제출장마사지', '황제출장안마', '황제홈타이',
+  '에이스출장마사지', '에이스출장안마', '에이스홈타이',
+  '원출장마사지', '원출장안마', '원홈타이',
+  '로얄출장마사지', '로얄출장안마', '로얄홈타이',
+  '스타출장마사지', '스타출장안마', '스타홈타이',
+  '퀸출장마사지', '퀸출장안마', '퀸홈타이',
+  '엔젤출장마사지', '엔젤출장안마',
+  '달콤출장마사지', '달콤출장안마',
+  '시크릿출장마사지', '시크릿출장안마',
+  '미라클출장마사지', '미라클출장안마',
+  '애플출장마사지', '애플출장안마',
+  '골드출장마사지', '골드출장안마',
+  // 2. 비교·순위·업체 탐색 검색어
+  '출장마사지비교', '출장안마비교', '출장홈타이비교',
+  '출장마사지순위', '출장안마순위', '출장홈타이순위',
+  '출장마사지업체', '출장안마업체', '출장마사지업체비교', '출장안마업체비교',
+  '출장마사지업체순위', '출장안마업체순위', '출장마사지추천업체', '출장안마추천업체',
+  // 3. 주요 마사지 중개 플랫폼 연계 키워드
+  '마통출장마사지', '마사지몬출장마사지', '하이타이출장마사지', '다누워출장마사지', '마캉스출장마사지',
+];
+
 // 왓포 & 강남 출장 홈케어 전용 핵심 키워드군
 export const HOMECARE_WATPHO_SEO = [
   '왓포출장홈케어', '왓포홈케어', '왓포출장마사지', '왓포마사지', '왓포테라피',
@@ -184,6 +211,7 @@ export const HOMECARE_WATPHO_SEO = [
 ];
 
 export const SEO_KEYWORDS = [
+  ...COMPETITOR_SEO,
   ...SEOUL_SEO,
   ...GYEONGGI_SEO,
   ...INCHEON_SEO,
@@ -322,6 +350,7 @@ const DISTRICT_KEYWORDS = DISTRICTS.flatMap((d) => [
 
 const CANDIDATE_POOL: string[] = Array.from(
   new Set([
+    ...COMPETITOR_SEO,
     ...DISTRICT_KEYWORDS,
     ...HEAD_TERMS,
     ...SEOUL_SEO,
@@ -368,7 +397,7 @@ export function generateSeoPageData(keyword: string) {
 
   const isSeoulKw = SEOUL_SEO.some((k) => k === kw);
   const isCoursePage = COURSE_SEO.some((k) => k === kw);
-  const isCompetitor = /도도|스피드|비교/.test(kw);
+  const isCompetitor = /도도|스피드|나비|황제|에이스|원출장|원홈타이|로얄|스타|퀸|엔젤|달콤|시크릿|미라클|애플|골드|마통|마사지몬|하이타이|다누워|마캉스|비교|순위|업체/.test(kw);
   const isPrimaryRank1 = /출장마사지1위|출장안마1위/.test(kw) || kw === '출장마사지' || kw === '출장안마';
 
   let title = '';
