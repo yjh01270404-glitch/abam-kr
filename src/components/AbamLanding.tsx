@@ -104,6 +104,50 @@ const PhoneIcon = ({ size }: { size: number }) => (
   </svg>
 );
 
+/* 히어로 전면 전체에 반짝이는 작은 별 데이터 */
+const HERO_STARS = [
+  { top: '3%', left: '7%', size: 2, dur: '2.4s', delay: '0.2s', color: '#ffffff' },
+  { top: '5%', left: '23%', size: 2.5, dur: '3.1s', delay: '1.1s', color: '#fef08a' },
+  { top: '4%', left: '46%', size: 1.5, dur: '2.0s', delay: '0.5s', color: '#ffffff' },
+  { top: '7%', left: '69%', size: 2.5, dur: '3.6s', delay: '1.8s', color: '#ffffff' },
+  { top: '5%', left: '89%', size: 2, dur: '2.8s', delay: '0.9s', color: '#fde047' },
+  { top: '11%', left: '14%', size: 1.5, dur: '2.2s', delay: '0.4s', color: '#ffffff' },
+  { top: '14%', left: '33%', size: 2.5, dur: '3.4s', delay: '2.1s', color: '#ffffff' },
+  { top: '13%', left: '56%', size: 2, dur: '2.6s', delay: '0.7s', color: '#fef08a' },
+  { top: '15%', left: '79%', size: 3, dur: '4.0s', delay: '1.5s', color: '#ffffff' },
+  { top: '17%', left: '93%', size: 1.5, dur: '1.9s', delay: '0.3s', color: '#ffffff' },
+  { top: '21%', left: '5%', size: 2.5, dur: '3.2s', delay: '1.2s', color: '#ffffff' },
+  { top: '24%', left: '25%', size: 1.5, dur: '2.5s', delay: '0.8s', color: '#fde047' },
+  { top: '23%', left: '85%', size: 2, dur: '3.0s', delay: '1.7s', color: '#ffffff' },
+  { top: '27%', left: '41%', size: 2, dur: '2.3s', delay: '0.1s', color: '#ffffff' },
+  { top: '29%', left: '64%', size: 3, dur: '3.7s', delay: '2.4s', color: '#ffffff' },
+  { top: '33%', left: '11%', size: 1.5, dur: '2.7s', delay: '1.4s', color: '#fef08a' },
+  { top: '35%', left: '95%', size: 2.5, dur: '3.3s', delay: '0.6s', color: '#ffffff' },
+  { top: '39%', left: '4%', size: 2, dur: '2.1s', delay: '1.9s', color: '#ffffff' },
+  { top: '41%', left: '19%', size: 2.5, dur: '3.5s', delay: '0.5s', color: '#ffffff' },
+  { top: '43%', left: '81%', size: 1.5, dur: '2.4s', delay: '1.3s', color: '#fde047' },
+  { top: '47%', left: '37%', size: 2, dur: '2.9s', delay: '0.9s', color: '#ffffff' },
+  { top: '49%', left: '61%', size: 3, dur: '3.8s', delay: '2.2s', color: '#ffffff' },
+  { top: '53%', left: '7%', size: 2.5, dur: '2.6s', delay: '0.4s', color: '#fef08a' },
+  { top: '55%', left: '91%', size: 2, dur: '3.1s', delay: '1.6s', color: '#ffffff' },
+  { top: '59%', left: '27%', size: 1.5, dur: '2.0s', delay: '0.8s', color: '#ffffff' },
+  { top: '61%', left: '73%', size: 2.5, dur: '3.4s', delay: '2.0s', color: '#ffffff' },
+  { top: '65%', left: '15%', size: 2, dur: '2.8s', delay: '0.3s', color: '#fde047' },
+  { top: '67%', left: '47%', size: 3, dur: '3.9s', delay: '1.5s', color: '#ffffff' },
+  { top: '69%', left: '86%', size: 1.5, dur: '2.3s', delay: '0.7s', color: '#ffffff' },
+  { top: '73%', left: '4%', size: 2.5, dur: '3.2s', delay: '2.3s', color: '#ffffff' },
+  { top: '75%', left: '31%', size: 2, dur: '2.5s', delay: '1.1s', color: '#fef08a' },
+  { top: '77%', left: '65%', size: 1.5, dur: '2.1s', delay: '0.2s', color: '#ffffff' },
+  { top: '81%', left: '93%', size: 3, dur: '3.6s', delay: '1.8s', color: '#ffffff' },
+  { top: '83%', left: '21%', size: 2, dur: '2.7s', delay: '0.9s', color: '#ffffff' },
+  { top: '85%', left: '53%', size: 2.5, dur: '3.3s', delay: '1.4s', color: '#fde047' },
+  { top: '87%', left: '77%', size: 1.5, dur: '2.2s', delay: '0.6s', color: '#ffffff' },
+  { top: '91%', left: '9%', size: 2.5, dur: '3.0s', delay: '2.1s', color: '#ffffff' },
+  { top: '93%', left: '39%', size: 2, dur: '2.4s', delay: '0.4s', color: '#fef08a' },
+  { top: '95%', left: '67%', size: 3, dur: '3.7s', delay: '1.7s', color: '#ffffff' },
+  { top: '97%', left: '89%', size: 1.5, dur: '2.1s', delay: '1.0s', color: '#ffffff' },
+];
+
 export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaLinks?: string[] }) {
   const isKo = c.lang === 'ko';
   const x = EXTRA[c.lang];
@@ -184,9 +228,20 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   return (
     <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '88px', lineHeight: 1.6 }}>
       
-      {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 (인위적인 키프레임/별빛/펄스 애니메이션 완전 제거) ── */}
+      {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 별빛 애니메이션 ── */}
       <style>{`
         html { scroll-behavior: smooth; font-family: ${FONT}; }
+        @keyframes heroStarTwinkle {
+          0%, 100% {
+            opacity: 0.15;
+            transform: scale(0.65);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.4);
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.95);
+          }
+        }
       `}</style>
 
       {/* ── 전체 페이지 밤하늘 고정 배경 (반짝이는 별빛 제거, 깊고 차분한 서울 야경 톤) ── */}
@@ -298,10 +353,32 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       {/* ── 메인 콘텐츠 ── */}
       <main style={{ position: 'relative', zIndex: 1, maxWidth: '640px', margin: '0 auto', padding: '0 16px', wordBreak: 'keep-all' }}>
 
-        {/* ── 2. 히어로 섹션 ── */}
-        <section style={{ padding: '32px 0 0', textAlign: 'center' }}>
+        {/* ── 2. 히어로 섹션 (전면 전체 반짝이는 작은 별 모션 탑재) ── */}
+        <section style={{ position: 'relative', padding: '32px 0 0', textAlign: 'center' }}>
           
-          {/* 영업 상태 (단정하고 차분한 텍스트 배지) */}
+          {/* 히어로 전면 전체 반짝이는 작은 별 레이어 */}
+          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
+            {HERO_STARS.map((s, idx) => (
+              <span
+                key={idx}
+                style={{
+                  position: 'absolute',
+                  top: s.top,
+                  left: s.left,
+                  width: `${s.size}px`,
+                  height: `${s.size}px`,
+                  borderRadius: '50%',
+                  background: s.color,
+                  animation: `heroStarTwinkle ${s.dur} ease-in-out infinite`,
+                  animationDelay: s.delay,
+                  boxShadow: `0 0 ${s.size * 2}px ${s.color}`,
+                }}
+              />
+            ))}
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            {/* 영업 상태 (단정하고 차분한 텍스트 배지) */}
           {status && (
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#171922', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '5px 14px', fontSize: '12px', fontWeight: 600, color: C.textSub, marginBottom: '16px' }}>
               <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: status === 'closed' ? C.pointGold : '#10b981' }} />
@@ -403,16 +480,17 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 24시간 언제든 편하게 접수하실 수 있습니다.
           </div>
 
-          {/* 히어로 실사 모델 화보 */}
-          <div style={{ position: 'relative', width: '100%', height: '280px', borderRadius: '8px', overflow: 'hidden', border: `1px solid ${C.line}` }}>
-            <Image
-              src="/images/abam_hero_seductive.jpg"
-              alt="아밤 24시 출장마사지 힐링 케어"
-              fill
-              sizes="(max-width: 640px) 100vw, 640px"
-              style={{ objectFit: 'cover' }}
-              priority
-            />
+            {/* 히어로 실사 모델 화보 */}
+            <div style={{ position: 'relative', width: '100%', height: '280px', borderRadius: '8px', overflow: 'hidden', border: `1px solid ${C.line}` }}>
+              <Image
+                src="/images/abam_hero_seductive.jpg"
+                alt="아밤 24시 출장마사지 힐링 케어"
+                fill
+                sizes="(max-width: 640px) 100vw, 640px"
+                style={{ objectFit: 'cover' }}
+                priority
+              />
+            </div>
           </div>
         </section>
 
