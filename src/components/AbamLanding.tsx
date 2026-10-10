@@ -396,11 +396,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
-          .abam-container {
-            max-width: 860px;
-            padding: 0 20px;
-          }
-        }
+    .abam-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+  }
 
         .abam-header-inner {
           width: 100%;
@@ -804,13 +805,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
           {/* 우측: 데스크톱 메뉴 + 모바일 퀵 통화 아이콘 */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <nav className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <a href="#intro" style={{ color: '#cbd5e1', fontSize: '14px', fontWeight: 700, textDecoration: 'none', padding: '6px 8px' }}>소개</a>
-              <a href="#price" style={{ color: '#ffffff', fontSize: '14px', fontWeight: 800, textDecoration: 'none', padding: '6px 8px' }}>코스</a>
-              <a href="#rules" style={{ color: '#cbd5e1', fontSize: '14px', fontWeight: 700, textDecoration: 'none', padding: '6px 8px' }}>안내</a>
-              <a href="#reviews" style={{ color: '#cbd5e1', fontSize: '14px', fontWeight: 700, textDecoration: 'none', padding: '6px 8px' }}>후기</a>
-              <a href="#faq" style={{ color: '#cbd5e1', fontSize: '14px', fontWeight: 700, textDecoration: 'none', padding: '6px 8px' }}>FAQ</a>
-            </nav>
+            
 
             <a
               href={c.contact.tel}
@@ -963,38 +958,38 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       </header>
 
       {/* ── 메인 콘텐츠 ── */}
-      <main className="abam-container" style={{ position: 'relative', zIndex: 1, wordBreak: 'keep-all' }}>
-
-        {/* ── 2. 스피드출장 정석 비율: 화보 전면 풀스크린 히어로 (Full-Bleed 100% Background Hero) ── */}
+      {/* ── 2. 스피드출장 정석 비율: 화보 전면 풀스크린 히어로 (Full-Bleed 100% Background Hero) ── */}
         <section
           style={{
             position: 'relative',
             width: '100%',
-            minHeight: '78vh',
+            minHeight: '82vh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
             alignItems: 'center',
             overflow: 'hidden',
             boxSizing: 'border-box',
+            margin: 0,
+            padding: 0,
           }}
         >
-          {/* 전면 100% 배경 화보 이미지 (스피드출장과 동일한 풀스크린 비주얼) */}
+          {/* 전면 100% 배경 화보: 스피드출장과 100% 동일한 구도의 한국 20대 모델 바스트 샷 */}
           <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
             <Image
-              src="/images/abam_hero_seductive.jpg"
+              src="/images/abam_hero_speed_model.jpg"
               alt="아밤 24시 출장마사지 힐링 케어"
               fill
               priority
-              style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
               sizes="100vw"
             />
-            {/* 상단 및 하단 시네마틱 다크 그라데이션 오버레이 (텍스트 가독성 100% 확보) */}
+            {/* 시네마틱 다크 그라데이션 오버레이: 상단은 모델 얼굴이 맑게 보이고 하단 텍스트 영역은 짙은 블랙으로 가독성 100% */}
             <div
               style={{
                 position: 'absolute',
                 inset: 0,
-                background: 'linear-gradient(180deg, rgba(10,11,16,0.3) 0%, rgba(10,11,16,0.55) 40%, rgba(10,11,16,0.92) 80%, #0c0d11 100%)',
+                background: 'linear-gradient(180deg, rgba(10,11,16,0.15) 0%, rgba(10,11,16,0.3) 35%, rgba(10,11,16,0.78) 65%, rgba(10,11,16,0.96) 88%, #0c0d11 100%)',
               }}
             />
           </div>
@@ -1005,9 +1000,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               position: 'relative',
               zIndex: 2,
               width: '100%',
-              maxWidth: '680px',
+              maxWidth: '600px',
               margin: '0 auto',
-              padding: '60px 18px 28px',
+              padding: '40px 16px 24px',
               textAlign: 'center',
               boxSizing: 'border-box',
             }}
@@ -1021,30 +1016,30 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   gap: '8px',
                   background: 'rgba(18, 20, 28, 0.88)',
                   backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(245,158,11,0.35)',
+                  border: '1px solid rgba(245,158,11,0.4)',
                   borderRadius: '20px',
-                  padding: '6px 16px',
-                  fontSize: '13.5px',
+                  padding: '5px 14px',
+                  fontSize: '13px',
                   fontWeight: 800,
                   color: '#fef08a',
-                  marginBottom: '16px',
+                  marginBottom: '14px',
                 }}
               >
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: status === 'closed' ? '#f59e0b' : '#10b981' }} />
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: status === 'closed' ? '#f59e0b' : '#10b981' }} />
                 {x.status[status]}
               </div>
             )}
 
-            {/* 대형 H1 메인 타이틀: 스피드출장 스타일 */}
+            {/* 대형 H1 메인 타이틀: 스피드출장 100% 동일 비율 */}
             <h1
               style={{
-                fontSize: '25px',
+                fontSize: '24px',
                 fontWeight: 900,
-                lineHeight: 1.4,
+                lineHeight: 1.35,
                 color: '#ffffff',
-                margin: '0 0 16px',
+                margin: '0 0 14px',
                 letterSpacing: '-0.5px',
-                textShadow: '0 2px 12px rgba(0,0,0,0.85)',
+                textShadow: '0 2px 14px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.9)',
                 wordBreak: 'keep-all',
               }}
             >
@@ -1055,32 +1050,31 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             {/* 스피드출장 정석 본문 설명 텍스트 (화면 가득 시원시원한 가독성) */}
             <p
               style={{
-                fontSize: '16.5px',
-                color: '#f1f5f9',
-                lineHeight: 1.75,
-                margin: '0 auto 24px',
+                fontSize: '16px',
+                color: '#f8fafc',
+                lineHeight: 1.7,
+                margin: '0 auto 20px',
                 wordBreak: 'keep-all',
-                textShadow: '0 2px 10px rgba(0,0,0,0.9)',
-                maxWidth: '560px',
+                textShadow: '0 2px 12px rgba(0,0,0,0.95)',
+                maxWidth: '520px',
               }}
             >
-              아밤은 선입금·예약금이 단 1원도 없는 <strong style={{ color: '#fef08a' }}>100% 현장 대면결제</strong> 원칙을 준수합니다.
-              서울·경기 전지역 고객님이 머무시는 자택이나 호텔, 오피스텔 등으로 전원 20대 에이스 관리사가 30분 내 직접 찾아가는 1:1 프라이빗 맞춤 케어 서비스입니다.
+              서울출장마사지는 고객이 머무시는 자택이나 호텔, 모텔, 오피스텔 등으로 100% 한국인 관리사가 직접 찾아가는 1:1 방문 맞춤 케어 서비스입니다. 선입금·예약금이 단 1원도 없는 <strong style={{ color: '#fef08a' }}>100% 현장 대면결제</strong>로 안전하고 편안하게 컨디션을 관리하실 수 있습니다.
             </p>
 
             {/* 핵심 3대 신뢰 포인트 바 */}
             <div
               style={{
-                background: 'rgba(18, 20, 28, 0.85)',
+                background: 'rgba(18, 20, 28, 0.88)',
                 backdropFilter: 'blur(8px)',
                 border: '1px solid rgba(255,255,255,0.15)',
                 borderRadius: '8px',
-                padding: '12px 14px',
-                margin: '0 auto 24px',
+                padding: '11px 12px',
+                margin: '0 auto 20px',
                 display: 'flex',
                 justifyContent: 'space-around',
                 alignItems: 'center',
-                fontSize: '14.5px',
+                fontSize: '14px',
                 color: '#ffffff',
                 fontWeight: 800,
               }}
@@ -1097,8 +1091,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: '12px',
-                maxWidth: '460px',
+                gap: '10px',
+                maxWidth: '420px',
                 margin: '0 auto',
               }}
             >
@@ -1112,16 +1106,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   gap: '8px',
                   background: '#f59e0b',
                   color: '#000000',
-                  fontSize: '18px',
+                  fontSize: '17.5px',
                   fontWeight: 900,
-                  padding: '16px 0',
+                  padding: '15px 0',
                   borderRadius: '35px',
                   textDecoration: 'none',
-                  boxShadow: '0 6px 20px rgba(245,158,11,0.5)',
+                  boxShadow: '0 6px 18px rgba(245,158,11,0.5)',
                   boxSizing: 'border-box',
                 }}
               >
-                <PhoneIcon size={20} /> 전화하기
+                <PhoneIcon size={19} /> 전화하기
               </a>
 
               {/* ⚪ 흰색 둥근 알약 버튼: 코스 보기 */}
@@ -1134,12 +1128,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   gap: '6px',
                   background: '#ffffff',
                   color: '#0a0b10',
-                  fontSize: '18px',
+                  fontSize: '17.5px',
                   fontWeight: 900,
-                  padding: '16px 0',
+                  padding: '15px 0',
                   borderRadius: '35px',
                   textDecoration: 'none',
-                  boxShadow: '0 6px 20px rgba(255,255,255,0.3)',
+                  boxShadow: '0 6px 18px rgba(255,255,255,0.3)',
                   boxSizing: 'border-box',
                 }}
               >
@@ -1148,11 +1142,13 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
 
             {/* 1시간 전 예약 안내 */}
-            <div style={{ marginTop: '16px', fontSize: '13.5px', color: '#cbd5e1', textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+            <div style={{ marginTop: '14px', fontSize: '13px', color: '#cbd5e1', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
               ※ 희망 시간 <strong>1시간 전 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하게 이용 가능합니다.
             </div>
           </div>
         </section>
+        <main className="abam-container" style={{ position: 'relative', zIndex: 1, wordBreak: 'keep-all' }}>
+
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
           {head('출장안마 서비스 안내', '서울·경기 전지역 100% 현장 대면결제')}
