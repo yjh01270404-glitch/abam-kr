@@ -254,12 +254,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       {/* 헤더: 로고 · 언어 · 전화 + 섹션 바로가기 */}
       <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(5,9,13,0.9)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', borderBottom: `1px solid ${C.line}` }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '10px 16px 6px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ fontFamily: SERIF, fontSize: '22px', fontWeight: 800, color: '#fff', letterSpacing: '0.5px' }}>
+          <Link href="/" style={{ textDecoration: 'none', fontFamily: SERIF, fontSize: '22px', fontWeight: 800, color: '#fff', letterSpacing: '0.5px' }}>
             Abam<span style={{ color: C.gold }}>.kr</span>
-          </div>
+          </Link>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ display: 'flex', gap: '9px', fontSize: '12px' }}>
-              {(isKo ? LANGS : LANGS.filter((l) => l.code !== 'ko')).map((l) =>
+              {LANGS.map((l) =>
                 l.code === c.lang ? (
                   <span key={l.code} style={{ color: C.gold, fontWeight: 800 }}>{l.label}</span>
                 ) : (
