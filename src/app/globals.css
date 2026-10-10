@@ -52,8 +52,16 @@ input, select, textarea {
 a:active, button:active { opacity: 0.82; }
 
 @media (max-width: 640px) {
+  html {
+    font-size: 17px;
+  }
+  body {
+    font-size: 17px;
+    line-height: 1.75;
+  }
   .desktop-only { display: none !important; }
 }
 @media (min-width: 641px) {
   .mobile-only { display: none !important; }
 }
+

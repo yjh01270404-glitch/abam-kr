@@ -298,14 +298,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
   /* 시원시원하고 직관적인 한국형 섹션 타이틀 (모바일 가독성 극대화) */
   const head = (title: string, sub?: string) => (
-    <div style={{ marginBottom: '18px', borderLeft: `5px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '12px' }}>
-      <h2 style={{ fontSize: '23px', fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.4px', wordBreak: 'keep-all' }}>{title}</h2>
-      {sub && <p style={{ fontSize: '15.5px', color: C.textSub, margin: '6px 0 0', wordBreak: 'keep-all' }}>{sub}</p>}
+    <div style={{ marginBottom: '22px', borderLeft: `6px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '14px' }}>
+      <h2 style={{ fontSize: '26px', fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.5px', wordBreak: 'keep-all' }}>{title}</h2>
+      {sub && <p style={{ fontSize: '18px', color: '#cbd5e1', margin: '8px 0 0', wordBreak: 'keep-all', fontWeight: 600 }}>{sub}</p>}
     </div>
   );
 
+
   return (
-    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '120px', lineHeight: 1.65 }}>
+    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '140px', lineHeight: 1.65 }}>
       
       {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 화려한 별빛 & 유성 애니메이션 ── */}
       <style>{`
@@ -476,98 +477,99 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             display: none !important;
           }
           .abam-nav-link {
-            padding: 6px 7px !important;
-            font-size: 14.5px !important;
+            padding: 8px 8px !important;
+            font-size: 16px !important;
             font-weight: 800 !important;
           }
           .abam-hero-title-main {
-            font-size: 32px !important;
+            font-size: 36px !important;
           }
           .abam-hero-title-tag {
-            font-size: 26px !important;
+            font-size: 30px !important;
           }
           .abam-hero-subtitle {
-            font-size: 20px !important;
-            line-height: 1.45 !important;
+            font-size: 23px !important;
+            line-height: 1.5 !important;
           }
           .abam-hero-box {
             padding-left: 14px !important;
             padding-right: 14px !important;
           }
           .abam-hero-desc {
-            font-size: 17px !important;
-            line-height: 1.8 !important;
-            padding: 18px 16px !important;
+            font-size: 19.5px !important;
+            line-height: 1.85 !important;
+            padding: 20px 18px !important;
           }
           .abam-hero-summary-bar {
-            font-size: 15.5px !important;
+            font-size: 17.5px !important;
             font-weight: 800 !important;
-            padding: 16px 8px !important;
+            padding: 18px 10px !important;
           }
           .abam-hero-advance-box {
-            font-size: 15.5px !important;
-            line-height: 1.7 !important;
-            padding: 15px 14px !important;
-          }
-          .abam-hero-call-btn {
-            font-size: 22px !important;
+            font-size: 18px !important;
+            line-height: 1.75 !important;
             padding: 18px 16px !important;
           }
+          .abam-hero-call-btn {
+            font-size: 25px !important;
+            padding: 20px 18px !important;
+          }
           .abam-hero-sub-btn {
-            font-size: 16px !important;
-            padding: 15px 8px !important;
+            font-size: 18px !important;
+            padding: 16px 10px !important;
           }
           .abam-card {
-            padding: 22px 16px !important;
+            padding: 24px 18px !important;
           }
           .abam-body-text {
-            font-size: 17.5px !important;
-            line-height: 1.85 !important;
+            font-size: 19.5px !important;
+            line-height: 1.9 !important;
           }
           .abam-course-name {
-            font-size: 21px !important;
+            font-size: 24px !important;
           }
           .abam-course-desc {
-            font-size: 16.5px !important;
-            line-height: 1.75 !important;
+            font-size: 19px !important;
+            line-height: 1.85 !important;
           }
           .abam-course-chip {
-            font-size: 13.5px !important;
-            padding: 6px 11px !important;
+            font-size: 15.5px !important;
+            padding: 7px 14px !important;
           }
           .abam-course-price-cell {
-            padding: 12px 2px !important;
+            padding: 14px 4px !important;
           }
           .abam-course-price-val {
-            font-size: 18.5px !important;
+            font-size: 21.5px !important;
             font-weight: 900 !important;
             letter-spacing: -0.5px !important;
             white-space: nowrap !important;
           }
           .abam-course-duration {
-            font-size: 14px !important;
-            font-weight: 700 !important;
-          }
-          .abam-rule-title {
-            font-size: 18px !important;
+            font-size: 16px !important;
             font-weight: 800 !important;
           }
+          .abam-rule-title {
+            font-size: 21px !important;
+            font-weight: 900 !important;
+          }
           .abam-rule-desc {
-            font-size: 16px !important;
-            line-height: 1.75 !important;
+            font-size: 18.5px !important;
+            line-height: 1.85 !important;
           }
           .abam-review-text {
-            font-size: 16.5px !important;
-            line-height: 1.8 !important;
+            font-size: 19px !important;
+            line-height: 1.85 !important;
           }
           .abam-faq-q {
-            font-size: 17.5px !important;
+            font-size: 20px !important;
           }
           .abam-faq-a {
-            font-size: 16.5px !important;
-            line-height: 1.8 !important;
+            font-size: 18.5px !important;
+            line-height: 1.85 !important;
           }
         }
+
 
         .abam-photo-banner {
           position: relative;
@@ -1242,11 +1244,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 6. 100% 현장 직접 대면결제 원칙 ── */}
         <section id="safety" style={section}>
-          <div className="abam-card" style={{ borderLeft: `5px solid ${C.pointRed}`, textAlign: 'left', padding: '20px 18px' }}>
-            <h3 style={{ color: '#ffffff', fontSize: '19px', fontWeight: 900, margin: '0 0 8px' }}>
+          <div className="abam-card" style={{ borderLeft: `6px solid ${C.pointRed}`, textAlign: 'left', padding: '22px 20px' }}>
+            <h3 className="abam-rule-title" style={{ color: '#ffffff', fontSize: '21px', fontWeight: 900, margin: '0 0 10px' }}>
               아밤(Abam) 100% 현장 직접 대면결제 원칙
             </h3>
-            <div style={{ fontSize: '16.5px', color: C.textSub, lineHeight: 1.8, wordBreak: 'keep-all' }}>
+            <div className="abam-rule-desc" style={{ fontSize: '18.5px', color: '#e2e8f0', lineHeight: 1.85, wordBreak: 'keep-all' }}>
               아밤은 고객님께 사전 입금을 단 1원도 요구하지 않습니다.<br />
               관리사가 고객님이 계신 곳(자택·호텔)에 도착하여 직접 대면한 후 결제(현금, 계좌이체, 카드)를 진행하므로 안심하고 안전하게 이용하실 수 있습니다.
             </div>
@@ -1268,20 +1270,20 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="guide" style={section}>
           {head(x.guideTitle, '전화나 문자 한 통으로 간편하게 예약 (1시간 전 예약 시 원하는 시간 이용 수월)')}
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', marginBottom: '10px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', marginBottom: '12px' }}>
             {c.info.map((p, i) => (
-              <div key={i} className="abam-card" style={{ borderLeft: `4px solid ${C.pointRed}`, padding: '14px 16px' }}>
-                <div style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff' }}>{p.title}</div>
-                <div style={{ fontSize: '13.5px', color: C.textMuted, marginTop: '4px' }}>{p.sub}</div>
+              <div key={i} className="abam-card" style={{ borderLeft: `5px solid ${C.pointRed}`, padding: '16px 16px' }}>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff' }}>{p.title}</div>
+                <div style={{ fontSize: '15.5px', color: '#cbd5e1', marginTop: '6px', lineHeight: 1.5 }}>{p.sub}</div>
               </div>
             ))}
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '8px' }}>
             {x.steps.map((s, i) => (
-              <div key={i} className="abam-card" style={{ padding: '14px 8px', textAlign: 'center' }}>
-                <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: C.pointRed, color: '#ffffff', fontWeight: 900, fontSize: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px' }}>{i + 1}</div>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff' }}>{s}</div>
+              <div key={i} className="abam-card" style={{ padding: '16px 8px', textAlign: 'center' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: C.pointRed, color: '#ffffff', fontWeight: 900, fontSize: '17px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px' }}>{i + 1}</div>
+                <div style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', lineHeight: 1.4 }}>{s}</div>
               </div>
             ))}
           </div>
@@ -1387,14 +1389,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 background: 'linear-gradient(180deg, #2b3245, #1e2333)',
                 border: '1.5px solid #475569',
                 color: '#ffffff',
-                fontSize: '16.5px',
+                fontSize: '18px',
                 fontWeight: 900,
-                padding: '16px 0',
+                padding: '18px 0',
                 borderRadius: '8px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                boxShadow: '0 4px 14px rgba(0,0,0,0.5)',
               }}
             >
-              <SmsIcon size={21} /> 문자 간편예약
+              <SmsIcon size={23} /> 문자 간편예약
             </a>
           ) : (
             <a
@@ -1405,9 +1407,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 ...btn,
                 background: '#25D366',
                 color: '#ffffff',
-                fontSize: '16.5px',
+                fontSize: '18px',
                 fontWeight: 900,
-                padding: '16px 0',
+                padding: '18px 0',
                 borderRadius: '8px',
               }}
             >
@@ -1420,14 +1422,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               ...btn,
               background: 'linear-gradient(180deg, #f43f5e, #be123c)',
               color: '#ffffff',
-              fontSize: '16.5px',
+              fontSize: '18px',
               fontWeight: 900,
-              padding: '16px 0',
+              padding: '18px 0',
               borderRadius: '8px',
-              boxShadow: '0 4px 16px rgba(225,29,72,0.4)',
+              boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
             }}
           >
-            <PhoneIcon size={21} /> 24시 전화예약
+            <PhoneIcon size={23} /> 24시 전화예약
           </a>
         </div>
       </div>
