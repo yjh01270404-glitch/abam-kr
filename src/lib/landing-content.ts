@@ -62,23 +62,23 @@ const PRICES = {
   special: ['100,000원', '120,000원', '160,000원'],
 };
 
-/* 외국인 전용 VIP 프리미엄 요금표 (업계 표준 호텔·방문 단가) */
+/* 외국인 전용 요금표 (한국인 기본 요금에서 전 코스 +50,000원 정률 적용) */
 const PRICES_GLOBAL = {
-  thai: ['₩150,000', '₩180,000', '₩220,000'],
-  aroma: ['₩160,000', '₩200,000', '₩250,000'],
-  special: ['₩180,000', '₩230,000', '₩280,000'],
+  thai: ['₩130,000', '₩150,000', '₩170,000'],
+  aroma: ['₩140,000', '₩160,000', '₩190,000'],
+  special: ['₩150,000', '₩170,000', '₩210,000'],
 };
 
 const PRICES_JP = {
-  thai: ['150,000ウォン', '180,000ウォン', '220,000ウォン'],
-  aroma: ['160,000ウォン', '200,000ウォン', '250,000ウォン'],
-  special: ['180,000ウォン', '230,000ウォン', '280,000ウォン'],
+  thai: ['130,000ウォン', '150,000ウォン', '170,000ウォン'],
+  aroma: ['140,000ウォン', '160,000ウォン', '190,000ウォン'],
+  special: ['150,000ウォン', '170,000ウォン', '210,000ウォン'],
 };
 
 const PRICES_CN = {
-  thai: ['150,000韩元', '180,000韩元', '220,000韩元'],
-  aroma: ['160,000韩元', '200,000韩元', '250,000韩元'],
-  special: ['180,000韩元', '230,000韩元', '280,000韩元'],
+  thai: ['130,000韩元', '150,000韩元', '170,000韩元'],
+  aroma: ['140,000韩元', '160,000韩元', '190,000韩元'],
+  special: ['150,000韩元', '170,000韩元', '210,000韩元'],
 };
 
 const INFO_ICONS = ['🕕', '📅', '🏠', '🛡️'];
@@ -275,7 +275,7 @@ export const EN: LandingContent = {
     },
     {
       q: 'How much is each course?',
-      a: 'Transparent flat-rate VIP pricing across all courses:\n\n• Thai Care (Dry)\n  -  60 min : ₩150,000\n  -  90 min : ₩180,000\n  - 120 min : ₩220,000\n\n• Aroma Care (Oil)\n  -  60 min : ₩160,000\n  -  90 min : ₩200,000\n  - 120 min : ₩250,000\n\n• Special Care (Thai + Aroma)\n  -  60 min : ₩180,000\n  -  90 min : ₩230,000\n  - 120 min : ₩280,000\n\n※ International VIP pricing includes dedicated multilingual concierge support, priority dispatch of top-tier therapists, hotel rapid transit, and 100% pay-on-arrival scam protection.',
+      a: 'Transparent flat-rate pricing across all courses:\n\n• Thai Care (Dry)\n  -  60 min : ₩130,000\n  -  90 min : ₩150,000\n  - 120 min : ₩170,000\n\n• Aroma Care (Oil)\n  -  60 min : ₩140,000\n  -  90 min : ₩160,000\n  - 120 min : ₩190,000\n\n• Special Care (Thai + Aroma)\n  -  60 min : ₩150,000\n  -  90 min : ₩170,000\n  - 120 min : ₩210,000\n\n※ Foreign guest pricing includes dedicated multilingual concierge support, priority dispatch of top-tier therapists, hotel rapid transit, and 100% pay-on-arrival scam protection.',
     },
     {
       q: 'Can I use it at both home and hotel?',
@@ -286,7 +286,7 @@ export const EN: LandingContent = {
   about: {
     title: 'About Abam.kr Private 1:1 Home Visit Care',
     p1: 'Abam.kr (A Beautiful Night) is a private 1:1 home visit care service delivered to the space of your choice across Seoul, such as your home or hotel. Booking is available from 18:00 and we are open from 19:00 to 05:00. Booking 1 hour ahead lets you enjoy an even more comfortable experience.',
-    p2: 'Choose from 3 VIP courses — Thai (from ₩150,000 / 60 min), Aroma (from ₩160,000 / 60 min) and Special (from ₩180,000 / 60 min) — in 60, 90 or 120 minutes.',
+    p2: 'Choose from 3 VIP courses — Thai (from ₩130,000 / 60 min), Aroma (from ₩140,000 / 60 min) and Special (from ₩150,000 / 60 min) — in 60, 90 or 120 minutes.',
   },
   footer: {
     title: 'Private 1:1 Home Visit Care across Seoul & Gyeonggi',
@@ -394,7 +394,7 @@ export const JP: LandingContent = {
     },
     {
       q: 'コース別の料金を教えてください。',
-      a: '全コース明朗会計のVIP定額料金制です。\n\n• タイコース (乾式指圧)\n  -  60分 : 150,000ウォン\n  -  90分 : 180,000ウォン\n  - 120分 : 220,000ウォン\n\n• アロマコース (天然オイル)\n  -  60分 : 160,000ウォン\n  -  90分 : 200,000ウォン\n  - 120分 : 250,000ウォン\n\n• スペシャルコース (タイ + アロマ)\n  -  60分 : 180,000ウォン\n  -  90分 : 230,000ウォン\n  - 120分 : 280,000ウォン\n\n※ 外国人・ホテルVIP料金には、専任日本語対応、特選エース優先配属、ソウル全域ホテル出張交通費、100%完全後払い保証が全て含まれております。',
+      a: '全コース明朗会計の定額料金制です。\n\n• タイコース (乾式指圧)\n  -  60分 : 130,000ウォン\n  -  90分 : 150,000ウォン\n  - 120分 : 170,000ウォン\n\n• アロマコース (天然オイル)\n  -  60分 : 140,000ウォン\n  -  90分 : 160,000ウォン\n  - 120分 : 190,000ウォン\n\n• スペシャルコース (タイ + アロマ)\n  -  60分 : 150,000ウォン\n  -  90分 : 170,000ウォン\n  - 120分 : 210,000ウォン\n\n※ 外国人・ホテル特別料金には、専任日本語対応、特選エース優先配属、ソウル全域ホテル出張交通費、100%完全後払い保証が全て含まれております。',
     },
     {
       q: 'ご自宅とホテルのどちらも利用できますか？',
@@ -405,7 +405,7 @@ export const JP: LandingContent = {
   about: {
     title: 'Abam.kr プライベート1:1訪問ホームケアのご案内',
     p1: 'Abam.kr(美しい夜)は、ソウル全域のご自宅・ホテルなどご希望の空間で受けられるプライベート1:1訪問ホームケアです。ご予約は18:00から可能で、営業時間は19:00から05:00までです。1時間前にご予約いただくと、より快適にご利用いただけます。',
-    p2: 'タイ(60分 150,000ウォン〜)、アロマ(60分 160,000ウォン〜)、スペシャル(60分 180,000ウォン〜)の3コースを、60・90・120分からお選びいただけます。',
+    p2: 'タイ(60分 130,000ウォン〜)、アロマ(60分 140,000ウォン〜)、スペシャル(60分 150,000ウォン〜)の3コースを、60・90・120分からお選びいただけます。',
   },
   footer: {
     title: 'ソウル・京畿全域 プライベート1:1訪問ホームケア',
@@ -513,7 +513,7 @@ export const CN: LandingContent = {
     },
     {
       q: '各课程的价格是多少？',
-      a: '全课程明码标价，透明公开:\n\n• 泰式课程 (干式指压)\n  -  60分钟 : 150,000韩元\n  -  90分钟 : 180,000韩元\n  - 120分钟 : 220,000韩元\n\n• 芳香课程 (天然精油)\n  -  60分钟 : 160,000韩元\n  -  90分钟 : 200,000韩元\n  - 120分钟 : 250,000韩元\n\n• 特别课程 (泰式 + 芳香)\n  -  60分钟 : 180,000韩元\n  -  90分钟 : 230,000韩元\n  - 120分钟 : 280,000韩元\n\n※ 国际宾客专属VIP价格已全包中文专职客服、顶级王牌优先派遣、首尔酒店快速上门交通费及100%现场后付保障。',
+      a: '全课程明码标价，透明公开:\n\n• 泰式课程 (干式指压)\n  -  60分钟 : 130,000韩元\n  -  90分钟 : 150,000韩元\n  - 120分钟 : 170,000韩元\n\n• 芳香课程 (天然精油)\n  -  60分钟 : 140,000韩元\n  -  90分钟 : 160,000韩元\n  - 120分钟 : 190,000韩元\n\n• 特别课程 (泰式 + 芳香)\n  -  60分钟 : 150,000韩元\n  -  90分钟 : 170,000韩元\n  - 120分钟 : 210,000韩元\n\n※ 国际宾客专属价格已全包中文专职客服、顶级王牌优先派遣、首尔酒店快速上门交通费及100%现场后付保障。',
     },
     {
       q: '住宅和酒店都可以使用吗？',
@@ -524,7 +524,7 @@ export const CN: LandingContent = {
   about: {
     title: 'Abam.kr 私密1:1上门居家护理说明',
     p1: 'Abam.kr(美丽的夜晚)是前往首尔全境住宅、酒店等您指定空间的私密1:1上门居家护理服务。预约从18:00开始，营业时间为19:00至05:00。提前1小时预约可享受更加舒适的体验。',
-    p2: '泰式(60分钟 150,000韩元起)、芳香(60分钟 160,000韩元起)、特别(60分钟 180,000韩元起)三种课程，可选择60、90、120分钟。',
+    p2: '泰式(60分钟 130,000韩元起)、芳香(60分钟 140,000韩元起)、特别(60分钟 150,000韩元起)三种课程，可选择60、90、120分钟。',
   },
   footer: {
     title: '首尔 · 京畿全境 私密1:1上门居家护理',
