@@ -306,86 +306,83 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         html { scroll-behavior: smooth; font-family: ${FONT}; }
         @keyframes heroStarTwinkle {
           0%, 100% {
-            opacity: 0.2;
-            transform: scale(0.65);
+            opacity: 0.15;
+            transform: translate3d(0, 0, 0) scale(0.6);
           }
           50% {
             opacity: 1;
-            transform: scale(1.45);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.95), 0 0 16px rgba(254, 240, 138, 0.6);
+            transform: translate3d(0, 0, 0) scale(1.35);
           }
         }
         @keyframes heroDiamondSparkle {
           0%, 100% {
-            opacity: 0.2;
-            transform: scale(0.5) rotate(0deg);
+            opacity: 0.15;
+            transform: translate3d(0, 0, 0) scale(0.5) rotate(0deg);
           }
           50% {
             opacity: 1;
-            transform: scale(1.6) rotate(45deg);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(254, 240, 138, 0.8);
+            transform: translate3d(0, 0, 0) scale(1.4) rotate(45deg);
           }
         }
         @keyframes heroCrossGlint {
           0%, 100% {
-            opacity: 0.15;
-            transform: scale(0.5);
+            opacity: 0.12;
+            transform: translate3d(0, 0, 0) scale(0.5);
           }
           45%, 55% {
             opacity: 1;
-            transform: scale(1.6);
-            filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px rgba(254, 240, 138, 0.95));
+            transform: translate3d(0, 0, 0) scale(1.35);
           }
         }
         @keyframes heroShootingStarA {
           0% {
-            transform: translateX(0) translateY(0) rotate(-35deg);
+            transform: translate3d(0, 0, 0) rotate(-35deg);
             opacity: 0;
             width: 0px;
           }
           4% {
             opacity: 1;
-            width: 130px;
+            width: 120px;
           }
           12% {
-            transform: translateX(-240px) translateY(170px) rotate(-35deg);
+            transform: translate3d(-220px, 160px, 0) rotate(-35deg);
             opacity: 0;
-            width: 30px;
+            width: 25px;
           }
           100% {
-            transform: translateX(-240px) translateY(170px) rotate(-35deg);
+            transform: translate3d(-220px, 160px, 0) rotate(-35deg);
             opacity: 0;
             width: 0px;
           }
         }
         @keyframes heroShootingStarB {
           0% {
-            transform: translateX(0) translateY(0) rotate(-40deg);
+            transform: translate3d(0, 0, 0) rotate(-40deg);
             opacity: 0;
             width: 0px;
           }
           5% {
             opacity: 1;
-            width: 150px;
+            width: 140px;
           }
           14% {
-            transform: translateX(-280px) translateY(220px) rotate(-40deg);
+            transform: translate3d(-250px, 200px, 0) rotate(-40deg);
             opacity: 0;
-            width: 30px;
+            width: 25px;
           }
           100% {
-            transform: translateX(-280px) translateY(220px) rotate(-40deg);
+            transform: translate3d(-250px, 200px, 0) rotate(-40deg);
             opacity: 0;
             width: 0px;
           }
         }
 
-        /* ── 모바일 화면 최적화: 좌우 여백 대폭 축소 및 꽉 찬 직관적 레이아웃 ── */
+        /* ── 모바일 화면 최적화: 좌우 여백 최소화 및 꽉 찬 직관적 레이아웃 (확대 불필요) ── */
         .abam-container {
           width: 100%;
           max-width: 640px;
           margin: 0 auto;
-          padding: 0 8px; /* 모바일 좌우 8px 여백으로 화면 폭 극대화 */
+          padding: 0 4px; /* 모바일 좌우 여백 4px로 최소화하여 화면 98% 꽉 채움 */
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
@@ -398,7 +395,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           width: 100%;
           max-width: 680px;
           margin: 0 auto;
-          padding: 10px 8px;
+          padding: 8px 6px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -414,8 +411,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           background: #15171e;
           border: 1px solid #282b36;
           border-radius: 8px;
-          padding: 13px 10px;
+          padding: 14px 10px;
           box-sizing: border-box;
+          width: 100%;
         }
         @media (min-width: 640px) {
           .abam-card {
@@ -441,7 +439,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           right: 0;
           background: rgba(12, 13, 17, 0.98);
           border-top: 1px solid #282b36;
-          padding: 8px 8px;
+          padding: 8px 6px;
           z-index: 50;
           box-sizing: border-box;
         }
@@ -451,28 +449,34 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        @media (max-width: 520px) {
+        @media (max-width: 540px) {
           .abam-header-badge {
             display: none !important;
           }
           .abam-nav-link {
-            padding: 5px 3px !important;
-            font-size: 12px !important;
+            padding: 4px 3px !important;
+            font-size: 11.5px !important;
           }
           .abam-hero-title-main {
-            font-size: 24px !important;
+            font-size: 26px !important;
           }
           .abam-hero-title-tag {
-            font-size: 20px !important;
+            font-size: 22px !important;
           }
           .abam-hero-subtitle {
-            font-size: 16px !important;
+            font-size: 17px !important;
+            line-height: 1.4 !important;
           }
           .abam-course-price-cell {
             padding: 8px 2px !important;
           }
           .abam-course-price-val {
-            font-size: 13.5px !important;
+            font-size: 14px !important;
+          }
+          /* 모바일 본문 텍스트 확대: 억지로 줌인할 필요 없도록 큼직한 가독성 보장 */
+          .abam-body-text {
+            font-size: 15px !important;
+            line-height: 1.7 !important;
           }
         }
       `}</style>
@@ -573,13 +577,13 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           {/* 우측 메뉴 (표준 네비게이션) */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             <nav style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
-              <a href="#intro" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 7px' }}>소개</a>
-              <a href="#price" className="abam-nav-link" style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 7px' }}>코스안내</a>
-              <a href="#rules" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 7px' }}>이용안내</a>
-              <a href="#reviews" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 7px' }}>후기</a>
-              <a href="#faq" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 7px' }}>FAQ</a>
+              <a href="#intro" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>소개</a>
+              <a href="#price" className="abam-nav-link" style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 6px' }}>코스</a>
+              <a href="#rules" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>안내</a>
+              <a href="#reviews" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>후기</a>
+              <a href="#faq" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>FAQ</a>
             </nav>
-            <div style={{ display: 'flex', gap: '5px', fontSize: '11px', borderLeft: `1px solid ${C.line}`, paddingLeft: '6px' }}>
+            <div style={{ display: 'flex', gap: '4px', fontSize: '11px', borderLeft: `1px solid ${C.line}`, paddingLeft: '5px' }}>
               {LANGS.map((l) =>
                 l.code === c.lang ? (
                   <span key={l.code} style={{ color: C.pointGold, fontWeight: 800 }}>{l.label}</span>
@@ -629,7 +633,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               }}
             />
 
-            {/* 풍부하고 화려한 80여 개 별빛 모션 */}
+            {/* 풍부하고 화려한 80여 개 별빛 모션 (GPU 하드웨어 가속, 60fps 무지연) */}
             {HERO_STARS.map((s, idx) => {
               if (s.type === 'cross') {
                 return (
@@ -646,7 +650,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       justifyContent: 'center',
                       animation: `heroCrossGlint ${s.dur} ease-in-out infinite`,
                       animationDelay: s.delay,
-                      transformOrigin: 'center center',
+                      willChange: 'transform, opacity',
+                      transform: 'translate3d(0, 0, 0)',
                     }}
                   >
                     <svg width={s.size * 3} height={s.size * 3} viewBox="0 0 24 24" fill={s.color}>
@@ -666,10 +671,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       width: `${s.size}px`,
                       height: `${s.size}px`,
                       background: s.color,
-                      transform: 'rotate(45deg)',
+                      transform: 'translate3d(0, 0, 0) rotate(45deg)',
                       animation: `heroDiamondSparkle ${s.dur} ease-in-out infinite`,
                       animationDelay: s.delay,
-                      boxShadow: `0 0 ${s.size * 2.5}px ${s.color}`,
+                      willChange: 'transform, opacity',
                     }}
                   />
                 );
@@ -687,7 +692,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     background: s.color,
                     animation: `heroStarTwinkle ${s.dur} ease-in-out infinite`,
                     animationDelay: s.delay,
-                    boxShadow: `0 0 ${s.size * 2.5}px ${s.color}`,
+                    willChange: 'transform, opacity',
+                    transform: 'translate3d(0, 0, 0)',
                   }}
                 />
               );
@@ -697,7 +703,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div style={{ position: 'relative', zIndex: 1 }}>
             {/* 영업 상태 (단정하고 차분한 텍스트 배지) */}
           {status && (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#171922', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '5px 14px', fontSize: '12px', fontWeight: 600, color: C.textSub, marginBottom: '14px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(23, 25, 34, 0.85)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '5px 14px', fontSize: '12px', fontWeight: 600, color: C.textSub, marginBottom: '14px' }}>
               <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: status === 'closed' ? C.pointGold : '#10b981' }} />
               {x.status[status]}
             </div>
@@ -719,19 +725,19 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <span className="abam-hero-title-main" style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.45)' }}>아름다운 밤</span>
               <span className="abam-hero-title-tag" style={{ fontSize: '24px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
             </div>
-            <span className="abam-hero-subtitle" style={{ fontSize: '20px', fontWeight: 800, color: '#cbd5e1', letterSpacing: '-0.4px', display: 'block', marginTop: '4px' }}>
+            <span className="abam-hero-subtitle" style={{ fontSize: '19px', fontWeight: 800, color: '#cbd5e1', letterSpacing: '-0.4px', display: 'block', marginTop: '4px' }}>
               서울·경기 24시 1:1 방문 홈케어 출장안마 · 출장마사지
             </span>
           </h1>
 
-          {/* 아밤이 왜 아밤인지 설명 배너 */}
-          <div className="abam-hero-box" style={{ margin: '0 auto 12px', background: '#141722', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '11px 12px', fontSize: '13.5px', color: '#e2e8f0', lineHeight: 1.6, textAlign: 'center' }}>
+          {/* 아밤이 왜 아밤인지 설명 배너 (반투명 블러로 뒤편 별빛 투과 및 폰트 14.5px 가독성) */}
+          <div className="abam-hero-box" style={{ margin: '0 auto 12px', background: 'rgba(20, 23, 34, 0.82)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '12px 14px', fontSize: '14.5px', color: '#e2e8f0', lineHeight: 1.65, textAlign: 'center' }}>
             🌙 <strong style={{ color: C.pointGold }}>‘아름다운 밤’</strong>을 약속드리는 1:1 프리미엄 케어, 그래서 <strong style={{ color: '#ffffff' }}>아밤(Abam)</strong>입니다.<br />
             고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.
           </div>
 
           {/* 핵심 서비스 요약 바 */}
-          <div className="abam-hero-box" style={{ background: '#161822', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '10px 8px', margin: '0 auto 10px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '12.5px', color: '#e2e8f0', fontWeight: 700 }}>
+          <div className="abam-hero-box" style={{ background: 'rgba(22, 24, 34, 0.82)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '11px 8px', margin: '0 auto 10px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '13.5px', color: '#e2e8f0', fontWeight: 700 }}>
             <span>100% 현장 대면결제</span>
             <span style={{ color: C.lineLight }}>|</span>
             <span>20대 전문 힐러</span>
@@ -740,7 +746,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
 
           {/* 1시간 전 예약 안내 */}
-          <div className="abam-hero-box" style={{ margin: '0 auto 14px', background: '#181b26', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '9px 10px', fontSize: '12.5px', color: C.pointGold, textAlign: 'center', lineHeight: 1.5 }}>
+          <div className="abam-hero-box" style={{ margin: '0 auto 14px', background: 'rgba(24, 27, 38, 0.82)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '10px 10px', fontSize: '13px', color: C.pointGold, textAlign: 'center', lineHeight: 1.5 }}>
             이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하게 이용 가능합니다.
           </div>
 
@@ -756,8 +762,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 background: C.pointRed,
                 color: '#ffffff',
                 fontWeight: 800,
-                fontSize: '19px',
-                padding: '14px 16px',
+                fontSize: '20px',
+                padding: '15px 16px',
                 borderRadius: '8px',
                 textDecoration: 'none',
                 width: '100%',
@@ -777,12 +783,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '6px',
-                background: '#242836',
+                background: 'rgba(36, 40, 54, 0.88)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
                 border: `1px solid ${C.lineLight}`,
                 color: '#ffffff',
                 fontWeight: 700,
-                fontSize: '13.5px',
-                padding: '12px 8px',
+                fontSize: '14px',
+                padding: '13px 8px',
                 borderRadius: '6px',
                 textDecoration: 'none',
                 boxSizing: 'border-box',
@@ -798,12 +806,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '4px',
-                background: '#161822',
+                background: 'rgba(22, 24, 34, 0.88)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
                 border: `1px solid ${C.line}`,
                 color: C.textSub,
                 fontWeight: 700,
-                fontSize: '13px',
-                padding: '12px 8px',
+                fontSize: '13.5px',
+                padding: '13px 8px',
                 borderRadius: '6px',
                 cursor: 'pointer',
                 boxSizing: 'border-box',
@@ -813,7 +823,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </button>
           </div>
 
-          <div style={{ fontSize: '12px', color: C.textMuted, marginBottom: '20px', lineHeight: 1.5 }}>
+          <div style={{ fontSize: '12.5px', color: C.textMuted, marginBottom: '20px', lineHeight: 1.5 }}>
             ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 24시간 언제든 편하게 접수하실 수 있습니다.
           </div>
 
@@ -834,12 +844,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
           {head('출장안마 서비스 안내', '서울·경기 전지역 100% 현장 대면결제')}
-          <div className="abam-card" style={{ fontSize: '13.5px', color: '#cbd5e1', lineHeight: 1.8 }}>
-            <p style={{ margin: '0 0 10px' }}>
+          <div className="abam-card abam-body-text" style={{ fontSize: '15px', color: '#e2e8f0', lineHeight: 1.75 }}>
+            <p style={{ margin: '0 0 12px' }}>
               출장안마는 고객님이 계신 곳(자택, 아파트, 오피스텔, 호텔, 모텔)으로 전문 힐러가 직접 찾아가는 1:1 방문 맞춤 마사지 케어 서비스입니다.
             </p>
-            <p style={{ margin: '0 0 10px' }}>
-              아밤(Abam)은 선입금, 예약금, 출발비 등을 절대 요구하지 않는 <strong>100% 현장 대면결제 원칙</strong>을 준수합니다. 매니저가 현장에 도착하여 고객님과 직접 대면한 후 결제가 진행되므로 안심하고 이용하실 수 있습니다.
+            <p style={{ margin: '0 0 12px' }}>
+              아밤(Abam)은 선입금, 예약금, 출발비 등을 절대 요구하지 않는 <strong style={{ color: '#ffffff' }}>100% 현장 대면결제 원칙</strong>을 준수합니다. 매니저가 현장에 도착하여 고객님과 직접 대면한 후 결제가 진행되므로 안심하고 이용하실 수 있습니다.
             </p>
             <p style={{ margin: 0 }}>
               과중한 업무와 일상에서 지친 심신을 가장 편안하고 익숙한 프라이빗 공간에서 최고의 힐링으로 채워드립니다.
@@ -854,22 +864,22 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {c.courses.map((course) => (
               <article key={course.no} className="abam-card" style={{ overflow: 'hidden', padding: 0 }}>
-                <div style={{ padding: '10px 14px', background: '#1c1f2b', borderBottom: `1px solid ${C.line}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ padding: '12px 14px', background: '#1c1f2b', borderBottom: `1px solid ${C.line}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ background: C.pointRed, color: '#ffffff', fontWeight: 800, fontSize: '11px', padding: '2px 8px', borderRadius: '4px' }}>
+                    <span style={{ background: C.pointRed, color: '#ffffff', fontWeight: 800, fontSize: '12px', padding: '3px 8px', borderRadius: '4px' }}>
                       {course.no === 1 ? 'A코스' : course.no === 2 ? 'B코스' : 'C코스'}
                     </span>
-                    <strong style={{ fontSize: '15.5px', color: '#ffffff' }}>{course.name} 코스</strong>
+                    <strong style={{ fontSize: '17px', color: '#ffffff' }}>{course.name} 코스</strong>
                   </div>
-                  <span style={{ fontSize: '12px', color: C.pointGold, fontWeight: 700 }}>{course.subtitle}</span>
+                  <span style={{ fontSize: '13px', color: C.pointGold, fontWeight: 700 }}>{course.subtitle}</span>
                 </div>
-                <div style={{ padding: '12px 12px' }}>
-                  <p style={{ fontSize: '13px', color: C.textSub, margin: '0 0 10px', lineHeight: 1.6 }}>{course.desc}</p>
+                <div style={{ padding: '14px 12px' }}>
+                  <p style={{ fontSize: '14px', color: C.textSub, margin: '0 0 12px', lineHeight: 1.6 }}>{course.desc}</p>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' }}>
                     {course.prices.map((pr, pi) => (
-                      <div key={pi} className="abam-course-price-cell" style={{ textAlign: 'center', border: `1px solid ${C.line}`, background: '#101218', borderRadius: '6px', padding: '9px 4px' }}>
-                        <div style={{ fontSize: '11px', color: C.textMuted }}>{c.priceSection.durations[pi]}</div>
-                        <div className="abam-course-price-val" style={{ fontSize: '14.5px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>{pr}</div>
+                      <div key={pi} className="abam-course-price-cell" style={{ textAlign: 'center', border: `1px solid ${C.line}`, background: '#101218', borderRadius: '6px', padding: '10px 4px' }}>
+                        <div style={{ fontSize: '12px', color: C.textMuted }}>{c.priceSection.durations[pi]}</div>
+                        <div className="abam-course-price-val" style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>{pr}</div>
                       </div>
                     ))}
                   </div>
@@ -916,27 +926,27 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="rules" style={section}>
           {head('이용 및 방문 안내', '편안하고 안전한 방문을 위한 필수 안내')}
           
-          <div className="abam-card">
+          <div className="abam-card" style={{ padding: '16px 14px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>1. 건물 주차장 안내</div>
-                <div style={{ fontSize: '13px', color: C.textSub, lineHeight: 1.6 }}>건물 내 주차장이 있으시면 도착 후 기사가 바로 전화드립니다.</div>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>1. 건물 주차장 안내</div>
+                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>건물 내 주차장이 있으시면 도착 후 기사가 바로 전화드립니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>2. 공동현관 비밀번호</div>
-                <div style={{ fontSize: '13px', color: C.textSub, lineHeight: 1.6 }}>비밀번호를 예약 시 남겨주시거나 도착 시 세대 호출벨을 눌러주시면 됩니다.</div>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>2. 공동현관 비밀번호</div>
+                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>비밀번호를 예약 시 남겨주시거나 도착 시 세대 호출벨을 눌러주시면 됩니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>3. 호텔·모텔 객실 안내</div>
-                <div style={{ fontSize: '13px', color: C.textSub, lineHeight: 1.6 }}>도착 전 미리 연락드리며, 1층 로비에서 결제 후 객실에서 서비스를 받으시면 됩니다.</div>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>3. 호텔·모텔 객실 안내</div>
+                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>도착 전 미리 연락드리며, 1층 로비에서 결제 후 객실에서 서비스를 받으시면 됩니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>4. 100% 현장 대면결제</div>
-                <div style={{ fontSize: '13px', color: C.textSub, lineHeight: 1.6 }}>현금, 계좌이체, 카드 결제 모두 가능합니다. 어떠한 선입금도 요구하지 않습니다.</div>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>4. 100% 현장 대면결제</div>
+                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>현금, 계좌이체, 카드 결제 모두 가능합니다. 어떠한 선입금도 요구하지 않습니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '14px', fontWeight: 800, color: C.pointGold, marginBottom: '2px' }}>5. 문자(SMS) 간편 예약 접수</div>
-                <div style={{ fontSize: '13px', color: C.textSub, lineHeight: 1.6 }}>전화 통화 없이 문자로도 24시간 예약 가능합니다. (희망 시간 1시간 전 예약 시 가장 수월하게 이용하실 수 있습니다.)</div>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: C.pointGold, marginBottom: '2px' }}>5. 문자(SMS) 간편 예약 접수</div>
+                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>전화 통화 없이 문자로도 24시간 예약 가능합니다. (희망 시간 1시간 전 예약 시 가장 수월하게 이용하실 수 있습니다.)</div>
               </div>
             </div>
           </div>
@@ -944,11 +954,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 6. 100% 현장 직접 대면결제 원칙 ── */}
         <section id="safety" style={section}>
-          <div className="abam-card" style={{ borderLeft: `4px solid ${C.pointRed}`, textAlign: 'left' }}>
-            <h3 style={{ color: '#ffffff', fontSize: '15.5px', fontWeight: 800, margin: '0 0 6px' }}>
+          <div className="abam-card" style={{ borderLeft: `4px solid ${C.pointRed}`, textAlign: 'left', padding: '16px 14px' }}>
+            <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: 800, margin: '0 0 6px' }}>
               아밤(Abam) 100% 현장 직접 대면결제 원칙
             </h3>
-            <div style={{ fontSize: '13px', color: C.textSub, lineHeight: 1.7, wordBreak: 'keep-all' }}>
+            <div style={{ fontSize: '14px', color: C.textSub, lineHeight: 1.7, wordBreak: 'keep-all' }}>
               아밤은 고객님께 사전 입금을 단 1원도 요구하지 않습니다.<br />
               관리사가 고객님이 계신 곳(자택·호텔)에 도착하여 직접 대면한 후 결제(현금, 계좌이체, 카드)를 진행하므로 안심하고 안전하게 이용하실 수 있습니다.
             </div>
@@ -1006,15 +1016,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {c.reviews.map((rev, i) => (
-              <figure key={i} className="abam-card" style={{ margin: 0 }}>
+              <figure key={i} className="abam-card" style={{ margin: 0, padding: '14px 14px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <span style={{ color: C.pointGold, fontSize: '11px', letterSpacing: '1px' }}>★★★★★</span>
-                  <span style={{ fontSize: '12px', color: C.pointGold, fontWeight: 700 }}>{rev.course}</span>
+                  <span style={{ color: C.pointGold, fontSize: '11.5px', letterSpacing: '1px' }}>★★★★★</span>
+                  <span style={{ fontSize: '13px', color: C.pointGold, fontWeight: 700 }}>{rev.course}</span>
                 </div>
-                <blockquote style={{ margin: 0, fontSize: '13px', color: '#e2e8f0', lineHeight: 1.65, wordBreak: 'keep-all' }}>
+                <blockquote style={{ margin: 0, fontSize: '14.5px', color: '#e2e8f0', lineHeight: 1.7, wordBreak: 'keep-all' }}>
                   {rev.text}
                 </blockquote>
-                <figcaption style={{ fontSize: '11.5px', color: C.textMuted, marginTop: '8px' }}>
+                <figcaption style={{ fontSize: '12px', color: C.textMuted, marginTop: '8px' }}>
                   <span style={{ color: '#ffffff', fontWeight: 700 }}>{rev.author}</span> · {rev.area}
                 </figcaption>
               </figure>
@@ -1031,12 +1041,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               const isOpen = openFaq === i;
               return (
                 <div key={i} style={{ borderTop: i ? `1px solid ${C.line}` : 'none', background: isOpen ? '#1a1d27' : 'transparent' }}>
-                  <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} style={{ width: '100%', padding: '12px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', gap: '8px', background: 'none', border: 'none', cursor: 'pointer' }}>
-                    <span style={{ fontSize: '13.5px', fontWeight: 700, color: isOpen ? C.pointGold : '#ffffff' }}>{faq.q}</span>
+                  <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} style={{ width: '100%', padding: '14px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', gap: '8px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                    <span style={{ fontSize: '15px', fontWeight: 700, color: isOpen ? C.pointGold : '#ffffff' }}>{faq.q}</span>
                     <span style={{ fontSize: '16px', color: C.pointRed, fontWeight: 700 }}>{isOpen ? '−' : '+'}</span>
                   </button>
                   {isOpen && (
-                    <div style={{ margin: '0 12px 12px', padding: '10px 12px', background: '#101218', borderLeft: `3px solid ${C.pointRed}`, borderRadius: '4px', fontSize: '12.5px', color: C.textSub, lineHeight: 1.7, whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>
+                    <div style={{ margin: '0 12px 14px', padding: '12px 14px', background: '#101218', borderLeft: `3px solid ${C.pointRed}`, borderRadius: '4px', fontSize: '14px', color: C.textSub, lineHeight: 1.75, whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>
                       {faq.a}
                     </div>
                   )}
