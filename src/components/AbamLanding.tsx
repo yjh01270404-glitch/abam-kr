@@ -235,6 +235,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   const [toast, setToast] = useState<string | null>(null);
   const [status, setStatus] = useState<'open' | 'pre' | 'closed' | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
 
   /* 영업 상태 (한국 시간 기준) */
   useEffect(() => {
@@ -245,6 +246,20 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     calc();
     const t = setInterval(calc, 60000);
     return () => clearInterval(t);
+  }, []);
+
+  /* 스피드출장 황금비율: 히어로 화면에서는 2대 대형 알약 버튼에 집중하고, 아래로 스크롤 시 하단 고정바 부드럽게 등장 */
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 100) {
+        setShowStickyBar(true);
+      } else {
+        setShowStickyBar(false);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   // 주차장, 현관비번, 호텔1층 미팅, 결제수단(현금/이체/카드) 포함 오리지널 문자 예약 템플릿
@@ -761,22 +776,22 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       )}
 
-      {/* ── 1. 상단 헤더: 스피드출장 스타일 모바일 햄버거 + 중앙 로고 + 퀵 통화 ── */}
+      {/* ── 1. 상단 헤더: 스피드출장 스타일 모바일 햄버거 + 중앙 로고 (골드 포인트) ── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 100, background: '#0a0b10', borderBottom: '1px solid #1f232e' }}>
         <div style={{ width: '100%', maxWidth: '900px', margin: '0 auto', padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxSizing: 'border-box' }}>
           
-          {/* 좌측: 모바일 햄버거 메뉴 버튼 (스피드출장 노란색 ☰ 스타일) */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* 좌측: 모바일 햄버거 메뉴 버튼 (스피드출장 골드 ☰ 스타일) */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="전체 메뉴 열기"
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#f59e0b',
-                fontSize: '26px',
+                color: '#facc15',
+                fontSize: '25px',
                 cursor: 'pointer',
-                padding: '4px',
+                padding: '4px 6px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -785,65 +800,63 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             >
               ☰
             </button>
-
-            {/* 중앙 로고: 아름다운 밤 [아밤] */}
-            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.9))' }}>
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#headerMoonGradSpeed)" />
-                <defs>
-                  <linearGradient id="headerMoonGradSpeed" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#fef08a" />
-                    <stop offset="100%" stopColor="#f59e0b" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <span style={{ fontSize: '20px', fontWeight: 900, color: '#f59e0b', letterSpacing: '-0.5px' }}>
-                아름다운 밤 <span style={{ color: '#ffffff' }}>아밤</span>
-              </span>
-            </Link>
           </div>
 
-          {/* 우측: 데스크톱 메뉴 + 모바일 퀵 통화 아이콘 */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            
+          {/* 중앙 로고: 스피드출장처럼 크고 당당한 타이틀 */}
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.8))' }}>
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#headerMoonGradSpeed)" />
+              <defs>
+                <linearGradient id="headerMoonGradSpeed" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#fef08a" />
+                  <stop offset="100%" stopColor="#f59e0b" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span style={{ fontSize: '22px', fontWeight: 900, color: '#facc15', letterSpacing: '-0.5px' }}>
+              아름다운 밤 <span style={{ color: '#ffffff' }}>아밤</span>
+            </span>
+          </Link>
 
+          {/* 우측: 중앙 로고 밸런스를 맞추는 컴팩트 원형 통화 아이콘 */}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <a
               href={c.contact.tel}
+              aria-label="24시 전화예약"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                justifyContent: 'center',
+                width: '36px',
+                height: '36px',
                 background: '#e11d48',
                 color: '#ffffff',
-                fontWeight: 900,
-                fontSize: '14px',
-                padding: '7px 12px',
-                borderRadius: '20px',
+                borderRadius: '50%',
                 textDecoration: 'none',
                 boxShadow: '0 2px 8px rgba(225,29,72,0.4)',
               }}
             >
-              <PhoneIcon size={15} /> <span>전화예약</span>
+              <PhoneIcon size={17} />
             </a>
           </div>
         </div>
 
-        {/* ── 스피드출장 스타일 서브 카테고리 칩 바 (가로 2열 / 스크롤) ── */}
-        <div style={{ background: '#0e1017', borderTop: '1px solid #1a1e29', padding: '8px 12px', overflowX: 'auto', whiteSpace: 'nowrap', WebkitOverflowScrolling: 'touch' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxWidth: '900px', margin: '0 auto' }}>
-            <div style={{ display: 'flex', gap: '14px', fontSize: '13.5px', fontWeight: 800 }}>
-              <a href="#price" style={{ color: '#ffffff', textDecoration: 'none' }}>아밤출장마사지</a>
-              <a href="#price" style={{ color: '#f59e0b', textDecoration: 'none' }}>코스안내</a>
-              <a href="#safety" style={{ color: '#cbd5e1', textDecoration: 'none' }}>100%후불제</a>
-              <a href="#intro" style={{ color: '#cbd5e1', textDecoration: 'none' }}>서울출장마사지</a>
-              <a href="#intro" style={{ color: '#cbd5e1', textDecoration: 'none' }}>경기출장마사지</a>
+        {/* ── 스피드출장 스타일 서브 카테고리 칩 바 (고급 골드 폰트 · 여유로운 간격) ── */}
+        <div style={{ background: '#0e1017', borderTop: '1px solid #1a1e29', padding: '9px 14px', overflowX: 'auto', whiteSpace: 'nowrap', WebkitOverflowScrolling: 'touch' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '7px', maxWidth: '900px', margin: '0 auto' }}>
+            <div style={{ display: 'flex', gap: '18px', fontSize: '14px', fontWeight: 800 }}>
+              <a href="#price" style={{ color: '#facc15', textDecoration: 'none' }}>아밤출장마사지</a>
+              <a href="#price" style={{ color: '#fef08a', textDecoration: 'none' }}>코스안내</a>
+              <a href="#safety" style={{ color: '#facc15', textDecoration: 'none' }}>100%후불제</a>
+              <a href="#intro" style={{ color: '#facc15', textDecoration: 'none' }}>서울출장마사지</a>
+              <a href="#intro" style={{ color: '#facc15', textDecoration: 'none' }}>경기출장마사지</a>
             </div>
-            <div style={{ display: 'flex', gap: '12px', fontSize: '12.5px', fontWeight: 700, color: '#94a3b8' }}>
-              <a href="/seo/%EA%B0%95%EB%82%A8%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#fef08a', textDecoration: 'none' }}>강남출장안마</a>
-              <a href="/seo/%EC%84%9C%EC%B4%88%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#cbd5e1', textDecoration: 'none' }}>서초출장안마</a>
-              <a href="/seo/%EC%86%A1%ED%8C%8C%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#cbd5e1', textDecoration: 'none' }}>송파출장안마</a>
-              <a href="/seo/%EB%B6%84%EB%8B%B9%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#cbd5e1', textDecoration: 'none' }}>분당·판교</a>
-              <a href="/seo/%EC%88%98%EC%9B%90%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#cbd5e1', textDecoration: 'none' }}>수원·동탄</a>
+            <div style={{ display: 'flex', gap: '16px', fontSize: '13px', fontWeight: 700 }}>
+              <a href="/seo/%EA%B0%95%EB%82%A8%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#fde047', textDecoration: 'none' }}>강남출장안마</a>
+              <a href="/seo/%EC%84%9C%EC%B4%88%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#fde047', textDecoration: 'none' }}>서초출장안마</a>
+              <a href="/seo/%EC%86%A1%ED%8C%8C%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#fde047', textDecoration: 'none' }}>송파출장안마</a>
+              <a href="/seo/%EB%B6%84%EB%8B%B9%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#fde047', textDecoration: 'none' }}>분당·판교</a>
+              <a href="/seo/%EC%88%98%EC%9B%90%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80" style={{ color: '#fde047', textDecoration: 'none' }}>수원·동탄</a>
             </div>
           </div>
         </div>
@@ -959,198 +972,200 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
       {/* ── 메인 콘텐츠 ── */}
       {/* ── 2. 스피드출장 정석 비율: 화보 전면 풀스크린 히어로 (Full-Bleed 100% Background Hero) ── */}
-        <section
-          style={{
-            position: 'relative',
-            width: '100%',
-            minHeight: '82vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            overflow: 'hidden',
-            boxSizing: 'border-box',
-            margin: 0,
-            padding: 0,
-          }}
-        >
-          {/* 전면 100% 배경 화보: 스피드출장과 100% 동일한 구도의 한국 20대 모델 바스트 샷 */}
-          <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-            <Image
-              src="/images/abam_hero_speed_model.jpg"
-              alt="아밤 24시 출장마사지 힐링 케어"
-              fill
-              priority
-              style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
-              sizes="100vw"
-            />
-            {/* 시네마틱 다크 그라데이션 오버레이: 상단은 모델 얼굴이 맑게 보이고 하단 텍스트 영역은 짙은 블랙으로 가독성 100% */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(180deg, rgba(10,11,16,0.15) 0%, rgba(10,11,16,0.3) 35%, rgba(10,11,16,0.78) 65%, rgba(10,11,16,0.96) 88%, #0c0d11 100%)',
-              }}
-            />
-          </div>
-
-          {/* 화보 위에 시원시원하게 얹힌 텍스트 & 스피드출장 스타일 2대 둥근 캡슐 버튼 */}
+      <section
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: 'calc(100svh - 96px)',
+          minHeight: '580px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          overflow: 'hidden',
+          boxSizing: 'border-box',
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        {/* 전면 100% 배경 화보: 스피드출장과 100% 동일한 구도의 한국 20대 모델 바스트 샷 */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <Image
+            src="/images/abam_hero_speed_model.jpg"
+            alt="아밤 24시 출장마사지 힐링 케어"
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center 12%' }}
+            sizes="100vw"
+          />
+          {/* 시네마틱 다크 그라데이션: 상단 모델 미모 맑게 보존 + 하단 텍스트 완벽 가독성 */}
           <div
             style={{
-              position: 'relative',
-              zIndex: 2,
-              width: '100%',
-              maxWidth: '600px',
-              margin: '0 auto',
-              padding: '40px 16px 24px',
-              textAlign: 'center',
-              boxSizing: 'border-box',
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, rgba(10,11,16,0.08) 0%, rgba(10,11,16,0.18) 35%, rgba(10,11,16,0.68) 60%, rgba(10,11,16,0.92) 85%, #0c0d11 100%)',
+            }}
+          />
+        </div>
+
+        {/* 화보 위에 시원시원하게 얹힌 텍스트 & 스피드출장 스타일 2대 둥근 캡슐 버튼 */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 2,
+            width: '100%',
+            maxWidth: '560px',
+            margin: '0 auto',
+            padding: '20px 16px 28px',
+            textAlign: 'center',
+            boxSizing: 'border-box',
+          }}
+        >
+          {/* 대형 H1 메인 타이틀: 스피드출장 100% 동일 비율 */}
+          <h1
+            style={{
+              fontSize: '22px',
+              fontWeight: 900,
+              lineHeight: 1.4,
+              color: '#ffffff',
+              margin: '0 0 14px',
+              letterSpacing: '-0.5px',
+              textShadow: '0 2px 14px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.9)',
+              wordBreak: 'keep-all',
             }}
           >
-            {/* 영업 상태 뱃지 */}
-            {status && (
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: 'rgba(18, 20, 28, 0.88)',
-                  backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(245,158,11,0.4)',
-                  borderRadius: '20px',
-                  padding: '5px 14px',
-                  fontSize: '13px',
-                  fontWeight: 800,
-                  color: '#fef08a',
-                  marginBottom: '14px',
-                }}
-              >
-                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: status === 'closed' ? '#f59e0b' : '#10b981' }} />
-                {x.status[status]}
-              </div>
-            )}
+            서울출장마사지 서울출장안마 24시 예약 안내<br />
+            <span style={{ color: '#facc15' }}>– 아름다운 밤 [아밤]</span>
+          </h1>
 
-            {/* 대형 H1 메인 타이틀: 스피드출장 100% 동일 비율 */}
-            <h1
-              style={{
-                fontSize: '24px',
-                fontWeight: 900,
-                lineHeight: 1.35,
-                color: '#ffffff',
-                margin: '0 0 14px',
-                letterSpacing: '-0.5px',
-                textShadow: '0 2px 14px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.9)',
-                wordBreak: 'keep-all',
-              }}
-            >
-              서울출장마사지 서울출장안마 24시 예약 안내<br />
-              <span style={{ color: '#f59e0b' }}>– 아름다운 밤 [아밤]</span>
-            </h1>
+          {/* 스피드출장 정석 본문 설명 텍스트 (화면 가득 시원시원한 가독성) */}
+          <p
+            style={{
+              fontSize: '15.5px',
+              color: '#f8fafc',
+              lineHeight: 1.75,
+              margin: '0 auto 22px',
+              wordBreak: 'keep-all',
+              textShadow: '0 2px 12px rgba(0,0,0,0.95)',
+              maxWidth: '500px',
+            }}
+          >
+            서울출장마사지는 고객이 머무시는 자택이나 호텔, 모텔, 오피스텔 등으로 100% 한국인 관리사가 찾아가는 예약형 서비스입니다. 별도의 매장을 방문하거나 대기할 필요 없이 익숙한 공간에서 편안하게 컨디션을 관리하실 수 있습니다.
+          </p>
 
-            {/* 스피드출장 정석 본문 설명 텍스트 (화면 가득 시원시원한 가독성) */}
-            <p
+          {/* ── 스피드출장 100% 동일한 2대 시그니처 둥근 캡슐 버튼 ── */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '12px',
+              maxWidth: '420px',
+              margin: '0 auto',
+            }}
+          >
+            {/* 🟡 노란색 둥근 알약 버튼: 전화하기 */}
+            <a
+              href={c.contact.tel}
               style={{
-                fontSize: '16px',
-                color: '#f8fafc',
-                lineHeight: 1.7,
-                margin: '0 auto 20px',
-                wordBreak: 'keep-all',
-                textShadow: '0 2px 12px rgba(0,0,0,0.95)',
-                maxWidth: '520px',
-              }}
-            >
-              서울출장마사지는 고객이 머무시는 자택이나 호텔, 모텔, 오피스텔 등으로 100% 한국인 관리사가 직접 찾아가는 1:1 방문 맞춤 케어 서비스입니다. 선입금·예약금이 단 1원도 없는 <strong style={{ color: '#fef08a' }}>100% 현장 대면결제</strong>로 안전하고 편안하게 컨디션을 관리하실 수 있습니다.
-            </p>
-
-            {/* 핵심 3대 신뢰 포인트 바 */}
-            <div
-              style={{
-                background: 'rgba(18, 20, 28, 0.88)',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: '8px',
-                padding: '11px 12px',
-                margin: '0 auto 20px',
                 display: 'flex',
-                justifyContent: 'space-around',
                 alignItems: 'center',
-                fontSize: '14px',
-                color: '#ffffff',
-                fontWeight: 800,
+                justifyContent: 'center',
+                gap: '8px',
+                background: '#facc15',
+                color: '#000000',
+                fontSize: '18px',
+                fontWeight: 900,
+                padding: '16px 0',
+                borderRadius: '35px',
+                textDecoration: 'none',
+                boxShadow: '0 6px 18px rgba(250,204,21,0.5)',
+                boxSizing: 'border-box',
               }}
             >
-              <span>100% 대면결제</span>
-              <span style={{ color: '#475569' }}>|</span>
-              <span>20대 전문 힐러</span>
-              <span style={{ color: '#475569' }}>|</span>
-              <span>서울·경기 30분 도착</span>
-            </div>
+              <PhoneIcon size={20} /> 전화하기
+            </a>
 
-            {/* ── 스피드출장 100% 동일한 2대 시그니처 둥근 캡슐 버튼 ── */}
-            <div
+            {/* ⚪ 흰색 둥근 알약 버튼: 코스 보기 */}
+            <a
+              href="#price"
               style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '10px',
-                maxWidth: '420px',
-                margin: '0 auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                background: '#ffffff',
+                color: '#0a0b10',
+                fontSize: '18px',
+                fontWeight: 900,
+                padding: '16px 0',
+                borderRadius: '35px',
+                textDecoration: 'none',
+                boxShadow: '0 6px 18px rgba(255,255,255,0.3)',
+                boxSizing: 'border-box',
               }}
             >
-              {/* 🟡 노란색 둥근 알약 버튼: 전화하기 */}
-              <a
-                href={c.contact.tel}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  background: '#f59e0b',
-                  color: '#000000',
-                  fontSize: '17.5px',
-                  fontWeight: 900,
-                  padding: '15px 0',
-                  borderRadius: '35px',
-                  textDecoration: 'none',
-                  boxShadow: '0 6px 18px rgba(245,158,11,0.5)',
-                  boxSizing: 'border-box',
-                }}
-              >
-                <PhoneIcon size={19} /> 전화하기
-              </a>
-
-              {/* ⚪ 흰색 둥근 알약 버튼: 코스 보기 */}
-              <a
-                href="#price"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  background: '#ffffff',
-                  color: '#0a0b10',
-                  fontSize: '17.5px',
-                  fontWeight: 900,
-                  padding: '15px 0',
-                  borderRadius: '35px',
-                  textDecoration: 'none',
-                  boxShadow: '0 6px 18px rgba(255,255,255,0.3)',
-                  boxSizing: 'border-box',
-                }}
-              >
-                💆 코스 보기
-              </a>
-            </div>
-
-            {/* 1시간 전 예약 안내 */}
-            <div style={{ marginTop: '14px', fontSize: '13px', color: '#cbd5e1', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
-              ※ 희망 시간 <strong>1시간 전 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하게 이용 가능합니다.
-            </div>
+              💆 코스 보기
+            </a>
           </div>
-        </section>
-        <main className="abam-container" style={{ position: 'relative', zIndex: 1, wordBreak: 'keep-all' }}>
+        </div>
+      </section>
+
+      <main className="abam-container" style={{ position: 'relative', zIndex: 1, wordBreak: 'keep-all' }}>
 
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
+          
+          {/* 핵심 3대 신뢰 포인트 바 (히어로 바로 아래 웅장하게 안착) */}
+          <div
+            style={{
+              background: 'linear-gradient(135deg, rgba(21,23,30,0.95), rgba(28,31,43,0.95))',
+              border: '1px solid #282b36',
+              borderRadius: '8px',
+              padding: '14px 16px',
+              marginBottom: '16px',
+              display: 'flex',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              fontSize: '14.5px',
+              color: '#ffffff',
+              fontWeight: 800,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+            }}
+          >
+            <span style={{ color: '#facc15' }}>100% 대면결제</span>
+            <span style={{ color: '#475569' }}>|</span>
+            <span>20대 전문 힐러</span>
+            <span style={{ color: '#475569' }}>|</span>
+            <span style={{ color: '#10b981' }}>서울·경기 30분 도착</span>
+          </div>
+
+          {/* 영업 상태 및 1시간 전 예약 안내 바 */}
+          <div
+            style={{
+              background: 'rgba(245, 158, 11, 0.1)',
+              border: '1px solid rgba(245, 158, 11, 0.25)',
+              borderRadius: '8px',
+              padding: '12px 16px',
+              marginBottom: '22px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '8px',
+              fontSize: '13.5px',
+            }}
+          >
+            {status && (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#fef08a', fontWeight: 800 }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: status === 'closed' ? '#f59e0b' : '#10b981' }} />
+                {x.status[status]}
+              </span>
+            )}
+            <span style={{ color: '#cbd5e1' }}>
+              희망 시간 <strong>1시간 전 예약 시</strong> 가장 수월하게 이용 가능
+            </span>
+          </div>
+
           {head('출장안마 서비스 안내', '서울·경기 전지역 100% 현장 대면결제')}
           <div className="abam-card abam-body-text" style={{ fontSize: '15.5px', color: '#e2e8f0', lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 14px' }}>
@@ -1572,8 +1587,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
       </main>
 
-      {/* ── 12. 하단 고정 퀵바 (큼직한 대형 통화/문자 버튼 · 압도적 터치감과 가독성) ── */}
-      <div className="abam-bottom-bar">
+      {/* ── 12. 하단 고정 퀵바 (첫 화면 히어로에서는 깔끔히 숨겨지고 스크롤 시 부드럽게 등장) ── */}
+      <div
+        className="abam-bottom-bar"
+        style={{
+          transform: showStickyBar ? 'translateY(0)' : 'translateY(110%)',
+          opacity: showStickyBar ? 1 : 0,
+          transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease-out',
+          pointerEvents: showStickyBar ? 'auto' : 'none',
+        }}
+      >
         <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
           {isKo ? (
             <a
