@@ -26,14 +26,22 @@ const BING_VERIFICATION = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL('https://abam.kr'),
   title: {
-    default: '출장마사지 · 출장안마 1위 [20대 ACE 총출동] 서울·경기·인천 100% 후불제 | 아밤 Abam.kr',
-    template: '%s | 출장마사지 1위 20대 ACE 총출동 아밤 Abam.kr',
+    default: '【출장마사지 1위】 20대 ACE 총출동 | 서울·경기·인천 100% 현장후불제 아밤 Abam.kr',
+    template: '%s | 【출장마사지 1위】 아밤 Abam.kr',
   },
   description:
     '출장마사지 · 출장안마 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울 전역 자택·호텔 30분 총알도착, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 힐링 코스 60분/90분/120분 정찰제 운영.',
   keywords: [
     '출장마사지',
     '출장안마',
+    '출장마사지1위',
+    '출장안마1위',
+    '경기출장마사지',
+    '인천출장마사지',
+    '도도출장안마',
+    '도도출장마사지',
+    '스피드출장안마',
+    '스피드출장마사지',
     '후불제출장마사지',
     '서울출장마사지',
     '호텔출장마사지',
@@ -71,7 +79,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: '출장마사지 · 출장안마 1위 [20대 ACE 총출동] 서울·경기·인천 100% 후불제 | 아밤 Abam.kr',
+    title: '【출장마사지 1위】 20대 ACE 총출동 | 서울·경기·인천 100% 현장후불제 아밤 Abam.kr',
     description:
       '서울 전역 자택·호텔 30분 총알도착! 전원 20대 에이스 관리사 라인업, 사전 예약금 없는 100% 현장 후불제 출장마사지 & 출장안마. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
     type: 'website',

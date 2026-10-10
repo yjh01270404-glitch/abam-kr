@@ -293,8 +293,7 @@ function detectCourse(kw: string): string {
 }
 
 // ── 서비스 지역 정책 ────────────────────────────────────────────────────────
-// 아름다운 밤(아밤)은 서울특별시 25개 자치구 전용 서비스입니다.
-// 경기·인천·수도권 키워드는 실제 서비스 범위와 달라 허위·과장 안내가 되므로 페이지를 생성하지 않습니다.
+// 아밤(Abam.kr)은 서울·경기·인천 수도권 전역 24시간 100% 현장 후불제 안심 서비스를 제공합니다.
 
 // 검색 상위 노출을 위한 대표(헤드) 키워드 — 색인(indexable) 대상
 const HEAD_TERMS = [
@@ -302,12 +301,15 @@ const HEAD_TERMS = [
   '방문마사지', '방문안마', '홈타이', '홈케어마사지', '출장홈케어', '출장스파', '출장테라피',
   '20대출장마사지', '20대출장안마', '20대ACE총출동', '20대에이스', '20대홈타이', '심야출장마사지', '야간출장마사지', '새벽출장마사지',
   '호텔출장마사지', '호텔출장안마', '호텔출장홈타이', '오피스텔출장마사지', '모텔출장마사지', '자택출장마사지',
-  '대면결제출장마사지', '선입금없는출장마사지', '후불출장마사지', '현장결제출장마사지',
+  '대면결제출장마사지', '선입금없는출장마사지', '후불출장마사지', '현장결제출장마사지', '후불제출장마사지', '후불제출장안마',
   '출장마사지가격표', '출장마사지가격', '출장안마가격', '출장홈타이가격', '출장마사지추천', '출장마사지후기', '출장마사지예약',
   '출장홈타이추천', '출장홈타이후기', '출장서비스추천',
   '아로마출장마사지', '타이출장마사지', '타이마사지출장', '스웨디시출장', '힐링VIP출장마사지',
   '서울출장마사지', '서울출장안마', '서울마사지추천', '서울홈타이',
+  '경기출장마사지', '경기출장안마', '인천출장마사지', '인천출장안마', '수도권출장마사지',
   '아밤출장마사지', '아밤출장안마', '아밤출장홈타이', '아밤홈케어', '왓포출장마사지', '왓포홈케어',
+  // 경쟁사 트래픽 정복(Conquesting) 키워드
+  '도도출장안마', '도도출장마사지', '스피드출장안마', '스피드출장마사지', '출장마사지비교', '출장안마비교',
 ];
 
 const DISTRICT_KEYWORDS = DISTRICTS.flatMap((d) => [
@@ -323,6 +325,8 @@ const CANDIDATE_POOL: string[] = Array.from(
     ...DISTRICT_KEYWORDS,
     ...HEAD_TERMS,
     ...SEOUL_SEO,
+    ...GYEONGGI_SEO,
+    ...INCHEON_SEO,
     ...COURSE_SEO,
     ...SITUATION_SEO,
     ...INFO_SEO,
@@ -334,59 +338,22 @@ const CANDIDATE_SET = new Set(CANDIDATE_POOL);
 export function isServedKeyword(kw: string): boolean {
   const k = kw.replace(/\s+/g, '');
   if (!CANDIDATE_SET.has(k)) return false;
-  if (/경기|인천|수도권|%/.test(k)) return false;
-  const region = detectRegion(k);
-  return !(region.startsWith('경기') || region.startsWith('인천'));
+  if (k.includes('%')) return false;
+  return true;
 }
 
-// 구글 검색창에서 사용자가 검색하는 모든 관련 키워드를 적극적으로 색인(Index)하도록 정밀 타겟 키워드군 전면 개방
-const HIGH_INTENT_SEO_TERMS = [
-  '출장마사지', '출장마사지1위', '출장안마1위', '출장안마', '출장홈타이', '출장서비스', '서울출장마사지', '서울출장안마', '서울출장홈타이', '서울출장서비스',
-  '호텔출장마사지', '호텔출장안마', '호텔출장홈타이', '20대출장마사지', '20대출장안마', '20대ACE총출동', '20대에이스',
-  '심야출장마사지', '야간출장마사지', '새벽출장마사지', '방문마사지', '방문안마', '홈타이', '출장홈케어',
-  '타이출장마사지', '타이출장안마', '아로마출장마사지', '아로마출장안마', '스웨디시출장', '힐링VIP출장마사지',
-  '출장마사지가격표', '출장마사지가격', '출장안마가격', '출장마사지추천', '출장마사지후기', '출장마사지예약',
-  '아밤출장마사지', '아밤출장안마', '아밤홈케어', '서울마사지추천', '서울홈타이',
-  // 강남/서초/송파/마포/용산/영등포 등 최고 검색량 동·역세권
-  '강남출장마사지', '강남출장안마', '강남역출장마사지', '역삼출장마사지', '역삼동출장마사지', '논현출장마사지', '논현동출장마사지',
-  '청담출장마사지', '청담동출장마사지', '압구정출장마사지', '선릉출장마사지', '선릉역출장마사지',
-  '서초출장마사지', '서초출장안마', '서초동출장마사지', '반포출장마사지', '방배출장마사지', '교대출장마사지',
-  '송파출장마사지', '송파출장안마', '잠실출장마사지', '잠실출장안마', '잠실역출장마사지', '문정출장마사지',
-  '마포출장마사지', '마포출장안마', '홍대출장마사지', '홍대출장안마', '합정출장마사지', '공덕출장마사지', '상암출장마사지',
-  '용산출장마사지', '용산출장안마', '이태원출장마사지', '한남출장마사지', '한남동출장마사지', '용산역출장마사지',
-  '영등포출장마사지', '영등포출장안마', '여의도출장마사지', '여의도출장안마', '여의도역출장마사지', '신도림출장마사지',
-  '성동출장마사지', '성수출장마사지', '성수동출장마사지', '왕십리출장마사지', '뚝섬출장마사지',
-  '광진출장마사지', '건대출장마사지', '구의출장마사지',
-  '동작출장마사지', '사당출장마사지', '이수출장마사지',
-  '관악출장마사지', '신림출장마사지', '신림역출장마사지', '봉천출장마사지',
-  '서대문출장마사지', '신촌출장마사지', '신촌역출장마사지',
-  '종로출장마사지', '광화문출장마사지', '중구출장마사지', '을지로출장마사지', '명동출장마사지', '동대문출장마사지',
-  '강서출장마사지', '마곡출장마사지', '발산출장마사지', '화곡출장마사지',
-  '양천출장마사지', '목동출장마사지', '구로출장마사지', '금천출장마사지', '가산출장마사지',
-  '노원출장마사지', '노원역출장마사지', '강북출장마사지', '수유출장마사지', '미아출장마사지',
-  '동대문출장마사지', '중랑출장마사지', '성북출장마사지', '도봉출장마사지', '강동출장마사지', '천호출장마사지',
-];
+const INDEXABLE_SET = new Set<string>(CANDIDATE_POOL);
 
-const DISTRICT_HUBS = DISTRICTS.flatMap((d) => [
-  `${d.short}출장마사지`,
-  `${d.short}출장안마`,
-  `${d.short}출장홈타이`,
-  `${d.short}출장서비스`,
-]);
-
-const INDEXABLE_SET = new Set<string>([...HIGH_INTENT_SEO_TERMS, ...DISTRICT_HUBS]);
-
-/** 서울 서비스 지역 및 핵심 검색 키워드 100% 색인 허용 */
+/** 서울·경기·인천 서비스 지역 및 핵심 검색 키워드 100% 색인 허용 */
 export function isIndexableKeyword(kw: string): boolean {
-  const k = kw.replace(/\s+/g, '');
-  return isServedKeyword(k) && (INDEXABLE_SET.has(k) || CANDIDATE_SET.has(k));
+  return isServedKeyword(kw);
 }
 
-/** 지역 랜딩 페이지가 생성되는 서울 서비스 키워드 */
+/** 지역 랜딩 페이지가 생성되는 수도권 전역 서비스 키워드 */
 export const SERVED_KEYWORDS: string[] = CANDIDATE_POOL.filter((k) => isServedKeyword(k));
 
-/** 사이트맵·내부링크에 쓰는 색인 대상 키워드 목록 */
-export const INDEXABLE_KEYWORDS: string[] = SERVED_KEYWORDS.filter((k) => INDEXABLE_SET.has(k));
+/** 사이트맵·내부링크에 쓰는 색인 대상 키워드 전체 목록 */
+export const INDEXABLE_KEYWORDS: string[] = SERVED_KEYWORDS;
 
 export function getDistrictForKeyword(kw: string): DistrictInfo | undefined {
   const region = detectRegion(kw);
@@ -401,30 +368,35 @@ export function generateSeoPageData(keyword: string) {
 
   const isSeoulKw = SEOUL_SEO.some((k) => k === kw);
   const isCoursePage = COURSE_SEO.some((k) => k === kw);
+  const isCompetitor = /도도|스피드|비교/.test(kw);
+  const isPrimaryRank1 = /출장마사지1위|출장안마1위/.test(kw) || kw === '출장마사지' || kw === '출장안마';
 
   let title = '';
   let description = '';
   let h1 = '';
 
-  const isPrimaryRank1 = /출장마사지1위|출장안마1위/.test(kw) || kw === '출장마사지' || kw === '출장안마';
-
-  if (isPrimaryRank1) {
-    title = `${kw} [20대 ACE 총출동] | 대한민국 1위 서울 전역 30분 도착 100% 후불제 Abam.kr`;
-    description = `${kw} 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! 서울 전역 호텔·자택 30분 총알도착, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
+  if (isCompetitor) {
+    title = `【출장마사지 1위】 ${kw} vs 아밤 100% 현장후불제 비교 | 20대 ACE 총출동 Abam.kr`;
+    description = `${kw} 비교 분석 및 100% 안심 이용 가이드. 도도·스피드 등 출장안마 이용 시 선입금 사기 주의사항과 100% 대면 결제 원칙. 전원 20대 에이스 관리사 라인업, 서울·경기·인천 30분 총알도착 아밤(Abam.kr).`;
+    h1 = `${kw} vs 아밤 100% 후불제 비교 — [20대 ACE 총출동]`;
+  } else if (isPrimaryRank1) {
+    title = `【출장마사지 1위】 ${kw} [20대 ACE 총출동] | 서울·경기·인천 30분 도착 100% 후불제 Abam.kr`;
+    description = `${kw} 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! 서울·경기·인천 전역 호텔·자택 30분 총알도착, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
     h1 = `대한민국 ${kw} 1위 — [20대 ACE 총출동] 100% 현장 후불제`;
-  } else if (district && (isSeoulKw || region !== '서울 전지역')) {
+  } else if (district && (isSeoulKw || region.startsWith('서울'))) {
     const place = region.replace('서울 ', '');
-    title = `${kw} [20대 ACE 총출동] | ${district.short} 100% 후불제 Abam.kr`;
+    title = `【1위】 ${kw} [20대 ACE 총출동] | ${district.short} 100% 현장후불제 Abam.kr`;
     description = `${place} ${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울 ${district.stations.slice(0, 3).join('·')} 인근 호텔·자택 30분 총알도착, 100% 현장 후불제 안심 케어. 예약 18:00부터 (영업 19:00~05:00).`;
     h1 = `${district.gu} ${kw} [20대 ACE 총출동] — 100% 후불제 Abam.kr`;
   } else if (isCoursePage) {
-    title = `${kw} [20대 ACE 총출동] | 서울 ${course} 100% 후불제 Abam.kr`;
-    description = `${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! ${course} 60·90·120분 정찰제, 서울 전역 자택·호텔 30분 총알도착. 100% 현장 후불제. 예약 18:00부터 (영업 19:00~05:00).`;
+    title = `【1위】 ${kw} [20대 ACE 총출동] | 서울·경기·인천 ${course} 100% 후불제 Abam.kr`;
+    description = `${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! ${course} 60·90·120분 정찰제, 서울·경기·인천 전역 자택·호텔 30분 총알도착. 100% 현장 후불제. 예약 18:00부터 (영업 19:00~05:00).`;
     h1 = `${kw} — [20대 ACE 총출동] ${course}`;
   } else {
-    title = `${kw} [20대 ACE 총출동] | 서울 100% 후불제 Abam.kr`;
-    description = `${kw} — [20대 ACE 총출동] 서울 전역 호텔·자택 30분 총알도착! 전원 20대 에이스 관리사 항시 대기, 100% 현장 후불제 안심 케어. 예약 18:00부터 (영업 19:00~05:00).`;
-    h1 = `${kw} [20대 ACE 총출동] — 서울 100% 후불제 Abam.kr`;
+    const placeStr = region !== '서울 전지역' ? region : '서울·경기·인천';
+    title = `【1위】 ${kw} [20대 ACE 총출동] | ${placeStr} 100% 현장후불제 Abam.kr`;
+    description = `${kw} — [20대 ACE 총출동] ${placeStr} 전역 호텔·자택 30분 총알도착! 전원 20대 에이스 관리사 항시 대기, 100% 현장 후불제 안심 케어. 예약 18:00부터 (영업 19:00~05:00).`;
+    h1 = `${kw} [20대 ACE 총출동] — ${placeStr} 100% 후불제 Abam.kr`;
   }
 
   return {
@@ -438,16 +410,12 @@ export function generateSeoPageData(keyword: string) {
     keywords: [
       kw, `${kw} 가격`, `${kw} 후기`, `${kw} 추천`, `${kw} 예약`,
       '20대ACE총출동', '20대출장마사지', '20대출장안마', '20대에이스',
-      '서울출장마사지', '서울출장안마', '출장마사지', '출장안마', '후불제출장마사지',
+      '서울출장마사지', '경기출장마사지', '인천출장마사지', '출장마사지', '출장안마', '후불제출장마사지',
       ...(district ? [`${district.short} 출장마사지`, `${district.short} 출장안마`, `${district.short} 마사지`] : []),
     ],
     relatedKeywords: INDEXABLE_KEYWORDS
       .filter((k) => k !== kw)
-      .filter((k) => {
-        const d = getDistrictForKeyword(k);
-        return (district && d?.gu === district.gu) || detectCourse(k) === course;
-      })
-      .slice(0, 8),
+      .slice(0, 10),
   };
 }
 
