@@ -444,8 +444,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
           </div>
 
-          {/* 카카오톡 상담 버튼 */}
-          <div style={{ marginBottom: '24px' }}>
+          {/* 카카오톡 & 문자 간편 예약 버튼군 */}
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '8px' }}>
             <a
               href={bookHref}
               {...bookExtra}
@@ -454,18 +454,43 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
+                gap: '6px',
                 background: bookBg,
                 color: bookFg,
                 fontWeight: 800,
-                fontSize: '14.5px',
-                padding: '12px 28px',
+                fontSize: '14px',
+                padding: '11px 22px',
                 borderRadius: '30px',
                 textDecoration: 'none',
               }}
             >
-              {isKo && <KakaoIcon size={18} />}{bookLabel} (ID: {KAKAO_ID})
+              {isKo && <KakaoIcon size={16} />}{bookLabel} ({KAKAO_ID})
             </a>
+
+            {isKo && (
+              <a
+                href={SMS_HREF}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  background: 'rgba(255,255,255,0.08)',
+                  border: `1px solid ${C.line}`,
+                  color: '#ffffff',
+                  fontWeight: 800,
+                  fontSize: '14px',
+                  padding: '11px 22px',
+                  borderRadius: '30px',
+                  textDecoration: 'none',
+                }}
+              >
+                📱 문자로 간편 예약
+              </a>
+            )}
+          </div>
+          <div style={{ fontSize: '12px', color: C.sub, marginBottom: '22px' }}>
+            ※ 전화 통화가 부담스러우실 때도 카톡 및 문자(SMS)로 24시간 간편 예약 가능합니다.
           </div>
 
           {/* 히어로 실사 모델 화보 */}
@@ -583,6 +608,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div>
                 <div style={{ fontSize: '14px', fontWeight: 800, color: C.green, marginBottom: '3px' }}>💳 100% 현장 후불 결제</div>
                 <div style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.6 }}>현금, 계좌이체, 카드 결제 모두 가능합니다. (선입금 일절 없음)</div>
+              </div>
+              <div style={{ gridColumn: 'span 2' }}>
+                <div style={{ fontSize: '14px', fontWeight: 800, color: C.goldLt, marginBottom: '3px' }}>💬 카톡 &amp; 📱 문자 24시 예약</div>
+                <div style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.6 }}>전화 통화 없이 카카오톡 또는 휴대폰 일반 문자로도 24시간 언제든 주소와 코스를 남겨주시면 바로 접수 및 안내드립니다.</div>
               </div>
             </div>
           </div>
