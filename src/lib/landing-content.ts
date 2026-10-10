@@ -109,7 +109,7 @@ export const KO: LandingContent = {
     { no: 3, name: '스페셜', subtitle: '타이 + 아로마 복합 케어', desc: '타이의 시원한 지압과 아로마의 부드러운 오일 관리를 동시에 받을 수 있는 프리미엄 코스입니다.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: '코스', durations: ['60분', '90분', '120분'] },
-  therapistSection: { label: "20대 ACE LINEUP", title: '오늘 밤 20대 ACE 총출동 라인업', note: '전원 20대 에이스 관리사 항시 대기 · 서울·경기 30분 내 총알 방문', kakaoBtn: '카톡지명', callBtn: '전화지명' },
+  therapistSection: { label: "20대 ACE LINEUP", title: '오늘 밤 20대 ACE 총출동 라인업', note: '전원 20대 에이스 관리사 항시 대기 · 서울·경기 30분 내 총알 방문', kakaoBtn: '문자지명', callBtn: '전화지명' },
   therapists: [
     { name: '가빈', age: '24세', spec: '168cm · 슬렌더 롱다리 모델핏', badge: '장신 에이스', specialty: '타이 + 아로마 복합 케어', desc: '시원하게 뻗은 모델 비율과 깊이감 있는 압으로 피로를 완벽 해소.', available: true, img: '/images/t_gabin.jpg' },
     { name: '송이', age: '25세', spec: '167cm · 세련된 각선미 골반라인', badge: '지명 TOP', specialty: '정통 왓포 건식 지압 + 림프 케어', desc: '세련된 분위기와 섬세한 손길, 군더더기 없는 케어로 높은 만족도.', available: true, img: '/images/t_songi.jpg' },
@@ -134,7 +134,7 @@ export const KO: LandingContent = {
     { author: '윤*민 님', area: '부천 원미구 중동 호텔', course: '스페셜 90분', text: '부천 중동 호텔로 불렀는데 약속 시간에 딱 맞춰 오셨어요. 허리 쪽 뻐근했던 게 지압과 오일 케어로 말끔히 풀려서 오랜만에 꿀잠 잤습니다.' },
     { author: '강*석 님', area: '종로구 광화문 호텔', course: '아로마 120분', text: '호텔에서 조용히 혼자 릴랙스하기에 최고였습니다. 테라피스트분 매너도 단정하시고 위생도 철저해서 안심하고 받았습니다.' },
     { author: '오*택 님', area: '화성 동탄신도시 자택', course: '타이 60분', text: '동탄 자택인데 늦은 시간에도 빠른 배정 감사했습니다. 손끝 야무진 압이 정말 수준급이어서 다음엔 90분 코스로 길게 이용하려 합니다.' },
-    { author: '임*규 님', area: '광진구 건대 호텔', course: '스페셜 90분', text: '건대 호캉스 중에 카톡으로 간편하게 예약했어요. 1:1로 뭉친 부위를 집중 케어해 주셔서 묵은 피로가 완전히 사라졌습니다. 추천합니다.' },
+    { author: '임*규 님', area: '광진구 건대 호텔', course: '스페셜 90분', text: '건대 호캉스 중에 문자로 간편하게 예약했어요. 1:1로 뭉친 부위를 집중 케어해 주셔서 묵은 피로가 완전히 사라졌습니다. 추천합니다.' },
   ],
   faqSection: { label: 'FAQ', title: '자주 묻는 질문', sub: '궁금하신 점을 빠르게 확인하세요.' },
   faqs: [
@@ -163,8 +163,8 @@ export const KO: LandingContent = {
       a: '차량으로 이동하기 때문에 아래 세 가지만 편하게 확인해 주시면 됩니다.\n\n1. 건물에 주차장이 있으시면 도착해서 바로 전화 드립니다.\n2. 공동현관 비번이 있다면 예약 시 남겨주시거나, 도착해서 호수 호출벨을 누릅니다.\n3. 호텔이나 모텔은 도착 전 기사가 미리 전화드리니, 그때 1층 로비로 내려오셔서 결제하고 만나시면 됩니다.',
     },
     {
-      q: '전화 통화가 부담스러운데 카톡이나 문자로도 예약이 가능한가요?',
-      a: '네, 100% 가능합니다!\n\n전화 통화 없이도 24시간 언제든 카카오톡(ID: Abam1004) 또는 휴대폰 일반 문자메시지(010-6607-2239)로 원하시는 코스, 시간, 방문 주소를 보내주시면 즉시 예약 접수 및 도착 안내를 도와드립니다.',
+      q: '전화 통화가 부담스러운데 문자로도 예약이 가능한가요?',
+      a: '네, 100% 가능합니다!\n\n전화 통화 없이도 24시간 언제든 휴대폰 일반 문자메시지(010-6607-2239)로 원하시는 코스, 시간, 방문 주소를 보내주시면 즉시 예약 접수 및 도착 안내를 도와드립니다.',
     },
   ],
   contact: { phone: '010-6607-2239', tel: 'tel:010-6607-2239', tagline: '지금, 당신의 편안한 휴식을 위해', site: 'abam.kr' },
@@ -178,8 +178,8 @@ export const KO: LandingContent = {
     sub: '전원 20대 에이스 관리사 상시대기 · 서울 25개 구 및 경기(수원·분당·판교·일산·부천·평택·동탄 등) 전역 호텔·자택 30분 도착',
     line: 'Abam.kr · 아름다운 밤, 20대 ACE 총출동 · 서울·경기 전역 24시간 100% 현장 대면결제 · 예약 18:00부터 (영업 19:00 ~ 05:00) · 고객센터 010-6607-2239',
   },
-  cta: { primary: 'kakao', kakao: '카카오톡 1:1 상담', whatsapp: 'WhatsApp', call: '', callBar: '전화예약' },
-  modal: { title: '예약 및 상담 문의', body: '카톡 또는 문자로 편하게 남겨주시면 바로 안내해 드립니다.', idLabel: '카카오톡 ID', copy: '복사', open: '카카오톡 상담하기', close: '닫기', copied: `카톡 ID [${KAKAO_ID}] 복사 완료` },
+  cta: { primary: 'call', kakao: '', whatsapp: 'WhatsApp', call: '', callBar: '전화예약' },
+  modal: { title: '문자 간편 예약 양식', body: '문자로 편하게 남겨주시면 바로 안내해 드립니다.', idLabel: '', copy: '복사', open: '문자 예약하기', close: '닫기', copied: '복사 완료' },
   globalLine: 'English · 日本語 · 中文 · WhatsApp',
 };
 

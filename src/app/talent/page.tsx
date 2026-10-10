@@ -75,7 +75,7 @@ export default function TalentPage() {
 
     if (isPaidFlag || totalPaidCount > 0 || hasPaidAd) {
       // 결제 사장님 ➔ 연락처 & 1:1 대화 허용
-      alert(`✅ [결제 완료 매장 인증] ${item.name || item.nickname} 님의 1:1 비밀 연락처:\n\n📞 ${item.contact || '카톡 ID: abam_talent_01 (연락 시 "아밤 보고 연락드렸습니다"라고 말씀해주세요)'}`);
+      alert(`✅ [결제 완료 매장 인증] ${item.name || item.nickname} 님의 1:1 비밀 연락처:\n\n📞 ${item.contact || '010-6607-2239 (연락 시 "아밤 보고 연락드렸습니다"라고 말씀해주세요)'}`);
     } else {
       // 미결제 사장님 ➔ 철통 잠금 안내 모달 팝업
       setSelectedTalentContact(item);
@@ -86,7 +86,7 @@ export default function TalentPage() {
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     if (!nickname.trim() || !intro.trim() || !contact.trim()) {
-      alert('닉네임, 한줄소개, 연락처(카톡 ID 또는 전화번호)를 입력해 주세요.');
+      alert('닉네임, 한줄소개, 연락처(전화번호)를 입력해 주세요.');
       return;
     }
 
@@ -580,10 +580,10 @@ export default function TalentPage() {
               </div>
 
               <div>
-                <label style={{ fontSize: '13px', fontWeight: 800, color: '#374151', display: 'block', marginBottom: '4px' }}>비밀 연락처 (카톡 ID 또는 전화번호) *</label>
+                <label style={{ fontSize: '13px', fontWeight: 800, color: '#374151', display: 'block', marginBottom: '4px' }}>비밀 연락처 (휴대폰 번호) *</label>
                 <input
                   type="text"
-                  placeholder="예: 카톡ID abam_beauty 또는 010-XXXX-XXXX"
+                  placeholder="예: 010-XXXX-XXXX"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   style={{ width: '100%', padding: '10px', background: '#fdfafc', border: '1px solid #f3e2eb', borderRadius: '8px', color: '#1f2937', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}

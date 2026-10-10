@@ -18,8 +18,7 @@ export const metadata: Metadata = {
 };
 
 const SITE_URL = 'https://abam.kr';
-const KAKAO_ID = 'Abam1004';
-const KAKAO_LINK = 'kakaotalk://';
+const SMS_HREF = 'sms:01066072239';
 const PHONE_TEL = 'tel:010-6607-2239';
 const PHONE_NUM = '010-6607-2239';
 
@@ -170,25 +169,24 @@ export default function KeywordsPage() {
         <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', gap: '8px', alignItems: 'center' }}>
           
           <a
-            href={KAKAO_LINK}
+            href={SMS_HREF}
             style={{
               flex: 1.3,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
-              background: '#FEE500',
-              color: '#181600',
+              background: '#242836',
+              color: '#ffffff',
               padding: '12px 0',
               borderRadius: '10px',
               fontWeight: 900,
               fontSize: '14px',
               textDecoration: 'none',
-              boxShadow: '0 2px 8px rgba(254,229,0,0.25)',
+              border: '1px solid #3a3f50',
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.63 1.58 4.96 4 6.37L6 20l3.5-2.1c.8.17 1.63.26 2.5.26 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#181600"/></svg>
-            <span>카톡: {KAKAO_ID}</span>
+            <span>✉️ 문자 간편예약</span>
           </a>
 
           <a

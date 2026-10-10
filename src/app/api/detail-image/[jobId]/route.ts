@@ -96,7 +96,7 @@ export async function GET(
     📞 연락처: ${phone}
   </text>
   <text x="350" y="${270 + descBoxHeight + 93}" font-family="'Noto Sans KR', sans-serif" font-weight="800" font-size="17" fill="#fef08a" text-anchor="middle">
-    💬 카톡 ID: ${kakao} (24시간 친절 상담)
+    ✉️ 문자 / 전화 24시간 친절 상담
   </text>
 </svg>`;
 
