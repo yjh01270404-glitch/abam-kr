@@ -154,7 +154,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 • 주차장 유무: (있음 / 없음 / 주차장 도착시 호출 요망)
 • 공동현관: (비밀번호 기재 또는 도착 시 세대 호출벨)
 • 호텔·모텔: (1층 로비 픽업 및 결제 or 객실 앞 방문)
-• 결제 방식: (현금 / 계좌이체 / 카드)`;
+• 결제 방식: (현금 / 계좌이체 / 카드)
+(※ 1시간 전 미리 예약 시 원하시는 시간에 가장 수월하게 받으실 수 있습니다)`;
 
   const SMS_BODY = encodeURIComponent(
 `[아밤 예약신청]
@@ -164,7 +165,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 4. 현관비번(세대호출): 
 5. 호텔1층 픽업여부: 
 6. 결제(현금/이체/카드): 
-(차량 이동 특성상 주차장 도착시 호출드리며 호텔은 1층 픽업 및 결제 가능합니다. 100% 현장 후불제)`
+(1시간 전 예약 시 원하는 시간 이용 수월 · 100% 현장 대면결제)`
   );
   const SMS_HREF = `sms:01066072239?body=${SMS_BODY}`;
 
@@ -261,9 +262,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <button onClick={() => setSmsModal(false)} style={{ background: 'transparent', border: 'none', color: C.textMuted, fontSize: '20px', cursor: 'pointer', lineHeight: 1, padding: '2px 6px' }}>✕</button>
             </div>
             
-            <p style={{ fontSize: '13px', color: C.textSub, margin: '0 0 14px', textAlign: 'left', wordBreak: 'keep-all', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '13px', color: C.textSub, margin: '0 0 12px', textAlign: 'left', wordBreak: 'keep-all', lineHeight: 1.6 }}>
               아래 양식을 확인하신 후 <strong>[문자 앱으로 바로 전송]</strong>을 누르시면 내용이 자동으로 입력된 문자창이 열립니다.
             </p>
+
+            {/* 1시간 전 예약 강조 알림 */}
+            <div style={{ background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '6px', padding: '8px 12px', textAlign: 'left', fontSize: '12.5px', color: '#fef08a', marginBottom: '12px', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+              💡 <strong>예약 꿀팁:</strong> 이용 희망 시간 <strong>1시간 전쯤</strong> 예약하시면 원하시는 시간에 가장 수월하게 받으실 수 있습니다!
+            </div>
 
             {/* 예약 양식 프리뷰 카드 */}
             <div style={{ background: '#0e1015', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '12px 14px', textAlign: 'left', fontSize: '12.5px', lineHeight: 1.7, color: '#e2e8f0', marginBottom: '14px', fontFamily: 'monospace, sans-serif' }}>
@@ -291,9 +297,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </a>
             </div>
 
-            {/* 안심 후불제 안내 */}
+            {/* 안심 현장 대면결제 안내 */}
             <div style={{ background: '#1c1f2b', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '10px 12px', textAlign: 'left', fontSize: '12px', lineHeight: 1.6, color: '#94a3b8' }}>
-              • 선입금·예약금 없는 100% 현장 후불제<br />
+              • 선입금·예약금 없는 100% 현장 대면결제<br />
               • 서울·경기 전지역 30분 내 신속 방문
             </div>
 
@@ -313,7 +319,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               Abam<span style={{ color: C.pointRed }}>.kr</span>
             </span>
             <span style={{ fontSize: '11px', fontWeight: 700, color: C.pointGold, border: `1px solid ${C.lineLight}`, background: 'rgba(245,158,11,0.08)', padding: '2px 6px', borderRadius: '4px' }}>
-              100% 후불제
+              100% 현장 대면결제
             </span>
           </Link>
 
@@ -363,9 +369,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </p>
 
           {/* 핵심 안심 서비스 4대 포인트 배너 */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', maxWidth: '480px', margin: '0 auto 20px', textAlign: 'left' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', maxWidth: '480px', margin: '0 auto 16px', textAlign: 'left' }}>
             <div style={{ background: C.cardBg, border: `1px solid ${C.line}`, borderRadius: '6px', padding: '10px 12px', fontSize: '13px', color: '#e2e8f0', fontWeight: 600 }}>
-              <span style={{ color: C.pointRed, marginRight: '6px', fontWeight: 800 }}>✓</span> 100% 현장 후불제
+              <span style={{ color: C.pointRed, marginRight: '6px', fontWeight: 800 }}>✓</span> 100% 현장 대면결제
             </div>
             <div style={{ background: C.cardBg, border: `1px solid ${C.line}`, borderRadius: '6px', padding: '10px 12px', fontSize: '13px', color: '#e2e8f0', fontWeight: 600 }}>
               <span style={{ color: C.pointRed, marginRight: '6px', fontWeight: 800 }}>✓</span> 20대 전문 에이스 힐러
@@ -376,6 +382,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <div style={{ background: C.cardBg, border: `1px solid ${C.line}`, borderRadius: '6px', padding: '10px 12px', fontSize: '13px', color: '#e2e8f0', fontWeight: 600 }}>
               <span style={{ color: C.pointGreen, marginRight: '6px', fontWeight: 800 }}>✓</span> 현금 · 계좌이체 · 카드 결제
             </div>
+          </div>
+
+          {/* 💡 1시간 전 예약 수월 팁 배너 */}
+          <div style={{ maxWidth: '480px', margin: '0 auto 16px', background: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '6px', padding: '11px 14px', fontSize: '13px', color: '#fef08a', textAlign: 'left', lineHeight: 1.55 }}>
+            💡 <strong>1시간 전 예약 필수 팁:</strong> 이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하고 빠르게 이용하실 수 있습니다.
           </div>
 
           {/* 대표 24시 전화 상담 연결 버튼 (중심 배치) */}
@@ -465,13 +476,13 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
-          {head('출장안마 서비스 안내', '서울·경기 전지역 100% 현장 후불제')}
+          {head('출장안마 서비스 안내', '서울·경기 전지역 100% 현장 대면결제')}
           <div style={{ ...card, padding: '18px 20px', fontSize: '13.5px', color: '#cbd5e1', lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 10px' }}>
               출장안마는 고객님이 계신 곳(자택, 아파트, 오피스텔, 호텔, 모텔)으로 전문 힐러가 직접 찾아가는 1:1 방문 맞춤 마사지 케어 서비스입니다.
             </p>
             <p style={{ margin: '0 0 10px' }}>
-              아밤(Abam)은 선입금, 예약금, 출발비 등을 절대 요구하지 않는 <strong>100% 후불 결제 원칙</strong>을 준수합니다. 매니저가 현장에 도착하여 고객님과 직접 대면한 후 결제가 진행되므로 안심하고 이용하실 수 있습니다.
+              아밤(Abam)은 선입금, 예약금, 출발비 등을 절대 요구하지 않는 <strong>100% 현장 대면결제 원칙</strong>을 준수합니다. 매니저가 현장에 도착하여 고객님과 직접 대면한 후 결제가 진행되므로 안심하고 이용하실 수 있습니다.
             </p>
             <p style={{ margin: 0 }}>
               과중한 업무와 일상에서 지친 심신을 가장 편안하고 익숙한 프라이빗 공간에서 최고의 힐링으로 채워드립니다.
@@ -481,7 +492,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 4. 코스 및 정찰 가격표 (3대 코스 + 하단 화보) ── */}
         <section id="price" style={section}>
-          {head('코스 안내 및 정찰 가격표', '선입금 없는 100% 현장 후불 결제')}
+          {head('코스 안내 및 정찰 가격표', '선입금 없는 100% 현장 대면결제')}
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {c.courses.map((course) => (
@@ -563,12 +574,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 <div style={{ fontSize: '12.5px', color: C.textSub, lineHeight: 1.6 }}>도착 전 기사가 미리 연락드리며, 1층 로비에서 결제 후 만나시면 됩니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '13.5px', fontWeight: 800, color: C.pointGreen, marginBottom: '3px' }}>💳 100% 현장 후불 결제</div>
+                <div style={{ fontSize: '13.5px', fontWeight: 800, color: C.pointGreen, marginBottom: '3px' }}>💳 100% 현장 대면결제</div>
                 <div style={{ fontSize: '12.5px', color: C.textSub, lineHeight: 1.6 }}>현금, 계좌이체, 카드 결제 모두 가능합니다. (선입금 일절 없음)</div>
               </div>
               <div style={{ gridColumn: 'span 2' }}>
                 <div style={{ fontSize: '13.5px', fontWeight: 800, color: C.pointGold, marginBottom: '3px' }}>📱 24시 문자(SMS) 간편 예약 접수</div>
-                <div style={{ fontSize: '12.5px', color: C.textSub, lineHeight: 1.6 }}>전화 통화 없이 휴대폰 일반 문자로도 24시간 언제든 주소와 코스를 남겨주시면 예약 양식을 바탕으로 즉시 접수 및 안내드립니다.</div>
+                <div style={{ fontSize: '12.5px', color: C.textSub, lineHeight: 1.6 }}>전화 통화 없이 휴대폰 일반 문자로도 24시간 언제든 주소와 코스를 남겨주시면 예약 양식을 바탕으로 즉시 접수 및 안내드립니다. (1시간 전 예약 시 가장 수월)</div>
               </div>
             </div>
           </div>
@@ -578,10 +589,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="caution" style={section}>
           <div style={{ background: '#1c1417', border: `1px solid ${C.pointRed}`, borderRadius: '8px', padding: '18px 16px', textAlign: 'center' }}>
             <h3 style={{ color: C.pointRed, fontSize: '16px', fontWeight: 800, margin: '0 0 8px' }}>
-              아밤 출장안마 100% 안심 후불제 (선입금 사기 주의)
+              아밤 출장안마 100% 현장 대면결제 (선입금 사기 주의)
             </h3>
             <div style={{ fontSize: '13px', color: '#e2e8f0', lineHeight: 1.7, maxWidth: '520px', margin: '0 auto', wordBreak: 'keep-all' }}>
-              아밤은 선입금 없는 <strong>100% 현장 후불제</strong> 출장안마입니다.<br />
+              아밤은 선입금 없는 <strong>100% 현장 대면결제</strong> 출장안마입니다.<br />
               예약금, 보증금, 출발비 등의 명목으로 사전에 입금을 요구하는 곳은 100% 사기입니다!<br /><br />
               서울·경기 전지역 자택 / 아파트 / 오피스텔 / 호텔 / 모텔<br />
               관리사 문 앞 도착 후 직접 만나뵙고 결제하는 정직한 안심 시스템입니다.
@@ -602,7 +613,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 7. 이용 안내 ── */}
         <section id="guide" style={section}>
-          {head(x.guideTitle, '전화나 문자 한 통으로 간편하게 예약')}
+          {head(x.guideTitle, '전화나 문자 한 통으로 간편하게 예약 (1시간 전 예약 시 원하는 시간 이용 수월)')}
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', marginBottom: '10px' }}>
             {c.info.map((p, i) => (
