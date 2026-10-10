@@ -12,7 +12,7 @@ const PHONE_TEL = 'tel:010-6607-2239';
 const BOOKING_TEMPLATE = `[아밤 24시 예약 신청]
 • 성함/닉네임: 
 • 방문 위치(구/동/호텔·모텔명): 
-• 희망 코스: (VIP 스웨디시 / 힐링 혼혈 / 정통 타이)
+• 희망 코스: (타이 / 아로마 / VIP 스페셜)
 • 이용 시간: (60분 / 90분 / 120분)
 • 희망 시간: 바로 가능 or 희망시간`;
 
@@ -202,7 +202,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div style={{ display: 'inline-flex', flexDirection: 'column', gap: '6px', textAlign: 'left', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '14px 20px', marginBottom: '22px' }}>
             <div style={{ color: '#f8fafc', fontSize: '13.5px', fontWeight: 800 }}>✓ 24시간 실시간 예약 가능 시스템 ♥</div>
             <div style={{ color: '#f8fafc', fontSize: '13.5px', fontWeight: 800 }}>✓ 프라이빗 1:1 감성 밀착 케어 서비스 ♥</div>
-            <div style={{ color: '#f8fafc', fontSize: '13.5px', fontWeight: 800 }}>✓ 전문자격증 보유 20대 한국인/에이스 관리사 ♥</div>
+            <div style={{ color: '#f8fafc', fontSize: '13.5px', fontWeight: 800 }}>✓ 전문자격증 보유 20대 정예 에이스 관리사 ♥</div>
             <div style={{ color: T.neonGreen, fontSize: '13.5px', fontWeight: 900 }}>✓ 선입금·예약금 일절 없는 100% 현장 후불제 ♥</div>
           </div>
 
@@ -331,38 +331,67 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
             
-            {/* 코스 1: 한국인 관리사 스웨디시 VIP 코스 (대표 BEST) */}
-            <div style={{ background: T.card, borderRadius: '18px', border: `2px solid ${T.gold}`, overflow: 'hidden', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 8px 30px rgba(255, 207, 51, 0.25)' }}>
-              <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255, 207, 51, 0.08)' }}>
+            {/* A코스: 타이 정통 테라피 (건식 지압) */}
+            <div style={{ background: T.card, borderRadius: '18px', border: `1.5px solid ${T.cardBorder}`, overflow: 'hidden', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
+              <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <span style={{ background: T.hotPink, color: '#fff', fontWeight: 950, fontSize: '11px', padding: '3px 8px', borderRadius: '4px', marginRight: '8px' }}>대표 BEST</span>
-                  <strong style={{ fontSize: '18px', color: '#fff', fontWeight: 950 }}>한국인 관리사 스웨디시 VIP 코스</strong>
+                  <span style={{ background: T.gold, color: '#000', fontWeight: 950, fontSize: '11px', padding: '3px 8px', borderRadius: '4px', marginRight: '8px' }}>A코스</span>
+                  <strong style={{ fontSize: '18px', color: '#fff', fontWeight: 950 }}>타이 정통 테라피 (건식 지압)</strong>
                 </div>
-                <span style={{ fontSize: '12.5px', color: T.gold, fontWeight: 900 }}>재이용률 1위</span>
+                <span style={{ fontSize: '12.5px', color: T.goldLt }}>왓포 정통 수기</span>
               </div>
               <div style={{ padding: '16px 20px' }}>
                 <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 16px', lineHeight: 1.65 }}>
-                  일상 속 쌓인 극심한 피로를 최고급 천연 에센셜 오일과 섬세한 림프 순환 테크닉으로 부드럽게 녹여드리는 아밤의 대표 시그니처 힐링 프로그램입니다.
+                  오일을 사용하지 않고 편안한 관리복을 착용한 상태에서 진행되는 왓포 전통 방식의 건식 수기 지압 관리입니다. 뭉친 어깨, 목, 허리 근육을 시원하게 풀어드립니다.
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
                   <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '12px', color: T.textMuted }}>A코스 (60분)</div>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>150,000원</div>
+                    <div style={{ fontSize: '12px', color: T.textMuted }}>60분</div>
+                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>80,000원</div>
                   </div>
-                  <div style={{ background: 'rgba(255, 207, 51, 0.16)', border: `2px solid ${T.gold}`, borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 800 }}>B코스 (90분/추천)</div>
-                    <div style={{ fontSize: '18px', fontWeight: 950, color: T.gold, marginTop: '2px' }}>190,000원</div>
+                  <div style={{ background: 'rgba(255, 207, 51, 0.14)', border: `1.5px solid ${T.gold}`, borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 800 }}>90분 (인기)</div>
+                    <div style={{ fontSize: '17.5px', fontWeight: 950, color: T.gold, marginTop: '2px' }}>100,000원</div>
                   </div>
                   <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '12px', color: T.textMuted }}>C코스 (120분)</div>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>240,000원</div>
+                    <div style={{ fontSize: '12px', color: T.textMuted }}>120분</div>
+                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>120,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* B코스: 아로마 릴렉싱 케어 (천연 에센셜) */}
+            <div style={{ background: T.card, borderRadius: '18px', border: `1.5px solid ${T.cardBorder}`, overflow: 'hidden', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
+              <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <span style={{ background: T.neonGreen, color: '#000', fontWeight: 950, fontSize: '11px', padding: '3px 8px', borderRadius: '4px', marginRight: '8px' }}>B코스</span>
+                  <strong style={{ fontSize: '18px', color: '#fff', fontWeight: 950 }}>아로마 릴렉싱 케어 (천연 에센셜)</strong>
+                </div>
+                <span style={{ fontSize: '12.5px', color: T.neonGreen, fontWeight: 800 }}>림프 순환 케어</span>
+              </div>
+              <div style={{ padding: '16px 20px' }}>
+                <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 16px', lineHeight: 1.65 }}>
+                  피부 자극이 없는 최고급 천연 식물성 에센셜 오일을 전신에 도포하여 부드럽고 섬세한 수기 테크닉으로 림프절을 자극하고 깊은 휴식과 피로 해소를 돕습니다.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+                  <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '12px', color: T.textMuted }}>60분</div>
+                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>90,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(255, 207, 51, 0.14)', border: `1.5px solid ${T.gold}`, borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 800 }}>90분 (추천)</div>
+                    <div style={{ fontSize: '17.5px', fontWeight: 950, color: T.gold, marginTop: '2px' }}>110,000원</div>
+                  </div>
+                  <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '12px', color: T.textMuted }}>120분</div>
+                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>140,000원</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* ── [이미지 2: 야경 펜트하우스 고혹적인 모델 비주얼] ── */}
-            {/* 서울 야경이 내려다보이는 펜트하우스 소파 위 슬립 드레스의 매혹적인 여인 */}
             <div style={{ position: 'relative', width: '100%', height: '270px', borderRadius: '18px', overflow: 'hidden', border: `1.5px solid ${T.cardBorder}`, boxShadow: '0 14px 36px rgba(0,0,0,0.7)' }}>
               <Image
                 src="/images/abam_penthouse_night.jpg"
@@ -373,65 +402,35 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               />
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(180deg, transparent 0%, rgba(7, 9, 14, 0.95) 100%)', padding: '20px 16px 12px', textAlign: 'left' }}>
                 <div style={{ color: T.gold, fontSize: '12px', fontWeight: 900 }}>PRIVATE LUXURY THERAPY</div>
-                <div style={{ color: '#ffffff', fontSize: '15px', fontWeight: 950 }}>서울의 밤, 가장 완벽한 힐링 파트너 · 내상 없는 20대 에이스</div>
+                <div style={{ color: '#ffffff', fontSize: '15px', fontWeight: 950 }}>서울의 밤, 가장 완벽한 힐링 파트너 · 20대 에이스 관리사</div>
               </div>
             </div>
 
-            {/* 코스 2: 20대 혼혈/글래머 힐링 코스 (인기 1위) */}
-            <div style={{ background: T.card, borderRadius: '18px', border: `1.5px solid ${T.cardBorder}`, overflow: 'hidden', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
-              <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {/* C코스: 스페셜 VIP 올인원 케어 (대표 BEST) */}
+            <div style={{ background: T.card, borderRadius: '18px', border: `2px solid ${T.gold}`, overflow: 'hidden', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 8px 30px rgba(255, 207, 51, 0.25)' }}>
+              <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255, 207, 51, 0.08)' }}>
                 <div>
-                  <span style={{ background: T.neonGreen, color: '#000', fontWeight: 950, fontSize: '11px', padding: '3px 8px', borderRadius: '4px', marginRight: '8px' }}>만족도 최고</span>
-                  <strong style={{ fontSize: '18px', color: '#fff', fontWeight: 950 }}>20대 혼혈 VIP 스페셜 코스</strong>
+                  <span style={{ background: T.hotPink, color: '#fff', fontWeight: 950, fontSize: '11px', padding: '3px 8px', borderRadius: '4px', marginRight: '8px' }}>대표 BEST</span>
+                  <strong style={{ fontSize: '18px', color: '#fff', fontWeight: 950 }}>스페셜 VIP 올인원 힐링 코스</strong>
                 </div>
-                <span style={{ fontSize: '12px', color: T.neonGreen, fontWeight: 800 }}>가성비 인기 1위</span>
+                <span style={{ fontSize: '12.5px', color: T.gold, fontWeight: 900 }}>재이용률 1위</span>
               </div>
               <div style={{ padding: '16px 20px' }}>
                 <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 16px', lineHeight: 1.65 }}>
-                  이국적인 매력과 섬세한 마인드를 겸비한 20대 정예 힐러들이 심신의 안정과 뭉친 근육을 부드럽게 이완하며 특별한 감동을 선사합니다.
-                </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
-                  <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '12px', color: T.textMuted }}>A코스 (60분)</div>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>110,000원</div>
-                  </div>
-                  <div style={{ background: 'rgba(255, 207, 51, 0.14)', border: `1.5px solid ${T.gold}`, borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 800 }}>B코스 (90분/인기)</div>
-                    <div style={{ fontSize: '17.5px', fontWeight: 950, color: T.gold, marginTop: '2px' }}>130,000원</div>
-                  </div>
-                  <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '12px', color: T.textMuted }}>C코스 (120분)</div>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>150,000원</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 코스 3: 정통 왓포 건식 타이 코스 (실속 피로회복) */}
-            <div style={{ background: T.card, borderRadius: '18px', border: `1.5px solid ${T.cardBorder}`, overflow: 'hidden', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
-              <div style={{ padding: '16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <span style={{ background: 'rgba(255,255,255,0.2)', color: '#fff', fontWeight: 950, fontSize: '11px', padding: '3px 8px', borderRadius: '4px', marginRight: '8px' }}>실속 케어</span>
-                  <strong style={{ fontSize: '18px', color: '#fff', fontWeight: 950 }}>정통 왓포 수기 지압 코스</strong>
-                </div>
-                <span style={{ fontSize: '12px', color: '#cbd5e1' }}>건식 전신 수기</span>
-              </div>
-              <div style={{ padding: '16px 20px' }}>
-                <p style={{ fontSize: '13px', color: '#cbd5e1', margin: '0 0 16px', lineHeight: 1.65 }}>
-                  오일을 사용하지 않고 편안한 복장 상태에서 진행되는 정통 왓포 방식의 수기 지압으로 뭉친 어깨, 목, 허리를 시원하게 풀어드립니다.
+                  정통 건식 수기 지압으로 큰 근육을 먼저 시원하게 이완한 뒤, 천연 에센셜 오일로 림프와 미세 근막을 정밀하게 케어하는 최고 만족도의 복합 시그니처 프로그램입니다.
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
                   <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
                     <div style={{ fontSize: '12px', color: T.textMuted }}>60분</div>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>80,000원</div>
+                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>100,000원</div>
                   </div>
-                  <div style={{ background: 'rgba(255, 207, 51, 0.12)', border: `1.5px solid ${T.gold}`, borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
-                    <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 800 }}>90분 (추천)</div>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.gold, marginTop: '2px' }}>100,000원</div>
+                  <div style={{ background: 'rgba(255, 207, 51, 0.16)', border: `2px solid ${T.gold}`, borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '12px', color: T.goldLt, fontWeight: 800 }}>90분 (대표BEST)</div>
+                    <div style={{ fontSize: '18px', fontWeight: 950, color: T.gold, marginTop: '2px' }}>120,000원</div>
                   </div>
                   <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 6px', textAlign: 'center' }}>
                     <div style={{ fontSize: '12px', color: T.textMuted }}>120분</div>
-                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>120,000원</div>
+                    <div style={{ fontSize: '17px', fontWeight: 950, color: T.neonGreen, marginTop: '2px' }}>160,000원</div>
                   </div>
                 </div>
               </div>
@@ -480,7 +479,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '14px', padding: '16px' }}>
               <div style={{ color: T.gold, fontWeight: 950, fontSize: '13px' }}>STEP 1</div>
               <div style={{ fontSize: '15px', fontWeight: 950, color: '#fff', margin: '3px 0' }}>코스 &amp; 시간 선택</div>
-              <div style={{ fontSize: '12px', color: T.textMuted }}>스웨디시 / 아로마 / 타이 중 선택</div>
+              <div style={{ fontSize: '12px', color: T.textMuted }}>타이 / 아로마 / 스페셜 중 선택</div>
             </div>
 
             <div style={{ background: T.card, border: `1px solid ${T.cardBorder}`, borderRadius: '14px', padding: '16px' }}>
@@ -529,7 +528,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <div style={{ background: T.card, border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '16px 18px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <span style={{ fontWeight: 900, fontSize: '14px', color: '#fff' }}>강남구 역삼동 김OO 님 | ★★★★★</span>
-                <span style={{ color: T.gold, fontSize: '12px', fontWeight: 800 }}>스웨디시 90분</span>
+                <span style={{ color: T.gold, fontSize: '12px', fontWeight: 800 }}>스페셜 90분</span>
               </div>
               <p style={{ fontSize: '13px', color: '#cbd5e1', margin: 0, lineHeight: 1.65 }}>
                 야근 때문에 어깨랑 허리가 굳어서 불렀는데 기대 이상이었습니다. 선입금 요구도 전혀 없고 관리사분 도착하셔서 직접 뵙고 결제하니 안심되었습니다. 손길이 너무 부드럽고 시원해서 재방문 의사 100%입니다.
@@ -539,7 +538,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <div style={{ background: T.card, border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '16px 18px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <span style={{ fontWeight: 900, fontSize: '14px', color: '#fff' }}>분당구 정자동 박OO 님 | ★★★★★</span>
-                <span style={{ color: T.gold, fontSize: '12px', fontWeight: 800 }}>혼혈 VIP 90분</span>
+                <span style={{ color: T.gold, fontSize: '12px', fontWeight: 800 }}>아로마 90분</span>
               </div>
               <p style={{ fontSize: '13px', color: '#cbd5e1', margin: 0, lineHeight: 1.65 }}>
                 새벽 늦은 시간에 예약했는데 25분 만에 정확히 오셨네요. 관리사분 미모도 훌륭하시고 대화도 상냥하게 잘 이끌어주셔서 대접받는 기분으로 푹 쉬었습니다. 강추합니다.
@@ -549,7 +548,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <div style={{ background: T.card, border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '16px 18px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <span style={{ fontWeight: 900, fontSize: '14px', color: '#fff' }}>마포구 공덕동 최OO 님 | ★★★★★</span>
-                <span style={{ color: T.gold, fontSize: '12px', fontWeight: 800 }}>정통 타이 60분</span>
+                <span style={{ color: T.gold, fontSize: '12px', fontWeight: 800 }}>타이 60분</span>
               </div>
               <p style={{ fontSize: '13px', color: '#cbd5e1', margin: 0, lineHeight: 1.65 }}>
                 호텔 출장으로 이용했는데 로비에서 대면 후 같이 방으로 올라와 관리받았습니다. 샵에 굳이 나갈 필요 없이 숙소에서 받으니 편안함의 차원이 다릅니다.
