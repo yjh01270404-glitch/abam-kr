@@ -104,6 +104,12 @@ const PhoneIcon = ({ size }: { size: number }) => (
   </svg>
 );
 
+const SmsIcon = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z" />
+  </svg>
+);
+
 /* 히어로 전면 전체에 반짝이는 작은 별 & 다이아몬드 스파클 데이터 */
 type StarType = 'cross' | 'sparkle' | 'twinkle';
 interface HeroStarItem {
@@ -299,7 +305,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   );
 
   return (
-    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '88px', lineHeight: 1.6 }}>
+    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '116px', lineHeight: 1.6 }}>
       
       {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 화려한 별빛 & 유성 애니메이션 ── */}
       <style>{`
@@ -891,40 +897,62 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* ── 4. 코스 및 정찰 가격표 (3대 코스 특화 하이라이트 포인트 적용) ── */}
+        {/* ── 4. 코스 및 정찰 가격표 (하나의 일체형 큰 박스 안에서 종류별 고유 컬러 구분) ── */}
         <section id="price" style={section}>
-          {head('코스 안내 및 정찰 가격표', '선입금 없는 100% 현장 대면결제 · 취향별 맞춤 코스')}
+          {head('코스 안내 및 정찰 가격표', '선입금 없는 100% 현장 대면결제 · 3대 시그니처 코스')}
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {c.courses.map((course) => {
+          {/* 3대 코스 통합 단일 마스터 박스 (따로 놀지 않고 하나로 묶인 일체형 메뉴판) */}
+          <div
+            className="abam-card"
+            style={{
+              padding: 0,
+              overflow: 'hidden',
+              border: '1px solid #333846',
+              borderRadius: '12px',
+              background: '#13151c',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+            }}
+          >
+            {/* 마스터 안내 바 */}
+            <div
+              style={{
+                padding: '12px 18px',
+                background: '#1a1d26',
+                borderBottom: '1px solid #282b36',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '6px',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: C.pointGold }} />
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff' }}>아밤 3대 프라이빗 맞춤 코스</span>
+              </div>
+              <span style={{ fontSize: '12px', color: C.pointGold, fontWeight: 700 }}>전 코스 100% 현장 대면결제 정찰제</span>
+            </div>
+
+            {/* 3대 코스: A(시안 블루), B(앰버 골드), C(루비 레드)로 종류별 확실한 컬러 구분 */}
+            {c.courses.map((course, idx) => {
               const isThai = course.no === 1;
               const isAroma = course.no === 2;
               const isSpecial = course.no === 3;
 
-              /* 코스별 포인트 스타일 및 뱃지 설정 */
-              const cardBorder = isAroma
-                ? '1.5px solid #f59e0b'
+              /* 코스별 고유 시그니처 테마 컬러 */
+              const themeColor = isAroma ? '#f59e0b' : isSpecial ? '#e11d48' : '#38bdf8';
+              const themeBg = isAroma
+                ? 'rgba(245, 158, 11, 0.035)'
                 : isSpecial
-                ? '1.5px solid #e11d48'
-                : `1px solid ${C.line}`;
+                ? 'rgba(225, 29, 72, 0.035)'
+                : 'transparent';
 
-              const cardShadow = isAroma
-                ? '0 0 20px rgba(245,158,11,0.12)'
+              const badgeText = isThai ? 'A코스' : isAroma ? 'B코스' : 'C코스';
+              const tagText = isAroma
+                ? '👑 고객 선호 1위 · BEST'
                 : isSpecial
-                ? '0 0 20px rgba(225,29,72,0.12)'
-                : 'none';
-
-              const headerBg = isAroma
-                ? 'linear-gradient(90deg, #261f12, #1c1f2b)'
-                : isSpecial
-                ? 'linear-gradient(90deg, #261318, #1c1f2b)'
-                : '#1c1f2b';
-
-              const headerBorderLeft = isAroma
-                ? '4px solid #f59e0b'
-                : isSpecial
-                ? '4px solid #e11d48'
-                : '4px solid #38bdf8';
+                ? '💎 VIP 스페셜 올케어'
+                : '기본 충실 · 뭉친 피로 타파';
 
               const chips = isThai
                 ? ['⚡ 전신 수기 건식 지압', '🎯 뭉친 어깨·허리 피로 해소', '🧘 스트레칭 균형 회복']
@@ -933,23 +961,20 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 : ['🔥 시원한 지압 + 부드러운 오일', '⭐ 20대 ACE 집중 VIP 케어', '🏆 만족도 1위 종합 테라피'];
 
               return (
-                <article
+                <div
                   key={course.no}
-                  className="abam-card"
                   style={{
-                    overflow: 'hidden',
-                    padding: 0,
-                    border: cardBorder,
-                    boxShadow: cardShadow,
+                    background: themeBg,
+                    borderTop: idx > 0 ? '1px solid #282b36' : 'none',
+                    borderLeft: `5px solid ${themeColor}`,
                   }}
                 >
-                  {/* 코스 헤더 (강조 뱃지 & 포인트 컬러) */}
+                  {/* 코스별 헤더 바 (고유 컬러 뱃지 및 타이틀) */}
                   <div
                     style={{
                       padding: '14px 18px',
-                      background: headerBg,
-                      borderBottom: `1px solid ${C.line}`,
-                      borderLeft: headerBorderLeft,
+                      background: isAroma ? 'rgba(245, 158, 11, 0.08)' : isSpecial ? 'rgba(225, 29, 72, 0.08)' : 'rgba(56, 189, 248, 0.06)',
+                      borderBottom: '1px solid #282b36',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
@@ -960,7 +985,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                       <span
                         style={{
-                          background: isAroma ? '#f59e0b' : isSpecial ? C.pointRed : '#0284c7',
+                          background: themeColor,
                           color: '#ffffff',
                           fontWeight: 900,
                           fontSize: '12.5px',
@@ -968,35 +993,32 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                           borderRadius: '4px',
                         }}
                       >
-                        {course.no === 1 ? 'A코스' : course.no === 2 ? 'B코스' : 'C코스'}
+                        {badgeText}
                       </span>
                       <strong style={{ fontSize: '18px', color: '#ffffff' }}>{course.name} 코스</strong>
 
-                      {/* 하이라이트 뱃지 태그 */}
-                      {isAroma && (
-                        <span style={{ background: 'rgba(245,158,11,0.2)', border: '1px solid #f59e0b', color: '#fef08a', fontSize: '11px', fontWeight: 800, padding: '2px 7px', borderRadius: '4px' }}>
-                          👑 고객 선호 1위 · BEST
-                        </span>
-                      )}
-                      {isSpecial && (
-                        <span style={{ background: 'rgba(225,29,72,0.2)', border: '1px solid #e11d48', color: '#fda4af', fontSize: '11px', fontWeight: 800, padding: '2px 7px', borderRadius: '4px' }}>
-                          💎 VIP 스페셜 올케어
-                        </span>
-                      )}
-                      {isThai && (
-                        <span style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid #38bdf8', color: '#bae6fd', fontSize: '11px', fontWeight: 700, padding: '2px 7px', borderRadius: '4px' }}>
-                          기본 충실 · 뭉친 피로 타파
-                        </span>
-                      )}
+                      <span
+                        style={{
+                          background: isAroma ? 'rgba(245, 158, 11, 0.2)' : isSpecial ? 'rgba(225, 29, 72, 0.2)' : 'rgba(56, 189, 248, 0.15)',
+                          border: `1px solid ${themeColor}`,
+                          color: isAroma ? '#fef08a' : isSpecial ? '#fda4af' : '#bae6fd',
+                          fontSize: '11px',
+                          fontWeight: 800,
+                          padding: '2px 7px',
+                          borderRadius: '4px',
+                        }}
+                      >
+                        {tagText}
+                      </span>
                     </div>
 
-                    <span style={{ fontSize: '13.5px', color: isAroma ? '#fef08a' : C.pointGold, fontWeight: 700 }}>
+                    <span style={{ fontSize: '13.5px', color: isAroma ? '#fef08a' : themeColor, fontWeight: 700 }}>
                       {course.subtitle}
                     </span>
                   </div>
 
-                  {/* 코스 본문 & 특징 칩 3개 */}
-                  <div style={{ padding: '16px 18px' }}>
+                  {/* 코스 본문 & 특징 불릿 칩 & 3열 가격표 그리드 */}
+                  <div style={{ padding: '16px 18px 20px' }}>
                     <p style={{ fontSize: '14.5px', color: C.textSub, margin: '0 0 12px', lineHeight: 1.65 }}>
                       {course.desc}
                     </p>
@@ -1007,8 +1029,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                         <span
                           key={ci}
                           style={{
-                            background: '#101218',
-                            border: `1px solid ${C.lineLight}`,
+                            background: '#0d0f14',
+                            border: `1px solid ${themeColor}44`,
                             color: '#e2e8f0',
                             fontSize: '12px',
                             fontWeight: 600,
@@ -1031,8 +1053,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                             className="abam-course-price-cell"
                             style={{
                               textAlign: 'center',
-                              border: isRecom ? (isAroma ? '1px solid #f59e0b' : isSpecial ? '1px solid #e11d48' : '1px solid #38bdf8') : `1px solid ${C.line}`,
-                              background: isRecom ? (isAroma ? '#1e1a12' : isSpecial ? '#1e1215' : '#121820') : '#101218',
+                              border: isRecom ? `1.5px solid ${themeColor}` : `1px solid ${C.line}`,
+                              background: isRecom ? `${themeColor}15` : '#0e1016',
                               borderRadius: '8px',
                               padding: '12px 6px',
                               position: 'relative',
@@ -1045,7 +1067,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                                   top: '-9px',
                                   left: '50%',
                                   transform: 'translateX(-50%)',
-                                  background: isAroma ? '#f59e0b' : isSpecial ? C.pointRed : '#0284c7',
+                                  background: themeColor,
                                   color: '#ffffff',
                                   fontSize: '10px',
                                   fontWeight: 800,
@@ -1074,7 +1096,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       })}
                     </div>
                   </div>
-                </article>
+                </div>
               );
             })}
           </div>
@@ -1279,20 +1301,58 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
       </main>
 
-      {/* ── 12. 하단 고정 퀵바 (문자 예약 + 24시 직통 전화 1:1 배치) ── */}
+      {/* ── 12. 하단 고정 퀵바 (큼직한 대형 통화/문자 버튼 · 압도적 터치감과 가독성) ── */}
       <div className="abam-bottom-bar">
-        <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
           {isKo ? (
-            <a href={SMS_HREF} style={{ ...btn, background: '#242836', border: `1px solid ${C.lineLight}`, color: '#ffffff', fontSize: '14px', padding: '13px 0' }}>
-              문자 간편예약 (양식 자동)
+            <a
+              href={SMS_HREF}
+              style={{
+                ...btn,
+                background: 'linear-gradient(180deg, #2b3245, #1e2333)',
+                border: '1.5px solid #475569',
+                color: '#ffffff',
+                fontSize: '16.5px',
+                fontWeight: 900,
+                padding: '16px 0',
+                borderRadius: '8px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+              }}
+            >
+              <SmsIcon size={21} /> 문자 간편예약
             </a>
           ) : (
-            <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ ...btn, background: '#25D366', color: '#ffffff', fontSize: '14px', padding: '13px 0' }}>
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                ...btn,
+                background: '#25D366',
+                color: '#ffffff',
+                fontSize: '16.5px',
+                fontWeight: 900,
+                padding: '16px 0',
+                borderRadius: '8px',
+              }}
+            >
               {c.cta.whatsapp}
             </a>
           )}
-          <a href={c.contact.tel} style={{ ...btn, background: C.pointRed, color: '#ffffff', fontSize: '14px', padding: '13px 0' }}>
-            <PhoneIcon size={16} /> {c.cta.callBar}
+          <a
+            href={c.contact.tel}
+            style={{
+              ...btn,
+              background: 'linear-gradient(180deg, #f43f5e, #be123c)',
+              color: '#ffffff',
+              fontSize: '16.5px',
+              fontWeight: 900,
+              padding: '16px 0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 16px rgba(225,29,72,0.4)',
+            }}
+          >
+            <PhoneIcon size={21} /> 24시 전화예약
           </a>
         </div>
       </div>
