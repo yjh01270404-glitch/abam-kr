@@ -296,16 +296,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
   const section: React.CSSProperties = { marginTop: '40px', scrollMarginTop: '70px', width: '100%' };
 
-  /* 직관적이고 깔끔한 한국형 섹션 타이틀 */
+  /* 시원시원하고 직관적인 한국형 섹션 타이틀 (모바일 가독성 극대화) */
   const head = (title: string, sub?: string) => (
-    <div style={{ marginBottom: '14px', borderLeft: `4px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '10px' }}>
-      <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', margin: 0, letterSpacing: '-0.3px', wordBreak: 'keep-all' }}>{title}</h2>
-      {sub && <p style={{ fontSize: '13.5px', color: C.textMuted, margin: '4px 0 0', wordBreak: 'keep-all' }}>{sub}</p>}
+    <div style={{ marginBottom: '18px', borderLeft: `5px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '12px' }}>
+      <h2 style={{ fontSize: '23px', fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.4px', wordBreak: 'keep-all' }}>{title}</h2>
+      {sub && <p style={{ fontSize: '15.5px', color: C.textSub, margin: '6px 0 0', wordBreak: 'keep-all' }}>{sub}</p>}
     </div>
   );
 
   return (
-    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '116px', lineHeight: 1.6 }}>
+    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '120px', lineHeight: 1.65 }}>
       
       {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 화려한 별빛 & 유성 애니메이션 ── */}
       <style>{`
@@ -470,33 +470,102 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        @media (max-width: 540px) {
+        /* ── 모바일 점보 가독성 최적화: 스마트폰에서 확대를 전혀 하지 않아도 시원시원하게 한눈에 들어오는 대형 폰트 ── */
+        @media (max-width: 640px) {
           .abam-header-badge {
             display: none !important;
           }
           .abam-nav-link {
-            padding: 4px 4px !important;
-            font-size: 12px !important;
+            padding: 6px 7px !important;
+            font-size: 14.5px !important;
+            font-weight: 800 !important;
           }
           .abam-hero-title-main {
-            font-size: 28px !important;
+            font-size: 32px !important;
           }
           .abam-hero-title-tag {
-            font-size: 24px !important;
+            font-size: 26px !important;
           }
           .abam-hero-subtitle {
-            font-size: 18px !important;
-            line-height: 1.4 !important;
+            font-size: 20px !important;
+            line-height: 1.45 !important;
           }
-          .abam-course-price-cell {
-            padding: 10px 4px !important;
+          .abam-hero-box {
+            padding-left: 14px !important;
+            padding-right: 14px !important;
           }
-          .abam-course-price-val {
+          .abam-hero-desc {
+            font-size: 17px !important;
+            line-height: 1.8 !important;
+            padding: 18px 16px !important;
+          }
+          .abam-hero-summary-bar {
             font-size: 15.5px !important;
+            font-weight: 800 !important;
+            padding: 16px 8px !important;
+          }
+          .abam-hero-advance-box {
+            font-size: 15.5px !important;
+            line-height: 1.7 !important;
+            padding: 15px 14px !important;
+          }
+          .abam-hero-call-btn {
+            font-size: 22px !important;
+            padding: 18px 16px !important;
+          }
+          .abam-hero-sub-btn {
+            font-size: 16px !important;
+            padding: 15px 8px !important;
+          }
+          .abam-card {
+            padding: 22px 16px !important;
           }
           .abam-body-text {
-            font-size: 15.5px !important;
+            font-size: 17.5px !important;
+            line-height: 1.85 !important;
+          }
+          .abam-course-name {
+            font-size: 21px !important;
+          }
+          .abam-course-desc {
+            font-size: 16.5px !important;
             line-height: 1.75 !important;
+          }
+          .abam-course-chip {
+            font-size: 13.5px !important;
+            padding: 6px 11px !important;
+          }
+          .abam-course-price-cell {
+            padding: 12px 2px !important;
+          }
+          .abam-course-price-val {
+            font-size: 18.5px !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.5px !important;
+            white-space: nowrap !important;
+          }
+          .abam-course-duration {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+          }
+          .abam-rule-title {
+            font-size: 18px !important;
+            font-weight: 800 !important;
+          }
+          .abam-rule-desc {
+            font-size: 16px !important;
+            line-height: 1.75 !important;
+          }
+          .abam-review-text {
+            font-size: 16.5px !important;
+            line-height: 1.8 !important;
+          }
+          .abam-faq-q {
+            font-size: 17.5px !important;
+          }
+          .abam-faq-a {
+            font-size: 16.5px !important;
+            line-height: 1.8 !important;
           }
         }
 
@@ -739,19 +808,19 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section style={{ position: 'relative', padding: '32px 0 0', textAlign: 'center' }}>
           
           <div style={{ position: 'relative', zIndex: 1 }}>
-            {/* 영업 상태 배지 (간격 22px 확보) */}
+            {/* 영업 상태 배지 (간격 22px 확보 및 폰트 14px) */}
             {status && (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(23, 25, 34, 0.88)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '6px 16px', fontSize: '12.5px', fontWeight: 600, color: C.textSub, marginBottom: '22px' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: status === 'closed' ? C.pointGold : '#10b981' }} />
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(23, 25, 34, 0.88)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '8px 18px', fontSize: '14px', fontWeight: 700, color: C.textSub, marginBottom: '22px' }}>
+                <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: status === 'closed' ? C.pointGold : '#10b981' }} />
                 {x.status[status]}
               </div>
             )}
 
             {/* H1 메인 타이틀 박스 (간격 26px 확보로 조잡함 완전 해소) */}
-            <h1 style={{ fontSize: '32px', fontWeight: 900, lineHeight: 1.3, color: '#ffffff', margin: '0 0 26px', letterSpacing: '-0.8px' }}>
+            <h1 style={{ fontSize: '34px', fontWeight: 900, lineHeight: 1.3, color: '#ffffff', margin: '0 0 26px', letterSpacing: '-0.8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '14px', flexWrap: 'wrap' }}>
                 {/* 화려하게 빛나는 골드 달모양 로고 */}
-                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 14px rgba(245,158,11,0.95)) drop-shadow(0 0 28px rgba(254,240,138,0.7))' }}>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 14px rgba(245,158,11,0.95)) drop-shadow(0 0 28px rgba(254,240,138,0.7))' }}>
                   <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#heroMoonGrad)" />
                   <defs>
                     <linearGradient id="heroMoonGrad" x1="0" y1="0" x2="1" y2="1">
@@ -762,21 +831,21 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   </defs>
                 </svg>
                 <span className="abam-hero-title-main" style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.5)' }}>아름다운 밤</span>
-                <span className="abam-hero-title-tag" style={{ fontSize: '26px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
+                <span className="abam-hero-title-tag" style={{ fontSize: '28px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
               </div>
-              <span className="abam-hero-subtitle" style={{ fontSize: '20px', fontWeight: 800, color: '#e2e8f0', letterSpacing: '-0.4px', display: 'block', marginTop: '10px', lineHeight: 1.5 }}>
+              <span className="abam-hero-subtitle" style={{ fontSize: '21px', fontWeight: 800, color: '#e2e8f0', letterSpacing: '-0.4px', display: 'block', marginTop: '10px', lineHeight: 1.5 }}>
                 서울·경기 24시 1:1 방문 홈케어 출장안마 · 출장마사지
               </span>
             </h1>
 
-            {/* 아밤이 왜 아밤인지 설명 배너 (간격 22px 확보 및 폰트 15px 가독성) */}
-            <div className="abam-hero-box" style={{ margin: '0 auto 22px', background: 'rgba(20, 23, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '10px', padding: '16px 20px', fontSize: '15px', color: '#e2e8f0', lineHeight: 1.7, textAlign: 'center' }}>
+            {/* 아밤이 왜 아밤인지 설명 배너 (모바일 점보 폰트 17px) */}
+            <div className="abam-hero-box abam-hero-desc" style={{ margin: '0 auto 22px', background: 'rgba(20, 23, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '10px', padding: '18px 20px', fontSize: '16.5px', color: '#e2e8f0', lineHeight: 1.75, textAlign: 'center' }}>
               🌙 <strong style={{ color: C.pointGold }}>‘아름다운 밤’</strong>을 약속드리는 1:1 프리미엄 케어, 그래서 <strong style={{ color: '#ffffff' }}>아밤(Abam)</strong>입니다.<br />
               고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.
             </div>
 
-            {/* 핵심 서비스 요약 바 (간격 20px 확보) */}
-            <div className="abam-hero-box" style={{ background: 'rgba(22, 24, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.line}`, borderRadius: '8px', padding: '14px 16px', margin: '0 auto 20px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '14.5px', color: '#e2e8f0', fontWeight: 700 }}>
+            {/* 핵심 서비스 요약 바 (모바일 점보 폰트 16px) */}
+            <div className="abam-hero-box abam-hero-summary-bar" style={{ background: 'rgba(22, 24, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.line}`, borderRadius: '8px', padding: '15px 16px', margin: '0 auto 20px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '15.5px', color: '#e2e8f0', fontWeight: 800 }}>
               <span>100% 현장 대면결제</span>
               <span style={{ color: C.lineLight }}>|</span>
               <span>20대 전문 힐러</span>
@@ -784,33 +853,34 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <span>서울·경기 30분 도착</span>
             </div>
 
-            {/* 1시간 전 예약 안내 (간격 24px 확보) */}
-            <div className="abam-hero-box" style={{ margin: '0 auto 24px', background: 'rgba(24, 27, 38, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '13px 16px', fontSize: '13.5px', color: C.pointGold, textAlign: 'center', lineHeight: 1.6 }}>
+            {/* 1시간 전 예약 안내 (모바일 점보 폰트 15.5px) */}
+            <div className="abam-hero-box abam-hero-advance-box" style={{ margin: '0 auto 24px', background: 'rgba(24, 27, 38, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '15px 16px', fontSize: '15.5px', color: C.pointGold, textAlign: 'center', lineHeight: 1.65 }}>
               이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하게 이용 가능합니다.
             </div>
 
-            {/* 대표 24시 전화 상담 연결 버튼 (간격 12px) */}
+            {/* 대표 24시 전화 상담 연결 버튼 (모바일 점보 폰트 22px) */}
             <div className="abam-hero-box" style={{ margin: '0 auto 12px' }}>
               <a
                 href={c.contact.tel}
+                className="abam-hero-call-btn"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '10px',
+                  gap: '12px',
                   background: C.pointRed,
                   color: '#ffffff',
-                  fontWeight: 800,
-                  fontSize: '21px',
-                  padding: '16px 20px',
+                  fontWeight: 900,
+                  fontSize: '22px',
+                  padding: '18px 20px',
                   borderRadius: '10px',
                   textDecoration: 'none',
                   width: '100%',
                   boxSizing: 'border-box',
-                  boxShadow: '0 4px 20px rgba(225,29,72,0.35)',
+                  boxShadow: '0 4px 20px rgba(225,29,72,0.4)',
                 }}
               >
-                <PhoneIcon size={24} /> {c.contact.phone} 24시 전화예약
+                <PhoneIcon size={26} /> {c.contact.phone} 24시 전화예약
               </a>
             </div>
 
@@ -818,6 +888,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <div className="abam-hero-box" style={{ margin: '0 auto 16px', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '8px' }}>
               <a
                 href={SMS_HREF}
+                className="abam-hero-sub-btn"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -828,9 +899,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   WebkitBackdropFilter: 'blur(8px)',
                   border: `1px solid ${C.lineLight}`,
                   color: '#ffffff',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  padding: '14px 10px',
+                  fontWeight: 800,
+                  fontSize: '16px',
+                  padding: '15px 10px',
                   borderRadius: '8px',
                   textDecoration: 'none',
                   boxSizing: 'border-box',
@@ -841,6 +912,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
               <button
                 onClick={() => setSmsModal(true)}
+                className="abam-hero-sub-btn"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -851,9 +923,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   WebkitBackdropFilter: 'blur(8px)',
                   border: `1px solid ${C.line}`,
                   color: C.textSub,
-                  fontWeight: 700,
-                  fontSize: '14px',
-                  padding: '14px 10px',
+                  fontWeight: 800,
+                  fontSize: '15.5px',
+                  padding: '15px 10px',
                   borderRadius: '8px',
                   cursor: 'pointer',
                   boxSizing: 'border-box',
@@ -863,7 +935,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </button>
             </div>
 
-            <div style={{ fontSize: '13px', color: C.textMuted, marginBottom: '26px', lineHeight: 1.6 }}>
+            <div style={{ fontSize: '14px', color: C.textMuted, marginBottom: '26px', lineHeight: 1.6 }}>
               ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 24시간 언제든 편하게 접수하실 수 있습니다.
             </div>
 
@@ -1018,24 +1090,25 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   </div>
 
                   {/* 코스 본문 & 특징 불릿 칩 & 3열 가격표 그리드 */}
-                  <div style={{ padding: '16px 18px 20px' }}>
-                    <p style={{ fontSize: '14.5px', color: C.textSub, margin: '0 0 12px', lineHeight: 1.65 }}>
+                  <div style={{ padding: '18px 18px 22px' }}>
+                    <p className="abam-course-desc" style={{ fontSize: '16.5px', color: C.textSub, margin: '0 0 14px', lineHeight: 1.75 }}>
                       {course.desc}
                     </p>
 
                     {/* 핵심 포인트 칩 3개 */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '18px' }}>
                       {chips.map((chip, ci) => (
                         <span
                           key={ci}
+                          className="abam-course-chip"
                           style={{
                             background: '#0d0f14',
-                            border: `1px solid ${themeColor}44`,
+                            border: `1px solid ${themeColor}66`,
                             color: '#e2e8f0',
-                            fontSize: '12px',
-                            fontWeight: 600,
-                            padding: '4px 10px',
-                            borderRadius: '4px',
+                            fontSize: '13.5px',
+                            fontWeight: 700,
+                            padding: '6px 12px',
+                            borderRadius: '5px',
                           }}
                         >
                           {chip}
@@ -1054,9 +1127,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                             style={{
                               textAlign: 'center',
                               border: isRecom ? `1.5px solid ${themeColor}` : `1px solid ${C.line}`,
-                              background: isRecom ? `${themeColor}15` : '#0e1016',
+                              background: isRecom ? `${themeColor}18` : '#0e1016',
                               borderRadius: '8px',
-                              padding: '12px 6px',
+                              padding: '14px 6px',
                               position: 'relative',
                             }}
                           >
@@ -1064,14 +1137,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                               <div
                                 style={{
                                   position: 'absolute',
-                                  top: '-9px',
+                                  top: '-10px',
                                   left: '50%',
                                   transform: 'translateX(-50%)',
                                   background: themeColor,
                                   color: '#ffffff',
-                                  fontSize: '10px',
-                                  fontWeight: 800,
-                                  padding: '1px 6px',
+                                  fontSize: '11px',
+                                  fontWeight: 900,
+                                  padding: '2px 8px',
                                   borderRadius: '3px',
                                   whiteSpace: 'nowrap',
                                 }}
@@ -1079,14 +1152,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                                 {isSpecial ? 'VIP 풀코스' : '추천 코스'}
                               </div>
                             )}
-                            <div style={{ fontSize: '12px', color: C.textMuted }}>{c.priceSection.durations[pi]}</div>
+                            <div className="abam-course-duration" style={{ fontSize: '14px', color: C.textMuted, fontWeight: 700 }}>{c.priceSection.durations[pi]}</div>
                             <div
                               className="abam-course-price-val"
                               style={{
-                                fontSize: '17px',
-                                fontWeight: 800,
-                                color: isRecom ? '#ffffff' : '#cbd5e1',
+                                fontSize: '18.5px',
+                                fontWeight: 900,
+                                color: isRecom ? '#ffffff' : '#f1f5f9',
                                 marginTop: '4px',
+                                letterSpacing: '-0.5px',
+                                whiteSpace: 'nowrap',
                               }}
                             >
                               {pr}
@@ -1139,27 +1214,27 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="rules" style={section}>
           {head('이용 및 방문 안내', '편안하고 안전한 방문을 위한 필수 안내')}
           
-          <div className="abam-card" style={{ padding: '16px 14px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div className="abam-card" style={{ padding: '20px 18px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>1. 건물 주차장 안내</div>
-                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>건물 내 주차장이 있으시면 도착 후 기사가 바로 전화드립니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>1. 건물 주차장 안내</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>건물 내 주차장이 있으시면 도착 후 기사가 바로 전화드립니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>2. 공동현관 비밀번호</div>
-                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>비밀번호를 예약 시 남겨주시거나 도착 시 세대 호출벨을 눌러주시면 됩니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>2. 공동현관 비밀번호</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>비밀번호를 예약 시 남겨주시거나 도착 시 세대 호출벨을 눌러주시면 됩니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>3. 호텔·모텔 객실 안내</div>
-                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>도착 전 미리 연락드리며, 1층 로비에서 결제 후 객실에서 서비스를 받으시면 됩니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>3. 호텔·모텔 객실 안내</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>도착 전 미리 연락드리며, 1층 로비에서 결제 후 객실에서 서비스를 받으시면 됩니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '2px' }}>4. 100% 현장 대면결제</div>
-                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>현금, 계좌이체, 카드 결제 모두 가능합니다. 어떠한 선입금도 요구하지 않습니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>4. 100% 현장 대면결제</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>현금, 계좌이체, 카드 결제 모두 가능합니다. 어떠한 선입금도 요구하지 않습니다.</div>
               </div>
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 800, color: C.pointGold, marginBottom: '2px' }}>5. 문자(SMS) 간편 예약 접수</div>
-                <div style={{ fontSize: '13.5px', color: C.textSub, lineHeight: 1.6 }}>전화 통화 없이 문자로도 24시간 예약 가능합니다. (희망 시간 1시간 전 예약 시 가장 수월하게 이용하실 수 있습니다.)</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: C.pointGold, marginBottom: '4px' }}>5. 문자(SMS) 간편 예약 접수</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>전화 통화 없이 문자로도 24시간 예약 가능합니다. (희망 시간 1시간 전 예약 시 가장 수월하게 이용하실 수 있습니다.)</div>
               </div>
             </div>
           </div>
@@ -1167,11 +1242,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 6. 100% 현장 직접 대면결제 원칙 ── */}
         <section id="safety" style={section}>
-          <div className="abam-card" style={{ borderLeft: `4px solid ${C.pointRed}`, textAlign: 'left', padding: '16px 14px' }}>
-            <h3 style={{ color: '#ffffff', fontSize: '16px', fontWeight: 800, margin: '0 0 6px' }}>
+          <div className="abam-card" style={{ borderLeft: `5px solid ${C.pointRed}`, textAlign: 'left', padding: '20px 18px' }}>
+            <h3 style={{ color: '#ffffff', fontSize: '19px', fontWeight: 900, margin: '0 0 8px' }}>
               아밤(Abam) 100% 현장 직접 대면결제 원칙
             </h3>
-            <div style={{ fontSize: '14px', color: C.textSub, lineHeight: 1.7, wordBreak: 'keep-all' }}>
+            <div style={{ fontSize: '16.5px', color: C.textSub, lineHeight: 1.8, wordBreak: 'keep-all' }}>
               아밤은 고객님께 사전 입금을 단 1원도 요구하지 않습니다.<br />
               관리사가 고객님이 계신 곳(자택·호텔)에 도착하여 직접 대면한 후 결제(현금, 계좌이체, 카드)를 진행하므로 안심하고 안전하게 이용하실 수 있습니다.
             </div>
@@ -1195,18 +1270,18 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', marginBottom: '10px' }}>
             {c.info.map((p, i) => (
-              <div key={i} className="abam-card" style={{ borderLeft: `3px solid ${C.pointRed}`, padding: '12px 14px' }}>
-                <div style={{ fontSize: '14px', fontWeight: 700, color: '#ffffff' }}>{p.title}</div>
-                <div style={{ fontSize: '12px', color: C.textMuted, marginTop: '3px' }}>{p.sub}</div>
+              <div key={i} className="abam-card" style={{ borderLeft: `4px solid ${C.pointRed}`, padding: '14px 16px' }}>
+                <div style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff' }}>{p.title}</div>
+                <div style={{ fontSize: '13.5px', color: C.textMuted, marginTop: '4px' }}>{p.sub}</div>
               </div>
             ))}
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '8px' }}>
             {x.steps.map((s, i) => (
-              <div key={i} className="abam-card" style={{ padding: '12px 6px', textAlign: 'center' }}>
-                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: C.pointRed, color: '#ffffff', fontWeight: 800, fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px' }}>{i + 1}</div>
-                <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#ffffff' }}>{s}</div>
+              <div key={i} className="abam-card" style={{ padding: '14px 8px', textAlign: 'center' }}>
+                <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: C.pointRed, color: '#ffffff', fontWeight: 900, fontSize: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px' }}>{i + 1}</div>
+                <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff' }}>{s}</div>
               </div>
             ))}
           </div>
@@ -1227,17 +1302,17 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="reviews" style={section}>
           {head(c.reviewSection.title, '실제 이용 고객님들의 진솔한 이용 후기 (100% 리얼)')}
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {c.reviews.map((rev, i) => (
-              <figure key={i} className="abam-card" style={{ margin: 0, padding: '16px 18px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ color: C.pointGold, fontSize: '12px', letterSpacing: '1px' }}>★★★★★</span>
-                  <span style={{ fontSize: '13.5px', color: C.pointGold, fontWeight: 700 }}>{rev.course}</span>
+              <figure key={i} className="abam-card" style={{ margin: 0, padding: '18px 20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                  <span style={{ color: C.pointGold, fontSize: '14px', letterSpacing: '1px' }}>★★★★★</span>
+                  <span style={{ fontSize: '15px', color: C.pointGold, fontWeight: 800 }}>{rev.course}</span>
                 </div>
-                <blockquote style={{ margin: 0, fontSize: '15px', color: '#e2e8f0', lineHeight: 1.75, wordBreak: 'keep-all' }}>
+                <blockquote className="abam-review-text" style={{ margin: 0, fontSize: '16.5px', color: '#e2e8f0', lineHeight: 1.8, wordBreak: 'keep-all' }}>
                   {rev.text}
                 </blockquote>
-                <figcaption style={{ fontSize: '12.5px', color: C.textMuted, marginTop: '10px' }}>
+                <figcaption style={{ fontSize: '13.5px', color: C.textMuted, marginTop: '12px' }}>
                   <span style={{ color: '#ffffff', fontWeight: 700 }}>{rev.author}</span> · {rev.area}
                 </figcaption>
               </figure>
@@ -1254,12 +1329,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               const isOpen = openFaq === i;
               return (
                 <div key={i} style={{ borderTop: i ? `1px solid ${C.line}` : 'none', background: isOpen ? '#1a1d27' : 'transparent' }}>
-                  <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} style={{ width: '100%', padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', gap: '8px', background: 'none', border: 'none', cursor: 'pointer' }}>
-                    <span style={{ fontSize: '15.5px', fontWeight: 700, color: isOpen ? C.pointGold : '#ffffff' }}>{faq.q}</span>
-                    <span style={{ fontSize: '17px', color: C.pointRed, fontWeight: 700 }}>{isOpen ? '−' : '+'}</span>
+                  <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} style={{ width: '100%', padding: '18px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', gap: '8px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                    <span className="abam-faq-q" style={{ fontSize: '17px', fontWeight: 800, color: isOpen ? C.pointGold : '#ffffff' }}>{faq.q}</span>
+                    <span style={{ fontSize: '18px', color: C.pointRed, fontWeight: 800 }}>{isOpen ? '−' : '+'}</span>
                   </button>
                   {isOpen && (
-                    <div style={{ margin: '0 16px 16px', padding: '14px 16px', background: '#101218', borderLeft: `3px solid ${C.pointRed}`, borderRadius: '6px', fontSize: '14.5px', color: C.textSub, lineHeight: 1.8, whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>
+                    <div className="abam-faq-a" style={{ margin: '0 16px 18px', padding: '16px 18px', background: '#101218', borderLeft: `4px solid ${C.pointRed}`, borderRadius: '6px', fontSize: '16px', color: C.textSub, lineHeight: 1.8, whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>
                       {faq.a}
                     </div>
                   )}
@@ -1270,9 +1345,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 10. SEO 본문 안내 ── */}
-        <section id="about" style={{ marginTop: '36px', paddingTop: '20px', borderTop: `1px solid ${C.line}`, paddingLeft: '16px', paddingRight: '16px' }}>
-          <h2 style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', margin: '0 0 10px' }}>{c.about.title}</h2>
-          <div style={{ fontSize: '13px', color: C.textMuted, lineHeight: 1.8, wordBreak: 'keep-all' }}>
+        <section id="about" style={{ marginTop: '38px', paddingTop: '22px', borderTop: `1px solid ${C.line}`, paddingLeft: '16px', paddingRight: '16px' }}>
+          <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', margin: '0 0 10px' }}>{c.about.title}</h2>
+          <div style={{ fontSize: '14.5px', color: C.textMuted, lineHeight: 1.8, wordBreak: 'keep-all' }}>
             <p style={{ margin: '0 0 10px' }}>{c.about.p1}</p>
             <p style={{ margin: 0 }}>
               {c.about.p2}
@@ -1286,17 +1361,17 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 11. 푸터 & 지역 네트워크 링크 ── */}
-        <footer style={{ marginTop: '28px', paddingTop: '20px', borderTop: `1px solid ${C.line}`, paddingBottom: '24px', paddingLeft: '16px', paddingRight: '16px' }}>
-          <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff', marginBottom: '6px' }}>{c.footer.title}</div>
-          <p style={{ fontSize: '12.5px', color: C.textMuted, lineHeight: 1.6, margin: '0 0 12px', wordBreak: 'keep-all' }}>{c.footer.sub}</p>
+        <footer style={{ marginTop: '30px', paddingTop: '22px', borderTop: `1px solid ${C.line}`, paddingBottom: '28px', paddingLeft: '16px', paddingRight: '16px' }}>
+          <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', marginBottom: '8px' }}>{c.footer.title}</div>
+          <p style={{ fontSize: '13.5px', color: C.textMuted, lineHeight: 1.65, margin: '0 0 14px', wordBreak: 'keep-all' }}>{c.footer.sub}</p>
           {areaLinks && areaLinks.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 10px', fontSize: '11.5px', marginBottom: '14px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '7px 10px', fontSize: '12.5px', marginBottom: '16px' }}>
               {areaLinks.slice(0, 36).map((area, i) => (
                 <Link key={i} href={`/seo/${encodeURIComponent(area)}`} style={{ textDecoration: 'none', color: '#64748b' }}>{area}</Link>
               ))}
             </div>
           )}
-          <div style={{ fontSize: '11.5px', color: '#64748b', lineHeight: 1.6 }}>{c.footer.line}</div>
+          <div style={{ fontSize: '12.5px', color: '#64748b', lineHeight: 1.65 }}>{c.footer.line}</div>
         </footer>
 
       </main>
