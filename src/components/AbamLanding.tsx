@@ -104,48 +104,121 @@ const PhoneIcon = ({ size }: { size: number }) => (
   </svg>
 );
 
-/* 히어로 전면 전체에 반짝이는 작은 별 데이터 */
-const HERO_STARS = [
-  { top: '3%', left: '7%', size: 2, dur: '2.4s', delay: '0.2s', color: '#ffffff' },
-  { top: '5%', left: '23%', size: 2.5, dur: '3.1s', delay: '1.1s', color: '#fef08a' },
-  { top: '4%', left: '46%', size: 1.5, dur: '2.0s', delay: '0.5s', color: '#ffffff' },
-  { top: '7%', left: '69%', size: 2.5, dur: '3.6s', delay: '1.8s', color: '#ffffff' },
-  { top: '5%', left: '89%', size: 2, dur: '2.8s', delay: '0.9s', color: '#fde047' },
-  { top: '11%', left: '14%', size: 1.5, dur: '2.2s', delay: '0.4s', color: '#ffffff' },
-  { top: '14%', left: '33%', size: 2.5, dur: '3.4s', delay: '2.1s', color: '#ffffff' },
-  { top: '13%', left: '56%', size: 2, dur: '2.6s', delay: '0.7s', color: '#fef08a' },
-  { top: '15%', left: '79%', size: 3, dur: '4.0s', delay: '1.5s', color: '#ffffff' },
-  { top: '17%', left: '93%', size: 1.5, dur: '1.9s', delay: '0.3s', color: '#ffffff' },
-  { top: '21%', left: '5%', size: 2.5, dur: '3.2s', delay: '1.2s', color: '#ffffff' },
-  { top: '24%', left: '25%', size: 1.5, dur: '2.5s', delay: '0.8s', color: '#fde047' },
-  { top: '23%', left: '85%', size: 2, dur: '3.0s', delay: '1.7s', color: '#ffffff' },
-  { top: '27%', left: '41%', size: 2, dur: '2.3s', delay: '0.1s', color: '#ffffff' },
-  { top: '29%', left: '64%', size: 3, dur: '3.7s', delay: '2.4s', color: '#ffffff' },
-  { top: '33%', left: '11%', size: 1.5, dur: '2.7s', delay: '1.4s', color: '#fef08a' },
-  { top: '35%', left: '95%', size: 2.5, dur: '3.3s', delay: '0.6s', color: '#ffffff' },
-  { top: '39%', left: '4%', size: 2, dur: '2.1s', delay: '1.9s', color: '#ffffff' },
-  { top: '41%', left: '19%', size: 2.5, dur: '3.5s', delay: '0.5s', color: '#ffffff' },
-  { top: '43%', left: '81%', size: 1.5, dur: '2.4s', delay: '1.3s', color: '#fde047' },
-  { top: '47%', left: '37%', size: 2, dur: '2.9s', delay: '0.9s', color: '#ffffff' },
-  { top: '49%', left: '61%', size: 3, dur: '3.8s', delay: '2.2s', color: '#ffffff' },
-  { top: '53%', left: '7%', size: 2.5, dur: '2.6s', delay: '0.4s', color: '#fef08a' },
-  { top: '55%', left: '91%', size: 2, dur: '3.1s', delay: '1.6s', color: '#ffffff' },
-  { top: '59%', left: '27%', size: 1.5, dur: '2.0s', delay: '0.8s', color: '#ffffff' },
-  { top: '61%', left: '73%', size: 2.5, dur: '3.4s', delay: '2.0s', color: '#ffffff' },
-  { top: '65%', left: '15%', size: 2, dur: '2.8s', delay: '0.3s', color: '#fde047' },
-  { top: '67%', left: '47%', size: 3, dur: '3.9s', delay: '1.5s', color: '#ffffff' },
-  { top: '69%', left: '86%', size: 1.5, dur: '2.3s', delay: '0.7s', color: '#ffffff' },
-  { top: '73%', left: '4%', size: 2.5, dur: '3.2s', delay: '2.3s', color: '#ffffff' },
-  { top: '75%', left: '31%', size: 2, dur: '2.5s', delay: '1.1s', color: '#fef08a' },
-  { top: '77%', left: '65%', size: 1.5, dur: '2.1s', delay: '0.2s', color: '#ffffff' },
-  { top: '81%', left: '93%', size: 3, dur: '3.6s', delay: '1.8s', color: '#ffffff' },
-  { top: '83%', left: '21%', size: 2, dur: '2.7s', delay: '0.9s', color: '#ffffff' },
-  { top: '85%', left: '53%', size: 2.5, dur: '3.3s', delay: '1.4s', color: '#fde047' },
-  { top: '87%', left: '77%', size: 1.5, dur: '2.2s', delay: '0.6s', color: '#ffffff' },
-  { top: '91%', left: '9%', size: 2.5, dur: '3.0s', delay: '2.1s', color: '#ffffff' },
-  { top: '93%', left: '39%', size: 2, dur: '2.4s', delay: '0.4s', color: '#fef08a' },
-  { top: '95%', left: '67%', size: 3, dur: '3.7s', delay: '1.7s', color: '#ffffff' },
-  { top: '97%', left: '89%', size: 1.5, dur: '2.1s', delay: '1.0s', color: '#ffffff' },
+/* 히어로 전면 전체에 반짝이는 작은 별 & 다이아몬드 스파클 데이터 */
+type StarType = 'cross' | 'sparkle' | 'twinkle';
+interface HeroStarItem {
+  top: string;
+  left: string;
+  size: number;
+  dur: string;
+  delay: string;
+  color: string;
+  type: StarType;
+}
+
+const HERO_STARS: HeroStarItem[] = [
+  // 상단부 0% ~ 25% (풍성한 밤하늘 밀키웨이)
+  { top: '2%', left: '5%', size: 2, dur: '2.2s', delay: '0.1s', color: '#ffffff', type: 'twinkle' },
+  { top: '3%', left: '16%', size: 4, dur: '3.4s', delay: '0.8s', color: '#fef08a', type: 'cross' },
+  { top: '4%', left: '28%', size: 1.5, dur: '1.9s', delay: '1.5s', color: '#ffffff', type: 'twinkle' },
+  { top: '2%', left: '42%', size: 3, dur: '2.8s', delay: '0.3s', color: '#fde047', type: 'sparkle' },
+  { top: '5%', left: '55%', size: 2, dur: '3.1s', delay: '1.2s', color: '#bae6fd', type: 'twinkle' },
+  { top: '3%', left: '68%', size: 4.5, dur: '3.6s', delay: '1.9s', color: '#ffffff', type: 'cross' },
+  { top: '4%', left: '80%', size: 2.5, dur: '2.4s', delay: '0.6s', color: '#fef08a', type: 'sparkle' },
+  { top: '2%', left: '92%', size: 1.5, dur: '2.0s', delay: '1.1s', color: '#ffffff', type: 'twinkle' },
+
+  { top: '8%', left: '9%', size: 1.5, dur: '2.5s', delay: '0.4s', color: '#ffffff', type: 'twinkle' },
+  { top: '10%', left: '22%', size: 2.5, dur: '2.7s', delay: '1.7s', color: '#bae6fd', type: 'twinkle' },
+  { top: '7%', left: '35%', size: 3.5, dur: '3.5s', delay: '0.2s', color: '#fef08a', type: 'cross' },
+  { top: '9%', left: '48%', size: 2, dur: '2.1s', delay: '1.4s', color: '#ffffff', type: 'twinkle' },
+  { top: '8%', left: '62%', size: 2.5, dur: '3.0s', delay: '0.9s', color: '#fde047', type: 'sparkle' },
+  { top: '11%', left: '74%', size: 1.5, dur: '1.8s', delay: '1.6s', color: '#ffffff', type: 'twinkle' },
+  { top: '9%', left: '87%', size: 4, dur: '3.8s', delay: '0.5s', color: '#ffffff', type: 'cross' },
+  { top: '12%', left: '96%', size: 2, dur: '2.3s', delay: '2.1s', color: '#fef08a', type: 'twinkle' },
+
+  { top: '15%', left: '4%', size: 3, dur: '3.2s', delay: '1.0s', color: '#fde047', type: 'sparkle' },
+  { top: '17%', left: '14%', size: 1.5, dur: '2.0s', delay: '0.3s', color: '#ffffff', type: 'twinkle' },
+  { top: '14%', left: '26%', size: 4, dur: '3.7s', delay: '2.3s', color: '#ffffff', type: 'cross' },
+  { top: '18%', left: '39%', size: 2, dur: '2.6s', delay: '0.7s', color: '#bae6fd', type: 'twinkle' },
+  { top: '16%', left: '52%', size: 1.5, dur: '1.9s', delay: '1.3s', color: '#ffffff', type: 'twinkle' },
+  { top: '19%', left: '66%', size: 3, dur: '3.3s', delay: '0.8s', color: '#fef08a', type: 'sparkle' },
+  { top: '15%', left: '79%', size: 2, dur: '2.4s', delay: '1.8s', color: '#ffffff', type: 'twinkle' },
+  { top: '18%', left: '91%', size: 3.5, dur: '3.6s', delay: '0.4s', color: '#ffffff', type: 'cross' },
+
+  // 중상단부 20% ~ 45% (H1 제목 및 요약 바 주변)
+  { top: '22%', left: '7%', size: 2, dur: '2.5s', delay: '1.5s', color: '#bae6fd', type: 'twinkle' },
+  { top: '24%', left: '18%', size: 3, dur: '3.1s', delay: '0.6s', color: '#fde047', type: 'sparkle' },
+  { top: '21%', left: '32%', size: 1.5, dur: '2.2s', delay: '2.0s', color: '#ffffff', type: 'twinkle' },
+  { top: '25%', left: '44%', size: 4.5, dur: '3.9s', delay: '1.1s', color: '#fef08a', type: 'cross' },
+  { top: '23%', left: '58%', size: 2, dur: '2.8s', delay: '0.2s', color: '#ffffff', type: 'twinkle' },
+  { top: '26%', left: '72%', size: 3, dur: '3.4s', delay: '1.7s', color: '#ffffff', type: 'sparkle' },
+  { top: '22%', left: '84%', size: 2.5, dur: '2.3s', delay: '0.9s', color: '#fef08a', type: 'twinkle' },
+  { top: '25%', left: '95%', size: 3.5, dur: '3.5s', delay: '1.4s', color: '#ffffff', type: 'cross' },
+
+  { top: '29%', left: '3%', size: 1.5, dur: '1.9s', delay: '0.5s', color: '#ffffff', type: 'twinkle' },
+  { top: '31%', left: '12%', size: 4, dur: '3.8s', delay: '2.2s', color: '#ffffff', type: 'cross' },
+  { top: '28%', left: '23%', size: 2, dur: '2.4s', delay: '1.0s', color: '#bae6fd', type: 'twinkle' },
+  { top: '32%', left: '36%', size: 3, dur: '3.2s', delay: '0.3s', color: '#fde047', type: 'sparkle' },
+  { top: '30%', left: '64%', size: 2, dur: '2.7s', delay: '1.6s', color: '#ffffff', type: 'twinkle' },
+  { top: '33%', left: '77%', size: 4, dur: '3.6s', delay: '0.7s', color: '#fef08a', type: 'cross' },
+  { top: '29%', left: '88%', size: 1.5, dur: '2.1s', delay: '1.9s', color: '#ffffff', type: 'twinkle' },
+  { top: '32%', left: '97%', size: 2.5, dur: '3.0s', delay: '0.4s', color: '#bae6fd', type: 'twinkle' },
+
+  { top: '36%', left: '6%', size: 3, dur: '3.4s', delay: '1.2s', color: '#fef08a', type: 'sparkle' },
+  { top: '38%', left: '16%', size: 1.5, dur: '2.0s', delay: '0.8s', color: '#ffffff', type: 'twinkle' },
+  { top: '35%', left: '29%', size: 2.5, dur: '2.8s', delay: '1.5s', color: '#ffffff', type: 'twinkle' },
+  { top: '39%', left: '70%', size: 3, dur: '3.3s', delay: '0.1s', color: '#fde047', type: 'sparkle' },
+  { top: '37%', left: '83%', size: 4, dur: '3.7s', delay: '2.4s', color: '#ffffff', type: 'cross' },
+  { top: '40%', left: '93%', size: 2, dur: '2.5s', delay: '1.3s', color: '#bae6fd', type: 'twinkle' },
+
+  // 중하단부 45% ~ 70% (전화/문자 버튼 및 화보 주변)
+  { top: '44%', left: '4%', size: 4.5, dur: '3.9s', delay: '0.9s', color: '#ffffff', type: 'cross' },
+  { top: '46%', left: '15%', size: 2, dur: '2.3s', delay: '1.8s', color: '#bae6fd', type: 'twinkle' },
+  { top: '43%', left: '25%', size: 3, dur: '3.1s', delay: '0.4s', color: '#fef08a', type: 'sparkle' },
+  { top: '47%', left: '74%', size: 2.5, dur: '2.9s', delay: '1.6s', color: '#ffffff', type: 'twinkle' },
+  { top: '45%', left: '86%', size: 3.5, dur: '3.5s', delay: '0.2s', color: '#fde047', type: 'cross' },
+  { top: '48%', left: '96%', size: 1.5, dur: '2.1s', delay: '1.1s', color: '#ffffff', type: 'twinkle' },
+
+  { top: '52%', left: '7%', size: 2, dur: '2.6s', delay: '0.7s', color: '#ffffff', type: 'twinkle' },
+  { top: '55%', left: '19%', size: 3.5, dur: '3.6s', delay: '2.1s', color: '#fef08a', type: 'cross' },
+  { top: '53%', left: '81%', size: 3, dur: '3.2s', delay: '1.0s', color: '#ffffff', type: 'sparkle' },
+  { top: '56%', left: '92%', size: 2, dur: '2.4s', delay: '0.5s', color: '#bae6fd', type: 'twinkle' },
+
+  { top: '60%', left: '5%', size: 3, dur: '3.3s', delay: '1.4s', color: '#fde047', type: 'sparkle' },
+  { top: '63%', left: '14%', size: 1.5, dur: '1.9s', delay: '0.3s', color: '#ffffff', type: 'twinkle' },
+  { top: '61%', left: '26%', size: 2.5, dur: '2.8s', delay: '2.0s', color: '#bae6fd', type: 'twinkle' },
+  { top: '64%', left: '72%', size: 4, dur: '3.8s', delay: '0.8s', color: '#ffffff', type: 'cross' },
+  { top: '62%', left: '85%', size: 2, dur: '2.2s', delay: '1.7s', color: '#fef08a', type: 'twinkle' },
+  { top: '65%', left: '95%', size: 3, dur: '3.4s', delay: '0.6s', color: '#ffffff', type: 'sparkle' },
+
+  // 하단부 70% ~ 98% (모델 화보 및 히어로 바닥)
+  { top: '70%', left: '8%', size: 4, dur: '3.7s', delay: '1.2s', color: '#ffffff', type: 'cross' },
+  { top: '73%', left: '21%', size: 2, dur: '2.5s', delay: '0.5s', color: '#bae6fd', type: 'twinkle' },
+  { top: '71%', left: '33%', size: 1.5, dur: '2.0s', delay: '1.8s', color: '#ffffff', type: 'twinkle' },
+  { top: '74%', left: '46%', size: 3, dur: '3.2s', delay: '0.9s', color: '#fde047', type: 'sparkle' },
+  { top: '72%', left: '59%', size: 2, dur: '2.7s', delay: '1.4s', color: '#ffffff', type: 'twinkle' },
+  { top: '75%', left: '69%', size: 4.5, dur: '4.0s', delay: '2.2s', color: '#fef08a', type: 'cross' },
+  { top: '71%', left: '82%', size: 2.5, dur: '2.9s', delay: '0.3s', color: '#ffffff', type: 'twinkle' },
+  { top: '74%', left: '93%', size: 3, dur: '3.5s', delay: '1.6s', color: '#bae6fd', type: 'sparkle' },
+
+  { top: '80%', left: '4%', size: 2, dur: '2.3s', delay: '1.1s', color: '#ffffff', type: 'twinkle' },
+  { top: '83%', left: '16%', size: 3.5, dur: '3.6s', delay: '0.4s', color: '#fef08a', type: 'cross' },
+  { top: '81%', left: '27%', size: 1.5, dur: '1.8s', delay: '1.5s', color: '#ffffff', type: 'twinkle' },
+  { top: '84%', left: '40%', size: 2.5, dur: '2.8s', delay: '2.3s', color: '#bae6fd', type: 'twinkle' },
+  { top: '82%', left: '54%', size: 3, dur: '3.3s', delay: '0.7s', color: '#fde047', type: 'sparkle' },
+  { top: '85%', left: '66%', size: 2, dur: '2.4s', delay: '1.9s', color: '#ffffff', type: 'twinkle' },
+  { top: '81%', left: '78%', size: 4, dur: '3.8s', delay: '0.2s', color: '#ffffff', type: 'cross' },
+  { top: '84%', left: '89%', size: 1.5, dur: '2.1s', delay: '1.3s', color: '#fef08a', type: 'twinkle' },
+  { top: '86%', left: '97%', size: 3, dur: '3.4s', delay: '0.8s', color: '#ffffff', type: 'sparkle' },
+
+  { top: '91%', left: '7%', size: 3.5, dur: '3.5s', delay: '1.7s', color: '#ffffff', type: 'cross' },
+  { top: '93%', left: '18%', size: 2, dur: '2.2s', delay: '0.6s', color: '#bae6fd', type: 'twinkle' },
+  { top: '90%', left: '31%', size: 1.5, dur: '1.9s', delay: '1.2s', color: '#ffffff', type: 'twinkle' },
+  { top: '94%', left: '44%', size: 3, dur: '3.1s', delay: '2.0s', color: '#fde047', type: 'sparkle' },
+  { top: '92%', left: '58%', size: 2, dur: '2.6s', delay: '0.4s', color: '#ffffff', type: 'twinkle' },
+  { top: '95%', left: '71%', size: 4, dur: '3.9s', delay: '1.5s', color: '#fef08a', type: 'cross' },
+  { top: '91%', left: '84%', size: 2.5, dur: '2.8s', delay: '0.9s', color: '#ffffff', type: 'twinkle' },
+  { top: '96%', left: '94%', size: 3, dur: '3.3s', delay: '2.4s', color: '#ffffff', type: 'sparkle' },
 ];
 
 export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaLinks?: string[] }) {
@@ -228,18 +301,82 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   return (
     <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '88px', lineHeight: 1.6 }}>
       
-      {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 별빛 애니메이션 ── */}
+      {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 화려한 별빛 & 유성 애니메이션 ── */}
       <style>{`
         html { scroll-behavior: smooth; font-family: ${FONT}; }
         @keyframes heroStarTwinkle {
           0%, 100% {
-            opacity: 0.15;
+            opacity: 0.2;
             transform: scale(0.65);
           }
           50% {
             opacity: 1;
-            transform: scale(1.4);
-            box-shadow: 0 0 6px rgba(255, 255, 255, 0.95);
+            transform: scale(1.45);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.95), 0 0 16px rgba(254, 240, 138, 0.6);
+          }
+        }
+        @keyframes heroDiamondSparkle {
+          0%, 100% {
+            opacity: 0.2;
+            transform: scale(0.5) rotate(0deg);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.6) rotate(45deg);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(254, 240, 138, 0.8);
+          }
+        }
+        @keyframes heroCrossGlint {
+          0%, 100% {
+            opacity: 0.15;
+            transform: scale(0.5);
+          }
+          45%, 55% {
+            opacity: 1;
+            transform: scale(1.6);
+            filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px rgba(254, 240, 138, 0.95));
+          }
+        }
+        @keyframes heroShootingStarA {
+          0% {
+            transform: translateX(0) translateY(0) rotate(-35deg);
+            opacity: 0;
+            width: 0px;
+          }
+          4% {
+            opacity: 1;
+            width: 130px;
+          }
+          12% {
+            transform: translateX(-240px) translateY(170px) rotate(-35deg);
+            opacity: 0;
+            width: 30px;
+          }
+          100% {
+            transform: translateX(-240px) translateY(170px) rotate(-35deg);
+            opacity: 0;
+            width: 0px;
+          }
+        }
+        @keyframes heroShootingStarB {
+          0% {
+            transform: translateX(0) translateY(0) rotate(-40deg);
+            opacity: 0;
+            width: 0px;
+          }
+          5% {
+            opacity: 1;
+            width: 150px;
+          }
+          14% {
+            transform: translateX(-280px) translateY(220px) rotate(-40deg);
+            opacity: 0;
+            width: 30px;
+          }
+          100% {
+            transform: translateX(-280px) translateY(220px) rotate(-40deg);
+            opacity: 0;
+            width: 0px;
           }
         }
       `}</style>
@@ -356,25 +493,100 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         {/* ── 2. 히어로 섹션 (전면 전체 반짝이는 작은 별 모션 탑재) ── */}
         <section style={{ position: 'relative', padding: '32px 0 0', textAlign: 'center' }}>
           
-          {/* 히어로 전면 전체 반짝이는 작은 별 레이어 */}
+          {/* 히어로 전면 전체 반짝이는 작은 별 & 유성 레이어 */}
           <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
-            {HERO_STARS.map((s, idx) => (
-              <span
-                key={idx}
-                style={{
-                  position: 'absolute',
-                  top: s.top,
-                  left: s.left,
-                  width: `${s.size}px`,
-                  height: `${s.size}px`,
-                  borderRadius: '50%',
-                  background: s.color,
-                  animation: `heroStarTwinkle ${s.dur} ease-in-out infinite`,
-                  animationDelay: s.delay,
-                  boxShadow: `0 0 ${s.size * 2}px ${s.color}`,
-                }}
-              />
-            ))}
+            {/* 유성 1 */}
+            <span
+              style={{
+                position: 'absolute',
+                top: '10%',
+                right: '8%',
+                height: '1.5px',
+                background: 'linear-gradient(to left, rgba(255,255,255,0), #ffffff, rgba(254,240,138,0.9))',
+                borderRadius: '999px',
+                boxShadow: '0 0 8px #ffffff',
+                animation: 'heroShootingStarA 8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite',
+                animationDelay: '1.2s',
+              }}
+            />
+            {/* 유성 2 */}
+            <span
+              style={{
+                position: 'absolute',
+                top: '45%',
+                right: '18%',
+                height: '1.5px',
+                background: 'linear-gradient(to left, rgba(255,255,255,0), #bae6fd, #ffffff)',
+                borderRadius: '999px',
+                boxShadow: '0 0 8px #bae6fd',
+                animation: 'heroShootingStarB 11s cubic-bezier(0.25, 0.1, 0.25, 1) infinite',
+                animationDelay: '5.5s',
+              }}
+            />
+
+            {/* 풍부하고 화려한 80여 개 별빛 모션 */}
+            {HERO_STARS.map((s, idx) => {
+              if (s.type === 'cross') {
+                return (
+                  <span
+                    key={idx}
+                    style={{
+                      position: 'absolute',
+                      top: s.top,
+                      left: s.left,
+                      width: `${s.size * 3}px`,
+                      height: `${s.size * 3}px`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      animation: `heroCrossGlint ${s.dur} ease-in-out infinite`,
+                      animationDelay: s.delay,
+                      transformOrigin: 'center center',
+                    }}
+                  >
+                    <svg width={s.size * 3} height={s.size * 3} viewBox="0 0 24 24" fill={s.color}>
+                      <path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z" />
+                    </svg>
+                  </span>
+                );
+              }
+              if (s.type === 'sparkle') {
+                return (
+                  <span
+                    key={idx}
+                    style={{
+                      position: 'absolute',
+                      top: s.top,
+                      left: s.left,
+                      width: `${s.size}px`,
+                      height: `${s.size}px`,
+                      background: s.color,
+                      transform: 'rotate(45deg)',
+                      animation: `heroDiamondSparkle ${s.dur} ease-in-out infinite`,
+                      animationDelay: s.delay,
+                      boxShadow: `0 0 ${s.size * 2.5}px ${s.color}`,
+                    }}
+                  />
+                );
+              }
+              return (
+                <span
+                  key={idx}
+                  style={{
+                    position: 'absolute',
+                    top: s.top,
+                    left: s.left,
+                    width: `${s.size}px`,
+                    height: `${s.size}px`,
+                    borderRadius: '50%',
+                    background: s.color,
+                    animation: `heroStarTwinkle ${s.dur} ease-in-out infinite`,
+                    animationDelay: s.delay,
+                    boxShadow: `0 0 ${s.size * 2.5}px ${s.color}`,
+                  }}
+                />
+              );
+            })}
           </div>
 
           <div style={{ position: 'relative', zIndex: 1 }}>
