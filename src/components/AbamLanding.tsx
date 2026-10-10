@@ -457,11 +457,20 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <div style={{ maxWidth: '680px', margin: '0 auto', padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.5px' }}>
-              Abam<span style={{ color: C.pointRed }}>.kr</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 6px rgba(245,158,11,0.9))' }}>
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#headerMoonGrad)" />
+              <defs>
+                <linearGradient id="headerMoonGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#fef08a" />
+                  <stop offset="100%" stopColor="#f59e0b" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px' }}>
+              아름다운 밤 <span style={{ color: C.pointRed }}>아밤</span>
             </span>
             <span style={{ fontSize: '11px', fontWeight: 700, color: C.pointGold, border: `1px solid ${C.lineLight}`, background: 'rgba(245,158,11,0.08)', padding: '2px 6px', borderRadius: '4px' }}>
-              100% 현장 대면결제
+              100% 대면결제
             </span>
           </Link>
 
@@ -598,14 +607,32 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
           )}
 
-          <h1 style={{ fontSize: '25px', fontWeight: 800, lineHeight: 1.35, color: '#ffffff', margin: '0 0 10px', letterSpacing: '-0.5px' }}>
-            서울·경기 24시 1:1 방문 홈케어<br />
-            <span style={{ color: C.pointRed }}>아밤(Abam) 출장안마 · 출장마사지</span>
+          <h1 style={{ fontSize: '30px', fontWeight: 900, lineHeight: 1.25, color: '#ffffff', margin: '0 0 12px', letterSpacing: '-0.8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
+              {/* 화려하게 빛나는 골드 달모양 로고 */}
+              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 12px rgba(245,158,11,0.9)) drop-shadow(0 0 24px rgba(254,240,138,0.6))' }}>
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#heroMoonGrad)" />
+                <defs>
+                  <linearGradient id="heroMoonGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="35%" stopColor="#fef08a" />
+                    <stop offset="100%" stopColor="#f59e0b" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.45)' }}>아름다운 밤</span>
+              <span style={{ fontSize: '24px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
+            </div>
+            <span style={{ fontSize: '21px', fontWeight: 800, color: '#cbd5e1', letterSpacing: '-0.4px', display: 'block', marginTop: '4px' }}>
+              서울·경기 24시 1:1 방문 홈케어 출장안마 · 출장마사지
+            </span>
           </h1>
 
-          <p style={{ fontSize: '14px', color: C.textSub, margin: '0 0 18px', fontWeight: 500, lineHeight: 1.6 }}>
-            {c.hero.bannerSub.join(' · ')} · {c.hero.tagline}
-          </p>
+          {/* 아밤이 왜 아밤인지 설명 배너 */}
+          <div style={{ maxWidth: '520px', margin: '0 auto 16px', background: '#141722', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '11px 16px', fontSize: '13.5px', color: '#e2e8f0', lineHeight: 1.6, textAlign: 'center' }}>
+            🌙 <strong style={{ color: C.pointGold }}>‘아름다운 밤’</strong>을 약속드리는 1:1 프리미엄 케어, 그래서 <strong style={{ color: '#ffffff' }}>아밤(Abam)</strong>입니다.<br />
+            고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.
+          </div>
 
           {/* 핵심 서비스 요약 바 */}
           <div style={{ background: '#161822', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '11px 14px', maxWidth: '480px', margin: '0 auto 12px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '13px', color: '#e2e8f0', fontWeight: 700 }}>
