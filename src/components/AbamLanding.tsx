@@ -20,7 +20,7 @@ const SMS_HREF = `sms:${PHONE_NUM}?body=${encodeURIComponent(BOOKING_TEMPLATE)}`
 
 const T = {
   bg: '#080a12',
-  card: 'rgba(15, 20, 34, 0.85)',
+  card: 'rgba(15, 20, 34, 0.88)',
   cardBorder: 'rgba(255, 215, 0, 0.22)',
   gold: '#ffd700',
   goldLt: '#fef08a',
@@ -85,14 +85,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   return (
     <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', color: T.textWhite, paddingBottom: '90px', fontFamily: '-apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif', lineHeight: 1.6 }}>
       
-      {/* ── 전체 백그라운드 서울 야경 고정 배경 (고급스러운 딥 나이트 앰비언스) ── */}
+      {/* ── 전체 백그라운드 서울 야경 고정 배경 ── */}
       <div
         aria-hidden="true"
         style={{
           position: 'fixed',
           inset: 0,
           zIndex: 0,
-          backgroundImage: 'linear-gradient(180deg, rgba(8, 10, 18, 0.72) 0%, rgba(8, 10, 18, 0.85) 40%, rgba(8, 10, 18, 0.95) 100%), url(/images/seoul_night_sky.jpg)',
+          backgroundImage: 'linear-gradient(180deg, rgba(8, 10, 18, 0.75) 0%, rgba(8, 10, 18, 0.88) 40%, rgba(8, 10, 18, 0.96) 100%), url(/images/seoul_night_sky.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center top',
           backgroundAttachment: 'fixed',
@@ -155,42 +155,36 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       )}
 
-      {/* ── 1. 상단 스티키 헤더 ── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 1000, background: 'rgba(8, 10, 18, 0.94)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: `1px solid ${T.cardBorder}`, padding: '12px 16px' }}>
-        <div style={{ maxWidth: '640px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ textDecoration: 'none', fontSize: '22px', fontWeight: 950, color: T.gold, letterSpacing: '-0.5px' }}>
-            아밤출장안마<span style={{ color: '#fff', fontSize: '15px', fontWeight: 700, marginLeft: '4px' }}>Abam.kr</span>
+      {/* ── 1. 도도 스타일 상단 헤더: 좌측 로고 & 상단 우측 메뉴 배치 ── */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 1000, background: 'rgba(8, 10, 18, 0.96)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: `1.5px solid ${T.cardBorder}`, padding: '10px 16px' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          
+          {/* 좌측 브랜드 로고 */}
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '22px', fontWeight: 950, color: T.gold, letterSpacing: '-0.5px' }}>아밤출장안마</span>
+            <span style={{ fontSize: '13px', fontWeight: 700, color: '#fff', background: 'rgba(255,255,255,0.1)', padding: '2px 6px', borderRadius: '4px' }}>Abam.kr</span>
           </Link>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ display: 'flex', gap: '6px', fontSize: '12px' }}>
-              {LANGS.map((l) => (
-                <Link key={l.code} href={l.href} style={{ color: l.code === c.lang ? T.gold : T.textDim, fontWeight: l.code === c.lang ? 900 : 600, textDecoration: 'none', padding: '2px 4px' }}>
-                  {l.label}
-                </Link>
-              ))}
-            </div>
+          {/* 상단 우측 메뉴 배치 (도도안마 표준 우측 정렬 내비게이션) */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <nav style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+              <a href="#about" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 8px' }}>소개말</a>
+              <a href="#courses" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 8px' }}>코스안내</a>
+              <a href="#process" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 8px' }}>이용방법</a>
+              <a href="#caution" style={{ color: '#f87171', fontSize: '13px', fontWeight: 800, textDecoration: 'none', padding: '6px 8px' }}>선입금주의</a>
+            </nav>
 
-            <a href={PHONE_TEL} style={{ background: T.ctaPink, color: '#fff', fontSize: '12.5px', fontWeight: 900, padding: '7px 14px', borderRadius: '20px', textDecoration: 'none', boxShadow: '0 0 12px rgba(255, 59, 107, 0.4)' }}>
-              24시 전화
+            <a href={PHONE_TEL} style={{ background: T.ctaPink, color: '#fff', fontSize: '12.5px', fontWeight: 900, padding: '7px 12px', borderRadius: '18px', textDecoration: 'none', boxShadow: '0 0 12px rgba(255, 59, 107, 0.4)', marginLeft: '4px' }}>
+              📞 24시 전화
             </a>
           </div>
         </div>
-
-        {/* 앵커 탭 */}
-        <nav style={{ maxWidth: '640px', margin: '8px auto 0', display: 'flex', justifyContent: 'space-around', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '6px' }}>
-          <a href="#about" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>서비스소개</a>
-          <a href="#courses" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>코스안내</a>
-          <a href="#process" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>이용안내</a>
-          <a href="#caution" style={{ color: '#f87171', fontSize: '13px', fontWeight: 800, textDecoration: 'none', padding: '4px 8px' }}>선입금주의</a>
-          <a href="#faq" style={{ color: T.textMuted, fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '4px 8px' }}>자주묻는질문</a>
-        </nav>
       </header>
 
       {/* ── 메인 콘텐츠 ── */}
       <main style={{ position: 'relative', zIndex: 1, maxWidth: '640px', margin: '0 auto', padding: '0 16px' }}>
 
-        {/* ── 2. 히어로 영역 & 메인 브랜디드 배너 ── */}
+        {/* ── 2. 히어로 배너 영역 ── */}
         <section style={{ textAlign: 'center', paddingTop: '20px' }}>
           <div style={{ display: 'inline-block', background: 'rgba(0, 255, 179, 0.1)', border: `1px solid ${T.neonGreen}`, color: T.neonGreen, padding: '6px 16px', borderRadius: '25px', fontSize: '12.5px', fontWeight: 900, marginBottom: '14px' }}>
             100% 현장 후불제 · 예약금 / 보증금 일절 없음
@@ -215,11 +209,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </a>
           </div>
 
-          {/* [이미지 1] 도도 스타일 아밤 대표 로고 워터마크 히어로 배너 */}
+          {/* [이미지 1] 도도 스타일 아밤 대표 히어로 배너 */}
           <div style={{ position: 'relative', width: '100%', height: '230px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 12px 36px rgba(0,0,0,0.6)' }}>
             <Image src="/images/abam_hero_banner.jpg" alt="아밤출장안마 서울·경기 100% 후불제" fill sizes="640px" style={{ objectFit: 'cover' }} priority />
           </div>
         </section>
+
+        {/* ── [이미지 2] 히어로 중간 센슈얼 모델 힐링 배너 (섹시한 20대 에이스 관리사 비주얼) ── */}
+        <div style={{ marginTop: '22px', position: 'relative', width: '100%', height: '240px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 12px 36px rgba(0,0,0,0.6)' }}>
+          <Image src="/images/abam_sensual_1.jpg" alt="20대 ACE 관리사 프라이빗 힐링" fill sizes="640px" style={{ objectFit: 'cover' }} />
+        </div>
 
         {/* ── 3. 도도안마 스타일 소개말 & 신뢰 원칙 ── */}
         <section id="about" style={{ marginTop: '32px' }}>
@@ -252,12 +251,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* ── [이미지 2] 도도 스타일 아밤 세로형 대표 플라이어 배너 ── */}
+        {/* ── [이미지 3] 세로형 대표 플라이어 배너 ── */}
         <div style={{ marginTop: '28px', position: 'relative', width: '100%', height: '340px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 12px 36px rgba(0,0,0,0.6)' }}>
           <Image src="/images/abam_vertical_flyer.jpg" alt="아밤 24시 출장안마 안내" fill sizes="640px" style={{ objectFit: 'cover' }} />
         </div>
 
-        {/* ── 4. 코스 및 정찰 가격표 (도도안마 표준 코스 레이아웃) ── */}
+        {/* ── 4. 코스 및 정찰 가격표 ── */}
         <section id="courses" style={{ marginTop: '36px' }}>
           <div style={{ textAlign: 'center', marginBottom: '18px' }}>
             <h2 style={{ fontSize: '22px', fontWeight: 950, color: T.gold }}>아밤 대표 코스 및 정찰 요금표</h2>
@@ -326,6 +325,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </div>
             </div>
 
+            {/* [이미지 4] 코스 중간 센슈얼 1:1 테라피 배너 (매력적인 모델 컷) */}
+            <div style={{ position: 'relative', width: '100%', height: '230px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+              <Image src="/images/abam_sensual_2.jpg" alt="1:1 감미로운 프라이빗 테라피" fill sizes="640px" style={{ objectFit: 'cover' }} />
+            </div>
+
             {/* C코스: 스페셜 VIP 올인원 케어 (BEST) */}
             <div style={{ background: T.card, borderRadius: '16px', border: `2px solid ${T.gold}`, overflow: 'hidden', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 8px 30px rgba(255, 215, 0, 0.2)' }}>
               <div style={{ padding: '16px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -359,7 +363,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* ── [이미지 3] 코스 안내 VIP 배너 ── */}
+        {/* ── [이미지 5] VIP 코스 안내 배너 ── */}
         <div style={{ marginTop: '24px', position: 'relative', width: '100%', height: '210px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
           <Image src="/images/abam_vip_course_banner.jpg" alt="아밤 시그니처 VIP 코스" fill sizes="640px" style={{ objectFit: 'cover' }} />
         </div>
@@ -378,7 +382,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* ── [이미지 4] 안심 후불제 보증 배너 ── */}
+        {/* ── [이미지 6] 안심 후불제 보증 배너 ── */}
         <div style={{ marginTop: '20px', position: 'relative', width: '100%', height: '190px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
           <Image src="/images/abam_safety_banner.jpg" alt="선입금 없는 안심 출장 서비스" fill sizes="640px" style={{ objectFit: 'cover' }} />
         </div>
@@ -417,7 +421,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* ── 7. 고객 솔직 후기 (도도안마 스타일 고객 리뷰) ── */}
+        {/* ── [이미지 7] 심야 아로마 감성 힐링 배너 ── */}
+        <div style={{ marginTop: '22px', position: 'relative', width: '100%', height: '230px', borderRadius: '16px', overflow: 'hidden', border: `1px solid ${T.cardBorder}`, boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+          <Image src="/images/abam_sensual_3.jpg" alt="프리미엄 아로마 밀착 힐링" fill sizes="640px" style={{ objectFit: 'cover' }} />
+        </div>
+
+        {/* ── 7. 고객 솔직 후기 ── */}
         <section style={{ marginTop: '36px' }}>
           <div style={{ textAlign: 'center', marginBottom: '16px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: 950, color: T.gold }}>고객 리얼 이용 후기</h2>
