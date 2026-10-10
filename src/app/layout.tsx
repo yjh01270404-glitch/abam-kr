@@ -13,8 +13,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   minimumScale: 1,
-  maximumScale: 5,
-  themeColor: '#0a0f1d',
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+  themeColor: '#0c0d11',
 };
 
 // 검색엔진 소유확인 토큰은 환경변수로 주입합니다. (Search Console / 네이버 서치어드바이저에서 발급)
