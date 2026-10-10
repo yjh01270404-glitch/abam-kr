@@ -291,7 +291,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           )}
 
           <div style={{ fontFamily: SERIF, fontSize: '11.5px', letterSpacing: isKo ? '2.5px' : '5px', color: C.gold, fontWeight: 700, marginTop: '26px' }}>
-            {isKo ? '서울·경기·인천 수도권 전역 · ' + c.hero.badge : c.hero.badge}
+            {isKo ? '서울·경기 전역 · ' + c.hero.badge : c.hero.badge}
           </div>
           <h1 style={{ fontSize: '33px', fontWeight: 800, lineHeight: 1.3, color: '#fff', margin: '12px 0 12px', letterSpacing: '-0.8px', textShadow: '0 2px 20px rgba(0,0,0,0.75)' }}>
             {x.h1a}<br /><span style={GOLD_TEXT}>{x.h1b}</span>
@@ -513,7 +513,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               {isKo && (
                 <>
                   {' '}지역별 이용 안내는
-                  <Link href="/keywords" style={{ color: C.goldLt, fontWeight: 700 }}> 서울·경기·인천 수도권 지역별 안내</Link>에서,
+                  <Link href="/keywords" style={{ color: C.goldLt, fontWeight: 700 }}> 서울·경기 지역별 안내</Link>에서,
                   코스 및 예약 방법은
                   <Link href="/guide" style={{ color: C.goldLt, fontWeight: 700 }}> 이용 가이드</Link>에서 확인하실 수 있습니다.
                 </>

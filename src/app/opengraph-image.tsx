@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-export const alt = 'Abam.kr 아름다운 밤 | 프라이빗 1:1 방문 홈케어 · 서울·경기·인천';
+export const alt = 'Abam.kr 아름다운 밤 | 프라이빗 1:1 방문 홈케어 · 서울·경기';
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -58,7 +58,7 @@ export default function OpenGraphImage() {
             marginTop: -8,
           }}
         >
-          프라이빗 1:1 방문 홈케어 · 서울·경기·인천
+          프라이빗 1:1 방문 홈케어 · 서울·경기
         </div>
 
         {/* URL */}

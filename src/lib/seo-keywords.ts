@@ -239,7 +239,7 @@ export const ALL_SEO_SLUGS = SEO_KEYWORDS.map(k => ({
 function detectRegion(kw: string): string {
   // 서비스 접미어를 제거한 뒤 지역명만 매칭합니다. (예: '출장안마'의 '장안'이 수원 장안구로 오탐되는 문제 방지)
   const core = kw.replace(/출장안마|출장마사지|출장홈타이|출장서비스|출장스파|출장테라피|출장케어|출장홈케어|방문안마|방문마사지|방문케어|홈마사지|홈케어마사지|홈케어|홈타이|마사지|안마|서비스|출장/g, '');
-  if (!core) return '서울·경기·인천 수도권 전지역';
+  if (!core) return '서울·경기 전지역';
   const regionMap: Record<string, string> = {
     '강남역': '서울 강남구 강남역', '강남': '서울 강남구', '역삼': '서울 강남구 역삼동',
     '논현': '서울 강남구 논현동', '서초': '서울 서초구', '반포': '서울 서초구 반포동',
@@ -307,7 +307,7 @@ function detectRegion(kw: string): string {
   for (const [key, val] of Object.entries(regionMap)) {
     if (core.includes(key)) return val;
   }
-  return '서울·경기·인천 수도권 전지역';
+  return '서울·경기 전지역';
 }
 
 function detectCourse(kw: string): string {
@@ -321,7 +321,7 @@ function detectCourse(kw: string): string {
 }
 
 // ── 서비스 지역 정책 ────────────────────────────────────────────────────────
-// 아밤(Abam.kr)은 서울·경기·인천 수도권 전역 24시간 100% 현장 후불제 안심 서비스를 제공합니다.
+// 아밤(Abam.kr)은 서울·경기 전역 24시간 100% 현장 후불제 안심 서비스를 제공합니다.
 
 // 검색 상위 노출을 위한 대표(헤드) 키워드 — 색인(indexable) 대상
 const HEAD_TERMS = [
@@ -373,7 +373,7 @@ export function isServedKeyword(kw: string): boolean {
 
 const INDEXABLE_SET = new Set<string>(CANDIDATE_POOL);
 
-/** 서울·경기·인천 서비스 지역 및 핵심 검색 키워드 100% 색인 허용 */
+/** 서울·경기 서비스 지역 및 핵심 검색 키워드 100% 색인 허용 */
 export function isIndexableKeyword(kw: string): boolean {
   return isServedKeyword(kw);
 }
@@ -406,11 +406,11 @@ export function generateSeoPageData(keyword: string) {
 
   if (isCompetitor) {
     title = `【출장마사지 1위】 ${kw} vs 아밤 서비스 비교 | 20대 ACE 총출동 100% 현장후불제 Abam.kr`;
-    description = `${kw} 및 주요 출장안마 서비스 비교 안내. 사전 예약금 없는 100% 현장 대면 결제 원칙과 투명 정찰제, 전원 20대 에이스 관리사 라인업, 서울·경기·인천 30분 총알도착 아밤(Abam.kr) 이용 안내.`;
+    description = `${kw} 및 주요 출장안마 서비스 비교 안내. 사전 예약금 없는 100% 현장 대면 결제 원칙과 투명 정찰제, 전원 20대 에이스 관리사 라인업, 서울·경기 30분 총알도착 아밤(Abam.kr) 이용 안내.`;
     h1 = `${kw} vs 아밤 서비스 비교 — [20대 ACE 총출동 100% 후불제]`;
   } else if (isPrimaryRank1) {
-    title = `【출장마사지 1위】 ${kw} [20대 ACE 총출동] | 서울·경기·인천 30분 도착 100% 후불제 Abam.kr`;
-    description = `${kw} 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! 서울·경기·인천 전역 호텔·자택 30분 총알도착, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
+    title = `【출장마사지 1위】 ${kw} [20대 ACE 총출동] | 서울·경기 30분 도착 100% 후불제 Abam.kr`;
+    description = `${kw} 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! 서울·경기 전역 호텔·자택 30분 총알도착, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
     h1 = `대한민국 ${kw} 1위 — [20대 ACE 총출동] 100% 현장 후불제`;
   } else if (district && (isSeoulKw || region.startsWith('서울'))) {
     const place = region.replace('서울 ', '');
@@ -418,11 +418,11 @@ export function generateSeoPageData(keyword: string) {
     description = `${place} ${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울 ${district.stations.slice(0, 3).join('·')} 인근 호텔·자택 30분 총알도착, 100% 현장 후불제 안심 케어. 예약 18:00부터 (영업 19:00~05:00).`;
     h1 = `${district.gu} ${kw} [20대 ACE 총출동] — 100% 후불제 Abam.kr`;
   } else if (isCoursePage) {
-    title = `【1위】 ${kw} [20대 ACE 총출동] | 서울·경기·인천 ${course} 100% 후불제 Abam.kr`;
-    description = `${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! ${course} 60·90·120분 정찰제, 서울·경기·인천 전역 자택·호텔 30분 총알도착. 100% 현장 후불제. 예약 18:00부터 (영업 19:00~05:00).`;
+    title = `【1위】 ${kw} [20대 ACE 총출동] | 서울·경기 ${course} 100% 후불제 Abam.kr`;
+    description = `${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! ${course} 60·90·120분 정찰제, 서울·경기 전역 자택·호텔 30분 총알도착. 100% 현장 후불제. 예약 18:00부터 (영업 19:00~05:00).`;
     h1 = `${kw} — [20대 ACE 총출동] ${course}`;
   } else {
-    const placeStr = region !== '서울 전지역' ? region : '서울·경기·인천';
+    const placeStr = region !== '서울 전지역' ? region : '서울·경기';
     title = `【1위】 ${kw} [20대 ACE 총출동] | ${placeStr} 100% 현장후불제 Abam.kr`;
     description = `${kw} — [20대 ACE 총출동] ${placeStr} 전역 호텔·자택 30분 총알도착! 전원 20대 에이스 관리사 항시 대기, 100% 현장 후불제 안심 케어. 예약 18:00부터 (영업 19:00~05:00).`;
     h1 = `${kw} [20대 ACE 총출동] — ${placeStr} 100% 후불제 Abam.kr`;

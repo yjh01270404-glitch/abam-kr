@@ -3,14 +3,14 @@ import Link from 'next/link';
 import { SERVED_KEYWORDS } from '../../lib/seo-keywords';
 
 export const metadata: Metadata = {
-  title: '수도권(서울·경기·인천) 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
-  description: '서울 25개 구 및 경기·인천(수원·분당·판교·일산·부천·송도·평택 등) 수도권 전역 지역별 안내. 자택·호텔 30분 도착, 100% 현장 후불제. 타이·아로마·스페셜 코스.',
+  title: '서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
+  description: '서울 25개 구 및 경기(수원·분당·판교·일산·부천·평택·동탄 등) 전역 지역별 안내. 자택·호텔 30분 도착, 100% 현장 후불제. 타이·아로마·스페셜 코스.',
   keywords: '서울출장안마,서울출장마사지,서울출장홈타이,강남출장안마,강남출장마사지,강남출장홈타이,호텔출장안마,출장서비스,방문마사지,홈타이,Abam.kr',
   alternates: { canonical: 'https://abam.kr/keywords' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1 } },
   openGraph: {
-    title: '수도권(서울·경기·인천) 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
-    description: '서울·경기·인천 수도권 전역 · 자택 · 호텔 30분 도착. 100% 후불제.',
+    title: '서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
+    description: '서울·경기 전역 · 자택 · 호텔 30분 도착. 100% 후불제.',
     url: 'https://abam.kr/keywords',
     siteName: 'Abam.kr',
     locale: 'ko_KR',
@@ -41,7 +41,7 @@ export default function KeywordsPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     '@id': `${SITE_URL}/keywords#cp`,
-    name: '수도권(서울·경기·인천) 지역별 프라이빗 1:1 방문 홈케어 안내 Abam.kr',
+    name: '서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내 Abam.kr',
     url: `${SITE_URL}/keywords`,
     breadcrumb: {
       '@type': 'BreadcrumbList',
@@ -87,15 +87,15 @@ export default function KeywordsPage() {
         <section style={{ padding: '20px 0', borderBottom: '1px solid #f1f5f9' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 800, color: '#b45309', backgroundColor: '#fef3c7', padding: '4px 12px', borderRadius: '20px', marginBottom: '12px' }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16a34a' }} />
-            서울·경기·인천 수도권 전역 · 자택 · 호텔 30분 도착 · 100% 현장후불제
+            서울·경기 전역 · 자택 · 호텔 30분 도착 · 100% 현장후불제
           </div>
 
           <h1 style={{ fontSize: '22px', fontWeight: 900, margin: '0 0 8px 0', lineHeight: 1.35, color: '#0f172a' }}>
-            수도권(서울·경기·인천) 지역별 프라이빗 1:1 방문 홈케어 안내
+            서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내
           </h1>
 
           <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#475569', margin: 0, wordBreak: 'keep-all' }}>
-            원하시는 지역을 선택하시면 해당 지역의 주요 역·생활권 정보와 코스 요금표, 이용 절차를 확인하실 수 있습니다. Abam.kr(아름다운 밤)은 서울 25개 구 및 경기·인천 수도권 전역 자택·호텔로 신속하게 방문하는 프라이빗 1:1 홈케어입니다.
+            원하시는 지역을 선택하시면 해당 지역의 주요 역·생활권 정보와 코스 요금표, 이용 절차를 확인하실 수 있습니다. Abam.kr(아름다운 밤)은 서울 25개 구 및 경기 전역 자택·호텔로 신속하게 방문하는 프라이빗 1:1 홈케어입니다.
           </p>
         </section>
 
@@ -144,7 +144,7 @@ export default function KeywordsPage() {
 
         {/* 푸터 */}
         <footer style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #e2e8f0', fontSize: '11px', color: '#64748b', lineHeight: 1.7 }}>
-          <div><strong>Abam.kr</strong> · 아름다운 밤, 당신을 위한 특별한 시간 · 서울·경기·인천 수도권 전역 프라이빗 1:1 방문 홈케어</div>
+          <div><strong>Abam.kr</strong> · 아름다운 밤, 당신을 위한 특별한 시간 · 서울·경기 전역 프라이빗 1:1 방문 홈케어</div>
           <div>대표 상담 전화: {PHONE_NUM} · 예약은 18:00부터 (영업 19:00 ~ 05:00)</div>
           <div>코스: 타이 · 아로마 · 스페셜 (60분 / 90분 / 120분)</div>
           <div style={{ marginTop: '6px' }}>

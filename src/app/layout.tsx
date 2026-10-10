@@ -79,9 +79,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: '【출장마사지 1위】 20대 ACE 총출동 | 서울·경기·인천 100% 현장후불제 아밤 Abam.kr',
+    title: '【출장마사지 1위】 20대 ACE 총출동 | 서울·경기 100% 현장후불제 아밤 Abam.kr',
     description:
-      '서울·경기·인천 수도권 전역 자택·호텔 30분 총알도착! 전원 20대 에이스 관리사 라인업, 사전 예약금 없는 100% 현장 후불제 출장마사지 & 출장안마. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
+      '서울·경기 전역 자택·호텔 30분 총알도착! 전원 20대 에이스 관리사 라인업, 사전 예약금 없는 100% 현장 후불제 출장마사지 & 출장안마. 예약은 18:00부터 (영업 19:00 ~ 05:00).',
     type: 'website',
     locale: 'ko_KR',
     url: 'https://abam.kr',
@@ -91,14 +91,14 @@ export const metadata: Metadata = {
         url: 'https://abam.kr/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Abam.kr 20대 ACE 총출동 서울·경기·인천 출장마사지',
+        alt: 'Abam.kr 20대 ACE 총출동 서울·경기 출장마사지',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '출장마사지 · 출장안마 1위 [20대 ACE 총출동] 서울·경기·인천 100% 후불제 | 아밤 Abam.kr',
-    description: '서울·경기·인천 수도권 전역 자택·호텔 30분 총알도착! 전원 20대 ACE 관리사 라인업, 100% 현장 후불제. 예약 18:00부터 (영업 19:00 ~ 05:00).',
+    title: '출장마사지 · 출장안마 1위 [20대 ACE 총출동] 서울·경기 100% 후불제 | 아밤 Abam.kr',
+    description: '서울·경기 전역 자택·호텔 30분 총알도착! 전원 20대 ACE 관리사 라인업, 100% 현장 후불제. 예약 18:00부터 (영업 19:00 ~ 05:00).',
     images: ['https://abam.kr/og-image.png'],
   },
   verification: {
@@ -125,7 +125,7 @@ const jsonLdData = {
     {
       '@type': ['HealthAndBeautyBusiness', 'LocalBusiness'],
       '@id': 'https://abam.kr/#business',
-      name: 'Abam.kr 서울·경기·인천 출장마사지 · 출장안마 [20대 ACE 총출동]',
+      name: 'Abam.kr 서울·경기 출장마사지 · 출장안마 [20대 ACE 총출동]',
       alternateName: ['출장마사지', '출장안마', '출장마사지1위', '출장안마1위', '아밤', '아름다운 밤', '20대 ACE 총출동', '서울출장마사지', '서울출장안마', '아밤출장마사지'],
       description: '전원 20대 에이스 관리사 라인업! 서울 25개 구 및 경기·인천(수원·분당·판교·일산·부천·송도·평택 등) 수도권 전역 자택·호텔로 30분 내 방문하는 100% 후불제 1:1 프라이빗 출장마사지, 출장안마.',
       url: 'https://abam.kr',
@@ -199,7 +199,7 @@ const jsonLdData = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: '서울 및 경기·인천 수도권도 방문 가능한가요?',
+          name: '서울 및 경기도 지역도 방문 가능한가요?',
           acceptedAnswer: {
             '@type': 'Answer',
             text: '네, 서울 25개 구 전역 및 경기·인천(수원·분당·판교·일산·부천·송도 등) 수도권 핵심 거점 자택·호텔 등 원하시는 공간으로 신속하게 방문합니다.',
@@ -234,7 +234,7 @@ const jsonLdData = {
           name: '자택과 호텔 모두 이용할 수 있나요?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: '네, 서울·경기·인천 수도권 전역 자택·호텔 등 원하시는 공간에서 프라이빗한 1:1 케어를 받으실 수 있습니다.',
+            text: '네, 서울·경기 전역 자택·호텔 등 원하시는 공간에서 프라이빗한 1:1 케어를 받으실 수 있습니다.',
           },
         },
       ],
@@ -245,14 +245,14 @@ const jsonLdData = {
       serviceType: '프라이빗 1:1 방문 홈케어',
       name: '프라이빗 1:1 방문 홈케어',
       provider: { '@id': 'https://abam.kr/#business' },
-      areaServed: { '@type': 'AdministrativeArea', name: '서울·경기·인천 수도권 전역' },
+      areaServed: { '@type': 'AdministrativeArea', name: '서울·경기 전역' },
       termsOfService: 'https://abam.kr/terms',
     },
     {
       '@type': 'WebSite',
       '@id': 'https://abam.kr/#website',
       url: 'https://abam.kr',
-      name: '아밤 Abam.kr - 20대 ACE 총출동 서울·경기·인천 출장마사지',
+      name: '아밤 Abam.kr - 20대 ACE 총출동 서울·경기 출장마사지',
       alternateName: ['아밤', 'Abam', '아름다운밤', '20대 ACE 총출동'],
       description: '서울·경기·인천 출장마사지 · 출장안마 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울·경기·인천 수도권 전역 자택·호텔 30분 총알도착, 100% 현장 후불제 안심 케어.',
       inLanguage: 'ko-KR',
