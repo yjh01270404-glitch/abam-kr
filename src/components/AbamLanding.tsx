@@ -379,18 +379,18 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        /* ── 모바일 화면 최적화: 좌우 여백 0 완전 100% 풀와이드(Full-Width) 레이아웃 ── */
+        /* ── 모바일 화면 최적화: 좌우 여백 0 완전 100% 풀와이드(Full-Width) 레이아웃 + 데스크톱 860px 확대 ── */
         .abam-container {
           width: 100%;
           max-width: 100%;
           margin: 0 auto;
-          padding: 0; /* 모바일에서 좌우 여백 0으로 화면 전체 100% 채움 */
+          padding: 0;
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
           .abam-container {
-            max-width: 640px;
-            padding: 0 16px;
+            max-width: 860px;
+            padding: 0 20px;
           }
         }
 
@@ -398,7 +398,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           width: 100%;
           max-width: 100%;
           margin: 0 auto;
-          padding: 10px 12px;
+          padding: 12px 14px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -406,8 +406,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
         @media (min-width: 640px) {
           .abam-header-inner {
-            max-width: 680px;
-            padding: 12px 16px;
+            max-width: 900px;
+            padding: 14px 20px;
           }
         }
 
@@ -419,28 +419,28 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           border-left: none;
           border-right: none;
           border-radius: 0;
-          padding: 18px 14px;
+          padding: 20px 16px;
           box-sizing: border-box;
           width: 100%;
         }
         @media (min-width: 640px) {
           .abam-card {
             border: 1px solid #282b36;
-            border-radius: 8px;
-            padding: 18px 20px;
+            border-radius: 10px;
+            padding: 22px 24px;
           }
         }
 
         .abam-hero-box {
           width: 100%;
           max-width: 100%;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding-left: 12px;
+          padding-right: 12px;
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
           .abam-hero-box {
-            max-width: 500px;
+            max-width: 640px;
             padding-left: 0;
             padding-right: 0;
           }
@@ -460,7 +460,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
         @media (min-width: 640px) {
           .abam-bottom-bar {
-            padding: 8px 16px;
+            padding: 10px 20px;
           }
         }
 
@@ -497,7 +497,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         .abam-photo-banner {
           position: relative;
           width: 100%;
-          height: 260px;
+          height: 280px;
           overflow: hidden;
           border-top: 1px solid #282b36;
           border-bottom: 1px solid #282b36;
@@ -505,19 +505,115 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           border-right: none;
           border-radius: 0;
           box-sizing: border-box;
-          margin-top: 14px;
+          margin-top: 16px;
         }
         @media (min-width: 640px) {
           .abam-photo-banner {
             border: 1px solid #282b36;
-            border-radius: 8px;
+            border-radius: 10px;
+            height: 330px;
           }
         }
       `}</style>
 
-      {/* ── 전체 페이지 밤하늘 고정 배경 (반짝이는 별빛 제거, 깊고 차분한 서울 야경 톤) ── */}
+      {/* ── 전체 페이지 밤하늘 고정 배경 (전체 스크롤 구간에 반짝이는 작은 별 & 유성 쏟아짐) ── */}
       <div aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(12,13,17,0.85), rgba(12,13,17,0.98)), url(/images/seoul-night.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        
+        {/* 전체 화면 밤하늘 유성 1 */}
+        <span
+          style={{
+            position: 'absolute',
+            top: '12%',
+            right: '8%',
+            height: '1.5px',
+            background: 'linear-gradient(to left, rgba(255,255,255,0), #ffffff, rgba(254,240,138,0.9))',
+            borderRadius: '999px',
+            boxShadow: '0 0 8px #ffffff',
+            animation: 'heroShootingStarA 8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite',
+            animationDelay: '1.2s',
+          }}
+        />
+        {/* 전체 화면 밤하늘 유성 2 */}
+        <span
+          style={{
+            position: 'absolute',
+            top: '48%',
+            right: '18%',
+            height: '1.5px',
+            background: 'linear-gradient(to left, rgba(255,255,255,0), #bae6fd, #ffffff)',
+            borderRadius: '999px',
+            boxShadow: '0 0 8px #bae6fd',
+            animation: 'heroShootingStarB 11s cubic-bezier(0.25, 0.1, 0.25, 1) infinite',
+            animationDelay: '5.5s',
+          }}
+        />
+
+        {/* 전체 페이지 고정 반짝이는 별빛 모션 (스크롤을 내려도 끝까지 아름답게 반짝임 · GPU 가속) */}
+        {HERO_STARS.map((s, idx) => {
+          if (s.type === 'cross') {
+            return (
+              <span
+                key={idx}
+                style={{
+                  position: 'absolute',
+                  top: s.top,
+                  left: s.left,
+                  width: `${s.size * 3}px`,
+                  height: `${s.size * 3}px`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  animation: `heroCrossGlint ${s.dur} ease-in-out infinite`,
+                  animationDelay: s.delay,
+                  willChange: 'transform, opacity',
+                  transform: 'translate3d(0, 0, 0)',
+                }}
+              >
+                <svg width={s.size * 3} height={s.size * 3} viewBox="0 0 24 24" fill={s.color}>
+                  <path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z" />
+                </svg>
+              </span>
+            );
+          }
+          if (s.type === 'sparkle') {
+            return (
+              <span
+                key={idx}
+                style={{
+                  position: 'absolute',
+                  top: s.top,
+                  left: s.left,
+                  width: `${s.size}px`,
+                  height: `${s.size}px`,
+                  background: s.color,
+                  transform: 'translate3d(0, 0, 0) rotate(45deg)',
+                  animation: `heroDiamondSparkle ${s.dur} ease-in-out infinite`,
+                  animationDelay: s.delay,
+                  willChange: 'transform, opacity',
+                }}
+              />
+            );
+          }
+          return (
+            <span
+              key={idx}
+              style={{
+                position: 'absolute',
+                top: s.top,
+                left: s.left,
+                width: `${s.size}px`,
+                height: `${s.size}px`,
+                borderRadius: '50%',
+                background: s.color,
+                animation: `heroStarTwinkle ${s.dur} ease-in-out infinite`,
+                animationDelay: s.delay,
+                willChange: 'transform, opacity',
+                transform: 'translate3d(0, 0, 0)',
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* 토스트 알림 */}
@@ -633,241 +729,145 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       {/* ── 메인 콘텐츠 ── */}
       <main className="abam-container" style={{ position: 'relative', zIndex: 1, wordBreak: 'keep-all' }}>
 
-        {/* ── 2. 히어로 섹션 (전면 전체 반짝이는 작은 별 모션 탑재) ── */}
-        <section style={{ position: 'relative', padding: '24px 0 0', textAlign: 'center' }}>
+        {/* ── 2. 히어로 섹션 (시원하고 여유로운 간격 + 전면 밤하늘 별빛 투과) ── */}
+        <section style={{ position: 'relative', padding: '32px 0 0', textAlign: 'center' }}>
           
-          {/* 히어로 전면 전체 반짝이는 작은 별 & 유성 레이어 */}
-          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
-            {/* 유성 1 */}
-            <span
-              style={{
-                position: 'absolute',
-                top: '10%',
-                right: '8%',
-                height: '1.5px',
-                background: 'linear-gradient(to left, rgba(255,255,255,0), #ffffff, rgba(254,240,138,0.9))',
-                borderRadius: '999px',
-                boxShadow: '0 0 8px #ffffff',
-                animation: 'heroShootingStarA 8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite',
-                animationDelay: '1.2s',
-              }}
-            />
-            {/* 유성 2 */}
-            <span
-              style={{
-                position: 'absolute',
-                top: '45%',
-                right: '18%',
-                height: '1.5px',
-                background: 'linear-gradient(to left, rgba(255,255,255,0), #bae6fd, #ffffff)',
-                borderRadius: '999px',
-                boxShadow: '0 0 8px #bae6fd',
-                animation: 'heroShootingStarB 11s cubic-bezier(0.25, 0.1, 0.25, 1) infinite',
-                animationDelay: '5.5s',
-              }}
-            />
-
-            {/* 풍부하고 화려한 80여 개 별빛 모션 (GPU 하드웨어 가속, 60fps 무지연) */}
-            {HERO_STARS.map((s, idx) => {
-              if (s.type === 'cross') {
-                return (
-                  <span
-                    key={idx}
-                    style={{
-                      position: 'absolute',
-                      top: s.top,
-                      left: s.left,
-                      width: `${s.size * 3}px`,
-                      height: `${s.size * 3}px`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      animation: `heroCrossGlint ${s.dur} ease-in-out infinite`,
-                      animationDelay: s.delay,
-                      willChange: 'transform, opacity',
-                      transform: 'translate3d(0, 0, 0)',
-                    }}
-                  >
-                    <svg width={s.size * 3} height={s.size * 3} viewBox="0 0 24 24" fill={s.color}>
-                      <path d="M12 0L14 9.5L24 12L14 14.5L12 24L10 14.5L0 12L10 9.5Z" />
-                    </svg>
-                  </span>
-                );
-              }
-              if (s.type === 'sparkle') {
-                return (
-                  <span
-                    key={idx}
-                    style={{
-                      position: 'absolute',
-                      top: s.top,
-                      left: s.left,
-                      width: `${s.size}px`,
-                      height: `${s.size}px`,
-                      background: s.color,
-                      transform: 'translate3d(0, 0, 0) rotate(45deg)',
-                      animation: `heroDiamondSparkle ${s.dur} ease-in-out infinite`,
-                      animationDelay: s.delay,
-                      willChange: 'transform, opacity',
-                    }}
-                  />
-                );
-              }
-              return (
-                <span
-                  key={idx}
-                  style={{
-                    position: 'absolute',
-                    top: s.top,
-                    left: s.left,
-                    width: `${s.size}px`,
-                    height: `${s.size}px`,
-                    borderRadius: '50%',
-                    background: s.color,
-                    animation: `heroStarTwinkle ${s.dur} ease-in-out infinite`,
-                    animationDelay: s.delay,
-                    willChange: 'transform, opacity',
-                    transform: 'translate3d(0, 0, 0)',
-                  }}
-                />
-              );
-            })}
-          </div>
-
           <div style={{ position: 'relative', zIndex: 1 }}>
-            {/* 영업 상태 (단정하고 차분한 텍스트 배지) */}
-          {status && (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(23, 25, 34, 0.85)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '5px 14px', fontSize: '12px', fontWeight: 600, color: C.textSub, marginBottom: '14px' }}>
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: status === 'closed' ? C.pointGold : '#10b981' }} />
-              {x.status[status]}
+            {/* 영업 상태 배지 (간격 22px 확보) */}
+            {status && (
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(23, 25, 34, 0.88)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '6px 16px', fontSize: '12.5px', fontWeight: 600, color: C.textSub, marginBottom: '22px' }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: status === 'closed' ? C.pointGold : '#10b981' }} />
+                {x.status[status]}
+              </div>
+            )}
+
+            {/* H1 메인 타이틀 박스 (간격 26px 확보로 조잡함 완전 해소) */}
+            <h1 style={{ fontSize: '32px', fontWeight: 900, lineHeight: 1.3, color: '#ffffff', margin: '0 0 26px', letterSpacing: '-0.8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '14px', flexWrap: 'wrap' }}>
+                {/* 화려하게 빛나는 골드 달모양 로고 */}
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 14px rgba(245,158,11,0.95)) drop-shadow(0 0 28px rgba(254,240,138,0.7))' }}>
+                  <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#heroMoonGrad)" />
+                  <defs>
+                    <linearGradient id="heroMoonGrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="35%" stopColor="#fef08a" />
+                      <stop offset="100%" stopColor="#f59e0b" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <span className="abam-hero-title-main" style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.5)' }}>아름다운 밤</span>
+                <span className="abam-hero-title-tag" style={{ fontSize: '26px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
+              </div>
+              <span className="abam-hero-subtitle" style={{ fontSize: '20px', fontWeight: 800, color: '#e2e8f0', letterSpacing: '-0.4px', display: 'block', marginTop: '10px', lineHeight: 1.5 }}>
+                서울·경기 24시 1:1 방문 홈케어 출장안마 · 출장마사지
+              </span>
+            </h1>
+
+            {/* 아밤이 왜 아밤인지 설명 배너 (간격 22px 확보 및 폰트 15px 가독성) */}
+            <div className="abam-hero-box" style={{ margin: '0 auto 22px', background: 'rgba(20, 23, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '10px', padding: '16px 20px', fontSize: '15px', color: '#e2e8f0', lineHeight: 1.7, textAlign: 'center' }}>
+              🌙 <strong style={{ color: C.pointGold }}>‘아름다운 밤’</strong>을 약속드리는 1:1 프리미엄 케어, 그래서 <strong style={{ color: '#ffffff' }}>아밤(Abam)</strong>입니다.<br />
+              고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.
             </div>
-          )}
 
-          <h1 style={{ fontSize: '30px', fontWeight: 900, lineHeight: 1.25, color: '#ffffff', margin: '0 0 12px', letterSpacing: '-0.8px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
-              {/* 화려하게 빛나는 골드 달모양 로고 */}
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 12px rgba(245,158,11,0.9)) drop-shadow(0 0 24px rgba(254,240,138,0.6))' }}>
-                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#heroMoonGrad)" />
-                <defs>
-                  <linearGradient id="heroMoonGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="35%" stopColor="#fef08a" />
-                    <stop offset="100%" stopColor="#f59e0b" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <span className="abam-hero-title-main" style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.45)' }}>아름다운 밤</span>
-              <span className="abam-hero-title-tag" style={{ fontSize: '24px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
+            {/* 핵심 서비스 요약 바 (간격 20px 확보) */}
+            <div className="abam-hero-box" style={{ background: 'rgba(22, 24, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.line}`, borderRadius: '8px', padding: '14px 16px', margin: '0 auto 20px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '14.5px', color: '#e2e8f0', fontWeight: 700 }}>
+              <span>100% 현장 대면결제</span>
+              <span style={{ color: C.lineLight }}>|</span>
+              <span>20대 전문 힐러</span>
+              <span style={{ color: C.lineLight }}>|</span>
+              <span>서울·경기 30분 도착</span>
             </div>
-            <span className="abam-hero-subtitle" style={{ fontSize: '19px', fontWeight: 800, color: '#cbd5e1', letterSpacing: '-0.4px', display: 'block', marginTop: '4px' }}>
-              서울·경기 24시 1:1 방문 홈케어 출장안마 · 출장마사지
-            </span>
-          </h1>
 
-          {/* 아밤이 왜 아밤인지 설명 배너 (반투명 블러로 뒤편 별빛 투과 및 폰트 14.5px 가독성) */}
-          <div className="abam-hero-box" style={{ margin: '0 auto 12px', background: 'rgba(20, 23, 34, 0.82)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '12px 14px', fontSize: '14.5px', color: '#e2e8f0', lineHeight: 1.65, textAlign: 'center' }}>
-            🌙 <strong style={{ color: C.pointGold }}>‘아름다운 밤’</strong>을 약속드리는 1:1 프리미엄 케어, 그래서 <strong style={{ color: '#ffffff' }}>아밤(Abam)</strong>입니다.<br />
-            고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.
-          </div>
+            {/* 1시간 전 예약 안내 (간격 24px 확보) */}
+            <div className="abam-hero-box" style={{ margin: '0 auto 24px', background: 'rgba(24, 27, 38, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '13px 16px', fontSize: '13.5px', color: C.pointGold, textAlign: 'center', lineHeight: 1.6 }}>
+              이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하게 이용 가능합니다.
+            </div>
 
-          {/* 핵심 서비스 요약 바 */}
-          <div className="abam-hero-box" style={{ background: 'rgba(22, 24, 34, 0.82)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '11px 8px', margin: '0 auto 10px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '13.5px', color: '#e2e8f0', fontWeight: 700 }}>
-            <span>100% 현장 대면결제</span>
-            <span style={{ color: C.lineLight }}>|</span>
-            <span>20대 전문 힐러</span>
-            <span style={{ color: C.lineLight }}>|</span>
-            <span>서울·경기 30분 도착</span>
-          </div>
+            {/* 대표 24시 전화 상담 연결 버튼 (간격 12px) */}
+            <div className="abam-hero-box" style={{ margin: '0 auto 12px' }}>
+              <a
+                href={c.contact.tel}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  background: C.pointRed,
+                  color: '#ffffff',
+                  fontWeight: 800,
+                  fontSize: '21px',
+                  padding: '16px 20px',
+                  borderRadius: '10px',
+                  textDecoration: 'none',
+                  width: '100%',
+                  boxSizing: 'border-box',
+                  boxShadow: '0 4px 20px rgba(225,29,72,0.35)',
+                }}
+              >
+                <PhoneIcon size={24} /> {c.contact.phone} 24시 전화예약
+              </a>
+            </div>
 
-          {/* 1시간 전 예약 안내 */}
-          <div className="abam-hero-box" style={{ margin: '0 auto 14px', background: 'rgba(24, 27, 38, 0.82)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: `1px solid ${C.lineLight}`, borderRadius: '6px', padding: '10px 10px', fontSize: '13px', color: C.pointGold, textAlign: 'center', lineHeight: 1.5 }}>
-            이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하게 이용 가능합니다.
-          </div>
+            {/* 문자로 간편 예약하기 버튼 (양식 자동입력) */}
+            <div className="abam-hero-box" style={{ margin: '0 auto 16px', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '8px' }}>
+              <a
+                href={SMS_HREF}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  background: 'rgba(36, 40, 54, 0.92)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  border: `1px solid ${C.lineLight}`,
+                  color: '#ffffff',
+                  fontWeight: 700,
+                  fontSize: '15px',
+                  padding: '14px 10px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  boxSizing: 'border-box',
+                }}
+              >
+                문자로 간편 예약하기
+              </a>
 
-          {/* 대표 24시 전화 상담 연결 버튼 */}
-          <div className="abam-hero-box" style={{ margin: '0 auto 8px' }}>
-            <a
-              href={c.contact.tel}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
-                background: C.pointRed,
-                color: '#ffffff',
-                fontWeight: 800,
-                fontSize: '20px',
-                padding: '15px 16px',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                width: '100%',
-                boxSizing: 'border-box',
-              }}
-            >
-              <PhoneIcon size={22} /> {c.contact.phone} 24시 전화예약
-            </a>
-          </div>
+              <button
+                onClick={() => setSmsModal(true)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '4px',
+                  background: 'rgba(22, 24, 34, 0.92)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  border: `1px solid ${C.line}`,
+                  color: C.textSub,
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  padding: '14px 10px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  boxSizing: 'border-box',
+                }}
+              >
+                예약 양식 보기
+              </button>
+            </div>
 
-          {/* 문자로 간편 예약하기 버튼 (양식 자동입력) */}
-          <div className="abam-hero-box" style={{ margin: '0 auto 10px', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '6px' }}>
-            <a
-              href={SMS_HREF}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '6px',
-                background: 'rgba(36, 40, 54, 0.88)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
-                border: `1px solid ${C.lineLight}`,
-                color: '#ffffff',
-                fontWeight: 700,
-                fontSize: '14px',
-                padding: '13px 8px',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                boxSizing: 'border-box',
-              }}
-            >
-              문자로 간편 예약하기
-            </a>
-
-            <button
-              onClick={() => setSmsModal(true)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '4px',
-                background: 'rgba(22, 24, 34, 0.88)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
-                border: `1px solid ${C.line}`,
-                color: C.textSub,
-                fontWeight: 700,
-                fontSize: '13.5px',
-                padding: '13px 8px',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                boxSizing: 'border-box',
-              }}
-            >
-              예약 양식 보기
-            </button>
-          </div>
-
-          <div style={{ fontSize: '12.5px', color: C.textMuted, marginBottom: '20px', lineHeight: 1.5 }}>
-            ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 24시간 언제든 편하게 접수하실 수 있습니다.
-          </div>
+            <div style={{ fontSize: '13px', color: C.textMuted, marginBottom: '26px', lineHeight: 1.6 }}>
+              ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 24시간 언제든 편하게 접수하실 수 있습니다.
+            </div>
 
             {/* 히어로 실사 모델 화보 */}
-            <div className="abam-photo-banner" style={{ height: '280px', marginTop: '10px' }}>
+            <div className="abam-photo-banner">
               <Image
                 src="/images/abam_hero_seductive.jpg"
                 alt="아밤 24시 출장마사지 힐링 케어"
                 fill
-                sizes="(max-width: 640px) 100vw, 640px"
+                sizes="(max-width: 640px) 100vw, 860px"
                 style={{ objectFit: 'cover' }}
                 priority
               />
@@ -878,11 +878,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
           {head('출장안마 서비스 안내', '서울·경기 전지역 100% 현장 대면결제')}
-          <div className="abam-card abam-body-text" style={{ fontSize: '15px', color: '#e2e8f0', lineHeight: 1.75 }}>
-            <p style={{ margin: '0 0 12px' }}>
+          <div className="abam-card abam-body-text" style={{ fontSize: '15.5px', color: '#e2e8f0', lineHeight: 1.8 }}>
+            <p style={{ margin: '0 0 14px' }}>
               출장안마는 고객님이 계신 곳(자택, 아파트, 오피스텔, 호텔, 모텔)으로 전문 힐러가 직접 찾아가는 1:1 방문 맞춤 마사지 케어 서비스입니다.
             </p>
-            <p style={{ margin: '0 0 12px' }}>
+            <p style={{ margin: '0 0 14px' }}>
               아밤(Abam)은 선입금, 예약금, 출발비 등을 절대 요구하지 않는 <strong style={{ color: '#ffffff' }}>100% 현장 대면결제 원칙</strong>을 준수합니다. 매니저가 현장에 도착하여 고객님과 직접 대면한 후 결제가 진행되므로 안심하고 이용하실 수 있습니다.
             </p>
             <p style={{ margin: 0 }}>
@@ -891,35 +891,192 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* ── 4. 코스 및 정찰 가격표 (3대 코스 + 하단 화보) ── */}
+        {/* ── 4. 코스 및 정찰 가격표 (3대 코스 특화 하이라이트 포인트 적용) ── */}
         <section id="price" style={section}>
-          {head('코스 안내 및 정찰 가격표', '선입금 없는 100% 현장 대면결제')}
+          {head('코스 안내 및 정찰 가격표', '선입금 없는 100% 현장 대면결제 · 취향별 맞춤 코스')}
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {c.courses.map((course) => (
-              <article key={course.no} className="abam-card" style={{ overflow: 'hidden', padding: 0 }}>
-                <div style={{ padding: '12px 14px', background: '#1c1f2b', borderBottom: `1px solid ${C.line}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ background: C.pointRed, color: '#ffffff', fontWeight: 800, fontSize: '12px', padding: '3px 8px', borderRadius: '4px' }}>
-                      {course.no === 1 ? 'A코스' : course.no === 2 ? 'B코스' : 'C코스'}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {c.courses.map((course) => {
+              const isThai = course.no === 1;
+              const isAroma = course.no === 2;
+              const isSpecial = course.no === 3;
+
+              /* 코스별 포인트 스타일 및 뱃지 설정 */
+              const cardBorder = isAroma
+                ? '1.5px solid #f59e0b'
+                : isSpecial
+                ? '1.5px solid #e11d48'
+                : `1px solid ${C.line}`;
+
+              const cardShadow = isAroma
+                ? '0 0 20px rgba(245,158,11,0.12)'
+                : isSpecial
+                ? '0 0 20px rgba(225,29,72,0.12)'
+                : 'none';
+
+              const headerBg = isAroma
+                ? 'linear-gradient(90deg, #261f12, #1c1f2b)'
+                : isSpecial
+                ? 'linear-gradient(90deg, #261318, #1c1f2b)'
+                : '#1c1f2b';
+
+              const headerBorderLeft = isAroma
+                ? '4px solid #f59e0b'
+                : isSpecial
+                ? '4px solid #e11d48'
+                : '4px solid #38bdf8';
+
+              const chips = isThai
+                ? ['⚡ 전신 수기 건식 지압', '🎯 뭉친 어깨·허리 피로 해소', '🧘 스트레칭 균형 회복']
+                : isAroma
+                ? ['✨ 최고급 천연 식물성 아로마', '💧 림프 순환 & 딥 릴렉싱', '🌿 부드럽고 섬세한 힐링']
+                : ['🔥 시원한 지압 + 부드러운 오일', '⭐ 20대 ACE 집중 VIP 케어', '🏆 만족도 1위 종합 테라피'];
+
+              return (
+                <article
+                  key={course.no}
+                  className="abam-card"
+                  style={{
+                    overflow: 'hidden',
+                    padding: 0,
+                    border: cardBorder,
+                    boxShadow: cardShadow,
+                  }}
+                >
+                  {/* 코스 헤더 (강조 뱃지 & 포인트 컬러) */}
+                  <div
+                    style={{
+                      padding: '14px 18px',
+                      background: headerBg,
+                      borderBottom: `1px solid ${C.line}`,
+                      borderLeft: headerBorderLeft,
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: '8px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                      <span
+                        style={{
+                          background: isAroma ? '#f59e0b' : isSpecial ? C.pointRed : '#0284c7',
+                          color: '#ffffff',
+                          fontWeight: 900,
+                          fontSize: '12.5px',
+                          padding: '3px 9px',
+                          borderRadius: '4px',
+                        }}
+                      >
+                        {course.no === 1 ? 'A코스' : course.no === 2 ? 'B코스' : 'C코스'}
+                      </span>
+                      <strong style={{ fontSize: '18px', color: '#ffffff' }}>{course.name} 코스</strong>
+
+                      {/* 하이라이트 뱃지 태그 */}
+                      {isAroma && (
+                        <span style={{ background: 'rgba(245,158,11,0.2)', border: '1px solid #f59e0b', color: '#fef08a', fontSize: '11px', fontWeight: 800, padding: '2px 7px', borderRadius: '4px' }}>
+                          👑 고객 선호 1위 · BEST
+                        </span>
+                      )}
+                      {isSpecial && (
+                        <span style={{ background: 'rgba(225,29,72,0.2)', border: '1px solid #e11d48', color: '#fda4af', fontSize: '11px', fontWeight: 800, padding: '2px 7px', borderRadius: '4px' }}>
+                          💎 VIP 스페셜 올케어
+                        </span>
+                      )}
+                      {isThai && (
+                        <span style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid #38bdf8', color: '#bae6fd', fontSize: '11px', fontWeight: 700, padding: '2px 7px', borderRadius: '4px' }}>
+                          기본 충실 · 뭉친 피로 타파
+                        </span>
+                      )}
+                    </div>
+
+                    <span style={{ fontSize: '13.5px', color: isAroma ? '#fef08a' : C.pointGold, fontWeight: 700 }}>
+                      {course.subtitle}
                     </span>
-                    <strong style={{ fontSize: '17px', color: '#ffffff' }}>{course.name} 코스</strong>
                   </div>
-                  <span style={{ fontSize: '13px', color: C.pointGold, fontWeight: 700 }}>{course.subtitle}</span>
-                </div>
-                <div style={{ padding: '14px 12px' }}>
-                  <p style={{ fontSize: '14px', color: C.textSub, margin: '0 0 12px', lineHeight: 1.6 }}>{course.desc}</p>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' }}>
-                    {course.prices.map((pr, pi) => (
-                      <div key={pi} className="abam-course-price-cell" style={{ textAlign: 'center', border: `1px solid ${C.line}`, background: '#101218', borderRadius: '6px', padding: '10px 4px' }}>
-                        <div style={{ fontSize: '12px', color: C.textMuted }}>{c.priceSection.durations[pi]}</div>
-                        <div className="abam-course-price-val" style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>{pr}</div>
-                      </div>
-                    ))}
+
+                  {/* 코스 본문 & 특징 칩 3개 */}
+                  <div style={{ padding: '16px 18px' }}>
+                    <p style={{ fontSize: '14.5px', color: C.textSub, margin: '0 0 12px', lineHeight: 1.65 }}>
+                      {course.desc}
+                    </p>
+
+                    {/* 핵심 포인트 칩 3개 */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '16px' }}>
+                      {chips.map((chip, ci) => (
+                        <span
+                          key={ci}
+                          style={{
+                            background: '#101218',
+                            border: `1px solid ${C.lineLight}`,
+                            color: '#e2e8f0',
+                            fontSize: '12px',
+                            fontWeight: 600,
+                            padding: '4px 10px',
+                            borderRadius: '4px',
+                          }}
+                        >
+                          {chip}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* 가격표 셀 (90분/120분 추천 하이라이트) */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '8px' }}>
+                      {course.prices.map((pr, pi) => {
+                        const isRecom = (isThai && pi === 1) || (isAroma && pi === 1) || (isSpecial && pi === 2);
+                        return (
+                          <div
+                            key={pi}
+                            className="abam-course-price-cell"
+                            style={{
+                              textAlign: 'center',
+                              border: isRecom ? (isAroma ? '1px solid #f59e0b' : isSpecial ? '1px solid #e11d48' : '1px solid #38bdf8') : `1px solid ${C.line}`,
+                              background: isRecom ? (isAroma ? '#1e1a12' : isSpecial ? '#1e1215' : '#121820') : '#101218',
+                              borderRadius: '8px',
+                              padding: '12px 6px',
+                              position: 'relative',
+                            }}
+                          >
+                            {isRecom && (
+                              <div
+                                style={{
+                                  position: 'absolute',
+                                  top: '-9px',
+                                  left: '50%',
+                                  transform: 'translateX(-50%)',
+                                  background: isAroma ? '#f59e0b' : isSpecial ? C.pointRed : '#0284c7',
+                                  color: '#ffffff',
+                                  fontSize: '10px',
+                                  fontWeight: 800,
+                                  padding: '1px 6px',
+                                  borderRadius: '3px',
+                                  whiteSpace: 'nowrap',
+                                }}
+                              >
+                                {isSpecial ? 'VIP 풀코스' : '추천 코스'}
+                              </div>
+                            )}
+                            <div style={{ fontSize: '12px', color: C.textMuted }}>{c.priceSection.durations[pi]}</div>
+                            <div
+                              className="abam-course-price-val"
+                              style={{
+                                fontSize: '17px',
+                                fontWeight: 800,
+                                color: isRecom ? '#ffffff' : '#cbd5e1',
+                                marginTop: '4px',
+                              }}
+                            >
+                              {pr}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
 
           {/* 코스 설명 하단 화보 */}
@@ -928,7 +1085,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               src="/images/abam_penthouse_night.jpg"
               alt="서울의 밤 프라이빗 출장마사지 아밤"
               fill
-              sizes="(max-width: 640px) 100vw, 640px"
+              sizes="(max-width: 640px) 100vw, 860px"
               style={{ objectFit: 'cover' }}
             />
           </div>
@@ -1000,12 +1157,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 화보 2: 천연 에센셜 오일 테라피 ── */}
-        <div className="abam-photo-banner" style={{ height: '240px' }}>
+        <div className="abam-photo-banner">
           <Image
             src="/images/sensual_back.jpg"
             alt="천연 아로마 오일 테라피"
             fill
-            sizes="(max-width: 640px) 100vw, 640px"
+            sizes="(max-width: 640px) 100vw, 860px"
             style={{ objectFit: 'cover' }}
           />
         </div>
@@ -1014,32 +1171,32 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="guide" style={section}>
           {head(x.guideTitle, '전화나 문자 한 통으로 간편하게 예약 (1시간 전 예약 시 원하는 시간 이용 수월)')}
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '6px', marginBottom: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', marginBottom: '10px' }}>
             {c.info.map((p, i) => (
-              <div key={i} className="abam-card" style={{ borderLeft: `3px solid ${C.pointRed}`, padding: '10px 10px' }}>
-                <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#ffffff' }}>{p.title}</div>
-                <div style={{ fontSize: '11.5px', color: C.textMuted, marginTop: '2px' }}>{p.sub}</div>
+              <div key={i} className="abam-card" style={{ borderLeft: `3px solid ${C.pointRed}`, padding: '12px 14px' }}>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: '#ffffff' }}>{p.title}</div>
+                <div style={{ fontSize: '12px', color: C.textMuted, marginTop: '3px' }}>{p.sub}</div>
               </div>
             ))}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '8px' }}>
             {x.steps.map((s, i) => (
-              <div key={i} className="abam-card" style={{ padding: '10px 4px', textAlign: 'center' }}>
-                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: C.pointRed, color: '#ffffff', fontWeight: 800, fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 6px' }}>{i + 1}</div>
-                <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#ffffff' }}>{s}</div>
+              <div key={i} className="abam-card" style={{ padding: '12px 6px', textAlign: 'center' }}>
+                <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: C.pointRed, color: '#ffffff', fontWeight: 800, fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 8px' }}>{i + 1}</div>
+                <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#ffffff' }}>{s}</div>
               </div>
             ))}
           </div>
         </section>
 
         {/* ── 화보 3: 프라이빗 1:1 케어 ── */}
-        <div className="abam-photo-banner" style={{ height: '240px' }}>
+        <div className="abam-photo-banner">
           <Image
             src="/images/sensual_touch.jpg"
             alt="프라이빗 1:1 맞춤 힐링 케어"
             fill
-            sizes="(max-width: 640px) 100vw, 640px"
+            sizes="(max-width: 640px) 100vw, 860px"
             style={{ objectFit: 'cover' }}
           />
         </div>
@@ -1048,17 +1205,17 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="reviews" style={section}>
           {head(c.reviewSection.title, '실제 이용 고객님들의 진솔한 이용 후기 (100% 리얼)')}
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {c.reviews.map((rev, i) => (
-              <figure key={i} className="abam-card" style={{ margin: 0, padding: '14px 14px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <span style={{ color: C.pointGold, fontSize: '11.5px', letterSpacing: '1px' }}>★★★★★</span>
-                  <span style={{ fontSize: '13px', color: C.pointGold, fontWeight: 700 }}>{rev.course}</span>
+              <figure key={i} className="abam-card" style={{ margin: 0, padding: '16px 18px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ color: C.pointGold, fontSize: '12px', letterSpacing: '1px' }}>★★★★★</span>
+                  <span style={{ fontSize: '13.5px', color: C.pointGold, fontWeight: 700 }}>{rev.course}</span>
                 </div>
-                <blockquote style={{ margin: 0, fontSize: '14.5px', color: '#e2e8f0', lineHeight: 1.7, wordBreak: 'keep-all' }}>
+                <blockquote style={{ margin: 0, fontSize: '15px', color: '#e2e8f0', lineHeight: 1.75, wordBreak: 'keep-all' }}>
                   {rev.text}
                 </blockquote>
-                <figcaption style={{ fontSize: '12px', color: C.textMuted, marginTop: '8px' }}>
+                <figcaption style={{ fontSize: '12.5px', color: C.textMuted, marginTop: '10px' }}>
                   <span style={{ color: '#ffffff', fontWeight: 700 }}>{rev.author}</span> · {rev.area}
                 </figcaption>
               </figure>
@@ -1075,12 +1232,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               const isOpen = openFaq === i;
               return (
                 <div key={i} style={{ borderTop: i ? `1px solid ${C.line}` : 'none', background: isOpen ? '#1a1d27' : 'transparent' }}>
-                  <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} style={{ width: '100%', padding: '14px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', gap: '8px', background: 'none', border: 'none', cursor: 'pointer' }}>
-                    <span style={{ fontSize: '15px', fontWeight: 700, color: isOpen ? C.pointGold : '#ffffff' }}>{faq.q}</span>
-                    <span style={{ fontSize: '16px', color: C.pointRed, fontWeight: 700 }}>{isOpen ? '−' : '+'}</span>
+                  <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} style={{ width: '100%', padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', gap: '8px', background: 'none', border: 'none', cursor: 'pointer' }}>
+                    <span style={{ fontSize: '15.5px', fontWeight: 700, color: isOpen ? C.pointGold : '#ffffff' }}>{faq.q}</span>
+                    <span style={{ fontSize: '17px', color: C.pointRed, fontWeight: 700 }}>{isOpen ? '−' : '+'}</span>
                   </button>
                   {isOpen && (
-                    <div style={{ margin: '0 12px 14px', padding: '12px 14px', background: '#101218', borderLeft: `3px solid ${C.pointRed}`, borderRadius: '4px', fontSize: '14px', color: C.textSub, lineHeight: 1.75, whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>
+                    <div style={{ margin: '0 16px 16px', padding: '14px 16px', background: '#101218', borderLeft: `3px solid ${C.pointRed}`, borderRadius: '6px', fontSize: '14.5px', color: C.textSub, lineHeight: 1.8, whiteSpace: 'pre-line', wordBreak: 'keep-all' }}>
                       {faq.a}
                     </div>
                   )}
@@ -1091,10 +1248,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 10. SEO 본문 안내 ── */}
-        <section id="about" style={{ marginTop: '32px', paddingTop: '16px', borderTop: `1px solid ${C.line}`, paddingLeft: '14px', paddingRight: '14px' }}>
-          <h2 style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', margin: '0 0 8px' }}>{c.about.title}</h2>
-          <div style={{ fontSize: '12.5px', color: C.textMuted, lineHeight: 1.75, wordBreak: 'keep-all' }}>
-            <p style={{ margin: '0 0 8px' }}>{c.about.p1}</p>
+        <section id="about" style={{ marginTop: '36px', paddingTop: '20px', borderTop: `1px solid ${C.line}`, paddingLeft: '16px', paddingRight: '16px' }}>
+          <h2 style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff', margin: '0 0 10px' }}>{c.about.title}</h2>
+          <div style={{ fontSize: '13px', color: C.textMuted, lineHeight: 1.8, wordBreak: 'keep-all' }}>
+            <p style={{ margin: '0 0 10px' }}>{c.about.p1}</p>
             <p style={{ margin: 0 }}>
               {c.about.p2}
               {isKo && (
@@ -1107,34 +1264,34 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 11. 푸터 & 지역 네트워크 링크 ── */}
-        <footer style={{ marginTop: '24px', paddingTop: '16px', borderTop: `1px solid ${C.line}`, paddingBottom: '20px', paddingLeft: '14px', paddingRight: '14px' }}>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>{c.footer.title}</div>
-          <p style={{ fontSize: '12px', color: C.textMuted, lineHeight: 1.6, margin: '0 0 10px', wordBreak: 'keep-all' }}>{c.footer.sub}</p>
+        <footer style={{ marginTop: '28px', paddingTop: '20px', borderTop: `1px solid ${C.line}`, paddingBottom: '24px', paddingLeft: '16px', paddingRight: '16px' }}>
+          <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff', marginBottom: '6px' }}>{c.footer.title}</div>
+          <p style={{ fontSize: '12.5px', color: C.textMuted, lineHeight: 1.6, margin: '0 0 12px', wordBreak: 'keep-all' }}>{c.footer.sub}</p>
           {areaLinks && areaLinks.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px 8px', fontSize: '11px', marginBottom: '12px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 10px', fontSize: '11.5px', marginBottom: '14px' }}>
               {areaLinks.slice(0, 36).map((area, i) => (
                 <Link key={i} href={`/seo/${encodeURIComponent(area)}`} style={{ textDecoration: 'none', color: '#64748b' }}>{area}</Link>
               ))}
             </div>
           )}
-          <div style={{ fontSize: '11px', color: '#64748b', lineHeight: 1.6 }}>{c.footer.line}</div>
+          <div style={{ fontSize: '11.5px', color: '#64748b', lineHeight: 1.6 }}>{c.footer.line}</div>
         </footer>
 
       </main>
 
       {/* ── 12. 하단 고정 퀵바 (문자 예약 + 24시 직통 전화 1:1 배치) ── */}
       <div className="abam-bottom-bar">
-        <div style={{ maxWidth: '640px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '6px' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px' }}>
           {isKo ? (
-            <a href={SMS_HREF} style={{ ...btn, background: '#242836', border: `1px solid ${C.lineLight}`, color: '#ffffff', fontSize: '13.5px', padding: '12px 0' }}>
+            <a href={SMS_HREF} style={{ ...btn, background: '#242836', border: `1px solid ${C.lineLight}`, color: '#ffffff', fontSize: '14px', padding: '13px 0' }}>
               문자 간편예약 (양식 자동)
             </a>
           ) : (
-            <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ ...btn, background: '#25D366', color: '#ffffff', fontSize: '13.5px', padding: '12px 0' }}>
+            <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ ...btn, background: '#25D366', color: '#ffffff', fontSize: '14px', padding: '13px 0' }}>
               {c.cta.whatsapp}
             </a>
           )}
-          <a href={c.contact.tel} style={{ ...btn, background: C.pointRed, color: '#ffffff', fontSize: '13.5px', padding: '12px 0' }}>
+          <a href={c.contact.tel} style={{ ...btn, background: C.pointRed, color: '#ffffff', fontSize: '14px', padding: '13px 0' }}>
             <PhoneIcon size={16} /> {c.cta.callBar}
           </a>
         </div>
