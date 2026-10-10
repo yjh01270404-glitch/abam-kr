@@ -288,22 +288,24 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     transition: 'background-color 0.15s ease',
   };
 
-  const section: React.CSSProperties = { marginTop: '48px', scrollMarginTop: '70px' };
+  const section: React.CSSProperties = { marginTop: '40px', scrollMarginTop: '70px', width: '100%' };
 
   /* 직관적이고 깔끔한 한국형 섹션 타이틀 */
   const head = (title: string, sub?: string) => (
-    <div style={{ marginBottom: '16px', borderLeft: `4px solid ${C.pointRed}`, paddingLeft: '12px' }}>
+    <div style={{ marginBottom: '14px', borderLeft: `4px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '10px' }}>
       <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', margin: 0, letterSpacing: '-0.3px', wordBreak: 'keep-all' }}>{title}</h2>
-      {sub && <p style={{ fontSize: '13px', color: C.textMuted, margin: '4px 0 0', wordBreak: 'keep-all' }}>{sub}</p>}
+      {sub && <p style={{ fontSize: '13.5px', color: C.textMuted, margin: '4px 0 0', wordBreak: 'keep-all' }}>{sub}</p>}
     </div>
   );
 
   return (
-    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '88px', lineHeight: 1.6 }}>
+    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.text, fontFamily: FONT, paddingBottom: '88px', lineHeight: 1.6 }}>
       
       {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 화려한 별빛 & 유성 애니메이션 ── */}
       <style>{`
-        html { scroll-behavior: smooth; font-family: ${FONT}; }
+        html { scroll-behavior: smooth; font-family: ${FONT}; width: 100%; overflow-x: hidden; }
+        body { width: 100%; overflow-x: hidden; }
+
         @keyframes heroStarTwinkle {
           0%, 100% {
             opacity: 0.15;
@@ -377,25 +379,26 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        /* ── 모바일 화면 최적화: 좌우 여백 최소화 및 꽉 찬 직관적 레이아웃 (확대 불필요) ── */
+        /* ── 모바일 화면 최적화: 좌우 여백 0 완전 100% 풀와이드(Full-Width) 레이아웃 ── */
         .abam-container {
           width: 100%;
-          max-width: 640px;
+          max-width: 100%;
           margin: 0 auto;
-          padding: 0 4px; /* 모바일 좌우 여백 4px로 최소화하여 화면 98% 꽉 채움 */
+          padding: 0; /* 모바일에서 좌우 여백 0으로 화면 전체 100% 채움 */
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
           .abam-container {
+            max-width: 640px;
             padding: 0 16px;
           }
         }
 
         .abam-header-inner {
           width: 100%;
-          max-width: 680px;
+          max-width: 100%;
           margin: 0 auto;
-          padding: 8px 6px;
+          padding: 10px 12px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -403,20 +406,27 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
         @media (min-width: 640px) {
           .abam-header-inner {
+            max-width: 680px;
             padding: 12px 16px;
           }
         }
 
+        /* 모바일에서는 좁은 카드 상자 형태가 아니라, 화면 좌우 끝까지 100% 닿는 풀스크린 섹션으로 전환 */
         .abam-card {
           background: #15171e;
-          border: 1px solid #282b36;
-          border-radius: 8px;
-          padding: 14px 10px;
+          border-top: 1px solid #282b36;
+          border-bottom: 1px solid #282b36;
+          border-left: none;
+          border-right: none;
+          border-radius: 0;
+          padding: 18px 14px;
           box-sizing: border-box;
           width: 100%;
         }
         @media (min-width: 640px) {
           .abam-card {
+            border: 1px solid #282b36;
+            border-radius: 8px;
             padding: 18px 20px;
           }
         }
@@ -424,11 +434,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         .abam-hero-box {
           width: 100%;
           max-width: 100%;
+          padding-left: 10px;
+          padding-right: 10px;
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
           .abam-hero-box {
             max-width: 500px;
+            padding-left: 0;
+            padding-right: 0;
           }
         }
 
@@ -439,9 +453,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           right: 0;
           background: rgba(12, 13, 17, 0.98);
           border-top: 1px solid #282b36;
-          padding: 8px 6px;
+          padding: 8px 10px;
           z-index: 50;
           box-sizing: border-box;
+          width: 100%;
         }
         @media (min-width: 640px) {
           .abam-bottom-bar {
@@ -454,29 +469,48 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             display: none !important;
           }
           .abam-nav-link {
-            padding: 4px 3px !important;
-            font-size: 11.5px !important;
+            padding: 4px 4px !important;
+            font-size: 12px !important;
           }
           .abam-hero-title-main {
-            font-size: 26px !important;
+            font-size: 28px !important;
           }
           .abam-hero-title-tag {
-            font-size: 22px !important;
+            font-size: 24px !important;
           }
           .abam-hero-subtitle {
-            font-size: 17px !important;
+            font-size: 18px !important;
             line-height: 1.4 !important;
           }
           .abam-course-price-cell {
-            padding: 8px 2px !important;
+            padding: 10px 4px !important;
           }
           .abam-course-price-val {
-            font-size: 14px !important;
+            font-size: 15.5px !important;
           }
-          /* 모바일 본문 텍스트 확대: 억지로 줌인할 필요 없도록 큼직한 가독성 보장 */
           .abam-body-text {
-            font-size: 15px !important;
-            line-height: 1.7 !important;
+            font-size: 15.5px !important;
+            line-height: 1.75 !important;
+          }
+        }
+
+        .abam-photo-banner {
+          position: relative;
+          width: 100%;
+          height: 260px;
+          overflow: hidden;
+          border-top: 1px solid #282b36;
+          border-bottom: 1px solid #282b36;
+          border-left: none;
+          border-right: none;
+          border-radius: 0;
+          box-sizing: border-box;
+          margin-top: 14px;
+        }
+        @media (min-width: 640px) {
+          .abam-photo-banner {
+            border: 1px solid #282b36;
+            border-radius: 8px;
           }
         }
       `}</style>
@@ -828,7 +862,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
 
             {/* 히어로 실사 모델 화보 */}
-            <div style={{ position: 'relative', width: '100%', height: '280px', borderRadius: '8px', overflow: 'hidden', border: `1px solid ${C.line}` }}>
+            <div className="abam-photo-banner" style={{ height: '280px', marginTop: '10px' }}>
               <Image
                 src="/images/abam_hero_seductive.jpg"
                 alt="아밤 24시 출장마사지 힐링 케어"
@@ -889,7 +923,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
 
           {/* 코스 설명 하단 화보 */}
-          <div style={{ marginTop: '14px', position: 'relative', width: '100%', height: '260px', borderRadius: '8px', overflow: 'hidden', border: `1px solid ${C.line}` }}>
+          <div className="abam-photo-banner">
             <Image
               src="/images/abam_penthouse_night.jpg"
               alt="서울의 밤 프라이빗 출장마사지 아밤"
@@ -966,7 +1000,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 화보 2: 천연 에센셜 오일 테라피 ── */}
-        <div style={{ marginTop: '14px', position: 'relative', width: '100%', height: '240px', borderRadius: '8px', overflow: 'hidden', border: `1px solid ${C.line}` }}>
+        <div className="abam-photo-banner" style={{ height: '240px' }}>
           <Image
             src="/images/sensual_back.jpg"
             alt="천연 아로마 오일 테라피"
@@ -1000,7 +1034,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 화보 3: 프라이빗 1:1 케어 ── */}
-        <div style={{ marginTop: '14px', position: 'relative', width: '100%', height: '240px', borderRadius: '8px', overflow: 'hidden', border: `1px solid ${C.line}` }}>
+        <div className="abam-photo-banner" style={{ height: '240px' }}>
           <Image
             src="/images/sensual_touch.jpg"
             alt="프라이빗 1:1 맞춤 힐링 케어"
@@ -1057,7 +1091,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 10. SEO 본문 안내 ── */}
-        <section id="about" style={{ marginTop: '32px', paddingTop: '16px', borderTop: `1px solid ${C.line}` }}>
+        <section id="about" style={{ marginTop: '32px', paddingTop: '16px', borderTop: `1px solid ${C.line}`, paddingLeft: '14px', paddingRight: '14px' }}>
           <h2 style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', margin: '0 0 8px' }}>{c.about.title}</h2>
           <div style={{ fontSize: '12.5px', color: C.textMuted, lineHeight: 1.75, wordBreak: 'keep-all' }}>
             <p style={{ margin: '0 0 8px' }}>{c.about.p1}</p>
@@ -1073,7 +1107,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </section>
 
         {/* ── 11. 푸터 & 지역 네트워크 링크 ── */}
-        <footer style={{ marginTop: '24px', paddingTop: '16px', borderTop: `1px solid ${C.line}`, paddingBottom: '20px' }}>
+        <footer style={{ marginTop: '24px', paddingTop: '16px', borderTop: `1px solid ${C.line}`, paddingBottom: '20px', paddingLeft: '14px', paddingRight: '14px' }}>
           <div style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>{c.footer.title}</div>
           <p style={{ fontSize: '12px', color: C.textMuted, lineHeight: 1.6, margin: '0 0 10px', wordBreak: 'keep-all' }}>{c.footer.sub}</p>
           {areaLinks && areaLinks.length > 0 && (
