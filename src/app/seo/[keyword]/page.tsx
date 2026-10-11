@@ -10,6 +10,7 @@ import {
   hubKeywordFor,
 } from "../../../lib/seo-keywords";
 import { DISTRICTS } from "../../../lib/region-data";
+import { findGeoLocation } from "../../../lib/geo-coords";
 
 type Props = { params: Promise<{ keyword: string }> };
 
@@ -148,6 +149,12 @@ export async function generateMetadata({ params }: Props) {
       description: `${decoded} 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감.`,
       images: [`${SITE_URL}/og-image.png`],
     },
+    other: {
+      "geo.region": findGeoLocation(decoded).region,
+      "geo.placename": findGeoLocation(decoded).placename,
+      "geo.position": `${findGeoLocation(decoded).lat};${findGeoLocation(decoded).lng}`,
+      "ICBM": `${findGeoLocation(decoded).lat}, ${findGeoLocation(decoded).lng}`,
+    },
   };
 }
 
@@ -215,9 +222,21 @@ export default async function SeoLandingPage({ params }: Props) {
       url: SITE_URL,
       image: `${SITE_URL}/og-image.png`,
       telephone: PHONE_NUM,
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: findGeoLocation(decoded).lat,
+        longitude: findGeoLocation(decoded).lng,
+      },
       areaServed: district
-        ? { "@type": "AdministrativeArea", name: `서울특별시 ${district.gu}` }
-        : { "@type": "AdministrativeArea", name: "서울·경기 전역" },
+        ? [
+            { "@type": "AdministrativeArea", name: `서울특별시 ${district.gu}` },
+            ...district.areas.map((a) => ({ "@type": "AdministrativeArea", name: a })),
+            ...district.stations.map((s) => ({ "@type": "Place", name: `${s} 인근` })),
+          ]
+        : [
+            { "@type": "AdministrativeArea", name: findGeoLocation(decoded).placename },
+            { "@type": "AdministrativeArea", name: "서울·경기 전역" },
+          ],
       priceRange: "₩80,000 - ₩160,000",
       aggregateRating: {
         "@type": "AggregateRating",
