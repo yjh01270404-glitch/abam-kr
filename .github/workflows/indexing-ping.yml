@@ -1,0 +1,18 @@
+name: Search engine indexing ping
+
+# 6시간마다 GitHub 서버에서 실행 (PC가 꺼져 있어도 동작).
+# abam.kr 의 /api/cron/indexing 을 호출하면 서버가 IndexNow + Google Indexing API 로 핑을 전송합니다.
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call indexing endpoint
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          curl -fsS --max-time 90 -H "Authorization: Bearer $CRON_SECRET" https://abam.kr/api/cron/indexing
