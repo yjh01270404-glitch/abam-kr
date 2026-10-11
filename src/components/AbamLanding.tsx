@@ -299,8 +299,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   /* 시원시원하고 직관적인 한국형 섹션 타이틀 (모바일 가독성 극대화) */
   const head = (title: string, sub?: string) => (
     <div style={{ marginBottom: '22px', borderLeft: `6px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '14px' }}>
-      <h2 style={{ fontSize: '26px', fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.5px', wordBreak: 'keep-all' }}>{title}</h2>
-      {sub && <p style={{ fontSize: '18px', color: '#cbd5e1', margin: '8px 0 0', wordBreak: 'keep-all', fontWeight: 600 }}>{sub}</p>}
+      <h2 className="abam-head-title" style={{ fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.5px', wordBreak: 'keep-all', lineHeight: 1.3 }}>{title}</h2>
+      {sub && <p className="abam-head-sub" style={{ color: '#cbd5e1', margin: '8px 0 0', wordBreak: 'keep-all', fontWeight: 600 }}>{sub}</p>}
     </div>
   );
 
@@ -471,103 +471,161 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        /* ── 모바일 점보 가독성 최적화: 스마트폰에서 확대를 전혀 하지 않아도 시원시원하게 한눈에 들어오는 대형 폰트 ── */
+        /* ── 모바일 정돈 시스템: 실제 폰 폭(360~430px) 기준 · 들여쓰기/줄바꿈/줄맞춤 통일 ── */
+        .abam-head-title { font-size: 26px; }
+        .abam-head-sub { font-size: 18px; }
+        .abam-bottom-btn { white-space: nowrap; }
+
         @media (max-width: 640px) {
-          .abam-header-badge {
-            display: none !important;
+          /* 헤더: 1줄 로고 + 2줄 메뉴(가로 스크롤)로 깔끔하게 분리 */
+          .abam-header-inner {
+            flex-wrap: wrap !important;
+            row-gap: 2px !important;
+            padding: 10px 14px 4px !important;
           }
+          .abam-header-badge { display: none !important; }
+          .abam-header-right {
+            width: 100% !important;
+            justify-content: space-between !important;
+            gap: 8px !important;
+          }
+          .abam-header-nav {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            overflow-x: auto !important;
+            scrollbar-width: none !important;
+            -webkit-overflow-scrolling: touch;
+          }
+          .abam-header-nav::-webkit-scrollbar { display: none; }
           .abam-nav-link {
-            padding: 8px 8px !important;
-            font-size: 16px !important;
+            padding: 8px 12px 8px 0 !important;
+            font-size: 15px !important;
             font-weight: 800 !important;
+            white-space: nowrap !important;
           }
-          .abam-hero-title-main {
-            font-size: 36px !important;
-          }
+
+          /* 히어로 타이틀: 로고+이름 / [아밤·Abam] / 서브카피 3단 중앙정렬 */
+          .abam-hero-title-main { font-size: 30px !important; }
           .abam-hero-title-tag {
-            font-size: 30px !important;
+            font-size: 22px !important;
+            flex-basis: 100% !important;
+            text-align: center !important;
+            margin-top: -2px !important;
           }
           .abam-hero-subtitle {
-            font-size: 23px !important;
-            line-height: 1.5 !important;
+            font-size: 17px !important;
+            line-height: 1.6 !important;
+            padding: 0 16px !important;
+            text-wrap: balance;
+          }
+
+          /* 히어로 박스류: 버튼과 같은 좌우 16px 안쪽 라인에 정렬 */
+          .abam-hero-desc,
+          .abam-hero-summary-bar,
+          .abam-hero-advance-box {
+            width: calc(100% - 32px) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
           }
           .abam-hero-box {
-            padding-left: 14px !important;
-            padding-right: 14px !important;
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+            box-sizing: border-box !important;
           }
           .abam-hero-desc {
-            font-size: 19.5px !important;
-            line-height: 1.85 !important;
-            padding: 20px 18px !important;
+            font-size: 15.5px !important;
+            line-height: 1.75 !important;
+            padding: 16px 14px !important;
+            text-wrap: pretty;
           }
           .abam-hero-summary-bar {
-            font-size: 17.5px !important;
+            font-size: 13.5px !important;
             font-weight: 800 !important;
-            padding: 18px 10px !important;
+            padding: 14px 6px !important;
+            gap: 4px !important;
           }
+          .abam-hero-summary-bar span {
+            flex: 1 1 0 !important;
+            text-align: center !important;
+            line-height: 1.4 !important;
+            text-wrap: balance;
+          }
+          .abam-hero-summary-bar span:nth-child(even) { flex: 0 0 auto !important; }
           .abam-hero-advance-box {
-            font-size: 18px !important;
-            line-height: 1.75 !important;
-            padding: 18px 16px !important;
+            font-size: 14.5px !important;
+            line-height: 1.7 !important;
+            padding: 14px 16px !important;
+            text-wrap: pretty;
           }
           .abam-hero-call-btn {
-            font-size: 25px !important;
-            padding: 20px 18px !important;
+            font-size: 17px !important;
+            padding: 16px 12px !important;
+            gap: 8px !important;
+            white-space: nowrap !important;
           }
           .abam-hero-sub-btn {
-            font-size: 18px !important;
-            padding: 16px 10px !important;
+            font-size: 15px !important;
+            padding: 14px 8px !important;
+            white-space: nowrap !important;
           }
-          .abam-card {
-            padding: 24px 18px !important;
-          }
+
+          /* 본문 카드: 좌우 16px 통일, 16px 본문, 단어 단위 줄바꿈 */
+          .abam-card { padding: 20px 16px !important; }
+          .abam-card.abam-card-flush { padding: 0 !important; }
+          .abam-head-title { font-size: 21px !important; }
+          .abam-head-sub { font-size: 14.5px !important; line-height: 1.55 !important; text-wrap: balance; }
           .abam-body-text {
-            font-size: 19.5px !important;
-            line-height: 1.9 !important;
+            font-size: 15.5px !important;
+            line-height: 1.8 !important;
+            text-wrap: pretty;
           }
-          .abam-course-name {
-            font-size: 24px !important;
-          }
+          .abam-course-name { font-size: 19px !important; text-wrap: balance; }
           .abam-course-desc {
-            font-size: 19px !important;
-            line-height: 1.85 !important;
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
           }
           .abam-course-chip {
-            font-size: 15.5px !important;
-            padding: 7px 14px !important;
+            font-size: 13px !important;
+            padding: 6px 10px !important;
           }
-          .abam-course-price-cell {
-            padding: 14px 4px !important;
-          }
+          .abam-course-price-cell { padding: 12px 2px !important; }
           .abam-course-price-val {
-            font-size: 21.5px !important;
+            font-size: 17px !important;
             font-weight: 900 !important;
-            letter-spacing: -0.5px !important;
+            letter-spacing: -0.3px !important;
             white-space: nowrap !important;
           }
           .abam-course-duration {
-            font-size: 16px !important;
+            font-size: 13px !important;
             font-weight: 800 !important;
           }
-          .abam-rule-title {
-            font-size: 21px !important;
-            font-weight: 900 !important;
-          }
+          .abam-rule-title { font-size: 17px !important; font-weight: 900 !important; line-height: 1.4 !important; text-wrap: balance; }
           .abam-rule-desc {
-            font-size: 18.5px !important;
-            line-height: 1.85 !important;
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
           }
           .abam-review-text {
-            font-size: 19px !important;
-            line-height: 1.85 !important;
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
           }
-          .abam-faq-q {
-            font-size: 20px !important;
-          }
+          .abam-faq-q { font-size: 16px !important; line-height: 1.5 !important; }
           .abam-faq-a {
-            font-size: 18.5px !important;
-            line-height: 1.85 !important;
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
           }
+
+          /* 하단 고정 버튼 */
+          .abam-bottom-bar { padding: 8px 10px calc(8px + env(safe-area-inset-bottom)) !important; }
+          .abam-bottom-btn {
+            font-size: 16px !important;
+            padding: 14px 0 !important;
+            gap: 6px !important;
+          }
+          .abam-photo-banner { height: 220px !important; }
         }
 
 
@@ -782,8 +840,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </Link>
 
           {/* 우측 메뉴 (표준 네비게이션) */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <nav style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
+          <div className="abam-header-right" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <nav className="abam-header-nav" style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
               <a href="#intro" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>소개</a>
               <a href="#price" className="abam-nav-link" style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 6px' }}>코스</a>
               <a href="#rules" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>안내</a>
@@ -977,7 +1035,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           
           {/* 3대 코스 통합 단일 마스터 박스 (따로 놀지 않고 하나로 묶인 일체형 메뉴판) */}
           <div
-            className="abam-card"
+            className="abam-card abam-card-flush"
             style={{
               padding: 0,
               overflow: 'hidden',
@@ -1383,7 +1441,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
           {isKo ? (
             <a
-              href={SMS_HREF}
+              href={SMS_HREF} className="abam-bottom-btn"
               style={{
                 ...btn,
                 background: 'linear-gradient(180deg, #2b3245, #1e2333)',
@@ -1402,7 +1460,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <a
               href={WA_LINK}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer" className="abam-bottom-btn"
               style={{
                 ...btn,
                 background: '#25D366',
@@ -1417,7 +1475,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </a>
           )}
           <a
-            href={c.contact.tel}
+            href={c.contact.tel} className="abam-bottom-btn"
             style={{
               ...btn,
               background: 'linear-gradient(180deg, #f43f5e, #be123c)',
