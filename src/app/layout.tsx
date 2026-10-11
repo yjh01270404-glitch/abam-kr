@@ -293,14 +293,18 @@ const jsonLdData = {
   ],
 };
 
+// 폰이 "데스크톱 사이트" 모드(약 980px 레이아웃)로 그려도 일반 모바일과 동일하게 보이도록 보정
+const FORCE_MOBILE_SCRIPT = `(function(){try{var d=document.documentElement;function a(){var sw=Math.min(screen.width,screen.height);var iw=window.innerWidth;if(navigator.maxTouchPoints>0&&sw>0&&sw<=600&&iw>sw*1.35){d.classList.add('abam-m');d.style.zoom=(iw/sw).toFixed(4);}else{d.classList.remove('abam-m');d.style.zoom='';}}a();window.addEventListener('resize',a);window.addEventListener('orientationchange',a);}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: FORCE_MOBILE_SCRIPT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}

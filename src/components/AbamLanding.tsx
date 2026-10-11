@@ -395,7 +395,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
-          .abam-container {
+          html:not(.abam-m) .abam-container {
             max-width: 860px;
             padding: 0 20px;
           }
@@ -412,7 +412,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
-          .abam-header-inner {
+          html:not(.abam-m) .abam-header-inner {
             max-width: 900px;
             padding: 14px 20px;
           }
@@ -431,7 +431,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           width: 100%;
         }
         @media (min-width: 640px) {
-          .abam-card {
+          html:not(.abam-m) .abam-card {
             border: 1px solid #282b36;
             border-radius: 10px;
             padding: 22px 24px;
@@ -446,7 +446,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           box-sizing: border-box;
         }
         @media (min-width: 640px) {
-          .abam-hero-box {
+          html:not(.abam-m) .abam-hero-box {
             max-width: 640px;
             padding-left: 0;
             padding-right: 0;
@@ -466,7 +466,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           width: 100%;
         }
         @media (min-width: 640px) {
-          .abam-bottom-bar {
+          html:not(.abam-m) .abam-bottom-bar {
             padding: 10px 20px;
           }
         }
@@ -626,6 +626,164 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             gap: 6px !important;
           }
           .abam-photo-banner { height: 220px !important; }
+
+          .abam-container { padding: 0 !important; max-width: 100% !important; }
+          .abam-header-inner { max-width: 100% !important; }
+        }
+        /* 폰 "데스크톱 사이트" 모드(약 980px 레이아웃 + 자동 줌 보정): 동일한 모바일 규칙 적용 */
+        html.abam-m {
+          /* 헤더: 1줄 로고 + 2줄 메뉴(가로 스크롤)로 깔끔하게 분리 */
+          .abam-header-inner {
+            flex-wrap: wrap !important;
+            row-gap: 2px !important;
+            padding: 10px 14px 4px !important;
+          }
+          .abam-header-badge { display: none !important; }
+          .abam-header-right {
+            width: 100% !important;
+            justify-content: space-between !important;
+            gap: 8px !important;
+          }
+          .abam-header-nav {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            overflow-x: auto !important;
+            scrollbar-width: none !important;
+            -webkit-overflow-scrolling: touch;
+          }
+          .abam-header-nav::-webkit-scrollbar { display: none; }
+          .abam-nav-link {
+            padding: 8px 12px 8px 0 !important;
+            font-size: 15px !important;
+            font-weight: 800 !important;
+            white-space: nowrap !important;
+          }
+
+          /* 히어로 타이틀: 로고+이름 / [아밤·Abam] / 서브카피 3단 중앙정렬 */
+          .abam-hero-title-main { font-size: 30px !important; }
+          .abam-hero-title-tag {
+            font-size: 22px !important;
+            flex-basis: 100% !important;
+            text-align: center !important;
+            margin-top: -2px !important;
+          }
+          .abam-hero-subtitle {
+            font-size: 17px !important;
+            line-height: 1.6 !important;
+            padding: 0 16px !important;
+            text-wrap: balance;
+          }
+
+          /* 히어로 박스류: 버튼과 같은 좌우 16px 안쪽 라인에 정렬 */
+          .abam-hero-desc,
+          .abam-hero-summary-bar,
+          .abam-hero-advance-box {
+            width: calc(100% - 32px) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          .abam-hero-box {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+            box-sizing: border-box !important;
+          }
+          .abam-hero-desc {
+            font-size: 15.5px !important;
+            line-height: 1.75 !important;
+            padding: 16px 14px !important;
+            text-wrap: pretty;
+          }
+          .abam-hero-summary-bar {
+            font-size: 13.5px !important;
+            font-weight: 800 !important;
+            padding: 14px 6px !important;
+            gap: 4px !important;
+          }
+          .abam-hero-summary-bar span {
+            flex: 1 1 0 !important;
+            text-align: center !important;
+            line-height: 1.4 !important;
+            text-wrap: balance;
+          }
+          .abam-hero-summary-bar span:nth-child(even) { flex: 0 0 auto !important; }
+          .abam-hero-advance-box {
+            font-size: 14.5px !important;
+            line-height: 1.7 !important;
+            padding: 14px 16px !important;
+            text-wrap: pretty;
+          }
+          .abam-hero-call-btn {
+            font-size: 17px !important;
+            padding: 16px 12px !important;
+            gap: 8px !important;
+            white-space: nowrap !important;
+          }
+          .abam-hero-sub-btn {
+            font-size: 15px !important;
+            padding: 14px 8px !important;
+            white-space: nowrap !important;
+          }
+
+          /* 본문 카드: 좌우 16px 통일, 16px 본문, 단어 단위 줄바꿈 */
+          .abam-card { padding: 20px 16px !important; }
+          .abam-card.abam-card-flush { padding: 0 !important; }
+          .abam-head-title { font-size: 21px !important; }
+          .abam-head-sub { font-size: 14.5px !important; line-height: 1.55 !important; text-wrap: balance; }
+          .abam-body-text {
+            font-size: 15.5px !important;
+            line-height: 1.8 !important;
+            text-wrap: pretty;
+          }
+          .abam-course-name { font-size: 19px !important; text-wrap: balance; }
+          .abam-course-desc {
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
+          }
+          .abam-course-chip {
+            font-size: 13px !important;
+            padding: 6px 10px !important;
+          }
+          .abam-course-price-cell { padding: 12px 2px !important; }
+          .abam-course-price-val {
+            font-size: 17px !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.3px !important;
+            white-space: nowrap !important;
+          }
+          .abam-course-duration {
+            font-size: 13px !important;
+            font-weight: 800 !important;
+          }
+          .abam-rule-title { font-size: 17px !important; font-weight: 900 !important; line-height: 1.4 !important; text-wrap: balance; }
+          .abam-rule-desc {
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
+          }
+          .abam-review-text {
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
+          }
+          .abam-faq-q { font-size: 16px !important; line-height: 1.5 !important; }
+          .abam-faq-a {
+            font-size: 15px !important;
+            line-height: 1.75 !important;
+            text-wrap: pretty;
+          }
+
+          /* 하단 고정 버튼 */
+          .abam-bottom-bar { padding: 8px 10px calc(8px + env(safe-area-inset-bottom)) !important; }
+          .abam-bottom-btn {
+            font-size: 16px !important;
+            padding: 14px 0 !important;
+            gap: 6px !important;
+          }
+          .abam-photo-banner { height: 220px !important; }
+
+          .abam-container { padding: 0 !important; max-width: 100% !important; }
+          .abam-header-inner { max-width: 100% !important; }
         }
 
 
@@ -643,7 +801,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           margin-top: 16px;
         }
         @media (min-width: 640px) {
-          .abam-photo-banner {
+          html:not(.abam-m) .abam-photo-banner {
             border: 1px solid #282b36;
             border-radius: 10px;
             height: 330px;
