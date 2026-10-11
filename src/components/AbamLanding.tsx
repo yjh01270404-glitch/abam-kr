@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type LandingContent } from '../lib/landing-content';
+import { UI } from '../lib/landing-ui';
 
 const WA_LINK =
   'https://wa.me/821066072239?text=Hello%20Abam.kr,%20I%20would%20like%20to%20inquire%20about%20your%20private%201:1%20home%20care%20service.';
@@ -79,7 +80,7 @@ const EXTRA: Record<Lang, Extra> = {
     nav: ['紹介', 'コース', '利用案内', 'レビュー', 'よくある質問'],
     priceNote: '60分の料金 · 全料金表示',
     guideTitle: 'ご利用案内',
-    steps: ['メッセージまたはお電話', 'コース・場所・時間を確定', 'ご希望의場所で1:1ケア'],
+    steps: ['メッセージまたはお電話', 'コース・場所・時間を確定', 'ご希望の場所で1:1ケア'],
     modalTitle: 'ご予約・ご相談',
     modalBody: 'WhatsAppまたはお電話でご連絡ください。',
     callNow: '電話する',
@@ -97,6 +98,19 @@ const EXTRA: Record<Lang, Extra> = {
     callNow: '立即致电',
   },
 };
+
+/* **굵게** 와 \n 줄바꿈을 지원하는 간단한 텍스트 렌더러 */
+const rich = (str: string, color?: string) =>
+  str.split('\n').map((line, li) => (
+    <React.Fragment key={li}>
+      {li > 0 && <br />}
+      {line.split('**').map((p, i) =>
+        i % 2 ? <strong key={i} style={color ? { color } : undefined}>{p}</strong> : <React.Fragment key={i}>{p}</React.Fragment>,
+      )}
+    </React.Fragment>
+  ));
+
+const LANG_NAME: Record<Lang, string> = { ko: '한국어', en: 'English', jp: '日本語', cn: '中文' };
 
 const PhoneIcon = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -230,6 +244,7 @@ const HERO_STARS: HeroStarItem[] = [
 export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaLinks?: string[] }) {
   const isKo = c.lang === 'ko';
   const x = EXTRA[c.lang];
+  const t = UI[c.lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [smsModal, setSmsModal] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -247,31 +262,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   }, []);
 
   // 주차장, 공동현관(비번/호출버튼), 호텔 1층 로비 미팅·대면결제, 결제수단(현금/이체/카드) 포함 문자 예약 템플릿
-  const BOOKING_TEMPLATE = `[아밤(Abam) 1:1 빠른 예약 신청]
-• 희망 코스: (타이 / 아로마 / 스페셜 / 시간)
-• 방문 주소: (예: 강남구 역삼동 OOO)
-• 주차장 유무: (있음 / 없음 / 도착 시 전화 요망)
-• 1층 공동현관: (비밀번호 기재 또는 호출버튼으로 열어주실 수 있음)
-• 호텔·모텔명: (1층 로비에서 만나 대면결제 후 객실 이동)
-• 결제 방식: (현금 / 계좌이체 / 카드)
-(※ 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 / 1시간 전 예약 시 가장 수월합니다)`;
+  const BOOKING_TEMPLATE = t.tpl;
 
-  const SMS_BODY = encodeURIComponent(
-`[아밤 예약신청]
-1. 코스: 
-2. 방문주소/호수: 
-3. 주차장유무(도착시 전화): 
-4. 공동현관(비번 또는 호출버튼): 
-5. 호텔·모텔명(1층 로비 만남): 
-6. 결제(현금/이체/카드): 
-(예약 18:00~05:00 · 출발 19:00부터 · 100% 현장 대면결제)`
-  );
+  const SMS_BODY = encodeURIComponent(t.smsBody);
   const SMS_HREF = `sms:01066072239?body=${SMS_BODY}`;
 
   const copyTemplate = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
       navigator.clipboard.writeText(BOOKING_TEMPLATE).catch(() => {});
-      setToast('📋 예약 양식이 복사되었습니다. 문자에 붙여넣어 주세요.');
+      setToast(t.toast);
       setTimeout(() => setToast(null), 2500);
     }
   };
@@ -401,6 +400,43 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
+        .abam-header-right { margin-left: auto; }
+        .abam-lang {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          order: 3;
+          margin-left: 16px;
+        }
+        .abam-lang-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 46px;
+          height: 38px;
+          padding: 0 12px;
+          border-radius: 8px;
+          border: 1px solid #3a3f50;
+          background: #1c1f28;
+          color: #e2e8f0;
+          font-size: 14.5px;
+          font-weight: 800;
+          letter-spacing: 0.3px;
+          text-decoration: none;
+          box-sizing: border-box;
+          cursor: pointer;
+          transition: background 0.15s, border-color 0.15s, color 0.15s;
+        }
+        .abam-lang-btn:hover { border-color: #f59e0b; color: #ffffff; background: #262a36; }
+        .abam-lang-btn:active { transform: scale(0.96); }
+        .abam-lang-on {
+          background: #f59e0b;
+          border-color: #f59e0b;
+          color: #1a1204;
+          cursor: default;
+        }
+        .abam-lang-on:hover { background: #f59e0b; color: #1a1204; }
+
         .abam-header-inner {
           width: 100%;
           max-width: 100%;
@@ -484,6 +520,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             padding: 10px 14px 4px !important;
           }
           .abam-header-badge { display: none !important; }
+          /* 언어 버튼: 1행 로고 우측, 손가락으로 누르기 쉬운 40px 높이 */
+          .abam-lang { order: 0 !important; margin-left: auto !important; gap: 4px !important; }
+          .abam-lang-btn { min-width: 38px !important; height: 40px !important; padding: 0 6px !important; font-size: 14.5px !important; }
           .abam-header-right {
             width: 100% !important;
             justify-content: space-between !important;
@@ -639,6 +678,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             padding: 10px 14px 4px !important;
           }
           .abam-header-badge { display: none !important; }
+          /* 언어 버튼: 1행 로고 우측, 손가락으로 누르기 쉬운 40px 높이 */
+          .abam-lang { order: 0 !important; margin-left: auto !important; gap: 4px !important; }
+          .abam-lang-btn { min-width: 38px !important; height: 40px !important; padding: 0 6px !important; font-size: 14.5px !important; }
           .abam-header-right {
             width: 100% !important;
             justify-content: space-between !important;
@@ -923,53 +965,53 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             
             {/* 모달 헤더 */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff' }}>문자 간편 예약 양식</div>
+              <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff' }}>{t.modalHead}</div>
               <button onClick={() => setSmsModal(false)} style={{ background: 'transparent', border: 'none', color: C.textMuted, fontSize: '20px', cursor: 'pointer', lineHeight: 1, padding: '2px 6px' }}>✕</button>
             </div>
             
             <p style={{ fontSize: '13px', color: C.textSub, margin: '0 0 12px', textAlign: 'left', wordBreak: 'keep-all', lineHeight: 1.6 }}>
-              아래 양식을 확인하신 후 <strong>[문자 앱으로 바로 전송]</strong>을 누르시면 내용이 자동으로 입력된 문자창이 열립니다.
+              {rich(t.modalDesc)}
             </p>
 
             {/* 1시간 전 예약 강조 알림 */}
             <div style={{ background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '6px', padding: '9px 12px', textAlign: 'left', fontSize: '12.5px', color: '#fef08a', marginBottom: '12px', lineHeight: 1.5, wordBreak: 'keep-all' }}>
-              이용 희망 시간 <strong>1시간 전쯤</strong> 예약하시면 원하시는 시간대에 가장 수월하게 받으실 수 있습니다.
+              {rich(t.modalNotice)}
             </div>
 
             {/* 예약 양식 프리뷰 카드 */}
             <div style={{ background: '#0e1015', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '12px 14px', textAlign: 'left', fontSize: '12.5px', lineHeight: 1.7, color: '#e2e8f0', marginBottom: '14px', fontFamily: 'monospace, sans-serif' }}>
-              <div style={{ color: C.pointGold, fontWeight: 700, marginBottom: '4px', fontFamily: FONT }}>[아밤 빠른 예약 양식]</div>
-              <div>1. 희망 코스: 타이 / 아로마 / 스페셜</div>
-              <div>2. 방문 주소: (동·호수 상세 기재)</div>
-              <div>3. 주차장 유무: (도착 시 전화 요망)</div>
-              <div>4. 1층 공동현관: (비밀번호 또는 호출버튼 가능)</div>
-              <div>5. 호텔·모텔명: (1층 로비에서 만나 대면결제)</div>
-              <div>6. 결제 수단: 현금 / 계좌이체 / 카드</div>
+              <div style={{ color: C.pointGold, fontWeight: 700, marginBottom: '4px', fontFamily: FONT }}>{t.previewTitle}</div>
+              <div>{t.preview[0]}</div>
+              <div>{t.preview[1]}</div>
+              <div>{t.preview[2]}</div>
+              <div>{t.preview[3]}</div>
+              <div>{t.preview[4]}</div>
+              <div>{t.preview[5]}</div>
             </div>
 
             {/* 메인 액션 버튼군 */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '14px' }}>
               <a href={SMS_HREF} onClick={() => setSmsModal(false)} style={{ ...btn, background: C.pointRed, color: '#ffffff', fontSize: '15px', padding: '13px 0' }}>
-                문자 앱으로 바로 전송하기
+                {t.send}
               </a>
 
               <button onClick={copyTemplate} style={{ ...btn, background: '#252936', border: `1px solid ${C.lineLight}`, color: '#ffffff', fontSize: '14px', padding: '11px 0' }}>
-                예약 양식 복사하기
+                {t.copy}
               </button>
 
               <a href={c.contact.tel} onClick={() => setSmsModal(false)} style={{ ...btn, background: 'transparent', border: `1px solid ${C.lineLight}`, color: C.textSub, fontSize: '14px', padding: '11px 0' }}>
-                <PhoneIcon size={16} /> {c.contact.phone} 전화 바로 연결
+                <PhoneIcon size={16} /> {c.contact.phone} {t.callModal}
               </a>
             </div>
 
             {/* 안심 현장 대면결제 안내 */}
             <div style={{ background: '#1c1f2b', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '10px 12px', textAlign: 'left', fontSize: '12px', lineHeight: 1.6, color: '#94a3b8' }}>
-              • 선입금·예약금 없는 100% 현장 대면결제<br />
-              • 서울·경기 전지역 30분 내 신속 방문
+              {t.assure1}<br />
+              {t.assure2}
             </div>
 
             <button onClick={() => setSmsModal(false)} style={{ marginTop: '12px', width: '100%', padding: '9px 0', background: 'transparent', color: C.textMuted, fontSize: '13px', border: `1px solid ${C.line}`, borderRadius: '6px', cursor: 'pointer' }}>
-              닫기
+              {t.close}
             </button>
           </div>
         </div>
@@ -990,31 +1032,33 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </defs>
             </svg>
             <span style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px' }}>
-              아름다운 밤 <span style={{ color: C.pointRed }}>아밤</span>
+              {t.logoA}{isKo ? ' ' : ''}<span style={{ color: C.pointRed }}>{t.logoB}</span>
             </span>
             <span className="abam-header-badge" style={{ fontSize: '11px', fontWeight: 700, color: C.pointGold, border: `1px solid ${C.lineLight}`, background: 'rgba(245,158,11,0.08)', padding: '2px 6px', borderRadius: '4px' }}>
-              100% 대면결제
+              {t.badge}
             </span>
           </Link>
+
+          {/* 언어 전환 버튼 (EN / JP / CN / KR) — 큰 터치 영역 */}
+          <div className="abam-lang" role="group" aria-label="Language">
+            {LANGS.map((l) =>
+              l.code === c.lang ? (
+                <span key={l.code} className="abam-lang-btn abam-lang-on" aria-current="page" title={LANG_NAME[l.code]}>{l.label}</span>
+              ) : (
+                <Link key={l.code} href={l.href} className="abam-lang-btn" hrefLang={l.code === 'jp' ? 'ja' : l.code === 'cn' ? 'zh' : l.code} aria-label={LANG_NAME[l.code]} title={LANG_NAME[l.code]}>{l.label}</Link>
+              ),
+            )}
+          </div>
 
           {/* 우측 메뉴 (표준 네비게이션) */}
           <div className="abam-header-right" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             <nav className="abam-header-nav" style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
-              <a href="#intro" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>소개</a>
-              <a href="#price" className="abam-nav-link" style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 6px' }}>코스</a>
-              <a href="#rules" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>안내</a>
-              <a href="#reviews" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>후기</a>
-              <a href="#faq" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>FAQ</a>
+              <a href="#intro" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[0]}</a>
+              <a href="#price" className="abam-nav-link" style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[1]}</a>
+              <a href="#rules" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[2]}</a>
+              <a href="#reviews" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[3]}</a>
+              <a href="#faq" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[4]}</a>
             </nav>
-            <div style={{ display: 'flex', gap: '4px', fontSize: '11px', borderLeft: `1px solid ${C.line}`, paddingLeft: '5px' }}>
-              {LANGS.map((l) =>
-                l.code === c.lang ? (
-                  <span key={l.code} style={{ color: C.pointGold, fontWeight: 800 }}>{l.label}</span>
-                ) : (
-                  <Link key={l.code} href={l.href} style={{ color: C.textMuted, textDecoration: 'none' }}>{l.label}</Link>
-                ),
-              )}
-            </div>
           </div>
         </div>
       </header>
@@ -1048,40 +1092,39 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </linearGradient>
                   </defs>
                 </svg>
-                <span className="abam-hero-title-main" style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.5)' }}>아름다운 밤</span>
-                <span className="abam-hero-title-tag" style={{ fontSize: '28px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
+                <span className="abam-hero-title-main" style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.5)' }}>{t.heroMain}</span>
+                <span className="abam-hero-title-tag" style={{ fontSize: '28px', fontWeight: 800, color: C.pointRed }}>{t.heroTag}</span>
               </div>
               <span className="abam-hero-subtitle" style={{ fontSize: '21px', fontWeight: 800, color: '#e2e8f0', letterSpacing: '-0.4px', display: 'block', marginTop: '10px', lineHeight: 1.5 }}>
-                서울·경기 전역 1:1 방문 홈케어 출장안마 · 출장마사지
+                {t.heroSub}
               </span>
             </h1>
 
             {/* 아밤이 왜 아밤인지 설명 배너 (모바일 점보 폰트 17px) */}
             <div className="abam-hero-box abam-hero-desc" style={{ margin: '0 auto 22px', background: 'rgba(20, 23, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '10px', padding: '18px 20px', fontSize: '16.5px', color: '#e2e8f0', lineHeight: 1.75, textAlign: 'center' }}>
-              🌙 <strong style={{ color: C.pointGold }}>‘아름다운 밤’</strong>을 약속드리는 1:1 프리미엄 케어, 그래서 <strong style={{ color: '#ffffff' }}>아밤(Abam)</strong>입니다.<br />
-              고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.
+              🌙 <strong style={{ color: C.pointGold }}>{t.leadA}</strong>{t.leadB}<strong style={{ color: '#ffffff' }}>{t.leadC}</strong>{t.leadD}<br />
+              {t.leadE}
             </div>
 
             {/* 핵심 서비스 요약 바 (모바일 점보 폰트 16px) */}
             <div className="abam-hero-box abam-hero-summary-bar" style={{ background: 'rgba(22, 24, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.line}`, borderRadius: '8px', padding: '15px 16px', margin: '0 auto 20px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '15.5px', color: '#e2e8f0', fontWeight: 800 }}>
-              <span>100% 현장 대면결제</span>
+              <span>{t.sum[0]}</span>
               <span style={{ color: C.lineLight }}>|</span>
-              <span>20대 전문 힐러</span>
+              <span>{t.sum[1]}</span>
               <span style={{ color: C.lineLight }}>|</span>
-              <span>서울·경기 30분 도착</span>
+              <span>{t.sum[2]}</span>
             </div>
 
             {/* 1시간 전 예약 안내 (모바일 점보 폰트 15.5px) */}
             <div className="abam-hero-box abam-hero-advance-box" style={{ margin: '0 auto 24px', background: 'rgba(24, 27, 38, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '15px 16px', fontSize: '15.5px', color: C.pointGold, textAlign: 'center', lineHeight: 1.65 }}>
-              예약 접수 <strong>18:00부터</strong> · 매니저 출발 <strong>19:00부터</strong> · 마지막 예약 <strong>새벽 05:00</strong> 마감<br />
-              이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 가장 수월하게 이용 가능합니다.
+              {rich(t.adv)}
             </div>
 
             {/* 방문 전 안내 (주차장·공동현관·호텔) */}
             <div className="abam-hero-box abam-hero-advance-box" style={{ margin: '0 auto 24px', background: 'rgba(24, 27, 38, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '15px 16px', fontSize: '15.5px', color: '#e2e8f0', textAlign: 'left', lineHeight: 1.7, wordBreak: 'keep-all' }}>
-              <strong style={{ color: C.pointGold }}>📍 방문 전 미리 알려주세요</strong><br />
-              • 주차장·1층 공동현관 <strong>비밀번호를 예약 시 미리 알려주세요.</strong> 어려우시면 <strong>호출버튼으로 열어주실 수 있다</strong>고 미리 말씀해 주세요.<br />
-              • 호텔·모텔은 <strong>1층 로비에서 매니저를 만나 대면결제</strong> 후 객실까지 함께 이동합니다.
+              <strong style={{ color: C.pointGold }}>{t.noticeTitle}</strong><br />
+              {rich(t.notice1)}<br />
+              {rich(t.notice2)}
             </div>
 
             {/* 대표 전화 상담 연결 버튼 (모바일 점보 폰트 22px) */}
@@ -1106,14 +1149,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   boxShadow: '0 4px 20px rgba(225,29,72,0.4)',
                 }}
               >
-                <PhoneIcon size={26} /> {c.contact.phone} 전화예약
+                <PhoneIcon size={26} /> {c.contact.phone} {t.callHero}
               </a>
             </div>
 
             {/* 문자로 간편 예약하기 버튼 (양식 자동입력) */}
             <div className="abam-hero-box" style={{ margin: '0 auto 16px', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '8px' }}>
               <a
-                href={SMS_HREF}
+                href={isKo ? SMS_HREF : WA_LINK}
+                target={isKo ? undefined : '_blank'}
+                rel={isKo ? undefined : 'noreferrer'}
                 className="abam-hero-sub-btn"
                 style={{
                   display: 'flex',
@@ -1133,7 +1178,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   boxSizing: 'border-box',
                 }}
               >
-                문자로 간편 예약하기
+                {t.smsHero}
               </a>
 
               <button
@@ -1157,19 +1202,19 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   boxSizing: 'border-box',
                 }}
               >
-                예약 양식 보기
+                {t.formHero}
               </button>
             </div>
 
             <div style={{ fontSize: '14px', color: C.textMuted, marginBottom: '26px', lineHeight: 1.6 }}>
-              ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 편하게 접수하실 수 있습니다. (예약 접수 18:00 ~ 익일 05:00)
+              {t.smsNote}
             </div>
 
             {/* 히어로 실사 모델 화보 */}
             <div className="abam-photo-banner">
               <Image
                 src="/images/abam_hero_seductive.jpg"
-                alt="아밤 출장마사지 힐링 케어"
+                alt={t.altHero}
                 fill
                 sizes="(max-width: 640px) 100vw, 860px"
                 style={{ objectFit: 'cover' }}
@@ -1181,23 +1226,23 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
-          {head('출장안마 서비스 안내', '서울·경기 전지역 100% 현장 대면결제')}
+          {head(t.introTitle, t.introSub)}
           <div className="abam-card abam-body-text" style={{ fontSize: '15.5px', color: '#e2e8f0', lineHeight: 1.8 }}>
             <p style={{ margin: '0 0 14px' }}>
-              출장안마는 고객님이 계신 곳(자택, 아파트, 오피스텔, 호텔, 모텔)으로 전문 힐러가 직접 찾아가는 1:1 방문 맞춤 마사지 케어 서비스입니다.
+              {t.intro1}
             </p>
             <p style={{ margin: '0 0 14px' }}>
-              아밤(Abam)은 선입금, 예약금, 출발비 등을 절대 요구하지 않는 <strong style={{ color: '#ffffff' }}>100% 현장 대면결제 원칙</strong>을 준수합니다. 매니저가 현장에 도착하여 고객님과 직접 대면한 후 결제가 진행되므로 안심하고 이용하실 수 있습니다.
+              {rich(t.intro2, '#ffffff')}
             </p>
             <p style={{ margin: 0 }}>
-              과중한 업무와 일상에서 지친 심신을 가장 편안하고 익숙한 프라이빗 공간에서 최고의 힐링으로 채워드립니다.
+              {t.intro3}
             </p>
           </div>
         </section>
 
         {/* ── 4. 코스 및 정찰 가격표 (하나의 일체형 큰 박스 안에서 종류별 고유 컬러 구분) ── */}
         <section id="price" style={section}>
-          {head('코스 안내 및 정찰 가격표', '선입금 없는 100% 현장 대면결제 · 3대 시그니처 코스')}
+          {head(t.priceTitle, t.priceSub)}
           
           {/* 3대 코스 통합 단일 마스터 박스 (따로 놀지 않고 하나로 묶인 일체형 메뉴판) */}
           <div
@@ -1226,9 +1271,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: C.pointGold }} />
-                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff' }}>아밤 3대 프라이빗 맞춤 코스</span>
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff' }}>{t.priceBar1}</span>
               </div>
-              <span style={{ fontSize: '12px', color: C.pointGold, fontWeight: 700 }}>전 코스 100% 현장 대면결제 정찰제</span>
+              <span style={{ fontSize: '12px', color: C.pointGold, fontWeight: 700 }}>{t.priceBar2}</span>
             </div>
 
             {/* 3대 코스: A(시안 블루), B(앰버 골드), C(루비 레드)로 종류별 확실한 컬러 구분 */}
@@ -1245,18 +1290,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 ? 'rgba(225, 29, 72, 0.035)'
                 : 'transparent';
 
-              const badgeText = isThai ? 'A코스' : isAroma ? 'B코스' : 'C코스';
-              const tagText = isAroma
-                ? '👑 고객 선호 1위 · BEST'
-                : isSpecial
-                ? '💎 VIP 스페셜 올케어'
-                : '기본 충실 · 뭉친 피로 타파';
+              const badgeText = t.courseLetter[course.no - 1] ?? t.courseLetter[0];
+              const tagText = isAroma ? t.tags[1] : isSpecial ? t.tags[2] : t.tags[0];
 
-              const chips = isThai
-                ? ['⚡ 전신 수기 건식 지압', '🎯 뭉친 어깨·허리 피로 해소', '🧘 스트레칭 균형 회복']
-                : isAroma
-                ? ['✨ 최고급 천연 식물성 아로마', '💧 림프 순환 & 딥 릴렉싱', '🌿 부드럽고 섬세한 힐링']
-                : ['🔥 시원한 지압 + 부드러운 오일', '⭐ 20대 ACE 집중 VIP 케어', '🏆 만족도 1위 종합 테라피'];
+              const chips = isThai ? t.chips[0] : isAroma ? t.chips[1] : t.chips[2];
 
               return (
                 <div
@@ -1293,7 +1330,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       >
                         {badgeText}
                       </span>
-                      <strong style={{ fontSize: '18px', color: '#ffffff' }}>{course.name} 코스</strong>
+                      <strong style={{ fontSize: '18px', color: '#ffffff' }}>{course.name}{t.courseSuffix}</strong>
 
                       <span
                         style={{
@@ -1375,7 +1412,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                                   whiteSpace: 'nowrap',
                                 }}
                               >
-                                {isSpecial ? 'VIP 풀코스' : '추천 코스'}
+                                {isSpecial ? t.vipFull : t.recommend}
                               </div>
                             )}
                             <div className="abam-course-duration" style={{ fontSize: '14px', color: C.textMuted, fontWeight: 700 }}>{c.priceSection.durations[pi]}</div>
@@ -1406,7 +1443,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div className="abam-photo-banner">
             <Image
               src="/images/abam_penthouse_night.jpg"
-              alt="서울의 밤 프라이빗 출장마사지 아밤"
+              alt={t.altNight}
               fill
               sizes="(max-width: 640px) 100vw, 860px"
               style={{ objectFit: 'cover' }}
@@ -1438,29 +1475,29 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 5. 방문 확인사항 및 결제 안내 ── */}
         <section id="rules" style={section}>
-          {head('이용 및 방문 안내', '편안하고 안전한 방문을 위한 필수 안내')}
+          {head(t.rulesTitle, t.rulesSub)}
           
           <div className="abam-card" style={{ padding: '20px 18px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>1. 예약·출발 시간</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>예약 접수는 18:00부터, 매니저 출발은 19:00부터, 마지막 예약 마감은 새벽 05:00입니다. 1시간 전 예약을 권장드립니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>{t.rules[0][0]}</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>{t.rules[0][1]}</div>
               </div>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>2. 주차장·1층 공동현관 안내</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>주차장과 공동현관 비밀번호는 예약 시 미리 알려주세요. 알려주기 어려우시면 호출버튼으로 열어주실 수 있다고 미리 말씀해 주시면, 도착 후 매니저가 전화드리고 호출버튼을 누릅니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>{t.rules[1][0]}</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>{t.rules[1][1]}</div>
               </div>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>3. 호텔·모텔 이용 안내</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>예약 시 호텔명을 알려주시면 도착 전 매니저가 연락드립니다. 1층 로비에서 매니저를 만나 대면결제 후, 매니저가 객실까지 픽업·동행합니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>{t.rules[2][0]}</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>{t.rules[2][1]}</div>
               </div>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>4. 100% 현장 대면결제</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>현금, 계좌이체, 카드 결제 모두 가능합니다. 어떠한 선입금도 요구하지 않습니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>{t.rules[3][0]}</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>{t.rules[3][1]}</div>
               </div>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: C.pointGold, marginBottom: '4px' }}>5. 문자(SMS) 간편 예약 접수</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>전화 통화 없이 문자로도 예약 가능합니다. (접수 18:00 ~ 익일 05:00 · 희망 시간 1시간 전 예약 시 가장 수월합니다.)</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: C.pointGold, marginBottom: '4px' }}>{t.rules[4][0]}</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>{t.rules[4][1]}</div>
               </div>
             </div>
           </div>
@@ -1470,11 +1507,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="safety" style={section}>
           <div className="abam-card" style={{ borderLeft: `6px solid ${C.pointRed}`, textAlign: 'left', padding: '22px 20px' }}>
             <h3 className="abam-rule-title" style={{ color: '#ffffff', fontSize: '21px', fontWeight: 900, margin: '0 0 10px' }}>
-              아밤(Abam) 100% 현장 직접 대면결제 원칙
+              {t.safetyTitle}
             </h3>
             <div className="abam-rule-desc" style={{ fontSize: '18.5px', color: '#e2e8f0', lineHeight: 1.85, wordBreak: 'keep-all' }}>
-              아밤은 고객님께 사전 입금을 단 1원도 요구하지 않습니다.<br />
-              매니저가 고객님이 계신 곳(자택) 또는 호텔 1층 로비에서 직접 대면한 후 결제(현금, 계좌이체, 카드)를 진행하므로 안심하고 안전하게 이용하실 수 있습니다.
+              {t.safety1}<br />
+              {t.safety2}
             </div>
           </div>
         </section>
@@ -1483,7 +1520,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <div className="abam-photo-banner">
           <Image
             src="/images/sensual_back.jpg"
-            alt="천연 아로마 오일 테라피"
+            alt={t.altAroma}
             fill
             sizes="(max-width: 640px) 100vw, 860px"
             style={{ objectFit: 'cover' }}
@@ -1492,7 +1529,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 7. 이용 안내 ── */}
         <section id="guide" style={section}>
-          {head(x.guideTitle, '전화나 문자 한 통으로 간편하게 예약 (1시간 전 예약 시 원하는 시간 이용 수월)')}
+          {head(x.guideTitle, t.guideSub)}
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '8px', marginBottom: '12px' }}>
             {c.info.map((p, i) => (
@@ -1517,7 +1554,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <div className="abam-photo-banner">
           <Image
             src="/images/sensual_touch.jpg"
-            alt="프라이빗 1:1 맞춤 힐링 케어"
+            alt={t.altCare}
             fill
             sizes="(max-width: 640px) 100vw, 860px"
             style={{ objectFit: 'cover' }}
@@ -1526,7 +1563,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
         {/* ── 8. 고객 후기 (11개 전체 표시) ── */}
         <section id="reviews" style={section}>
-          {head(c.reviewSection.title, '실제 이용 고객님들의 진솔한 이용 후기 (100% 리얼)')}
+          {head(c.reviewSection.title, t.reviewsSub)}
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {c.reviews.map((rev, i) => (
@@ -1620,7 +1657,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 boxShadow: '0 4px 14px rgba(0,0,0,0.5)',
               }}
             >
-              <SmsIcon size={23} /> 문자 간편예약
+              <SmsIcon size={23} /> {t.smsBar}
             </a>
           ) : (
             <a
@@ -1653,7 +1690,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
             }}
           >
-            <PhoneIcon size={23} /> 전화예약
+            <PhoneIcon size={23} /> {t.callBar}
           </a>
         </div>
       </div>
