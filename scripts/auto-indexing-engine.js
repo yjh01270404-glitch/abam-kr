@@ -113,6 +113,10 @@ const CORE_URLS = [
   `${SITE_URL}/guide`,
   `${SITE_URL}/guide/outcall-massage-scam-prevention-comparison`,
   `${SITE_URL}/guide/chuljang-massage-price`,
+  `${SITE_URL}/en`,
+  `${SITE_URL}/jp`,
+  `${SITE_URL}/cn`,
+  `${SITE_URL}/guide/late-night-massage`,
   `${SITE_URL}/guide/how-to-book-outcall-massage`,
 ];
 
