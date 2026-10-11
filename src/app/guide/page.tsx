@@ -41,7 +41,7 @@ export default function GuideIndexPage() {
           ))}
         </ul>
         <p style={{ marginTop: 22, fontSize: 13 }}>
-          예약·문의: <a href={PHONE_TEL} style={{ fontWeight: 800 }}>010-6607-2239</a> · 예약은 18:00부터 (영업 19:00 ~ 05:00) · 서울·경기 전역 자택·호텔 방문
+          예약·문의: <a href={PHONE_TEL} style={{ fontWeight: 800 }}>010-6607-2239</a> · 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 · 서울·경기 전역 자택·호텔 방문
         </p>
       </main>
     </div>

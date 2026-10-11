@@ -49,21 +49,21 @@ type Extra = {
 
 const EXTRA: Record<Lang, Extra> = {
   ko: {
-    h1a: '출장안마 · 출장마사지 24시 아밤',
+    h1a: '출장안마 · 출장마사지 아밤',
     h1b: '20대 ACE가 문 앞으로 찾아갑니다',
-    status: { open: '지금 영업 중 · 바로 상담 가능', pre: '예약 접수 중 · 19:00 영업 시작', closed: '예약은 18:00부터 · 영업 19:00~05:00' },
+    status: { open: '지금 예약 접수 중 · 바로 상담 가능', pre: '예약 접수 중 · 19:00부터 매니저 출발', closed: '예약 접수 18:00부터 · 출발 19:00부터' },
     nav: ['소개말', '코스안내', '방문·결제', '고객후기', '자주묻는질문'],
     priceNote: '60분 기준 · 전체 정찰제 요금',
     guideTitle: '이용 안내',
     steps: ['전화·문자로 예약', '코스·주소·시간 전달', '30분 내 방문 1:1 케어'],
-    modalTitle: '아밤 24시 예약 및 상담',
+    modalTitle: '아밤 예약 및 상담',
     modalBody: '전화 또는 문자로 편하게 남겨주시면 바로 안내해 드립니다.',
     callNow: '전화 바로연결',
   },
   en: {
     h1a: 'Tonight, a private massage',
     h1b: 'comes to your door',
-    status: { open: 'Open now · Message us anytime', pre: 'Booking open · Service starts 19:00', closed: 'Booking from 18:00 · Open 19:00–05:00' },
+    status: { open: 'Booking open now · Message us', pre: 'Booking open · Departures from 19:00', closed: 'Booking from 18:00 · Departures from 19:00' },
     nav: ['Intro', 'Courses', 'Visit/Pay', 'Reviews', 'FAQ'],
     priceNote: 'Per 60 min · all transparent prices',
     guideTitle: 'How it works',
@@ -75,7 +75,7 @@ const EXTRA: Record<Lang, Extra> = {
   jp: {
     h1a: '今夜、プライベートな癒しが',
     h1b: 'あなたの元へ伺います',
-    status: { open: '営業中 · すぐにご相談いただけます', pre: '予約受付中 · 19:00より営業', closed: '予約は18:00から · 営業19:00〜05:00' },
+    status: { open: 'ご予約受付中 · すぐにご相談いただけます', pre: '予約受付中 · 19:00より出発', closed: '予約は18:00から · 出発19:00から' },
     nav: ['紹介', 'コース', '利用案内', 'レビュー', 'よくある質問'],
     priceNote: '60分の料金 · 全料金表示',
     guideTitle: 'ご利用案内',
@@ -87,7 +87,7 @@ const EXTRA: Record<Lang, Extra> = {
   cn: {
     h1a: '今晚，私人专属护理',
     h1b: '上门为您服务',
-    status: { open: '营业中 · 可立即咨询', pre: '接受预约 · 19:00开始营业', closed: '18:00起接受预约 · 营业19:00–05:00' },
+    status: { open: '正在接受预约 · 可立即咨询', pre: '接受预约 · 19:00起出发', closed: '18:00起接受预约 · 19:00起出发' },
     nav: ['介绍', '项目', '须知', '评价', '常见问题'],
     priceNote: '60分钟价格 · 查看全部',
     guideTitle: '预约须知',
@@ -246,25 +246,25 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     return () => clearInterval(t);
   }, []);
 
-  // 주차장, 현관비번, 호텔1층 미팅, 결제수단(현금/이체/카드) 포함 오리지널 문자 예약 템플릿
+  // 주차장, 공동현관(비번/호출버튼), 호텔 1층 로비 미팅·대면결제, 결제수단(현금/이체/카드) 포함 문자 예약 템플릿
   const BOOKING_TEMPLATE = `[아밤(Abam) 1:1 빠른 예약 신청]
 • 희망 코스: (타이 / 아로마 / 스페셜 / 시간)
 • 방문 주소: (예: 강남구 역삼동 OOO)
-• 주차장 유무: (있음 / 없음 / 주차장 도착시 호출 요망)
-• 공동현관: (비밀번호 기재 또는 도착 시 세대 호출벨)
-• 호텔·모텔: (1층 로비 픽업 및 결제 or 객실 앞 방문)
+• 주차장 유무: (있음 / 없음 / 도착 시 전화 요망)
+• 1층 공동현관: (비밀번호 기재 또는 호출버튼으로 열어주실 수 있음)
+• 호텔·모텔명: (1층 로비에서 만나 대면결제 후 객실 이동)
 • 결제 방식: (현금 / 계좌이체 / 카드)
-(※ 1시간 전 미리 예약 시 원하시는 시간에 가장 수월하게 받으실 수 있습니다)`;
+(※ 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 / 1시간 전 예약 시 가장 수월합니다)`;
 
   const SMS_BODY = encodeURIComponent(
 `[아밤 예약신청]
 1. 코스: 
 2. 방문주소/호수: 
-3. 주차장유무(도착시호출): 
-4. 현관비번(세대호출): 
-5. 호텔1층 픽업여부: 
+3. 주차장유무(도착시 전화): 
+4. 공동현관(비번 또는 호출버튼): 
+5. 호텔·모텔명(1층 로비 만남): 
 6. 결제(현금/이체/카드): 
-(1시간 전 예약 시 원하는 시간 이용 수월 · 100% 현장 대면결제)`
+(예약 18:00~05:00 · 출발 19:00부터 · 100% 현장 대면결제)`
   );
   const SMS_HREF = `sms:01066072239?body=${SMS_BODY}`;
 
@@ -942,8 +942,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div>1. 희망 코스: 타이 / 아로마 / 스페셜</div>
               <div>2. 방문 주소: (동·호수 상세 기재)</div>
               <div>3. 주차장 유무: (도착 시 전화 요망)</div>
-              <div>4. 현관 비밀번호: (세대 호출벨 가능)</div>
-              <div>5. 호텔·모텔: 1층 로비 미팅 및 결제</div>
+              <div>4. 1층 공동현관: (비밀번호 또는 호출버튼 가능)</div>
+              <div>5. 호텔·모텔명: (1층 로비에서 만나 대면결제)</div>
               <div>6. 결제 수단: 현금 / 계좌이체 / 카드</div>
             </div>
 
@@ -958,7 +958,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </button>
 
               <a href={c.contact.tel} onClick={() => setSmsModal(false)} style={{ ...btn, background: 'transparent', border: `1px solid ${C.lineLight}`, color: C.textSub, fontSize: '14px', padding: '11px 0' }}>
-                <PhoneIcon size={16} /> {c.contact.phone} 24시 전화 바로 연결
+                <PhoneIcon size={16} /> {c.contact.phone} 전화 바로 연결
               </a>
             </div>
 
@@ -1052,7 +1052,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 <span className="abam-hero-title-tag" style={{ fontSize: '28px', fontWeight: 800, color: C.pointRed }}>[아밤 · Abam]</span>
               </div>
               <span className="abam-hero-subtitle" style={{ fontSize: '21px', fontWeight: 800, color: '#e2e8f0', letterSpacing: '-0.4px', display: 'block', marginTop: '10px', lineHeight: 1.5 }}>
-                서울·경기 24시 1:1 방문 홈케어 출장안마 · 출장마사지
+                서울·경기 전역 1:1 방문 홈케어 출장안마 · 출장마사지
               </span>
             </h1>
 
@@ -1073,10 +1073,18 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
             {/* 1시간 전 예약 안내 (모바일 점보 폰트 15.5px) */}
             <div className="abam-hero-box abam-hero-advance-box" style={{ margin: '0 auto 24px', background: 'rgba(24, 27, 38, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '15px 16px', fontSize: '15.5px', color: C.pointGold, textAlign: 'center', lineHeight: 1.65 }}>
-              이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 원하시는 시간대에 가장 수월하게 이용 가능합니다.
+              예약 접수 <strong>18:00부터</strong> · 매니저 출발 <strong>19:00부터</strong> · 마지막 예약 <strong>새벽 05:00</strong> 마감<br />
+              이용 희망 시간 <strong>1시간 전쯤 미리 예약</strong>해 주시면 가장 수월하게 이용 가능합니다.
             </div>
 
-            {/* 대표 24시 전화 상담 연결 버튼 (모바일 점보 폰트 22px) */}
+            {/* 방문 전 안내 (주차장·공동현관·호텔) */}
+            <div className="abam-hero-box abam-hero-advance-box" style={{ margin: '0 auto 24px', background: 'rgba(24, 27, 38, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '8px', padding: '15px 16px', fontSize: '15.5px', color: '#e2e8f0', textAlign: 'left', lineHeight: 1.7, wordBreak: 'keep-all' }}>
+              <strong style={{ color: C.pointGold }}>📍 방문 전 미리 알려주세요</strong><br />
+              • 주차장·1층 공동현관 <strong>비밀번호를 예약 시 미리 알려주세요.</strong> 어려우시면 <strong>호출버튼으로 열어주실 수 있다</strong>고 미리 말씀해 주세요.<br />
+              • 호텔·모텔은 <strong>1층 로비에서 매니저를 만나 대면결제</strong> 후 객실까지 함께 이동합니다.
+            </div>
+
+            {/* 대표 전화 상담 연결 버튼 (모바일 점보 폰트 22px) */}
             <div className="abam-hero-box" style={{ margin: '0 auto 12px' }}>
               <a
                 href={c.contact.tel}
@@ -1098,7 +1106,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   boxShadow: '0 4px 20px rgba(225,29,72,0.4)',
                 }}
               >
-                <PhoneIcon size={26} /> {c.contact.phone} 24시 전화예약
+                <PhoneIcon size={26} /> {c.contact.phone} 전화예약
               </a>
             </div>
 
@@ -1154,14 +1162,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
 
             <div style={{ fontSize: '14px', color: C.textMuted, marginBottom: '26px', lineHeight: 1.6 }}>
-              ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 24시간 언제든 편하게 접수하실 수 있습니다.
+              ※ 전화 통화가 부담스러우실 때도 문자(SMS)로 편하게 접수하실 수 있습니다. (예약 접수 18:00 ~ 익일 05:00)
             </div>
 
             {/* 히어로 실사 모델 화보 */}
             <div className="abam-photo-banner">
               <Image
                 src="/images/abam_hero_seductive.jpg"
-                alt="아밤 24시 출장마사지 힐링 케어"
+                alt="아밤 출장마사지 힐링 케어"
                 fill
                 sizes="(max-width: 640px) 100vw, 860px"
                 style={{ objectFit: 'cover' }}
@@ -1435,16 +1443,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div className="abam-card" style={{ padding: '20px 18px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>1. 건물 주차장 안내</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>건물 내 주차장이 있으시면 도착 후 기사가 바로 전화드립니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>1. 예약·출발 시간</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>예약 접수는 18:00부터, 매니저 출발은 19:00부터, 마지막 예약 마감은 새벽 05:00입니다. 1시간 전 예약을 권장드립니다.</div>
               </div>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>2. 공동현관 비밀번호</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>비밀번호를 예약 시 남겨주시거나 도착 시 세대 호출벨을 눌러주시면 됩니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>2. 주차장·1층 공동현관 안내</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>주차장과 공동현관 비밀번호는 예약 시 미리 알려주세요. 알려주기 어려우시면 호출버튼으로 열어주실 수 있다고 미리 말씀해 주시면, 도착 후 매니저가 전화드리고 호출버튼을 누릅니다.</div>
               </div>
               <div>
-                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>3. 호텔·모텔 객실 안내</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>도착 전 미리 연락드리며, 1층 로비에서 결제 후 객실에서 서비스를 받으시면 됩니다.</div>
+                <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>3. 호텔·모텔 이용 안내</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>예약 시 호텔명을 알려주시면 도착 전 매니저가 연락드립니다. 1층 로비에서 매니저를 만나 대면결제 후, 매니저가 객실까지 픽업·동행합니다.</div>
               </div>
               <div>
                 <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>4. 100% 현장 대면결제</div>
@@ -1452,7 +1460,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </div>
               <div>
                 <div className="abam-rule-title" style={{ fontSize: '18px', fontWeight: 800, color: C.pointGold, marginBottom: '4px' }}>5. 문자(SMS) 간편 예약 접수</div>
-                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>전화 통화 없이 문자로도 24시간 예약 가능합니다. (희망 시간 1시간 전 예약 시 가장 수월하게 이용하실 수 있습니다.)</div>
+                <div className="abam-rule-desc" style={{ fontSize: '16px', color: C.textSub, lineHeight: 1.75 }}>전화 통화 없이 문자로도 예약 가능합니다. (접수 18:00 ~ 익일 05:00 · 희망 시간 1시간 전 예약 시 가장 수월합니다.)</div>
               </div>
             </div>
           </div>
@@ -1466,7 +1474,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </h3>
             <div className="abam-rule-desc" style={{ fontSize: '18.5px', color: '#e2e8f0', lineHeight: 1.85, wordBreak: 'keep-all' }}>
               아밤은 고객님께 사전 입금을 단 1원도 요구하지 않습니다.<br />
-              관리사가 고객님이 계신 곳(자택·호텔)에 도착하여 직접 대면한 후 결제(현금, 계좌이체, 카드)를 진행하므로 안심하고 안전하게 이용하실 수 있습니다.
+              매니저가 고객님이 계신 곳(자택) 또는 호텔 1층 로비에서 직접 대면한 후 결제(현금, 계좌이체, 카드)를 진행하므로 안심하고 안전하게 이용하실 수 있습니다.
             </div>
           </div>
         </section>
@@ -1645,7 +1653,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
             }}
           >
-            <PhoneIcon size={23} /> 24시 전화예약
+            <PhoneIcon size={23} /> 전화예약
           </a>
         </div>
       </div>

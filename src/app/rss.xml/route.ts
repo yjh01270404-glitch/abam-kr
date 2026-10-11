@@ -14,7 +14,7 @@ export async function GET() {
       <title><![CDATA[${kw} - 서울·경기 프라이빗 1:1 방문 홈케어 | Abam.kr]]></title>
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
-      <description><![CDATA[서울·경기 전역 자택·호텔 1:1 방문 홈케어 ${kw}. 100% 현장 대면결제, 예약은 18:00부터 (영업 19:00~05:00). 타이·아로마·스페셜 코스.]]></description>
+      <description><![CDATA[서울·경기 전역 자택·호텔 1:1 방문 홈케어 ${kw}. 100% 현장 대면결제, 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감. 타이·아로마·스페셜 코스.]]></description>
       <pubDate>${pubDate}</pubDate>
     </item>`;
   }).join('');

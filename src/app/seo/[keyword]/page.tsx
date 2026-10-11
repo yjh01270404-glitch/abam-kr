@@ -14,7 +14,7 @@ import { DISTRICTS } from "../../../lib/region-data";
 type Props = { params: Promise<{ keyword: string }> };
 
 export const dynamic = "force-static";
-export const revalidate = 86400; // 24시간 캐시
+export const revalidate = 86400; // 하루(86400초) 캐시
 export const dynamicParams = false;
 
 const SITE_URL  = "https://abam.kr";
@@ -145,7 +145,7 @@ export async function generateMetadata({ params }: Props) {
     twitter: {
       card: "summary_large_image" as const,
       title: `${decoded} — Abam.kr 프라이빗 1:1 방문 홈케어`,
-      description: `${decoded} 예약은 18:00부터 (영업 19:00 ~ 05:00).`,
+      description: `${decoded} 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감.`,
       images: [`${SITE_URL}/og-image.png`],
     },
   };
@@ -170,7 +170,7 @@ export default async function SeoLandingPage({ params }: Props) {
   const localFaq = [
     {
       q: `${decoded} 예약은 어떻게 하나요?`,
-      a: "전화 또는 카카오톡으로 코스(타이·아로마·스페셜)와 방문 장소를 알려 주세요. 예약은 18:00부터 가능하며, 1시간 전에 예약해 주시면 더욱 편안하게 이용하실 수 있습니다.",
+      a: "전화 또는 문자로 코스(타이·아로마·스페셜)와 방문 장소를 알려 주세요. 예약은 18:00부터 가능하며, 1시간 전에 예약해 주시면 더욱 편안하게 이용하실 수 있습니다.",
     },
     {
       q: district ? `${district.gu}에서는 어떤 장소로 방문하나요?` : "어떤 장소로 방문하나요?",
@@ -179,8 +179,12 @@ export default async function SeoLandingPage({ params }: Props) {
         : "자택·호텔 등 원하시는 공간으로 서울·경기 전역 방문합니다.",
     },
     {
-      q: "운영 시간은 어떻게 되나요?",
-      a: "예약은 18:00부터 가능하며, 영업 시간은 19:00부터 05:00까지입니다. 1시간 전에 예약해 주시면 더욱 편안하게 이용하실 수 있습니다.",
+      q: "예약 시간과 출발 시간은 어떻게 되나요?",
+      a: "예약 접수는 18:00부터, 매니저 출발은 19:00부터, 마지막 예약 마감은 새벽 05:00입니다. 1시간 전에 예약해 주시면 더욱 편안하게 이용하실 수 있습니다.",
+    },
+    {
+      q: "주차장·공동현관·호텔은 어떻게 이용하나요?",
+      a: "주차장과 1층 공동현관 비밀번호는 예약 시 미리 알려 주세요. 비밀번호를 알려 주기 어려우시면 호출(세대 호출벨) 버튼으로 열어 주실 수 있다고 미리 말씀해 주시면 됩니다. 호텔·모텔은 1층 로비에서 매니저를 만나 대면결제를 하신 뒤, 매니저가 객실까지 픽업·동행합니다.",
     },
   ];
 
@@ -207,7 +211,7 @@ export default async function SeoLandingPage({ params }: Props) {
       "@id": `${SITE_URL}/#business`,
       name: `Abam.kr 프라이빗 1:1 방문 홈케어 (${decoded})`,
       alternateName: [`${decoded} 출장안마`, `${decoded} 출장마사지`, "Abam.kr"],
-      description: `${decoded} 지역 프라이빗 1:1 방문 홈케어. 자택·호텔 방문, 예약은 18:00부터 (영업 19:00 ~ 05:00).`,
+      description: `${decoded} 지역 프라이빗 1:1 방문 홈케어. 자택·호텔 방문, 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감.`,
       url: SITE_URL,
       image: `${SITE_URL}/og-image.png`,
       telephone: PHONE_NUM,
@@ -304,7 +308,7 @@ export default async function SeoLandingPage({ params }: Props) {
                 priority
               />
               <div style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(15,23,42,0.85)", padding: "3px 8px", borderRadius: "4px", fontSize: "10.5px", fontWeight: 800, color: "#fef08a" }}>
-                예약은 18:00부터 (영업 19:00 ~ 05:00)
+                예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감
               </div>
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px 10px", background: "linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.3) 70%, transparent 100%)", color: "#ffffff" }}>
                 <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#fde68a", marginBottom: "2px" }}>
@@ -325,7 +329,7 @@ export default async function SeoLandingPage({ params }: Props) {
               </div>
               <div style={{ fontSize: "13px", lineHeight: 1.6, color: "#4b5563", margin: "0 0 12px 0" }}>
                 아름다운 밤, 당신을 위한 특별한 시간<br />
-                <strong>예약은 18:00부터</strong> · 영업 19:00 ~ 05:00<br />
+                <strong>예약 18:00부터</strong> · 출발 19:00부터 · 마지막 예약 05:00 마감<br />
                 {data.region} 전 지역 <strong>자택 · 호텔 방문</strong>
               </div>
               <div style={{ background: "#1a73e8", color: "#ffffff", padding: "12px 0", borderRadius: "6px", fontWeight: 800, fontSize: "14px" }}>
@@ -334,7 +338,7 @@ export default async function SeoLandingPage({ params }: Props) {
             </div>
           </a>
 
-          {/* 액션 버튼 (문자 예약 및 24시 전화) */}
+          {/* 액션 버튼 (문자 예약 및 전화 예약) */}
           <div style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
             <a
               href={SMS_HREF}
@@ -402,7 +406,7 @@ export default async function SeoLandingPage({ params }: Props) {
                   예약 · 영업 안내
                 </div>
                 <div style={{ fontSize: "12px", color: "#008744", fontWeight: 600 }}>
-                  예약 18:00부터 (영업 19:00 ~ 05:00)
+                  예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감
                 </div>
               </a>
             </div>
@@ -544,8 +548,8 @@ export default async function SeoLandingPage({ params }: Props) {
                 프라이빗 1:1 방문 홈케어입니다. {district.gu}은(는) {district.note}입니다.
               </p>
               <p style={{ margin: "0 0 10px 0" }}>
-                주요 방문 환경은 {district.stay}이며, 호텔은 객실 호수를, 자택은 정확한 주소와 출입 방법을 알려 주시면
-                조용히 방문합니다. 예약은 18:00부터 가능하며 영업 시간은 19:00부터 05:00까지입니다.
+                주요 방문 환경은 {district.stay}이며, 자택은 정확한 주소와 출입 방법(주차장·공동현관 비밀번호 또는 호출버튼)을, 호텔·모텔은 호텔명을 알려 주시면
+                1층 로비에서 만나 대면결제 후 객실까지 안내해 드립니다. 예약 접수는 18:00부터, 매니저 출발은 19:00부터, 마지막 예약 마감은 새벽 05:00입니다.
               </p>
               <p style={{ margin: 0 }}>
                 타이(80,000원~), 아로마(90,000원~), 스페셜(100,000원~) 3가지 코스를 60·90·120분으로
@@ -555,7 +559,7 @@ export default async function SeoLandingPage({ params }: Props) {
           ) : (
             <p style={{ fontSize: "13px", color: "#3c4043", lineHeight: 1.75, margin: 0 }}>
               {decoded}에 관한 안내입니다. Abam.kr(아름다운 밤)은 서울·경기 전역 자택·호텔로 방문하는 프라이빗 1:1 방문 홈케어이며,
-              예약은 18:00부터 가능하고 영업 시간은 19:00부터 05:00까지입니다.
+              예약 접수는 18:00부터, 매니저 출발은 19:00부터, 마지막 예약 마감은 새벽 05:00입니다.
             </p>
           )}
 
@@ -577,13 +581,13 @@ export default async function SeoLandingPage({ params }: Props) {
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", fontSize: "13px", color: "#3c4043", lineHeight: 1.6 }}>
             <div>
-              <strong>1. 코스 및 시간 선택:</strong> 원하시는 코스(타이, 아로마, 스페셜)와 관리 시간(60·90·120분)을 선택 후 메신저나 전화로 접수합니다.
+              <strong>1. 코스 및 시간 선택:</strong> 원하시는 코스(타이, 아로마, 스페셜)와 관리 시간(60·90·120분)을 선택 후 문자나 전화로 접수합니다.
             </div>
             <div>
-              <strong>2. 방문 장소 확인:</strong> {data.region} 내 정확한 방문 장소(자택 주소 또는 호텔명)를 전달합니다.
+              <strong>2. 방문 장소 확인:</strong> {data.region} 내 정확한 방문 장소(자택 주소 또는 호텔명)를 전달합니다. 자택은 주차장·공동현관 비밀번호(어려우시면 호출버튼으로 열어 주실 수 있다고 미리 안내), 호텔·모텔은 1층 로비에서 만나 대면결제 후 객실로 이동합니다.
             </div>
             <div>
-              <strong>3. 프라이빗 1:1 케어:</strong> 예약은 18:00부터, 1시간 전에 예약하시면 더욱 편안하게 원하시는 공간에서 케어를 받으실 수 있습니다.
+              <strong>3. 프라이빗 1:1 케어:</strong> 예약은 18:00부터 받으며 매니저 출발은 19:00부터입니다. 1시간 전에 예약하시면 더욱 편안하게 원하시는 공간에서 케어를 받으실 수 있습니다.
             </div>
           </div>
         </section>
@@ -615,7 +619,7 @@ export default async function SeoLandingPage({ params }: Props) {
           <div style={{ fontWeight: 700, color: "#202124", fontSize: "12px", marginBottom: "4px" }}>
             Abam.kr · 아름다운 밤, 당신을 위한 특별한 시간
           </div>
-          <div>대표 상담 전화: {PHONE_NUM} · 예약은 18:00부터 (영업 19:00 ~ 05:00)</div>
+          <div>대표 상담 전화: {PHONE_NUM} · 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감</div>
           <div>코스: 타이 · 아로마 · 스페셜 (60분 / 90분 / 120분)</div>
           <div style={{ marginTop: "8px" }}>
             © ABAM. All rights reserved.

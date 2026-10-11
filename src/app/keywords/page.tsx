@@ -144,7 +144,7 @@ export default function KeywordsPage() {
         {/* 푸터 */}
         <footer style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #e2e8f0', fontSize: '11px', color: '#64748b', lineHeight: 1.7 }}>
           <div><strong>Abam.kr</strong> · 아름다운 밤, 당신을 위한 특별한 시간 · 서울·경기 전역 프라이빗 1:1 방문 홈케어</div>
-          <div>대표 상담 전화: {PHONE_NUM} · 예약은 18:00부터 (영업 19:00 ~ 05:00)</div>
+          <div>대표 상담 전화: {PHONE_NUM} · 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감</div>
           <div>코스: 타이 · 아로마 · 스페셜 (60분 / 90분 / 120분)</div>
           <div style={{ marginTop: '6px' }}>
             © ABAM. All rights reserved.

@@ -306,7 +306,7 @@ function detectCourse(kw: string): string {
 }
 
 // ── 서비스 지역 정책 ────────────────────────────────────────────────────────
-// 아밤(Abam.kr)은 서울·경기 전역 24시간 100% 현장 후불제 안심 서비스를 제공합니다.
+// 아밤(Abam.kr)은 서울·경기 전역 100% 현장 후불제 안심 서비스를 제공합니다.
 
 // 검색 상위 노출을 위한 대표(헤드) 키워드 — 색인(indexable) 대상
 const HEAD_TERMS = [
@@ -400,16 +400,16 @@ export function generateSeoPageData(keyword: string) {
   } else if (district && (isSeoulKw || region.startsWith('서울'))) {
     const place = region.replace('서울 ', '');
     title = `【1위】 ${kw} [20대 ACE 총출동] | ${district.short} 100% 현장후불제 Abam.kr`;
-    description = `${place} ${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울 ${district.stations.slice(0, 3).join('·')} 인근 호텔·자택 30분 총알도착, 100% 현장 후불제 안심 케어. 예약 18:00부터 (영업 19:00~05:00).`;
+    description = `${place} ${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울 ${district.stations.slice(0, 3).join('·')} 인근 호텔·자택 30분 총알도착, 100% 현장 후불제 안심 케어. 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감.`;
     h1 = `${district.gu} ${kw} [20대 ACE 총출동] — 100% 후불제 Abam.kr`;
   } else if (isCoursePage) {
     title = `【1위】 ${kw} [20대 ACE 총출동] | 서울·경기 ${course} 100% 후불제 Abam.kr`;
-    description = `${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! ${course} 60·90·120분 정찰제, 서울·경기 전역 자택·호텔 30분 총알도착. 100% 현장 후불제. 예약 18:00부터 (영업 19:00~05:00).`;
+    description = `${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! ${course} 60·90·120분 정찰제, 서울·경기 전역 자택·호텔 30분 총알도착. 100% 현장 후불제. 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감.`;
     h1 = `${kw} — [20대 ACE 총출동] ${course}`;
   } else {
     const placeStr = region !== '서울 전지역' ? region : '서울·경기';
     title = `【1위】 ${kw} [20대 ACE 총출동] | ${placeStr} 100% 현장후불제 Abam.kr`;
-    description = `${kw} — [20대 ACE 총출동] ${placeStr} 전역 호텔·자택 30분 총알도착! 전원 20대 에이스 관리사 항시 대기, 100% 현장 후불제 안심 케어. 예약 18:00부터 (영업 19:00~05:00).`;
+    description = `${kw} — [20대 ACE 총출동] ${placeStr} 전역 호텔·자택 30분 총알도착! 전원 20대 에이스 관리사 항시 대기, 100% 현장 후불제 안심 케어. 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감.`;
     h1 = `${kw} [20대 ACE 총출동] — ${placeStr} 100% 후불제 Abam.kr`;
   }
 

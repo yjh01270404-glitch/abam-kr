@@ -40,6 +40,15 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/guide/late-night-24-hour-massage',
+        destination: '/guide/late-night-massage',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

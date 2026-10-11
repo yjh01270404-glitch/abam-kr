@@ -88,7 +88,7 @@ export const KO: LandingContent = {
   lang: 'ko',
   htmlLang: 'ko',
   brandTag: '20대 ACE 총출동 · 서울·경기 100% 현장 대면결제 프라이빗 홈케어',
-  topBar: { pre: '서울·경기 전역 호텔 · 자택 30분 도착 · ', strong: '20대 ACE 총출동 (예약 18:00~ / 영업 19:00~05:00)' },
+  topBar: { pre: '서울·경기 전역 호텔 · 자택 30분 도착 · ', strong: '20대 ACE 총출동 (예약 18:00~ / 출발 19:00~ / 마지막 예약 05:00)' },
   navLabels: { info: '🕕 예약 안내', courses: '🍃 코스 소개', price: '💳 COURSE & PRICE', faq: '❓ 자주묻는 질문' },
   hero: {
     badge: '20대 ACE 총출동 · 서울·경기 100% 현장 대면결제',
@@ -97,7 +97,7 @@ export const KO: LandingContent = {
     bannerSub: ['서울·경기', '30분 도착', '100% 현장 대면결제'],
   },
   info: [
-    { icon: INFO_ICONS[0], title: '예약 접수 18:00부터', sub: '(실제 영업 19:00 ~ 05:00)' },
+    { icon: INFO_ICONS[0], title: '예약 접수 18:00부터', sub: '(매니저 출발 19:00부터 · 마지막 예약 05:00)' },
     { icon: INFO_ICONS[1], title: '1시간 전 예약 추천', sub: '원하는 시간에 가장 수월하게 이용' },
     { icon: INFO_ICONS[2], title: '원하는 프라이빗 공간', sub: '(자택 · 아파트 · 호텔 등)' },
     { icon: INFO_ICONS[3], title: '선입금 없는 안심', sub: '100% 현장 대면결제' },
@@ -143,8 +143,8 @@ export const KO: LandingContent = {
       a: '네, 서울 전역(25개 자치구)뿐만 아니라 경기도 핵심 거점 어디든 원하시는 프라이빗한 공간으로 신속하게 방문해 드립니다.\n\n• 방문 가능 지역:\n  - 서울: 강남, 서초, 송파, 마포, 용산, 영등포 등 서울 25개 자치구 전역\n  - 경기: 수원, 성남(분당·판교), 고양(일산), 부천, 안양, 평택, 화성(동탄), 김포, 파주, 광명, 하남 등 경기 주요 도심권\n\n• 방문 가능 장소:\n  - 자택 (아파트 · 오피스텔 · 빌라 · 단독주택 등)\n  - 숙박시설 (서울·경기 전역 호텔 · 모텔 · 비즈니스 레지던스)\n\n• 1:1 방문 전담 케어로 조용하고 편안하게 이용하실 수 있습니다.',
     },
     {
-      q: '예약과 영업 시간은 어떻게 되나요?',
-      a: '• 사전 예약 접수: 18:00부터 가능\n• 현장 영업 시간: 19:00 ~ 익일 05:00 (연중무휴)\n\n※ 원활한 매니저 배정과 빠른 방문을 위해 이용 1시간 전 사전 예약을 권장해 드립니다.',
+      q: '예약 시간과 출발 시간은 어떻게 되나요?',
+      a: '• 예약 접수: 18:00부터\n• 매니저 출발: 19:00부터\n• 마지막 예약 마감: 새벽 05:00\n\n※ 예약은 18:00부터 받지만, 매니저 출발은 19:00부터입니다.\n※ 원활한 매니저 배정과 빠른 방문을 위해 이용 1시간 전 예약을 권장해 드립니다.\n※ 05:00에 예약이 마감되며, 당일 18:00부터 다시 접수합니다.',
     },
     {
       q: '어떤 코스가 있나요?',
@@ -159,12 +159,16 @@ export const KO: LandingContent = {
       a: '네, 고객님께서 머무시는 프라이빗한 공간 어디서든 이용 가능합니다.\n\n• 주거 공간: 아파트, 오피스텔, 빌라, 단독주택 등 자택\n• 숙박 시설: 서울·경기 전역 모든 호텔, 모텔, 비즈니스 레지던스\n\n• 전담 테라피스트가 필요한 모든 관리용품 및 위생 소모품을 구비하여 차량으로 방문하므로 별도의 준비 없이 편안하게 받으시면 됩니다.',
     },
     {
-      q: '차량 이동 시 주차나 현관 비번, 호텔 이용은 어떻게 하나요?',
-      a: '차량으로 이동하기 때문에 아래 세 가지만 편하게 확인해 주시면 됩니다.\n\n1. 건물에 주차장이 있으시면 도착해서 바로 전화 드립니다.\n2. 공동현관 비번이 있다면 예약 시 남겨주시거나, 도착해서 호수 호출벨을 누릅니다.\n3. 호텔이나 모텔은 도착 전 기사가 미리 전화드리니, 그때 1층 로비로 내려오셔서 결제하고 만나시면 됩니다.',
+      q: '주차장·1층 공동현관 비밀번호, 호텔 이용은 어떻게 하나요?',
+      a: '매니저가 차량으로 이동하기 때문에, 아래 내용을 예약 시 미리 알려주시면 가장 빠르고 정확하게 방문할 수 있습니다.\n\n1. 주차장\n  - 건물에 주차장이 있다면 예약 시 미리 알려주세요. 도착하면 매니저가 전화드립니다.\n\n2. 1층 공동현관\n  - 공동현관 비밀번호는 예약 시 미리 알려주세요.\n  - 비밀번호를 알려주기 어려우시면, 호출(세대 호출벨) 버튼을 눌러 열어주실 수 있다고 미리 말씀해 주세요. 도착 후 매니저가 전화드린 뒤 호출 버튼을 누릅니다.\n  - 비밀번호도, 호출 버튼도 어려운 경우에는 예약 시 먼저 상담해 주세요.\n\n3. 호텔·모텔\n  - 예약 시 호텔(모텔) 이름을 알려주세요. 도착 전 매니저가 미리 연락드립니다.\n  - 1층 로비에서 매니저를 만나 대면결제(현금·계좌이체·카드)를 하신 뒤, 매니저가 객실까지 픽업·동행합니다.',
+    },
+    {
+      q: '결제는 언제, 어떻게 하나요?',
+      a: '어떠한 선입금도 받지 않으며, 100% 현장 대면결제입니다.\n\n• 자택: 매니저가 도착해 대면한 후 결제\n• 호텔·모텔: 1층 로비에서 매니저를 만나 대면결제 후 객실로 이동\n• 결제 수단: 현금 · 계좌이체 · 카드',
     },
     {
       q: '전화 통화가 부담스러운데 문자로도 예약이 가능한가요?',
-      a: '네, 100% 가능합니다!\n\n전화 통화 없이도 24시간 언제든 휴대폰 일반 문자메시지(010-6607-2239)로 원하시는 코스, 시간, 방문 주소를 보내주시면 즉시 예약 접수 및 도착 안내를 도와드립니다.',
+      a: '네, 100% 가능합니다!\n\n전화 통화 없이도 예약 접수 시간(18:00 ~ 익일 05:00) 안에 일반 문자메시지(010-6607-2239)로 코스, 시간, 방문 주소(호텔은 호텔명)를 보내주시면 예약 접수 및 도착 안내를 도와드립니다.\n\n※ 주차장·공동현관 비밀번호(또는 호출버튼 가능 여부)를 함께 남겨주시면 더욱 빠릅니다.',
     },
   ],
   contact: { phone: '010-6607-2239', tel: 'tel:010-6607-2239', tagline: '지금, 당신의 편안한 휴식을 위해', site: 'abam.kr' },
@@ -176,7 +180,7 @@ export const KO: LandingContent = {
   footer: {
     title: '서울·경기 출장마사지 · 출장안마 [20대 ACE 총출동] · 아밤(Abam.kr)',
     sub: '전원 20대 에이스 관리사 상시대기 · 서울 25개 구 및 경기(수원·분당·판교·일산·부천·평택·동탄 등) 전역 호텔·자택 30분 도착',
-    line: 'Abam.kr · 아름다운 밤, 20대 ACE 총출동 · 서울·경기 전역 24시간 100% 현장 대면결제 · 예약 18:00부터 (영업 19:00 ~ 05:00) · 고객센터 010-6607-2239',
+    line: 'Abam.kr · 아름다운 밤, 20대 ACE 총출동 · 서울·경기 전역 100% 현장 대면결제 · 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 · 고객센터 010-6607-2239',
   },
   cta: { primary: 'call', kakao: '', whatsapp: 'WhatsApp', call: '', callBar: '전화예약' },
   modal: { title: '문자 간편 예약 양식', body: '문자로 편하게 남겨주시면 바로 안내해 드립니다.', idLabel: '', copy: '복사', open: '문자 예약하기', close: '닫기', copied: '복사 완료' },
@@ -188,7 +192,7 @@ export const EN: LandingContent = {
   lang: 'en',
   htmlLang: 'en',
   brandTag: 'A beautiful night, a special time just for you',
-  topBar: { pre: 'Seoul & Gyeonggi Area · ', strong: 'Booking from 18:00 (Open 19:00 ~ 05:00)' },
+  topBar: { pre: 'Seoul & Gyeonggi Area · ', strong: 'Booking from 18:00 · Departures from 19:00 · Last booking 05:00' },
   navLabels: { info: '🕕 Booking Info', courses: '🍃 Courses', price: '💳 COURSE & PRICE', faq: '❓ FAQ' },
   hero: {
     badge: 'PRIVATE HOME CARE SERVICE',
@@ -197,7 +201,7 @@ export const EN: LandingContent = {
     bannerSub: ['Seoul & Gyeonggi', 'Home', 'Hotel'],
   },
   info: [
-    { icon: INFO_ICONS[0], title: 'Booking from 18:00', sub: '(Open 19:00 ~ 05:00)' },
+    { icon: INFO_ICONS[0], title: 'Booking from 18:00', sub: '(Departures from 19:00 · last booking 05:00)' },
     { icon: INFO_ICONS[1], title: 'Book 1 hour ahead', sub: 'for an even more comfortable experience.' },
     { icon: INFO_ICONS[2], title: 'Anywhere you like', sub: '(Home · Hotel, etc.)' },
     { icon: INFO_ICONS[3], title: 'Private', sub: '1:1 Care' },
@@ -216,8 +220,8 @@ export const EN: LandingContent = {
     reasons: [
       {
         icon: '🌐',
-        title: 'Dedicated Multilingual Concierge (24/7)',
-        desc: 'Real-time English booking coordination, hotel front desk and room liaison, and 24/7 dedicated support via WhatsApp with zero language barrier.',
+        title: 'Dedicated Multilingual Concierge',
+        desc: 'Real-time English booking coordination, hotel lobby meet-up and room escort, and dedicated support via WhatsApp with zero language barrier.',
       },
       {
         icon: '👑',
@@ -270,8 +274,12 @@ export const EN: LandingContent = {
       a: 'Yes, we visit any private space you prefer throughout all districts of Seoul.\n\n• Available Locations:\n  - Residences (apartments, studios, villas)\n  - Accommodations (all hotels, motels, serviced residences in Seoul)\n\n• Dedicated 1:1 visit care delivered in complete privacy and comfort.',
     },
     {
-      q: 'What are the booking and opening hours?',
-      a: '• Booking Open: From 18:00\n• Service Hours: 19:00 ~ 05:00 next morning (Open 365 days)\n\n※ We recommend booking 1 hour ahead for optimal schedule coordination and prompt arrival.',
+      q: 'What are the booking and departure hours?',
+      a: '• Booking accepted: from 18:00\n• Manager departures: from 19:00\n• Last booking deadline: 05:00 (early morning)\n\n※ Bookings open at 18:00, but managers depart from 19:00.\n※ We recommend booking 1 hour ahead for smooth scheduling and prompt arrival.',
+    },
+    {
+      q: 'How do parking, the building entrance and hotels work?',
+      a: 'Please tell us the following when you book.\n\n1. Parking\n  - If your building has parking, let us know in advance. Your manager will call you on arrival.\n\n2. 1st-floor common entrance\n  - Please give us the entrance password in advance.\n  - If you cannot share it, please tell us in advance that you can open the door via the call / intercom button. Your manager will phone you on arrival and press the button.\n  - If neither is possible, please contact us first when booking.\n\n3. Hotels / motels\n  - Tell us the hotel name when booking. Your manager will contact you before arriving.\n  - Meet the manager in the 1st-floor lobby and pay face to face (cash, bank transfer or card). The manager then picks you up and escorts you to your room.\n\n• No deposit is ever required. 100% pay on the spot, in person.',
     },
     {
       q: 'What courses do you offer?',
@@ -289,17 +297,17 @@ export const EN: LandingContent = {
   contact: { phone: '010-6607-2239', tel: 'tel:+82-10-6607-2239', tagline: 'Right now, for your comfortable rest', site: 'abam.kr' },
   about: {
     title: 'About Abam.kr Private 1:1 Home Visit Care',
-    p1: 'Abam.kr (A Beautiful Night) is a private 1:1 home visit care service delivered to the space of your choice across Seoul, such as your home or hotel. Booking is available from 18:00 and we are open from 19:00 to 05:00. Booking 1 hour ahead lets you enjoy an even more comfortable experience.',
+    p1: 'Abam.kr (A Beautiful Night) is a private 1:1 home visit care service delivered to the space of your choice across Seoul, such as your home or hotel. Booking is available from 18:00, managers depart from 19:00, and the last booking deadline is 05:00. Booking 1 hour ahead lets you enjoy an even more comfortable experience.',
     p2: 'Choose from 3 VIP courses — Thai (from ₩130,000 / 60 min), Aroma (from ₩140,000 / 60 min) and Special (from ₩150,000 / 60 min) — in 60, 90 or 120 minutes.',
   },
   footer: {
     title: 'Private 1:1 Home Visit Care across Seoul & Gyeonggi',
     sub: 'Seoul 25 districts, Suwon, Bundang, Pangyo, Ilsan, Bucheon & all key hubs — home & hotel visits',
-    line: 'Abam.kr · A beautiful night, a special time just for you · PRIVATE HOME CARE SERVICE · Booking from 18:00 (Open 19:00 ~ 05:00) · Contact 010-6607-2239',
+    line: 'Abam.kr · A beautiful night, a special time just for you · PRIVATE HOME CARE SERVICE · Booking from 18:00 · Departures from 19:00 · Last booking 05:00 · Contact 010-6607-2239',
   },
   cta: { primary: 'whatsapp', kakao: 'KakaoTalk', whatsapp: 'WhatsApp Booking', call: '', callBar: 'Call' },
   modal: { title: '', body: '', idLabel: '', copy: '', open: '', close: '', copied: '' },
-  globalLine: 'English · 日本語 · 中文 · WhatsApp 24/7 Concierge',
+  globalLine: 'English · 日本語 · 中文 · WhatsApp Concierge',
 };
 
 /* ───────────── 日本語 ───────────── */
@@ -307,7 +315,7 @@ export const JP: LandingContent = {
   lang: 'jp',
   htmlLang: 'ja',
   brandTag: '美しい夜、あなたのための特別な時間',
-  topBar: { pre: 'ソウル・京畿全域 · ご自宅 · ホテル · ', strong: 'ご予約は18:00から (営業 19:00 ~ 05:00)' },
+  topBar: { pre: 'ソウル・京畿全域 · ご自宅 · ホテル · ', strong: 'ご予約は18:00から · 出発19:00から · 最終受付05:00' },
   navLabels: { info: '🕕 ご予約案内', courses: '🍃 コース紹介', price: '💳 COURSE & PRICE', faq: '❓ よくある質問' },
   hero: {
     badge: 'PRIVATE HOME CARE SERVICE',
@@ -316,7 +324,7 @@ export const JP: LandingContent = {
     bannerSub: ['ソウル・京畿', 'ご自宅', 'ホテル'],
   },
   info: [
-    { icon: INFO_ICONS[0], title: 'ご予約は18:00から', sub: '(営業 19:00 ~ 05:00)' },
+    { icon: INFO_ICONS[0], title: 'ご予約は18:00から', sub: '(出発は19:00から · 最終受付05:00)' },
     { icon: INFO_ICONS[1], title: '1時間前のご予約で', sub: 'より快適にご利用いただけます。' },
     { icon: INFO_ICONS[2], title: 'ご希望の空間で', sub: '(ご自宅 · ホテルなど)' },
     { icon: INFO_ICONS[3], title: 'プライベートな', sub: '1:1ケア' },
@@ -389,8 +397,12 @@ export const JP: LandingContent = {
       a: 'はい、ソウル全域のお客様がご希望されるプライベート空間へ迅速にお伺いします。\n\n• ご訪問可能エリア・場所:\n  - ご自宅 (マンション · アパート · 一戸建てなど)\n  - ご宿泊施設 (ソウル市内の全ホテル · レジデンス)\n\n• 専任セラピストによる1:1訪問ケアで、安心・快適にご利用いただけます。',
     },
     {
-      q: 'ご予約と営業時間を教えてください。',
-      a: '• ご予約受付: 18:00から受付可能\n• 営業稼働時間: 19:00 ~ 翌朝05:00 (年中無休)\n\n※ スムーズなセラピスト手配と迅速な到着のため、1時間前のご予約をおすすめしております。',
+      q: 'ご予約時間と出発時間を教えてください。',
+      a: '• ご予約受付: 18:00から\n• マネージャー出発: 19:00から\n• 最終予約受付: 翌朝05:00まで\n\n※ ご予約は18:00から承りますが、マネージャーの出発は19:00からです。\n※ スムーズな手配と迅速な到着のため、1時間前のご予約をおすすめしております。',
+    },
+    {
+      q: '駐車場・1階エントランス・ホテルの利用方法は？',
+      a: 'ご予約時に以下を事前にお知らせください。\n\n1. 駐車場\n  - 建物に駐車場がある場合は事前にお知らせください。到着後、マネージャーがお電話いたします。\n\n2. 1階共用エントランス\n  - 暗証番号を事前にお知らせください。\n  - 番号をお伝えしにくい場合は、呼び出しボタン（インターホン）で開錠できることを事前にお伝えください。到着後、マネージャーがお電話のうえボタンを押します。\n  - どちらも難しい場合は、ご予約時に先にご相談ください。\n\n3. ホテル・モーテル\n  - ご予約時にホテル名をお知らせください。到着前にマネージャーがご連絡します。\n  - 1階ロビーでマネージャーと合流し、対面でお支払い(現金・振込・カード)。その後マネージャーがお部屋までご案内します。\n\n• 事前のお振込・予約金は一切不要。100%現場での対面お支払いです。',
     },
     {
       q: 'どんなコースがありますか？',
@@ -408,17 +420,17 @@ export const JP: LandingContent = {
   contact: { phone: '010-6607-2239', tel: 'tel:+82-10-6607-2239', tagline: '今、あなたの心地よい休息のために', site: 'abam.kr' },
   about: {
     title: 'Abam.kr プライベート1:1訪問ホームケアのご案内',
-    p1: 'Abam.kr(美しい夜)は、ソウル全域のご自宅・ホテルなどご希望の空間で受けられるプライベート1:1訪問ホームケアです。ご予約は18:00から可能で、営業時間は19:00から05:00までです。1時間前にご予約いただくと、より快適にご利用いただけます。',
+    p1: 'Abam.kr(美しい夜)は、ソウル全域のご自宅・ホテルなどご希望の空間で受けられるプライベート1:1訪問ホームケアです。ご予約は18:00から、マネージャーの出発は19:00から、最終予約受付は05:00までです。1時間前にご予約いただくと、より快適にご利用いただけます。',
     p2: 'タイ(60分 130,000ウォン〜)、アロマ(60分 140,000ウォン〜)、スペシャル(60分 150,000ウォン〜)の3コースを、60・90・120分からお選びいただけます。',
   },
   footer: {
     title: 'ソウル・京畿全域 プライベート1:1訪問ホームケア',
     sub: 'ソウル25区、水原、盆唐、板橋、一山、富川などソウル・京畿全域のご自宅・ホテルへ迅速訪問',
-    line: 'Abam.kr · 美しい夜、あなたのための特別な時間 · PRIVATE HOME CARE SERVICE · ご予約18:00から (営業 19:00 ~ 05:00) · お問い合わせ 010-6607-2239',
+    line: 'Abam.kr · 美しい夜、あなたのための特別な時間 · PRIVATE HOME CARE SERVICE · ご予約18:00から · 出発19:00から · 最終受付05:00 · お問い合わせ 010-6607-2239',
   },
   cta: { primary: 'whatsapp', kakao: 'KakaoTalk', whatsapp: 'WhatsAppで予約', call: '', callBar: '電話' },
   modal: { title: '', body: '', idLabel: '', copy: '', open: '', close: '', copied: '' },
-  globalLine: 'English · 日本語 · 中文 · WhatsApp 24/7 Concierge',
+  globalLine: 'English · 日本語 · 中文 · WhatsApp Concierge',
 };
 
 /* ───────────── 中文 ───────────── */
@@ -426,7 +438,7 @@ export const CN: LandingContent = {
   lang: 'cn',
   htmlLang: 'zh-CN',
   brandTag: '美丽的夜晚，专属于您的特别时光',
-  topBar: { pre: '首尔 · 京畿全境 · 住宅 · 酒店 · ', strong: '预约从18:00开始 (营业 19:00 ~ 05:00)' },
+  topBar: { pre: '首尔 · 京畿全境 · 住宅 · 酒店 · ', strong: '预约从18:00开始 · 19:00起出发 · 最晚预约05:00截止' },
   navLabels: { info: '🕕 预约须知', courses: '🍃 课程介绍', price: '💳 COURSE & PRICE', faq: '❓ 常见问题' },
   hero: {
     badge: 'PRIVATE HOME CARE SERVICE',
@@ -435,7 +447,7 @@ export const CN: LandingContent = {
     bannerSub: ['首尔 · 京畿', '住宅', '酒店'],
   },
   info: [
-    { icon: INFO_ICONS[0], title: '预约从18:00开始', sub: '(营业 19:00 ~ 05:00)' },
+    { icon: INFO_ICONS[0], title: '预约从18:00开始', sub: '(19:00起出发 · 最晚预约05:00)' },
     { icon: INFO_ICONS[1], title: '提前1小时预约', sub: '可享受更加舒适的体验。' },
     { icon: INFO_ICONS[2], title: '在您想要的空间', sub: '(住宅 · 酒店等)' },
     { icon: INFO_ICONS[3], title: '私密的', sub: '1:1护理' },
@@ -508,8 +520,12 @@ export const CN: LandingContent = {
       a: '可以，我们可前往首尔全境您指定的任何私密空间。\n\n• 可上门场所:\n  - 住宅空间 (公寓 · 单身公寓 · 别墅 · 住宅等)\n  - 住宿设施 (首尔市内所有酒店 · 商务酒店 · 酒店式公寓)\n\n• 专享1:1上门私密居家护理，安心尽享静谧时光。',
     },
     {
-      q: '预约和营业时间是怎样的？',
-      a: '• 预约受理: 18:00开始接受预约\n• 营业时间: 19:00 ~ 次日05:00 (全年无休)\n\n※ 为确保顺利安排专属理疗师并准时抵达，建议提前1小时预约。',
+      q: '预约时间和出发时间是怎样的？',
+      a: '• 预约受理: 18:00开始\n• 经理出发: 19:00开始\n• 最晚预约截止: 次日凌晨05:00\n\n※ 18:00起接受预约，但经理19:00起才出发。\n※ 为确保顺利安排并准时抵达，建议提前1小时预约。',
+    },
+    {
+      q: '停车场、一楼公共大门和酒店要如何配合？',
+      a: '预约时请提前告知以下信息。\n\n1. 停车场\n  - 如大楼有停车场，请提前告知。到达后经理会致电联系您。\n\n2. 一楼公共大门\n  - 请提前告知大门密码。\n  - 如不方便告知密码，请提前说明您可通过呼叫(门铃)按钮开门。到达后经理会先致电，再按下呼叫按钮。\n  - 如两者都不方便，请在预约时先与我们沟通。\n\n3. 酒店 / 汽车旅馆\n  - 预约时请告知酒店名称，经理到达前会提前联系您。\n  - 在一楼大堂与经理会合并当面付款(现金、转账或刷卡)，随后经理会接您并陪同前往客房。\n\n• 不收取任何定金，100%现场当面付款。',
     },
     {
       q: '有哪些课程？',
@@ -527,15 +543,15 @@ export const CN: LandingContent = {
   contact: { phone: '010-6607-2239', tel: 'tel:+82-10-6607-2239', tagline: '现在，为您舒适的休息', site: 'abam.kr' },
   about: {
     title: 'Abam.kr 私密1:1上门居家护理说明',
-    p1: 'Abam.kr(美丽的夜晚)是前往首尔全境住宅、酒店等您指定空间的私密1:1上门居家护理服务。预约从18:00开始，营业时间为19:00至05:00。提前1小时预约可享受更加舒适的体验。',
+    p1: 'Abam.kr(美丽的夜晚)是前往首尔全境住宅、酒店等您指定空间的私密1:1上门居家护理服务。预约从18:00开始，经理19:00起出发，最晚预约截止时间为05:00。提前1小时预约可享受更加舒适的体验。',
     p2: '泰式(60分钟 130,000韩元起)、芳香(60分钟 140,000韩元起)、特别(60分钟 150,000韩元起)三种课程，可选择60、90、120分钟。',
   },
   footer: {
     title: '首尔 · 京畿全境 私密1:1上门居家护理',
     sub: '首尔25区、水原、盆唐、板桥、一山、富川等首尔·京畿全境住宅 · 酒店上门',
-    line: 'Abam.kr · 美丽的夜晚，专属于您的特别时光 · PRIVATE HOME CARE SERVICE · 预约18:00开始 (营业 19:00 ~ 05:00) · 客服 010-6607-2239',
+    line: 'Abam.kr · 美丽的夜晚，专属于您的特别时光 · PRIVATE HOME CARE SERVICE · 预约18:00开始 · 19:00起出发 · 最晚预约05:00 · 客服 010-6607-2239',
   },
   cta: { primary: 'whatsapp', kakao: 'KakaoTalk', whatsapp: 'WhatsApp 预约', call: '', callBar: '电话' },
   modal: { title: '', body: '', idLabel: '', copy: '', open: '', close: '', copied: '' },
-  globalLine: 'English · 日本語 · 中文 · WhatsApp 24/7 Concierge',
+  globalLine: 'English · 日本語 · 中文 · WhatsApp Concierge',
 };
