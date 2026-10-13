@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { type LandingContent } from '../lib/landing-content';
 import { UI } from '../lib/landing-ui';
+import InteractiveEtaCourseTool from './InteractiveEtaCourseTool';
 
 const WA_LINK =
   'https://wa.me/821066072239?text=Hello%20Abam.kr,%20I%20would%20like%20to%20inquire%20about%20your%20private%201:1%20home%20care%20service.';
@@ -1352,6 +1353,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
           </div>
         </section>
+        <InteractiveEtaCourseTool />
 
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
@@ -1767,7 +1769,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
           )}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 14px', fontSize: '13px', margin: '14px 0', padding: '12px 0', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-            <Link href="/keywords" style={{ color: '#fef08a', textDecoration: 'none', fontWeight: 700 }}>전체 570+ 지역 디렉터리 →</Link>
+            <Link href="/keywords" style={{ color: '#fef08a', textDecoration: 'none', fontWeight: 800 }}>전체 570+ 지역 디렉터리 →</Link>
+            <Link href="/regions/seoul" style={{ color: '#fde047', textDecoration: 'none', fontWeight: 800 }}>👑 서울 25개구 전역 허브</Link>
+            <Link href="/regions/gyeonggi-south" style={{ color: '#fde047', textDecoration: 'none', fontWeight: 800 }}>⭐ 경기 남부 허브 (수원·분당·평택)</Link>
+            <Link href="/regions/gyeonggi-north" style={{ color: '#fde047', textDecoration: 'none', fontWeight: 800 }}>💎 경기 북부 허브 (일산·파주·남양주)</Link>
+            <Link href="/regions/incheon-bucheon" style={{ color: '#fde047', textDecoration: 'none', fontWeight: 800 }}>🏆 인천·부천 허브 (부평·송도·부천)</Link>
             <Link href="/guide/chuljang-massage-price" style={{ color: '#cbd5e1', textDecoration: 'none' }}>출장마사지 정찰 가격표</Link>
             <Link href="/guide/outcall-massage-scam-prevention-comparison" style={{ color: '#cbd5e1', textDecoration: 'none' }}>선입금 사기 예방 가이드</Link>
             <Link href="/guide/outcall-massage-platform-ranking-comparison" style={{ color: '#cbd5e1', textDecoration: 'none' }}>플랫폼 순위 및 비교</Link>

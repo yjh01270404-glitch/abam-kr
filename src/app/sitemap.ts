@@ -5,19 +5,23 @@ import { GUIDES } from '../lib/guides';
 const BASE_URL = 'https://abam.kr';
 
 // 콘텐츠 최신 배포 갱신일
-const LAST_MODIFIED = new Date('2026-10-08T17:30:00+09:00');
+const LAST_MODIFIED = new Date('2026-10-13T19:00:00+09:00');
 
 // 존재하는 핵심 페이지만 포함 (404 URL 금지)
 const CORE_PAGES: MetadataRoute.Sitemap = [
-  { url: BASE_URL,                lastModified: LAST_MODIFIED, changeFrequency: 'daily',   priority: 1.0 },
-  { url: `${BASE_URL}/keywords`,  lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.9 },
-  { url: `${BASE_URL}/guide`,     lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.8 },
-  { url: `${BASE_URL}/en`,        lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.7 },
-  { url: `${BASE_URL}/jp`,        lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.7 },
-  { url: `${BASE_URL}/cn`,        lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.7 },
-  { url: `${BASE_URL}/support`,   lastModified: LAST_MODIFIED, changeFrequency: 'monthly', priority: 0.4 },
-  { url: `${BASE_URL}/terms`,     lastModified: LAST_MODIFIED, changeFrequency: 'monthly', priority: 0.2 },
-  { url: `${BASE_URL}/privacy`,   lastModified: LAST_MODIFIED, changeFrequency: 'monthly', priority: 0.2 },
+  { url: BASE_URL,                              lastModified: LAST_MODIFIED, changeFrequency: 'daily',   priority: 1.0 },
+  { url: `${BASE_URL}/keywords`,                lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.9 },
+  { url: `${BASE_URL}/regions/seoul`,           lastModified: LAST_MODIFIED, changeFrequency: 'daily',   priority: 0.95 },
+  { url: `${BASE_URL}/regions/gyeonggi-south`,  lastModified: LAST_MODIFIED, changeFrequency: 'daily',   priority: 0.95 },
+  { url: `${BASE_URL}/regions/gyeonggi-north`,  lastModified: LAST_MODIFIED, changeFrequency: 'daily',   priority: 0.95 },
+  { url: `${BASE_URL}/regions/incheon-bucheon`, lastModified: LAST_MODIFIED, changeFrequency: 'daily',   priority: 0.95 },
+  { url: `${BASE_URL}/guide`,                   lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.8 },
+  { url: `${BASE_URL}/en`,                      lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.7 },
+  { url: `${BASE_URL}/jp`,                      lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.7 },
+  { url: `${BASE_URL}/cn`,                      lastModified: LAST_MODIFIED, changeFrequency: 'weekly',  priority: 0.7 },
+  { url: `${BASE_URL}/support`,                 lastModified: LAST_MODIFIED, changeFrequency: 'monthly', priority: 0.4 },
+  { url: `${BASE_URL}/terms`,                   lastModified: LAST_MODIFIED, changeFrequency: 'monthly', priority: 0.2 },
+  { url: `${BASE_URL}/privacy`,                 lastModified: LAST_MODIFIED, changeFrequency: 'monthly', priority: 0.2 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -112,6 +112,90 @@ export default function KeywordsPage() {
           </p>
         </section>
 
+        {/* 4대 권역 메가 토픽 클러스터 허브 배너 */}
+        <section style={{ padding: '16px 0', borderBottom: '2px solid #e2e8f0' }}>
+          <div style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a', marginBottom: '10px' }}>
+            👑 수도권 4대 권역 메가 허브 (1:1 방문 맞춤 케어)
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+            <Link
+              href="/regions/seoul"
+              style={{
+                textDecoration: 'none',
+                background: '#0f172a',
+                color: '#ffffff',
+                padding: '14px 12px',
+                borderRadius: '10px',
+                border: '1px solid #1e293b',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+              }}
+            >
+              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>SEOUL MEGA HUB</span>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>서울 25개구 전역 허브</strong>
+              <span style={{ fontSize: '12px', color: '#94a3b8' }}>강남·서초·마포·용산 20~30분</span>
+            </Link>
+
+            <Link
+              href="/regions/gyeonggi-south"
+              style={{
+                textDecoration: 'none',
+                background: '#0f172a',
+                color: '#ffffff',
+                padding: '14px 12px',
+                borderRadius: '10px',
+                border: '1px solid #1e293b',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+              }}
+            >
+              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>SOUTH GYEONGGI</span>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>경기 남부 메가 허브</strong>
+              <span style={{ fontSize: '12px', color: '#94a3b8' }}>수원·분당·판교·동탄·평택</span>
+            </Link>
+
+            <Link
+              href="/regions/gyeonggi-north"
+              style={{
+                textDecoration: 'none',
+                background: '#0f172a',
+                color: '#ffffff',
+                padding: '14px 12px',
+                borderRadius: '10px',
+                border: '1px solid #1e293b',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+              }}
+            >
+              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>NORTH GYEONGGI</span>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>경기 북부 메가 허브</strong>
+              <span style={{ fontSize: '12px', color: '#94a3b8' }}>일산·고양·파주·의정부·남양주</span>
+            </Link>
+
+            <Link
+              href="/regions/incheon-bucheon"
+              style={{
+                textDecoration: 'none',
+                background: '#0f172a',
+                color: '#ffffff',
+                padding: '14px 12px',
+                borderRadius: '10px',
+                border: '1px solid #1e293b',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+              }}
+            >
+              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>INCHEON & BUCHEON</span>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>인천·부천 권역 허브</strong>
+              <span style={{ fontSize: '12px', color: '#94a3b8' }}>부평·송도·청라·구월·부천 전역</span>
+            </Link>
+          </div>
+        </section>
+
         {/* 지역별 텍스트 링크 리스트 */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {GROUPS.map((g, idx) => {
