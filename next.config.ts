@@ -35,7 +35,6 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
   typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
   images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
