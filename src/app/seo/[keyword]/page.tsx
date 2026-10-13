@@ -275,7 +275,9 @@ export default async function SeoLandingPage({ params }: Props) {
           
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
             <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ fontSize: "17px", fontWeight: 900, color: "#ffffff", letterSpacing: "-0.3px" }}>🌙 Abam<span style={{ color: "#e0b04a" }}>.kr</span></span>
+              <span style={{ fontSize: "18px", fontWeight: 900, color: "#ffffff", letterSpacing: "-0.3px", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                🌙 <span className="abam-script-font" style={{ fontSize: "24px", color: "#fef08a", fontStyle: "italic", verticalAlign: "middle" }}>아름다운 밤</span> <span style={{ color: "#e11d48" }}>아밤</span>
+              </span>
             </Link>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <Link href="/keywords" style={{ fontSize: "12px", color: "#cbd5e1", fontWeight: 700, textDecoration: "none", padding: "4px 8px", borderRadius: "6px", backgroundColor: "rgba(255, 255, 255, 0.08)", border: "1px solid rgba(255, 255, 255, 0.15)" }}>
@@ -330,7 +332,10 @@ export default async function SeoLandingPage({ params }: Props) {
                 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감
               </div>
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 14px 10px", background: "linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.3) 70%, transparent 100%)", color: "#ffffff" }}>
-                <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#fde68a", marginBottom: "2px" }}>
+                <div className="abam-copperplate-en" style={{ fontSize: "16px", color: "#fef08a", letterSpacing: "0.06em", opacity: 0.95, marginBottom: "2px", lineHeight: 1.2 }}>
+                  Beautiful Night · Private 1:1 Care
+                </div>
+                <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#cbd5e1", marginBottom: "2px" }}>
                   {data.region} 자택 · 호텔 방문
                 </div>
                 <h1 style={{ fontSize: "19px", fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0, color: "#ffffff" }}>
@@ -346,8 +351,8 @@ export default async function SeoLandingPage({ params }: Props) {
               <div style={{ fontSize: "24px", fontWeight: 900, color: "#111827", letterSpacing: "-0.02em", margin: "4px 0 10px 0" }}>
                 {PHONE_NUM}
               </div>
-              <div style={{ fontSize: "13px", lineHeight: 1.6, color: "#4b5563", margin: "0 0 12px 0" }}>
-                아름다운 밤, 당신을 위한 특별한 시간<br />
+              <div style={{ fontSize: "13.5px", lineHeight: 1.7, color: "#4b5563", margin: "0 0 12px 0" }}>
+                <span className="abam-script-font" style={{ fontSize: "21px", color: "#d97706", fontStyle: "italic", verticalAlign: "middle" }}>아름다운 밤</span>, 당신을 위한 특별한 시간<br />
                 <strong>예약 18:00부터</strong> · 출발 19:00부터 · 마지막 예약 05:00 마감<br />
                 {data.region} 전 지역 <strong>자택 · 호텔 방문</strong>
               </div>

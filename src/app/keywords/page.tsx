@@ -61,7 +61,9 @@ export default function KeywordsPage() {
           
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
             <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '17px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.3px' }}>🌙 Abam<span style={{ color: '#e0b04a' }}>.kr</span></span>
+              <span style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.3px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                🌙 <span className="abam-script-font" style={{ fontSize: '24px', color: '#fef08a', fontStyle: 'italic', verticalAlign: 'middle' }}>아름다운 밤</span> <span style={{ color: '#e11d48' }}>아밤</span>
+              </span>
             </Link>
             <Link href="/" style={{ fontSize: '12px', color: '#0f172a', fontWeight: 800, textDecoration: 'none', padding: '4px 10px', borderRadius: '6px', backgroundColor: '#ffffff' }}>
               메인홈
@@ -84,6 +86,9 @@ export default function KeywordsPage() {
         
         {/* 상단 개요 */}
         <section style={{ padding: '20px 0', borderBottom: '1px solid #f1f5f9' }}>
+          <div className="abam-copperplate-en" style={{ fontSize: '18px', color: '#d97706', letterSpacing: '0.06em', marginBottom: '4px', lineHeight: 1.2 }}>
+            Regional Directory · Beautiful Night
+          </div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 800, color: '#b45309', backgroundColor: '#fef3c7', padding: '4px 12px', borderRadius: '20px', marginBottom: '12px' }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16a34a' }} />
             서울·경기 전역 · 자택 · 호텔 30분 도착 · 100% 현장후불제
@@ -93,8 +98,8 @@ export default function KeywordsPage() {
             서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내
           </h1>
 
-          <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#475569', margin: 0, wordBreak: 'keep-all' }}>
-            원하시는 지역을 선택하시면 해당 지역의 주요 역·생활권 정보와 코스 요금표, 이용 절차를 확인하실 수 있습니다. Abam.kr(아름다운 밤)은 서울 25개 구 및 경기 전역 자택·호텔로 신속하게 방문하는 프라이빗 1:1 홈케어입니다.
+          <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: '#475569', margin: 0, wordBreak: 'keep-all' }}>
+            원하시는 지역을 선택하시면 해당 지역의 주요 역·생활권 정보와 코스 요금표, 이용 절차를 확인하실 수 있습니다. Abam.kr(<span className="abam-script-font" style={{ fontSize: '17px', color: '#d97706', fontStyle: 'italic' }}>아름다운 밤</span>)은 서울 25개 구 및 경기 전역 자택·호텔로 신속하게 방문하는 프라이빗 1:1 홈케어입니다.
           </p>
         </section>
 

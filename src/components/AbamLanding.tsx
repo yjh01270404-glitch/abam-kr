@@ -295,13 +295,30 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
   const section: React.CSSProperties = { marginTop: '40px', scrollMarginTop: '70px', width: '100%' };
 
-  /* 시원시원하고 직관적인 한국형 섹션 타이틀 (모바일 가독성 극대화) */
-  const head = (title: string, sub?: string) => (
-    <div style={{ marginBottom: '22px', borderLeft: `6px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '14px' }}>
-      <h2 className="abam-head-title" style={{ fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.5px', wordBreak: 'keep-all', lineHeight: 1.3 }}>{title}</h2>
-      {sub && <p className="abam-head-sub" style={{ color: '#cbd5e1', margin: '8px 0 0', wordBreak: 'keep-all', fontWeight: 600 }}>{sub}</p>}
-    </div>
-  );
+  /* 섹션 영문 깃펜 캘리그래피 캡션 매핑 (아밤 타이틀 필기체와 조화로운 앙상블) */
+  const getSectionEnglishTag = (title: string): string => {
+    if (title.includes('서비스') || (title.includes('안내') && !title.includes('이용') && !title.includes('방문'))) return 'Private Therapy & Service Guide';
+    if (title.includes('코스') || title.includes('가격표')) return 'Signature Courses & Transparent Prices';
+    if (title.includes('방문') || title.includes('이용') || title.includes('절차')) return 'Usage Guidelines & Safe Procedures';
+    if (title.includes('후기') || title.includes('리뷰')) return 'Real Customer Stories & Experiences';
+    if (title.includes('질문') || title.includes('FAQ')) return 'Frequently Asked Questions';
+    if (title.includes('대면결제') || title.includes('안심')) return '100% On-Site Direct Payment Guarantee';
+    return 'Beautiful Night · Private Care';
+  };
+
+  /* 시원시원하고 직관적인 한국형 섹션 타이틀 + 럭셔리 깃펜 필기체 서브 캡션 페어링 */
+  const head = (title: string, sub?: string, tag?: string) => {
+    const englishTag = tag || getSectionEnglishTag(title);
+    return (
+      <div style={{ marginBottom: '22px', borderLeft: `5px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '14px', position: 'relative' }}>
+        <div className="abam-copperplate-en" style={{ fontSize: '20px', color: '#fef08a', letterSpacing: '0.06em', opacity: 0.92, marginBottom: '2px', lineHeight: 1.2, textShadow: '0 0 10px rgba(245,158,11,0.4)' }}>
+          {englishTag}
+        </div>
+        <h2 className="abam-head-title" style={{ fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.5px', wordBreak: 'keep-all', lineHeight: 1.3 }}>{title}</h2>
+        {sub && <p className="abam-head-sub" style={{ color: '#cbd5e1', margin: '6px 0 0', wordBreak: 'keep-all', fontWeight: 600 }}>{sub}</p>}
+      </div>
+    );
+  };
 
 
   return (
@@ -1559,6 +1576,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         {/* ── 6. 100% 현장 직접 대면결제 원칙 ── */}
         <section id="safety" style={section}>
           <div className="abam-card" style={{ borderLeft: `6px solid ${C.pointRed}`, textAlign: 'left', padding: '22px 20px' }}>
+            <div className="abam-copperplate-en" style={{ fontSize: '20px', color: '#fef08a', letterSpacing: '0.06em', opacity: 0.92, marginBottom: '2px', lineHeight: 1.2 }}>
+              100% On-Site Direct Payment Guarantee
+            </div>
             <h3 className="abam-rule-title" style={{ color: '#ffffff', fontSize: '21px', fontWeight: 900, margin: '0 0 10px' }}>
               {t.safetyTitle}
             </h3>

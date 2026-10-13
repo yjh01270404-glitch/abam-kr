@@ -23,11 +23,18 @@ export default function GuideIndexPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header style={{ background: 'rgba(10,15,29,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.12)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 640, margin: '0 auto', padding: '12px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{ color: '#fff', fontWeight: 900, fontSize: 17 }}>🌙 Abam<span style={{ fontSize: 13, color: '#e0b04a' }}>.kr</span></Link>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: 18, fontWeight: 900, color: '#ffffff', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              🌙 <span className="abam-script-font" style={{ fontSize: 24, color: '#fef08a', fontStyle: 'italic', verticalAlign: 'middle' }}>아름다운 밤</span> <span style={{ color: '#e11d48' }}>아밤</span>
+            </span>
+          </Link>
           <Link href="/keywords" style={{ color: '#cbd5e1', fontSize: 12 }}>전체지역</Link>
         </div>
       </header>
       <main style={{ maxWidth: 640, margin: '16px auto', background: 'rgba(255,255,255,0.95)', borderRadius: 16, padding: '22px 18px 120px' }}>
+        <div className="abam-copperplate-en" style={{ fontSize: 18, color: '#d97706', letterSpacing: '0.06em', marginBottom: 4, lineHeight: 1.2 }}>
+          Essential Guide & Price Manual · Beautiful Night
+        </div>
         <h1 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 8px', lineHeight: 1.35 }}>출장마사지 이용 가이드</h1>
         <p style={{ fontSize: 13, lineHeight: 1.7, color: '#475569', margin: '0 0 18px' }}>
           서울·경기 전역 자택·호텔 프라이빗 1:1 방문 홈케어를 처음 이용하는 분들이 자주 궁금해하는 가격, 예약 방법, 호텔 이용, 코스 선택을 정리했습니다.

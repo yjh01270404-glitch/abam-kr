@@ -62,15 +62,22 @@ export default async function GuidePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header style={{ background: 'rgba(10,15,29,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.12)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 640, margin: '0 auto', padding: '12px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{ color: '#fff', fontWeight: 900, fontSize: 17 }}>🌙 Abam<span style={{ fontSize: 13, color: '#e0b04a' }}>.kr</span></Link>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: 18, fontWeight: 900, color: '#ffffff', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              🌙 <span className="abam-script-font" style={{ fontSize: 24, color: '#fef08a', fontStyle: 'italic', verticalAlign: 'middle' }}>아름다운 밤</span> <span style={{ color: '#e11d48' }}>아밤</span>
+            </span>
+          </Link>
           <Link href="/guide" style={{ color: '#cbd5e1', fontSize: 12 }}>이용 가이드</Link>
         </div>
       </header>
 
       <main style={{ maxWidth: 640, margin: '16px auto', background: 'rgba(255,255,255,0.95)', borderRadius: 16, padding: '22px 18px 120px' }}>
         <article>
+          <div className="abam-copperplate-en" style={{ fontSize: 17, color: '#d97706', letterSpacing: '0.06em', marginBottom: 4, lineHeight: 1.2 }}>
+            Official Safety Guide · Beautiful Night
+          </div>
           <h1 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 8px', lineHeight: 1.35 }}>{g.h1}</h1>
-          <p style={{ fontSize: 12, color: '#64748b', margin: '0 0 16px' }}>Abam.kr · 아름다운 밤, 당신을 위한 특별한 시간 · 최종 업데이트 {g.published}</p>
+          <p style={{ fontSize: 12.5, color: '#64748b', margin: '0 0 16px' }}>Abam.kr · <span className="abam-script-font" style={{ fontSize: 16, color: '#d97706', fontStyle: 'italic' }}>아름다운 밤</span>, 당신을 위한 특별한 시간 · 최종 업데이트 {g.published}</p>
           <p style={{ fontSize: 13.5, lineHeight: 1.75, color: '#334155', margin: '0 0 8px' }}>{g.description}</p>
 
           {g.sections.map((s) => (
