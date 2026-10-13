@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import AbamBrandLogo from "../../../components/AbamBrandLogo";
 import AbamBottomBookingBar from "../../../components/AbamBottomBookingBar";
 import {
@@ -18,7 +18,7 @@ type Props = { params: Promise<{ keyword: string }> };
 
 export const dynamic = "force-static";
 export const revalidate = 86400; // 하루(86400초) 캐시
-export const dynamicParams = false;
+export const dynamicParams = true; // 구 타사 링크나 미등록 URL 접근 시 404 방지 및 자동 리다이렉트
 
 const SITE_URL  = "https://abam.kr";
 const SMS_HREF  = "sms:01066072239";
@@ -162,9 +162,11 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function SeoLandingPage({ params }: Props) {
   const { keyword } = await params;
-  const data = generateSeoPageData(keyword);
   const decoded = decodeURIComponent(keyword).replace(/-/g, " ");
-  if (!isServedKeyword(decoded)) notFound();
+  if (!isServedKeyword(decoded)) {
+    redirect('/seo/아밤출장마사지');
+  }
+  const data = generateSeoPageData(keyword);
   const district = data.district;
   const canonicalUrl = `${SITE_URL}/seo/${encodeURIComponent(decoded.replace(/\s+/g, "-"))}`;
 
