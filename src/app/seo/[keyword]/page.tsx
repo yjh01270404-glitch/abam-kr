@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import AbamBrandLogo from "../../../components/AbamBrandLogo";
 import {
   SERVED_KEYWORDS,
   INDEXABLE_KEYWORDS,
@@ -274,20 +275,7 @@ export default async function SeoLandingPage({ params }: Props) {
         <div style={{ maxWidth: "640px", margin: "0 auto", padding: "12px 18px 10px" }}>
           
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
-            <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                <span style={{ fontSize: "20px" }}>🌙</span>
-                <span className="abam-script-font" style={{
-                  fontSize: "26px",
-                  color: "#fef08a",
-                  fontStyle: "italic",
-                  transform: "rotate(-1deg) skewX(-6deg)",
-                  display: "inline-block",
-                  lineHeight: 1,
-                }}>아름다운밤</span>
-                <span style={{ fontSize: "16px", fontWeight: 900, color: "#e11d48", letterSpacing: "-0.3px" }}>[아밤.Abam.kr]</span>
-              </span>
-            </Link>
+            <AbamBrandLogo size="compact" />
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <Link href="/keywords" style={{ fontSize: "12px", color: "#cbd5e1", fontWeight: 700, textDecoration: "none", padding: "4px 8px", borderRadius: "6px", backgroundColor: "rgba(255, 255, 255, 0.08)", border: "1px solid rgba(255, 255, 255, 0.15)" }}>
                 전체지역

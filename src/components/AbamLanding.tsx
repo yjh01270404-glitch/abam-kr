@@ -1133,17 +1133,18 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <span className="abam-script-font abam-header-title-text" style={{
                 fontSize: '29px',
-                fontFamily: "'KccEunyeong', 'Pinyon Script', cursive",
+                fontFamily: "'KccEunyeong', 'Pinyon Script', cursive, sans-serif",
                 fontStyle: 'italic',
                 fontWeight: 'normal',
-                transform: 'rotate(-1deg) skewX(-6deg)',
+                transform: 'rotate(-2deg) skewX(-7deg)',
                 display: 'inline-block',
-                background: 'linear-gradient(180deg, #ffffff 15%, #fef08a 65%, #f59e0b 100%)',
+                background: 'linear-gradient(180deg, #ffffff 10%, #fef08a 60%, #f59e0b 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                filter: 'drop-shadow(0 2px 8px rgba(245,158,11,0.5))',
+                filter: 'drop-shadow(0 2px 14px rgba(245,158,11,0.6))',
                 lineHeight: 1,
-                padding: '0 2px',
+                padding: '0 3px',
+                letterSpacing: '0.01em',
               }}>{t.logoA}</span>
               <span className="abam-header-tag-text" style={{ fontSize: '18px', fontWeight: 900, color: C.pointRed, letterSpacing: '-0.3px', lineHeight: 1 }}>{t.heroTag}</span>
             </span>

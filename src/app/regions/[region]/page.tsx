@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import AbamBrandLogo from '../../../components/AbamBrandLogo';
+
 export const dynamic = 'force-static';
 export const revalidate = 86400;
 
@@ -228,11 +230,7 @@ export default async function RegionHubPage({ params }: { params: Promise<{ regi
       {/* 헤더 */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(12,13,17,0.96)', borderBottom: '1px solid #282b36', padding: '12px 16px' }}>
         <div style={{ maxWidth: '860px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '20px' }}>🌙</span>
-            <span style={{ fontSize: '20px', fontWeight: 900, color: '#fef08a' }}>아름다운밤</span>
-            <span style={{ fontSize: '14px', fontWeight: 900, color: '#e11d48' }}>[아밤.Abam.kr]</span>
-          </Link>
+          <AbamBrandLogo size="header" />
           <div style={{ display: 'flex', gap: '8px' }}>
             <Link href="/keywords" style={{ fontSize: '13px', color: '#cbd5e1', textDecoration: 'none', padding: '5px 10px', background: '#1c1f28', borderRadius: '6px', border: '1px solid #3a3f50' }}>전체 지역</Link>
             <Link href="/" style={{ fontSize: '13px', color: '#1a1204', fontWeight: 800, textDecoration: 'none', padding: '5px 10px', background: '#f59e0b', borderRadius: '6px' }}>메인홈</Link>

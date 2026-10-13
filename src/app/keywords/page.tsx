@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SERVED_KEYWORDS } from '../../lib/seo-keywords';
+import AbamBrandLogo from '../../components/AbamBrandLogo';
 
 export const metadata: Metadata = {
   title: '서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
@@ -60,20 +61,7 @@ export default function KeywordsPage() {
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '12px 18px 10px' }}>
           
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ fontSize: '20px' }}>🌙</span>
-                <span className="abam-script-font" style={{
-                  fontSize: '26px',
-                  color: '#fef08a',
-                  fontStyle: 'italic',
-                  transform: 'rotate(-1deg) skewX(-6deg)',
-                  display: 'inline-block',
-                  lineHeight: 1,
-                }}>아름다운밤</span>
-                <span style={{ fontSize: '16px', fontWeight: 900, color: '#e11d48', letterSpacing: '-0.3px' }}>[아밤.Abam.kr]</span>
-              </span>
-            </Link>
+            <AbamBrandLogo size="compact" />
             <Link href="/" style={{ fontSize: '12px', color: '#0f172a', fontWeight: 800, textDecoration: 'none', padding: '4px 10px', borderRadius: '6px', backgroundColor: '#ffffff' }}>
               메인홈
             </Link>
