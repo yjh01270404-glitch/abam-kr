@@ -10,6 +10,7 @@
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "index:push": "node scripts/auto-indexing-engine.js",
     "index:daemon": "node scripts/auto-indexing-engine.js --daemon",
+    "backlink:publish": "node scripts/publish-authority-backlinks.js",
     "lint": "eslint"
   },
   "dependencies": {

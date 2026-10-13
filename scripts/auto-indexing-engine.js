@@ -1,8 +1,13 @@
 /**
  * scripts/auto-indexing-engine.js
- * 아밤(Abam.kr) 실시간 고속 검색엔진 색인 엔진
- * 1. Google Indexing API (Service Account OAuth2) -> 구글봇 실시간 크롤링 강제 디스패치
- * 2. IndexNow API -> 네이버 서치어드바이저 / Bing / Yandex 실시간 전송
+ * 아밤(Abam.kr) 실시간 고속 검색엔진 색인 엔진 (v3 고도화 버전)
+ * 
+ * 1. IndexNow API (네이버 서치어드바이저 / Bing / Yandex)
+ *    - sitemap.xml 전체 URL (575+개) 일괄 즉시 디스패치
+ * 2. Google Indexing API (Service Account OAuth2 JWT)
+ *    - 대형 핵심 키워드(서울출장마사지, 경기출장마사지, 강남출장마사지 등) 및 
+ *      핵심 거점/경쟁사 공략 URL을 우선순위 큐(Priority Queue) 기반으로 1일 쿼터(200건) 최대 푸시
+ * 3. 주기적 자동 실행 (--daemon) 지원: 백그라운드 상주 모드로 6시간 주기 자동 갱신
  */
 
 const crypto = require('crypto');
@@ -12,6 +17,7 @@ const path = require('path');
 
 const SITE_URL = 'https://abam.kr';
 const INDEXNOW_KEY = 'abam1234567890abcdefabcdefabcdef';
+const SITEMAP_URL = `${SITE_URL}/sitemap.xml`;
 
 // 1. Google Service Account Token Generation
 async function getGoogleAccessToken() {
@@ -106,95 +112,118 @@ async function submitIndexNow(urlList) {
   }
 }
 
-// 3. Priority URL Target List
-const CORE_URLS = [
+// 3. 사이트맵 동적 추출
+async function fetchSitemapUrls() {
+  try {
+    const res = await fetch(SITEMAP_URL);
+    if (!res.ok) throw new Error(`사이트맵 응답 실패: ${res.status}`);
+    const xml = await res.text();
+    const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].trim());
+    return urls;
+  } catch (err) {
+    console.warn(`[주의] 라이브 사이트맵 로드 실패 (${err.message}). 기본 목록으로 대체합니다.`);
+    return [];
+  }
+}
+
+// 4. 최우선 구글 색인 대상 (SEO 우선순위 큐)
+const HIGH_PRIORITY_KEYWORDS = [
+  // 1티어: 대형 메가 키워드
+  '출장마사지', '출장안마', '출장마사지1위', '출장안마1위',
+  '서울출장마사지', '경기출장마사지', '수도권출장마사지',
+  '강남출장마사지', '강남출장안마', '역삼출장마사지', '선릉출장마사지', '서초출장마사지', '송파출장마사지', '잠실출장마사지',
+  '마포출장마사지', '홍대출장마사지', '영등포출장마사지', '여의도출장마사지', '용산출장마사지', '한남출장마사지',
+  '수원출장마사지', '분당출장마사지', '판교출장마사지', '일산출장마사지', '부천출장마사지', '인천출장마사지',
+  '평택출장마사지', '동탄출장마사지', '안양출장마사지', '김포출장마사지', '하남출장마사지', '광명출장마사지',
+  // 2티어: 경쟁사 정복 키워드
+  '도도출장마사지', '도도출장안마', '스피드출장마사지', '스피드출장안마',
+  '나비출장마사지', '황제출장마사지', '에이스출장마사지', '원출장마사지',
+  '출장마사지비교', '선입금없는출장마사지', '후불제출장마사지', '후불제출장안마', '20대출장마사지', '호텔출장마사지',
+];
+
+const CORE_STATIC_URLS = [
   SITE_URL,
   `${SITE_URL}/keywords`,
   `${SITE_URL}/guide`,
   `${SITE_URL}/guide/outcall-massage-scam-prevention-comparison`,
   `${SITE_URL}/guide/chuljang-massage-price`,
+  `${SITE_URL}/guide/outcall-massage-platform-ranking-comparison`,
+  `${SITE_URL}/guide/late-night-massage`,
+  `${SITE_URL}/guide/how-to-book-outcall-massage`,
   `${SITE_URL}/en`,
   `${SITE_URL}/jp`,
   `${SITE_URL}/cn`,
-  `${SITE_URL}/guide/late-night-massage`,
-  `${SITE_URL}/guide/how-to-book-outcall-massage`,
 ];
-
-const COMPETITOR_URLS = [
-  `${SITE_URL}/seo/%EB%8F%84%EB%8F%84%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80`,
-  `${SITE_URL}/seo/%EB%8F%84%EB%8F%84%EC%B6%9C%EC%9E%A5%EC%95%88%EB%A7%88`,
-  `${SITE_URL}/seo/%EC%8A%A4%ED%94%BC%EB%93%9C%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80`,
-  `${SITE_URL}/seo/%EC%8A%A4%ED%94%BC%EB%93%9C%EC%B6%9C%EC%9E%A5%EC%95%88%EB%A7%88`,
-  `${SITE_URL}/seo/%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80%EB%B9%84%EA%B5%90`,
-  `${SITE_URL}/seo/%EC%84%A0%EC%9E%85%EA%B8%88%EC%97%86%EB%8A%94%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80`,
-  `${SITE_URL}/seo/%ED%9B%84%EB%B6%88%EC%A0%9C%EC%B6%9C%EC%9E%A5%EB%A7%88%EC%82%AC%EC%A7%80`,
-  `${SITE_URL}/seo/%ED%9B%84%EB%B6%88%EC%A0%9C%EC%B6%9C%EC%9E%A5%EC%95%88%EB%A7%88`,
-];
-
-const METRO_HUBS = [
-  '출장마사지', '출장안마', '출장마사지1위', '출장안마1위', '출장홈타이', '방문마사지', '20대출장마사지', '호텔출장마사지',
-  '서울출장마사지', '경기출장마사지', '평택출장마사지',
-  '강남출장마사지', '강남출장안마', '역삼출장마사지', '서초출장마사지', '송파출장마사지', '잠실출장마사지', '마포출장마사지', '영등포출장마사지', '여의도출장마사지', '용산출장마사지',
-  '수원출장마사지', '분당출장마사지', '판교출장마사지', '일산출장마사지', '부천출장마사지', '안양출장마사지', '김포출장마사지', '동탄출장마사지', '하남출장마사지', '광명출장마사지',
-];
-
-const TARGET_URLS = Array.from(
-  new Set([
-    ...CORE_URLS,
-    ...COMPETITOR_URLS,
-    ...METRO_HUBS.map(k => `${SITE_URL}/seo/${encodeURIComponent(k)}`)
-  ])
-);
 
 async function main() {
-  console.log('=====================================================');
-  console.log('  아밤(Abam.kr) 실시간 고속 색인 트리거 가동');
-  console.log('=====================================================');
+  console.log('================================================================');
+  console.log('  아밤(Abam.kr) 실시간 고속 색인 트리거 가동 (Google & IndexNow)');
+  console.log('================================================================');
 
-  // 1. IndexNow bulk push
-  console.log('\n[1단계] IndexNow (네이버·Bing·Yandex) 대량 전송 중...');
-  const indexNowResult = await submitIndexNow(TARGET_URLS);
-  console.log(`- 결과: HTTP ${indexNowResult.status} (${indexNowResult.count}개 URL 전송 완료)`);
+  // 사이트맵에서 실시간 URL 수집
+  const sitemapUrls = await fetchSitemapUrls();
+  console.log(`- 사이트맵 실시간 감지: ${sitemapUrls.length}개 URL 확인`);
 
-  // 2. Google Indexing API push
-  console.log('\n[2단계] Google Indexing API 실시간 구글봇 호출...');
+  const priorityUrls = HIGH_PRIORITY_KEYWORDS.map(k => `${SITE_URL}/seo/${encodeURIComponent(k)}`);
+  
+  // 전체 색인 대상 URL (중복 제거)
+  const allTargetUrls = Array.from(new Set([
+    ...CORE_STATIC_URLS,
+    ...priorityUrls,
+    ...sitemapUrls
+  ]));
+
+  console.log(`- 최종 색인 대상 풀: 총 ${allTargetUrls.length}개 URL`);
+
+  // [1단계] IndexNow 대량 전송 (네이버 서치어드바이저 / Bing / Yandex)
+  console.log('\n[1단계] IndexNow 대량 전송 (네이버·Bing·Yandex)...');
+  const indexNowResult = await submitIndexNow(allTargetUrls);
+  console.log(`- IndexNow 전송 결과: HTTP ${indexNowResult.status} (${indexNowResult.count}개 URL 일괄 접수 완료)`);
+
+  // [2단계] Google Indexing API 우선순위 큐 실시간 푸시
+  console.log('\n[2단계] Google Indexing API 실시간 구글봇 호출 (우선순위 큐)...');
   try {
     const token = await getGoogleAccessToken();
-    console.log('- Google OAuth2 인증 성공');
+    console.log('- Google OAuth2 서비스 계정 인증 성공');
     let success = 0;
     let failed = 0;
-    let quotaHit = false;
+    let quotaExceeded = false;
 
-    for (let i = 0; i < TARGET_URLS.length; i++) {
-      const url = TARGET_URLS[i];
+    // Google API 1일 최대 쿼터 200건 타깃팅
+    const googleTargets = allTargetUrls.slice(0, 150);
+
+    for (let i = 0; i < googleTargets.length; i++) {
+      const url = googleTargets[i];
       const res = await publishGoogleUrl(token, url);
       if (res.statusCode === 200) {
         success++;
-        console.log(`  [200 OK] 크롤링 디스패치: ${decodeURIComponent(url)}`);
+        console.log(`  [200 OK] 크롤링 디스패치 (${i + 1}/${googleTargets.length}): ${decodeURIComponent(url)}`);
       } else {
         failed++;
         if (res.body && res.body.includes('Quota exceeded')) {
-          console.log(`  [안내] 금일 Google Indexing API 1일 쿼터(200회) 도달. (내일 00시 자동 리셋)`);
-          quotaHit = true;
+          console.log(`\n  [안내] 금일 Google Indexing API 1일 쿼터 도달. (성공: ${success}건)`);
+          quotaExceeded = true;
           break;
         } else {
-          console.log(`  [${res.statusCode}] 대기: ${decodeURIComponent(url)}`);
+          console.log(`  [${res.statusCode}] 대기/오류: ${decodeURIComponent(url)}`);
         }
       }
+      // API Rate Limit 준수 (120ms 대기)
       await new Promise(r => setTimeout(r, 120));
     }
-    console.log(`- 구글봇 실시간 전송: 성공 ${success}건 / 잔여 쿼터 대기 ${failed}건`);
+
+    console.log(`\n- 구글봇 실시간 전송 완료: 성공 ${success}건 / 잔여 쿼터 대기 ${failed}건`);
   } catch (err) {
     console.error('- Google Indexing API 오류:', err.message);
   }
 
-  console.log('\n=====================================================');
+  console.log('\n================================================================');
   console.log('  고속 색인 트리거 작업 완료');
-  console.log('=====================================================');
+  console.log('================================================================');
 }
 
 const isDaemon = process.argv.includes('--daemon');
-const INTERVAL_MS = 6 * 60 * 60 * 1000; // 6시간 주기 자동 핑
+const INTERVAL_MS = 6 * 60 * 60 * 1000; // 6시간 주기 자동 갱신
 
 async function runLoop() {
   await main();
