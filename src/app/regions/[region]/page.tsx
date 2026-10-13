@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import AbamBrandLogo from '../../../components/AbamBrandLogo';
+import AbamBottomBookingBar from '../../../components/AbamBottomBookingBar';
 
 export const dynamic = 'force-static';
 export const revalidate = 86400;
@@ -246,7 +247,7 @@ export default async function RegionHubPage({ params }: { params: Promise<{ regi
       </div>
 
       {/* 메인 히어로 컨테이너 */}
-      <main style={{ maxWidth: '860px', margin: '20px auto 0', padding: '0 16px' }}>
+      <main style={{ maxWidth: '860px', margin: '20px auto 0', padding: '0 16px 100px' }}>
         <div style={{ background: '#15171e', border: '1px solid #282b36', borderRadius: '14px', padding: '28px 22px', textAlign: 'center', marginBottom: '24px' }}>
           <div style={{ display: 'inline-block', background: 'rgba(245, 158, 11, 0.15)', border: '1px solid rgba(245, 158, 11, 0.35)', color: '#fef08a', fontSize: '13px', fontWeight: 800, padding: '4px 12px', borderRadius: '999px', marginBottom: '14px' }}>
             {hub.badge}
@@ -349,6 +350,9 @@ export default async function RegionHubPage({ params }: { params: Promise<{ regi
           </div>
         </section>
       </main>
+
+      {/* 실시간 하단 고정 전화/문자 예약 바 */}
+      <AbamBottomBookingBar smsMessage={`[아밤 ${hub.name} 예약문의] 코스 및 예약 문의드립니다.`} />
     </div>
   );
 }

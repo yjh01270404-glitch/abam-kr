@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import AbamBrandLogo from '../../../components/AbamBrandLogo';
+import AbamBottomBookingBar from '../../../components/AbamBottomBookingBar';
 import { GUIDES, getGuide } from '../../../lib/guides';
 import { DISTRICTS, hubKeywordFor } from '../../../lib/region-data';
 
@@ -122,6 +123,9 @@ export default async function GuidePage({ params }: Props) {
           </div>
         </section>
       </main>
+
+      {/* 하단 고정 전화/문자 예약 바 */}
+      <AbamBottomBookingBar smsMessage={`[아밤 가이드 문의 - ${g.title}] 코스 및 예약 문의드립니다.`} />
     </div>
   );
 }

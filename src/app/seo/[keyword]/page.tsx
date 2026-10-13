@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import AbamBrandLogo from "../../../components/AbamBrandLogo";
+import AbamBottomBookingBar from "../../../components/AbamBottomBookingBar";
 import {
   SERVED_KEYWORDS,
   INDEXABLE_KEYWORDS,
@@ -649,88 +650,8 @@ export default async function SeoLandingPage({ params }: Props) {
 
       </main>
 
-      {/* 3. 모바일 하단 플로팅 예약 바 */}
-      <aside aria-label="상담 예약" style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        background: "rgba(255, 255, 255, 0.98)",
-        backdropFilter: "blur(12px)",
-        borderTop: "1px solid #e2e8f0",
-        padding: "8px 16px calc(8px + env(safe-area-inset-bottom, 0px))",
-        zIndex: 100,
-        boxShadow: "0 -4px 16px rgba(0,0,0,0.06)",
-      }}>
-        <div style={{ maxWidth: "640px", margin: "0 auto", display: "flex", gap: "8px", alignItems: "center" }}>
-          
-          <a
-            href={SMS_HREF}
-            style={{
-              flex: 1.3,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "6px",
-              background: "#242836",
-              color: "#ffffff",
-              padding: "12px 0",
-              borderRadius: "10px",
-              fontWeight: 900,
-              fontSize: "14px",
-              textDecoration: "none",
-              border: "1px solid #3a3f50",
-            }}
-          >
-            <span>✉️ 문자 간편예약</span>
-          </a>
-
-          <a
-            href={PHONE_TEL}
-            style={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "5px",
-              background: "#0f172a",
-              color: "#ffffff",
-              padding: "12px 0",
-              borderRadius: "10px",
-              fontWeight: 800,
-              fontSize: "13.5px",
-              textDecoration: "none",
-              boxShadow: "0 2px 8px rgba(15,23,42,0.15)",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="#ffffff"/></svg>
-            <span>전화예약</span>
-          </a>
-
-          <a
-            href="https://wa.me/821066072239?text=Hello%20Abam%20Spa"
-            target="_blank"
-            rel="noreferrer"
-            title="WhatsApp"
-            style={{
-              width: "42px",
-              height: "42px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#25D366",
-              color: "#ffffff",
-              borderRadius: "10px",
-              flexShrink: 0,
-              textDecoration: "none",
-              boxShadow: "0 2px 8px rgba(37,211,102,0.3)",
-            }}
-          >
-            <span style={{ fontSize: "18px" }}>💬</span>
-          </a>
-
-        </div>
-      </aside>
+      {/* 3. 실시간 하단 고정 전화/문자 예약 바 */}
+      <AbamBottomBookingBar smsMessage={`[아밤 ${decoded} 예약문의] 코스 및 예약 문의드립니다.`} />
 
     </div>
   );

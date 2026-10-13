@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GUIDES } from '../../lib/guides';
 import AbamBrandLogo from '../../components/AbamBrandLogo';
+import AbamBottomBookingBar from '../../components/AbamBottomBookingBar';
 
 export const metadata: Metadata = {
   title: { absolute: '출장마사지 이용 가이드 — 가격·예약·호텔 총정리 | Abam.kr' },
@@ -48,6 +49,9 @@ export default function GuideIndexPage() {
           예약·문의: <a href={PHONE_TEL} style={{ fontWeight: 800 }}>010-6607-2239</a> · 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 · 서울·경기 전역 자택·호텔 방문
         </p>
       </main>
+
+      {/* 하단 고정 전화/문자 예약 바 */}
+      <AbamBottomBookingBar smsMessage="[아밤 가이드 문의] 코스 및 예약 문의드립니다." />
     </div>
   );
 }
