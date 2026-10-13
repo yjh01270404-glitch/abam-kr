@@ -652,6 +652,35 @@ export default async function SeoLandingPage({ params }: Props) {
           </div>
         </section>
 
+        {/* E-E-A-T 신뢰도 & 안심 보장 5대 원칙 */}
+        <section style={{ padding: "20px 0", borderBottom: "1px solid #f1f3f4" }}>
+          <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#202124", margin: "0 0 12px 0" }}>
+            아름다운밤 [아밤.Abam.kr] 5대 안심 보장 원칙
+          </h2>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "10px", fontSize: "12.5px", color: "#374151", lineHeight: 1.6 }}>
+            <div style={{ background: "#f8fafc", padding: "12px 14px", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+              <strong style={{ color: "#0f172a" }}>1. 100% 현장후불제 (사전 예약금 0원):</strong>
+              <div style={{ marginTop: "2px", color: "#64748b" }}>어떠한 명목으로도 선입금을 요구하지 않습니다. 매니저 도착 후 현장에서 직접 안심 결제하세요.</div>
+            </div>
+            <div style={{ background: "#f8fafc", padding: "12px 14px", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+              <strong style={{ color: "#0f172a" }}>2. 전원 20대 전문 에이스 관리사 라인업:</strong>
+              <div style={{ marginTop: "2px", color: "#64748b" }}>체계적인 마인드 교육과 실력 검증을 완료한 전원 20대 테라피스트만이 1:1로 방문 케어합니다.</div>
+            </div>
+            <div style={{ background: "#f8fafc", padding: "12px 14px", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+              <strong style={{ color: "#0f172a" }}>3. 서울 25개 구 및 경기 전역 신속 방문:</strong>
+              <div style={{ marginTop: "2px", color: "#64748b" }}>자택·아파트·오피스텔·호텔 어디서든 18:00 예약 접수, 19:00부터 순차 출발하여 편안하게 이용 가능합니다.</div>
+            </div>
+            <div style={{ background: "#f8fafc", padding: "12px 14px", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+              <strong style={{ color: "#0f172a" }}>4. 최고급 위생 케어 키트 & 천연 오일 사용:</strong>
+              <div style={{ marginTop: "2px", color: "#64748b" }}>철저한 위생 관리 하에 1회용 고급 타월 및 순수 식물성 천연 에센셜 아로마 오일만을 고집합니다.</div>
+            </div>
+            <div style={{ background: "#f8fafc", padding: "12px 14px", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+              <strong style={{ color: "#0f172a" }}>5. 거품 없는 투명한 정찰제 가격 정책:</strong>
+              <div style={{ marginTop: "2px", color: "#64748b" }}>타이 60분 8만 원, 아로마 60분 9만 원, 스페셜 60분 10만 원 등 기재된 금액 외 추가 옵션 강요가 일체 없습니다.</div>
+            </div>
+          </div>
+        </section>
+
         {/* 이용 수칙 안내 */}
         <section id="guide-section" style={{ padding: "20px 0", borderBottom: "1px solid #f1f3f4" }}>
           <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#202124", margin: "0 0 14px 0" }}>
