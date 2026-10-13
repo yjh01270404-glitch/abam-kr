@@ -30,9 +30,9 @@ export interface UiStrings {
 
 export const UI: Record<UiLang, UiStrings> = {
   ko: {
-    logoA: '아름다운 밤', logoB: '아밤', badge: '100% 대면결제',
+    logoA: '아름다운밤', logoB: '아밤', badge: '100% 대면결제',
     hnav: ['소개', '코스', '안내', '후기', 'FAQ'],
-    heroMain: '아름다운 밤', heroTag: '[아밤 · Abam]',
+    heroMain: '아름다운밤', heroTag: '[아밤.Abam.kr]',
     heroSub: '서울·경기 전역 1:1 방문 홈케어 출장안마 · 출장마사지',
     leadA: '‘아름다운 밤’', leadB: '을 약속드리는 1:1 프리미엄 케어, 그래서 ', leadC: '아밤(Abam)', leadD: '입니다.',
     leadE: '고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.',

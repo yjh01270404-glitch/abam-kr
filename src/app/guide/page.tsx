@@ -33,8 +33,8 @@ export default function GuideIndexPage() {
                 transform: 'rotate(-1deg) skewX(-6deg)',
                 display: 'inline-block',
                 lineHeight: 1,
-              }}>아름다운 밤</span>
-              <span style={{ fontSize: '16px', fontWeight: 900, color: '#e11d48', letterSpacing: '-0.3px' }}>[아밤 · Abam]</span>
+              }}>아름다운밤</span>
+              <span style={{ fontSize: '16px', fontWeight: 900, color: '#e11d48', letterSpacing: '-0.3px' }}>[아밤.Abam.kr]</span>
             </span>
           </Link>
           <Link href="/keywords" style={{ color: '#cbd5e1', fontSize: 12 }}>전체지역</Link>
