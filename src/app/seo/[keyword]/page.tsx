@@ -18,7 +18,7 @@ type Props = { params: Promise<{ keyword: string }> };
 
 export const dynamic = "force-static";
 export const revalidate = 86400; // 하루(86400초) 캐시
-export const dynamicParams = true; // 구 타사 링크나 미등록 URL 접근 시 404 방지 및 자동 리다이렉트
+export const dynamicParams = false;
 
 const SITE_URL  = "https://abam.kr";
 const SMS_HREF  = "sms:01066072239";
