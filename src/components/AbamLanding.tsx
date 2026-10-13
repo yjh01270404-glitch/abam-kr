@@ -1703,11 +1703,18 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <p style={{ fontSize: '13.5px', color: C.textMuted, lineHeight: 1.65, margin: '0 0 14px', wordBreak: 'keep-all' }}>{c.footer.sub}</p>
           {areaLinks && areaLinks.length > 0 && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '7px 10px', fontSize: '12.5px', marginBottom: '16px' }}>
-              {areaLinks.slice(0, 36).map((area, i) => (
-                <Link key={i} href={`/seo/${encodeURIComponent(area)}`} style={{ textDecoration: 'none', color: '#64748b' }}>{area}</Link>
+              {areaLinks.slice(0, 80).map((area, i) => (
+                <Link key={i} href={`/seo/${encodeURIComponent(area)}`} style={{ textDecoration: 'none', color: i < 5 ? '#f59e0b' : '#94a3b8', fontWeight: i < 5 ? 700 : 400 }}>{area}</Link>
               ))}
             </div>
           )}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 14px', fontSize: '13px', margin: '14px 0', padding: '12px 0', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+            <Link href="/keywords" style={{ color: '#fef08a', textDecoration: 'none', fontWeight: 700 }}>전체 570+ 지역 디렉터리 →</Link>
+            <Link href="/guide/chuljang-massage-price" style={{ color: '#cbd5e1', textDecoration: 'none' }}>출장마사지 정찰 가격표</Link>
+            <Link href="/guide/outcall-massage-scam-prevention-comparison" style={{ color: '#cbd5e1', textDecoration: 'none' }}>선입금 사기 예방 가이드</Link>
+            <Link href="/guide/outcall-massage-platform-ranking-comparison" style={{ color: '#cbd5e1', textDecoration: 'none' }}>플랫폼 순위 및 비교</Link>
+            <Link href="/guide/late-night-massage" style={{ color: '#cbd5e1', textDecoration: 'none' }}>심야 방문 케어 안내</Link>
+          </div>
           <div style={{ fontSize: '12.5px', color: '#64748b', lineHeight: 1.65 }}>{c.footer.line}</div>
         </footer>
 
