@@ -1062,31 +1062,32 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <div className="abam-header-inner">
           
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 6px rgba(245,158,11,0.9))' }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.9))' }}>
               <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#headerMoonGrad)" />
               <defs>
                 <linearGradient id="headerMoonGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#fef08a" />
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="35%" stopColor="#fef08a" />
                   <stop offset="100%" stopColor="#f59e0b" />
                 </linearGradient>
               </defs>
             </svg>
-            <span style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
               <span className="abam-script-font" style={{
-                fontSize: '32px',
-                color: '#fef08a',
+                fontSize: '29px',
                 fontFamily: "'KccEunyeong', 'Pinyon Script', cursive",
                 fontStyle: 'italic',
                 fontWeight: 'normal',
-                transform: 'skewX(-6deg)',
+                transform: 'rotate(-1deg) skewX(-6deg)',
                 display: 'inline-block',
-                textShadow: '0 0 10px rgba(254,240,138,0.7)',
+                background: 'linear-gradient(180deg, #ffffff 15%, #fef08a 65%, #f59e0b 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: 'drop-shadow(0 2px 8px rgba(245,158,11,0.5))',
                 lineHeight: 1,
+                padding: '0 2px',
               }}>{t.logoA}</span>
-              {isKo ? ' ' : ''}<span style={{ color: C.pointRed }}>{t.logoB}</span>
-            </span>
-            <span className="abam-header-badge" style={{ fontSize: '11px', fontWeight: 700, color: C.pointGold, border: `1px solid ${C.lineLight}`, background: 'rgba(245,158,11,0.08)', padding: '2px 6px', borderRadius: '4px' }}>
-              {t.badge}
+              <span style={{ fontSize: '18px', fontWeight: 900, color: C.pointRed, letterSpacing: '-0.3px', lineHeight: 1 }}>{t.heroTag}</span>
             </span>
           </Link>
 

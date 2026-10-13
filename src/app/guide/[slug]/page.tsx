@@ -62,9 +62,18 @@ export default async function GuidePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header style={{ background: 'rgba(10,15,29,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.12)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 640, margin: '0 auto', padding: '12px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ fontSize: 18, fontWeight: 900, color: '#ffffff', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-              🌙 <span className="abam-script-font" style={{ fontSize: 24, color: '#fef08a', fontStyle: 'italic', verticalAlign: 'middle' }}>아름다운 밤</span> <span style={{ color: '#e11d48' }}>아밤</span>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '20px' }}>🌙</span>
+              <span className="abam-script-font" style={{
+                fontSize: '26px',
+                color: '#fef08a',
+                fontStyle: 'italic',
+                transform: 'rotate(-1deg) skewX(-6deg)',
+                display: 'inline-block',
+                lineHeight: 1,
+              }}>아름다운 밤</span>
+              <span style={{ fontSize: '16px', fontWeight: 900, color: '#e11d48', letterSpacing: '-0.3px' }}>[아밤 · Abam]</span>
             </span>
           </Link>
           <Link href="/guide" style={{ color: '#cbd5e1', fontSize: 12 }}>이용 가이드</Link>

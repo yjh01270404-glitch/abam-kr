@@ -274,9 +274,18 @@ export default async function SeoLandingPage({ params }: Props) {
         <div style={{ maxWidth: "640px", margin: "0 auto", padding: "12px 18px 10px" }}>
           
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
-            <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ fontSize: "18px", fontWeight: 900, color: "#ffffff", letterSpacing: "-0.3px", display: "inline-flex", alignItems: "center", gap: "4px" }}>
-                🌙 <span className="abam-script-font" style={{ fontSize: "24px", color: "#fef08a", fontStyle: "italic", verticalAlign: "middle" }}>아름다운 밤</span> <span style={{ color: "#e11d48" }}>아밤</span>
+            <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                <span style={{ fontSize: "20px" }}>🌙</span>
+                <span className="abam-script-font" style={{
+                  fontSize: "26px",
+                  color: "#fef08a",
+                  fontStyle: "italic",
+                  transform: "rotate(-1deg) skewX(-6deg)",
+                  display: "inline-block",
+                  lineHeight: 1,
+                }}>아름다운 밤</span>
+                <span style={{ fontSize: "16px", fontWeight: 900, color: "#e11d48", letterSpacing: "-0.3px" }}>[아밤 · Abam]</span>
               </span>
             </Link>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
