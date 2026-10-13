@@ -3,6 +3,7 @@
 // 단순 키워드 치환(도어웨이 페이지)이 아닌, 지역별로 가치 있는 고유 콘텐츠가 되도록 구성합니다.
 
 export type DistrictInfo = {
+  city?: string;         // '서울' | '부산'
   gu: string;            // 자치구 정식 명칭 (예: 강남구)
   short: string;         // 검색어용 약칭 (예: 강남)
   areas: string[];       // 주요 동·생활권

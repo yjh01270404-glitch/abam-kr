@@ -309,6 +309,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       
       {/* ── 브라우저 기본 스크롤 및 고딕 폰트 지정 + 히어로 화려한 별빛 & 유성 애니메이션 ── */}
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Brush+Script&display=swap');
+
+        .abam-script-font {
+          font-family: 'Nanum Pen Script', 'Nanum Brush Script', cursive, sans-serif !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.04em !important;
+        }
+
         html { scroll-behavior: smooth; font-family: ${FONT}; width: 100%; overflow-x: hidden; }
         body { width: 100%; overflow-x: hidden; }
 
@@ -544,7 +552,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
 
           /* 히어로 타이틀: 로고+이름 / [아밤·Abam] / 서브카피 3단 중앙정렬 */
-          .abam-hero-title-main { font-size: 30px !important; }
+          .abam-hero-title-main { font-size: 40px !important; }
           .abam-hero-title-tag {
             font-size: 22px !important;
             flex-basis: 100% !important;
@@ -702,7 +710,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
 
           /* 히어로 타이틀: 로고+이름 / [아밤·Abam] / 서브카피 3단 중앙정렬 */
-          .abam-hero-title-main { font-size: 30px !important; }
+          .abam-hero-title-main { font-size: 40px !important; }
           .abam-hero-title-tag {
             font-size: 22px !important;
             flex-basis: 100% !important;
@@ -1031,8 +1039,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 </linearGradient>
               </defs>
             </svg>
-            <span style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px' }}>
-              {t.logoA}{isKo ? ' ' : ''}<span style={{ color: C.pointRed }}>{t.logoB}</span>
+            <span style={{ fontSize: '18px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+              <span className="abam-script-font" style={{ fontSize: '26px', color: '#fef08a', textShadow: '0 0 8px rgba(254,240,138,0.5)', lineHeight: 1 }}>{t.logoA}</span>
+              {isKo ? ' ' : ''}<span style={{ color: C.pointRed }}>{t.logoB}</span>
             </span>
             <span className="abam-header-badge" style={{ fontSize: '11px', fontWeight: 700, color: C.pointGold, border: `1px solid ${C.lineLight}`, background: 'rgba(245,158,11,0.08)', padding: '2px 6px', borderRadius: '4px' }}>
               {t.badge}
@@ -1092,7 +1101,19 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </linearGradient>
                   </defs>
                 </svg>
-                <span className="abam-hero-title-main" style={{ color: '#ffffff', textShadow: '0 0 24px rgba(255,255,255,0.5)' }}>{t.heroMain}</span>
+                <span className="abam-hero-title-main abam-script-font" style={{
+                  color: '#ffffff',
+                  fontSize: '48px',
+                  fontFamily: "'Nanum Pen Script', 'Nanum Brush Script', cursive, sans-serif",
+                  lineHeight: 1,
+                  display: 'inline-block',
+                  background: 'linear-gradient(180deg, #ffffff 10%, #fef08a 60%, #f59e0b 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 14px rgba(245,158,11,0.6))',
+                  transform: 'rotate(-2deg)',
+                  padding: '0 4px',
+                }}>{t.heroMain}</span>
                 <span className="abam-hero-title-tag" style={{ fontSize: '28px', fontWeight: 800, color: C.pointRed }}>{t.heroTag}</span>
               </div>
               <span className="abam-hero-subtitle" style={{ fontSize: '21px', fontWeight: 800, color: '#e2e8f0', letterSpacing: '-0.4px', display: 'block', marginTop: '10px', lineHeight: 1.5 }}>
@@ -1102,7 +1123,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
             {/* 아밤이 왜 아밤인지 설명 배너 (모바일 점보 폰트 17px) */}
             <div className="abam-hero-box abam-hero-desc" style={{ margin: '0 auto 22px', background: 'rgba(20, 23, 34, 0.85)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: `1px solid ${C.lineLight}`, borderRadius: '10px', padding: '18px 20px', fontSize: '16.5px', color: '#e2e8f0', lineHeight: 1.75, textAlign: 'center' }}>
-              🌙 <strong style={{ color: C.pointGold }}>{t.leadA}</strong>{t.leadB}<strong style={{ color: '#ffffff' }}>{t.leadC}</strong>{t.leadD}<br />
+              🌙 <strong className="abam-script-font" style={{ color: C.pointGold, fontSize: '24px', verticalAlign: 'middle', display: 'inline-block', marginRight: '4px' }}>{t.leadA}</strong>{t.leadB}<strong style={{ color: '#ffffff' }}>{t.leadC}</strong>{t.leadD}<br />
               {t.leadE}
             </div>
 

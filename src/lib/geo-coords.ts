@@ -81,6 +81,14 @@ export const REGIONAL_COORDS: Record<string, GeoLocation> = {
   '김포': { region: 'KR-41', placename: '경기도 김포시', lat: 37.615246, lng: 126.715732 },
   '김포시': { region: 'KR-41', placename: '경기도 김포시', lat: 37.615246, lng: 126.715732 },
   '용인': { region: 'KR-41', placename: '경기도 용인시', lat: 37.241086, lng: 127.177553 },
+  '남양주': { region: 'KR-41', placename: '경기도 남양주시', lat: 37.636000, lng: 127.216500 },
+  '하남': { region: 'KR-41', placename: '경기도 하남시', lat: 37.539200, lng: 127.214800 },
+  '파주': { region: 'KR-41', placename: '경기도 파주시', lat: 37.760000, lng: 126.780000 },
+  '의정부': { region: 'KR-41', placename: '경기도 의정부시', lat: 37.738100, lng: 127.033700 },
+  '광명': { region: 'KR-41', placename: '경기도 광명시', lat: 37.478600, lng: 126.864600 },
+  '시흥': { region: 'KR-41', placename: '경기도 시흥시', lat: 37.380000, lng: 126.802900 },
+  '안산': { region: 'KR-41', placename: '경기도 안산시', lat: 37.321900, lng: 126.830900 },
+  '구리': { region: 'KR-41', placename: '경기도 구리시', lat: 37.594300, lng: 127.129600 },
 };
 
 // 키워드 문자열에서 가장 적합한 위치 좌표 탐색

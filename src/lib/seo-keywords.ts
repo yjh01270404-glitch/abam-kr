@@ -397,7 +397,7 @@ export function generateSeoPageData(keyword: string) {
     title = `【출장마사지 1위】 ${kw} [20대 ACE 총출동] | 서울·경기 30분 도착 100% 후불제 Abam.kr`;
     description = `${kw} 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 에이스 관리사 항시 대기! 서울·경기 전역 호텔·자택 30분 총알도착, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
     h1 = `대한민국 ${kw} 1위 — [20대 ACE 총출동] 100% 현장 후불제`;
-  } else if (district && (isSeoulKw || region.startsWith('서울'))) {
+  } else if (district) {
     const place = region.replace('서울 ', '');
     title = `【1위】 ${kw} [20대 ACE 총출동] | ${district.short} 100% 현장후불제 Abam.kr`;
     description = `${place} ${kw} — [20대 ACE 총출동] 전원 20대 에이스 관리사 라인업! 서울 ${district.stations.slice(0, 3).join('·')} 인근 호텔·자택 30분 총알도착, 100% 현장 후불제 안심 케어. 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감.`;
