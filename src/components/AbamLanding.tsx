@@ -553,34 +553,63 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         .abam-bottom-btn { white-space: nowrap; }
 
         @media (max-width: 640px) {
-          /* 헤더: 1줄 로고 + 2줄 메뉴(가로 스크롤)로 깔끔하게 분리 */
+          /* 헤더: 모바일에서 상단 타이틀과 네비게이션바가 완벽하게 한 줄(Single Line)로 정렬 */
           .abam-header-inner {
-            flex-wrap: wrap !important;
-            row-gap: 2px !important;
-            padding: 10px 14px 4px !important;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 0 10px !important;
+            height: 52px !important;
+            box-sizing: border-box !important;
           }
           .abam-header-badge { display: none !important; }
-          /* 언어 버튼: 1행 로고 우측, 손가락으로 누르기 쉬운 40px 높이 */
-          .abam-lang { order: 0 !important; margin-left: auto !important; gap: 4px !important; }
-          .abam-lang-btn { min-width: 38px !important; height: 40px !important; padding: 0 6px !important; font-size: 14.5px !important; }
+          /* 모바일 헤더 조합의 어울림과 1줄 유지를 위해 언어 버튼은 헤더에서 제거(푸터 제공) */
+          .abam-lang { display: none !important; }
+          .abam-header-moon {
+            width: 19px !important;
+            height: 19px !important;
+            flex-shrink: 0 !important;
+          }
+          .abam-header-title-text {
+            font-size: 21px !important;
+            line-height: 1 !important;
+          }
+          .abam-header-tag-text {
+            font-size: 13px !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.4px !important;
+            white-space: nowrap !important;
+          }
           .abam-header-right {
-            width: 100% !important;
-            justify-content: space-between !important;
-            gap: 8px !important;
+            width: auto !important;
+            margin-left: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            flex-shrink: 0 !important;
+            gap: 0 !important;
           }
           .abam-header-nav {
-            flex: 1 1 auto !important;
-            min-width: 0 !important;
-            overflow-x: auto !important;
-            scrollbar-width: none !important;
-            -webkit-overflow-scrolling: touch;
-          }
-          .abam-header-nav::-webkit-scrollbar { display: none; }
-          .abam-nav-link {
-            padding: 8px 12px 8px 0 !important;
-            font-size: 15px !important;
-            font-weight: 800 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 1px !important;
+            flex-shrink: 0 !important;
             white-space: nowrap !important;
+            overflow: visible !important;
+          }
+          /* 소개는 최상단 직후이므로 모바일 1줄 균형을 위해 제거, 핵심 4대 메뉴(코스·안내·후기·FAQ) 노출 */
+          .abam-nav-intro { display: none !important; }
+          .abam-nav-link {
+            padding: 5px 6px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            white-space: nowrap !important;
+            color: #cbd5e1 !important;
+          }
+          .abam-nav-price {
+            color: #fef08a !important;
+            font-weight: 800 !important;
           }
 
           /* 히어로 타이틀: 로고+이름 / [아밤·Abam] / 서브카피 3단 중앙정렬 */
@@ -711,34 +740,63 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
         /* 폰 "데스크톱 사이트" 모드(약 980px 레이아웃 + 자동 줌 보정): 동일한 모바일 규칙 적용 */
         html.abam-m {
-          /* 헤더: 1줄 로고 + 2줄 메뉴(가로 스크롤)로 깔끔하게 분리 */
+          /* 헤더: 모바일에서 상단 타이틀과 네비게이션바가 완벽하게 한 줄(Single Line)로 정렬 */
           .abam-header-inner {
-            flex-wrap: wrap !important;
-            row-gap: 2px !important;
-            padding: 10px 14px 4px !important;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 0 10px !important;
+            height: 52px !important;
+            box-sizing: border-box !important;
           }
           .abam-header-badge { display: none !important; }
-          /* 언어 버튼: 1행 로고 우측, 손가락으로 누르기 쉬운 40px 높이 */
-          .abam-lang { order: 0 !important; margin-left: auto !important; gap: 4px !important; }
-          .abam-lang-btn { min-width: 38px !important; height: 40px !important; padding: 0 6px !important; font-size: 14.5px !important; }
+          /* 모바일 헤더 조합의 어울림과 1줄 유지를 위해 언어 버튼은 헤더에서 제거(푸터 제공) */
+          .abam-lang { display: none !important; }
+          .abam-header-moon {
+            width: 19px !important;
+            height: 19px !important;
+            flex-shrink: 0 !important;
+          }
+          .abam-header-title-text {
+            font-size: 21px !important;
+            line-height: 1 !important;
+          }
+          .abam-header-tag-text {
+            font-size: 13px !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.4px !important;
+            white-space: nowrap !important;
+          }
           .abam-header-right {
-            width: 100% !important;
-            justify-content: space-between !important;
-            gap: 8px !important;
+            width: auto !important;
+            margin-left: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            flex-shrink: 0 !important;
+            gap: 0 !important;
           }
           .abam-header-nav {
-            flex: 1 1 auto !important;
-            min-width: 0 !important;
-            overflow-x: auto !important;
-            scrollbar-width: none !important;
-            -webkit-overflow-scrolling: touch;
-          }
-          .abam-header-nav::-webkit-scrollbar { display: none; }
-          .abam-nav-link {
-            padding: 8px 12px 8px 0 !important;
-            font-size: 15px !important;
-            font-weight: 800 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 1px !important;
+            flex-shrink: 0 !important;
             white-space: nowrap !important;
+            overflow: visible !important;
+          }
+          /* 소개는 최상단 직후이므로 모바일 1줄 균형을 위해 제거, 핵심 4대 메뉴(코스·안내·후기·FAQ) 노출 */
+          .abam-nav-intro { display: none !important; }
+          .abam-nav-link {
+            padding: 5px 6px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            white-space: nowrap !important;
+            color: #cbd5e1 !important;
+          }
+          .abam-nav-price {
+            color: #fef08a !important;
+            font-weight: 800 !important;
           }
 
           /* 히어로 타이틀: 로고+이름 / [아밤·Abam] / 서브카피 3단 중앙정렬 */
@@ -1061,8 +1119,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(12,13,17,0.96)', borderBottom: `1px solid ${C.line}` }}>
         <div className="abam-header-inner">
           
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.9))' }}>
+          <Link href="/" className="abam-header-logo-link" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+            <svg className="abam-header-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 8px rgba(245,158,11,0.9))' }}>
               <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#headerMoonGrad)" />
               <defs>
                 <linearGradient id="headerMoonGrad" x1="0" y1="0" x2="1" y2="1">
@@ -1072,8 +1130,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 </linearGradient>
               </defs>
             </svg>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-              <span className="abam-script-font" style={{
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <span className="abam-script-font abam-header-title-text" style={{
                 fontSize: '29px',
                 fontFamily: "'KccEunyeong', 'Pinyon Script', cursive",
                 fontStyle: 'italic',
@@ -1087,11 +1145,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 lineHeight: 1,
                 padding: '0 2px',
               }}>{t.logoA}</span>
-              <span style={{ fontSize: '18px', fontWeight: 900, color: C.pointRed, letterSpacing: '-0.3px', lineHeight: 1 }}>{t.heroTag}</span>
+              <span className="abam-header-tag-text" style={{ fontSize: '18px', fontWeight: 900, color: C.pointRed, letterSpacing: '-0.3px', lineHeight: 1 }}>{t.heroTag}</span>
             </span>
           </Link>
 
-          {/* 언어 전환 버튼 (EN / JP / CN / KR) — 큰 터치 영역 */}
+          {/* 언어 전환 버튼 (데스크톱 전용 — 모바일에서는 깔끔한 1줄 배치를 위해 헤더에서 숨기고 푸터에서 제공) */}
           <div className="abam-lang" role="group" aria-label="Language">
             {LANGS.map((l) =>
               l.code === c.lang ? (
@@ -1102,14 +1160,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             )}
           </div>
 
-          {/* 우측 메뉴 (표준 네비게이션) */}
+          {/* 우측 메뉴 (표준 네비게이션: 모바일에서도 상단 타이틀과 나란히 1줄로 배치) */}
           <div className="abam-header-right" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             <nav className="abam-header-nav" style={{ display: 'flex', alignItems: 'center', gap: '1px' }}>
-              <a href="#intro" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[0]}</a>
-              <a href="#price" className="abam-nav-link" style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[1]}</a>
-              <a href="#rules" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[2]}</a>
-              <a href="#reviews" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[3]}</a>
-              <a href="#faq" className="abam-nav-link" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[4]}</a>
+              <a href="#intro" className="abam-nav-link abam-nav-intro" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[0]}</a>
+              <a href="#price" className="abam-nav-link abam-nav-price" style={{ color: '#ffffff', fontSize: '13px', fontWeight: 700, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[1]}</a>
+              <a href="#rules" className="abam-nav-link abam-nav-rules" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[2]}</a>
+              <a href="#reviews" className="abam-nav-link abam-nav-reviews" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[3]}</a>
+              <a href="#faq" className="abam-nav-link abam-nav-faq" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600, textDecoration: 'none', padding: '6px 6px' }}>{t.hnav[4]}</a>
             </nav>
           </div>
         </div>
@@ -1714,6 +1772,29 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             <Link href="/guide/outcall-massage-scam-prevention-comparison" style={{ color: '#cbd5e1', textDecoration: 'none' }}>선입금 사기 예방 가이드</Link>
             <Link href="/guide/outcall-massage-platform-ranking-comparison" style={{ color: '#cbd5e1', textDecoration: 'none' }}>플랫폼 순위 및 비교</Link>
             <Link href="/guide/late-night-massage" style={{ color: '#cbd5e1', textDecoration: 'none' }}>심야 방문 케어 안내</Link>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', margin: '14px 0 10px', padding: '10px 12px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 700 }}>Language:</span>
+            <div style={{ display: 'flex', gap: '6px' }}>
+              {LANGS.map((l) => (
+                <Link
+                  key={l.code}
+                  href={l.href}
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: 800,
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                    textDecoration: 'none',
+                    color: l.code === c.lang ? '#1a1204' : '#cbd5e1',
+                    background: l.code === c.lang ? '#f59e0b' : 'rgba(255,255,255,0.06)',
+                    border: `1px solid ${l.code === c.lang ? '#f59e0b' : 'rgba(255,255,255,0.1)'}`,
+                  }}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
           </div>
           <div style={{ fontSize: '12.5px', color: '#64748b', lineHeight: 1.65 }}>{c.footer.line}</div>
         </footer>
