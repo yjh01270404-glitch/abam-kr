@@ -16,7 +16,7 @@ export const ANIMATION_STYLES: AnimationStyle[] = [
   },
   {
     id: 'anim-2',
-    name: '골드 글로우 펄스 (도도/고급)',
+    name: '골드 글로우 펄스 (아밤 럭셔리)',
     className: 'animate-gold-glow-pulse',
     tone: 'luxury',
     description: '은은한 황금빛 네온 테두리가 차오르는 펄스 모션'
