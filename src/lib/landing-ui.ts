@@ -35,8 +35,8 @@ export const UI: Record<UiLang, UiStrings> = {
     heroMain: '아름다운밤', heroTag: '[아밤.Abam.kr]',
     heroSub: '서울·경기 전역 1:1 방문 홈케어 출장안마 · 출장마사지',
     leadA: '‘아름다운 밤’', leadB: '을 약속드리는 1:1 프리미엄 케어, 그래서 ', leadC: '아밤(Abam)', leadD: '입니다.',
-    leadE: '고객님이 계신 자택·호텔로 전원 20대 에이스 관리사가 30분 내 직접 찾아갑니다.',
-    sum: ['100% 현장 대면결제', '20대 전문 힐러', '서울·경기 30분 도착'],
+    leadE: '고객님이 계신 자택·호텔로 전원 20대 전문 힐러가 실시간 도로 배차 동선에 맞춰 방문 관리해 드립니다.',
+    sum: ['100% 현장 대면결제', '20대 전문 힐러', '희망 1시간 전 예약권장'],
     adv: '예약 접수 **18:00부터** · 매니저 출발 **19:00부터** · 마지막 예약 **새벽 05:00** 마감\n이용 희망 시간 **1시간 전쯤 미리 예약**해 주시면 가장 수월하게 이용 가능합니다.',
     noticeTitle: '📍 방문 전 미리 알려주세요',
     notice1: '• 주차장·1층 공동현관 **비밀번호를 예약 시 미리 알려주세요.** 어려우시면 **호출버튼으로 열어주실 수 있다**고 미리 말씀해 주세요.',
@@ -78,7 +78,7 @@ export const UI: Record<UiLang, UiStrings> = {
     previewTitle: '[아밤 빠른 예약 양식]',
     preview: ['1. 희망 코스: 타이 / 아로마 / 스페셜', '2. 방문 주소: (동·호수 상세 기재)', '3. 주차장 유무: (도착 시 전화 요망)', '4. 1층 공동현관: (비밀번호 또는 호출버튼 가능)', '5. 호텔·모텔명: (1층 로비에서 만나 대면결제)', '6. 결제 수단: 현금 / 계좌이체 / 카드'],
     send: '문자 앱으로 바로 전송하기', copy: '예약 양식 복사하기', callModal: '전화 바로 연결',
-    assure1: '• 선입금·예약금 없는 100% 현장 대면결제', assure2: '• 서울·경기 전지역 30분 내 신속 방문', close: '닫기',
+    assure1: '• 선입금·예약금 없는 100% 현장 대면결제', assure2: '• 18시 접수 · 19시 순차 출발 (1시간 전 예약 권장)', close: '닫기',
     toast: '📋 예약 양식이 복사되었습니다. 문자에 붙여넣어 주세요.',
     tpl: `[아밤(Abam) 1:1 빠른 예약 신청]
 • 희망 코스: (타이 / 아로마 / 스페셜 / 시간)
@@ -103,8 +103,8 @@ export const UI: Record<UiLang, UiStrings> = {
     heroMain: 'A Beautiful Night', heroTag: '[Abam]',
     heroSub: 'Private 1:1 home & hotel visit care across Seoul & Gyeonggi',
     leadA: '“A Beautiful Night”', leadB: ' — a 1:1 premium care we promise you. That is why we are ', leadC: 'Abam', leadD: '.',
-    leadE: 'Our top-tier therapists in their 20s come straight to your home or hotel within 30 minutes.',
-    sum: ['100% pay on arrival', 'Therapists in their 20s', '30 min across Seoul'],
+    leadE: 'Our professional therapists in their 20s visit your home or hotel according to real-time traffic and dispatch schedules.',
+    sum: ['100% pay on arrival', 'Therapists in their 20s', 'Book 1 hr ahead recommended'],
     adv: 'Booking from **18:00** · Departures from **19:00** · Last booking **05:00**\nBooking **about 1 hour ahead** gives you the smoothest experience.',
     noticeTitle: '📍 Please tell us before we visit',
     notice1: '• Please give us the **parking / 1st-floor entrance password when booking.** If you cannot, tell us in advance that **you can open the door via the call button.**',
@@ -146,7 +146,7 @@ export const UI: Record<UiLang, UiStrings> = {
     previewTitle: '[Abam quick booking form]',
     preview: ['1. Course: Thai / Aroma / Special', '2. Address: (building, room no.)', '3. Parking: (please call on arrival)', '4. 1st-floor entrance: (password or call button OK)', '5. Hotel / motel name: (meet in 1st-floor lobby, pay face to face)', '6. Payment: Cash / Transfer / Card'],
     send: 'Send via messages', copy: 'Copy booking form', callModal: 'Call now',
-    assure1: '• No deposit · 100% pay on arrival', assure2: '• Fast visit within 30 min across Seoul & Gyeonggi', close: 'Close',
+    assure1: '• No deposit · 100% pay on arrival', assure2: '• Booking from 18:00 · Departures from 19:00 (Book 1 hr ahead)', close: 'Close',
     toast: '📋 Form copied. Please paste it into your message.',
     tpl: `[Abam 1:1 quick booking request]
 • Course: (Thai / Aroma / Special / duration)
@@ -171,8 +171,8 @@ export const UI: Record<UiLang, UiStrings> = {
     heroMain: '美しい夜', heroTag: '[Abam]',
     heroSub: 'ソウル・京畿全域 1:1訪問ホームケア',
     leadA: '「美しい夜」', leadB: 'をお約束する1:1プレミアムケア、だから', leadC: 'Abam', leadD: 'です。',
-    leadE: 'ご自宅・ホテルへ20代エースセラピストが30分以内に直接お伺いします。',
-    sum: ['100%対面後払い', '20代の専門セラピスト', 'ソウル30分で到着'],
+    leadE: 'ご自宅・ホテルへ20代専門セラピストが交通状況と配車動線に合わせてお伺いします。',
+    sum: ['100%対面後払い', '20代の専門セラピスト', '1時間前のご予約推奨'],
     adv: 'ご予約は**18:00から** · 出発は**19:00から** · 最終受付は**翌朝05:00**\nご希望の**1時間前**までにご予約いただくと最もスムーズです。',
     noticeTitle: '📍 訪問前にお知らせください',
     notice1: '• 駐車場・1階エントランスの**暗証番号はご予約時にお知らせください。**難しい場合は**呼び出しボタンで開けられる**ことを事前にお伝えください。',
@@ -214,7 +214,7 @@ export const UI: Record<UiLang, UiStrings> = {
     previewTitle: '[Abam クイック予約フォーム]',
     preview: ['1. コース: タイ / アロマ / スペシャル', '2. 住所: (建物名・部屋番号)', '3. 駐車場: (到着時にお電話ください)', '4. 1階エントランス: (暗証番号または呼び出しボタン可)', '5. ホテル・モーテル名: (1階ロビーで合流し対面払い)', '6. お支払い: 現金 / 振込 / カード'],
     send: 'メッセージで送信', copy: '予約フォームをコピー', callModal: '電話する',
-    assure1: '• 前払いなし · 100%対面後払い', assure2: '• ソウル・京畿全域 30分以内にお伺い', close: '閉じる',
+    assure1: '• 前払いなし · 100%対面後払い', assure2: '• 18時受付 · 19時順次出発 (1時間前予約推奨)', close: '閉じる',
     toast: '📋 フォームをコピーしました。メッセージに貼り付けてください。',
     tpl: `[Abam 1:1 クイック予約申込]
 • コース: (タイ / アロマ / スペシャル / 時間)
@@ -239,8 +239,8 @@ export const UI: Record<UiLang, UiStrings> = {
     heroMain: '美丽的夜晚', heroTag: '[Abam]',
     heroSub: '首尔·京畿全境 1:1上门居家护理',
     leadA: '“美丽的夜晚”', leadB: '，我们承诺的1:1尊享护理，这就是', leadC: 'Abam', leadD: '。',
-    leadE: '全员20代王牌技师30分钟内直达您所在的住宅或酒店。',
-    sum: ['100%现场当面付款', '20代专业技师', '首尔30分钟到达'],
+    leadE: '全员20代专业技师根据实时路况与派车路线前往您所在的住宅或酒店。',
+    sum: ['100%现场当面付款', '20代专业技师', '建议提前1小时预约'],
     adv: '预约从**18:00开始** · **19:00起**出发 · 最晚预约**凌晨05:00**截止\n建议**提前1小时**预约，体验最顺畅。',
     noticeTitle: '📍 上门前请提前告知',
     notice1: '• 停车场·一楼公共大门的**密码请在预约时告知。**如不方便，请提前说明**可通过呼叫按钮开门**。',
@@ -282,7 +282,7 @@ export const UI: Record<UiLang, UiStrings> = {
     previewTitle: '[Abam 快速预约表单]',
     preview: ['1. 项目: 泰式 / 芳香 / 特别', '2. 地址: (楼栋、房号)', '3. 停车场: (到达时请来电)', '4. 一楼大门: (密码或呼叫按钮均可)', '5. 酒店/旅馆名称: (一楼大堂会合并当面付款)', '6. 付款方式: 现金 / 转账 / 刷卡'],
     send: '通过短信发送', copy: '复制预约表单', callModal: '立即致电',
-    assure1: '• 无需定金 · 100%现场当面付款', assure2: '• 首尔·京畿全境30分钟内上门', close: '关闭',
+    assure1: '• 无需定金 · 100%现场当面付款', assure2: '• 18点起接单 · 19点起顺次出发 (建议提前1小时预约)', close: '关闭',
     toast: '📋 预约表单已复制，请粘贴到短信中。',
     tpl: `[Abam 1:1 快速预约申请]
 • 项目: (泰式 / 芳香 / 特别 / 时长)

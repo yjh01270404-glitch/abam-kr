@@ -4,13 +4,13 @@ import { SERVED_KEYWORDS } from '../../lib/seo-keywords';
 
 export const metadata: Metadata = {
   title: '서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
-  description: '서울 25개 구 및 경기(수원·분당·판교·일산·부천·평택·동탄 등) 전역 지역별 안내. 자택·호텔 30분 도착, 100% 현장 후불제. 타이·아로마·스페셜 코스.',
+  description: '서울 25개 구 및 경기(수원·분당·판교·일산·부천·평택·동탄 등) 전역 지역별 안내. 자택·호텔 1:1 방문 맞춤 케어, 100% 현장 후불제. 타이·아로마·스페셜 코스.',
   keywords: '서울출장안마,서울출장마사지,서울출장홈타이,강남출장안마,강남출장마사지,강남출장홈타이,호텔출장안마,출장서비스,방문마사지,홈타이,Abam.kr',
   alternates: { canonical: 'https://abam.kr/keywords' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-snippet': -1 } },
   openGraph: {
     title: '서울·경기 지역별 프라이빗 1:1 방문 홈케어 안내 | Abam.kr',
-    description: '서울·경기 전역 · 자택 · 호텔 30분 도착. 100% 후불제.',
+    description: '서울·경기 전역 · 자택 · 호텔 1:1 방문 맞춤 케어. 100% 후불제.',
     url: 'https://abam.kr/keywords',
     siteName: 'Abam.kr',
     locale: 'ko_KR',
@@ -100,7 +100,7 @@ export default function KeywordsPage() {
           </div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 800, color: '#b45309', backgroundColor: '#fef3c7', padding: '4px 12px', borderRadius: '20px', marginBottom: '12px' }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16a34a' }} />
-            서울·경기 전역 · 자택 · 호텔 30분 도착 · 100% 현장후불제
+            서울·경기 전역 · 18시 접수 19시 순차출발 · 100% 현장후불제
           </div>
 
           <h1 style={{ fontSize: '22px', fontWeight: 900, margin: '0 0 8px 0', lineHeight: 1.35, color: '#0f172a' }}>
@@ -112,10 +112,10 @@ export default function KeywordsPage() {
           </p>
         </section>
 
-        {/* 4대 권역 메가 토픽 클러스터 허브 배너 */}
+        {/* 수도권 주요 권역 바로가기 */}
         <section style={{ padding: '16px 0', borderBottom: '2px solid #e2e8f0' }}>
-          <div style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a', marginBottom: '10px' }}>
-            👑 수도권 4대 권역 메가 허브 (1:1 방문 맞춤 케어)
+          <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#0f172a', marginBottom: '10px' }}>
+            📍 수도권 주요 권역별 안내 (1:1 방문 맞춤 케어)
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
             <Link
@@ -132,9 +132,8 @@ export default function KeywordsPage() {
                 gap: '4px',
               }}
             >
-              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>SEOUL MEGA HUB</span>
-              <strong style={{ fontSize: '15px', color: '#ffffff' }}>서울 25개구 전역 허브</strong>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>강남·서초·마포·용산 20~30분</span>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>서울 25개 자치구</strong>
+              <span style={{ fontSize: '12px', color: '#94a3b8' }}>강남·서초·송파·마포·영등포·용산</span>
             </Link>
 
             <Link
@@ -151,9 +150,8 @@ export default function KeywordsPage() {
                 gap: '4px',
               }}
             >
-              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>SOUTH GYEONGGI</span>
-              <strong style={{ fontSize: '15px', color: '#ffffff' }}>경기 남부 메가 허브</strong>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>수원·분당·판교·동탄·평택</span>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>경기 남부 지역</strong>
+              <span style={{ fontSize: '12px', color: '#94a3b8' }}>수원·분당·판교·동탄·평택·용인</span>
             </Link>
 
             <Link
@@ -170,8 +168,7 @@ export default function KeywordsPage() {
                 gap: '4px',
               }}
             >
-              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>NORTH GYEONGGI</span>
-              <strong style={{ fontSize: '15px', color: '#ffffff' }}>경기 북부 메가 허브</strong>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>경기 북부 지역</strong>
               <span style={{ fontSize: '12px', color: '#94a3b8' }}>일산·고양·파주·의정부·남양주</span>
             </Link>
 
@@ -189,8 +186,7 @@ export default function KeywordsPage() {
                 gap: '4px',
               }}
             >
-              <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: 800 }}>INCHEON & BUCHEON</span>
-              <strong style={{ fontSize: '15px', color: '#ffffff' }}>인천·부천 권역 허브</strong>
+              <strong style={{ fontSize: '15px', color: '#ffffff' }}>인천·부천 권역</strong>
               <span style={{ fontSize: '12px', color: '#94a3b8' }}>부평·송도·청라·구월·부천 전역</span>
             </Link>
           </div>

@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: '아밤 - 20대 ACE 총출동 서울·경기 출장마사지',
     short_name: '아밤 (Abam)',
-    description: '서울·경기 전역 자택·호텔 30분 총알도착! 전원 20대 에이스 관리사 라인업, 사전 예약금 없는 100% 현장 후불제 안심 케어.',
+    description: '서울·경기 전역 자택·호텔 1:1 방문 맞춤 케어! 전원 20대 전문 관리사 라인업, 사전 예약금 없는 100% 현장 후불제 안심 케어.',
     start_url: '/',
     display: 'standalone',
     background_color: '#06090d',
@@ -46,7 +46,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: '서울·경기 지역별 안내',
         short_name: '지역안내',
-        description: '서울 25개 구 및 경기(수원·분당·일산·부천·평택·동탄 등) 30분 도착',
+        description: '서울 25개 구 및 경기(수원·분당·일산·부천·평택·동탄 등) 1:1 방문 맞춤 케어',
         url: '/keywords',
         icons: [{ src: '/icon.png', sizes: '192x192' }],
       },
