@@ -307,7 +307,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Brush+Script&family=Dancing+Script:wght@700&family=Caveat:wght@700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Monsieur+La+Doulaise&family=Alex+Brush&family=Nanum+Pen+Script&display=swap"
           rel="stylesheet"
         />
         <script dangerouslySetInnerHTML={{ __html: FORCE_MOBILE_SCRIPT }} />

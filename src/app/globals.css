@@ -1,9 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nanum+Brush+Script&family=Dancing+Script:wght@700&family=Caveat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Great+Vibes&family=Monsieur+La+Doulaise&family=Alex+Brush&family=Nanum+Pen+Script&display=swap');
 
+@font-face {
+  font-family: 'KccEunyeong';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 정통 서양 독립선언문 스타일 깃펜/만년필 필기체 클래스 (영문) */
+.abam-copperplate-en {
+  font-family: 'Pinyon Script', 'Monsieur La Doulaise', 'Great Vibes', cursive !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* 정통 만년필 유려한 흘림 필기체 클래스 (한글 아름다운 밤) */
 .abam-script-font {
-  font-family: 'Nanum Pen Script', 'Dancing Script', 'Caveat', cursive, sans-serif !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.04em !important;
+  font-family: 'KccEunyeong', 'Pinyon Script', 'Nanum Pen Script', cursive, sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
 }
 
 *, *::before, *::after {
