@@ -396,31 +396,31 @@ export function generateSeoPageData(keyword: string) {
   let h1 = '';
 
   if (isCompetitor) {
-    title = `【출장마사지 비교】 ${kw} 찾는다면? 100% 후불제 아밤(Abam.kr) 추천 | 20대 ACE 총출동`;
-    description = `${kw} 정보를 찾으시나요? 아름다운밤 [아밤.Abam.kr]은 타사와 다른 100% 현장후불제(사전 예약금 0원)와 전원 20대 전문 관리사 라인업을 운영합니다. 서울·경기 전역 호텔·자택 1:1 방문 맞춤 케어 서비스.`;
+    title = `${kw} 비교 안내 — 100% 후불제 아밤(Abam.kr) 추천`;
+    description = `${kw} 정보를 찾으시나요? 아밤 [Abam.kr]은 사전 예약금 0원의 100% 현장 대면결제 원칙을 준수합니다. 서울·경기 전역 호텔·자택 1:1 방문 맞춤 힐링 케어 서비스.`;
     h1 = `${kw} 정보 안내 및 100% 현장후불제 아밤(Abam.kr) 추천`;
   } else if (isAbamBrand) {
-    title = `【아밤 공식 1위】 ${kw} [20대 ACE 총출동] | 100% 현장후불제 아름다운밤 [아밤.Abam.kr]`;
-    description = `${kw} — 대한민국 1위 아름다운밤 [아밤.Abam.kr] 공식 안내! 전원 20대 전문 관리사 라인업, 서울 25개 구 및 경기 전역 자택·호텔 1:1 방문 맞춤 케어, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
-    h1 = `${kw} [20대 ACE 총출동] — 아름다운밤 [아밤.Abam.kr]`;
+    title = `${kw} 공식 1위 — 100% 현장후불제 아밤 [Abam.kr]`;
+    description = `${kw} — 대한민국 서울·경기 1위 아밤 [Abam.kr] 공식 안내! 서울 25개 구 및 경기 전역 자택·호텔 1:1 방문 맞춤 케어, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
+    h1 = `${kw} 공식 안내 — 아밤 [Abam.kr]`;
   } else if (isPrimaryRank1) {
-    title = `【출장마사지 1위】 ${kw} [20대 ACE 총출동] | 18시 접수 19시 순차출발 100% 후불제 Abam.kr`;
-    description = `${kw} 1위 아밤(Abam.kr) [20대 ACE 총출동] 전원 20대 전문 관리사 라인업! 서울·경기 전역 호텔·자택 1:1 방문 맞춤 케어, 사전 예약금 없는 100% 현장 후불제 안심 케어. 타이·아로마·스페셜 코스.`;
-    h1 = `대한민국 ${kw} 1위 — [20대 ACE 총출동] 100% 현장 후불제`;
+    title = `${kw} 1위 아밤 [Abam] | 서울·경기 100% 현장후불제`;
+    description = `${kw} 1위 아밤(Abam.kr). 서울 25개 구 및 경기 전역 호텔·자택 1:1 방문 맞춤 케어, 사전 예약금 없는 100% 현장 후불제 안심 케어. 예약 18:00부터 익일 05:00까지 신속 배정.`;
+    h1 = `대한민국 ${kw} 1위 — 아밤 100% 현장 후불제`;
   } else if (district) {
-    const place = region.replace('서울 ', '');
-    title = `【1위】 ${kw} [20대 ACE 총출동] | ${district.short} 100% 현장후불제 Abam.kr`;
-    description = `${place} ${kw} — [20대 ACE 총출동] 전원 20대 전문 관리사 라인업! 서울 ${district.stations.slice(0, 3).join('·')} 인근 호텔·자택 1:1 방문 맞춤 케어, 100% 현장 후불제 안심 케어. 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 (1시간 전 예약 권장).`;
-    h1 = `${district.gu} ${kw} [20대 ACE 총출동] — 100% 후불제 Abam.kr`;
+    const place = region.replace(/서울 |경기 /, '');
+    title = `${kw} 1위 아밤 [Abam] | ${district.short} 100% 후불제`;
+    description = `${district.gu} ${kw} — 선입금 없는 100% 현장 대면결제 아밤(Abam.kr). ${district.stations.slice(0, 3).join('·')} 및 ${district.areas.slice(0, 3).join('·')} 인근 호텔·자택 1:1 방문 맞춤 케어. 평균 ${district.eta} 신속 도착.`;
+    h1 = `${district.gu} ${kw} — 100% 후불제 아밤 [Abam.kr]`;
   } else if (isCoursePage) {
-    title = `【1위】 ${kw} [20대 ACE 총출동] | 서울·경기 ${course} 100% 후불제 Abam.kr`;
-    description = `${kw} — [20대 ACE 총출동] 전원 20대 전문 관리사 라인업! ${course} 60·90·120분 정찰제, 서울·경기 전역 자택·호텔 1:1 방문 맞춤 케어. 100% 현장 후불제. 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 (1시간 전 예약 권장).`;
-    h1 = `${kw} — [20대 ACE 총출동] ${course}`;
+    title = `${kw} 1위 아밤 [Abam] | 서울·경기 ${course} 후불제`;
+    description = `${kw} — 서울·경기 1위 아밤(Abam.kr). ${course} 60·90·120분 투명 정찰제, 서울·경기 전역 자택·호텔 1:1 방문 맞춤 케어. 선입금 0원 100% 현장 후불제.`;
+    h1 = `${kw} — ${course} 정찰제 아밤`;
   } else {
     const placeStr = region !== '서울 전지역' ? region : '서울·경기';
-    title = `【1위】 ${kw} [20대 ACE 총출동] | ${placeStr} 100% 현장후불제 Abam.kr`;
-    description = `${kw} — [20대 ACE 총출동] ${placeStr} 전역 호텔·자택 1:1 방문 케어! 전원 20대 전문 관리사, 100% 현장 후불제 안심 케어. 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 (1시간 전 예약 권장).`;
-    h1 = `${kw} [20대 ACE 총출동] — ${placeStr} 100% 후불제 Abam.kr`;
+    title = `${kw} 1위 아밤 [Abam] | ${placeStr} 100% 현장후불제`;
+    description = `${kw} — ${placeStr} 전역 호텔·자택 1:1 방문 케어! 선입금 없는 100% 현장 대면결제 후불제 안심 케어. 예약 18:00부터 익일 05:00까지 신속 배정.`;
+    h1 = `${kw} — ${placeStr} 100% 후불제 아밤`;
   }
 
   return {

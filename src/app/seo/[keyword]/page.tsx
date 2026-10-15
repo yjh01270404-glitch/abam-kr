@@ -252,7 +252,7 @@ export default async function SeoLandingPage({ params }: Props) {
       },
       areaServed: district
         ? [
-            { "@type": "AdministrativeArea", name: `서울특별시 ${district.gu}` },
+            { "@type": "AdministrativeArea", name: district.city ? `${district.city} ${district.gu}` : `서울특별시 ${district.gu}` },
             ...district.areas.map((a) => ({ "@type": "AdministrativeArea", name: a })),
             ...district.stations.map((s) => ({ "@type": "Place", name: `${s} 인근` })),
           ]
