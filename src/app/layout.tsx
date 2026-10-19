@@ -91,6 +91,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: './',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
+    ],
+    shortcut: '/favicon.png',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: '출장마사지 · 출장 홈타이 1위 아밤 — 서울·경기 100% 현장후불제',
     description:
@@ -145,6 +155,7 @@ const jsonLdData = {
       url: 'https://abam.kr',
       telephone: '010-6607-2239',
       image: 'https://abam.kr/images/thai.jpg',
+      logo: 'https://abam.kr/icon.png',
       priceRange: '80,000원 - 160,000원',
       currenciesAccepted: 'KRW',
       address: {
