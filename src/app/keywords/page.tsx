@@ -20,7 +20,18 @@ export const metadata: Metadata = {
 };
 
 const SITE_URL = 'https://abam.kr';
-const SMS_HREF = 'sms:01066072239';
+const UNIFIED_SMS_BODY = encodeURIComponent(`[아밤] 예약 신청 양식
+• 성함: 
+• 연락처: 
+• 방문 주소 (호텔/모텔명 및 객실번호): 
+• 희망 코스 및 시간: (60분 / 90분 / 120분)
+• 방문 희망 시간: 
+• 주차 / 1층 공동현관: (비밀번호 또는 호출버튼)
+• 결제 방식: 현장에서 운전기사에게 대면결제 (현금 / 계좌이체 / 카드)
+----------------------------------------
+※ 안내 사항:
+호텔/모텔은 1층 로비에서 기사와 관리사를 만나 대면결제 후, 관리사를 객실로 안내해 주시면 됩니다.`);
+const SMS_HREF = `sms:01066072239?body=${UNIFIED_SMS_BODY}`;
 const PHONE_TEL = 'tel:010-6607-2239';
 const PHONE_NUM = '010-6607-2239';
 

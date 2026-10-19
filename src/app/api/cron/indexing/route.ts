@@ -15,14 +15,17 @@ const INDEXNOW_KEY = 'abam1234567890abcdefabcdefabcdef';
 
 const CORE_PATHS = [
   '',
-  '/en',
-  '/jp',
-  '/cn',
   '/keywords',
+  '/regions/seoul',
+  '/regions/gyeonggi-south',
+  '/regions/gyeonggi-north',
+  '/regions/incheon-bucheon',
   '/guide',
+  '/guide/outcall-massage-platform-ranking-comparison',
   '/guide/outcall-massage-scam-prevention-comparison',
   '/guide/chuljang-massage-price',
   '/guide/how-to-book-outcall-massage',
+  '/guide/hotel-outcall-massage-guide',
   '/guide/late-night-massage',
 ];
 

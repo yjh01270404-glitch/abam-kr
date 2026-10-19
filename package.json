@@ -8,6 +8,7 @@
     "start": "next start",
     "submit:search": "node scripts/submit-indexnow.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "seo:master": "node scripts/master-seo-pipeline.mjs",
     "index:push": "node scripts/auto-indexing-engine.js",
     "index:daemon": "node scripts/auto-indexing-engine.js --daemon",
     "backlink:publish": "node scripts/publish-authority-backlinks.js",

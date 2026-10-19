@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { type LandingContent } from '../lib/landing-content';
 import { UI } from '../lib/landing-ui';
+import AbamBookingGuideModal from './AbamBookingGuideModal';
 
 const WA_LINK =
   'https://wa.me/821066072239?text=Hello%20Abam.kr,%20I%20would%20like%20to%20inquire%20about%20your%20private%201:1%20home%20care%20service.';
@@ -1056,64 +1057,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       )}
 
-      {/* ── 직관적이고 실용적인 문자 예약 양식 모달 ── */}
-      {smsModal && (
-        <div onClick={() => setSmsModal(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 99998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-          <div onClick={(e) => e.stopPropagation()} style={{ background: '#161820', border: `1px solid ${C.lineLight}`, borderRadius: '10px', maxWidth: '420px', width: '100%', padding: '24px 20px', textAlign: 'center', boxShadow: '0 20px 45px rgba(0,0,0,0.9)' }}>
-            
-            {/* 모달 헤더 */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff' }}>{t.modalHead}</div>
-              <button onClick={() => setSmsModal(false)} style={{ background: 'transparent', border: 'none', color: C.textMuted, fontSize: '20px', cursor: 'pointer', lineHeight: 1, padding: '2px 6px' }}>✕</button>
-            </div>
-            
-            <p style={{ fontSize: '13px', color: C.textSub, margin: '0 0 12px', textAlign: 'left', wordBreak: 'keep-all', lineHeight: 1.6 }}>
-              {rich(t.modalDesc)}
-            </p>
-
-            {/* 1시간 전 예약 강조 알림 */}
-            <div style={{ background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '6px', padding: '9px 12px', textAlign: 'left', fontSize: '12.5px', color: '#fef08a', marginBottom: '12px', lineHeight: 1.5, wordBreak: 'keep-all' }}>
-              {rich(t.modalNotice)}
-            </div>
-
-            {/* 예약 양식 프리뷰 카드 */}
-            <div style={{ background: '#0e1015', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '12px 14px', textAlign: 'left', fontSize: '12.5px', lineHeight: 1.7, color: '#e2e8f0', marginBottom: '14px', fontFamily: 'monospace, sans-serif' }}>
-              <div style={{ color: C.pointGold, fontWeight: 700, marginBottom: '4px', fontFamily: FONT }}>{t.previewTitle}</div>
-              <div>{t.preview[0]}</div>
-              <div>{t.preview[1]}</div>
-              <div>{t.preview[2]}</div>
-              <div>{t.preview[3]}</div>
-              <div>{t.preview[4]}</div>
-              <div>{t.preview[5]}</div>
-            </div>
-
-            {/* 메인 액션 버튼군 */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '14px' }}>
-              <a href={SMS_HREF} onClick={() => setSmsModal(false)} style={{ ...btn, background: C.pointRed, color: '#ffffff', fontSize: '15px', padding: '13px 0' }}>
-                {t.send}
-              </a>
-
-              <button onClick={copyTemplate} style={{ ...btn, background: '#252936', border: `1px solid ${C.lineLight}`, color: '#ffffff', fontSize: '14px', padding: '11px 0' }}>
-                {t.copy}
-              </button>
-
-              <a href={c.contact.tel} onClick={() => setSmsModal(false)} style={{ ...btn, background: 'transparent', border: `1px solid ${C.lineLight}`, color: C.textSub, fontSize: '14px', padding: '11px 0' }}>
-                <PhoneIcon size={16} /> {c.contact.phone} {t.callModal}
-              </a>
-            </div>
-
-            {/* 안심 현장 대면결제 안내 */}
-            <div style={{ background: '#1c1f2b', border: `1px solid ${C.line}`, borderRadius: '6px', padding: '10px 12px', textAlign: 'left', fontSize: '12px', lineHeight: 1.6, color: '#94a3b8' }}>
-              {t.assure1}<br />
-              {t.assure2}
-            </div>
-
-            <button onClick={() => setSmsModal(false)} style={{ marginTop: '12px', width: '100%', padding: '9px 0', background: 'transparent', color: C.textMuted, fontSize: '13px', border: `1px solid ${C.line}`, borderRadius: '6px', cursor: 'pointer' }}>
-              {t.close}
-            </button>
-          </div>
-        </div>
-      )}
+      {/* ── 아밤 5대 핵심 예약 가이드 & 100% 현장 대면결제 안심 안내 모달 ── */}
+      <AbamBookingGuideModal
+        isOpen={smsModal}
+        onClose={() => setSmsModal(false)}
+      />
 
       {/* ── 1. 상단 헤더: 좌측 로고 & 상단 우측 메뉴 배치 ── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(12,13,17,0.96)', borderBottom: `1px solid ${C.line}` }}>
@@ -1259,8 +1207,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
             {/* 대표 전화 상담 연결 버튼 (모바일 점보 폰트 22px) */}
             <div className="abam-hero-box" style={{ margin: '0 auto 12px' }}>
-              <a
-                href={c.contact.tel}
+              <button
+                type="button"
+                onClick={() => setSmsModal(true)}
                 className="abam-hero-call-btn"
                 style={{
                   display: 'flex',
@@ -1273,22 +1222,22 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   fontSize: '22px',
                   padding: '18px 20px',
                   borderRadius: '10px',
-                  textDecoration: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
                   width: '100%',
                   boxSizing: 'border-box',
                   boxShadow: '0 4px 20px rgba(225,29,72,0.4)',
                 }}
               >
                 <PhoneIcon size={26} /> {c.contact.phone} {t.callHero}
-              </a>
+              </button>
             </div>
 
             {/* 문자로 간편 예약하기 버튼 (양식 자동입력) */}
             <div className="abam-hero-box" style={{ margin: '0 auto 16px', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '8px' }}>
-              <a
-                href={isKo ? SMS_HREF : WA_LINK}
-                target={isKo ? undefined : '_blank'}
-                rel={isKo ? undefined : 'noreferrer'}
+              <button
+                type="button"
+                onClick={() => setSmsModal(true)}
                 className="abam-hero-sub-btn"
                 style={{
                   display: 'flex',
@@ -1304,12 +1253,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   fontSize: '16px',
                   padding: '15px 10px',
                   borderRadius: '8px',
-                  textDecoration: 'none',
+                  cursor: 'pointer',
                   boxSizing: 'border-box',
                 }}
               >
                 {t.smsHero}
-              </a>
+              </button>
 
               <button
                 onClick={() => setSmsModal(true)}
@@ -1806,12 +1755,14 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
       </main>
 
-      {/* ── 12. 하단 고정 퀵바 (큼직한 대형 통화/문자 버튼 · 압도적 터치감과 가독성) ── */}
+      {/* ── 12. 하단 고정 퀵바 (큼직한 대형 통화/문자 버튼 · 클릭 시 5대 수칙 모달 호출) ── */}
       <div className="abam-bottom-bar">
         <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
           {isKo ? (
-            <a
-              href={SMS_HREF} className="abam-bottom-btn"
+            <button
+              type="button"
+              onClick={() => setSmsModal(true)}
+              className="abam-bottom-btn"
               style={{
                 ...btn,
                 background: 'linear-gradient(180deg, #2b3245, #1e2333)',
@@ -1822,10 +1773,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 padding: '18px 0',
                 borderRadius: '8px',
                 boxShadow: '0 4px 14px rgba(0,0,0,0.5)',
+                cursor: 'pointer',
               }}
             >
               <SmsIcon size={23} /> {t.smsBar}
-            </a>
+            </button>
           ) : (
             <a
               href={WA_LINK}
@@ -1844,23 +1796,52 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               {c.cta.whatsapp}
             </a>
           )}
-          <a
-            href={c.contact.tel} className="abam-bottom-btn"
-            style={{
-              ...btn,
-              background: 'linear-gradient(180deg, #f43f5e, #be123c)',
-              color: '#ffffff',
-              fontSize: '18px',
-              fontWeight: 900,
-              padding: '18px 0',
-              borderRadius: '8px',
-              boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
-            }}
-          >
-            <PhoneIcon size={23} /> {t.callBar}
-          </a>
+          {isKo ? (
+            <button
+              type="button"
+              onClick={() => setSmsModal(true)}
+              className="abam-bottom-btn"
+              style={{
+                ...btn,
+                background: 'linear-gradient(180deg, #f43f5e, #be123c)',
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: 900,
+                padding: '18px 0',
+                borderRadius: '8px',
+                boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              <PhoneIcon size={23} /> {t.callBar}
+            </button>
+          ) : (
+            <a
+              href={c.contact.tel} className="abam-bottom-btn"
+              style={{
+                ...btn,
+                background: 'linear-gradient(180deg, #f43f5e, #be123c)',
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: 900,
+                padding: '18px 0',
+                borderRadius: '8px',
+                boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
+              }}
+            >
+              <PhoneIcon size={23} /> {t.callBar}
+            </a>
+          )}
         </div>
       </div>
+
+      {/* ── 예약 전 필수 안내 모달 ── */}
+      <AbamBookingGuideModal
+        isOpen={smsModal}
+        onClose={() => setSmsModal(false)}
+        smsMessage={t.smsBody}
+      />
 
     </div>
   );

@@ -570,7 +570,7 @@ function generateMainIndexHtml() {
   <div class="bottom-bar">
     <div class="bottom-inner">
       <a href="tel:010-6607-2239" class="btn btn-call">📞 전화 간편예약</a>
-      <a href="sms:010-6607-2239?body=아밤출장마사지예약문의" class="btn btn-sms">💬 문자 예약</a>
+      <a href="sms:010-6607-2239?body=%5B%EC%95%84%EB%B0%A4%5D%20아밤출장마사지예약문의" class="btn btn-sms">💬 문자 예약</a>
       <a href="${SITE_URL}" target="_blank" class="btn btn-web">🌐 아밤 메인</a>
     </div>
   </div>
@@ -709,7 +709,7 @@ function generateDistrictHtml(d) {
   <div class="bottom-bar">
     <div class="bottom-inner">
       <a href="tel:010-6607-2239" class="btn btn-call">📞 ${d.short} 전화예약</a>
-      <a href="sms:010-6607-2239?body=${encodeURIComponent(d.name + '출장마사지 예약문의')}" class="btn btn-sms">💬 문자예약</a>
+      <a href="sms:010-6607-2239?body=%5B%EC%95%84%EB%B0%A4%5D%20${encodeURIComponent(d.name + '출장마사지 예약문의')}" class="btn btn-sms">💬 문자예약</a>
       <a href="${SITE_URL}" target="_blank" class="btn btn-web">🌐 아밤 메인</a>
     </div>
   </div>
@@ -825,7 +825,7 @@ function generateMetroHtml(m) {
   <div class="bottom-bar">
     <div class="bottom-inner">
       <a href="tel:010-6607-2239" class="btn btn-call">📞 ${m.short} 전화예약</a>
-      <a href="sms:010-6607-2239?body=${encodeURIComponent(m.name + '출장마사지 예약문의')}" class="btn btn-sms">💬 문자예약</a>
+      <a href="sms:010-6607-2239?body=%5B%EC%95%84%EB%B0%A4%5D%20${encodeURIComponent(m.name + '출장마사지 예약문의')}" class="btn btn-sms">💬 문자예약</a>
       <a href="${SITE_URL}" target="_blank" class="btn btn-web">🌐 아밤 메인</a>
     </div>
   </div>
