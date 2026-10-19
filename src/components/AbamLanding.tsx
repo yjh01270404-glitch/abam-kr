@@ -548,12 +548,27 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        /* ── 모바일 정돈 시스템: 실제 폰 폭(360~430px) 기준 · 들여쓰기/줄바꿈/줄맞춤 통일 ── */
+        /* ── PC & 모바일 반응형 줄바꿈 및 줄맞춤 타이포그래피 시스템 ── */
+        .pc-br { display: inline; }
+        .mo-br { display: none; }
+        .abam-head-title, .abam-course-name, .abam-rule-title, .abam-faq-q, .abam-hero-title-main, .abam-hero-subtitle {
+          text-wrap: balance !important;
+          word-break: keep-all !important;
+          letter-spacing: -0.4px !important;
+        }
+        .abam-head-sub, .abam-body-text, .abam-course-desc, .abam-rule-desc, .abam-review-text, .abam-faq-a {
+          text-wrap: pretty !important;
+          word-break: keep-all !important;
+          line-height: 1.72 !important;
+        }
+
         .abam-head-title { font-size: 26px; }
         .abam-head-sub { font-size: 18px; }
         .abam-bottom-btn { white-space: nowrap; }
 
         @media (max-width: 640px) {
+          .pc-br { display: none !important; }
+          .mo-br { display: inline !important; }
           /* 헤더: 모바일에서 상단 타이틀과 네비게이션바가 완벽하게 한 줄(Single Line)로 정렬 */
           .abam-header-inner {
             display: flex !important;

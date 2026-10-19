@@ -1,0 +1,16 @@
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:3056
+- Network:       http://192.168.35.123:3056
+- Environments: .env.local
+✓ Ready in 784ms
+⚠ `eslint` configuration in next.config.ts is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+⚠ Invalid next.config.ts options detected: 
+⚠     Unrecognized key(s) in object: 'eslint'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+⚠ Duplicate page detected. src\app\api\banner\[jobId]\route.ts and src\app\api\banner\[jobId]\route.tsx resolve to /api/banner/[jobId]
+⚠ Duplicate page detected. src\app\api\detail-image\[jobId]\route.ts and src\app\api\detail-image\[jobId]\route.tsx resolve to /api/detail-image/[jobId]
+⚠ Duplicate page detected. src\app\api\banner\[jobId]\route.ts and src\app\api\banner\[jobId]\route.tsx resolve to /api/banner/[jobId]
+⚠ Duplicate page detected. src\app\api\detail-image\[jobId]\route.ts and src\app\api\detail-image\[jobId]\route.tsx resolve to /api/detail-image/[jobId]
+
+ GET / 200 in 658ms (next.js: 340ms, application-code: 319ms)
+ GET /manifest.webmanifest 200 in 129ms (next.js: 101ms, application-code: 27ms)
