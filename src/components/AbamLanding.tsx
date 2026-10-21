@@ -442,7 +442,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        /* ── 루미노케이 기준 와이드 레이아웃: PC 1200px~1280px 시원한 와이드 컨테이너 시스템 ── */
+        /* ── 아밤 프리미엄 밸런스 레이아웃: 과도한 팽창 없이 단정하고 세련된 860px 비례 시스템 ── */
         .abam-container {
           width: 100%;
           max-width: 100%;
@@ -452,8 +452,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
         @media (min-width: 640px) {
           html:not(.abam-m) .abam-container {
-            max-width: 1200px;
-            padding: 0 28px;
+            max-width: 860px;
+            padding: 0 20px;
           }
         }
 
@@ -498,7 +498,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           width: 100%;
           max-width: 100%;
           margin: 0 auto;
-          padding: 14px 18px;
+          padding: 12px 14px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -506,8 +506,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
         @media (min-width: 640px) {
           html:not(.abam-m) .abam-header-inner {
-            max-width: 1280px;
-            padding: 18px 32px;
+            max-width: 900px;
+            padding: 14px 20px;
           }
         }
 
@@ -515,10 +515,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         .abam-card {
           background: rgba(15, 23, 42, 0.95);
           border: 1px solid rgba(212, 175, 55, 0.24);
-          border-radius: 14px;
-          padding: 22px 18px;
+          border-radius: 12px;
+          padding: 20px 16px;
           box-sizing: border-box;
-          width: calc(100% - 24px);
+          width: 100%;
           margin: 0 auto;
           box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.06);
           transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
@@ -526,15 +526,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         @media (min-width: 640px) {
           html:not(.abam-m) .abam-card {
             border: 1px solid rgba(212, 175, 55, 0.24);
-            border-radius: 16px;
-            padding: 32px 32px;
+            border-radius: 14px;
+            padding: 24px 24px;
             width: 100%;
             margin: 0;
           }
           html:not(.abam-m) .abam-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(212, 175, 55, 0.48);
-            box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 0 24px rgba(212, 175, 55, 0.12);
+            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.45);
+            box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.1);
           }
         }
 
@@ -547,7 +547,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
         @media (min-width: 640px) {
           html:not(.abam-m) .abam-hero-box {
-            max-width: 880px;
+            max-width: 640px;
             padding-left: 0;
             padding-right: 0;
           }
@@ -1346,195 +1346,139 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* ── [루미노케이 벤치마크 1] 4열 신뢰 지표 & 핵심 보증 카드 그리드 (Trust & KPI Cards Strip) ── */}
-        <section style={{ margin: '32px auto 40px', width: '100%', maxWidth: '1200px', padding: '0 12px', boxSizing: 'border-box' }}>
+        {/* ── 아밤 4대 핵심 이용 안내 카드 (루미노케이 슬레이트 네이비 + 골드 림라이트 카드 박스) ── */}
+        <section style={{ margin: '20px auto 26px', width: '100%', maxWidth: '860px', padding: '0 12px', boxSizing: 'border-box' }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '16px',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '10px',
           }}>
-            {/* 카드 1: 100% 후불 결제 */}
+            {/* 카드 1: 100% 현장 대면결제 */}
             <div style={{
               background: 'rgba(15, 23, 42, 0.95)',
               border: `1px solid ${C.line}`,
-              borderRadius: '14px',
-              padding: '24px 20px',
+              borderRadius: '12px',
+              padding: '16px 14px',
               textAlign: 'center',
-              boxShadow: '0 10px 28px -4px rgba(0,0,0,0.55)',
-              transition: 'transform 0.2s ease, border-color 0.2s ease',
+              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
             }}>
               <div style={{
-                width: '44px',
-                height: '44px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 background: 'rgba(212, 175, 55, 0.12)',
                 border: '1px solid rgba(212, 175, 55, 0.35)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '12px',
+                marginBottom: '8px',
                 color: C.pointGold,
-                fontSize: '20px',
+                fontSize: '17px',
               }}>
                 🛡️
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '6px', letterSpacing: '-0.3px' }}>
-                100% 후불제 안심결제
+              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                100% 현장 대면결제
               </div>
-              <div style={{ fontSize: '14px', color: '#94a3b8', lineHeight: 1.6, wordBreak: 'keep-all' }}>
-                선입금 0원 · 매니저 도착 후 직접 확인하고 대면 결제
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                선입금 없는 안심 대면결제
               </div>
             </div>
 
-            {/* 카드 2: 수도권 30분 도착 */}
+            {/* 카드 2: 예약 접수 18:00부터 */}
             <div style={{
               background: 'rgba(15, 23, 42, 0.95)',
               border: `1px solid ${C.line}`,
-              borderRadius: '14px',
-              padding: '24px 20px',
+              borderRadius: '12px',
+              padding: '16px 14px',
               textAlign: 'center',
-              boxShadow: '0 10px 28px -4px rgba(0,0,0,0.55)',
-              transition: 'transform 0.2s ease, border-color 0.2s ease',
+              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
             }}>
               <div style={{
-                width: '44px',
-                height: '44px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 background: 'rgba(212, 175, 55, 0.12)',
                 border: '1px solid rgba(212, 175, 55, 0.35)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '12px',
+                marginBottom: '8px',
                 color: C.pointGold,
-                fontSize: '20px',
+                fontSize: '17px',
               }}>
-                ⚡
+                🕕
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '6px', letterSpacing: '-0.3px' }}>
-                수도권 30분 신속도착
+              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                예약 접수 18:00부터
               </div>
-              <div style={{ fontSize: '14px', color: '#94a3b8', lineHeight: 1.6, wordBreak: 'keep-all' }}>
-                서울·경기 거점별 20대 전문 매니저 다이렉트 출장 배차
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                출발 19:00부터 · 마지막 예약 05:00
               </div>
             </div>
 
-            {/* 카드 3: 철저한 프라이버시 */}
+            {/* 카드 3: 원하는 프라이빗 공간 */}
             <div style={{
               background: 'rgba(15, 23, 42, 0.95)',
               border: `1px solid ${C.line}`,
-              borderRadius: '14px',
-              padding: '24px 20px',
+              borderRadius: '12px',
+              padding: '16px 14px',
               textAlign: 'center',
-              boxShadow: '0 10px 28px -4px rgba(0,0,0,0.55)',
-              transition: 'transform 0.2s ease, border-color 0.2s ease',
+              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
             }}>
               <div style={{
-                width: '44px',
-                height: '44px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 background: 'rgba(212, 175, 55, 0.12)',
                 border: '1px solid rgba(212, 175, 55, 0.35)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '12px',
+                marginBottom: '8px',
                 color: C.pointGold,
-                fontSize: '20px',
+                fontSize: '17px',
               }}>
-                🔒
+                🏠
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '6px', letterSpacing: '-0.3px' }}>
-                1:1 완전 비밀보장
+              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                원하는 프라이빗 공간
               </div>
-              <div style={{ fontSize: '14px', color: '#94a3b8', lineHeight: 1.6, wordBreak: 'keep-all' }}>
-                이용 내역 및 고객 번호 당일 자동 파기 · 프라이빗 케어
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                자택 · 아파트 · 호텔 등 1:1 방문
               </div>
             </div>
 
-            {/* 카드 4: 24시 실시간 접수 */}
+            {/* 카드 4: 1시간 전 예약 추천 */}
             <div style={{
               background: 'rgba(15, 23, 42, 0.95)',
               border: `1px solid ${C.line}`,
-              borderRadius: '14px',
-              padding: '24px 20px',
+              borderRadius: '12px',
+              padding: '16px 14px',
               textAlign: 'center',
-              boxShadow: '0 10px 28px -4px rgba(0,0,0,0.55)',
-              transition: 'transform 0.2s ease, border-color 0.2s ease',
+              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
             }}>
               <div style={{
-                width: '44px',
-                height: '44px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 background: 'rgba(212, 175, 55, 0.12)',
                 border: '1px solid rgba(212, 175, 55, 0.35)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '12px',
+                marginBottom: '8px',
                 color: C.pointGold,
-                fontSize: '20px',
+                fontSize: '17px',
               }}>
-                👑
+                📅
               </div>
-              <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '6px', letterSpacing: '-0.3px' }}>
-                24시 전담 실시간 상담
+              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                1시간 전 예약 추천
               </div>
-              <div style={{ fontSize: '14px', color: '#94a3b8', lineHeight: 1.6, wordBreak: 'keep-all' }}>
-                365일 24시간 전화·문자 맞춤형 친절 상담 및 빠른 접수
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                원하는 시간에 가장 수월하게 이용
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── [루미노케이 벤치마크 2] 공인 인증 & 공식 안심 캠페인 쇼케이스 바 (Authority Badge Strip) ── */}
-        <section style={{ margin: '0 auto 36px', width: '100%', maxWidth: '1200px', padding: '0 12px', boxSizing: 'border-box' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(20, 30, 55, 0.8) 100%)',
-            border: `1px solid ${C.line}`,
-            borderRadius: '12px',
-            padding: '16px 20px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '12px',
-            boxShadow: '0 6px 20px rgba(0,0,0,0.4)',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '20px' }}>🏆</span>
-              <div>
-                <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
-                  2026 대한민국 프리미엄 홈케어 공식 안심 플랫폼
-                </div>
-                <div style={{ fontSize: '12.5px', color: C.pointGold, fontWeight: 600 }}>
-                  선입금 없는 클린 에이전시 · 수도권 고객 만족도 99.4%
-                </div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{
-                background: 'rgba(212, 175, 55, 0.15)',
-                border: '1px solid rgba(212, 175, 55, 0.35)',
-                color: C.pointGold,
-                fontSize: '12px',
-                fontWeight: 700,
-                padding: '4px 10px',
-                borderRadius: '6px',
-              }}>
-                공식 인증 표준
-              </span>
-              <span style={{
-                background: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid rgba(16, 185, 129, 0.35)',
-                color: '#34d399',
-                fontSize: '12px',
-                fontWeight: 700,
-                padding: '4px 10px',
-                borderRadius: '6px',
-              }}>
-                100% 대면결제
-              </span>
             </div>
           </div>
         </section>
