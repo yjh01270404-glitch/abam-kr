@@ -10,19 +10,23 @@ import AbamBookingGuideModal from './AbamBookingGuideModal';
 const WA_LINK =
   'https://wa.me/821066072239?text=Hello%20Abam.kr,%20I%20would%20like%20to%20inquire%20about%20your%20private%201:1%20home%20care%20service.';
 
-/* 실제 한국 상용 사이트 표준 디자인 토큰 — 깊은 다크 배경 + 솔리드 포인트 컬러 */
+/* 루미노케이(Luminok) 하이엔드 디자인 시스템 토큰 — 미드나잇 다크 네이비 + 샴페인 골드 + 림라이트 */
 const C = {
-  bg: '#0c0d11',
-  cardBg: '#15171e',
-  cardBgAlt: '#1c1f28',
-  line: '#282b36',
-  lineLight: '#3a3f50',
+  bg: '#070a14',                 // 루미노케이 미드나잇 다크 네이비 베이스
+  bgSurface: '#0b101d',          // 세컨더리 표면 네이비
+  cardBg: 'rgba(15, 23, 42, 0.95)', // 루미노케이형 딥 슬레이트 네이비 카드
+  cardBgAlt: 'rgba(20, 30, 55, 0.92)',
+  line: 'rgba(212, 175, 55, 0.22)',  // 은은한 샴페인 골드 림라이트 보더
+  lineLight: 'rgba(212, 175, 55, 0.38)',
+  lineMuted: '#1e293b',
   text: '#ffffff',
   textSub: '#cbd5e1',
   textMuted: '#94a3b8',
-  pointRed: '#e11d48',      // 강렬한 직관적 통화/강조 레드
-  pointGold: '#f59e0b',     // 단색 웜 골드/옐로우 (그라데이션 제거)
-  pointGreen: '#10b981',    // 후불제 신뢰 그린
+  pointRed: '#dc2626',           // 직관적 긴급/상담 크림슨 레드
+  pointGold: '#d4af37',          // 루미노케이 시그니처 샴페인 골드
+  pointGoldBright: '#f59e0b',    // 밝은 골드 앰버
+  pointGreen: '#10b981',         // 후불제 신뢰 그린
+  cardShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.08)',
 };
 
 const FONT = '-apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
@@ -307,16 +311,28 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     return 'Beautiful Night · Private Care';
   };
 
-  /* 시원시원하고 직관적인 한국형 섹션 타이틀 + 럭셔리 깃펜 필기체 서브 캡션 페어링 */
+  /* 루미노케이 스타일 프리미엄 섹션 타이틀: 샴페인 골드 바 인디케이터 + 계층형 캡션 */
   const head = (title: string, sub?: string, tag?: string) => {
     const englishTag = tag || getSectionEnglishTag(title);
     return (
-      <div style={{ marginBottom: '22px', borderLeft: `5px solid ${C.pointRed}`, marginLeft: '12px', paddingLeft: '14px', position: 'relative' }}>
-        <div className="abam-copperplate-en" style={{ fontSize: '20px', color: '#fef08a', letterSpacing: '0.06em', opacity: 0.92, marginBottom: '2px', lineHeight: 1.2, textShadow: '0 0 10px rgba(245,158,11,0.4)' }}>
-          {englishTag}
+      <div style={{ marginBottom: '24px', borderLeft: `4px solid ${C.pointGold}`, marginLeft: '12px', paddingLeft: '14px', position: 'relative' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+          <span style={{
+            fontSize: '11.5px',
+            fontWeight: 800,
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            color: C.pointGold,
+            background: 'rgba(212, 175, 55, 0.12)',
+            border: `1px solid ${C.line}`,
+            padding: '2px 8px',
+            borderRadius: '4px',
+          }}>
+            {englishTag}
+          </span>
         </div>
-        <h2 className="abam-head-title" style={{ fontWeight: 900, color: '#ffffff', margin: 0, letterSpacing: '-0.5px', wordBreak: 'keep-all', lineHeight: 1.3 }}>{title}</h2>
-        {sub && <p className="abam-head-sub" style={{ color: '#cbd5e1', margin: '6px 0 0', wordBreak: 'keep-all', fontWeight: 600 }}>{sub}</p>}
+        <h2 className="abam-head-title" style={{ fontWeight: 800, fontSize: '26px', color: '#ffffff', margin: '4px 0 0', letterSpacing: '-0.5px', wordBreak: 'keep-all', lineHeight: 1.3 }}>{title}</h2>
+        {sub && <p className="abam-head-sub" style={{ color: '#94a3b8', fontSize: '15px', margin: '6px 0 0', wordBreak: 'keep-all', fontWeight: 500, lineHeight: 1.6 }}>{sub}</p>}
       </div>
     );
   };
@@ -495,23 +511,30 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
-        /* 모바일에서는 좁은 카드 상자 형태가 아니라, 화면 좌우 끝까지 100% 닿는 풀스크린 섹션으로 전환 */
+        /* 루미노케이 하이엔드 박스 표현 시스템: 슬레이트 네이비 카드 + 골드 림라이트 보더 + 깊은 입체 음영 */
         .abam-card {
-          background: #15171e;
-          border-top: 1px solid #282b36;
-          border-bottom: 1px solid #282b36;
-          border-left: none;
-          border-right: none;
-          border-radius: 0;
-          padding: 20px 16px;
+          background: rgba(15, 23, 42, 0.95);
+          border: 1px solid rgba(212, 175, 55, 0.24);
+          border-radius: 14px;
+          padding: 22px 18px;
           box-sizing: border-box;
-          width: 100%;
+          width: calc(100% - 24px);
+          margin: 0 auto;
+          box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.06);
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
         }
         @media (min-width: 640px) {
           html:not(.abam-m) .abam-card {
-            border: 1px solid #282b36;
-            border-radius: 10px;
-            padding: 22px 24px;
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            border-radius: 16px;
+            padding: 26px 26px;
+            width: 100%;
+            margin: 0;
+          }
+          html:not(.abam-m) .abam-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.48);
+            box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7), 0 0 24px rgba(212, 175, 55, 0.12);
           }
         }
 
@@ -530,21 +553,25 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
+        /* 루미노케이 스타일 하단 고정 퀵바 (블러 네이비 독 + 상단 골드 악센트 라인) */
         .abam-bottom-bar {
           position: fixed;
           bottom: 0;
           left: 0;
           right: 0;
-          background: rgba(12, 13, 17, 0.98);
-          border-top: 1px solid #282b36;
-          padding: 8px 10px;
+          background: rgba(7, 10, 20, 0.96);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border-top: 1px solid rgba(212, 175, 55, 0.35);
+          box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.75);
+          padding: 10px 14px;
           z-index: 50;
           box-sizing: border-box;
           width: 100%;
         }
         @media (min-width: 640px) {
           html:not(.abam-m) .abam-bottom-bar {
-            padding: 10px 20px;
+            padding: 12px 24px;
           }
         }
 
@@ -1318,6 +1345,199 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
+        {/* ── [루미노케이 벤치마크 1] 4열 신뢰 지표 & 핵심 보증 카드 그리드 (Trust & KPI Cards Strip) ── */}
+        <section style={{ margin: '24px auto 32px', width: '100%', maxWidth: '860px', padding: '0 12px', boxSizing: 'border-box' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '12px',
+          }}>
+            {/* 카드 1: 100% 후불 결제 */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.95)',
+              border: `1px solid ${C.line}`,
+              borderRadius: '12px',
+              padding: '18px 16px',
+              textAlign: 'center',
+              boxShadow: '0 8px 24px -4px rgba(0,0,0,0.5)',
+              transition: 'transform 0.2s ease, border-color 0.2s ease',
+            }}>
+              <div style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                background: 'rgba(212, 175, 55, 0.12)',
+                border: '1px solid rgba(212, 175, 55, 0.35)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '10px',
+                color: C.pointGold,
+                fontSize: '18px',
+              }}>
+                🛡️
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                100% 후불제 안심결제
+              </div>
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                선입금 0원 · 매니저 도착 후 직접 확인하고 대면 결제
+              </div>
+            </div>
+
+            {/* 카드 2: 수도권 30분 도착 */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.95)',
+              border: `1px solid ${C.line}`,
+              borderRadius: '12px',
+              padding: '18px 16px',
+              textAlign: 'center',
+              boxShadow: '0 8px 24px -4px rgba(0,0,0,0.5)',
+              transition: 'transform 0.2s ease, border-color 0.2s ease',
+            }}>
+              <div style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                background: 'rgba(212, 175, 55, 0.12)',
+                border: '1px solid rgba(212, 175, 55, 0.35)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '10px',
+                color: C.pointGold,
+                fontSize: '18px',
+              }}>
+                ⚡
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                수도권 30분 신속도착
+              </div>
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                서울·경기 거점별 20대 전문 매니저 다이렉트 출장 배차
+              </div>
+            </div>
+
+            {/* 카드 3: 철저한 프라이버시 */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.95)',
+              border: `1px solid ${C.line}`,
+              borderRadius: '12px',
+              padding: '18px 16px',
+              textAlign: 'center',
+              boxShadow: '0 8px 24px -4px rgba(0,0,0,0.5)',
+              transition: 'transform 0.2s ease, border-color 0.2s ease',
+            }}>
+              <div style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                background: 'rgba(212, 175, 55, 0.12)',
+                border: '1px solid rgba(212, 175, 55, 0.35)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '10px',
+                color: C.pointGold,
+                fontSize: '18px',
+              }}>
+                🔒
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                1:1 완전 비밀보장
+              </div>
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                이용 내역 및 고객 번호 당일 자동 파기 · 프라이빗 케어
+              </div>
+            </div>
+
+            {/* 카드 4: 24시 실시간 접수 */}
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.95)',
+              border: `1px solid ${C.line}`,
+              borderRadius: '12px',
+              padding: '18px 16px',
+              textAlign: 'center',
+              boxShadow: '0 8px 24px -4px rgba(0,0,0,0.5)',
+              transition: 'transform 0.2s ease, border-color 0.2s ease',
+            }}>
+              <div style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                background: 'rgba(212, 175, 55, 0.12)',
+                border: '1px solid rgba(212, 175, 55, 0.35)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '10px',
+                color: C.pointGold,
+                fontSize: '18px',
+              }}>
+                👑
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+                24시 전담 실시간 상담
+              </div>
+              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+                365일 24시간 전화·문자 맞춤형 친절 상담 및 빠른 접수
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── [루미노케이 벤치마크 2] 공인 인증 & 공식 안심 캠페인 쇼케이스 바 (Authority Badge Strip) ── */}
+        <section style={{ margin: '0 auto 28px', width: '100%', maxWidth: '860px', padding: '0 12px', boxSizing: 'border-box' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(20, 30, 55, 0.8) 100%)',
+            border: `1px solid ${C.line}`,
+            borderRadius: '12px',
+            padding: '16px 20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '12px',
+            boxShadow: '0 6px 20px rgba(0,0,0,0.4)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '20px' }}>🏆</span>
+              <div>
+                <div style={{ fontSize: '14.5px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
+                  2026 대한민국 프리미엄 홈케어 공식 안심 플랫폼
+                </div>
+                <div style={{ fontSize: '12.5px', color: C.pointGold, fontWeight: 600 }}>
+                  선입금 없는 클린 에이전시 · 수도권 고객 만족도 99.4%
+                </div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{
+                background: 'rgba(212, 175, 55, 0.15)',
+                border: '1px solid rgba(212, 175, 55, 0.35)',
+                color: C.pointGold,
+                fontSize: '12px',
+                fontWeight: 700,
+                padding: '4px 10px',
+                borderRadius: '6px',
+              }}>
+                공식 인증 표준
+              </span>
+              <span style={{
+                background: 'rgba(16, 185, 129, 0.15)',
+                border: '1px solid rgba(16, 185, 129, 0.35)',
+                color: '#34d399',
+                fontSize: '12px',
+                fontWeight: 700,
+                padding: '4px 10px',
+                borderRadius: '6px',
+              }}>
+                100% 대면결제
+              </span>
+            </div>
+          </div>
+        </section>
+
         {/* ── 3. 출장안마 서비스 안내 ── */}
         <section id="intro" style={section}>
           {head(t.introTitle, t.introSub)}
@@ -1338,36 +1558,36 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="price" style={section}>
           {head(t.priceTitle, t.priceSub)}
           
-          {/* 3대 코스 통합 단일 마스터 박스 (따로 놀지 않고 하나로 묶인 일체형 메뉴판) */}
+          {/* 3대 코스 통합 단일 마스터 박스 (루미노케이 슬레이트 네이비 + 골드 림라이트 프레임) */}
           <div
             className="abam-card abam-card-flush"
             style={{
               padding: 0,
               overflow: 'hidden',
-              border: '1px solid #333846',
-              borderRadius: '12px',
-              background: '#13151c',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+              border: `1px solid ${C.line}`,
+              borderRadius: '16px',
+              background: 'rgba(15, 23, 42, 0.95)',
+              boxShadow: '0 12px 36px -4px rgba(0,0,0,0.65), 0 0 16px rgba(212, 175, 55, 0.08)',
             }}
           >
             {/* 마스터 안내 바 */}
             <div
               style={{
-                padding: '12px 18px',
-                background: '#1a1d26',
-                borderBottom: '1px solid #282b36',
+                padding: '14px 20px',
+                background: 'rgba(20, 30, 55, 0.95)',
+                borderBottom: `1px solid ${C.line}`,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 flexWrap: 'wrap',
-                gap: '6px',
+                gap: '8px',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: C.pointGold }} />
-                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff' }}>{t.priceBar1}</span>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: C.pointGold, boxShadow: '0 0 8px rgba(212, 175, 55, 0.8)' }} />
+                <span style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>{t.priceBar1}</span>
               </div>
-              <span style={{ fontSize: '12px', color: C.pointGold, fontWeight: 700 }}>{t.priceBar2}</span>
+              <span style={{ fontSize: '12.5px', color: C.pointGold, fontWeight: 700 }}>{t.priceBar2}</span>
             </div>
 
             {/* 3대 코스: A(시안 블루), B(앰버 골드), C(루비 레드)로 종류별 확실한 컬러 구분 */}
@@ -1770,7 +1990,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
       </main>
 
-      {/* ── 12. 하단 고정 퀵바 (큼직한 대형 통화/문자 버튼 · 클릭 시 5대 수칙 모달 호출) ── */}
+      {/* ── 12. [루미노케이 벤치마크] 하단 고정 듀얼 액션 독 (샴페인 골드 실시간 예약 + 크림슨 레드 24시 상담전화) ── */}
       <div className="abam-bottom-bar">
         <div style={{ maxWidth: '860px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
           {isKo ? (
@@ -1780,18 +2000,18 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               className="abam-bottom-btn"
               style={{
                 ...btn,
-                background: 'linear-gradient(180deg, #2b3245, #1e2333)',
-                border: '1.5px solid #475569',
-                color: '#ffffff',
-                fontSize: '18px',
+                background: 'linear-gradient(135deg, #d4af37 0%, #b89628 100%)',
+                border: '1px solid rgba(254, 240, 138, 0.4)',
+                color: '#070a14',
+                fontSize: '17px',
                 fontWeight: 900,
-                padding: '18px 0',
-                borderRadius: '8px',
-                boxShadow: '0 4px 14px rgba(0,0,0,0.5)',
+                padding: '16px 0',
+                borderRadius: '10px',
+                boxShadow: '0 4px 18px rgba(212, 175, 55, 0.35)',
                 cursor: 'pointer',
               }}
             >
-              <SmsIcon size={23} /> {t.smsBar}
+              <SmsIcon size={22} /> {t.smsBar}
             </button>
           ) : (
             <a
@@ -1802,10 +2022,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 ...btn,
                 background: '#25D366',
                 color: '#ffffff',
-                fontSize: '18px',
+                fontSize: '17px',
                 fontWeight: 900,
-                padding: '18px 0',
-                borderRadius: '8px',
+                padding: '16px 0',
+                borderRadius: '10px',
               }}
             >
               {c.cta.whatsapp}
@@ -1818,34 +2038,34 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               className="abam-bottom-btn"
               style={{
                 ...btn,
-                background: 'linear-gradient(180deg, #f43f5e, #be123c)',
+                background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)',
                 color: '#ffffff',
-                fontSize: '18px',
+                fontSize: '17px',
                 fontWeight: 900,
-                padding: '18px 0',
-                borderRadius: '8px',
-                boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
-                border: 'none',
+                padding: '16px 0',
+                borderRadius: '10px',
+                boxShadow: '0 4px 18px rgba(220, 38, 38, 0.4)',
+                border: '1px solid rgba(254, 202, 202, 0.3)',
                 cursor: 'pointer',
               }}
             >
-              <PhoneIcon size={23} /> {t.callBar}
+              <PhoneIcon size={22} /> {t.callBar}
             </button>
           ) : (
             <a
               href={c.contact.tel} className="abam-bottom-btn"
               style={{
                 ...btn,
-                background: 'linear-gradient(180deg, #f43f5e, #be123c)',
+                background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)',
                 color: '#ffffff',
-                fontSize: '18px',
+                fontSize: '17px',
                 fontWeight: 900,
-                padding: '18px 0',
-                borderRadius: '8px',
-                boxShadow: '0 4px 18px rgba(225,29,72,0.45)',
+                padding: '16px 0',
+                borderRadius: '10px',
+                boxShadow: '0 4px 18px rgba(220, 38, 38, 0.4)',
               }}
             >
-              <PhoneIcon size={23} /> {t.callBar}
+              <PhoneIcon size={22} /> {t.callBar}
             </a>
           )}
         </div>
