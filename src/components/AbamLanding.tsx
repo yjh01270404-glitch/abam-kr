@@ -13,18 +13,15 @@ const WA_LINK =
 /* 루미노케이(Luminok) 정통 하이엔드 디자인 토큰 — 딥 네이비 블루 + 샴페인 골드 & 옐로우 악센트 */
 const C = {
   bg: '#060a17',                  // 루미노케이 시그니처 딥 미드나잇 블루
-  bgAlt: '#0a1024',
   cardBg: 'rgba(10, 18, 38, 0.92)', // 루미노케이형 딥 블루 글래스 카드
-  cardBgHover: 'rgba(14, 25, 52, 0.96)',
-  border: 'rgba(212, 175, 55, 0.28)', // 샴페인 골드 림라이트 라인
-  borderBlue: 'rgba(56, 189, 248, 0.22)',
+  border: 'rgba(212, 175, 55, 0.3)', // 샴페인 골드 림라이트 라인
   textWhite: '#ffffff',
   textSub: '#cbd5e1',
   textMuted: '#94a3b8',
   gold: '#fbbf24',                // 루미노케이 텍스트 강조 옐로우-골드
   goldSoft: '#d4af37',
   red: '#dc2626',
-  green: '#10b981',
+  brandRed: '#e11d48',
 };
 
 const FONT = '-apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif';
@@ -58,12 +55,47 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   }, []);
 
   return (
-    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', background: C.bg, color: C.textWhite, fontFamily: FONT, paddingBottom: '120px', lineHeight: 1.65 }}>
+    <div lang={c.htmlLang} style={{ position: 'relative', minHeight: '100vh', width: '100%', color: C.textWhite, fontFamily: FONT, paddingBottom: '120px', lineHeight: 1.65 }}>
       
-      {/* ── 전역 스타일 및 반응형 레이아웃 ── */}
+      {/* ── 백그라운드 고정 도심 밤하늘 배경 이미지 & 레이아웃 스타일 ── */}
       <style jsx global>{`
         html { scroll-behavior: smooth; font-family: ${FONT}; width: 100%; overflow-x: hidden; }
-        body { width: 100%; overflow-x: hidden; margin: 0; padding: 0; background: #060a17; color: #ffffff; }
+        body {
+          width: 100%;
+          min-height: 100vh;
+          overflow-x: hidden;
+          margin: 0;
+          padding: 0;
+          background-color: #060913;
+          background-image: linear-gradient(180deg, rgba(6, 9, 19, 0.72) 0%, rgba(6, 9, 19, 0.88) 55%, rgba(6, 9, 19, 0.98) 100%), url('/images/seoul_night_sky.jpg');
+          background-size: cover;
+          background-position: center top;
+          background-attachment: fixed;
+          background-repeat: no-repeat;
+          color: #ffffff;
+        }
+
+        /* 아름다운밤 정통 유려한 흘림 필기체 클래스 */
+        .abam-script-font {
+          font-family: 'KccEunyeong', 'Pinyon Script', 'Nanum Pen Script', cursive, sans-serif !important;
+          font-weight: 400 !important;
+          letter-spacing: 0.01em !important;
+        }
+
+        .abam-hero-title-cursive {
+          font-size: 50px;
+        }
+        .abam-hero-title-tag {
+          font-size: 26px;
+        }
+        @media (max-width: 640px) {
+          .abam-hero-title-cursive {
+            font-size: 36px !important;
+          }
+          .abam-hero-title-tag {
+            font-size: 19px !important;
+          }
+        }
 
         /* 루미노케이 스타일 860px 럭셔리 중앙 컨테이너 */
         .abam-container {
@@ -117,7 +149,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           margin: 20px 0;
         }
         .luminok-guide-card {
-          background: rgba(10, 18, 38, 0.9);
+          background: rgba(10, 18, 38, 0.92);
           border: 1px solid rgba(212, 175, 55, 0.25);
           border-radius: 10px;
           padding: 20px 18px;
@@ -132,7 +164,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         /* 공통 프리미엄 카드 */
         .abam-panel {
           background: rgba(10, 18, 38, 0.92);
-          border: 1px solid rgba(212, 175, 55, 0.22);
+          border: 1px solid rgba(212, 175, 55, 0.25);
           border-radius: 12px;
           padding: 24px;
           box-sizing: border-box;
@@ -184,9 +216,6 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         }
       `}</style>
 
-      {/* ── 배경 앰비언트 그라데이션 ── */}
-      <div aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 90% 70% at 50% 0%, #0d1a38 0%, #060a17 65%)' }} />
-
       {/* 토스트 알림 */}
       {toast && (
         <div style={{ position: 'fixed', top: '16px', left: '50%', transform: 'translateX(-50%)', background: '#1e293b', border: `1px solid ${C.border}`, color: '#ffffff', padding: '10px 20px', borderRadius: '6px', fontSize: '13.5px', fontWeight: 700, zIndex: 99999, boxShadow: '0 8px 24px rgba(0,0,0,0.8)' }}>
@@ -201,19 +230,45 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         smsMessage={t.smsBody}
       />
 
-      {/* ── 1. 상단 헤더 (루미노케이형 골드 엠블럼 + 심플 네비게이션) ── */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(6, 10, 23, 0.94)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: `1px solid rgba(212, 175, 55, 0.2)` }}>
+      {/* ── 1. 상단 헤더: 아밤 고유 골드 달 로고 + 아름다운밤 필기체 복원 ── */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 40, background: 'rgba(6, 10, 23, 0.94)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: `1px solid rgba(212, 175, 55, 0.25)` }}>
         <div style={{ maxWidth: '860px', margin: '0 auto', padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {/* 루미노케이 스타일 골드 육각/크레센트 심볼 */}
-            <div style={{ width: '28px', height: '28px', borderRadius: '6px', background: 'rgba(212, 175, 55, 0.15)', border: `1px solid ${C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: C.gold, fontSize: '16px', fontWeight: 900 }}>A</span>
-            </div>
-            <div>
-              <span style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px', display: 'block', lineHeight: 1.1 }}>{t.logoA}</span>
-              <span style={{ fontSize: '10.5px', color: C.goldSoft, letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 600 }}>Private Therapy</span>
-            </div>
+          <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+            {/* 아밤 시그니처 골드 달 로고 */}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 8px rgba(245, 158, 11, 0.9))', flexShrink: 0 }}>
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#headerMoonGrad)" />
+              <defs>
+                <linearGradient id="headerMoonGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="35%" stopColor="#fef08a" />
+                  <stop offset="100%" stopColor="#f59e0b" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <span
+                className="abam-script-font"
+                style={{
+                  fontSize: '28px',
+                  fontStyle: 'italic',
+                  fontWeight: 'normal',
+                  lineHeight: 1,
+                  display: 'inline-block',
+                  background: 'linear-gradient(180deg, #ffffff 10%, #fef08a 60%, #f59e0b 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 12px rgba(245, 158, 11, 0.5))',
+                  transform: 'rotate(-2deg) skewX(-7deg)',
+                  padding: '0 2px',
+                }}
+              >
+                아름다운밤
+              </span>
+              <span style={{ fontSize: '17px', fontWeight: 900, color: C.brandRed, letterSpacing: '-0.3px', lineHeight: 1 }}>
+                [아밤.Abam.kr]
+              </span>
+            </span>
           </Link>
 
           {/* 우측 메뉴 & 언어 전환 */}
@@ -252,27 +307,56 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       {/* ── 메인 콘텐츠 ── */}
       <main className="abam-container" style={{ position: 'relative', zIndex: 1, paddingTop: '36px' }}>
 
-        {/* ── 2. 루미노케이 시그니처 히어로 섹션 ── */}
+        {/* ── 2. 히어로 섹션: 아밤 브랜드 로고 + 루미노케이 2-Box CTA 시스템 ── */}
         <section style={{ textAlign: 'left', marginBottom: '32px' }}>
           
-          {/* 상단 서브 카피 */}
-          <div style={{ fontSize: '13.5px', fontWeight: 700, color: C.gold, letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '8px' }}>
-            Seoul & Gyeonggi Premium Home Care
+          {/* 상단 아밤 시그니처 엠블럼 & 필기체 타이틀 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 0 14px rgba(245, 158, 11, 0.95))', flexShrink: 0 }}>
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#heroMoonGrad)" />
+              <defs>
+                <linearGradient id="heroMoonGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="35%" stopColor="#fef08a" />
+                  <stop offset="100%" stopColor="#f59e0b" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span
+              className="abam-script-font abam-hero-title-cursive"
+              style={{
+                fontStyle: 'italic',
+                fontWeight: 'normal',
+                lineHeight: 1,
+                display: 'inline-block',
+                background: 'linear-gradient(180deg, #ffffff 10%, #fef08a 60%, #f59e0b 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: 'drop-shadow(0 2px 14px rgba(245, 158, 11, 0.6))',
+                transform: 'rotate(-2deg) skewX(-7deg)',
+                padding: '0 4px',
+              }}
+            >
+              아름다운밤
+            </span>
+            <span className="abam-hero-title-tag" style={{ fontWeight: 900, color: C.brandRed, letterSpacing: '-0.3px', lineHeight: 1 }}>
+              [아밤.Abam.kr]
+            </span>
           </div>
 
-          {/* 메인 헤드라인 (정통 굵은 고딕 볼드) */}
-          <h1 style={{ fontSize: '32px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.8px', margin: '0 0 12px', lineHeight: 1.25, wordBreak: 'keep-all' }}>
+          {/* 메인 헤드라인 */}
+          <h1 style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.6px', margin: '4px 0 10px', lineHeight: 1.3, wordBreak: 'keep-all' }}>
             출장마사지 · 출장 홈타이 아밤
           </h1>
 
-          <div style={{ fontSize: '17px', fontWeight: 700, color: '#e2e8f0', letterSpacing: '-0.4px', marginBottom: '22px' }}>
+          <div style={{ fontSize: '16.5px', fontWeight: 700, color: '#e2e8f0', letterSpacing: '-0.3px', marginBottom: '22px' }}>
             서울·경기 전지역 1:1 방문 맞춤 케어 · 100% 현장 대면결제
           </div>
 
-          {/* 루미노케이 스타일 본문 소개 (좌측 골드 라인 + 품격 있는 스토리텔링) */}
+          {/* 루미노케이 스타일 본문 스토리텔링 소개 (좌측 골드 라인) */}
           <div style={{ borderLeft: `3px solid ${C.goldSoft}`, paddingLeft: '16px', margin: '0 0 26px', fontSize: '15.5px', color: '#cbd5e1', lineHeight: 1.8, wordBreak: 'keep-all' }}>
             <p style={{ margin: '0 0 8px' }}>
-              저희 <strong style={{ color: '#ffffff' }}>‘아밤(Abam)’</strong>은 고객님이 계신 가장 편안하고 익숙한 프라이빗 공간(자택, 아파트, 호텔)으로 전문 테라피스트가 직접 찾아가는 1:1 방문 힐링 케어 서비스입니다.
+              <span className="abam-script-font" style={{ color: C.gold, fontSize: '24px', verticalAlign: 'baseline', display: 'inline-block', marginRight: '6px', fontStyle: 'italic', fontWeight: 'normal' }}>아름다운 밤</span>을 뜻하는 저희 <strong style={{ color: '#ffffff' }}>‘아밤(Abam)’</strong>은 고객님이 계신 가장 편안하고 익숙한 프라이빗 공간(자택, 아파트, 호텔)으로 전문 테라피스트가 직접 찾아가는 1:1 방문 힐링 케어 서비스입니다.
             </p>
             <p style={{ margin: 0 }}>
               어떠한 경우에도 사전 입금이나 예약금을 요구하지 않는 <strong style={{ color: C.gold }}>100% 현장 대면결제 원칙</strong>을 준수하며, 지친 일상의 피로를 품격 있는 관리로 완벽하게 해소해 드립니다.
