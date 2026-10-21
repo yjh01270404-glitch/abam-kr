@@ -575,6 +575,73 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           }
         }
 
+        /* ── 4대 핵심 가이드 카드: PC/모바일 균형 높이 및 줄맞춤 ── */
+        .abam-guide-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: rgba(15, 23, 42, 0.95);
+          border: 1px solid rgba(212, 175, 55, 0.24);
+          border-radius: 12px;
+          padding: 18px 12px;
+          text-align: center;
+          box-shadow: 0 6px 20px -4px rgba(0,0,0,0.5);
+          min-height: 128px;
+          box-sizing: border-box;
+          transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .abam-guide-card-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(212, 175, 55, 0.12);
+          border: 1px solid rgba(212, 175, 55, 0.35);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 8px;
+          color: #d4af37;
+          font-size: 17px;
+          flex-shrink: 0;
+        }
+        .abam-guide-card-title {
+          font-size: 15px;
+          font-weight: 800;
+          color: #ffffff;
+          margin-bottom: 4px;
+          letter-spacing: -0.3px;
+          line-height: 1.35;
+          text-wrap: balance;
+          word-break: keep-all;
+        }
+        .abam-guide-card-sub {
+          font-size: 12.5px;
+          color: #94a3b8;
+          line-height: 1.45;
+          text-wrap: pretty;
+          word-break: keep-all;
+          margin: 0;
+        }
+        @media (min-width: 640px) {
+          .abam-guide-card {
+            padding: 22px 18px;
+            min-height: 140px;
+          }
+          .abam-guide-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.45);
+          }
+          .abam-guide-card-title {
+            font-size: 16.5px;
+            margin-bottom: 6px;
+          }
+          .abam-guide-card-sub {
+            font-size: 13.5px;
+            line-height: 1.5;
+          }
+        }
+
         /* ── PC & 모바일 반응형 줄바꿈 및 줄맞춤 타이포그래피 시스템 ── */
         .pc-br { display: inline; }
         .mo-br { display: none; }
@@ -1354,131 +1421,55 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             gap: '10px',
           }}>
             {/* 카드 1: 100% 현장 대면결제 */}
-            <div style={{
-              background: 'rgba(15, 23, 42, 0.95)',
-              border: `1px solid ${C.line}`,
-              borderRadius: '12px',
-              padding: '16px 14px',
-              textAlign: 'center',
-              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
-            }}>
-              <div style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: 'rgba(212, 175, 55, 0.12)',
-                border: '1px solid rgba(212, 175, 55, 0.35)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '8px',
-                color: C.pointGold,
-                fontSize: '17px',
-              }}>
+            <div className="abam-guide-card">
+              <div className="abam-guide-card-icon">
                 🛡️
               </div>
-              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+              <div className="abam-guide-card-title">
                 100% 현장 대면결제
               </div>
-              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
+              <p className="abam-guide-card-sub">
                 선입금 없는 안심 대면결제
-              </div>
+              </p>
             </div>
 
             {/* 카드 2: 예약 접수 18:00부터 */}
-            <div style={{
-              background: 'rgba(15, 23, 42, 0.95)',
-              border: `1px solid ${C.line}`,
-              borderRadius: '12px',
-              padding: '16px 14px',
-              textAlign: 'center',
-              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
-            }}>
-              <div style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: 'rgba(212, 175, 55, 0.12)',
-                border: '1px solid rgba(212, 175, 55, 0.35)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '8px',
-                color: C.pointGold,
-                fontSize: '17px',
-              }}>
+            <div className="abam-guide-card">
+              <div className="abam-guide-card-icon">
                 🕕
               </div>
-              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+              <div className="abam-guide-card-title">
                 예약 접수 18:00부터
               </div>
-              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
-                출발 19:00부터 · 마지막 예약 05:00
-              </div>
+              <p className="abam-guide-card-sub">
+                출발 19:00부터<span className="mo-br"><br /></span><span className="pc-br"> · </span>마지막 예약 05:00
+              </p>
             </div>
 
             {/* 카드 3: 원하는 프라이빗 공간 */}
-            <div style={{
-              background: 'rgba(15, 23, 42, 0.95)',
-              border: `1px solid ${C.line}`,
-              borderRadius: '12px',
-              padding: '16px 14px',
-              textAlign: 'center',
-              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
-            }}>
-              <div style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: 'rgba(212, 175, 55, 0.12)',
-                border: '1px solid rgba(212, 175, 55, 0.35)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '8px',
-                color: C.pointGold,
-                fontSize: '17px',
-              }}>
+            <div className="abam-guide-card">
+              <div className="abam-guide-card-icon">
                 🏠
               </div>
-              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+              <div className="abam-guide-card-title">
                 원하는 프라이빗 공간
               </div>
-              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
-                자택 · 아파트 · 호텔 등 1:1 방문
-              </div>
+              <p className="abam-guide-card-sub">
+                자택 · 아파트 · 호텔 등<span className="mo-br"><br /></span><span className="pc-br"> </span>편안한 1:1 방문 케어
+              </p>
             </div>
 
-            {/* 카드 4: 1시간 전 예약 추천 */}
-            <div style={{
-              background: 'rgba(15, 23, 42, 0.95)',
-              border: `1px solid ${C.line}`,
-              borderRadius: '12px',
-              padding: '16px 14px',
-              textAlign: 'center',
-              boxShadow: '0 6px 20px -4px rgba(0,0,0,0.5)',
-            }}>
-              <div style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: 'rgba(212, 175, 55, 0.12)',
-                border: '1px solid rgba(212, 175, 55, 0.35)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '8px',
-                color: C.pointGold,
-                fontSize: '17px',
-              }}>
-                📅
+            {/* 카드 4: 1시간 전 예약 추천 / 서울·경기 30~40분 내 도착 */}
+            <div className="abam-guide-card">
+              <div className="abam-guide-card-icon">
+                ⚡
               </div>
-              <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#ffffff', marginBottom: '4px', letterSpacing: '-0.3px' }}>
+              <div className="abam-guide-card-title">
                 1시간 전 예약 추천
               </div>
-              <div style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, wordBreak: 'keep-all' }}>
-                원하는 시간에 가장 수월하게 이용
-              </div>
+              <p className="abam-guide-card-sub">
+                1시간 전 추천<span className="mo-br"><br /></span><span className="pc-br"> · </span>서울·경기 30~40분 내 도착
+              </p>
             </div>
           </div>
         </section>
