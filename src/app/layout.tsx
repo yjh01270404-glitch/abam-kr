@@ -28,8 +28,8 @@ const BING_VERIFICATION = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL('https://abam.kr'),
   title: {
-    default: '출장마사지 · 출장 홈타이 1위 (서울·경기 24시 방문) | 아밤 [100% 현장 대면결제]',
-    template: '%s | 출장마사지 · 출장홈타이 1위 아밤 [Abam.kr]',
+    default: '아밤 (Abam.kr) - 서울·경기 1위 출장마사지 · 출장 홈타이 [100% 현장 대면결제]',
+    template: '%s | 아밤 (Abam.kr) - 출장마사지 · 출장홈타이 1위',
   },
   description:
     '출장마사지 · 출장 홈타이 1위 아밤(Abam.kr). 서울 25개 구 및 경기 전역(수원·성남·분당·판교·일산·부천·용인·평택·동탄·안양·김포) 자택·호텔 1:1 방문 맞춤 케어! 선입금·예약금 없는 100% 현장 대면결제 안심 후불제. 타이·아로마·스페셜 정찰제. 24시간 실시간 예약 신속 방문.',
