@@ -27,7 +27,7 @@ export default function AbamBookingGuideModal({
       const target = new Date(now.getTime() + 60 * 60 * 1000);
       const pad = (n: number) => (n < 10 ? '0' : '') + n;
       const str = `${pad(now.getHours())}:${pad(now.getMinutes())} ~ ${pad(target.getHours())}:${pad(target.getMinutes())}`;
-      setTimeText(`지금부터 1시간 이내 도착 (예상: ${str})`);
+      setTimeText(`지금부터 30~40분 내 신속 도착 (예상: ${str})`);
     } else {
       document.body.style.overflow = '';
     }
@@ -44,7 +44,11 @@ export default function AbamBookingGuideModal({
     const cleanAddr = addr.trim();
     const cleanDoor = door.trim();
 
-    if (cleanAddr) parts.push(cleanAddr);
+    if (cleanAddr) {
+      parts.push(cleanAddr);
+    } else {
+      parts.push('[방문주소/호텔명 입력]');
+    }
     if (cleanDoor) {
       if (!cleanDoor.startsWith('공비') && !cleanDoor.startsWith('비번') && !cleanDoor.startsWith('호텔')) {
         parts.push(`공비${cleanDoor}`);
@@ -65,17 +69,34 @@ export default function AbamBookingGuideModal({
 
   const finalSummary = getSummarySlip();
 
-  const handleSendSms = () => {
-    if (!addr.trim()) {
-      alert('방문 주소(동/호수 포함)를 입력해 주세요.');
-      return;
-    }
+  const openNativeSms = (bodyText: string) => {
     onClose();
     const phone = '01066072239';
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isIOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     const sep = isIOS ? '&body=' : '?body=';
-    const url = `sms:${phone}${sep}${encodeURIComponent(finalSummary)}`;
-    window.location.href = url;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(bodyText).catch(() => {});
+      }
+    } catch {}
+    window.location.href = `sms:${phone}${sep}${encodeURIComponent(bodyText)}`;
+  };
+
+  const handleSendSms = () => {
+    // 주소 미입력 시에도 절대 alert로 차단하지 않고 즉시 문자앱을 열어 전환 이탈 0% 달성
+    if (!addr.trim()) {
+      const quickBody = `[아밤 예약문의] ${course} / ${parking}${pay ? ' / ' + pay : ''}\n방문 주소(동·호수 또는 호텔명): `;
+      openNativeSms(quickBody);
+      return;
+    }
+    openNativeSms(finalSummary);
+  };
+
+  const handleDirectQuickSms = () => {
+    const quickBody = `[아밤 빠른문의] ${course}${pay ? ' (' + pay + ')' : ''}\n계신 지역/주소: `;
+    openNativeSms(quickBody);
   };
 
   const handleFastDoor = (val: string) => {
@@ -98,9 +119,7 @@ export default function AbamBookingGuideModal({
         position: 'fixed',
         inset: 0,
         zIndex: 100000,
-        backgroundColor: 'rgba(0, 0, 0, 0.82)',
-        backdropFilter: 'blur(6px)',
-        WebkitBackdropFilter: 'blur(6px)',
+        backgroundColor: 'rgba(5, 8, 16, 0.92)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -147,7 +166,7 @@ export default function AbamBookingGuideModal({
                 textTransform: 'uppercase',
               }}
             >
-              ABAM QUICK CONCIERGE
+              ABAM QUICK CONCIERGE · 선입금 0원
             </div>
             <h2
               id="modal-title"
@@ -159,7 +178,7 @@ export default function AbamBookingGuideModal({
                 lineHeight: 1.2,
               }}
             >
-              프라이빗 간편 예약 접수
+              프라이빗 간편 예약 · 실시간 문의
             </h2>
             <div
               style={{
@@ -168,7 +187,7 @@ export default function AbamBookingGuideModal({
                 marginTop: '4px',
               }}
             >
-              가정집·오피스텔·호텔 방문 배차 (100% 현장 대면결제)
+              가정집·오피스텔·호텔 30~40분 내 방문 (100% 현장 대면결제)
             </div>
           </div>
           <button
@@ -189,10 +208,61 @@ export default function AbamBookingGuideModal({
           </button>
         </div>
 
+        {/* 상단 1초 직통 연결 바 (폼 입력 없이 바로 문의하고 싶은 고객용) */}
+        <div
+          style={{
+            padding: '10px 20px',
+            background: 'rgba(245, 158, 11, 0.12)',
+            borderBottom: '1px solid rgba(245, 158, 11, 0.25)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '8px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <span style={{ fontSize: '12px', fontWeight: 700, color: '#fde68a' }}>
+            ⚡ 입력 없이 바로 물어보시겠어요?
+          </span>
+          <div style={{ display: 'flex', gap: '6px' }}>
+            <button
+              type="button"
+              onClick={handleDirectQuickSms}
+              style={{
+                background: '#2563eb',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '6px',
+                padding: '6px 10px',
+                fontSize: '12px',
+                fontWeight: 800,
+                cursor: 'pointer',
+              }}
+            >
+              ✉️ 바로 문자앱 열기
+            </button>
+            <a
+              href="tel:010-6607-2239"
+              onClick={onClose}
+              style={{
+                background: '#dc2626',
+                color: '#ffffff',
+                textDecoration: 'none',
+                borderRadius: '6px',
+                padding: '6px 10px',
+                fontSize: '12px',
+                fontWeight: 800,
+              }}
+            >
+              📞 바로 전화걸기
+            </a>
+          </div>
+        </div>
+
         {/* 본문 폼 입력 */}
         <div
           style={{
-            padding: '18px 20px',
+            padding: '16px 20px',
             overflowY: 'auto',
             WebkitOverflowScrolling: 'touch',
             display: 'flex',
@@ -200,108 +270,10 @@ export default function AbamBookingGuideModal({
             gap: '14px',
           }}
         >
-          {/* 1. 방문 주소 */}
+          {/* 1. 코스 선택 (가장 먼저 선택하기 쉽게 최상단 배치) */}
           <div>
             <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
-              방문 주소 (동/호수 포함) <span style={{ color: '#f59e0b' }}>*</span>
-            </label>
-            <input
-              type="text"
-              value={addr}
-              onChange={(e) => setAddr(e.target.value)}
-              placeholder="예: 역삼동 649-4 역삼푸르지오 102동 1204호"
-              style={{
-                width: '100%',
-                boxSizing: 'border-box',
-                padding: '12px 14px',
-                backgroundColor: '#1e293b',
-                border: '1.5px solid #334155',
-                borderRadius: '10px',
-                color: '#ffffff',
-                fontSize: '14.5px',
-                outline: 'none',
-              }}
-            />
-          </div>
-
-          {/* 2. 1층 공동현관 비번 */}
-          <div>
-            <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
-              공동현관 출입 안내 (가정집/오피스텔) <span style={{ color: '#f59e0b' }}>*</span>
-            </label>
-            <input
-              type="text"
-              value={door}
-              onChange={(e) => setDoor(e.target.value)}
-              placeholder="예: #1234* 또는 종1234열 (없으면 비번없음)"
-              style={{
-                width: '100%',
-                boxSizing: 'border-box',
-                padding: '12px 14px',
-                backgroundColor: '#1e293b',
-                border: '1.5px solid #334155',
-                borderRadius: '10px',
-                color: '#ffffff',
-                fontSize: '14.5px',
-                outline: 'none',
-              }}
-            />
-            {/* 빠른 선택 칩 */}
-            <div style={{ display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' }}>
-              {['비번없음', '경비호출', '자유출입', '도착시연락', '호텔로비방문'].map((chip) => (
-                <button
-                  key={chip}
-                  type="button"
-                  onClick={() => handleFastDoor(chip)}
-                  style={{
-                    backgroundColor: '#1e293b',
-                    border: '1px solid #475569',
-                    color: '#cbd5e1',
-                    fontSize: '11.5px',
-                    fontWeight: 700,
-                    padding: '4px 8px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {chip}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 3. 주차장 진입 여부 */}
-          <div>
-            <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
-              주차 가능 여부 <span style={{ color: '#f59e0b' }}>*</span>
-            </label>
-            <select
-              value={parking}
-              onChange={(e) => setParking(e.target.value)}
-              style={{
-                width: '100%',
-                boxSizing: 'border-box',
-                padding: '12px 14px',
-                backgroundColor: '#1e293b',
-                border: '1.5px solid #334155',
-                borderRadius: '10px',
-                color: '#ffffff',
-                fontSize: '14.5px',
-                outline: 'none',
-                cursor: 'pointer',
-              }}
-            >
-              <option value="주차가능">지상/지하 주차가능 (방문객 주차)</option>
-              <option value="지하주차">지하주차장 완비 (진입수월)</option>
-              <option value="주차불가">주차불가 (인근 유료주차/골목)</option>
-              <option value="도착전안내">도착 5분 전 주차위치 안내</option>
-            </select>
-          </div>
-
-          {/* 4. 코스 선택 (타이/아로마/스페셜 x 60/90/120분) */}
-          <div>
-            <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
-              코스 및 시간 선택 <span style={{ color: '#f59e0b' }}>*</span>
+              1. 희망 코스 및 시간 선택 <span style={{ color: '#f59e0b' }}>*</span>
             </label>
             <select
               value={course}
@@ -338,10 +310,107 @@ export default function AbamBookingGuideModal({
             </select>
           </div>
 
+          {/* 2. 방문 주소 */}
+          <div>
+            <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
+              2. 방문 주소 또는 호텔명 <span style={{ color: '#94a3b8', fontSize: '11.5px', fontWeight: 500 }}>(문자앱에서 직접 적으셔도 됩니다)</span>
+            </label>
+            <input
+              type="text"
+              value={addr}
+              onChange={(e) => setAddr(e.target.value)}
+              placeholder="예: 역삼동 649-4 102동 1204호 / 신라스테이 역삼"
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '12px 14px',
+                backgroundColor: '#1e293b',
+                border: '1.5px solid #334155',
+                borderRadius: '10px',
+                color: '#ffffff',
+                fontSize: '14.5px',
+                outline: 'none',
+              }}
+            />
+          </div>
+
+          {/* 3. 1층 공동현관 비번 */}
+          <div>
+            <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
+              3. 공동현관 출입 / 호텔 로비 안내 <span style={{ color: '#94a3b8', fontSize: '11.5px', fontWeight: 500 }}>(선택)</span>
+            </label>
+            <input
+              type="text"
+              value={door}
+              onChange={(e) => setDoor(e.target.value)}
+              placeholder="예: #1234* 또는 종1234열 / 호텔 1층 로비"
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '12px 14px',
+                backgroundColor: '#1e293b',
+                border: '1.5px solid #334155',
+                borderRadius: '10px',
+                color: '#ffffff',
+                fontSize: '14.5px',
+                outline: 'none',
+              }}
+            />
+            <div style={{ display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' }}>
+              {['비번없음', '경비호출', '자유출입', '도착시연락', '호텔로비방문'].map((chip) => (
+                <button
+                  key={chip}
+                  type="button"
+                  onClick={() => handleFastDoor(chip)}
+                  style={{
+                    backgroundColor: door === chip ? '#f59e0b' : '#1e293b',
+                    border: '1px solid ' + (door === chip ? '#f59e0b' : '#475569'),
+                    color: door === chip ? '#0f172a' : '#cbd5e1',
+                    fontSize: '11.5px',
+                    fontWeight: 700,
+                    padding: '4px 8px',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 4. 주차장 진입 여부 */}
+          <div>
+            <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
+              4. 주차 가능 여부
+            </label>
+            <select
+              value={parking}
+              onChange={(e) => setParking(e.target.value)}
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '12px 14px',
+                backgroundColor: '#1e293b',
+                border: '1.5px solid #334155',
+                borderRadius: '10px',
+                color: '#ffffff',
+                fontSize: '14.5px',
+                outline: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              <option value="주차가능">지상/지하 주차가능 (방문객 주차)</option>
+              <option value="지하주차">지하주차장 완비 (진입수월)</option>
+              <option value="주차불가">주차불가 (인근 유료주차/골목)</option>
+              <option value="도착전안내">도착 5분 전 주차위치 안내</option>
+            </select>
+          </div>
+
           {/* 5. 결제 방식 및 현금 잔돈 여부 */}
           <div>
             <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '6px' }}>
-              결제 방식 <span style={{ color: '#f59e0b' }}>*</span>
+              5. 현장 결제 방식 (잔돈 필요 여부 체크)
             </label>
             <select
               value={pay}
@@ -364,7 +433,6 @@ export default function AbamBookingGuideModal({
               <option value="계좌이체">현장 계좌이체</option>
               <option value="카드결제">현장 카드결제</option>
             </select>
-            {/* 빠른 선택 칩 */}
             <div style={{ display: 'flex', gap: '6px', marginTop: '6px', flexWrap: 'wrap' }}>
               {[
                 { label: '현금 (잔돈 불필요)', val: '' },
@@ -411,7 +479,7 @@ export default function AbamBookingGuideModal({
                 fontWeight: 700,
               }}
             >
-              <span>{timeText || '지금부터 1시간 이내 신속 도착'}</span>
+              <span>{timeText || '지금부터 30~40분 내 신속 도착'}</span>
             </div>
           </div>
 
@@ -443,7 +511,7 @@ export default function AbamBookingGuideModal({
                 border: '1px solid rgba(255, 255, 255, 0.08)',
               }}
             >
-              {finalSummary || '주소를 입력해 주세요.'}
+              {finalSummary}
             </div>
           </div>
 
@@ -492,7 +560,7 @@ export default function AbamBookingGuideModal({
               boxShadow: '0 4px 15px rgba(37, 99, 235, 0.35)',
             }}
           >
-            문자로 간편 예약 전송
+            ✉️ 문자로 간편 예약 전송 (즉시 연결)
           </button>
           <a
             href="tel:010-6607-2239"
@@ -513,7 +581,7 @@ export default function AbamBookingGuideModal({
               boxSizing: 'border-box',
             }}
           >
-            전화 상담 연결 (010-6607-2239)
+            📞 전화 상담 연결 (010-6607-2239)
           </a>
           <button
             type="button"
