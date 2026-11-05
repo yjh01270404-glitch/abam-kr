@@ -452,11 +452,11 @@ export const CN: LandingContent = {
     { icon: INFO_ICONS[2], title: '在您想要的空间', sub: '(住宅 · 酒店等)' },
     { icon: INFO_ICONS[3], title: '私密的', sub: '1:1护理' },
   ],
-  courseSection: { label: 'COURSE', title: '泰式 · 芳香 · 特别' },
+  courseSection: { label: 'COURSE', title: '泰式 · 精油 · 特别' },
   courses: [
     { no: 1, name: '泰式', subtitle: '传统干式指压 · 清爽力度', desc: '以卧佛寺传统方式进行干式指压，舒缓僵硬的肌肉，并通过拉伸调整身体的平衡。', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES_CN.thai },
-    { no: 2, name: '芳香', subtitle: '天然芳香精油 · 温柔护理', desc: '使用天然植物性芳香精油温柔护理全身，帮助淋巴循环并获得深度放松。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_CN.aroma },
-    { no: 3, name: '特别', subtitle: '泰式 + 芳香 复合护理', desc: '可同时享受泰式清爽指压与芳香温柔精油护理的高级课程。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_CN.special },
+    { no: 2, name: '精油', subtitle: '天然芳香精油 · 温柔护理', desc: '使用天然植物性芳香精油温柔护理全身，帮助淋巴循环并获得深度放松。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_CN.aroma },
+    { no: 3, name: '特别', subtitle: '泰式 + 精油 复合护理', desc: '可同时享受泰式清爽指压与芳香温柔精油护理的高级课程。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_CN.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: '课程', durations: ['60分钟', '90分钟', '120分钟'] },
   priceNotice: {

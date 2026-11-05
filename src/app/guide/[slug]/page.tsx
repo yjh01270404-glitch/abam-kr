@@ -71,9 +71,6 @@ export default async function GuidePage({ params }: Props) {
 
       <main style={{ maxWidth: 640, margin: '16px auto', background: 'rgba(255,255,255,0.95)', borderRadius: 16, padding: '22px 18px 120px' }}>
         <article>
-          <div className="abam-copperplate-en" style={{ fontSize: 17, color: '#d97706', letterSpacing: '0.06em', marginBottom: 4, lineHeight: 1.2 }}>
-            Official Safety Guide · Beautiful Night
-          </div>
           <h1 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 8px', lineHeight: 1.35 }}>{g.h1}</h1>
           <p style={{ fontSize: 12.5, color: '#64748b', margin: '0 0 16px' }}>Abam.kr · <span className="abam-script-font" style={{ fontSize: 16, color: '#d97706', fontStyle: 'italic' }}>아름다운 밤</span>, 당신을 위한 특별한 시간 · 최종 업데이트 {g.published}</p>
           <p style={{ fontSize: 13.5, lineHeight: 1.75, color: '#334155', margin: '0 0 8px' }}>{g.description}</p>

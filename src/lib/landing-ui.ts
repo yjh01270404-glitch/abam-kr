@@ -50,7 +50,7 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: '과중한 업무와 일상에서 지친 심신을 가장 편안하고 익숙한 프라이빗 공간에서 최고의 힐링으로 채워드립니다.',
     priceTitle: '코스 안내 및 정찰 가격표', priceSub: '선입금 없는 100% 현장 대면결제 · 3대 시그니처 코스',
     priceBar1: '아밤 3대 프라이빗 맞춤 코스', priceBar2: '전 코스 100% 현장 대면결제 정찰제',
-    courseLetter: ['A코스', 'B코스', 'C코스'], courseSuffix: ' 코스',
+    courseLetter: ['타이', '아로마', '스페셜'], courseSuffix: '',
     tags: ['기본 충실 · 뭉친 피로 케어', '고객 선호 1위 · BEST', 'VIP 프리미엄 올케어'],
     chips: [
       ['전신 수기 건식 지압', '뭉친 어깨·허리 피로 해소', '스트레칭 균형 회복'],
@@ -79,29 +79,17 @@ export const UI: Record<UiLang, UiStrings> = {
     preview: ['1. 희망 코스: 타이 / 아로마 / 스페셜', '2. 방문 주소: (동·호수 상세 기재)', '3. 주차장 유무: (도착 시 전화 요망)', '4. 1층 공동현관: (비밀번호 또는 호출버튼 가능)', '5. 호텔·모텔명: (1층 로비에서 기사에게 대면결제)', '6. 결제 수단: 현금 / 계좌이체 / 카드'],
     send: '문자 앱으로 바로 전송하기', copy: '예약 양식 복사하기', callModal: '전화 바로 연결',
     assure1: '• 선입금·예약금 없는 100% 현장 대면결제', assure2: '• 18시 접수 · 19시 순차 출발 (1시간 전 예약 권장)', close: '닫기',
-    toast: '📋 예약 양식이 복사되었습니다. 문자에 붙여넣어 주세요.',
-    tpl: `[아밤] 예약 신청 양식
-• 성함: 
-• 연락처: 
-• 방문 주소 (호텔/모텔명 및 객실번호): 
-• 희망 코스 및 시간: (60분 / 90분 / 120분)
-• 방문 희망 시간: 
-• 주차 / 1층 공동현관: (비밀번호 또는 호출버튼)
-• 결제 방식: 현장에서 운전기사에게 대면결제 (현금 / 계좌이체 / 카드)
-----------------------------------------
-※ 안내 사항:
-호텔/모텔은 1층 로비에서 기사와 관리사를 만나 대면결제 후, 관리사를 객실로 안내해 주시면 됩니다.`,
+    toast: '예약 양식이 복사되었습니다. 문자에 붙여넣어 주세요.',
+    tpl: `[아밤] 예약 신청 양식 (웹사이트 미저장 · 문자창 전용)
+• 방문 주소 (동·호수 또는 호텔명·객실번호): 
+• 희망 코스 및 시간: (타이 / 아로마 / 스페셜 · 60분 / 90분 / 120분)
+• 주차 / 1층 공동현관: (비밀번호 또는 호출버튼 / 호텔 1층 로비)
+• 결제 방식: 현장에서 대면결제 (현금 잔돈유무 / 계좌이체 / 카드)`,
     smsBody: `[아밤] 예약 신청 양식
-• 성함: 
-• 연락처: 
-• 방문 주소 (호텔/모텔명 및 객실번호): 
-• 희망 코스 및 시간: (60분 / 90분 / 120분)
-• 방문 희망 시간: 
-• 주차 / 1층 공동현관: (비밀번호 또는 호출버튼)
-• 결제 방식: 현장에서 운전기사에게 대면결제 (현금 / 계좌이체 / 카드)
-----------------------------------------
-※ 안내 사항:
-호텔/모텔은 1층 로비에서 기사와 관리사를 만나 대면결제 후, 관리사를 객실로 안내해 주시면 됩니다.`,
+• 방문 주소 (동·호수 또는 호텔명·객실번호): 
+• 희망 코스 및 시간: (타이 / 아로마 / 스페셜 · 60분 / 90분 / 120분)
+• 주차 / 1층 공동현관: (비밀번호 또는 호출버튼 / 호텔 1층 로비)
+• 결제 방식: 현장에서 대면결제 (현금 잔돈유무 / 계좌이체 / 카드)`,
   },
   en: {
     logoA: 'Abam', logoB: '.kr', badge: '100% Pay on arrival',
@@ -124,7 +112,7 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: 'Recharge your tired body and mind in the comfort of your own private space.',
     priceTitle: 'Courses & Prices', priceSub: 'No deposit · 100% pay on arrival · 3 signature courses',
     priceBar1: 'Abam 3 private signature courses', priceBar2: 'Flat prices · 100% pay on arrival',
-    courseLetter: ['Course A', 'Course B', 'Course C'], courseSuffix: '',
+    courseLetter: ['Thai', 'Aroma', 'Special'], courseSuffix: '',
     tags: ['Solid basics · Beat the fatigue', 'Customer choice #1 · BEST', 'VIP Special all-care'],
     chips: [
       ['Full-body dry acupressure', 'Relieves shoulder & back tension', 'Stretching to restore balance'],
@@ -153,29 +141,17 @@ export const UI: Record<UiLang, UiStrings> = {
     preview: ['1. Course: Thai / Aroma / Special', '2. Address: (building, room no.)', '3. Parking: (please call on arrival)', '4. 1st-floor entrance: (password or call button OK)', '5. Hotel / motel name: (meet in 1st-floor lobby, pay face to face)', '6. Payment: Cash / Transfer / Card'],
     send: 'Send via messages', copy: 'Copy booking form', callModal: 'Call now',
     assure1: '• No deposit · 100% pay on arrival', assure2: '• Booking from 18:00 · Departures from 19:00 (Book 1 hr ahead)', close: 'Close',
-    toast: '📋 Form copied. Please paste it into your message.',
-    tpl: `[아밤] 예약 신청 양식
-• 성함: 
-• 연락처: 
-• 방문 주소 (호텔/모텔명 및 객실번호): 
-• 희망 코스 및 시간: (60분 / 90분 / 120분)
-• 방문 희망 시간: 
-• 주차 / 1층 공동현관: (비밀번호 또는 호출버튼)
-• 결제 방식: 현장에서 운전기사에게 대면결제 (현금 / 계좌이체 / 카드)
-----------------------------------------
-※ 안내 사항:
-호텔/모텔은 1층 로비에서 기사와 관리사를 만나 대면결제 후, 관리사를 객실로 안내해 주시면 됩니다.`,
-    smsBody: `[아밤] 예약 신청 양식
-• 성함: 
-• 연락처: 
-• 방문 주소 (호텔/모텔명 및 객실번호): 
-• 희망 코스 및 시간: (60분 / 90분 / 120분)
-• 방문 희망 시간: 
-• 주차 / 1층 공동현관: (비밀번호 또는 호출버튼)
-• 결제 방식: 현장에서 운전기사에게 대면결제 (현금 / 계좌이체 / 카드)
-----------------------------------------
-※ 안내 사항:
-호텔/모텔은 1층 로비에서 기사와 관리사를 만나 대면결제 후, 관리사를 객실로 안내해 주시면 됩니다.`,
+    toast: 'Form copied. Please paste it into your message.',
+    tpl: `[Abam Booking Slip]
+• Address / Hotel & Room: 
+• Course & Duration: (Thai / Aroma / Special · 60m / 90m / 120m)
+• Parking / 1F Entrance: (Password / Call button / Hotel 1F Lobby)
+• Payment on Arrival: (Cash / Transfer / Card)`,
+    smsBody: `[Abam Booking Slip]
+• Address / Hotel & Room: 
+• Course & Duration: (Thai / Aroma / Special · 60m / 90m / 120m)
+• Parking / 1F Entrance: (Password / Call button / Hotel 1F Lobby)
+• Payment on Arrival: (Cash / Transfer / Card)`,
   },
   jp: {
     logoA: 'Abam', logoB: '.kr', badge: '100%対面後払い',
@@ -198,7 +174,7 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: 'お仕事や日常でお疲れの心身を、最も落ち着くプライベート空間で癒します。',
     priceTitle: 'コース・料金表', priceSub: '前払いなし · 100%対面後払い · 3つのシグネチャーコース',
     priceBar1: 'Abam 3大プライベートコース', priceBar2: '全コース定額 · 100%対面後払い',
-    courseLetter: ['Aコース', 'Bコース', 'Cコース'], courseSuffix: '',
+    courseLetter: ['タイ', 'アロマ', 'スペシャル'], courseSuffix: '',
     tags: ['基本に忠実 · 凝りを解消', 'お客様人気No.1 · BEST', 'VIPスペシャルオールケア'],
     chips: [
       ['全身の乾式指圧', '肩・腰の凝りを解消', 'ストレッチでバランス回復'],
@@ -227,23 +203,17 @@ export const UI: Record<UiLang, UiStrings> = {
     preview: ['1. コース: タイ / アロマ / スペシャル', '2. 住所: (建物名・部屋番号)', '3. 駐車場: (到着時にお電話ください)', '4. 1階エントランス: (暗証番号または呼び出しボタン可)', '5. ホテル・モーテル名: (1階ロビーで合流し対面払い)', '6. お支払い: 現金 / 振込 / カード'],
     send: 'メッセージで送信', copy: '予約フォームをコピー', callModal: '電話する',
     assure1: '• 前払いなし · 100%対面後払い', assure2: '• 18時受付 · 19時順次出発 (1時間前予約推奨)', close: '閉じる',
-    toast: '📋 フォームをコピーしました。メッセージに貼り付けてください。',
-    tpl: `[Abam 1:1 クイック予約申込]
-• コース: (タイ / アロマ / スペシャル / 時間)
-• 住所: (例: 江南区駅三洞 OOO)
-• 駐車場: (あり / なし / 到着時に電話希望)
-• 1階エントランス: (暗証番号 または 呼び出しボタンで開錠可)
-• ホテル・モーテル名: (1階ロビーで合流・対面払い後にお部屋へ)
-• お支払い: (現金 / 振込 / カード)
-(※ ご予約18:00から · 出発19:00から · 最終受付05:00 / 1時間前のご予約が最もスムーズです)`,
+    toast: 'フォームをコピーしました。メッセージに貼り付けてください。',
+    tpl: `[Abam ご予約申込]
+• 住所 / ホテル名・部屋番号: 
+• コース・時間: (タイ / アロマ / スペシャル · 60分 / 90分 / 120分)
+• 駐車場・1階エントランス: (暗証番号 / 呼び出しボタン / ホテル1階ロビー)
+• 現地お支払い: (現金 / 振込 / カード)`,
     smsBody: `[Abam ご予約申込]
-1. コース: 
-2. 住所/部屋番号: 
-3. 駐車場(到着時に電話): 
-4. エントランス(暗証番号または呼び出しボタン): 
-5. ホテル・モーテル名(1階ロビー合流): 
-6. お支払い(現金/振込/カード): 
-(予約18:00~05:00 · 出発19:00から · 100%対面後払い)`,
+• 住所 / ホテル名・部屋番号: 
+• コース・時間: (タイ / アロマ / スペシャル · 60分 / 90分 / 120分)
+• 駐車場・1階エントランス: (暗証番号 / 呼び出しボタン / ホテル1階ロビー)
+• 現地お支払い: (現金 / 振込 / カード)`,
   },
   cn: {
     logoA: 'Abam', logoB: '.kr', badge: '100%当面付款',
@@ -266,7 +236,7 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: '让您在最舒适、熟悉的私密空间里，消除工作与生活的疲惫。',
     priceTitle: '项目与价格表', priceSub: '无需定金 · 100%现场当面付款 · 3大招牌项目',
     priceBar1: 'Abam 3大私密专属项目', priceBar2: '全项目明码标价 · 100%当面付款',
-    courseLetter: ['A项目', 'B项目', 'C项目'], courseSuffix: '',
+    courseLetter: ['泰式', '精油', '特别'], courseSuffix: '',
     tags: ['基础扎实 · 消除酸痛疲劳', '顾客首选No.1 · BEST', 'VIP特别全方位护理'],
     chips: [
       ['全身干式指压', '缓解肩腰酸痛', '拉伸恢复平衡'],
@@ -295,22 +265,16 @@ export const UI: Record<UiLang, UiStrings> = {
     preview: ['1. 项目: 泰式 / 芳香 / 特别', '2. 地址: (楼栋、房号)', '3. 停车场: (到达时请来电)', '4. 一楼大门: (密码或呼叫按钮均可)', '5. 酒店/旅馆名称: (一楼大堂会合并当面付款)', '6. 付款方式: 现金 / 转账 / 刷卡'],
     send: '通过短信发送', copy: '复制预约表单', callModal: '立即致电',
     assure1: '• 无需定金 · 100%现场当面付款', assure2: '• 18点起接单 · 19点起顺次出发 (建议提前1小时预约)', close: '关闭',
-    toast: '📋 预约表单已复制，请粘贴到短信中。',
-    tpl: `[Abam 1:1 快速预约申请]
-• 项目: (泰式 / 芳香 / 特别 / 时长)
-• 地址: (例: 江南区驿三洞 OOO)
-• 停车场: (有 / 无 / 到达时请来电)
-• 一楼公共大门: (告知密码，或可通过呼叫按钮开门)
-• 酒店/旅馆名称: (一楼大堂会合，当面付款后前往客房)
-• 付款方式: (现金 / 转账 / 刷卡)
-(※ 18:00起接受预约 · 19:00起出发 · 最晚预约05:00 / 提前1小时预约最顺畅)`,
+    toast: '预约表单已复制，请粘贴到短信中。',
+    tpl: `[Abam 预约申请]
+• 地址 / 酒店名称与房号: 
+• 项目与时长: (泰式 / 芳香 / 特别 · 60分钟 / 90分钟 / 120分钟)
+• 停车场·一楼大门: (密码 / 呼叫按钮 / 酒店一楼大堂)
+• 现场当面付款: (现金 / 转账 / 刷卡)`,
     smsBody: `[Abam 预约申请]
-1. 项目: 
-2. 地址/房号: 
-3. 停车场(到达时来电): 
-4. 公共大门(密码或呼叫按钮): 
-5. 酒店/旅馆名称(一楼大堂会合): 
-6. 付款(现金/转账/刷卡): 
-(预约18:00~05:00 · 19:00起出发 · 100%现场当面付款)`,
+• 地址 / 酒店名称与房号: 
+• 项目与时长: (泰式 / 芳香 / 特别 · 60分钟 / 90分钟 / 120分钟)
+• 停车场·一楼大门: (密码 / 呼叫按钮 / 酒店一楼大堂)
+• 现场当面付款: (现金 / 转账 / 刷卡)`,
   },
 };

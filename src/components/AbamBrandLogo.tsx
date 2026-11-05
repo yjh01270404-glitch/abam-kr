@@ -16,13 +16,12 @@ export default function AbamBrandLogo({
   moonSize,
   href = '/',
 }: AbamBrandLogoProps) {
-  // Preset sizes based on hero, header, or compact
   const finalTitleSize =
-    titleSize || (size === 'hero' ? '56px' : size === 'compact' ? '24px' : '29px');
+    titleSize || (size === 'hero' ? '26px' : size === 'compact' ? '18px' : '20px');
   const finalTagSize =
-    tagSize || (size === 'hero' ? '28px' : size === 'compact' ? '15px' : '18px');
+    tagSize || (size === 'hero' ? '14px' : size === 'compact' ? '12px' : '13px');
   const finalMoonSize =
-    moonSize || (size === 'hero' ? 36 : size === 'compact' ? 20 : 24);
+    moonSize || (size === 'hero' ? 24 : size === 'compact' ? 18 : 20);
 
   return (
     <Link
@@ -32,7 +31,7 @@ export default function AbamBrandLogo({
         textDecoration: 'none',
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '6px',
+        gap: '7px',
         flexShrink: 0,
       }}
     >
@@ -42,53 +41,32 @@ export default function AbamBrandLogo({
         height={finalMoonSize}
         viewBox="0 0 24 24"
         fill="none"
-        style={{
-          filter: 'drop-shadow(0 0 8px rgba(245, 158, 11, 0.9))',
-          flexShrink: 0,
-        }}
+        style={{ flexShrink: 0 }}
       >
-        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="url(#abamBrandMoonGrad)" />
-        <defs>
-          <linearGradient id="abamBrandMoonGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="35%" stopColor="#fef08a" />
-            <stop offset="100%" stopColor="#f59e0b" />
-          </linearGradient>
-        </defs>
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="#fbbf24" />
       </svg>
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', whiteSpace: 'nowrap' }}>
+      <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '6px', whiteSpace: 'nowrap' }}>
         <span
-          className="abam-script-font"
           style={{
             fontSize: finalTitleSize,
-            fontFamily: "'KccEunyeong', 'Pinyon Script', cursive, sans-serif",
-            fontStyle: 'italic',
-            fontWeight: 'normal',
+            fontWeight: 900,
+            color: '#ffffff',
+            letterSpacing: '-0.4px',
             lineHeight: 1,
-            display: 'inline-block',
-            background: 'linear-gradient(180deg, #ffffff 10%, #fef08a 60%, #f59e0b 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 2px 14px rgba(245, 158, 11, 0.6))',
-            transform: 'rotate(-2deg) skewX(-7deg)',
-            padding: '0 4px',
-            letterSpacing: '0.01em',
           }}
         >
-          아름다운밤
+          아밤
         </span>
         <span
-          className="abam-brand-tag"
           style={{
             fontSize: finalTagSize,
-            fontWeight: 900,
-            color: '#e11d48',
-            letterSpacing: '-0.3px',
+            fontWeight: 700,
+            color: '#fbbf24',
+            letterSpacing: '0.02em',
             lineHeight: 1,
-            display: 'inline-block',
           }}
         >
-          [아밤.Abam.kr]
+          ABAM
         </span>
       </span>
     </Link>

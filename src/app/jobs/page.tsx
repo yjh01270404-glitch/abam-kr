@@ -1,2 +1,5 @@
-﻿'use client';
-export default function Page() { return null; }
+import { permanentRedirect } from 'next/navigation';
+
+export default function LegacyRedirectPage() {
+  permanentRedirect('/');
+}

@@ -352,7 +352,7 @@ export default async function RegionHubPage({ params }: { params: Promise<{ regi
       </main>
 
       {/* 실시간 하단 고정 전화/문자 예약 바 */}
-      <AbamBottomBookingBar smsMessage={`[아밤 ${hub.name} 예약문의] 코스 및 예약 문의드립니다.`} />
+      <AbamBottomBookingBar smsMessage={`안녕하세요, 아밤 ${hub.name} 예약 문의드립니다. 지금 방문 가능한가요?`} />
     </div>
   );
 }

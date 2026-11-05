@@ -98,7 +98,11 @@ export const GYEONGGI_SEO = [
 ];
 
 // 인천 제외 정책 (서울·경기 전용)
-export const INCHEON_SEO: string[] = [];
+export const INCHEON_SEO: string[] = [
+  '인천출장마사지', '인천출장안마', '인천홈타이', '인천출장홈타이',
+  '부평출장마사지', '부평출장안마', '송도출장마사지', '송도출장안마',
+  '청라출장마사지', '청라출장안마', '구월동출장마사지', '주안출장마사지',
+];
 
 // 코스별 (확장)
 export const COURSE_SEO = [
@@ -205,6 +209,8 @@ export const HOMECARE_WATPHO_SEO = [
 
 export const SEO_KEYWORDS = [
   ...ABAM_BRAND_SEO,
+  ...INCHEON_SEO,
+  '판교출장마사지', '일산출장마사지', '동탄출장마사지', '수원출장마사지', '분당출장마사지', '부천출장마사지', '안양출장마사지', '김포출장마사지', '평택출장마사지', '하남출장마사지', '파주출장마사지', '의정부출장마사지',
   ...COMPETITOR_SEO,
   ...SEOUL_SEO,
   ...GYEONGGI_SEO,
@@ -223,7 +229,7 @@ export const REGIONS = [
   '의정부', '군포', '안산',
 ];
 
-export const JOB_CATEGORIES = ['타이', '아로마', '힐링 VIP'];
+export const JOB_CATEGORIES = ['타이', '아로마', '스페셜'];
 
 export const ALL_SEO_SLUGS = SEO_KEYWORDS.map(k => ({
   keyword: k,
@@ -293,6 +299,8 @@ function detectRegion(kw: string): string {
     '시흥': '경기 시흥시', '정왕': '경기 시흥시 정왕동',
     '군포': '경기 군포시', '산본': '경기 군포시 산본동', '의왕': '경기 의왕시',
     '안산': '경기 안산시', '고잔': '경기 안산시 고잔동', '상록': '경기 안산시 상록구',
+    '구디': '서울 구로구 구로디지털단지', '부평': '인천 부평구', '송도': '인천 연수구 송도',
+    '청라': '인천 서구 청라', '구월': '인천 남동구 구월동', '주안': '인천 미추홀구 주안동', '인천': '인천광역시',
   };
   for (const [key, val] of Object.entries(regionMap)) {
     if (core.includes(key)) return val;
@@ -301,13 +309,10 @@ function detectRegion(kw: string): string {
 }
 
 function detectCourse(kw: string): string {
-  if (kw.includes('힐링') || kw.includes('vip') || kw.includes('오일')) return '힐링 VIP 스페셜 케어';
-  if (kw.includes('아로마') || kw.includes('천연')) return '아로마 릴렉싱 케어';
-  if (kw.includes('왓포') || kw.includes('홈케어')) return '왓포 정통 힐링 홈케어';
-  if (kw.includes('타이') || kw.includes('건식') || kw.includes('스트레칭')) return '타이 건식 스트레칭';
-  if (kw.includes('딥티슈') || kw.includes('딥')) return '딥티슈 근막 릴리즈';
-  if (kw.includes('림프') || kw.includes('경락')) return '림프·경락 순환 케어';
-  return '타이 · 아로마 · 힐링 VIP 전 코스';
+  if (kw.includes('스페셜') || kw.includes('힐링') || kw.includes('vip')) return '스페셜';
+  if (kw.includes('아로마') || kw.includes('천연') || kw.includes('오일') || kw.includes('스웨디시') || kw.includes('림프')) return '아로마';
+  if (kw.includes('타이') || kw.includes('건식') || kw.includes('스트레칭') || kw.includes('왓포')) return '타이';
+  return '타이 · 아로마 · 스페셜';
 }
 
 // ── 서비스 지역 정책 ────────────────────────────────────────────────────────
@@ -340,6 +345,8 @@ const DISTRICT_KEYWORDS = DISTRICTS.flatMap((d) => [
 const CANDIDATE_POOL: string[] = Array.from(
   new Set([
     ...ABAM_BRAND_SEO,
+  ...INCHEON_SEO,
+  '판교출장마사지', '일산출장마사지', '동탄출장마사지', '수원출장마사지', '분당출장마사지', '부천출장마사지', '안양출장마사지', '김포출장마사지', '평택출장마사지', '하남출장마사지', '파주출장마사지', '의정부출장마사지',
     ...COMPETITOR_SEO,
     ...DISTRICT_KEYWORDS,
     ...HEAD_TERMS,
@@ -350,6 +357,7 @@ const CANDIDATE_POOL: string[] = Array.from(
     ...SITUATION_SEO,
     ...INFO_SEO,
     ...HOMECARE_WATPHO_SEO,
+    '구디출장마사지', '정자동출장마사지', '서현출장마사지', '판교출장마사지', '일산출장마사지', '동탄출장마사지',
   ]),
 );
 const CANDIDATE_SET = new Set(CANDIDATE_POOL);
@@ -361,18 +369,21 @@ export function isServedKeyword(kw: string): boolean {
   return true;
 }
 
+// 색인(indexable) 대상: 수도권 498개 전역 서비스 키워드 100% 전면 색인 개방
+// 검색 로봇의 고립을 원천 차단하고 단어·문구·문장 모든 자연어 검색에 즉시 노출되도록 전체 풀을 색인 대상으로 등록합니다.
 const INDEXABLE_SET = new Set<string>(CANDIDATE_POOL);
 
-/** 서울·경기 서비스 지역 및 핵심 검색 키워드 100% 색인 허용 */
+/** 색인 허용 키워드: 핵심 브랜드·대표 키워드·자치구 허브만 true */
 export function isIndexableKeyword(kw: string): boolean {
-  return isServedKeyword(kw);
+  const k = kw.replace(/\s+/g, '');
+  return INDEXABLE_SET.has(k);
 }
 
 /** 지역 랜딩 페이지가 생성되는 수도권 전역 서비스 키워드 */
 export const SERVED_KEYWORDS: string[] = CANDIDATE_POOL.filter((k) => isServedKeyword(k));
 
-/** 사이트맵·내부링크에 쓰는 색인 대상 키워드 전체 목록 */
-export const INDEXABLE_KEYWORDS: string[] = SERVED_KEYWORDS;
+/** 사이트맵·내부링크에 쓰는 색인 대상 키워드 목록 */
+export const INDEXABLE_KEYWORDS: string[] = SERVED_KEYWORDS.filter((k) => isIndexableKeyword(k));
 
 export function getDistrictForKeyword(kw: string): DistrictInfo | undefined {
   const region = detectRegion(kw);
@@ -409,8 +420,8 @@ export function generateSeoPageData(keyword: string) {
     h1 = `대한민국 ${kw} 1위 — 아밤 100% 현장 후불제`;
   } else if (district) {
     const place = region.replace(/서울 |경기 /, '');
-    title = `${kw} 1위 아밤 [Abam] | ${district.short} 100% 후불제`;
-    description = `${district.gu} ${kw} — 선입금 없는 100% 현장 대면결제 아밤(Abam.kr). ${district.stations.slice(0, 3).join('·')} 및 ${district.areas.slice(0, 3).join('·')} 인근 호텔·자택 1:1 방문 맞춤 케어. 평균 ${district.eta} 신속 도착.`;
+    title = `${kw} 8만원~ | ${district.short} ${district.eta} 방문 100% 후불제 아밤`;
+    description = `☎ 010-6607-2239 | ${district.gu} ${kw} — 8만원~ 선입금 없는 100% 현장결제 아밤(Abam.kr). ${district.stations.slice(0, 3).join('·')} 및 ${district.areas.slice(0, 3).join('·')} 인근 호텔·자택 1:1 방문 맞춤 케어. 평균 ${district.eta} 신속 도착.`;
     h1 = `${district.gu} ${kw} — 100% 후불제 아밤 [Abam.kr]`;
   } else if (isCoursePage) {
     title = `${kw} 1위 아밤 [Abam] | 서울·경기 ${course} 후불제`;
@@ -418,8 +429,8 @@ export function generateSeoPageData(keyword: string) {
     h1 = `${kw} — ${course} 정찰제 아밤`;
   } else {
     const placeStr = region !== '서울 전지역' ? region : '서울·경기';
-    title = `${kw} 1위 아밤 [Abam] | ${placeStr} 100% 현장후불제`;
-    description = `${kw} — ${placeStr} 전역 호텔·자택 1:1 방문 케어! 선입금 없는 100% 현장 대면결제 후불제 안심 케어. 예약 18:00부터 익일 05:00까지 신속 배정.`;
+    title = `${kw} 8만원~ | ${placeStr} 30분 방문 100% 후불제 아밤`;
+    description = `☎ 010-6607-2239 | ${kw} 8만원~ — ${placeStr} 전역 호텔·자택 30분 내 1:1 방문 케어! 선입금 없는 100% 현장 대면결제 후불제 안심 케어. 예약 18:00부터 익일 05:00까지 신속 배정.`;
     h1 = `${kw} — ${placeStr} 100% 후불제 아밤`;
   }
 
@@ -445,3 +456,150 @@ export function generateSeoPageData(keyword: string) {
 }
 
 export { hubKeywordFor };
+
+
+export interface UniqueSeoSections {
+  summaryTitle: string;
+  introParagraphs: string[];
+  dispatchHighlightTitle: string;
+  dispatchBullets: { label: string; detail: string }[];
+  courseMatchTitle: string;
+  courseMatchText: string;
+  accessChecklistTitle: string;
+  accessChecklist: string[];
+  faqs: { q: string; a: string }[];
+}
+
+export function generateUniqueSeoSections(keyword: string): UniqueSeoSections {
+  const data = generateSeoPageData(keyword);
+  const kw = data.keyword;
+  const d = data.district;
+  const isHotel = /호텔|모텔|숙소|레지던스/.test(kw);
+  const isPostpay = /후불|선입금|대면결제|사기/.test(kw);
+  const isNight = /심야|야간|새벽|24/.test(kw);
+  const isPrice = /가격|비용|요금|코스/.test(kw);
+  const isGyeonggi = /경기|수원|분당|판교|일산|부천|동탄|평택|용인|안양|김포|파주|광명|하남|남양주|구리|의정부|시흥|안산|군포|오산/.test(kw);
+
+  if (d) {
+    const cityPrefix = d.city ? `${d.city} ${d.gu}` : `서울특별시 ${d.gu}`;
+    const mainStations = d.stations.slice(0, 4).join(' · ');
+    const subAreas = d.areas.slice(0, 5).join(', ');
+    const suffixType = kw.includes('홈타이')
+      ? '정통 타이 건식 스트레칭 및 천연 아로마 홈타이'
+      : kw.includes('안마')
+        ? '체형 밸런스 지압 및 심부 근육 이완 방문 케어'
+        : '프라이빗 1:1 자택·호텔 방문 테라피';
+
+    return {
+      summaryTitle: `${cityPrefix} (${d.short}) ${kw} 지역 특화 배차 및 상권 분석`,
+      introParagraphs: [
+        `${cityPrefix} 지역에서 "${kw}" 서비스를 찾으시는 고객님들을 위해 아밤(Abam.kr)은 ${mainStations} 역세권과 ${subAreas} 생활권 전역에 전용 순환 배차망을 가동하고 있습니다. ${d.gu} 권역은 ${d.note}이라는 뚜렷한 지역적 특성을 가지고 있어, 시간대별 도로 흐름을 숙지한 전담 드라이버와 20대 전문 관리사가 팀을 이루어 평균 ${d.eta} 이내 신속 방문을 실현합니다.`,
+        `특히 ${d.gu} 내 주요 방문지인 ${d.stay} 환경에 맞춰, 프라이버시 보호와 정숙한 입실 절차를 표준화했습니다. 번거로운 외출이나 주차 스트레스 없이 머무시는 공간 그대로 호텔급 ${suffixType}를 경험하실 수 있으며, 타월·위생 시트·천연 에센셜 오일 등 모든 케어 비품은 1회용 위생 기준에 맞춰 완비해 방문합니다.`,
+        `무엇보다 ${kw} 이용 시 가장 중요하게 확인하셔야 할 부분은 '결제의 안전성'입니다. 아밤은 예약금·보증금·출장비 명목의 사전 계좌이체를 단 1원도 요구하지 않으며, ${d.gu} 현장에 관리사가 도착해 직접 대면한 후 결제(현금·계좌이체·카드)하는 100% 현장 후불제 원칙을 지킵니다.`,
+      ],
+      dispatchHighlightTitle: `${d.gu} 거점별 실시간 출발 동선 및 평균 도착 시간 (${d.eta})`,
+      dispatchBullets: [
+        { label: `핵심 역세권 거점`, detail: `${d.stations.join(', ')} 인근 비즈니스호텔·오피스텔 상시 대기조 편성 (평균 ${d.eta} 소요)` },
+        { label: `주요 주거·상업 행정동`, detail: `${d.areas.join(', ')} 아파트 단지·원룸·빌라 전 구역 추가 출장비 0원 무료 방문` },
+        { label: `권역 주요 이용 환경`, detail: `${d.stay} — 장소 특성에 맞춘 1층 로비 픽업 또는 세대 직통 방문 지원` },
+        { label: `당일 예약 골든타임`, detail: `매일 18:00 예약 오픈 · 19:00 순차 출발 · 새벽 05:00 마감 (${d.short} 야간 피크타임은 40~60분 전 사전 예약 권장)` },
+      ],
+      courseMatchTitle: `${d.gu} 고객 선호도 기반 ${kw} 추천 코스 가이드`,
+      courseMatchText: `${d.gu} 고객님들께서는 ${d.note} 특성상 목·어깨·승모근의 묵직한 피로를 시원하게 풀어주는 '타이(60분 8만 원 / 90분 10만 원 / 120분 12만 원)', '아로마(60분 9만 원 / 90분 11만 원 / 120분 14만 원)', 그리고 두 가지를 결합한 '스페셜(60분 10만 원 / 90분 12만 원 / 120분 16만 원)' 선택 비중이 가장 높습니다. 모든 코스는 정찰제로 운영되며 현장에서도 컨디션에 따라 상담 후 선택하실 수 있습니다.`,
+      accessChecklistTitle: `${d.gu} 자택 · 호텔 방문 시 원활한 입실을 위한 3가지 체크포인트`,
+      accessChecklist: [
+        `[${d.short} 아파트·오피스텔·자택] 예약 문자 발송 시 동·호수와 함께 '지하/지상 주차 가능 여부' 및 '1층 공동현관 비밀번호(또는 세대 호출벨 오픈)'를 알려주시면 지연 없이 즉시 입실합니다.`,
+        `[${d.short} 비즈니스호텔·부티크호텔·모텔] 카드키 보안 엘리베이터가 작동하는 숙소는 호텔명과 객실번호를 알려주신 뒤, 도착 연락을 받으시면 1층 로비에서 기사와 관리사를 만나 대면결제 후 객실로 함께 동행해 주시면 됩니다.`,
+        `[일정 변경 및 시간 조율] ${d.stations[0]} 및 ${d.areas[0]} 일대 퇴근길·심야 교통 상황에 따라 예상 도착 시각을 문자로 투명하게 실시간 안내해 드립니다.`,
+      ],
+      faqs: [
+        {
+          q: `지금 바로 방문 예약이 가능한가요? 영업시간과 마지막 마감 시간은 어떻게 되나요?`,
+          a: `네, 100% 방문 가능합니다. ${d.gu} 권역은 매일 저녁 18:00부터 사전 예약 접수를 시작하여 19:00부터 순차 출발하며, 익일 새벽 05:00 마지막 예약 마감까지 ${mainStations} 및 ${subAreas} 전역에 전담 이동팀이 상시 대기하여 즉시 배차됩니다.`,
+        },
+        {
+          q: `선입금이나 예약금을 요구하지 않는 진짜 100% 현장 후불제가 맞나요?`,
+          a: `네, 단 1원도 없습니다. 아밤(Abam.kr)은 ${d.gu} 현장에 관리사가 직접 도착하여 얼굴을 대면한 후 결제하는 100% 현장 후불제 원칙만을 준수합니다. 어떠한 경우에도 사전 계좌이체나 보증금을 요구하지 않습니다.`,
+        },
+        {
+          q: `예약 시 주소나 전화번호 등 개인정보가 웹사이트나 서버에 기록으로 남나요?`,
+          a: `일절 남지 않습니다. 예약 상담 및 배차에 필요한 최소한의 주소 정보는 관리사 도착 및 케어 완료 즉시 복구 불가능하게 파기되며, 서버나 데이터베이스에 고객님의 개인정보를 영구 보관하거나 기록하지 않는 100% 안심 비밀보장 시스템으로 운영됩니다.`,
+        },
+        {
+          q: `${d.gu}에 있는 호텔, 모텔, 오피스텔, 원룸 등 어떤 장소든 방문이 가능한가요?`,
+          a: `네, 고객님이 머무시는 모든 공간에 방문 가능합니다. ${d.stay} 등 카드키 보안이 있는 숙소의 경우 도착 연락 후 1층 로비에서 기사와 대면결제를 마치고 관리사와 함께 객실로 편안하게 입실하시면 됩니다.`,
+        },
+        {
+          q: `${d.short} 지역 방문 시 정찰 가격 외에 심야 할증이나 출장비가 붙나요?`,
+          a: `추가 비용은 0원입니다. ${cityPrefix} 전 지역 어디든 출장비·교통비·심야 할증은 일절 없으며, 홈페이지에 명시된 타이(8만~12만)·아로마(9만~14만)·스페셜(10만~16만) 정찰 금액만 현장에서 결제하시면 됩니다.`,
+        },
+        {
+          q: `${d.gu}에서 ${kw} 부르면 실제로 도착까지 얼마나 걸리나요?`,
+          a: `${d.gu} 내 ${d.stations.slice(0, 3).join(', ')} 인근에 상주하는 전담 이동팀이 배차되어 평균 ${d.eta} 내외로 도착합니다. 퇴근길이나 심야 피크타임에는 30~50분 전 미리 예약해 주시면 원하시는 시간에 오차 없이 방문합니다.`,
+        },
+      ],
+    };
+  }
+
+  return {
+    summaryTitle: `${kw} 핵심 이용 가이드 및 서울·경기 100% 후불제 표준 시스템`,
+    introParagraphs: [
+      `"${kw}" 키워드로 신뢰할 수 있는 프리미엄 방문 홈케어를 찾고 계신다면, 사전 예약금 0원의 100% 현장 대면결제 원칙과 검증된 20대 전문 테라피스트 라인업을 갖춘 아밤(Abam.kr)이 가장 안전하고 명쾌한 해답을 드립니다. 서울특별시 25개 자치구 전역과 경기도 핵심 도시(수원·분당·판교·일산·부천·동탄·평택·안양·용인·김포·하남·남양주 등) 어디서나 동일한 정찰 요금과 특급 호텔 스파 수준의 테라피를 제공합니다.`,
+      isHotel
+        ? `특히 비즈니스 출장이나 호캉스로 서울·경기 호텔 및 레지던스에 머무시는 고객님들을 위해 '호텔 1층 로비 대면결제 및 동행 픽업 프로토콜'을 운영하고 있습니다. 객실 카드키 보안이 엄격한 5성급 호텔부터 부티크 호텔·모텔까지, 투숙객의 프라이버시를 완벽히 지키면서 객실 내에서 편안하게 타이·아로마·스페셜 관리를 받으실 수 있습니다.`
+        : isPostpay
+          ? `최근 온라인상에서 예약금·보증금·출장비 명목으로 선입금을 유도한 뒤 연락을 두절하는 출장 사기 피해가 빈번합니다. 아밤은 어떠한 경우에도 선입금을 요구하지 않으며, 관리사와 운전기사가 고객님 방문지에 도착해 직접 대면한 후 현금·계좌이체·카드로 결제하는 100% 현장 후불제만을 원칙으로 운영합니다.`
+          : isNight
+            ? `낮 시간의 고된 업무나 장거리 이동 후 밤늦게 찾아오는 피로를 해소하실 수 있도록, 아밤은 매일 저녁 18:00 예약 오픈부터 19:00 순차 출발, 익일 새벽 05:00 마지막 예약 마감까지 연중무휴 심야 배차 시스템을 가동합니다. 심야 시간대에도 별도의 야간 할증이나 추가 출장비가 전혀 발생하지 않습니다.`
+            : isPrice
+              ? `불투명한 추가 요금이나 현장 옵션 강요 없이 누구나 안심하고 이용할 수 있도록 100% 투명 정찰제를 시행합니다. 타이 코스(60분 80,000원 / 90분 100,000원 / 120분 120,000원), 아로마 코스(60분 90,000원 / 90분 110,000원 / 120분 140,000원), 스페셜 복합 코스(60분 100,000원 / 90분 120,000원 / 120분 160,000원) 중 컨디션에 맞춰 자유롭게 선택하세요.`
+              : `서울 5대 권역(강남권·도심권·마포여의도권·성수건대권·서남북권) 및 경기 남·북부 주요 역세권에 거점별 이동팀을 상시 배치하여, 예약 접수 후 평균 20~35분 이내 신속하게 도착합니다. 이동하는 번거로움 없이 관리 직후 내 침대에서 곧바로 숙면에 들 수 있는 것이 1:1 방문 홈케어만의 가장 큰 매력입니다.`,
+      `전원 체계적인 마인드 교육과 아나토미 지압·아로마 테라피 실기 검증을 마친 20대 한국인·전문 관리사가 배정되며, 피부에 직접 닿는 오일은 수용성·식물성 천연 에센셜 오일만을 엄선하여 시술 후 끈적임 없이 산뜻한 컨디션 회복을 돕습니다.`,
+    ],
+    dispatchHighlightTitle: `${kw} 권역별 배차 네트워크 및 운영 기준`,
+    dispatchBullets: [
+      { label: `서울 25개 자치구 전역`, detail: `강남·서초·송파·마포·용산·영등포·종로·중구·성동·광진·강서·구로·관악·노원 등 전 구역 20~30분 내 신속 방문` },
+      { label: `경기 핵심 거점 직통 배차`, detail: `수원·분당·판교·일산·부천·동탄·평택·용인·안양·김포·파주·광명·하남·남양주·구리·의정부·시흥·안산 25~35분 내 방문` },
+      { label: `100% 현장 대면 후불제`, detail: `사전 예약금·보증금·출장비 0원 — 관리사 도착 후 현장에서 현금·계좌이체·카드 결제` },
+      { label: `투명한 3대 정찰 코스`, detail: `타이(8만~12만) · 아로마(9만~14만) · 스페셜 타이+아로마(10만~16만) 외 추가 비용 일절 없음` },
+    ],
+    courseMatchTitle: `${kw} 이용 목적별 최적의 코스 선택법`,
+    courseMatchText: `장시간 데스크 업무나 운전으로 목·어깨·허리가 뭉치고 뻐근할 때는 오일 없이 강한 압과 스트레칭으로 풀어주는 '타이(60분·90분·120분)'를 추천하며, 스트레스성 불면과 전신 피로 누적이 심할 때는 따뜻한 천연 에센셜 오일로 림프 순환을 돕는 '아로마(60분·90분·120분)'가 적합합니다. 두 가지 장점을 한 번에 경험하고 싶으시다면 건식 지압과 아로마 오일 트리트먼트를 결합한 '스페셜(60분·90분·120분)'가 재예약률 1위를 기록하고 있습니다.`,
+    accessChecklistTitle: `${kw} 10초 간편 예약 및 방문 이용 체크리스트`,
+    accessChecklist: [
+      `[Step 1. 코스 및 장소 결정] 타이·아로마·스페셜 중 희망 코스와 시간(60/90/120분), 방문받으실 정확한 주소(또는 호텔명+객실번호)를 확인합니다.`,
+      `[Step 2. 전화 또는 문자 간편 접수] 010-6607-2239번으로 전화하시거나 홈페이지의 '문자 간편예약' 버튼을 눌러 양식을 전송하시면 담당 실장이 실시간 최단거리 관리사를 매칭해 도착 예정 시간을 안내합니다.`,
+      `[Step 3. 현장 대면결제 후 케어 시작] 자택은 주차·공동현관 출입 안내 후 문 앞에서, 호텔·모텔은 1층 로비에서 대면결제를 완료하신 뒤 편안하게 1:1 프라이빗 케어를 받으시면 됩니다.`,
+    ],
+    faqs: [
+      {
+        q: `지금 바로 방문 가능한가요? 영업시간과 마지막 마감 시간은 어떻게 되나요?`,
+        a: `네, 100% 방문 가능합니다. 아밤(Abam.kr)은 매일 저녁 18:00부터 사전 예약을 오픈하여 19:00부터 순차 출발하며, 익일 새벽 05:00 마지막 예약 마감까지 서울·경기 전역에서 상시 운행됩니다. 문의 주시면 현재 위치에서 가장 가까운 전담 이동팀이 즉시 배차됩니다.`,
+      },
+      {
+        q: `${kw} 예약 시 정말 사전에 입금해야 하는 예약금이 전혀 없나요?`,
+        a: `네, 단 1원도 없습니다. 아밤(Abam.kr)은 선입금 사기 피해를 원천 차단하기 위해 관리사가 고객님의 장소에 도착해 직접 대면한 후 결제하는 100% 현장 후불제 원칙만을 준수합니다.`,
+      },
+      {
+        q: `예약 시 전달한 주소나 전화번호 등 개인정보가 웹사이트에 기록으로 남나요?`,
+        a: `전혀 남지 않습니다. 예약 상담 및 배차에 필요한 최소한의 정보는 케어 완료 즉시 복구 불가능하게 파기되며, 서버에 어떠한 개인정보나 방문 기록도 영구 보관하지 않는 100% 익명 안심 시스템을 운영합니다.`,
+      },
+      {
+        q: `호텔, 모텔, 오피스텔, 원룸 등 어떤 장소든 방문이 가능한가요?`,
+        a: `네, 고객님이 머무시는 모든 공간에 방문 가능합니다. 아파트·오피스텔·원룸 자택은 물론, 호텔이나 모텔의 경우 1층 로비에서 기사와 대면결제를 마친 뒤 관리사와 함께 객실로 자연스럽게 이동하시는 방식으로 안전하게 이용하실 수 있습니다.`,
+      },
+      {
+        q: `서울 외에 경기도(수원·분당·일산·부천·동탄·평택 등) 전 지역도 방문 가능한가요?`,
+        a: `물론입니다. 서울 25개 구뿐만 아니라 경기 남부·북부·서부 주요 도시마다 거점 이동팀이 대기하고 있어 추가 출장비 없이 평균 25~35분 내외로 신속하게 방문합니다.`,
+      },
+      {
+        q: `코스별 정찰 가격과 현장 결제 수단은 어떻게 되나요?`,
+        a: `타이(8만~12만), 아로마(9만~14만), 스페셜(10만~16만) 정찰제이며 출장비·할증은 0원입니다. 현장에서 기사 대면 시 현금 결제 및 실시간 계좌이체가 가능하며, 카드 결제를 원하시는 경우 예약 접수 시 미리 말씀해 주시면 단말기를 지원해 드립니다.`,
+      },
+      {
+        q: `${kw} 이용 시 관리사는 어떤 분이 배정되나요?`,
+        a: `전원 엄격한 마인드 교육과 실기 검증을 수료한 20대 전문 테라피스트가 배정되며, 1:1 프라이빗 맞춤 케어로 편안하고 정성스러운 힐링을 제공합니다.`,
+      },
+    ],
+  };
+}

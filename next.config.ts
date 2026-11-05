@@ -31,9 +31,32 @@ const securityHeaders = [
   }
 ];
 
+const LEGACY_REDIRECT_SOURCES = [
+  '/job/:path*',
+  '/jobs',
+  '/jobs/:path*',
+  '/talent',
+  '/talent/:path*',
+  '/employer/:path*',
+  '/map',
+  '/community',
+  '/diary',
+  '/property',
+  '/business',
+  '/business/:path*',
+  '/partnership',
+  '/register',
+  '/login',
+  '/messages',
+  '/alerts',
+  '/test-banners',
+];
+
 const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
+  compress: true,
+  experimental: { inlineCss: true },
   typescript: { ignoreBuildErrors: true },
   images: {
     unoptimized: true,
@@ -42,10 +65,21 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.abam.kr' }],
+        destination: 'https://abam.kr/:path*',
+        permanent: true,
+      },
+      {
         source: '/guide/late-night-24-hour-massage',
         destination: '/guide/late-night-massage',
         permanent: true,
       },
+      ...LEGACY_REDIRECT_SOURCES.map((source) => ({
+        source,
+        destination: '/',
+        permanent: true,
+      })),
     ];
   },
   async headers() {
@@ -54,6 +88,10 @@ const nextConfig: NextConfig = {
         source: '/:path*',
         headers: securityHeaders,
       },
+      ...LEGACY_REDIRECT_SOURCES.map((source) => ({
+        source,
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      })),
     ];
   },
 };

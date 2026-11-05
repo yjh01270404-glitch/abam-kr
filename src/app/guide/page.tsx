@@ -30,9 +30,6 @@ export default function GuideIndexPage() {
         </div>
       </header>
       <main style={{ maxWidth: 640, margin: '16px auto', background: 'rgba(255,255,255,0.95)', borderRadius: 16, padding: '22px 18px 120px' }}>
-        <div className="abam-copperplate-en" style={{ fontSize: 18, color: '#d97706', letterSpacing: '0.06em', marginBottom: 4, lineHeight: 1.2 }}>
-          Essential Guide & Price Manual · Beautiful Night
-        </div>
         <h1 style={{ fontSize: 22, fontWeight: 900, margin: '0 0 8px', lineHeight: 1.35 }}>출장마사지 이용 가이드</h1>
         <p style={{ fontSize: 13, lineHeight: 1.7, color: '#475569', margin: '0 0 18px' }}>
           서울·경기 전역 자택·호텔 프라이빗 1:1 방문 홈케어를 처음 이용하는 분들이 자주 궁금해하는 가격, 예약 방법, 호텔 이용, 코스 선택을 정리했습니다.
