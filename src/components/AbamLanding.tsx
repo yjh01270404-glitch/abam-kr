@@ -8,13 +8,13 @@ import { UI } from '../lib/landing-ui';
 import AbamBottomBookingBar, { openDirectAbamSms } from './AbamBottomBookingBar';
 
 const C = {
-  bg: '#080c16',
-  cardBg: '#0f1626',
-  border: '#1e293b',
+  bg: '#0d1320',
+  cardBg: '#161b29',
+  border: '#2a3248',
   textWhite: '#ffffff',
   textSub: '#cbd5e1',
   textMuted: '#94a3b8',
-  accent: '#c59b27',
+  accent: '#f2ca50',
   blue: '#1e293b',
 };
 

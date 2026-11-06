@@ -9,14 +9,14 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  background-color: #080c16;
+  background-color: #0d1320;
   width: 100%;
 }
 
 body {
   width: 100%;
   min-height: 100vh;
-  background-color: #080c16;
+  background-color: #0d1320;
   color: #f1f5f9;
   font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   line-height: 1.6;
