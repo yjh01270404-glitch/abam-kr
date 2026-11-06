@@ -495,162 +495,116 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* 3. 코스 및 요금표 (실제 코스 사진 + 럭셔리 카드 디자인) */}
-        <section id="price" style={{ marginBottom: '30px', scrollMarginTop: '56px' }}>
+        {/* 3. 코스 및 정찰 요금표 */}
+        <section id="price" style={{ marginBottom: '26px', scrollMarginTop: '56px' }}>
           <div
             style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'baseline',
-              marginBottom: '12px',
+              marginBottom: '10px',
               gap: '8px',
             }}
           >
-            <div>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '1px', textTransform: 'uppercase' }}>
-                Signature Courses
-              </span>
-              <h2 style={{ fontSize: '20px', fontWeight: 900, color: '#ffffff', margin: '2px 0 0', whiteSpace: 'nowrap' }}>
-                {isKo ? '코스 및 정찰 요금표' : t.priceTitle}
-              </h2>
-            </div>
+            <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', margin: 0, whiteSpace: 'nowrap' }}>
+              {isKo ? '코스 및 정찰 요금표' : t.priceTitle}
+            </h2>
             <span style={{ fontSize: '12px', color: C.accent, fontWeight: 700, whiteSpace: 'nowrap' }}>
-              {isKo ? '요금 터치 시 즉시 예약' : 'Tap price to book'}
+              {isKo ? '요금 터치 시 예약 양식 열림' : 'Tap price to book'}
             </span>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            {c.courses.map((course, idx) => {
-              const coursePhotos = ['/images/thai.jpg', '/images/aroma.jpg', '/images/flower_spa.jpg'];
-              const photo = coursePhotos[idx] || course.img;
-              const badges = ['왓포 전통 건식 지압', '⭐ 고객 선호 1위 유기농 오일', '👑 VIP 시그니처 콤비네이션'];
-              const badge = badges[idx] || course.subtitle;
-
-              return (
+          <div
+            style={{
+              backgroundColor: C.cardBg,
+              border: `1px solid ${C.border}`,
+              borderRadius: '12px',
+              overflow: 'hidden',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+            }}
+          >
+            {c.courses.map((course, idx) => (
+              <div
+                key={course.no}
+                style={{
+                  borderTop: idx > 0 ? `1px solid ${C.border}` : 'none',
+                  padding: '14px',
+                }}
+              >
                 <div
-                  key={course.no}
                   style={{
-                    backgroundColor: C.cardBg,
-                    border: idx === 1 ? '2px solid #f2ca50' : `1px solid ${C.border}`,
-                    borderRadius: '14px',
-                    overflow: 'hidden',
-                    boxShadow: idx === 1 ? '0 10px 30px -10px rgba(242, 202, 80, 0.3)' : '0 6px 20px rgba(0, 0, 0, 0.4)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '6px',
+                    gap: '8px',
                   }}
                 >
-                  {/* 코스 이미지 헤더 */}
-                  <div style={{ position: 'relative', width: '100%', height: '140px', overflow: 'hidden' }}>
-                    <Image
-                      src={photo}
-                      alt={course.name}
-                      fill
-                      sizes="(max-width: 720px) 100vw, 720px"
-                      style={{ objectFit: 'cover' }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        background: 'linear-gradient(to top, rgba(17, 24, 39, 0.95) 0%, rgba(17, 24, 39, 0.2) 70%, transparent 100%)',
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '10px',
-                        left: '12px',
-                        backgroundColor: 'rgba(10, 14, 26, 0.85)',
-                        backdropFilter: 'blur(8px)',
-                        border: '1px solid rgba(242, 202, 80, 0.4)',
-                        borderRadius: '6px',
-                        padding: '3px 8px',
-                        fontSize: '11px',
-                        fontWeight: 800,
-                        color: C.accent,
-                      }}
-                    >
-                      {badge}
-                    </div>
-                  </div>
-
-                  <div style={{ padding: '14px' }}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginBottom: '6px',
-                        gap: '8px',
-                      }}
-                    >
-                      <strong style={{ fontSize: '18px', color: '#ffffff', fontWeight: 900 }}>
-                        {course.name} 코스
-                      </strong>
-                      <span style={{ fontSize: '12.5px', color: C.accent, fontWeight: 700 }}>
-                        {course.subtitle}
-                      </span>
-                    </div>
-
-                    <p
-                      style={{
-                        fontSize: '13px',
-                        color: C.textSub,
-                        margin: '0 0 12px',
-                        lineHeight: 1.55,
-                      }}
-                    >
-                      {course.desc}
-                    </p>
-
-                    {/* 시간/가격 선택 버튼 3개 */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-                      {course.prices.map((pr, pi) => {
-                        const slipCodes = [
-                          ['타이 60분 8만', '타이 90분 10만', '타이 120분 12만'],
-                          ['아로마 60분 9만', '아로마 90분 11만', '아로마 120분 14만'],
-                          ['스페셜 60분 10만', '스페셜 90분 12만', '스페셜 120분 16만'],
-                        ];
-                        const code = slipCodes[idx]?.[pi] || `${course.name} ${c.priceSection.durations[pi]} ${pr}`;
-                        return (
-                          <button
-                            key={pi}
-                            type="button"
-                            onClick={() => openDirectAbamSms(code)}
-                            style={{
-                              textAlign: 'center',
-                              border: '1px solid rgba(242, 202, 80, 0.25)',
-                              backgroundColor: '#0a0e1a',
-                              borderRadius: '8px',
-                              padding: '10px 4px',
-                              cursor: 'pointer',
-                              whiteSpace: 'nowrap',
-                              transition: 'all 0.2s',
-                            }}
-                          >
-                            <div style={{ fontSize: '11.5px', color: C.textMuted, fontWeight: 600 }}>
-                              {c.priceSection.durations[pi]}
-                            </div>
-                            <div
-                              style={{
-                                fontSize: '15px',
-                                fontWeight: 900,
-                                color: '#ffffff',
-                                marginTop: '2px',
-                                fontVariantNumeric: 'tabular-nums',
-                              }}
-                            >
-                              {pr}
-                            </div>
-                            <span style={{ fontSize: '10px', color: C.accent, fontWeight: 700, display: 'block', marginTop: '2px' }}>
-                              예약하기 ➔
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
+                  <strong style={{ fontSize: '16.5px', color: '#ffffff', fontWeight: 800, whiteSpace: 'nowrap' }}>
+                    {course.name} 코스
+                  </strong>
+                  <span style={{ fontSize: '12px', color: C.accent, fontWeight: 700, whiteSpace: 'nowrap' }}>
+                    {course.subtitle}
+                  </span>
                 </div>
-              );
-            })}
+
+                <p
+                  style={{
+                    fontSize: '13px',
+                    color: C.textSub,
+                    margin: '0 0 10px',
+                    paddingLeft: '10px',
+                    borderLeft: '2px solid #1e293b',
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {course.desc}
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+                  {course.prices.map((pr, pi) => {
+                    const slipCodes = [
+                      ['타이 60분 8만', '타이 90분 10만', '타이 120분 12만'],
+                      ['아로마 60분 9만', '아로마 90분 11만', '아로마 120분 14만'],
+                      ['스페셜 60분 10만', '스페셜 90분 12만', '스페셜 120분 16만'],
+                    ];
+                    const code = slipCodes[idx]?.[pi] || `${course.name} ${c.priceSection.durations[pi]} ${pr}`;
+                    return (
+                      <button
+                        key={pi}
+                        type="button"
+                        onClick={() => openDirectAbamSms(code)}
+                        style={{
+                          textAlign: 'center',
+                          border: `1px solid ${C.border}`,
+                          backgroundColor: '#090d18',
+                          borderRadius: '8px',
+                          padding: '10px 4px',
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap',
+                          transition: 'border-color 0.2s',
+                        }}
+                      >
+                        <div style={{ fontSize: '12px', color: C.textMuted, fontWeight: 600 }}>
+                          {c.priceSection.durations[pi]}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: '14.5px',
+                            fontWeight: 800,
+                            color: '#ffffff',
+                            marginTop: '2px',
+                            fontVariantNumeric: 'tabular-nums',
+                          }}
+                        >
+                          {pr}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
