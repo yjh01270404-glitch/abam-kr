@@ -180,9 +180,6 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <a href="#price" style={{ color: C.textWhite, fontSize: '13px', fontWeight: 700 }}>
                 {isKo ? '요금표' : t.hnav[1]}
               </a>
-              <a href="#therapists" style={{ color: C.accent, fontSize: '13px', fontWeight: 700 }}>
-                {isKo ? '에이스' : 'Roster'}
-              </a>
               <a href="#guide" style={{ color: C.textSub, fontSize: '13px', fontWeight: 600 }}>
                 {isKo ? '이용안내' : t.hnav[2]}
               </a>
@@ -656,101 +653,6 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             })}
           </div>
         </section>
-
-        {/* 4. 20대 ACE 관리사 라인업 SHOWCASE */}
-        {c.therapists && c.therapists.length > 0 && (
-          <section id="therapists" style={{ marginBottom: '30px', scrollMarginTop: '56px' }}>
-            <div style={{ marginBottom: '12px' }}>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: C.accent, letterSpacing: '1px', textTransform: 'uppercase' }}>
-                Ace Roster
-              </span>
-              <h2 style={{ fontSize: '20px', fontWeight: 900, color: '#ffffff', margin: '2px 0 0' }}>
-                {isKo ? '오늘 밤 20대 ACE 총출동 라인업' : 'Featured Therapists'}
-              </h2>
-              <p style={{ fontSize: '13px', color: C.textSub, margin: '4px 0 0' }}>
-                {isKo ? '20대 전문 힐러 1:1 방문 케어 · 실시간 도로 교통/배차 기준 순차 이동' : 'Vetted professionals dispatched promptly.'}
-              </p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-              {c.therapists.slice(0, 6).map((th, ti) => (
-                <div
-                  key={ti}
-                  style={{
-                    backgroundColor: C.cardBg,
-                    border: '1px solid rgba(242, 202, 80, 0.2)',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <div style={{ position: 'relative', width: '100%', height: '180px', overflow: 'hidden' }}>
-                    <Image
-                      src={th.img}
-                      alt={th.name}
-                      fill
-                      sizes="(max-width: 720px) 50vw, 360px"
-                      style={{ objectFit: 'cover', objectPosition: 'top' }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '8px',
-                        left: '8px',
-                        backgroundColor: 'rgba(10, 14, 26, 0.85)',
-                        backdropFilter: 'blur(6px)',
-                        borderRadius: '4px',
-                        padding: '2px 6px',
-                        fontSize: '10.5px',
-                        fontWeight: 800,
-                        color: C.accent,
-                        border: '1px solid rgba(242, 202, 80, 0.3)',
-                      }}
-                    >
-                      {th.badge}
-                    </div>
-                  </div>
-
-                  <div style={{ padding: '10px 12px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '2px' }}>
-                      <strong style={{ fontSize: '15px', fontWeight: 900, color: '#ffffff' }}>
-                        {th.name} 매니저
-                      </strong>
-                      <span style={{ fontSize: '11.5px', color: C.accent, fontWeight: 700 }}>
-                        {th.age}
-                      </span>
-                    </div>
-                    <div style={{ fontSize: '11px', color: C.textMuted, marginBottom: '6px' }}>
-                      {th.spec}
-                    </div>
-                    <div style={{ fontSize: '11.5px', color: C.textSub, lineHeight: 1.4, marginBottom: '8px' }}>
-                      {th.desc}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms(`${th.name} 매니저 지명 예약`)}
-                      style={{
-                        width: '100%',
-                        backgroundColor: '#1f293d',
-                        border: '1px solid rgba(242, 202, 80, 0.3)',
-                        color: C.accent,
-                        borderRadius: '6px',
-                        padding: '7px 0',
-                        fontSize: '12px',
-                        fontWeight: 800,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      문자지명 예약 ➔
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* 5. 이용 및 예약 필수 안내 */}
         <section id="guide" style={{ marginBottom: '30px', scrollMarginTop: '56px' }}>
