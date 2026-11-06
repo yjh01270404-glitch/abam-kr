@@ -232,12 +232,12 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
           <h1
             style={{
-              fontSize: '21px',
+              fontSize: 'clamp(24px, 6.4vw, 32px)',
               fontWeight: 900,
               color: '#ffffff',
               letterSpacing: '-0.5px',
-              margin: '0 0 10px',
-              lineHeight: 1.32,
+              margin: '0 0 12px',
+              lineHeight: 1.28,
               wordBreak: 'keep-all',
             }}
           >

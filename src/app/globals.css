@@ -109,3 +109,11 @@ a:active, button:active {
     display: none !important;
   }
 }
+
+/* Stitch-inspired refresh: deeper midnight gradient + larger touch targets */
+body {
+  background: radial-gradient(1100px 560px at 50% -8%, #14213d 0%, #0a1020 55%, #070b16 100%) fixed;
+}
+button, a[href^="tel:"], a[href^="sms:"] {
+  min-height: 44px;
+}
