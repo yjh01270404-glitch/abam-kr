@@ -129,18 +129,21 @@ export default function AbamBottomBookingBar({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '46px',
-              backgroundColor: '#c59b27', boxShadow: '0 2px 8px rgba(197, 155, 39, 0.25)',
+              gap: '6px',
+              height: '48px',
+              backgroundColor: '#c59b27',
+              boxShadow: '0 2px 10px rgba(197, 155, 39, 0.35)',
               color: '#0f172a',
-              borderRadius: '8px',
-              fontWeight: 800,
+              borderRadius: '10px',
+              fontWeight: 900,
               fontSize: '15px',
               letterSpacing: '-0.3px',
               border: 'none',
               cursor: 'pointer',
             }}
           >
-            {smsLabel}
+            <span>💬</span>
+            <span>{smsLabel}</span>
           </button>
 
           <a
@@ -149,19 +152,21 @@ export default function AbamBottomBookingBar({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '46px',
+              gap: '6px',
+              height: '48px',
               backgroundColor: '#1e293b',
               border: '1px solid #475569',
               color: '#f8fafc',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',
-              borderRadius: '8px',
+              borderRadius: '10px',
               fontWeight: 800,
               fontSize: '15px',
               letterSpacing: '-0.3px',
               textDecoration: 'none',
             }}
           >
-            {callLabel}
+            <span>📞</span>
+            <span>{callLabel}</span>
           </a>
         </div>
       </aside>

@@ -141,7 +141,7 @@ export default function AbamBookingGuideModal({
         style={{
           width: '100%',
           maxWidth: '460px',
-          maxHeight: '94vh',
+          maxHeight: 'min(92dvh, 760px)',
           backgroundColor: '#0f172a',
           border: '1px solid rgba(197, 155, 39, 0.4)',
           borderRadius: '14px',
@@ -204,12 +204,13 @@ export default function AbamBookingGuideModal({
                 color: '#ffffff',
                 margin: 0,
                 lineHeight: 1.25,
+                letterSpacing: '-0.3px',
               }}
             >
               문자 간편 예약 양식 (010-6607-2239)
             </h2>
-            <div style={{ fontSize: '11.5px', color: '#cbd5e1', marginTop: '2px', lineHeight: 1.4 }}>
-              접수 18:00 ~ 마감 05:00 (출발 19:00~) · 서울·경기 30~40분 내 방문
+            <div style={{ fontSize: '11.5px', color: '#cbd5e1', marginTop: '3px', lineHeight: 1.4 }}>
+              접수 18:00 ~ 마감 05:00 (출발 19:00~) · 서울·경기 30~40분 내 도착
             </div>
           </div>
           <button
@@ -220,10 +221,10 @@ export default function AbamBookingGuideModal({
               background: 'rgba(255,255,255,0.08)',
               border: 'none',
               color: '#cbd5e1',
-              width: '30px',
-              height: '30px',
+              width: '32px',
+              height: '32px',
               borderRadius: '50%',
-              fontSize: '19px',
+              fontSize: '20px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -245,10 +246,10 @@ export default function AbamBookingGuideModal({
         >
           <div style={{ paddingLeft: '10px', borderLeft: '2.5px solid #38bdf8', fontSize: '11.5px', lineHeight: 1.45, color: '#e2e8f0' }}>
             <div style={{ fontWeight: 800, color: '#fbbf24', marginBottom: '2px' }}>
-              안심 안내 (웹사이트에 개인정보 기록·저장 절대 없음)
+              안심 안내 (개인정보 저장 0%)
             </div>
             <div>
-              입력하시는 주소·출입번호는 <strong style={{ color: '#ffffff', textDecoration: 'underline' }}>웹사이트나 서버에 절대 기록되지 않으며</strong> 휴대폰 문자창에만 자동 입력됩니다. (불편하시면 빈칸으로 두고 문자창에서 직접 적으셔도 됩니다)
+              입력하시는 주소·출입번호는 <strong style={{ color: '#ffffff', textDecoration: 'underline' }}>웹사이트나 서버에 절대 기록되지 않으며</strong> 휴대폰 문자창에만 자동 입력됩니다.
             </div>
           </div>
         </div>
@@ -296,7 +297,7 @@ export default function AbamBookingGuideModal({
                 <option value="아로마90 11만">아로마 90분 (11만) — 110,000원 (인기)</option>
                 <option value="아로마2 14만">아로마 120분 (14만) — 140,000원</option>
               </optgroup>
-              <optgroup label="── 3. 스페셜 코스 [타이+아로마] ──">
+              <optgroup label="── 3. 스페셜(타이+아로마) ──">
                 <option value="스페셜1 10만">스페셜 60분 (10만) — 100,000원</option>
                 <option value="스페셜90 12만">스페셜 90분 (12만) — 120,000원 (인기)</option>
                 <option value="스페셜2 16만">스페셜 120분 (16만) — 160,000원 (풀코스)</option>
@@ -306,9 +307,12 @@ export default function AbamBookingGuideModal({
 
           {/* 2. 방문 주소 또는 호텔명 */}
           <div>
-            <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '4px' }}>
-              2. 방문 주소(동·호수) 또는 호텔명·객실번호 <span style={{ color: '#94a3b8', fontSize: '11px', fontWeight: 500 }}>(문자창에서 직접 기재 가능)</span>
-            </label>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
+              <label style={{ fontSize: '12.5px', fontWeight: 700, color: '#f1f5f9' }}>
+                2. 방문 주소 또는 호텔명·객실번호
+              </label>
+              <span style={{ color: '#94a3b8', fontSize: '11px' }}>문자창 직접 기재 가능</span>
+            </div>
             <input
               type="text"
               value={addr}
@@ -322,7 +326,7 @@ export default function AbamBookingGuideModal({
                 border: '1px solid #475569',
                 borderRadius: '8px',
                 color: '#ffffff',
-                fontSize: '13.5px',
+                fontSize: '13px',
                 outline: 'none',
               }}
             />
@@ -330,9 +334,12 @@ export default function AbamBookingGuideModal({
 
           {/* 3. 1층 공동현관 비밀번호 / 호텔 로비 안내 */}
           <div>
-            <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 700, color: '#f1f5f9', marginBottom: '4px' }}>
-              3. 1층 공동현관 출입 방법 / 호텔 로비 안내 <span style={{ color: '#94a3b8', fontSize: '11px', fontWeight: 500 }}>(아래 버튼 터치 또는 직접 입력)</span>
-            </label>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
+              <label style={{ fontSize: '12.5px', fontWeight: 700, color: '#f1f5f9' }}>
+                3. 1층 공동현관 출입 / 호텔 로비 안내
+              </label>
+              <span style={{ color: '#94a3b8', fontSize: '11px' }}>터치 또는 직접 입력</span>
+            </div>
             <input
               type="text"
               value={door}
@@ -346,7 +353,7 @@ export default function AbamBookingGuideModal({
                 border: '1px solid #475569',
                 borderRadius: '8px',
                 color: '#ffffff',
-                fontSize: '13.5px',
+                fontSize: '13px',
                 outline: 'none',
               }}
             />
@@ -360,9 +367,10 @@ export default function AbamBookingGuideModal({
                     backgroundColor: door === chip ? '#c59b27' : '#1e293b',
                     border: '1px solid ' + (door === chip ? '#c59b27' : '#475569'),
                     color: door === chip ? '#0f172a' : '#cbd5e1',
-                    fontSize: '11px',
+                    fontSize: '11.5px',
                     fontWeight: 700,
-                    padding: '5px 2px',
+                    minHeight: '34px',
+                    padding: '6px 2px',
                     borderRadius: '6px',
                     cursor: 'pointer',
                     textAlign: 'center',
@@ -432,7 +440,7 @@ export default function AbamBookingGuideModal({
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
             {[
               { label: '현금(딱맞춤)', val: '' },
               { label: '현금(잔돈요청)', val: '잔돈 필요' },
@@ -447,10 +455,11 @@ export default function AbamBookingGuideModal({
                   backgroundColor: pay === item.val ? '#c59b27' : '#1e293b',
                   border: '1px solid ' + (pay === item.val ? '#c59b27' : '#475569'),
                   color: pay === item.val ? '#0f172a' : '#cbd5e1',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  padding: '5px 2px',
-                  borderRadius: '6px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  minHeight: '36px',
+                  padding: '7px 4px',
+                  borderRadius: '7px',
                   cursor: 'pointer',
                   textAlign: 'center',
                   whiteSpace: 'nowrap',
@@ -518,15 +527,17 @@ export default function AbamBookingGuideModal({
           )}
         </div>
 
-        {/* 하단 버튼 (실제 <a href="sms:..."> 네이티브 링크 적용으로 모바일 차단 0%) */}
+        {/* 하단 버튼 (고정 푸터 · safe-area 대응 · 버튼 크기 통일) */}
         <div
           style={{
-            padding: '11px 16px',
+            flexShrink: 0,
+            padding: '10px 16px calc(10px + env(safe-area-inset-bottom, 0px))',
             borderTop: '1px solid rgba(255, 255, 255, 0.1)',
             background: '#161e31',
+            boxShadow: '0 -4px 16px rgba(0, 0, 0, 0.4)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '7px',
+            gap: '6px',
           }}
         >
           <a
@@ -534,60 +545,48 @@ export default function AbamBookingGuideModal({
             onClick={handleSmsLinkClick}
             style={{
               width: '100%',
+              height: '48px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              gap: '6px',
               backgroundColor: '#c59b27',
               color: '#0f172a',
-              padding: '13px',
-              borderRadius: '8px',
+              borderRadius: '10px',
               fontWeight: 900,
               fontSize: '15px',
               textDecoration: 'none',
               cursor: 'pointer',
               boxSizing: 'border-box',
+              boxShadow: '0 2px 10px rgba(197, 155, 39, 0.3)',
             }}
           >
+            <span>💬</span>
             문자 앱으로 예약 양식 바로 전송하기
           </a>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-            <a
-              href="tel:01066072239"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#1e293b',
-                border: '1px solid #475569',
-                color: '#f8fafc',
-                padding: '10px',
-                borderRadius: '8px',
-                fontWeight: 800,
-                fontSize: '13px',
-                textDecoration: 'none',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              전화 예약 (010-6607-2239)
-            </a>
-            <button
-              type="button"
-              onClick={onClose}
-              style={{
-                padding: '10px',
-                borderRadius: '8px',
-                fontSize: '13px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                background: '#1e293b',
-                color: '#cbd5e1',
-                border: '1px solid #334155',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              닫기
-            </button>
-          </div>
+          <a
+            href="tel:01066072239"
+            style={{
+              width: '100%',
+              height: '46px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              backgroundColor: '#1e293b',
+              border: '1px solid #475569',
+              color: '#f8fafc',
+              borderRadius: '10px',
+              fontWeight: 800,
+              fontSize: '14.5px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              boxSizing: 'border-box',
+            }}
+          >
+            <span>📞</span>
+            전화 직통 예약 (010-6607-2239)
+          </a>
         </div>
       </div>
     </div>

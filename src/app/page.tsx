@@ -4,9 +4,9 @@ import AbamLanding from '../components/AbamLanding';
 import { KO } from '../lib/landing-content';
 
 export const metadata: Metadata = {
-  title: '서울·경기 출장마사지 · 홈타이 · 홈케어 아밤 (Abam.kr) | 8만원~ 100% 현장결제',
+  title: '⚡[선입금0원·30분도착] 서울·경기 출장마사지 홈타이 아밤 | 100% 현장후불제',
   description:
-    '☎ 010-6607-2239 | 서울 25개구(강남·서초·송파·마포·영등포·용산 등) 및 경기 전 지역(수원·분당·판교·일산·부천·평택·동탄·안양·용인) 자택·오피스텔·호텔 30분 내 방문. 타이 8만원~ 정찰제, 선입금 없는 100% 현장 후불제.',
+    '⭐평점 4.9 (리뷰 376개) | ☎ 010-6607-2239 서울 25개구·경기 전지역 30분 도착 보장! 예약금·선입금 일절 없는 100% 안심 현장후불제. 타이 8만·아로마 9만 정찰제. 지금 바로 실시간 배차 문의.',
   alternates: {
     canonical: 'https://abam.kr',
   },

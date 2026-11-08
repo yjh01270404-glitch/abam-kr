@@ -9,10 +9,6 @@ const PRIVATE_PATHS = [
   '/messages',
   '/alerts',
   '/diary',
-  '/employer/',
-  '/job/',
-  '/jobs',
-  '/talent',
   '/test-banners',
 ];
 

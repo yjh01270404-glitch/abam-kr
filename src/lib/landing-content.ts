@@ -87,13 +87,13 @@ const INFO_ICONS = ['🕕', '📅', '🏠', '🛡️'];
 export const KO: LandingContent = {
   lang: 'ko',
   htmlLang: 'ko',
-  brandTag: '20대 전문 힐러 · 서울·경기 100% 현장 대면결제 프라이빗 홈케어',
-  topBar: { pre: '서울·경기 전역 호텔 · 자택 100% 현장후불제 · ', strong: '20대 전문 힐러 (예약 18:00~ / 출발 19:00~ / 마지막 예약 05:00)' },
+  brandTag: '아름다운 밤, 아밤(ABAM) · 서울·경기 100% 현장 대면결제 프라이빗 홈케어',
+  topBar: { pre: '아름다운 밤 아밤(Abam.kr) · 서울·경기 100% 현장후불제 · ', strong: '20대 전문 힐러 (예약 18:00~ / 출발 19:00~ / 마지막 예약 05:00)' },
   navLabels: { info: '🕕 예약 안내', courses: '🍃 코스 소개', price: '💳 COURSE & PRICE', faq: '❓ 자주묻는 질문' },
   hero: {
-    badge: '20대 전문 힐러 · 서울·경기 100% 현장 대면결제',
-    tagline: '20대 전문 관리사 1:1 방문 케어 · 18시 접수 19시 순차출발 · 1시간 전 예약 권장',
-    bannerTitle: ['20대 ACE 총출동', '프라이빗 홈케어'],
+    badge: '아름다운 밤, 아밤 · 서울·경기 100% 현장 대면결제',
+    tagline: '아름다운 밤을 선사하는 1:1 방문 케어 · 18시 접수 19시 순차출발 · 1시간 전 예약 권장',
+    bannerTitle: ['아름다운 밤 아밤', '프라이빗 홈케어'],
     bannerSub: ['서울·경기 전역', '1시간전 예약권장', '100% 현장 대면결제'],
   },
   info: [
@@ -106,7 +106,7 @@ export const KO: LandingContent = {
   courses: [
     { no: 1, name: '타이', subtitle: '전통 건식 지압 · 시원한 압', desc: '왓포 전통 방식의 건식 지압으로 뭉친 근육을 시원하게 풀어주고 스트레칭으로 몸의 균형을 잡아줍니다.', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES.thai },
     { no: 2, name: '아로마', subtitle: '천연 아로마 오일 · 부드러운 케어', desc: '천연 식물성 아로마 오일을 사용하여 부드럽게 전신을 케어하고 림프 순환과 깊은 휴식을 돕습니다.', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES.aroma },
-    { no: 3, name: '스페셜', subtitle: '타이 + 아로마 복합 케어', desc: '타이의 시원한 지압과 아로마의 부드러운 오일 관리를 동시에 받을 수 있는 프리미엄 코스입니다.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
+    { no: 3, name: '스페셜(타이+아로마)', subtitle: '타이 + 아로마 복합 케어', desc: '타이의 시원한 지압과 아로마의 부드러운 오일 관리를 동시에 받을 수 있는 프리미엄 코스입니다.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: '코스', durations: ['60분', '90분', '120분'] },
   therapistSection: { label: "20대 ACE LINEUP", title: '오늘 밤 20대 ACE 총출동 라인업', note: '20대 전문 관리사 1:1 프라이빗 케어 · 실시간 도로 교통/배차 기준 순차 이동', kakaoBtn: '문자지명', callBtn: '전화지명' },
