@@ -88,6 +88,12 @@ h1, h2, h3, .font-headline-lg, .font-display-lg {
   -webkit-font-smoothing: antialiased !important;
 }
 
+/* 모바일 하단 고정 예약바 콘텐츠 겹침 방지 보장 */
+footer.abam-site-footer,
+footer {
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 24px)) !important;
+}
+
 body {
   width: 100%;
   min-height: 100vh;
