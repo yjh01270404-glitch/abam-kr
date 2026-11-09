@@ -24,6 +24,7 @@ export default function AbamBookingGuideModal({
   const [pay, setPay] = useState('');
   const [timeText, setTimeText] = useState('');
   const [sentNotice, setSentNotice] = useState(false);
+  const [showFaq, setShowFaq] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
@@ -505,6 +506,75 @@ export default function AbamBookingGuideModal({
             >
               {finalSummary}
             </div>
+          </div>
+
+          {/* 궁금사항 원클릭 빠른 확인 (FAQ 토글) */}
+          <div
+            style={{
+              backgroundColor: '#0c192c',
+              border: '1px solid rgba(56, 189, 248, 0.25)',
+              borderRadius: '8px',
+              overflow: 'hidden',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setShowFaq(!showFaq)}
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                background: 'transparent',
+                border: 'none',
+                color: '#93c5fd',
+                fontSize: '12px',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer',
+              }}
+            >
+              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span>💡</span>
+                <span>궁금한 점이 있으신가요? (자주 묻는 질문 3초 확인)</span>
+              </span>
+              <span style={{ fontSize: '11px', color: '#38bdf8' }}>{showFaq ? '닫기 ▲' : '열기 ▼'}</span>
+            </button>
+            {showFaq && (
+              <div
+                style={{
+                  padding: '10px 12px',
+                  borderTop: '1px solid rgba(56, 189, 248, 0.15)',
+                  fontSize: '11.5px',
+                  lineHeight: 1.55,
+                  color: '#cbd5e1',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '6px',
+                }}
+              >
+                <div>
+                  <strong style={{ color: '#fbbf24' }}>Q. 관리사 프로필 / 사진 볼 수 있나요?</strong>
+                  <br />
+                  A. 20대 전문 힐러로 구성되며, 인터넷 도용 사진은 사용하지 않습니다. 선입금 0원의 현장 대면 시스템이므로 도착 후 직접 확인하신 뒤 불만족 시 즉시 무료 취소 가능합니다.
+                </div>
+                <div>
+                  <strong style={{ color: '#fbbf24' }}>Q. 선입금이나 예약금이 있나요?</strong>
+                  <br />
+                  A. 일절 없습니다. 100% 관리사 대면 후 현장 결제(현금, 계좌이체, 카드)로 진행됩니다.
+                </div>
+                <div>
+                  <strong style={{ color: '#fbbf24' }}>Q. 몇 시까지 영업하며 도착 시간은?</strong>
+                  <br />
+                  A. 매일 18:00 접수 시작, 19:00~05:00 운영되며 접수 후 평균 25~35분 내에 신속 도착합니다.
+                </div>
+                <div>
+                  <strong style={{ color: '#fbbf24' }}>Q. 따로 준비할 물품이 있나요?</strong>
+                  <br />
+                  A. 전혀 없습니다. 관리사가 전용 매트, 일회용 시트, 타월, 고급 오일 일체를 직접 지참하여 방문합니다.
+                </div>
+              </div>
+            )}
           </div>
 
           {sentNotice && (
