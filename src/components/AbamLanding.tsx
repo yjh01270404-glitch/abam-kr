@@ -22,6 +22,20 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showAllLinks, setShowAllLinks] = useState(false);
+  const [isOpenNow, setIsOpenNow] = useState<boolean>(true);
+
+  React.useEffect(() => {
+    const checkKst = () => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const kstDate = new Date(utc + (9 * 3600000));
+      const hour = kstDate.getHours();
+      setIsOpenNow(hour >= 18 || hour < 5);
+    };
+    checkKst();
+    const interval = setInterval(checkKst, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const cityName = c.city || '';
   const heroTitle = cityName 
@@ -172,8 +186,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* 1. 실시간 접수 상태 배지 (데스크톱 전용) */}
             <div className="abam-header-badge hidden lg:inline-flex items-center gap-2 px-3.5 bg-[#0F1626] border border-[#1E293B] shrink-0">
-              <span className="w-2 h-2 rounded-full bg-status-online animate-pulse shrink-0"></span>
-              <span className="text-[12px] text-text-muted font-medium whitespace-nowrap">24시 실시간 접수중</span>
+              <span className={`w-2 h-2 rounded-full ${isOpenNow ? 'bg-[#10B981] animate-pulse' : 'bg-[#F59E0B]'} shrink-0`}></span>
+              <span className="text-[12px] text-text-muted font-medium whitespace-nowrap">
+                {isOpenNow ? '🟢 실시간 영업중 (18:00 ~ 05:00)' : '🌙 사전 예약 접수중 (18:00 순차출발)'}
+              </span>
             </div>
 
             {/* 2. 다국어 선택기 (태블릿/데스크톱 전용) */}
@@ -271,9 +287,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     편안한 자택·호텔에서 누리는 힐링
                   </span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(8,12,22,0.85)', backdropFilter: 'blur(8px)', padding: '6px 12px', borderRadius: '9999px', border: '1px solid rgba(16,185,129,0.4)', flexShrink: 0 }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }}></span>
-                  <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#6EE7B7', whiteSpace: 'nowrap' }}>24시 배차 가능</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(8,12,22,0.85)', backdropFilter: 'blur(8px)', padding: '6px 12px', borderRadius: '9999px', border: isOpenNow ? '1px solid rgba(16,185,129,0.4)' : '1px solid rgba(245,158,11,0.4)', flexShrink: 0 }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isOpenNow ? '#10B981' : '#F59E0B', display: 'inline-block' }}></span>
+                  <span style={{ fontSize: '11.5px', fontWeight: 700, color: isOpenNow ? '#6EE7B7' : '#FCD34D', whiteSpace: 'nowrap' }}>
+                    {isOpenNow ? '🟢 실시간 영업중 (18:00~05:00)' : '🌙 사전 예약 접수중'}
+                  </span>
                 </div>
               </div>
             </div>

@@ -26,6 +26,18 @@ export default function AbamBookingGuideModal({
   const [sentNotice, setSentNotice] = useState(false);
   const [showFaq, setShowFaq] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
+  const [isOpenNow, setIsOpenNow] = useState(true);
+
+  useEffect(() => {
+    const checkKst = () => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const kstDate = new Date(utc + (9 * 3600000));
+      const h = kstDate.getHours();
+      setIsOpenNow(h >= 18 || h < 5);
+    };
+    checkKst();
+  }, [isOpen]);
 
   useEffect(() => {
     if (typeof navigator !== 'undefined') {
@@ -175,13 +187,13 @@ export default function AbamBookingGuideModal({
                   fontSize: '11px',
                   fontWeight: 800,
                   color: '#0f172a',
-                  backgroundColor: '#c59b27',
+                  backgroundColor: isOpenNow ? '#10b981' : '#c59b27',
                   padding: '2px 7px',
                   borderRadius: '4px',
                   whiteSpace: 'nowrap',
                 }}
               >
-                영업시간 내 100% 방문 가능
+                {isOpenNow ? '🟢 실시간 영업중 (18:00~05:00)' : '🌙 사전 예약 접수중'}
               </span>
               <span
                 style={{

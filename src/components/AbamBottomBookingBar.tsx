@@ -30,8 +30,22 @@ export default function AbamBottomBookingBar({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<string | undefined>(undefined);
   const [toast, setToast] = useState<string | null>(null);
+  const [isOpenNow, setIsOpenNow] = useState<boolean>(true);
 
   const cleanPhone = phone.replace(/[^0-9]/g, '') || '01066072239';
+
+  useEffect(() => {
+    const checkKst = () => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const kst = new Date(utc + (9 * 3600000));
+      const h = kst.getHours();
+      setIsOpenNow(h >= 18 || h < 5);
+    };
+    checkKst();
+    const timer = setInterval(checkKst, 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const handleToast = (ev: Event) => {
@@ -105,10 +119,55 @@ export default function AbamBottomBookingBar({
           width: '100%',
           backgroundColor: '#0a0e1a',
           borderTop: '1px solid #1e293b',
-          padding: '10px 14px calc(10px + env(safe-area-inset-bottom, 0px))',
+          padding: '8px 14px calc(8px + env(safe-area-inset-bottom, 0px))',
           zIndex: 99999,
         }}
       >
+        <div
+          style={{
+            maxWidth: '680px',
+            margin: '0 auto 6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '0 4px',
+            fontSize: '11px',
+            fontWeight: 800,
+          }}
+        >
+          {isOpenNow ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#34d399' }}>
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  backgroundColor: '#10b981',
+                  boxShadow: '0 0 8px #10b981',
+                }}
+              />
+              🟢 실시간 정상 영업중 (18:00 ~ 05:00)
+            </span>
+          ) : (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#fbbf24' }}>
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  backgroundColor: '#f59e0b',
+                }}
+              />
+              🌙 사전 예약 접수중 (오늘 저녁 18:00 순차 출발)
+            </span>
+          )}
+          <span style={{ color: '#eec14b', fontSize: '11px', fontWeight: 700 }}>
+            {isOpenNow ? '서울·경기 30분 도착 보장' : '영업: 매일 18:00~05:00'}
+          </span>
+        </div>
+
         <div
           style={{
             maxWidth: '680px',
