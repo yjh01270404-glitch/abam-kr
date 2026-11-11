@@ -1279,78 +1279,136 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
       {/* FOOTER */}
       <footer
-        className="w-full bg-[#05080F] text-text-muted border-t border-[#1E293B] abam-site-footer"
+        className="w-full bg-[#060913] text-[#94A3B8] border-t border-[#1E293B] abam-site-footer"
         style={{
-          paddingTop: '64px',
+          paddingTop: '56px',
           paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 24px))',
         }}
       >
         <div className="max-w-[1240px] mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 pb-12 border-b border-[#1E293B]">
-            {/* Col 1: Brand */}
-            <div className="space-y-4">
+          
+          {/* Top Trust Pillar Strip */}
+          <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0C1222] via-[#0F172A] to-[#0C1222] border border-[#1E293B] shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl shrink-0">
+                🛡️
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[14.5px] sm:text-[15.5px] font-extrabold text-white tracking-tight">
+                    100% 현장 대면 안심 후불제 원칙
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[11px] font-bold border border-emerald-500/30">
+                    선입금·예약금 0원 보증
+                  </span>
+                </div>
+                <p className="text-[12px] sm:text-[12.5px] text-[#94A3B8] mt-0.5 leading-snug">
+                  예약금이나 유류비를 절대 사전에 요구하지 않으며, 관리사 도착 대면 후 직접 결제합니다.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 w-full md:w-auto shrink-0 flex-wrap">
+              <span className="px-3 py-1.5 rounded-lg bg-[#141C2E] text-[12px] font-semibold text-slate-300 border border-[#222F49] flex items-center gap-1.5">
+                <span>⚡</span> 30분 신속 도착
+              </span>
+              <span className="px-3 py-1.5 rounded-lg bg-[#141C2E] text-[12px] font-semibold text-slate-300 border border-[#222F49] flex items-center gap-1.5">
+                <span>🔒</span> 1:1 프라이빗 보장
+              </span>
+            </div>
+          </div>
+
+          {/* 3-Column Structured Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-10 border-b border-[#1E293B]">
+            {/* Col 1: Brand (span 4) */}
+            <div className="md:col-span-4 space-y-4">
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <div className="w-8 h-8 rounded-full bg-primary/15 border border-primary/40 flex items-center justify-center text-primary shadow-[0_0_12px_rgba(238,193,75,0.25)]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
                   </svg>
                 </div>
-                <span className="text-[17px] font-extrabold text-white tracking-tight">아밤 (ABAM.kr)</span>
-                <span className="px-2 py-0.5 rounded-full bg-[#1b1f2a] text-primary text-[10.5px] font-bold border border-[#2a3040]">
+                <span className="text-[18px] font-black text-white tracking-tight">아밤 (ABAM.kr)</span>
+                <span className="px-2 py-0.5 rounded-full bg-[#161D2F] text-primary text-[10.5px] font-bold border border-primary/30">
                   VIP Concierge
                 </span>
               </div>
-              <p className="text-[13px] text-[#94A3B8] leading-relaxed max-w-sm">
-                서울 및 수도권 전 지역 홈 &amp; 호텔 30분 방문 프리미엄 힐링 케어 플랫폼. 100% 실명 검증 관리사와 정찰제 현장 후불제만을 고집합니다.
+              <p className="text-[13px] text-[#94A3B8] leading-relaxed">
+                서울 25개구 및 수도권 전 지역 자택·호텔 30분 방문 프리미엄 힐링 케어 플랫폼. 100% 실명 검증 관리사와 정찰제 현장 후불제만을 엄격히 고집합니다.
               </p>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0F1626] border border-[#1E293B] text-[12px] text-status-online font-medium">
-                <span className="w-2 h-2 rounded-full bg-status-online shadow-[0_0_6px_#10B981]"></span>
-                <span>100% 현장 대면 후불 결제 보장</span>
+              <div className="pt-1 space-y-1.5 text-[12px] text-[#64748B]">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary font-bold">운영안내</span>
+                  <span className="text-slate-300">연중무휴 24시간 실시간 배차 접수</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-primary font-bold">방문지역</span>
+                  <span className="text-slate-300">서울 전역 · 경기 수도권 · 인천 전 지역</span>
+                </div>
               </div>
             </div>
 
-            {/* Col 2: Services & Coverage */}
-            <div className="space-y-4">
-              <h4 className="text-[14px] font-bold text-white uppercase tracking-wider">
-                서비스 프로그램 &amp; 지역
+            {/* Col 2: Services & Coverage (span 4) */}
+            <div className="md:col-span-4 space-y-3">
+              <h4 className="text-[13.5px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                <span className="text-primary">❖</span> 서비스 프로그램 &amp; 코스
               </h4>
-              <ul className="space-y-2.5 text-[13px] text-[#94A3B8]">
-                <li className="flex items-center justify-between">
-                  <span>타이 테라피 (건식 수기 지압)</span>
-                  <span className="text-text-secondary font-semibold">60분 / 90분 / 120분</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span>프리미엄 아로마 (오가닉 오일)</span>
-                  <span className="text-text-secondary font-semibold">60분 / 90분 / 120분</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span>스페셜 콤보 (타이 + 아로마)</span>
-                  <span className="text-primary font-semibold">인기 추천 코스</span>
-                </li>
-                <li className="pt-2 border-t border-[#1E293B] text-[12px] text-text-muted flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[15px] text-primary">location_on</span>
-                  <span>서울 전역 · 경기 수도권 · 인천 전 지역 30분 내 신속 방문</span>
-                </li>
-              </ul>
+              <div className="space-y-2 text-[12.5px]">
+                <div className="p-3 rounded-xl bg-[#0C1222] border border-[#1E293B] flex items-center justify-between">
+                  <span className="font-semibold text-slate-200">타이 테라피 (건식 지압)</span>
+                  <span className="text-slate-300 font-bold bg-[#141C2E] px-2 py-0.5 rounded border border-[#222F49]">
+                    60분 / 90분 / 120분
+                  </span>
+                </div>
+                <div className="p-3 rounded-xl bg-[#0C1222] border border-[#1E293B] flex items-center justify-between">
+                  <span className="font-semibold text-slate-200">프리미엄 아로마 (오가닉)</span>
+                  <span className="text-slate-300 font-bold bg-[#141C2E] px-2 py-0.5 rounded border border-[#222F49]">
+                    60분 / 90분 / 120분
+                  </span>
+                </div>
+                <div className="p-3 rounded-xl bg-gradient-to-r from-[#0C1222] to-[#161F36] border border-primary/40 flex items-center justify-between">
+                  <span className="font-bold text-white flex items-center gap-1.5">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary text-slate-950 font-black">인기</span>
+                    스페셜 콤보 (타이+아로마)
+                  </span>
+                  <span className="text-primary font-extrabold">120분 추천</span>
+                </div>
+              </div>
             </div>
 
-            {/* Col 3: 24h Customer Support */}
-            <div className="space-y-4">
-              <h4 className="text-[14px] font-bold text-white uppercase tracking-wider">
-                24시 실시간 접수 &amp; 고객센터
+            {/* Col 3: 24h Customer Support (span 4) */}
+            <div className="md:col-span-4 space-y-3">
+              <h4 className="text-[13.5px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                <span className="text-primary">❖</span> 24시 실시간 접수 &amp; 고객센터
               </h4>
-              <div className="p-4 rounded-xl bg-[#0F1626] border border-[#1E293B] space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11.5px] text-primary font-bold tracking-wider">연중무휴 실시간 접수중</span>
-                  <span className="w-2 h-2 rounded-full bg-status-online animate-pulse"></span>
+              <div className="p-4 rounded-2xl bg-gradient-to-b from-[#0F172A] to-[#0A101D] border border-primary/30 shadow-[0_4px_25px_rgba(0,0,0,0.4)] space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10B981]"></span>
+                  <span className="text-[12px] text-emerald-400 font-bold tracking-wide">
+                    연중무휴 실시간 접수 중
+                  </span>
                 </div>
                 <a
                   href={`tel:${cleanPhone}`}
-                  className="text-[22px] font-black text-white hover:text-primary transition-colors block tracking-tight"
+                  className="text-[23px] font-black text-white hover:text-primary transition-colors block tracking-tight"
                 >
                   {formattedPhone}
                 </a>
-                <p className="text-[12px] text-text-muted leading-relaxed">
+                <div className="grid grid-cols-2 gap-2 pt-0.5">
+                  <a
+                    href={`tel:${cleanPhone}`}
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-gradient-to-r from-primary to-accent-gold-muted text-slate-950 font-black text-[12.5px] hover:brightness-105 active:scale-95 transition-all text-center no-underline shadow-md"
+                  >
+                    <span>📞</span> 전화 문의
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => openDirectAbamSms()}
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#141C2E] hover:bg-[#1C263D] text-white font-bold text-[12.5px] border border-[#2E3D5E] active:scale-95 transition-all text-center cursor-pointer"
+                  >
+                    <span>💬</span> 문자 예약
+                  </button>
+                </div>
+                <p className="text-[11.5px] text-[#64748B] leading-relaxed pt-1">
                   예약금이나 선입금을 절대 요구하지 않는 100% 안심 후불제 플랫폼입니다.
                 </p>
               </div>
@@ -1358,18 +1416,35 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
 
           {/* Bottom Copyright & Policy Links */}
-          <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[12px] text-[#64748B] gap-4">
-            <div>
-              © {new Date().getFullYear()} Abam.kr. All rights reserved. 건전한 프리미엄 수기 힐링 문화를 지향합니다.
+          <div className="pt-7 flex flex-col md:flex-row items-center justify-between text-[11.5px] text-[#64748B] gap-4">
+            <div className="space-y-1 text-center md:text-left">
+              <div>
+                © {new Date().getFullYear()} Abam.kr. All rights reserved. 건전한 프리미엄 수기 힐링 문화를 지향합니다.
+              </div>
+              <div className="text-[11px] text-[#475569]">
+                아밤은 건전 힐링 케어 정보 제공 플랫폼으로 관련 법규를 엄격히 준수하며 퇴폐·불법 문의는 사절합니다.
+              </div>
             </div>
-            <div className="flex items-center gap-5">
-              <span className="hover:text-text-secondary transition-colors cursor-pointer">이용약관</span>
-              <span>•</span>
-              <span className="hover:text-text-secondary transition-colors cursor-pointer">개인정보처리방침</span>
-              <span>•</span>
-              <span className="text-primary font-medium">100% 현장후불제 원칙</span>
+            <div className="flex items-center gap-4 text-[#94A3B8] flex-wrap justify-center">
+              <span className="hover:text-primary transition-colors cursor-pointer">이용약관</span>
+              <span className="text-[#334155]">•</span>
+              <span className="hover:text-primary transition-colors cursor-pointer">개인정보처리방침</span>
+              <span className="text-[#334155]">•</span>
+              <span className="text-primary font-semibold">100% 현장후불제 원칙</span>
             </div>
           </div>
+
+          {/* 모바일 하단 고정 예약 버튼바와 콘텐츠 겹침 방지 여백 (Clearance Spacer) */}
+          <div
+            className="w-full block md:hidden"
+            style={{
+              height: 'calc(76px + env(safe-area-inset-bottom, 20px))',
+              pointerEvents: 'none',
+            }}
+            aria-hidden="true"
+          />
+        </div>
+      </footer>
 
           {/* 모바일 하단 고정 예약 버튼바와 콘텐츠 겹침 방지 여백 (Clearance Spacer) */}
           <div
