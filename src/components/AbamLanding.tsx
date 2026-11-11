@@ -1446,18 +1446,6 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       </footer>
 
-          {/* 모바일 하단 고정 예약 버튼바와 콘텐츠 겹침 방지 여백 (Clearance Spacer) */}
-          <div
-            className="w-full block md:hidden"
-            style={{
-              height: 'calc(76px + env(safe-area-inset-bottom, 20px))',
-              pointerEvents: 'none',
-            }}
-            aria-hidden="true"
-          />
-        </div>
-      </footer>
-
       {/* FIXED BOTTOM BOOKING BAR */}
       <AbamBottomBookingBar phone={cleanPhone} />
     </div>
