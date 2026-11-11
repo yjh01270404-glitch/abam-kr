@@ -1288,7 +1288,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <div className="max-w-[1240px] mx-auto px-4 md:px-6 lg:px-8">
           
           {/* Top Trust Pillar Strip */}
-          <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0C1222] via-[#0F172A] to-[#0C1222] border border-[#1E293B] shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="abam-footer-trust-strip">
             <div className="flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl shrink-0">
                 🛡️
@@ -1318,9 +1318,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
 
           {/* 3-Column Structured Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-10 border-b border-[#1E293B]">
-            {/* Col 1: Brand (span 4) */}
-            <div className="md:col-span-4 space-y-4">
+          <div className="abam-footer-3col-grid">
+            {/* Col 1: Brand */}
+            <div className="space-y-4">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-full bg-primary/15 border border-primary/40 flex items-center justify-center text-primary shadow-[0_0_12px_rgba(238,193,75,0.25)]">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -1347,42 +1347,42 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </div>
             </div>
 
-            {/* Col 2: Services & Coverage (span 4) */}
-            <div className="md:col-span-4 space-y-3">
+            {/* Col 2: Services & Coverage */}
+            <div className="space-y-3">
               <h4 className="text-[13.5px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
                 <span className="text-primary">❖</span> 서비스 프로그램 &amp; 코스
               </h4>
-              <div className="space-y-2 text-[12.5px]">
-                <div className="p-3 rounded-xl bg-[#0C1222] border border-[#1E293B] flex items-center justify-between">
+              <div className="space-y-2">
+                <div className="abam-footer-course-row">
                   <span className="font-semibold text-slate-200">타이 테라피 (건식 지압)</span>
-                  <span className="text-slate-300 font-bold bg-[#141C2E] px-2 py-0.5 rounded border border-[#222F49]">
+                  <span className="abam-footer-course-badge">
                     60분 / 90분 / 120분
                   </span>
                 </div>
-                <div className="p-3 rounded-xl bg-[#0C1222] border border-[#1E293B] flex items-center justify-between">
+                <div className="abam-footer-course-row">
                   <span className="font-semibold text-slate-200">프리미엄 아로마 (오가닉)</span>
-                  <span className="text-slate-300 font-bold bg-[#141C2E] px-2 py-0.5 rounded border border-[#222F49]">
+                  <span className="abam-footer-course-badge">
                     60분 / 90분 / 120분
                   </span>
                 </div>
-                <div className="p-3 rounded-xl bg-gradient-to-r from-[#0C1222] to-[#161F36] border border-primary/40 flex items-center justify-between">
+                <div className="abam-footer-course-row" style={{ borderColor: 'rgba(238, 193, 75, 0.4)', background: 'linear-gradient(90deg, #0d1424 0%, #161e33 100%)' }}>
                   <span className="font-bold text-white flex items-center gap-1.5">
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary text-slate-950 font-black">인기</span>
                     스페셜 콤보 (타이+아로마)
                   </span>
-                  <span className="text-primary font-extrabold">120분 추천</span>
+                  <span className="text-primary font-extrabold text-[12px]">120분 추천</span>
                 </div>
               </div>
             </div>
 
-            {/* Col 3: 24h Customer Support (span 4) */}
-            <div className="md:col-span-4 space-y-3">
+            {/* Col 3: 24h Customer Support */}
+            <div className="space-y-3">
               <h4 className="text-[13.5px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
                 <span className="text-primary">❖</span> 24시 실시간 접수 &amp; 고객센터
               </h4>
-              <div className="p-4 rounded-2xl bg-gradient-to-b from-[#0F172A] to-[#0A101D] border border-primary/30 shadow-[0_4px_25px_rgba(0,0,0,0.4)] space-y-3">
+              <div className="abam-footer-cta-card space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10B981]"></span>
+                  <span className="abam-live-dot"></span>
                   <span className="text-[12px] text-emerald-400 font-bold tracking-wide">
                     연중무휴 실시간 접수 중
                   </span>
@@ -1393,17 +1393,17 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 >
                   {formattedPhone}
                 </a>
-                <div className="grid grid-cols-2 gap-2 pt-0.5">
+                <div className="abam-footer-btn-grid">
                   <a
                     href={`tel:${cleanPhone}`}
-                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-gradient-to-r from-primary to-accent-gold-muted text-slate-950 font-black text-[12.5px] hover:brightness-105 active:scale-95 transition-all text-center no-underline shadow-md"
+                    className="abam-footer-btn-call"
                   >
                     <span>📞</span> 전화 문의
                   </a>
                   <button
                     type="button"
                     onClick={() => openDirectAbamSms()}
-                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#141C2E] hover:bg-[#1C263D] text-white font-bold text-[12.5px] border border-[#2E3D5E] active:scale-95 transition-all text-center cursor-pointer"
+                    className="abam-footer-btn-sms"
                   >
                     <span>💬</span> 문자 예약
                   </button>
