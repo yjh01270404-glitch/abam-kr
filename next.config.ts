@@ -65,6 +65,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/official/rates',
+        destination: '/#courses',
+        permanent: false,
+      },
+      {
+        source: '/official/:path*',
+        destination: '/#courses',
+        permanent: false,
+      },
+      {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.abam.kr' }],
         destination: 'https://abam.kr/:path*',
