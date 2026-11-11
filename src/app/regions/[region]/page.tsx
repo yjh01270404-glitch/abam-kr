@@ -239,6 +239,24 @@ export default async function RegionHubPage({ params }: { params: Promise<{ regi
         </div>
       </header>
 
+      {/* 실시간 즉시 배차 상단 배너 */}
+      <aside style={{ background: 'linear-gradient(90deg, #032014 0%, #064e3b 50%, #032014 100%)', borderBottom: '2px solid #34d399', padding: '10px 16px', textAlign: 'center', boxShadow: '0 4px 20px rgba(16,185,129,0.3)', position: 'relative', zIndex: 40 }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '8px', fontSize: '13px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', textAlign: 'left' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '3px 8px', borderRadius: '999px', background: '#10b981', color: '#022c22', fontWeight: 900, fontSize: '11px' }}>
+              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#ffffff' }}></span>
+              실시간 배차중
+            </span>
+            <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '13.5px' }}>
+              🟢 <strong style={{ color: '#6ee7b7' }}>{hub.name} 지금 즉시 이용 가능</strong> (25~35분 내 신속 도착)
+            </span>
+          </div>
+          <span style={{ color: '#a7f3d0', fontSize: '11.5px', fontWeight: 700, background: 'rgba(6, 78, 59, 0.6)', padding: '3px 8px', borderRadius: '6px', border: '1px solid rgba(52, 211, 153, 0.4)' }}>
+            🛡️ 100% 현장후불제 · 선입금 0원
+          </span>
+        </div>
+      </aside>
+
       {/* 브레드크럼 */}
       <div style={{ maxWidth: '860px', margin: '14px auto 0', padding: '0 16px', fontSize: '12px', color: '#94a3b8' }}>
         <Link href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>홈</Link> ›{' '}
@@ -258,6 +276,21 @@ export default async function RegionHubPage({ params }: { params: Promise<{ regi
           <p style={{ fontSize: '15px', color: '#cbd5e1', lineHeight: 1.7, margin: '0 auto 20px', maxWidth: '680px', wordBreak: 'keep-all' }}>
             {hub.description}
           </p>
+
+          {/* 공식 광고 안심 인증 박스 */}
+          <div style={{ maxWidth: '680px', margin: '0 auto 20px', padding: '12px 16px', background: 'linear-gradient(135deg, rgba(6,78,59,0.4) 0%, rgba(15,23,42,0.8) 100%)', border: '1.5px solid #10b981', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '6px', textAlign: 'left' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '16px' }}>🛡️</span>
+                <span style={{ fontSize: '13.5px', fontWeight: 900, color: '#ffffff' }}>공식 광고 실시간 인증 배차 구역</span>
+                <span style={{ background: '#10b981', color: '#022c22', fontSize: '10px', fontWeight: 900, padding: '2px 6px', borderRadius: '4px' }}>즉시출발 대기</span>
+              </div>
+              <span style={{ color: '#fde047', fontSize: '11.5px', fontWeight: 800 }}>선입금 사기 피해 0건 보증</span>
+            </div>
+            <p style={{ fontSize: '12px', color: '#cbd5e1', margin: 0, lineHeight: 1.5 }}>
+              본 지역은 <strong>예약금·예약취소비·이동교통비 일체 없는 100% 현장 대면후불제</strong> 구역입니다. 관리사가 자택/호텔 로비에 도착하여 직접 대면한 후 결제합니다.
+            </p>
+          </div>
 
           {/* 핵심 지표 3박스 */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px', marginTop: '18px' }}>

@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: './',
+    canonical: 'https://abam.kr',
   },
   icons: {
     icon: [
@@ -362,6 +362,36 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+        />
+
+        {/* Google Ads Tag (gtag.js) & Automatic Conversion Tracking */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-6628335135" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-6628335135');
+              if (typeof document !== 'undefined') {
+                document.addEventListener('click', function(e) {
+                  var target = e.target && e.target.closest ? e.target.closest('a') : null;
+                  if (!target) return;
+                  var href = target.getAttribute('href') || '';
+                  if (href.startsWith('tel:')) {
+                    gtag('event', 'conversion', { 'send_to': 'AW-6628335135', 'event_category': 'lead', 'event_label': 'phone_call' });
+                    gtag('event', 'generate_lead', { 'method': 'phone' });
+                  } else if (href.startsWith('sms:')) {
+                    gtag('event', 'conversion', { 'send_to': 'AW-6628335135', 'event_category': 'lead', 'event_label': 'sms_booking' });
+                    gtag('event', 'generate_lead', { 'method': 'sms' });
+                  } else if (href.includes('wa.me')) {
+                    gtag('event', 'conversion', { 'send_to': 'AW-6628335135', 'event_category': 'lead', 'event_label': 'whatsapp_booking' });
+                    gtag('event', 'generate_lead', { 'method': 'whatsapp' });
+                  }
+                });
+              }
+            `,
+          }}
         />
       </head>
       <body>{children}</body>

@@ -221,7 +221,39 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       </header>
 
-      <main className="w-full bg-surface-deep min-h-screen" style={{ paddingTop: '72px' }}>
+      {/* 0. ULTRA HIGH-VISIBILITY LIVE DISPATCH TOP BANNER */}
+      <aside className="fixed top-[56px] left-0 right-0 w-full z-40 bg-gradient-to-r from-[#032014] via-[#064e3b] to-[#032014] border-b-2 border-emerald-400 py-2.5 px-3 sm:px-6 shadow-[0_4px_20px_rgba(16,185,129,0.35)]">
+        <div className="max-w-[1200px] mx-auto flex flex-wrap items-center justify-between gap-2.5 text-xs sm:text-sm">
+          <div className="flex items-center gap-2 text-left">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-black text-[11px] sm:text-xs animate-pulse">
+              <span className="w-2 h-2 rounded-full bg-white"></span>
+              실시간 배차
+            </span>
+            <span className="text-white font-black text-[13px] sm:text-[15px] tracking-tight">
+              🟢 <span className="text-emerald-300">지금 즉시 이용 가능:</span> 서울·경기 전지역 <strong className="text-amber-300">25~35분 내 신속 도착!</strong>
+            </span>
+            <span className="hidden md:inline-block text-[11.5px] text-emerald-200/90 font-bold bg-black/40 px-2 py-0.5 rounded border border-emerald-500/30">
+              대기 0분 · 예약금 0원 100% 현장후불제
+            </span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => openDirectAbamSms()}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 font-black text-[12px] shadow-md hover:brightness-110 cursor-pointer"
+            >
+              💬 문자 즉시예약
+            </button>
+            <a
+              href={`tel:${cleanPhone}`}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-[12px] shadow-md cursor-pointer"
+            >
+              📞 24시 직통전화
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <main className="w-full bg-surface-deep min-h-screen" style={{ paddingTop: '106px' }}>
         {/* HERO SECTION */}
         <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#080C16] via-[#0F1626] to-[#080C16] px-4 md:px-6 lg:px-8 pt-6 md:pt-12 pb-16 md:pb-24">
           {/* Ambient Subtle Midnight Glow */}
@@ -259,10 +291,36 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </div>
 
             {/* Spacious Subtitle with Generous Line Height */}
-            <p className="text-[14px] sm:text-[15.5px] text-[#94A3B8] max-w-xl mx-auto mb-6 leading-[1.8] px-2">
+            <p className="text-[14px] sm:text-[15.5px] text-[#94A3B8] max-w-xl mx-auto mb-4 leading-[1.8] px-2">
               자택 및 호텔 어디서든 전화나 문자 한 통으로 30분 내 도착합니다.<br className="hidden sm:inline" />
               예약금 일절 없는 100% 안심 현장후불제로 가장 편안하게 맞이하세요.
             </p>
+
+            {/* GOOGLE ADS & NAVER SEARCH REAL-TIME VERIFIED GUARANTEE BOX */}
+            <div className="w-full max-w-xl mx-auto my-3 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#11253E] to-[#0F172A] border-2 border-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.3)] text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-2xl font-black text-emerald-400 shrink-0">
+                  🛡️
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[14px] sm:text-[15.5px] font-black text-white">공식 광고 인증: 지금 즉시 배차 가능</span>
+                    <span className="px-2 py-0.5 rounded-md bg-emerald-500 text-slate-950 text-[10.5px] font-black uppercase tracking-wider animate-pulse">실시간 대기</span>
+                  </div>
+                  <p className="text-[12px] sm:text-[12.5px] text-slate-300 font-medium leading-snug mt-1">
+                    선입금/예약금 일절 없는 <strong>100% 현장후불제 안심 매칭</strong>입니다. 매니저 도착 시 대면 후 결제하세요!
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+                <button
+                  onClick={() => openDirectAbamSms()}
+                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 text-[12.5px] font-black shadow-lg hover:brightness-110 active:scale-95 transition-all cursor-pointer text-center"
+                >
+                  ⚡ 간편 예약하기
+                </button>
+              </div>
+            </div>
 
             {/* 럭셔리 호텔 인룸 메인 비주얼 배너 (여성 모델 메인 사진 복원) */}
             <div

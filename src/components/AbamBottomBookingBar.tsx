@@ -31,6 +31,7 @@ export default function AbamBottomBookingBar({
   const [selectedCourse, setSelectedCourse] = useState<string | undefined>(undefined);
   const [toast, setToast] = useState<string | null>(null);
   const [isOpenNow, setIsOpenNow] = useState<boolean>(true);
+  const [isLateNight, setIsLateNight] = useState<boolean>(false);
 
   const cleanPhone = phone.replace(/[^0-9]/g, '') || '01066072239';
 
@@ -41,6 +42,7 @@ export default function AbamBottomBookingBar({
       const kst = new Date(utc + (9 * 3600000));
       const h = kst.getHours();
       setIsOpenNow(h >= 18 || h < 5);
+      setIsLateNight(h >= 3 && h < 5);
     };
     checkKst();
     const timer = setInterval(checkKst, 60000);
@@ -131,31 +133,45 @@ export default function AbamBottomBookingBar({
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0 4px',
-            fontSize: '11px',
-            fontWeight: 800,
+            fontSize: '12.5px',
+            fontWeight: 900,
           }}
         >
-          {isOpenNow ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#34d399' }}>
+          {isLateNight ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#34d399' }}>
               <span
                 style={{
                   display: 'inline-block',
-                  width: '7px',
-                  height: '7px',
+                  width: '9px',
+                  height: '9px',
                   borderRadius: '50%',
                   backgroundColor: '#10b981',
-                  boxShadow: '0 0 8px #10b981',
+                  boxShadow: '0 0 12px #10b981',
                 }}
               />
-              🟢 실시간 정상 영업중 (18:00 ~ 05:00)
+              ⚡ [심야 긴급배차] 새벽 05:00까지 정상영업
             </span>
-          ) : (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: '#fbbf24' }}>
+          ) : isOpenNow ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#34d399' }}>
               <span
                 style={{
                   display: 'inline-block',
-                  width: '7px',
-                  height: '7px',
+                  width: '9px',
+                  height: '9px',
+                  borderRadius: '50%',
+                  backgroundColor: '#10b981',
+                  boxShadow: '0 0 10px #10b981',
+                }}
+              />
+              🟢 [실시간 즉시 이용 가능] 배차 대기중
+            </span>
+          ) : (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#fbbf24' }}>
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: '8px',
+                  height: '8px',
                   borderRadius: '50%',
                   backgroundColor: '#f59e0b',
                 }}
@@ -163,8 +179,8 @@ export default function AbamBottomBookingBar({
               🌙 사전 예약 접수중 (오늘 저녁 18:00 순차 출발)
             </span>
           )}
-          <span style={{ color: '#eec14b', fontSize: '11px', fontWeight: 700 }}>
-            {isOpenNow ? '서울·경기 30분 도착 보장' : '영업: 매일 18:00~05:00'}
+          <span style={{ color: '#eec14b', fontSize: '12px', fontWeight: 800 }}>
+            {isLateNight ? '🚨 지금 예약 시 20~25분 내 도착' : isOpenNow ? '⚡ 선입금 0원 · 30분 도착 보장' : '영업: 매일 18:00~05:00'}
           </span>
         </div>
 
@@ -202,7 +218,7 @@ export default function AbamBottomBookingBar({
             }}
           >
             <span>💬</span>
-            <span>{smsLabel}</span>
+            <span>{isLateNight ? '문자 빠른예약' : smsLabel}</span>
           </button>
 
           <a
@@ -213,19 +229,19 @@ export default function AbamBottomBookingBar({
               justifyContent: 'center',
               gap: '6px',
               height: '48px',
-              backgroundColor: '#1e293b',
-              border: '1px solid #475569',
-              color: '#f8fafc',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',
+              backgroundColor: isLateNight ? '#166534' : '#1e293b',
+              border: isLateNight ? '1.5px solid #22c55e' : '1px solid #475569',
+              color: '#ffffff',
+              boxShadow: isLateNight ? '0 0 16px rgba(34, 197, 94, 0.45)' : '0 2px 8px rgba(0, 0, 0, 0.25)',
               borderRadius: '10px',
-              fontWeight: 800,
+              fontWeight: 900,
               fontSize: '15px',
               letterSpacing: '-0.3px',
               textDecoration: 'none',
             }}
           >
             <span>📞</span>
-            <span>{callLabel}</span>
+            <span>{isLateNight ? '지금 즉시 통화' : callLabel}</span>
           </a>
         </div>
       </aside>

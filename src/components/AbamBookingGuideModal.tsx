@@ -27,6 +27,7 @@ export default function AbamBookingGuideModal({
   const [showFaq, setShowFaq] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isOpenNow, setIsOpenNow] = useState(true);
+  const [isLateNight, setIsLateNight] = useState(false);
 
   useEffect(() => {
     const checkKst = () => {
@@ -35,6 +36,7 @@ export default function AbamBookingGuideModal({
       const kstDate = new Date(utc + (9 * 3600000));
       const h = kstDate.getHours();
       setIsOpenNow(h >= 18 || h < 5);
+      setIsLateNight(h >= 3 && h < 5);
     };
     checkKst();
   }, [isOpen]);
@@ -187,13 +189,13 @@ export default function AbamBookingGuideModal({
                   fontSize: '11px',
                   fontWeight: 800,
                   color: '#0f172a',
-                  backgroundColor: isOpenNow ? '#10b981' : '#c59b27',
+                  backgroundColor: isLateNight ? '#10b981' : isOpenNow ? '#10b981' : '#c59b27',
                   padding: '2px 7px',
                   borderRadius: '4px',
                   whiteSpace: 'nowrap',
                 }}
               >
-                {isOpenNow ? '🟢 실시간 영업중 (18:00~05:00)' : '🌙 사전 예약 접수중'}
+                {isLateNight ? '⚡ [심야 배차] 새벽 05:00까지 정상영업' : isOpenNow ? '🟢 실시간 영업중 (18:00~05:00)' : '🌙 사전 예약 접수중'}
               </span>
               <span
                 style={{
@@ -223,7 +225,7 @@ export default function AbamBookingGuideModal({
               문자 간편 예약 양식 (010-6607-2239)
             </h2>
             <div style={{ fontSize: '11.5px', color: '#cbd5e1', marginTop: '3px', lineHeight: 1.4 }}>
-              접수 18:00 ~ 마감 05:00 (출발 19:00~) · 서울·경기 30~40분 내 도착
+              {isLateNight ? '⚡ 새벽 5시까지 정상 접수 · 지금 예약 시 20~25분 내 신속 도착' : '접수 18:00 ~ 마감 05:00 (출발 19:00~) · 서울·경기 30~40분 내 도착'}
             </div>
           </div>
           <button

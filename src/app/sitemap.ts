@@ -4,7 +4,7 @@ import { GUIDES } from '../lib/guides';
 
 const BASE_URL = 'https://abam.kr';
 
-const LAST_MODIFIED = new Date('2026-11-07T00:00:00Z');
+const LAST_MODIFIED = new Date('2026-11-11T00:00:00Z');
 
 const CORE_PAGES: MetadataRoute.Sitemap = [
   { url: BASE_URL,                              lastModified: LAST_MODIFIED, changeFrequency: 'always',  priority: 1.0 },
