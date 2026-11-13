@@ -160,9 +160,11 @@ body {
   min-height: 36px !important;
   max-height: 36px !important;
   border-radius: 9999px !important;
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center !important;
   box-sizing: border-box !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 @media (max-width: 767px) {

@@ -226,10 +226,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               className="abam-header-slogan"
               style={{
                 fontFamily: "'ChosunGs', 'Song Myung', 'Gungsuh', 'GungSeo', '궁서체', '궁서', 'Batang', serif",
-                fontSize: '15.5px',
+                fontSize: '14.5px',
                 fontWeight: 700,
                 color: '#FDE68A',
-                letterSpacing: '0.1em',
+                letterSpacing: '0.06em',
                 whiteSpace: 'nowrap',
                 textShadow: '0 0 12px rgba(238, 193, 75, 0.45), 0 1px 3px rgba(0, 0, 0, 0.9)',
                 display: 'inline-block',
@@ -265,7 +265,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             {/* 3. 예약 상담 버튼 (모바일 & 데스크톱 1줄 최적화) */}
             <a
               href={`tel:${cleanPhone}`}
-              className="abam-header-call inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 bg-gradient-to-r from-primary via-primary to-accent-gold-light text-[#080C16] font-extrabold text-[12.5px] shadow-[0_2px_12px_rgba(238,193,75,0.3)] hover:brightness-105 active:scale-95 transition-all shrink-0 whitespace-nowrap"
+              style={{ whiteSpace: 'nowrap', flexShrink: 0 }} className="abam-header-call inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-4 bg-gradient-to-r from-primary via-primary to-accent-gold-light text-[#080C16] font-extrabold text-[12.5px] shadow-[0_2px_12px_rgba(238,193,75,0.3)] hover:brightness-105 active:scale-95 transition-all shrink-0 whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[16px]">call</span>
               <span>실시간 예약상담</span>
