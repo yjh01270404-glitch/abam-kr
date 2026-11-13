@@ -255,7 +255,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       </header>
 
-      {/* 0. ULTRA HIGH-VISIBILITY LIVE DISPATCH TOP BANNER - MOBILE STRICTLY 1-LINE */}
+      {/* 0. SINGLE 1-LINE LIVE DISPATCH TOP BANNER (NO OVERLAP / ZERO CLUTTER) */}
       <aside
         style={{
           position: 'fixed',
@@ -263,110 +263,59 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           left: 0,
           right: 0,
           width: '100%',
+          height: '34px',
           zIndex: 40,
           background: scheduleState.isGreen
             ? 'linear-gradient(90deg, #032014 0%, #083321 50%, #032014 100%)'
             : 'linear-gradient(90deg, #1c1503 0%, #2e2205 50%, #1c1503 100%)',
           borderBottom: scheduleState.isGreen ? '1px solid #34d399' : '1px solid #f59e0b',
-          padding: '7px 10px',
           boxShadow: scheduleState.isGreen ? '0 2px 10px rgba(16,185,129,0.25)' : '0 2px 10px rgba(245,158,11,0.2)',
-          transition: 'all 0.3s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '0 12px',
           boxSizing: 'border-box',
           overflow: 'hidden',
-          minHeight: '34px',
-          maxHeight: '38px',
+          transition: 'all 0.3s ease',
         }}
       >
-        {/* MOBILE ONLY: Strictly 1 Line (No Wrap, Clean Centered) */}
-        <div className="flex md:hidden items-center justify-center text-center w-full overflow-hidden">
-          <a
-            href="#courses"
-            className="text-[12px] font-bold text-white tracking-tight truncate block max-w-full text-center"
-            style={{ textDecoration: 'none', lineHeight: '1.2' }}
-          >
-            {scheduleState.isDispatchActive ? (
-              <>🟢 <strong style={{ color: '#6ee7b7' }}>실시간 순차출발 가동중</strong> · 오늘 밤 04시까지 예약 가능</>
-            ) : scheduleState.isBookingOpen ? (
-              <>🟢 <strong style={{ color: '#fde047' }}>18시 예약 오픈!</strong> 19시 순차출발 (04시까지 예약 가능)</>
-            ) : (
-              <>🌙 <strong style={{ color: '#fde047' }}>오늘 밤 사전예약:</strong> 18시 오픈 / 19시 순차출발 (04시까지 접수)</>
-            )}
-          </a>
-        </div>
-
-        {/* DESKTOP (>= 768px): Rich 1-Line Flex Bar */}
-        <div className="hidden md:flex items-center justify-between gap-4 max-w-[1200px] mx-auto text-[12.5px]">
-          <div className="flex items-center gap-2.5 truncate">
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-                padding: '3px 9px',
-                borderRadius: '9999px',
-                backgroundColor: scheduleState.isGreen ? '#10b981' : '#f59e0b',
-                color: scheduleState.isGreen ? '#032014' : '#080c16',
-                fontWeight: 900,
-                fontSize: '11px',
-                flexShrink: 0
-              }}
-            >
-              <span
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  backgroundColor: '#ffffff',
-                  animation: scheduleState.isGreen ? 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
-                }}
-              ></span>
-              {scheduleState.isDispatchActive ? '실시간 배차 가동' : scheduleState.isBookingOpen ? '예약 접수 개시' : '야간 사전예약'}
-            </span>
-            <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '13px' }} className="truncate">
-              {scheduleState.isDispatchActive ? (
-                <>🟢 <strong style={{ color: '#6ee7b7' }}>실시간 순차출발 가동중:</strong> 오늘 밤 04:00까지 예약 가능 (<strong style={{ color: '#fde047' }}>서울·경기 25~35분 도착</strong>)</>
-              ) : scheduleState.isBookingOpen ? (
-                <>🟢 <strong style={{ color: '#fde047' }}>18:00 예약 접수 시작:</strong> 오늘 밤 19시부터 순차출발 (<strong style={{ color: '#6ee7b7' }}>오늘 밤 04시까지 예약 가능</strong>)</>
-              ) : (
-                <>🌙 <strong style={{ color: '#fde047' }}>야간 사전예약 접수중:</strong> 18:00 예약 오픈 · 19:00 순차출발 (<strong style={{ color: '#6ee7b7' }}>04시까지 예약 가능</strong>)</>
-              )}
-            </span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="shrink-0">
-            <span
-              style={{
-                display: 'inline-block',
-                fontSize: '11px',
-                color: scheduleState.isGreen ? '#34d399' : '#fde047',
-                fontWeight: 800,
-                backgroundColor: scheduleState.isGreen ? 'rgba(52,211,153,0.12)' : 'rgba(245,158,11,0.15)',
-                border: scheduleState.isGreen ? '1px solid rgba(52,211,153,0.3)' : '1px solid rgba(245,158,11,0.3)',
-                padding: '2px 8px',
-                borderRadius: '4px'
-              }}
-            >
-              100% 현장후불제
-            </span>
-            <a
-              href="#courses"
-              style={{
-                background: scheduleState.isGreen ? '#10b981' : '#f59e0b',
-                color: '#032014',
-                fontWeight: 800,
-                padding: '4px 12px',
-                borderRadius: '20px',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontSize: '11.5px',
-                transition: 'transform 0.2s'
-              }}
-            >
-              {scheduleState.isGreen ? '⚡ 실시간 빠른예약 →' : '⏰ 오늘 밤 사전예약 →'}
-            </a>
-          </div>
-        </div>
+        <a
+          href="#courses"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
+            textDecoration: 'none',
+            color: '#ffffff',
+            fontSize: '12px',
+            fontWeight: 800,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            maxWidth: '100%',
+            textAlign: 'center',
+            lineHeight: 1,
+            letterSpacing: '-0.2px',
+          }}
+        >
+          {scheduleState.isDispatchActive ? (
+            <>
+              <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: '#34d399', boxShadow: '0 0 6px #34d399', flexShrink: 0 }}></span>
+              <span><strong style={{ color: '#6ee7b7' }}>실시간 순차출발 가동중</strong> · 오늘 밤 04시까지 예약 가능</span>
+            </>
+          ) : scheduleState.isBookingOpen ? (
+            <>
+              <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: '#fde047', boxShadow: '0 0 6px #fde047', flexShrink: 0 }}></span>
+              <span><strong style={{ color: '#fde047' }}>18시 예약 오픈!</strong> 19시 순차출발 (오늘 밤 04시까지 예약 가능)</span>
+            </>
+          ) : (
+            <>
+              <span style={{ flexShrink: 0 }}>🌙</span>
+              <span><strong style={{ color: '#fde047' }}>오늘 밤 사전예약:</strong> 18시 예약 오픈 · 19시 순차출발 (04시까지 접수)</span>
+            </>
+          )}
+        </a>
       </aside>
 
       <main className="w-full bg-surface-deep min-h-screen" style={{ paddingTop: '96px' }}>
