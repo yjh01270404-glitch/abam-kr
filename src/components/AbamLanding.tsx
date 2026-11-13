@@ -383,32 +383,31 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </div>
                   </div>
 
-                  {/* 공식 배너 & 안심 보증 카드 */}
-                  <div className="w-full max-w-xl lg:max-w-none mb-5 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#11253E] to-[#0F172A] border-2 border-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.25)] text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  {/* 실시간 배차 & 안심 이용 보증 바 */}
+                  <div className="w-full max-w-xl lg:max-w-none mb-5 p-4 rounded-xl bg-[#0f172a] border border-[#334155] text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
                     <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-2xl font-black text-emerald-400 shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-[#1e293b] border border-[#475569] flex items-center justify-center text-xl shrink-0 text-[#EEC14B]">
                         🛡️
                       </div>
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[14px] sm:text-[15.5px] font-black text-white">공식 광고 인증: 지금 즉시 배차 가능</span>
-                          <span className="px-2 py-0.5 rounded-md bg-emerald-500 text-slate-950 text-[10.5px] font-black uppercase tracking-wider animate-pulse">실시간 대기</span>
-                          <span className="text-[11.5px] font-bold text-emerald-400 flex items-center gap-1">
-                            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                            {isOpenNow ? '실시간 영업중 (18:00~04:00)' : '사전 예약 접수중'}
+                          <span className="text-[14px] sm:text-[15px] font-bold text-white">실시간 배차 현황</span>
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-bold">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            {isOpenNow ? '야간 집중 배차중 (18:00~04:00)' : '주간 사전예약 접수중'}
                           </span>
                         </div>
-                        <p className="text-[12px] sm:text-[12.5px] text-slate-300 font-medium leading-snug mt-1">
-                          선입금/예약금 일절 없는 <strong>100% 현장후불제 안심 매칭</strong>입니다. 매니저 도착 시 대면 후 결제하세요!
+                        <p className="text-[12px] text-slate-300 leading-snug mt-1">
+                          선입금·예약금 0원, 관리사 대면 후 결제하는 <strong>100% 현장후불제 정찰 시스템</strong>입니다.
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
                       <button
                         onClick={() => openDirectAbamSms()}
-                        className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 text-[12.5px] font-black shadow-lg hover:brightness-110 active:scale-95 transition-all cursor-pointer text-center"
+                        className="w-full sm:w-auto px-4 py-2.5 rounded-lg bg-[#EEC14B] text-[#080C16] text-[12.5px] font-extrabold hover:bg-[#F2CA50] active:scale-95 transition-all cursor-pointer text-center"
                       >
-                        ⚡ 간편 예약하기
+                        간편 문자 예약
                       </button>
                     </div>
                   </div>
@@ -941,72 +940,70 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         <section id="fast-booking-builder" className="w-full bg-gradient-to-b from-[#0c1424] via-[#09101d] to-[#070b14] px-4 md:px-6 lg:px-8 py-12 md:py-18 border-y-2 border-[#EEC14B]/35 shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <div className="max-w-[1240px] mx-auto">
             {/* Header */}
-            <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1e293b] border border-[#f2ca50]/50 text-[#f2ca50] text-[11.5px] md:text-[12.5px] font-black tracking-widest uppercase mb-3 shadow-md">
-                ⚡ 30초 원클릭 신속 예약기
+            <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1e293b] border border-[#EEC14B]/30 text-[#EEC14B] text-[11.5px] font-bold tracking-wider uppercase mb-3">
+                빠른 예약 서비스
               </span>
-              <h2 className="text-[23px] sm:text-[30px] md:text-[36px] font-black text-white mb-3">
-                되묻는 번거로움 ZERO! <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">3개만 채우면 즉시 배차 확정</span>
+              <h2 className="text-[22px] sm:text-[28px] md:text-[32px] font-black text-white mb-3">
+                간편 문자 예약 신청 <span className="text-[#EEC14B]">· 30분 내 신속 방문</span>
               </h2>
-              <p className="text-[13.5px] sm:text-[15px] text-[#94a3b8] leading-relaxed">
-                희망 코스를 누르고 계신 주소와 공동현관만 적으신 후 <strong className="text-white">문자 전송</strong>을 누르시면, 배차실에서 주소를 되묻지 않고 25~35분 내 즉시 출발합니다.
+              <p className="text-[13.5px] sm:text-[14.5px] text-[#94a3b8] leading-relaxed">
+                코스와 주소만 남겨주시면 배차실 확인 즉시 25~35분 내 출발합니다. (100% 현장후불제)
               </p>
             </div>
 
             {/* 2-Column Responsive Layout: Left = Visual Chat Mockup, Right = Interactive Builder */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
               
-              {/* LEFT: VISUAL SMARTPHONE CHAT MOCKUP (5 Cols) */}
-              <div className="lg:col-span-5 rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 sm:p-6 flex flex-col justify-between shadow-xl">
+              {/* LEFT: AUTHENTIC ASSURANCE & DISPATCH PROTOCOL (5 Cols) */}
+              <div className="lg:col-span-5 rounded-xl bg-[#0f172a] border border-[#1e293b] p-5 sm:p-6 flex flex-col justify-between shadow-lg">
                 <div>
                   <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#1e293b]">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <span className="text-[13px] font-bold text-white">배차실 실시간 대화 예시</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                      <span className="text-[14px] font-bold text-white">아밤 안심 예약 3원칙</span>
                     </div>
-                    <span className="text-[11px] text-[#94a3b8]">010-6607-2239 직통</span>
+                    <span className="text-[11px] text-[#94a3b8]">안심 후불제 운영</span>
                   </div>
 
-                  {/* Chat Bubbles */}
-                  <div className="space-y-4 my-2">
-                    {/* User Sent Message (Right Bubble) */}
-                    <div className="flex flex-col items-end">
-                      <span className="text-[10.5px] text-[#64748b] mb-1 font-medium">손님 전송 문자 (오후 10:15)</span>
-                      <div className="max-w-[90%] rounded-2xl rounded-tr-xs bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white p-3.5 text-[13px] sm:text-[13.5px] leading-relaxed shadow-lg">
-                        <div className="font-bold text-[#fde047] mb-1">[아밤 빠른예약]</div>
-                        <div>• 코스: <strong>타이 90분 (10만)</strong></div>
-                        <div>• 주소: <strong>역삼동 OO오피스텔 1204호</strong></div>
-                        <div>• 공비: <strong>#1234 (또는 1층 호출)</strong></div>
-                        <div>• 결제: <strong>계좌이체</strong></div>
+                  {/* 3 Principles Checklist */}
+                  <div className="space-y-3.5 my-2">
+                    <div className="p-3.5 rounded-lg bg-[#162032] border border-[#25334d]">
+                      <div className="flex items-center gap-2 text-[13px] font-bold text-white mb-1">
+                        <span className="text-emerald-400">01</span>
+                        <span>선입금·예약금 0원 (대면 결제)</span>
                       </div>
-                      <span className="text-[10px] text-emerald-400 mt-0.5">✓ 1초 만에 배차실 수신 완료</span>
+                      <p className="text-[12px] text-[#94a3b8] leading-relaxed">
+                        관리사가 도착하기 전까지 일절 비용을 요구하지 않습니다. 현장 대면 후 직접 결제하세요.
+                      </p>
                     </div>
 
-                    {/* Dispatch Room Immediate Reply (Left Bubble) */}
-                    <div className="flex flex-col items-start">
-                      <span className="text-[10.5px] text-[#64748b] mb-1 font-medium">배차실 회신 (1분 내 신속 답변)</span>
-                      <div className="max-w-[92%] rounded-2xl rounded-tl-xs bg-[#1e293b] border border-[#334155] text-[#f1f5f9] p-3.5 text-[13px] sm:text-[13.5px] leading-relaxed shadow-md">
-                        <div className="font-bold text-[#38bdf8] flex items-center gap-1 mb-1">
-                          <span>⚡ 배차 접수 확인</span>
-                        </div>
-                        <p className="text-[#e2e8f0]">
-                          "접수 확인되었습니다! 현재 배차 진행 중이며 <strong>25~35분 내 도착</strong>합니다. 출발하는 기사가 곧 연락드리겠습니다. 모르는 번호로 전화가 오더라도 받아주세요."
-                        </p>
+                    <div className="p-3.5 rounded-lg bg-[#162032] border border-[#25334d]">
+                      <div className="flex items-center gap-2 text-[13px] font-bold text-white mb-1">
+                        <span className="text-[#EEC14B]">02</span>
+                        <span>실시간 교통 반영 신속 출발</span>
                       </div>
+                      <p className="text-[12px] text-[#94a3b8] leading-relaxed">
+                        서울 25개 구 및 수도권 주요 거점에서 대기 중인 전담 매니저가 평균 25~35분 내 방문합니다.
+                      </p>
+                    </div>
+
+                    <div className="p-3.5 rounded-lg bg-[#162032] border border-[#25334d]">
+                      <div className="flex items-center gap-2 text-[13px] font-bold text-white mb-1">
+                        <span className="text-sky-400">03</span>
+                        <span>철저한 개인정보 즉시 파기</span>
+                      </div>
+                      <p className="text-[12px] text-[#94a3b8] leading-relaxed">
+                        서비스 종료 즉시 방문 주소 및 접수 기록은 복구 불가능하게 영구 파기됩니다.
+                      </p>
                     </div>
                   </div>
-                </div>
-
-                {/* Callout Footer */}
-                <div className="mt-4 pt-3.5 border-t border-[#1e293b] flex items-center gap-2 text-[12px] text-[#94a3b8]">
-                  <span className="text-amber-400 text-[16px]">💡</span>
-                  <span><strong>핵심:</strong> 주소·비번을 남겨주시면 되묻는 번거로움 없이 1분 내 확인 후 <strong>25~35분 내 즉시 도착</strong>합니다.</span>
                 </div>
 
                 {/* Accommodation Pickup Callout */}
-                <div className="mt-3 px-3.5 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-2 text-[12px] text-amber-200/90 leading-snug">
-                  <span className="text-amber-400 text-[15px] shrink-0">🏨</span>
-                  <span><strong>숙박업소 안내:</strong> 호텔, 모텔 포함 모든 숙박업소는 1층에서 운전기사와 대면하여 관리사를 픽업해 주세요.</span>
+                <div className="mt-4 p-3 rounded-lg bg-amber-500/10 border border-amber-500/25 flex items-start gap-2 text-[12px] text-amber-200/90 leading-snug">
+                  <span className="text-amber-400 text-[14px] shrink-0">※</span>
+                  <span><strong>호텔·모텔 이용 안내:</strong> 숙박업소의 경우 관리사 보호 및 보안 규정상 1층 로비에서 기사와 대면하여 동행해 주셔야 합니다.</span>
                 </div>
               </div>
 
@@ -1487,7 +1484,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 💡 1초 즉문즉답 가이드
               </span>
               <h2 className="text-[22px] sm:text-[28px] md:text-[32px] font-black text-white mb-2">
-                이용 전 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">가장 많이 묻는 질문 TOP 6</span>
+                이용 전 <span className="text-[#EEC14B]">가장 많이 묻는 질문 TOP 6</span>
               </h2>
               <p className="text-[13px] sm:text-[14.5px] text-[#94a3b8]">
                 되묻지 않으셔도 됩니다. 이용자분들이 가장 궁금해하시는 핵심 질문을 투명하게 안내해 드립니다.
@@ -1499,10 +1496,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div className="rounded-2xl bg-[#080d18] border border-[#f2ca50]/30 p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/60 transition-colors">
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-black">Q1</span>
+                    <span className="w-6 h-6 rounded-full bg-[#1e293b] text-[#EEC14B] border border-[#334155] flex items-center justify-center text-xs font-bold">Q1</span>
                     <h3 className="text-[15px] font-extrabold text-white">선입금이나 예약금이 정말 없나요?</h3>
                   </div>
-                  <div className="inline-block px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-[12px] font-black mb-2.5">
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#EEC14B]/10 border border-[#EEC14B]/30 text-[#EEC14B] text-[12px] font-bold mb-2.5">
                     ✅ 100% 현장 후불제 (선입금 절대 0원)
                   </div>
                   <p className="text-[13px] text-[#94a3b8] leading-relaxed">
@@ -1515,10 +1512,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <span className="w-6 h-6 rounded-full bg-[#f2ca50]/20 text-[#f2ca50] flex items-center justify-center text-xs font-black">Q2</span>
+                    <span className="w-6 h-6 rounded-full bg-[#1e293b] text-[#EEC14B] border border-[#334155] flex items-center justify-center text-xs font-bold">Q2</span>
                     <h3 className="text-[15px] font-extrabold text-white">예약 후 도착까지 얼마나 걸리나요?</h3>
                   </div>
-                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#f2ca50]/15 border border-[#f2ca50]/40 text-[#f2ca50] text-[12px] font-black mb-2.5">
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#EEC14B]/10 border border-[#EEC14B]/30 text-[#EEC14B] text-[12px] font-bold mb-2.5">
                     ⚡ 평균 25분 ~ 35분 내 신속 도착
                   </div>
                   <p className="text-[13px] text-[#94a3b8] leading-relaxed">
@@ -1531,10 +1528,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <span className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-black">Q3</span>
+                    <span className="w-6 h-6 rounded-full bg-[#1e293b] text-[#EEC14B] border border-[#334155] flex items-center justify-center text-xs font-bold">Q3</span>
                     <h3 className="text-[15px] font-extrabold text-white">관리사 사진(프로필)은 왜 없나요?</h3>
                   </div>
-                  <div className="inline-block px-2.5 py-1 rounded-md bg-blue-500/15 border border-blue-500/40 text-blue-300 text-[12px] font-black mb-2.5">
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#EEC14B]/10 border border-[#EEC14B]/30 text-[#EEC14B] text-[12px] font-bold mb-2.5">
                     🛡️ 가짜 도용 사진 근절 · 20대 에이스 힐러
                   </div>
                   <p className="text-[13px] text-[#94a3b8] leading-relaxed">
@@ -1547,10 +1544,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs font-black">Q4</span>
+                    <span className="w-6 h-6 rounded-full bg-[#1e293b] text-[#EEC14B] border border-[#334155] flex items-center justify-center text-xs font-bold">Q4</span>
                     <h3 className="text-[15px] font-extrabold text-white">어디서 이용할 수 있나요?</h3>
                   </div>
-                  <div className="inline-block px-2.5 py-1 rounded-md bg-purple-500/15 border border-purple-500/40 text-purple-300 text-[12px] font-black mb-2.5">
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#EEC14B]/10 border border-[#EEC14B]/30 text-[#EEC14B] text-[12px] font-bold mb-2.5">
                     📍 자택 · 오피스텔 · 호텔 · 모텔 전지역
                   </div>
                   <p className="text-[13px] text-[#94a3b8] leading-relaxed">
@@ -1563,10 +1560,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <span className="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-black">Q5</span>
+                    <span className="w-6 h-6 rounded-full bg-[#1e293b] text-[#EEC14B] border border-[#334155] flex items-center justify-center text-xs font-bold">Q5</span>
                     <h3 className="text-[15px] font-extrabold text-white">결제는 어떻게 하나요?</h3>
                   </div>
-                  <div className="inline-block px-2.5 py-1 rounded-md bg-amber-500/15 border border-amber-500/40 text-amber-300 text-[12px] font-black mb-2.5">
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#EEC14B]/10 border border-[#EEC14B]/30 text-[#EEC14B] text-[12px] font-bold mb-2.5">
                     💳 현금 · 계좌이체 · 카드 결제 모두 가능
                   </div>
                   <p className="text-[13px] text-[#94a3b8] leading-relaxed">
@@ -1579,10 +1576,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <span className="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-black">Q6</span>
+                    <span className="w-6 h-6 rounded-full bg-[#1e293b] text-[#EEC14B] border border-[#334155] flex items-center justify-center text-xs font-bold">Q6</span>
                     <h3 className="text-[15px] font-extrabold text-white">따로 준비할 물품이 있나요?</h3>
                   </div>
-                  <div className="inline-block px-2.5 py-1 rounded-md bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 text-[12px] font-black mb-2.5">
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#EEC14B]/10 border border-[#EEC14B]/30 text-[#EEC14B] text-[12px] font-bold mb-2.5">
                     🎒 준비물 0개 (청결 위생 비품 완비)
                   </div>
                   <p className="text-[13px] text-[#94a3b8] leading-relaxed">
