@@ -961,16 +961,16 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         {/* 4. ULTRA-INTUITIVE 10-SECOND RESERVATION BUILDER & CHAT MOCKUP */}
         <section id="fast-booking-builder" className="w-full bg-gradient-to-b from-[#0c1424] via-[#09101d] to-[#070b14] px-4 md:px-6 lg:px-8 py-12 md:py-18 border-y-2 border-[#EEC14B]/35 shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
           <div className="max-w-[1240px] mx-auto">
-            {/* Header */}
+            {/* Header: 직관적인 '예약하기' 대주제 명시 */}
             <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1e293b] border border-[#EEC14B]/30 text-[#EEC14B] text-[11.5px] font-bold tracking-wider uppercase mb-3">
-                빠른 예약 서비스
+              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EEC14B]/15 border border-[#EEC14B]/40 text-[#EEC14B] text-[12px] font-black tracking-wider uppercase mb-3 shadow-sm">
+                ONLINE RESERVATION · 실시간 예약 접수처
               </span>
-              <h2 className="text-[22px] sm:text-[28px] md:text-[32px] font-black text-white mb-3">
-                간편 문자 예약 신청 <span className="text-[#EEC14B]">· 30분 내 신속 방문</span>
+              <h2 className="text-[26px] sm:text-[32px] md:text-[36px] font-black text-white mb-3 tracking-tight">
+                예약하기 <span className="text-[#EEC14B]">· 30초 간편 신청</span>
               </h2>
-              <p className="text-[13.5px] sm:text-[14.5px] text-[#94a3b8] leading-relaxed">
-                코스와 주소만 남겨주시면 배차실 확인 즉시 25~35분 내 출발합니다. (100% 현장후불제)
+              <p className="text-[14px] sm:text-[15.5px] text-[#cbd5e1] leading-relaxed">
+                여기부터는 실시간 방문 예약 구간입니다. 원하시는 코스와 주소를 선택하시면 통화 없이 문자로 즉각 접수 및 배차됩니다.
               </p>
             </div>
 
@@ -1032,18 +1032,27 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               {/* RIGHT: INTERACTIVE 10-SECOND RESERVATION BUILDER (7 Cols) */}
               <div className="lg:col-span-7 rounded-2xl bg-gradient-to-b from-[#10192e] to-[#0c1424] border-2 border-[#f2ca50]/40 p-5 sm:p-7 flex flex-col justify-between shadow-2xl relative">
                 
-                <div className="flex items-center justify-between pb-3 mb-5 border-b border-[#334155]">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded bg-primary/20 text-[#f2ca50] font-black text-[11px] uppercase">
-                      Interactive Booker
+                <div className="pb-4 mb-5 border-b border-[#334155]">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-1 rounded-md bg-[#EEC14B] text-[#080C16] font-black text-[12px] tracking-wide shadow-sm">
+                        예약하기
+                      </span>
+                      <span className="text-[12px] text-emerald-400 font-bold flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        선입금 0원 · 100% 안심 현장후불
+                      </span>
+                    </div>
+                    <span className="text-[11.5px] text-[#94a3b8] font-semibold hidden sm:inline">
+                      ⚡ 접수 확인 즉시 30분 내 방문
                     </span>
-                    <h3 className="text-[16px] sm:text-[18px] font-extrabold text-white">
-                      직접 선택하고 30초 만에 예약하기
-                    </h3>
                   </div>
-                  <span className="text-[11.5px] text-emerald-400 font-bold hidden sm:inline">
-                    선입금 0원 · 100% 현장후불
-                  </span>
+                  <h3 className="text-[18px] sm:text-[20px] font-black text-white leading-tight">
+                    방문 코스 및 장소 선택 (30초 간편 예약)
+                  </h3>
+                  <p className="text-[12.5px] text-[#94a3b8] mt-1 leading-snug">
+                    아래 1~4 항목을 순서대로 선택하시면 문자로 자동 완성되어 신속하게 배차 접수됩니다.
+                  </p>
                 </div>
 
                 <form onSubmit={handleQuickSmsSubmit} className="space-y-4">
