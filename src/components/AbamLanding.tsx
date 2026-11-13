@@ -1072,6 +1072,32 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                         </button>
                       ))}
                     </div>
+
+                    {/* 실시간 선택 즉각 반영 스트립 (터치 즉시 반응 피드백) */}
+                    <div style={{
+                      marginTop: '10px',
+                      padding: '10px 14px',
+                      backgroundColor: '#0c1322',
+                      border: '1.5px solid rgba(238, 193, 75, 0.45)',
+                      borderRadius: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      fontSize: '12.5px',
+                      color: '#e2e8f0',
+                      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.35)',
+                      transition: 'all 0.2s ease',
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+                        <span style={{ color: '#EEC14B', fontWeight: 900, flexShrink: 0 }}>✓ 예약 구성:</span>
+                        <span style={{ color: '#ffffff', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {quickCourse} · {finalQuickPay}
+                        </span>
+                      </div>
+                      <span style={{ color: '#4ade80', fontSize: '11px', fontWeight: 900, flexShrink: 0, backgroundColor: 'rgba(34, 197, 94, 0.15)', padding: '2px 7px', borderRadius: '4px' }}>
+                        문자 자동완성
+                      </span>
+                    </div>
                   </div>
 
                   {/* Step 2: Address Input */}
@@ -1434,31 +1460,6 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                         </div>
                       </div>
                     )}
-                  </div>
-
-                  {/* Live Booking Summary Strip */}
-                  <div style={{
-                    marginTop: '12px',
-                    marginBottom: '6px',
-                    padding: '10px 14px',
-                    backgroundColor: '#0c1322',
-                    border: '1.5px solid rgba(238, 193, 75, 0.4)',
-                    borderRadius: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    fontSize: '12.5px',
-                    color: '#e2e8f0',
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
-                      <span style={{ color: '#EEC14B', fontWeight: 900, flexShrink: 0 }}>✓ 예약 구성:</span>
-                      <span style={{ color: '#ffffff', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {quickCourse} · {finalQuickPay}
-                      </span>
-                    </div>
-                    <span style={{ color: '#4ade80', fontSize: '11px', fontWeight: 900, flexShrink: 0, backgroundColor: 'rgba(34, 197, 94, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>
-                      문자 자동완성
-                    </span>
                   </div>
 
                   {/* Action Buttons */}
