@@ -952,3 +952,45 @@ button, a[href^="tel:"], a[href^="sms:"] {
   box-shadow: 0 0 16px rgba(238, 193, 75, 0.4), inset 0 0 10px rgba(238, 193, 75, 0.15) !important;
   transform: translateY(-2px) !important;
 }
+
+/* HIGH-CONTRAST BULLETPROOF RESERVATION INPUT STYLING (모바일 글씨색/가독성 완벽 보장) */
+.abam-booking-input {
+  background-color: #0c1424 !important;
+  background: #0c1424 !important;
+  border: 2px solid #334155 !important;
+  border-radius: 12px !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #EEC14B !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  color-scheme: dark !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  outline: none !important;
+}
+
+.abam-booking-input:focus {
+  border-color: #EEC14B !important;
+  box-shadow: 0 0 12px rgba(238, 193, 75, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.abam-booking-input::placeholder {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+}
+
+.abam-booking-input:-webkit-autofill,
+.abam-booking-input:-webkit-autofill:hover, 
+.abam-booking-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0c1424 inset !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
