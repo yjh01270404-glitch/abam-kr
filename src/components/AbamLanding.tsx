@@ -2131,7 +2131,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary text-slate-950 font-black">인기</span>
                     C코스 · 로얄 스페셜 더블케어
                   </span>
-                  <span className="text-primary font-extrabold text-[12px]">120분 추천</span>
+                  <span className="text-primary font-extrabold text-[12px]">90분 추천</span>
                 </div>
               </div>
             </div>

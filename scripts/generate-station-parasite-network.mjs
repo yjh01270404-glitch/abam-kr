@@ -153,7 +153,7 @@ function generateStationHtml(st) {
       <ul>
         <li><strong>전통 건식 타이:</strong> 60분 8만 / 90분 10만 / 120분 12만</li>
         <li><strong>천연 식물성 아로마:</strong> 60분 9만 / 90분 11만 / 120분 14만</li>
-        <li><strong>VIP 복합 스페셜:</strong> 60분 10만 / 90분 12만 / 120분 16만</li>
+        <li><strong>C코스 · 로얄 스페셜 더블케어:</strong> 90분 12만 (추천) / 120분 16만 (VIP 풀코스)</li>
       </ul>
     </div>
 

@@ -193,7 +193,7 @@ const jsonLdData = {
           '@type': 'Review',
           author: { '@type': 'Person', name: '박*수 (서울 마포구)' },
           datePublished: '2026-11-05',
-          reviewBody: '스페셜 120분 코스 추천합니다. 타이 건식으로 뭉친 근육 풀고 아로마로 림프 순환까지 완벽합니다.',
+          reviewBody: '스페셜 90분 코스 추천합니다. 타이 건식으로 뭉친 근육 풀고 아로마로 림프 순환까지 완벽합니다.',
           reviewRating: { '@type': 'Rating', ratingValue: '5' },
         },
       ],
