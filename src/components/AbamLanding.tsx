@@ -220,6 +220,22 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </Link>
           </div>
 
+          {/* 모바일 상단 중앙: "아름다운 밤" 브랜드 슬로건 표기 */}
+          <div className="flex md:hidden items-center justify-center flex-1 px-1 text-center select-none pointer-events-none">
+            <span
+              style={{
+                fontSize: '13px',
+                fontWeight: 800,
+                color: '#fde047',
+                letterSpacing: '0.03em',
+                whiteSpace: 'nowrap',
+                textShadow: '0 1px 8px rgba(238, 193, 75, 0.25)',
+              }}
+            >
+              아름다운 밤
+            </span>
+          </div>
+
           <nav className="abam-desktop-nav" aria-label="Sections">
             <a href="#courses" className="text-[13.5px] font-semibold text-text-secondary hover:text-primary transition-colors py-1.5 px-2.5 rounded-lg hover:bg-surface-raised/40 whitespace-nowrap">서비스 코스</a>
             <a href="#guide" className="text-[13.5px] font-semibold text-text-secondary hover:text-primary transition-colors py-1.5 px-2.5 rounded-lg hover:bg-surface-raised/40 whitespace-nowrap">이용 안내</a>
