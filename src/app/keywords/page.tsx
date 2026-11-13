@@ -303,7 +303,7 @@ export default function KeywordsPage() {
         <footer style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #1e293b', fontSize: '11.5px', color: '#94a3b8', lineHeight: 1.65 }}>
           <div><strong style={{ color: '#ffffff' }}>아밤 (Abam.kr)</strong> · 서울·경기·인천 1:1 방문 홈케어 공식 포털</div>
           <div>예약 및 상담 직통: {PHONE_NUM} · 18:00 예약 접수 · 19:00 출발 · 05:00 마감</div>
-          <div>투명 정찰 요금제: Course A(로얄 타이) · Course B(힐링 아로마) · Course C(로얄 VIP) (60분 / 90분 / 120분) · 100% 현장 대면결제</div>
+          <div>투명 정찰 요금제: A코스(로얄 타이) · B코스(힐링 아로마) · C코스(로얄 VIP) (60분 / 90분 / 120분) · 100% 현장 대면결제</div>
         </footer>
       </main>
 

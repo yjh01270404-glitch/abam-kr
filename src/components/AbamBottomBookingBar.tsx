@@ -15,7 +15,7 @@ export function openDirectAbamSms(initialCourse?: string) {
   if (typeof window === 'undefined') return;
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent || '');
   const sep = isIOS ? '&body=' : '?body=';
-  const courseStr = initialCourse || 'Course A 90분 (10만)';
+  const courseStr = initialCourse || 'A코스 90분 (10만)';
   const text = `[아밤 빠른예약]\n• 코스: ${courseStr}\n• 주소: [동/호수/호텔명 입력]\n• 공비: [공동현관 비번 or 1층호출]\n• 결제: [계좌이체 / 현금 / 카드]\n(작성 후 전송 시 추가 질문 없이 30분 내 즉시 출발)`;
   window.location.href = `sms:01066072239${sep}${encodeURIComponent(text)}`;
 }

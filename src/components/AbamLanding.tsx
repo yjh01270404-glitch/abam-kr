@@ -38,7 +38,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const [quickCourse, setQuickCourse] = useState('Course A 90분 (10만)');
+  const [quickCourse, setQuickCourse] = useState('A코스 90분 (10만)');
   const [quickAddr, setQuickAddr] = useState('');
   const [quickDoor, setQuickDoor] = useState('');
   const [quickPay, setQuickPay] = useState('계좌이체');
@@ -78,7 +78,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   };
 
   const copyBookingSlip = () => {
-    const text = `[아밤 빠른예약신청]\n• 코스: Course A 90분 (10만)\n• 주소: [방문 상세주소/호텔명·호수]\n• 공비: [공동현관 비번 or 1층호출]\n• 결제: [계좌이체 / 현금 / 카드]`;
+    const text = `[아밤 빠른예약신청]\n• 코스: A코스 90분 (10만)\n• 주소: [방문 상세주소/호텔명·호수]\n• 공비: [공동현관 비번 or 1층호출]\n• 결제: [계좌이체 / 현금 / 카드]`;
     if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).catch(() => {});
     }
@@ -121,8 +121,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       a: '고객님의 방문 주소 및 연락처는 배차 완료 후 안전하게 파기되며 어떠한 서버나 장부에도 기록되지 않습니다. 철저한 1:1 비밀 보장 원칙으로 안심하고 이용하실 수 있습니다.'
     },
     {
-      q: 'Course A, Course B, Course C 중 어떤 코스를 추천하나요?',
-      a: '오일 없는 시원한 깊은 지압과 뭉친 근육 스트레칭을 원하시면 "Course A(로얄 건식 지압 타이)", 최고급 식물성 오일과 부드러운 유러피언 림프 이완을 원하시면 "Course B(힐링아로마 스웨디시)", 두 가지 장점을 결합하여 최고의 만족도를 선사하는 복합 풀케어를 원하신다면 고객 선호도 1위인 "Course C(로얄 VIP 더블 케어 90분/120분)" 코스를 가장 추천해 드립니다.'
+      q: 'A코스, B코스, C코스 중 어떤 코스를 추천하나요?',
+      a: '오일 없는 시원한 깊은 지압과 뭉친 근육 스트레칭을 원하시면 "A코스(로얄 건식 지압 타이)", 최고급 식물성 오일과 부드러운 유러피언 림프 이완을 원하시면 "B코스(힐링아로마 스웨디시)", 두 가지 장점을 결합하여 최고의 만족도를 선사하는 복합 풀케어를 원하신다면 고객 선호도 1위인 "C코스(로얄 VIP 더블 케어 90분/120분)" 코스를 가장 추천해 드립니다.'
     },
     {
       q: '전화 통화 없이 문자로만 예약할 수 있나요?',
@@ -249,10 +249,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', textAlign: 'left' }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px', borderRadius: '9999px', backgroundColor: '#10b981', color: '#032014', fontWeight: 900, fontSize: '10.5px', letterSpacing: '0.5px', flexShrink: 0 }}>
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#ffffff', animation: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}></span>
-              REAL-TIME DISPATCH
+              실시간 배차 현황
             </span>
             <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '13px' }}>
-              🟢 <strong style={{ color: '#6ee7b7' }}>AVAILABLE NOW:</strong> 서울·경기 전지역 호텔·자택·오피스텔 (<strong style={{ color: '#fde047' }}>25~35분 내 신속 도착</strong>)
+              🟢 <strong style={{ color: '#6ee7b7' }}>지금 즉시 배차 가능:</strong> 서울·경기 전지역 호텔·자택·오피스텔 (<strong style={{ color: '#fde047' }}>25~35분 내 신속 도착</strong>)
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -260,7 +260,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               100% 현장후불제
             </span>
             <a href="#courses" style={{ background: '#10b981', color: '#032014', fontWeight: 800, padding: '4px 12px', borderRadius: '20px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', transition: 'transform 0.2s' }}>
-              ⚡ FAST BOOKING &rarr;
+              ⚡ 실시간 빠른예약 &rarr;
             </a>
           </div>
         </div>
@@ -523,7 +523,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div className="max-w-[1240px] mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
               <span className="inline-block px-3 py-1 rounded-full bg-[#171b26] border border-[#262a35] text-primary text-[11px] md:text-[12px] font-bold tracking-widest uppercase mb-2.5 shadow-sm">
-                Select Your Course
+                아밤 시그니처 코스
               </span>
               <h2 className="text-[24px] sm:text-[30px] md:text-[36px] font-bold text-text-primary mb-2.5">투명하고 정직한 서비스 코스</h2>
               <p className="text-[13px] sm:text-[14px] md:text-[15px] text-text-muted leading-relaxed">
@@ -557,7 +557,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     <span className="px-3 py-1 rounded-full bg-[#1b1f2a] text-text-secondary text-[11px] font-semibold">오일 없는 건식 깊은 압</span>
                     <span className="text-[11px] text-[#EEC14B] font-bold">집중 피로회복 · 강한 압</span>
                   </div>
-                  <h3 className="text-[22px] font-bold text-text-primary mb-1">Course A · 로얄 건식 지압 타이</h3>
+                  <h3 className="text-[22px] font-bold text-text-primary mb-1">A코스 · 로얄 건식 지압 타이</h3>
                   <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
                     오일 없는 건식 깊은 압의 전신 지압 &amp; 파워 스트레칭으로 뭉친 속근육과 피로를 집중 해소하고 전신 밸런스를 바로잡아 드립니다.
                   </p>
@@ -566,7 +566,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   <div className="space-y-3 mb-8">
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course A 60분 (8만)')}
+                      onClick={() => openDirectAbamSms('A코스 60분 (8만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
@@ -574,7 +574,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course A 90분 (10만)')}
+                      onClick={() => openDirectAbamSms('A코스 90분 (10만)')}
                       className="abam-price-row highlight"
                     >
                       <div className="flex items-center gap-2">
@@ -585,7 +585,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course A 120분 (12만)')}
+                      onClick={() => openDirectAbamSms('A코스 120분 (12만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
@@ -612,11 +612,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
                 <button
                   type="button"
-                  onClick={() => openDirectAbamSms('Course A 90분 (10만)')}
+                  onClick={() => openDirectAbamSms('A코스 90분 (10만)')}
                   className="abam-course-btn-gold"
                 >
                   <span className="material-symbols-outlined text-[18px]">chat</span>
-                  <span>Course A 로얄 타이 간편예약</span>
+                  <span>A코스 로얄 타이 간편예약</span>
                 </button>
               </div>
 
@@ -649,7 +649,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-[11px] font-bold">최고급 식물성 에센셜 오일</span>
                     <span className="text-[11px] text-primary font-semibold">부드러운 이완 &amp; 숙면</span>
                   </div>
-                  <h3 className="text-[22px] font-bold text-text-primary mb-1">Course B · 힐링아로마 스웨디시</h3>
+                  <h3 className="text-[22px] font-bold text-text-primary mb-1">B코스 · 힐링아로마 스웨디시</h3>
                   <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
                     최고급 100% 천연 식물성 에센셜 오일과 부드러운 유러피언 림프 스웨디시 테크닉으로 림프 순환을 돕고 깊은 릴랙세이션과 숙면을 유도합니다.
                   </p>
@@ -658,7 +658,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   <div className="space-y-3 mb-8">
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course B 60분 (9만)')}
+                      onClick={() => openDirectAbamSms('B코스 60분 (9만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
@@ -666,7 +666,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course B 90분 (11만)')}
+                      onClick={() => openDirectAbamSms('B코스 90분 (11만)')}
                       className="abam-price-row highlight"
                     >
                       <div className="flex items-center gap-2">
@@ -677,7 +677,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course B 120분 (14만)')}
+                      onClick={() => openDirectAbamSms('B코스 120분 (14만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
@@ -704,11 +704,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
                 <button
                   type="button"
-                  onClick={() => openDirectAbamSms('Course B 90분 (11만)')}
+                  onClick={() => openDirectAbamSms('B코스 90분 (11만)')}
                   className="abam-course-btn-featured"
                 >
                   <span className="material-symbols-outlined text-[18px]">chat</span>
-                  <span>Course B 힐링아로마 간편예약</span>
+                  <span>B코스 힐링아로마 간편예약</span>
                 </button>
               </div>
 
@@ -737,7 +737,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     <span className="px-3 py-1 rounded-full bg-[#312E81]/40 text-[#818CF8] text-[11px] font-bold">건식 지압 + 아로마 스웨디시</span>
                     <span className="text-[11px] text-[#818CF8] font-semibold">👑 VIP 올인원</span>
                   </div>
-                  <h3 className="text-[22px] font-bold text-text-primary mb-1">Course C · 로얄 VIP 더블 케어 [Thai+Swedish]</h3>
+                  <h3 className="text-[22px] font-bold text-text-primary mb-1">C코스 · 로얄 VIP 더블 케어 [타이+스웨디시]</h3>
                   <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
                     전반부 건식 딥티슈 지압으로 뭉친 근육을 깊이 있게 분해하고, 후반부 따뜻한 힐링 아로마 스웨디시로 림프를 순환시켜 주는 VIP 고객 만족도 1위 올인원 프로그램입니다.
                   </p>
@@ -746,7 +746,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   <div className="space-y-3 mb-8">
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course C 60분 (10만)')}
+                      onClick={() => openDirectAbamSms('C코스 60분 (10만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
@@ -754,7 +754,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course C 90분 (12만)')}
+                      onClick={() => openDirectAbamSms('C코스 90분 (12만)')}
                       className="abam-price-row highlight"
                     >
                       <div className="flex items-center gap-2">
@@ -765,7 +765,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('Course C 120분 (16만)')}
+                      onClick={() => openDirectAbamSms('C코스 120분 (16만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
@@ -792,11 +792,11 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
                 <button
                   type="button"
-                  onClick={() => openDirectAbamSms('Course C 90분 (12만)')}
+                  onClick={() => openDirectAbamSms('C코스 90분 (12만)')}
                   className="abam-course-btn-gold"
                 >
                   <span className="material-symbols-outlined text-[18px]">chat</span>
-                  <span>Course C 로얄 VIP 간편예약</span>
+                  <span>C코스 로얄 VIP 간편예약</span>
                 </button>
               </div>
             </div>
@@ -989,10 +989,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {[
-                        { title: 'Course A 90분 (10만)', tag: '인기' },
-                        { title: 'Course B 90분 (11만)', tag: '추천' },
-                        { title: 'Course C 90분 (12만)', tag: '베스트' },
-                        { title: 'Course A 60분 (8만)', tag: '기본' },
+                        { title: 'A코스 90분 (10만)', tag: '인기' },
+                        { title: 'B코스 90분 (11만)', tag: '추천' },
+                        { title: 'C코스 90분 (12만)', tag: '베스트' },
+                        { title: 'A코스 60분 (8만)', tag: '기본' },
                       ].map((item) => (
                         <button
                           key={item.title}
@@ -2068,13 +2068,13 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </h4>
               <div className="space-y-2">
                 <div className="abam-footer-course-row">
-                  <span className="font-semibold text-slate-200">Course A · 로얄 건식 지압 타이</span>
+                  <span className="font-semibold text-slate-200">A코스 · 로얄 건식 지압 타이</span>
                   <span className="abam-footer-course-badge">
                     60분 / 90분 / 120분
                   </span>
                 </div>
                 <div className="abam-footer-course-row">
-                  <span className="font-semibold text-slate-200">Course B · 힐링아로마 스웨디시</span>
+                  <span className="font-semibold text-slate-200">B코스 · 힐링아로마 스웨디시</span>
                   <span className="abam-footer-course-badge">
                     60분 / 90분 / 120분
                   </span>
@@ -2082,7 +2082,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 <div className="abam-footer-course-row" style={{ borderColor: 'rgba(238, 193, 75, 0.4)', background: 'linear-gradient(90deg, #0d1424 0%, #161e33 100%)' }}>
                   <span className="font-bold text-white flex items-center gap-1.5">
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary text-slate-950 font-black">인기</span>
-                    Course C · 로얄 VIP 더블 케어 [Thai+Swedish]
+                    C코스 · 로얄 VIP 더블 케어 [타이+스웨디시]
                   </span>
                   <span className="text-primary font-extrabold text-[12px]">120분 추천</span>
                 </div>

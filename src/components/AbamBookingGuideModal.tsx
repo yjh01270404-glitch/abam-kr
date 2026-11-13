@@ -21,7 +21,7 @@ export default function AbamBookingGuideModal({
   const [door, setDoor] = useState('');
   const [placeType, setPlaceType] = useState<'home' | 'hotel'>('home');
   const [parking, setParking] = useState('주차가능');
-  const [course, setCourse] = useState('Course A 90분 (10만)');
+  const [course, setCourse] = useState('A코스 90분 (10만)');
   const [pay, setPay] = useState('');
   const [timeText, setTimeText] = useState('');
   const [sentNotice, setSentNotice] = useState(false);
@@ -303,20 +303,20 @@ export default function AbamBookingGuideModal({
                 cursor: 'pointer',
               }}
             >
-              <optgroup label="── Course A · 로얄 건식 지압 타이 (Deep Thai) ──">
-                <option value="Course A 60분 (8만)">Course A 60분 (8만) — 80,000원</option>
-                <option value="Course A 90분 (10만)">Course A 90분 (10만) — 100,000원 (추천)</option>
-                <option value="Course A 120분 (12만)">Course A 120분 (12만) — 120,000원</option>
+              <optgroup label="── A코스 · 로얄 건식 지압 타이 ──">
+                <option value="A코스 60분 (8만)">A코스 60분 (8만) — 80,000원</option>
+                <option value="A코스 90분 (10만)">A코스 90분 (10만) — 100,000원 (추천)</option>
+                <option value="A코스 120분 (12만)">A코스 120분 (12만) — 120,000원</option>
               </optgroup>
-              <optgroup label="── Course B · 힐링아로마 스웨디시 (Swedish) ⭐ [BEST] ──">
-                <option value="Course B 60분 (9만)">Course B 60분 (9만) — 90,000원</option>
-                <option value="Course B 90분 (11만)">Course B 90분 (11만) — 110,000원 (BEST)</option>
-                <option value="Course B 120분 (14만)">Course B 120분 (14만) — 140,000원</option>
+              <optgroup label="── B코스 · 힐링아로마 스웨디시 ⭐ [BEST] ──">
+                <option value="B코스 60분 (9만)">B코스 60분 (9만) — 90,000원</option>
+                <option value="B코스 90분 (11만)">B코스 90분 (11만) — 110,000원 (BEST)</option>
+                <option value="B코스 120분 (14만)">B코스 120분 (14만) — 140,000원</option>
               </optgroup>
-              <optgroup label="── Course C · 로얄 VIP 더블 케어 [Thai+Swedish] 👑 [VIP] ──">
-                <option value="Course C 60분 (10만)">Course C 60분 (10만) — 100,000원</option>
-                <option value="Course C 90분 (12만)">Course C 90분 (12만) — 120,000원 (인기)</option>
-                <option value="Course C 120분 (16만)">Course C 120분 (16만) — 160,000원 (풀코스)</option>
+              <optgroup label="── C코스 · 로얄 VIP 더블 케어 [타이+스웨디시] 👑 [VIP] ──">
+                <option value="C코스 60분 (10만)">C코스 60분 (10만) — 100,000원</option>
+                <option value="C코스 90분 (12만)">C코스 90분 (12만) — 120,000원 (인기)</option>
+                <option value="C코스 120분 (16만)">C코스 120분 (16만) — 160,000원 (풀코스)</option>
               </optgroup>
             </select>
           </div>
