@@ -197,6 +197,25 @@ input, select, textarea {
   font-size: inherit;
 }
 
+input[type="text"],
+input[type="tel"],
+input[type="search"],
+input[type="password"],
+input:not([type]),
+textarea {
+  background-color: #0c1424 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #EEC14B !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+  opacity: 1 !important;
+}
+
 a:active, button:active {
   opacity: 0.85;
 }

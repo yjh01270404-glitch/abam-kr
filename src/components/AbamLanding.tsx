@@ -1172,7 +1172,21 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       value={quickAddr}
                       onChange={(e) => setQuickAddr(e.target.value)}
                       placeholder={quickPlaceType === 'hotel' ? "예: 신라스테이 역삼 804호 / OO모텔 00호" : "예: 강남구 역삼동 OO오피스텔 1204호"}
-                      className="w-full px-4 py-3 rounded-xl bg-[#090e1a] border border-[#293852] text-white text-[13.5px] placeholder-[#64748b] focus:outline-none focus:border-[#f2ca50] transition-colors"
+                      style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        padding: '12px 14px',
+                        backgroundColor: '#0c1424',
+                        border: '1.5px solid #2d3e5d',
+                        borderRadius: '12px',
+                        color: '#ffffff',
+                        WebkitTextFillColor: '#ffffff',
+                        fontSize: '14.5px',
+                        fontWeight: 600,
+                        outline: 'none',
+                        boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.4)',
+                      }}
+                      className="placeholder-[#64748b] focus:border-[#f2ca50] transition-colors"
                     />
 
                     {/* Intuitive Accommodation Pickup Guidance with User Exact Specification */}
@@ -1233,7 +1247,21 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       value={quickDoor}
                       onChange={(e) => setQuickDoor(e.target.value)}
                       placeholder={isHotelBooking ? "예: 호텔 1층 로비 픽업 (또는 객실 번호)" : "예: 공동현관 비번 #1234 (또는 1층 도착 시 호출)"}
-                      className="w-full px-4 py-3 rounded-xl bg-[#090e1a] border border-[#293852] text-white text-[13.5px] placeholder-[#64748b] focus:outline-none focus:border-[#f2ca50] transition-colors"
+                      style={{
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        padding: '12px 14px',
+                        backgroundColor: '#0c1424',
+                        border: '1.5px solid #2d3e5d',
+                        borderRadius: '12px',
+                        color: '#ffffff',
+                        WebkitTextFillColor: '#ffffff',
+                        fontSize: '14.5px',
+                        fontWeight: 600,
+                        outline: 'none',
+                        boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.4)',
+                      }}
+                      className="placeholder-[#64748b] focus:border-[#f2ca50] transition-colors"
                     />
                   </div>
 
