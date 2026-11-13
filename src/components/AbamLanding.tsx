@@ -1585,6 +1585,30 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       </p>
                     </div>
 
+                    {/* 개인정보 사전 안내: 왜 주소 및 공동현관을 알려주셔야 하는지 */}
+                    <div style={{
+                      backgroundColor: 'rgba(15, 23, 42, 0.85)',
+                      border: '1.5px solid rgba(245, 208, 97, 0.35)',
+                      borderRadius: '12px',
+                      padding: '12px 14px',
+                      marginBottom: '14px',
+                      textAlign: 'left',
+                      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.4)'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                        <span style={{ fontSize: '15px' }}>🛡️</span>
+                        <span style={{ color: '#FDE047', fontSize: '12.5px', fontWeight: 800, letterSpacing: '-0.3px' }}>
+                          방문 정보(주소/공동현관) 사전 안내
+                        </span>
+                      </div>
+                      <ul style={{ margin: 0, paddingLeft: '16px', color: '#cbd5e1', fontSize: '11.5px', lineHeight: 1.6 }}>
+                        <li><strong>신속 배차 (ETA 25~35분):</strong> 기사가 경로 낭비 없이 고객님 댁까지 가장 빠른 길로 즉시 출발하기 위해 주소를 확인합니다.</li>
+                        <li><strong>공동현관 원활한 방문:</strong> 늦은 밤 불필요한 전화 호출로 휴식을 방해하지 않고 조용하고 매끄럽게 방문하기 위함입니다.</li>
+                        <li><strong>선입금 0원 / 100% 현장후불제:</strong> 선입금 요구 사기 일체 없음. 관리사 도착 후 직접 대면 확인하고 결제하시므로 안심하셔도 됩니다.</li>
+                        <li><strong>안심 개인정보 파기:</strong> 예약 정보는 당일 출장 배차 목적으로만 사용되며, 서비스 종료 즉시 안전하게 영구 파기됩니다.</li>
+                      </ul>
+                    </div>
+
                     {/* 3. 명확한 대형 확인 버튼 (문자 예약 전환) */}
                     <button
                       type="submit"
