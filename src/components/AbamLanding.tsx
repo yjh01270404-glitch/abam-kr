@@ -122,7 +122,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     },
     {
       q: 'A코스, B코스, C코스 중 어떤 코스를 추천하나요?',
-      a: '오일 없는 시원한 깊은 지압과 뭉친 근육 스트레칭을 원하시면 "A코스(로얄 건식 지압 타이)", 최고급 식물성 오일과 부드러운 유러피언 림프 이완을 원하시면 "B코스(힐링아로마 스웨디시)", 두 가지 장점을 결합하여 최고의 만족도를 선사하는 복합 풀케어를 원하신다면 고객 선호도 1위인 "C코스(로얄 VIP 더블 케어 90분/120분)" 코스를 가장 추천해 드립니다.'
+      a: '오일 없는 시원한 깊은 지압과 뭉친 근육 스트레칭을 원하시면 "A코스(로얄 건식 지압 타이)", 최고급 식물성 오일과 부드러운 유러피언 림프 이완을 원하시면 "B코스(힐링아로마 스웨디시)", 두 가지 장점을 결합하여 최고의 만족도를 선사하는 복합 풀케어를 원하신다면 고객 선호도 1위인 "C코스(로얄 스페셜 더블케어 90분/120분)" 코스를 가장 추천해 드립니다.'
     },
     {
       q: '전화 통화 없이 문자로만 예약할 수 있나요?',
@@ -206,9 +206,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* 1. 실시간 접수 상태 배지 (데스크톱 전용) */}
             <div className="abam-header-badge hidden lg:inline-flex items-center gap-2 px-3.5 bg-[#0F1626] border border-[#1E293B] shrink-0">
-              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse shrink-0"></span>
+              <span className={`w-2 h-2 rounded-full ${isOpenNow ? 'bg-[#10B981] animate-pulse' : 'bg-[#F59E0B]'} shrink-0`}></span>
               <span className="text-[12px] text-text-muted font-medium whitespace-nowrap">
-                🟢 실시간 영업중 (지금 즉시 배차 가능)
+                {isOpenNow ? '🟢 실시간 영업중 (지금 즉시 배차 가능)' : '🌙 사전 예약 접수중 (18:00 순차출발)'}
               </span>
             </div>
 
@@ -239,28 +239,77 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           right: 0,
           width: '100%',
           zIndex: 40,
-          background: 'linear-gradient(90deg, #032014 0%, #083321 50%, #032014 100%)',
-          borderBottom: '2px solid #34d399',
+          background: isOpenNow
+            ? 'linear-gradient(90deg, #032014 0%, #083321 50%, #032014 100%)'
+            : 'linear-gradient(90deg, #1c1503 0%, #2e2205 50%, #1c1503 100%)',
+          borderBottom: isOpenNow ? '2px solid #34d399' : '2px solid #f59e0b',
           padding: '8px 12px',
-          boxShadow: '0 4px 20px rgba(16,185,129,0.3)',
+          boxShadow: isOpenNow ? '0 4px 20px rgba(16,185,129,0.3)' : '0 4px 20px rgba(245,158,11,0.25)',
+          transition: 'all 0.3s ease',
         }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', fontSize: '12.5px', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', textAlign: 'left' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px', borderRadius: '9999px', backgroundColor: '#10b981', color: '#032014', fontWeight: 900, fontSize: '10.5px', letterSpacing: '0.5px', flexShrink: 0 }}>
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#ffffff', animation: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}></span>
-              실시간 배차 현황
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              padding: '3px 8px',
+              borderRadius: '9999px',
+              backgroundColor: isOpenNow ? '#10b981' : '#f59e0b',
+              color: isOpenNow ? '#032014' : '#080c16',
+              fontWeight: 900,
+              fontSize: '10.5px',
+              letterSpacing: '0.5px',
+              flexShrink: 0
+            }}>
+              <span style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                animation: isOpenNow ? 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
+              }}></span>
+              {isOpenNow ? '실시간 배차 현황' : '사전예약 접수중'}
             </span>
             <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '13px' }}>
-              🟢 <strong style={{ color: '#6ee7b7' }}>지금 즉시 배차 가능:</strong> 서울·경기 전지역 호텔·자택·오피스텔 (<strong style={{ color: '#fde047' }}>25~35분 내 신속 도착</strong>)
+              {isOpenNow ? (
+                <>🟢 <strong style={{ color: '#6ee7b7' }}>지금 즉시 배차 가능:</strong> 서울·경기 전지역 호텔·자택·오피스텔 (<strong style={{ color: '#fde047' }}>25~35분 내 신속 도착</strong>)</>
+              ) : (
+                <>🌙 <strong style={{ color: '#fde047' }}>사전 예약 접수중:</strong> 오늘 밤 18:00 순차출발 (<strong style={{ color: '#6ee7b7' }}>오늘 밤 야간 우선배차 접수</strong>)</>
+              )}
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ display: 'inline-block', fontSize: '11px', color: '#34d399', fontWeight: 800, backgroundColor: 'rgba(52,211,153,0.12)', border: '1px solid rgba(52,211,153,0.3)', padding: '2px 8px', borderRadius: '4px' }}>
+            <span style={{
+              display: 'inline-block',
+              fontSize: '11px',
+              color: isOpenNow ? '#34d399' : '#fde047',
+              fontWeight: 800,
+              backgroundColor: isOpenNow ? 'rgba(52,211,153,0.12)' : 'rgba(245,158,11,0.15)',
+              border: isOpenNow ? '1px solid rgba(52,211,153,0.3)' : '1px solid rgba(245,158,11,0.3)',
+              padding: '2px 8px',
+              borderRadius: '4px'
+            }}>
               100% 현장후불제
             </span>
-            <a href="#courses" style={{ background: '#10b981', color: '#032014', fontWeight: 800, padding: '4px 12px', borderRadius: '20px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', transition: 'transform 0.2s' }}>
-              ⚡ 실시간 빠른예약 &rarr;
+            <a
+              href="#courses"
+              style={{
+                background: isOpenNow ? '#10b981' : '#f59e0b',
+                color: '#032014',
+                fontWeight: 800,
+                padding: '4px 12px',
+                borderRadius: '20px',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                fontSize: '11.5px',
+                transition: 'transform 0.2s'
+              }}
+            >
+              {isOpenNow ? '⚡ 실시간 빠른예약 →' : '⏰ 오늘 밤 사전예약 →'}
             </a>
           </div>
         </div>
@@ -735,23 +784,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
                   <div className="flex items-center justify-between mb-4">
                     <span className="px-3 py-1 rounded-full bg-[#312E81]/40 text-[#818CF8] text-[11px] font-bold">건식 지압 + 아로마 스웨디시</span>
-                    <span className="text-[11px] text-[#818CF8] font-semibold">👑 VIP 올인원</span>
+                    <span className="text-[11px] text-[#818CF8] font-semibold">👑 VIP 올인원 (90분/120분)</span>
                   </div>
-                  <h3 className="text-[22px] font-bold text-text-primary mb-1">C코스 · 로얄 VIP 더블 케어 [타이+스웨디시]</h3>
+                  <h3 className="text-[22px] font-bold text-text-primary mb-1">C코스 · 로얄 스페셜 더블케어</h3>
                   <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
                     전반부 건식 딥티슈 지압으로 뭉친 근육을 깊이 있게 분해하고, 후반부 따뜻한 힐링 아로마 스웨디시로 림프를 순환시켜 주는 VIP 고객 만족도 1위 올인원 프로그램입니다.
                   </p>
 
                   {/* Price Tiers */}
                   <div className="space-y-3 mb-8">
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('C코스 60분 (10만)')}
-                      className="abam-price-row"
-                    >
-                      <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
-                      <span className="text-[17px] font-bold text-text-primary">₩100,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
                     <button
                       type="button"
                       onClick={() => openDirectAbamSms('C코스 90분 (12만)')}
@@ -768,9 +809,15 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       onClick={() => openDirectAbamSms('C코스 120분 (16만)')}
                       className="abam-price-row"
                     >
-                      <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
+                        <span className="px-1.5 py-0.5 rounded bg-[#818CF8]/20 text-[#818CF8] text-[10px] font-bold">VIP 풀코스</span>
+                      </div>
                       <span className="text-[17px] font-bold text-text-primary">₩160,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
                     </button>
+                    <div className="text-[11.5px] text-[#A5B4FC] font-medium text-center py-1.5 px-2 bg-[#1e293b]/60 rounded-lg border border-[#818CF8]/30">
+                      ※ 건식 지압과 아로마의 최상의 밸런스 풀케어를 위해 90분·120분으로만 정성껏 모십니다. (1시간 코스 제외)
+                    </div>
                   </div>
 
                   {/* Features */}
@@ -796,7 +843,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   className="abam-course-btn-gold"
                 >
                   <span className="material-symbols-outlined text-[18px]">chat</span>
-                  <span>C코스 로얄 VIP 간편예약</span>
+                  <span>C코스 로얄 스페셜 더블케어 간편예약</span>
                 </button>
               </div>
             </div>
@@ -2082,7 +2129,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 <div className="abam-footer-course-row" style={{ borderColor: 'rgba(238, 193, 75, 0.4)', background: 'linear-gradient(90deg, #0d1424 0%, #161e33 100%)' }}>
                   <span className="font-bold text-white flex items-center gap-1.5">
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary text-slate-950 font-black">인기</span>
-                    C코스 · 로얄 VIP 더블 케어 [타이+스웨디시]
+                    C코스 · 로얄 스페셜 더블케어
                   </span>
                   <span className="text-primary font-extrabold text-[12px]">120분 추천</span>
                 </div>

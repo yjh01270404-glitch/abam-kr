@@ -313,10 +313,9 @@ export default function AbamBookingGuideModal({
                 <option value="B코스 90분 (11만)">B코스 90분 (11만) — 110,000원 (BEST)</option>
                 <option value="B코스 120분 (14만)">B코스 120분 (14만) — 140,000원</option>
               </optgroup>
-              <optgroup label="── C코스 · 로얄 VIP 더블 케어 [타이+스웨디시] 👑 [VIP] ──">
-                <option value="C코스 60분 (10만)">C코스 60분 (10만) — 100,000원</option>
-                <option value="C코스 90분 (12만)">C코스 90분 (12만) — 120,000원 (인기)</option>
-                <option value="C코스 120분 (16만)">C코스 120분 (16만) — 160,000원 (풀코스)</option>
+              <optgroup label="── C코스 · 로얄 스페셜 더블케어 [VIP 90분/120분] ──">
+                <option value="C코스 90분 (12만)">C코스 90분 (12만) — 120,000원 (인기 추천)</option>
+                <option value="C코스 120분 (16만)">C코스 120분 (16만) — 160,000원 (VIP 풀코스)</option>
               </optgroup>
             </select>
           </div>

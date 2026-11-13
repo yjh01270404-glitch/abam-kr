@@ -5,7 +5,7 @@ import { KO } from '@/lib/landing-content';
 
 export const metadata: Metadata = {
   title: '아밤 공식 코스 및 정찰제 이용 안내 | 서울·경기 전지역 30분 도착 100% 현장후불제',
-  description: '아밤(Abam.kr) 공식 정찰제 요금표. A코스(로얄 타이) 8만원, B코스(힐링 아로마) 9만원, C코스(로얄 VIP) 10만원. 선입금 0원, 예약금 0원, 100% 기사 대면 현장결제. 서울 25개구 경기 전지역 30분 신속 도착.',
+  description: '아밤(Abam.kr) 공식 정찰제 요금표. A코스(로얄 타이) 8만원, B코스(힐링 아로마) 9만원, C코스(로얄 스페셜 더블케어) 12만원. 선입금 0원, 예약금 0원, 100% 기사 대면 현장결제. 서울 25개구 경기 전지역 30분 신속 도착.',
   alternates: {
     canonical: 'https://abam.kr/',
   },
