@@ -36,8 +36,8 @@ export default function AbamBookingGuideModal({
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
       const kstDate = new Date(utc + (9 * 3600000));
       const h = kstDate.getHours();
-      setIsOpenNow(h >= 18 || h < 5);
-      setIsLateNight(h >= 3 && h < 5);
+      setIsOpenNow(h >= 18 || h < 4);
+      setIsLateNight(h >= 2 && h < 4);
     };
     checkKst();
   }, [isOpen]);
@@ -196,7 +196,7 @@ export default function AbamBookingGuideModal({
                   whiteSpace: 'nowrap',
                 }}
               >
-                {isLateNight ? '⚡ [심야 배차] 새벽 05:00까지 정상영업' : isOpenNow ? '🟢 실시간 영업중 (18:00~05:00)' : '🌙 사전 예약 접수중'}
+                {isLateNight ? '⚡ [심야 배차] 새벽 04:00까지 예약 접수' : isOpenNow ? '🟢 실시간 영업중 (04:00까지 접수)' : '🌙 사전 예약 접수중'}
               </span>
               <span
                 style={{
@@ -226,7 +226,7 @@ export default function AbamBookingGuideModal({
               문자 간편 예약 양식 (010-6607-2239)
             </h2>
             <div style={{ fontSize: '11.5px', color: '#cbd5e1', marginTop: '3px', lineHeight: 1.4 }}>
-              {isLateNight ? '⚡ 새벽 5시까지 정상 접수 · 지금 예약 시 20~25분 내 신속 도착' : '접수 18:00 ~ 마감 05:00 (출발 19:00~) · 서울·경기 30~40분 내 도착'}
+              {isLateNight ? '⚡ 새벽 4시까지 정상 접수 · 지금 예약 시 25~35분 내 신속 도착' : '18:00부터 예약 가능 · 19:00부터 순차출발 · 04:00까지 예약 접수'}
             </div>
           </div>
           <button
@@ -656,7 +656,7 @@ export default function AbamBookingGuideModal({
                 <div>
                   <strong style={{ color: '#fbbf24' }}>Q. 몇 시까지 영업하며 도착 시간은?</strong>
                   <br />
-                  A. 매일 18:00 접수 시작, 19:00~05:00 운영되며 접수 후 평균 25~35분 내에 신속 도착합니다.
+                  A. 매일 18:00 예약 오픈, 19:00 순차출발(04:00까지 예약 접수)되며 접수 후 평균 25~35분 내에 신속 도착합니다.
                 </div>
                 <div>
                   <strong style={{ color: '#fbbf24' }}>Q. 따로 준비할 물품이 있나요?</strong>
