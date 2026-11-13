@@ -88,7 +88,7 @@ export const KO: LandingContent = {
   lang: 'ko',
   htmlLang: 'ko',
   brandTag: '아름다운 밤, 아밤(ABAM) · 서울·경기 100% 현장 대면결제 프라이빗 홈케어',
-  topBar: { pre: '아름다운 밤 아밤(Abam.kr) · 서울·경기 100% 현장후불제 · ', strong: '20대 전문 힐러 (예약 18:00~ / 출발 19:00~ / 마지막 예약 05:00)' },
+  topBar: { pre: '아름다운 밤 아밤(Abam.kr) · 서울·경기 100% 현장후불제 · ', strong: '20대 전문 힐러 (18:00부터 예약 가능 · 19:00부터 순차출발 · 04:00까지 예약 가능)' },
   navLabels: { info: '🕕 예약 안내', courses: '🍃 코스 소개', price: '💳 COURSE & PRICE', faq: '❓ 자주묻는 질문' },
   hero: {
     badge: '아름다운 밤, 아밤 · 서울·경기 100% 현장 대면결제',
@@ -97,7 +97,7 @@ export const KO: LandingContent = {
     bannerSub: ['서울·경기 전역', '1시간전 예약권장', '100% 현장 대면결제'],
   },
   info: [
-    { icon: INFO_ICONS[0], title: '예약 접수 18:00부터', sub: '(매니저 출발 19:00부터 · 마지막 예약 05:00)' },
+    { icon: INFO_ICONS[0], title: '예약 접수 18:00부터', sub: '(매니저 출발 19:00부터 · 04:00까지 예약 가능)' },
     { icon: INFO_ICONS[1], title: '1시간 전 예약 추천', sub: '원하는 시간에 가장 수월하게 이용' },
     { icon: INFO_ICONS[2], title: '원하는 프라이빗 공간', sub: '(자택 · 아파트 · 호텔 등)' },
     { icon: INFO_ICONS[3], title: '선입금 없는 안심', sub: '100% 현장 대면결제' },
@@ -179,8 +179,8 @@ export const KO: LandingContent = {
   },
   footer: {
     title: '서울·경기 출장마사지 · 출장안마 [20대 ACE 총출동] · 아밤(Abam.kr)',
-    sub: '20대 전문 관리사 1:1 방문 케어 · 18시 접수 · 19시 순차 출발 · 100% 현장후불제',
-    line: 'Abam.kr · 아름다운 밤, 20대 ACE 총출동 · 서울·경기 전역 100% 현장 대면결제 · 예약 18:00부터 · 출발 19:00부터 · 마지막 예약 05:00 마감 · 고객센터 010-6607-2239',
+    sub: '20대 전문 관리사 1:1 방문 케어 · 18시부터 예약 가능 · 19시 순차 출발 · 04시까지 예약 가능 · 100% 현장후불제',
+    line: 'Abam.kr · 아름다운 밤, 20대 ACE 총출동 · 서울·경기 전역 100% 현장 대면결제 · 예약 18:00부터 · 출발 19:00부터 · 04:00까지 예약 가능 마감 · 고객센터 010-6607-2239',
   },
   cta: { primary: 'call', kakao: '', whatsapp: 'WhatsApp', call: '', callBar: '전화예약' },
   modal: { title: '문자 간편 예약 양식', body: '문자로 편하게 남겨주시면 바로 안내해 드립니다.', idLabel: '', copy: '복사', open: '문자 예약하기', close: '닫기', copied: '복사 완료' },

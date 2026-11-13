@@ -12,7 +12,17 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showAllLinks, setShowAllLinks] = useState(false);
-  const [isOpenNow, setIsOpenNow] = useState<boolean>(true);
+  const [scheduleState, setScheduleState] = useState<{
+    isDispatchActive: boolean; // 19:00 ~ 03:59: 순차출발 가동중 (04시까지 예약 가능)
+    isBookingOpen: boolean;    // 18:00 ~ 18:59: 18시 예약 오픈 (19시 순차출발)
+    isDaytime: boolean;        // 04:00 ~ 17:59: 오늘 밤 사전예약
+    isGreen: boolean;
+  }>({
+    isDispatchActive: true,
+    isBookingOpen: false,
+    isDaytime: false,
+    isGreen: true
+  });
 
   React.useEffect(() => {
     const checkKst = () => {
@@ -20,7 +30,22 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
       const kstDate = new Date(utc + (9 * 3600000));
       const hour = kstDate.getHours();
-      setIsOpenNow(hour >= 18 || hour < 5);
+
+      // 운영 시간 공식 규칙:
+      // 18:00부터 예약 가능
+      // 19:00부터 순차 출발
+      // 04:00까지 예약 가능 (04시 마감이 아닌 04시까지 예약 접수)
+      const isDispatchActive = (hour >= 19 || hour < 4);
+      const isBookingOpen = (hour === 18);
+      const isDaytime = (hour >= 4 && hour < 18);
+      const isGreen = (isDispatchActive || isBookingOpen);
+
+      setScheduleState({
+        isDispatchActive,
+        isBookingOpen,
+        isDaytime,
+        isGreen
+      });
     };
     checkKst();
     const interval = setInterval(checkKst, 60000);
@@ -206,9 +231,9 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* 1. 실시간 접수 상태 배지 (데스크톱 전용) */}
             <div className="abam-header-badge hidden lg:inline-flex items-center gap-2 px-3.5 bg-[#0F1626] border border-[#1E293B] shrink-0">
-              <span className={`w-2 h-2 rounded-full ${isOpenNow ? 'bg-[#10B981] animate-pulse' : 'bg-[#F59E0B]'} shrink-0`}></span>
+              <span className={`w-2 h-2 rounded-full ${scheduleState.isGreen ? 'bg-[#10B981] animate-pulse' : 'bg-[#F59E0B]'} shrink-0`}></span>
               <span className="text-[12px] text-text-muted font-medium whitespace-nowrap">
-                {isOpenNow ? '🟢 실시간 영업중 (지금 즉시 배차 가능)' : '🌙 사전 예약 접수중 (18:00 순차출발)'}
+                {scheduleState.isDispatchActive ? '🟢 실시간 순차출발중 (04시까지 예약 가능)' : scheduleState.isBookingOpen ? '🟢 18시 예약 오픈 (19시 순차출발)' : '🌙 오늘 밤 사전예약 (18시 오픈 / 19시 출발)'}
               </span>
             </div>
 
@@ -230,7 +255,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
         </div>
       </header>
 
-      {/* 0. ULTRA HIGH-VISIBILITY LIVE DISPATCH TOP BANNER */}
+      {/* 0. ULTRA HIGH-VISIBILITY LIVE DISPATCH TOP BANNER - MOBILE STRICTLY 1-LINE */}
       <aside
         style={{
           position: 'fixed',
@@ -239,64 +264,93 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           right: 0,
           width: '100%',
           zIndex: 40,
-          background: isOpenNow
+          background: scheduleState.isGreen
             ? 'linear-gradient(90deg, #032014 0%, #083321 50%, #032014 100%)'
             : 'linear-gradient(90deg, #1c1503 0%, #2e2205 50%, #1c1503 100%)',
-          borderBottom: isOpenNow ? '2px solid #34d399' : '2px solid #f59e0b',
-          padding: '8px 12px',
-          boxShadow: isOpenNow ? '0 4px 20px rgba(16,185,129,0.3)' : '0 4px 20px rgba(245,158,11,0.25)',
+          borderBottom: scheduleState.isGreen ? '1px solid #34d399' : '1px solid #f59e0b',
+          padding: '7px 10px',
+          boxShadow: scheduleState.isGreen ? '0 2px 10px rgba(16,185,129,0.25)' : '0 2px 10px rgba(245,158,11,0.2)',
           transition: 'all 0.3s ease',
+          boxSizing: 'border-box',
+          overflow: 'hidden',
+          minHeight: '34px',
+          maxHeight: '38px',
         }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', fontSize: '12.5px', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', textAlign: 'left' }}>
-            <span style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '5px',
-              padding: '3px 8px',
-              borderRadius: '9999px',
-              backgroundColor: isOpenNow ? '#10b981' : '#f59e0b',
-              color: isOpenNow ? '#032014' : '#080c16',
-              fontWeight: 900,
-              fontSize: '10.5px',
-              letterSpacing: '0.5px',
-              flexShrink: 0
-            }}>
-              <span style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: '#ffffff',
-                animation: isOpenNow ? 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
-              }}></span>
-              {isOpenNow ? '실시간 배차 현황' : '사전예약 접수중'}
+        {/* MOBILE ONLY: Strictly 1 Line (No Wrap, Clean Centered) */}
+        <div className="flex md:hidden items-center justify-center text-center w-full overflow-hidden">
+          <a
+            href="#courses"
+            className="text-[12px] font-bold text-white tracking-tight truncate block max-w-full text-center"
+            style={{ textDecoration: 'none', lineHeight: '1.2' }}
+          >
+            {scheduleState.isDispatchActive ? (
+              <>🟢 <strong style={{ color: '#6ee7b7' }}>실시간 순차출발 가동중</strong> · 오늘 밤 04시까지 예약 가능</>
+            ) : scheduleState.isBookingOpen ? (
+              <>🟢 <strong style={{ color: '#fde047' }}>18시 예약 오픈!</strong> 19시 순차출발 (04시까지 예약 가능)</>
+            ) : (
+              <>🌙 <strong style={{ color: '#fde047' }}>오늘 밤 사전예약:</strong> 18시 오픈 / 19시 순차출발 (04시까지 접수)</>
+            )}
+          </a>
+        </div>
+
+        {/* DESKTOP (>= 768px): Rich 1-Line Flex Bar */}
+        <div className="hidden md:flex items-center justify-between gap-4 max-w-[1200px] mx-auto text-[12.5px]">
+          <div className="flex items-center gap-2.5 truncate">
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                padding: '3px 9px',
+                borderRadius: '9999px',
+                backgroundColor: scheduleState.isGreen ? '#10b981' : '#f59e0b',
+                color: scheduleState.isGreen ? '#032014' : '#080c16',
+                fontWeight: 900,
+                fontSize: '11px',
+                flexShrink: 0
+              }}
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: '#ffffff',
+                  animation: scheduleState.isGreen ? 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
+                }}
+              ></span>
+              {scheduleState.isDispatchActive ? '실시간 배차 가동' : scheduleState.isBookingOpen ? '예약 접수 개시' : '야간 사전예약'}
             </span>
-            <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '13px' }}>
-              {isOpenNow ? (
-                <>🟢 <strong style={{ color: '#6ee7b7' }}>지금 즉시 배차 가능:</strong> 서울·경기 전지역 호텔·자택·오피스텔 (<strong style={{ color: '#fde047' }}>25~35분 내 신속 도착</strong>)</>
+            <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '13px' }} className="truncate">
+              {scheduleState.isDispatchActive ? (
+                <>🟢 <strong style={{ color: '#6ee7b7' }}>실시간 순차출발 가동중:</strong> 오늘 밤 04:00까지 예약 가능 (<strong style={{ color: '#fde047' }}>서울·경기 25~35분 도착</strong>)</>
+              ) : scheduleState.isBookingOpen ? (
+                <>🟢 <strong style={{ color: '#fde047' }}>18:00 예약 접수 시작:</strong> 오늘 밤 19시부터 순차출발 (<strong style={{ color: '#6ee7b7' }}>오늘 밤 04시까지 예약 가능</strong>)</>
               ) : (
-                <>🌙 <strong style={{ color: '#fde047' }}>사전 예약 접수중:</strong> 오늘 밤 18:00 순차출발 (<strong style={{ color: '#6ee7b7' }}>오늘 밤 야간 우선배차 접수</strong>)</>
+                <>🌙 <strong style={{ color: '#fde047' }}>야간 사전예약 접수중:</strong> 18:00 예약 오픈 · 19:00 순차출발 (<strong style={{ color: '#6ee7b7' }}>04시까지 예약 가능</strong>)</>
               )}
             </span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{
-              display: 'inline-block',
-              fontSize: '11px',
-              color: isOpenNow ? '#34d399' : '#fde047',
-              fontWeight: 800,
-              backgroundColor: isOpenNow ? 'rgba(52,211,153,0.12)' : 'rgba(245,158,11,0.15)',
-              border: isOpenNow ? '1px solid rgba(52,211,153,0.3)' : '1px solid rgba(245,158,11,0.3)',
-              padding: '2px 8px',
-              borderRadius: '4px'
-            }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="shrink-0">
+            <span
+              style={{
+                display: 'inline-block',
+                fontSize: '11px',
+                color: scheduleState.isGreen ? '#34d399' : '#fde047',
+                fontWeight: 800,
+                backgroundColor: scheduleState.isGreen ? 'rgba(52,211,153,0.12)' : 'rgba(245,158,11,0.15)',
+                border: scheduleState.isGreen ? '1px solid rgba(52,211,153,0.3)' : '1px solid rgba(245,158,11,0.3)',
+                padding: '2px 8px',
+                borderRadius: '4px'
+              }}
+            >
               100% 현장후불제
             </span>
             <a
               href="#courses"
               style={{
-                background: isOpenNow ? '#10b981' : '#f59e0b',
+                background: scheduleState.isGreen ? '#10b981' : '#f59e0b',
                 color: '#032014',
                 fontWeight: 800,
                 padding: '4px 12px',
@@ -309,7 +363,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 transition: 'transform 0.2s'
               }}
             >
-              {isOpenNow ? '⚡ 실시간 빠른예약 →' : '⏰ 오늘 밤 사전예약 →'}
+              {scheduleState.isGreen ? '⚡ 실시간 빠른예약 →' : '⏰ 오늘 밤 사전예약 →'}
             </a>
           </div>
         </div>
@@ -384,7 +438,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   </div>
 
                   {/* 실시간 배차 & 안심 이용 보증 바 */}
-                  <div className="w-full max-w-xl lg:max-w-none mb-5 p-4 rounded-xl bg-[#0f172a] border border-[#334155] text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
+                  <div className="hidden md:flex w-full max-w-xl lg:max-w-none mb-5 p-4 rounded-xl bg-[#0f172a] border border-[#334155] text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-[#1e293b] border border-[#475569] flex items-center justify-center text-xl shrink-0 text-[#EEC14B]">
                         🛡️
@@ -394,7 +448,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                           <span className="text-[14px] sm:text-[15px] font-bold text-white">실시간 배차 현황</span>
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-bold">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                            {isOpenNow ? '야간 집중 배차중 (18:00~04:00)' : '주간 사전예약 접수중'}
+                            {scheduleState.isDispatchActive ? '실시간 순차출발중 (04시까지 예약 가능)' : scheduleState.isBookingOpen ? '18시 예약 오픈 (19시 순차출발)' : '사전예약 접수중 (18시 오픈 / 19시 순차출발)'}
                           </span>
                         </div>
                         <p className="text-[12px] text-slate-300 leading-snug mt-1">
@@ -2096,7 +2150,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <div className="pt-1 space-y-1.5 text-[12px] text-[#64748B]">
                 <div className="flex items-center gap-2">
                   <span className="text-primary font-bold">운영시간</span>
-                  <span className="text-slate-300">매일 18:00 ~ 익일 04:00 (사전접수 18:00~ / 배차 19:00~)</span>
+                  <span className="text-slate-300">매일 18:00 ~ 04:00 (18:00부터 예약 가능 · 19:00부터 순차출발 · 04:00까지 예약 접수)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-primary font-bold">방문지역</span>
