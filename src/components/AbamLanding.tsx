@@ -38,7 +38,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const [quickCourse, setQuickCourse] = useState('타이 90분 (10만)');
+  const [quickCourse, setQuickCourse] = useState('Course A 90분 (10만)');
   const [quickAddr, setQuickAddr] = useState('');
   const [quickDoor, setQuickDoor] = useState('');
   const [quickPay, setQuickPay] = useState('계좌이체');
@@ -78,7 +78,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
   };
 
   const copyBookingSlip = () => {
-    const text = `[아밤 빠른예약신청]\n• 코스: 타이 90분 (10만)\n• 주소: [방문 상세주소/호텔명·호수]\n• 공비: [공동현관 비번 or 1층호출]\n• 결제: [계좌이체 / 현금 / 카드]`;
+    const text = `[아밤 빠른예약신청]\n• 코스: Course A 90분 (10만)\n• 주소: [방문 상세주소/호텔명·호수]\n• 공비: [공동현관 비번 or 1층호출]\n• 결제: [계좌이체 / 현금 / 카드]`;
     if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).catch(() => {});
     }
@@ -121,8 +121,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
       a: '고객님의 방문 주소 및 연락처는 배차 완료 후 안전하게 파기되며 어떠한 서버나 장부에도 기록되지 않습니다. 철저한 1:1 비밀 보장 원칙으로 안심하고 이용하실 수 있습니다.'
     },
     {
-      q: '타이, 아로마, 스페셜 중 어떤 코스를 추천하나요?',
-      a: '시원한 수기 지압과 뭉친 근육 스트레칭을 원하시면 "타이(건식)", 부드러운 전신 순환과 림프 이완을 원하시면 "아로마(오일)", 두 가지의 장점을 모두 경험하고 싶으시다면 고객 만족도 1위인 "스페셜(타이+아로마) 90분" 코스를 추천해 드립니다.'
+      q: 'Course A, Course B, Course C 중 어떤 코스를 추천하나요?',
+      a: '오일 없는 시원한 깊은 지압과 뭉친 근육 스트레칭을 원하시면 "Course A(로얄 건식 지압 타이)", 최고급 식물성 오일과 부드러운 유러피언 림프 이완을 원하시면 "Course B(힐링아로마 스웨디시)", 두 가지 장점을 결합하여 최고의 만족도를 선사하는 복합 풀케어를 원하신다면 고객 선호도 1위인 "Course C(로얄 VIP 더블 케어 90분/120분)" 코스를 가장 추천해 드립니다.'
     },
     {
       q: '전화 통화 없이 문자로만 예약할 수 있나요?',
@@ -566,7 +566,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   <div className="space-y-3 mb-8">
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('타이1 8만')}
+                      onClick={() => openDirectAbamSms('Course A 60분 (8만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
@@ -574,7 +574,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('타이90 10만')}
+                      onClick={() => openDirectAbamSms('Course A 90분 (10만)')}
                       className="abam-price-row highlight"
                     >
                       <div className="flex items-center gap-2">
@@ -585,7 +585,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('타이2 12만')}
+                      onClick={() => openDirectAbamSms('Course A 120분 (12만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
@@ -612,7 +612,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
                 <button
                   type="button"
-                  onClick={() => openDirectAbamSms('타이90 10만')}
+                  onClick={() => openDirectAbamSms('Course A 90분 (10만)')}
                   className="abam-course-btn-gold"
                 >
                   <span className="material-symbols-outlined text-[18px]">chat</span>
@@ -658,7 +658,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   <div className="space-y-3 mb-8">
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('아로마1 9만')}
+                      onClick={() => openDirectAbamSms('Course B 60분 (9만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
@@ -666,7 +666,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('아로마90 11만')}
+                      onClick={() => openDirectAbamSms('Course B 90분 (11만)')}
                       className="abam-price-row highlight"
                     >
                       <div className="flex items-center gap-2">
@@ -677,7 +677,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('아로마2 14만')}
+                      onClick={() => openDirectAbamSms('Course B 120분 (14만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
@@ -704,7 +704,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
                 <button
                   type="button"
-                  onClick={() => openDirectAbamSms('아로마90 11만')}
+                  onClick={() => openDirectAbamSms('Course B 90분 (11만)')}
                   className="abam-course-btn-featured"
                 >
                   <span className="material-symbols-outlined text-[18px]">chat</span>
@@ -746,7 +746,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   <div className="space-y-3 mb-8">
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('스페셜1 10만')}
+                      onClick={() => openDirectAbamSms('Course C 60분 (10만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
@@ -754,7 +754,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('스페셜90 12만')}
+                      onClick={() => openDirectAbamSms('Course C 90분 (12만)')}
                       className="abam-price-row highlight"
                     >
                       <div className="flex items-center gap-2">
@@ -765,7 +765,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </button>
                     <button
                       type="button"
-                      onClick={() => openDirectAbamSms('스페셜2 16만')}
+                      onClick={() => openDirectAbamSms('Course C 120분 (16만)')}
                       className="abam-price-row"
                     >
                       <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
@@ -792,7 +792,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
 
                 <button
                   type="button"
-                  onClick={() => openDirectAbamSms('스페셜90 12만')}
+                  onClick={() => openDirectAbamSms('Course C 90분 (12만)')}
                   className="abam-course-btn-gold"
                 >
                   <span className="material-symbols-outlined text-[18px]">chat</span>
@@ -989,10 +989,10 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {[
-                        { title: '타이 90분 (10만)', tag: '인기' },
-                        { title: '아로마 90분 (11만)', tag: '추천' },
-                        { title: 'VIP 90분 (12만)', tag: '베스트' },
-                        { title: '타이 60분 (8만)', tag: '기본' },
+                        { title: 'Course A 90분 (10만)', tag: '인기' },
+                        { title: 'Course B 90분 (11만)', tag: '추천' },
+                        { title: 'Course C 90분 (12만)', tag: '베스트' },
+                        { title: 'Course A 60분 (8만)', tag: '기본' },
                       ].map((item) => (
                         <button
                           key={item.title}

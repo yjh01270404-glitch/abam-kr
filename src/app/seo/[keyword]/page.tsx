@@ -585,7 +585,7 @@ export default async function SeoLandingPage({ params }: Props) {
               아밤 (Abam.kr) · 서울·경기 1:1 방문 홈케어
             </div>
             <div>예약 및 상담: {PHONE_NUM} · 18:00 예약 접수 · 19:00 출발 · 05:00 마감</div>
-            <div>코스: 타이 · 아로마 · 스페셜 (60분 / 90분 / 120분)</div>
+            <div>코스: Course A(로얄 타이) · Course B(힐링 아로마) · Course C(로얄 VIP) (60분 / 90분 / 120분)</div>
           </div>
         </footer>
 

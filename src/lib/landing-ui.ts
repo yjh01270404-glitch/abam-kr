@@ -76,18 +76,18 @@ export const UI: Record<UiLang, UiStrings> = {
     modalDesc: '아래 양식을 확인하신 후 **[문자 앱으로 바로 전송]**을 누르시면 내용이 자동으로 입력된 문자창이 열립니다.',
     modalNotice: '이용 희망 시간 **1시간 전쯤** 예약하시면 원하시는 시간대에 가장 수월하게 받으실 수 있습니다.',
     previewTitle: '[아밤 빠른 예약 양식]',
-    preview: ['1. 희망 코스: 타이 / 아로마 / 스페셜', '2. 방문 주소: (동·호수 상세 기재)', '3. 주차장 유무: (도착 시 전화 요망)', '4. 1층 공동현관: (비밀번호 또는 호출버튼 가능)', '5. 호텔·모텔명: (1층 로비에서 기사에게 대면결제)', '6. 결제 수단: 현금 / 계좌이체 / 카드'],
+    preview: ['1. 희망 코스: Course A(로얄 타이) / Course B(힐링 아로마) / Course C(로얄 VIP)', '2. 방문 주소: (동·호수 상세 기재)', '3. 주차장 유무: (도착 시 전화 요망)', '4. 1층 공동현관: (비밀번호 또는 호출버튼 가능)', '5. 호텔·모텔명: (1층 로비에서 기사에게 대면결제)', '6. 결제 수단: 현금 / 계좌이체 / 카드'],
     send: '문자 앱으로 바로 전송하기', copy: '예약 양식 복사하기', callModal: '전화 바로 연결',
     assure1: '• 선입금·예약금 없는 100% 현장 대면결제', assure2: '• 18시 접수 · 19시 순차 출발 (1시간 전 예약 권장)', close: '닫기',
     toast: '예약 양식이 복사되었습니다. 문자에 붙여넣어 주세요.',
     tpl: `[아밤] 예약 신청 양식 (웹사이트 미저장 · 문자창 전용)
 • 방문 주소 (동·호수 또는 호텔명·객실번호): 
-• 희망 코스 및 시간: (타이 / 아로마 / 스페셜 · 60분 / 90분 / 120분)
+• 희망 코스 및 시간: (Course A / Course B / Course C · 60분 / 90분 / 120분)
 • 주차 / 1층 공동현관: (비밀번호 또는 호출버튼 / 호텔 1층 로비)
 • 결제 방식: 현장에서 대면결제 (현금 잔돈유무 / 계좌이체 / 카드)`,
     smsBody: `[아밤] 예약 신청 양식
 • 방문 주소 (동·호수 또는 호텔명·객실번호): 
-• 희망 코스 및 시간: (타이 / 아로마 / 스페셜 · 60분 / 90분 / 120분)
+• 희망 코스 및 시간: (Course A / Course B / Course C · 60분 / 90분 / 120분)
 • 주차 / 1층 공동현관: (비밀번호 또는 호출버튼 / 호텔 1층 로비)
 • 결제 방식: 현장에서 대면결제 (현금 잔돈유무 / 계좌이체 / 카드)`,
   },
@@ -112,7 +112,7 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: 'Recharge your tired body and mind in the comfort of your own private space.',
     priceTitle: 'Courses & Prices', priceSub: 'No deposit · 100% pay on arrival · 3 signature courses',
     priceBar1: 'Abam 3 private signature courses', priceBar2: 'Flat prices · 100% pay on arrival',
-    courseLetter: ['Thai', 'Aroma', 'Special'], courseSuffix: '',
+    courseLetter: ['Course A (Thai)', 'Course B (Swedish)', 'Course C (VIP Double)'], courseSuffix: '',
     tags: ['Solid basics · Beat the fatigue', 'Customer choice #1 · BEST', 'VIP Special all-care'],
     chips: [
       ['Full-body dry acupressure', 'Relieves shoulder & back tension', 'Stretching to restore balance'],
@@ -138,18 +138,18 @@ export const UI: Record<UiLang, UiStrings> = {
     modalDesc: 'Check the form below, then tap **[Send via messages]** to open a message with the details pre-filled.',
     modalNotice: 'Booking **about 1 hour ahead** gives you the smoothest experience.',
     previewTitle: '[Abam quick booking form]',
-    preview: ['1. Course: Thai / Aroma / Special', '2. Address: (building, room no.)', '3. Parking: (please call on arrival)', '4. 1st-floor entrance: (password or call button OK)', '5. Hotel / motel name: (meet in 1st-floor lobby, pay face to face)', '6. Payment: Cash / Transfer / Card'],
+    preview: ['1. Course: Course A(Thai) / Course B(Swedish) / Course C(VIP)', '2. Address: (building, room no.)', '3. Parking: (please call on arrival)', '4. 1st-floor entrance: (password or call button OK)', '5. Hotel / motel name: (meet in 1st-floor lobby, pay face to face)', '6. Payment: Cash / Transfer / Card'],
     send: 'Send via messages', copy: 'Copy booking form', callModal: 'Call now',
     assure1: '• No deposit · 100% pay on arrival', assure2: '• Booking from 18:00 · Departures from 19:00 (Book 1 hr ahead)', close: 'Close',
     toast: 'Form copied. Please paste it into your message.',
     tpl: `[Abam Booking Slip]
 • Address / Hotel & Room: 
-• Course & Duration: (Thai / Aroma / Special · 60m / 90m / 120m)
+• Course & Duration: (Course A / Course B / Course C · 60m / 90m / 120m)
 • Parking / 1F Entrance: (Password / Call button / Hotel 1F Lobby)
 • Payment on Arrival: (Cash / Transfer / Card)`,
     smsBody: `[Abam Booking Slip]
 • Address / Hotel & Room: 
-• Course & Duration: (Thai / Aroma / Special · 60m / 90m / 120m)
+• Course & Duration: (Course A / Course B / Course C · 60m / 90m / 120m)
 • Parking / 1F Entrance: (Password / Call button / Hotel 1F Lobby)
 • Payment on Arrival: (Cash / Transfer / Card)`,
   },
@@ -174,7 +174,7 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: 'お仕事や日常でお疲れの心身を、最も落ち着くプライベート空間で癒します。',
     priceTitle: 'コース・料金表', priceSub: '前払いなし · 100%対面後払い · 3つのシグネチャーコース',
     priceBar1: 'Abam 3大プライベートコース', priceBar2: '全コース定額 · 100%対面後払い',
-    courseLetter: ['タイ', 'アロマ', 'スペシャル'], courseSuffix: '',
+    courseLetter: ['Course A 指圧タイ', 'Course B アロマ', 'Course C VIPダブル'], courseSuffix: '',
     tags: ['基本に忠実 · 凝りを解消', 'お客様人気No.1 · BEST', 'VIPスペシャルオールケア'],
     chips: [
       ['全身の乾式指圧', '肩・腰の凝りを解消', 'ストレッチでバランス回復'],
@@ -200,18 +200,18 @@ export const UI: Record<UiLang, UiStrings> = {
     modalDesc: '下記フォームをご確認のうえ、**[メッセージで送信]**を押すと内容が入力されたメッセージ画面が開きます。',
     modalNotice: 'ご希望の**1時間前**までにご予約いただくと最もスムーズです。',
     previewTitle: '[Abam クイック予約フォーム]',
-    preview: ['1. コース: タイ / アロマ / スペシャル', '2. 住所: (建物名・部屋番号)', '3. 駐車場: (到着時にお電話ください)', '4. 1階エントランス: (暗証番号または呼び出しボタン可)', '5. ホテル・モーテル名: (1階ロビーで合流し対面払い)', '6. お支払い: 現金 / 振込 / カード'],
+    preview: ['1. コース: Course A(タイ) / Course B(アロマ) / Course C(VIP)', '2. 住所: (建物名・部屋番号)', '3. 駐車場: (到着時にお電話ください)', '4. 1階エントランス: (暗証番号または呼び出しボタン可)', '5. ホテル・モーテル名: (1階ロビーで合流し対面払い)', '6. お支払い: 現金 / 振込 / カード'],
     send: 'メッセージで送信', copy: '予約フォームをコピー', callModal: '電話する',
     assure1: '• 前払いなし · 100%対面後払い', assure2: '• 18時受付 · 19時順次出発 (1時間前予約推奨)', close: '閉じる',
     toast: 'フォームをコピーしました。メッセージに貼り付けてください。',
     tpl: `[Abam ご予約申込]
 • 住所 / ホテル名・部屋番号: 
-• コース・時間: (タイ / アロマ / スペシャル · 60分 / 90分 / 120分)
+• コース・時間: (Course A / Course B / Course C · 60分 / 90分 / 120分)
 • 駐車場・1階エントランス: (暗証番号 / 呼び出しボタン / ホテル1階ロビー)
 • 現地お支払い: (現金 / 振込 / カード)`,
     smsBody: `[Abam ご予約申込]
 • 住所 / ホテル名・部屋番号: 
-• コース・時間: (タイ / アロマ / スペシャル · 60分 / 90分 / 120分)
+• コース・時間: (Course A / Course B / Course C · 60分 / 90分 / 120分)
 • 駐車場・1階エントランス: (暗証番号 / 呼び出しボタン / ホテル1階ロビー)
 • 現地お支払い: (現金 / 振込 / カード)`,
   },
@@ -236,7 +236,7 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: '让您在最舒适、熟悉的私密空间里，消除工作与生活的疲惫。',
     priceTitle: '项目与价格表', priceSub: '无需定金 · 100%现场当面付款 · 3大招牌项目',
     priceBar1: 'Abam 3大私密专属项目', priceBar2: '全项目明码标价 · 100%当面付款',
-    courseLetter: ['泰式', '精油', '特别'], courseSuffix: '',
+    courseLetter: ['Course A 泰式', 'Course B 芳香精油', 'Course C 尊贵双重'], courseSuffix: '',
     tags: ['基础扎实 · 消除酸痛疲劳', '顾客首选No.1 · BEST', 'VIP特别全方位护理'],
     chips: [
       ['全身干式指压', '缓解肩腰酸痛', '拉伸恢复平衡'],
@@ -262,18 +262,18 @@ export const UI: Record<UiLang, UiStrings> = {
     modalDesc: '请确认下方表单，然后点击**[通过短信发送]**，将打开已自动填好内容的短信窗口。',
     modalNotice: '建议**提前1小时**预约，体验最顺畅。',
     previewTitle: '[Abam 快速预约表单]',
-    preview: ['1. 项目: 泰式 / 芳香 / 特别', '2. 地址: (楼栋、房号)', '3. 停车场: (到达时请来电)', '4. 一楼大门: (密码或呼叫按钮均可)', '5. 酒店/旅馆名称: (一楼大堂会合并当面付款)', '6. 付款方式: 现金 / 转账 / 刷卡'],
+    preview: ['1. 项目: Course A(泰式) / Course B(精油) / Course C(尊贵VIP)', '2. 地址: (楼栋、房号)', '3. 停车场: (到达时请来电)', '4. 一楼大门: (密码或呼叫按钮均可)', '5. 酒店/旅馆名称: (一楼大堂会合并当面付款)', '6. 付款方式: 现金 / 转账 / 刷卡'],
     send: '通过短信发送', copy: '复制预约表单', callModal: '立即致电',
     assure1: '• 无需定金 · 100%现场当面付款', assure2: '• 18点起接单 · 19点起顺次出发 (建议提前1小时预约)', close: '关闭',
     toast: '预约表单已复制，请粘贴到短信中。',
     tpl: `[Abam 预约申请]
 • 地址 / 酒店名称与房号: 
-• 项目与时长: (泰式 / 芳香 / 特别 · 60分钟 / 90分钟 / 120分钟)
+• 项目与时长: (Course A / Course B / Course C · 60分钟 / 90分钟 / 120分钟)
 • 停车场·一楼大门: (密码 / 呼叫按钮 / 酒店一楼大堂)
 • 现场当面付款: (现金 / 转账 / 刷卡)`,
     smsBody: `[Abam 预约申请]
 • 地址 / 酒店名称与房号: 
-• 项目与时长: (泰式 / 芳香 / 特别 · 60分钟 / 90分钟 / 120分钟)
+• 项目与时长: (Course A / Course B / Course C · 60分钟 / 90分钟 / 120分钟)
 • 停车场·一楼大门: (密码 / 呼叫按钮 / 酒店一楼大堂)
 • 现场当面付款: (现金 / 转账 / 刷卡)`,
   },

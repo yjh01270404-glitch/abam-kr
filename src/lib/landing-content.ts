@@ -102,7 +102,7 @@ export const KO: LandingContent = {
     { icon: INFO_ICONS[2], title: '원하는 프라이빗 공간', sub: '(자택 · 아파트 · 호텔 등)' },
     { icon: INFO_ICONS[3], title: '선입금 없는 안심', sub: '100% 현장 대면결제' },
   ],
-  courseSection: { label: 'COURSE', title: '타이 · 아로마 · 스페셜' },
+  courseSection: { label: 'COURSE', title: 'Course A · Course B · Course C' },
   courses: [
     { no: 1, name: 'Course A · 로얄 건식 지압 타이 (Royal Deep Thai)', subtitle: '오일 없는 건식 깊은 압의 전신 지압 & 파워 스트레칭', desc: '오일 없는 건식 깊은 압의 전신 지압 & 파워 스트레칭으로 뭉친 속근육과 피로를 집중 해소하고 전신 밸런스를 바로잡아 주는 고품격 수기 프로그램입니다.', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES.thai },
     { no: 2, name: 'Course B · 힐링아로마 스웨디시 (Healing Aroma Swedish) ⭐ [BEST 대표 추천]', subtitle: '최고급 천연 식물성 에센셜 오일 & 유러피언 림프 스웨디시', desc: '최고급 100% 천연 식물성 에센셜 오일과 부드러운 유러피언 림프 스웨디시 테크닉으로 림프 순환을 돕고 깊은 릴랙세이션과 숙면을 유도하는 대표 인기 코스입니다.', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES.aroma },
@@ -148,11 +148,11 @@ export const KO: LandingContent = {
     },
     {
       q: '어떤 코스가 있나요?',
-      a: '고객님의 컨디션에 맞춘 3가지 프리미엄 코스가 준비되어 있습니다.\n\n• 타이 케어 (건식 지압)\n  - 왓포 전통 방식의 건식 수기 지압으로 뭉친 근육과 피로를 시원하게 이완\n\n• 아로마 케어 (천연 오일)\n  - 천연 식물성 오일로 전신을 부드럽게 감싸 림프 순환과 깊은 휴식 유도\n\n• 스페셜 케어 (타이 + 아로마)\n  - 타이의 시원한 지압과 아로마의 부드러움을 동시에 누리는 대표 인기 코스\n\n(모든 코스는 60분 · 90분 · 120분 중 선택 가능합니다.)',
+      a: '고객님의 컨디션에 맞춘 3가지 프리미엄 코스가 준비되어 있습니다.\n\n• Course A · 로얄 건식 지압 타이\n  - 오일 없는 건식 깊은 압의 전신 지압 & 파워 스트레칭으로 뭉친 속근육 집중 분해\n\n• Course B · 힐링아로마 스웨디시 ⭐ [BEST]\n  - 최고급 100% 천연 식물성 에센셜 오일과 부드러운 유러피언 림프 스웨디시로 깊은 릴랙세이션 & 숙면\n\n• Course C · 로얄 VIP 더블 케어 👑 [VIP 올인원]\n  - 전반부 건식 딥티슈 지압 + 후반부 힐링 아로마 스웨디시 결합 고객 선호도 1위 올인원 프로그램\n\n(모든 코스는 60분 · 90분 · 120분 중 선택 가능합니다.)',
     },
     {
       q: '코스별 요금이 어떻게 되나요?',
-      a: '전 코스 정찰제 요금으로 투명하게 운영됩니다.\n\n• 타이 코스 (건식)\n  -  60분 :  80,000원\n  -  90분 : 100,000원\n  - 120분 : 120,000원\n\n• 아로마 코스 (천연오일)\n  -  60분 :  90,000원\n  -  90분 : 110,000원\n  - 120분 : 140,000원\n\n• 스페셜 코스 (타이 + 아로마)\n  -  60분 : 100,000원\n  -  90분 : 120,000원\n  - 120분 : 160,000원',
+      a: '전 코스 정찰제 요금으로 투명하게 운영됩니다.\n\n• Course A · 로얄 건식 지압 타이\n  -  60분 :  80,000원\n  -  90분 : 100,000원 (추천)\n  - 120분 : 120,000원\n\n• Course B · 힐링아로마 스웨디시 ⭐ [BEST]\n  -  60분 :  90,000원\n  -  90분 : 110,000원 (인기)\n  - 120분 : 140,000원\n\n• Course C · 로얄 VIP 더블 케어 👑 [VIP 올인원]\n  -  60분 : 100,000원\n  -  90분 : 120,000원 (인기)\n  - 120분 : 160,000원 (풀코스)',
     },
     {
       q: '자택과 호텔 모두 이용할 수 있나요?',
@@ -175,7 +175,7 @@ export const KO: LandingContent = {
   about: {
     title: '출장마사지 · 출장안마 1위 [20대 ACE 총출동] Abam.kr 이용 안내',
     p1: 'Abam.kr(아밤)은 실력과 매너를 갖춘 20대 전문 관리사 라인업의 출장마사지 & 출장안마 전문 플랫폼입니다. 사전 예약금이나 선입금을 일절 요구하지 않는 100% 현장 대면결제 안심 원칙으로 운영되며, 서울 25개 구 전역 및 경기(수원·분당·판교·일산·부천·안양·평택·동탄 등) 고객님의 프라이빗 공간(자택·호텔)으로 실시간 도로 교통 상황과 배차 동선에 맞춰 정성스럽게 방문 관리해 드립니다.',
-    p2: '정통 건식 지압의 타이 코스(80,000원~), 부드러운 림프 순환 천연 아로마 코스(90,000원~), 복합 힐링 스페셜 코스(100,000원~)까지 투명한 정찰제로 서울·경기 전역 어디든 최상의 힐링을 선사합니다.',
+    p2: '오일 없는 건식 깊은 압의 Course A 로얄 타이(80,000원~), 부드러운 림프 순환 Course B 힐링아로마 스웨디시(90,000원~), 복합 풀케어 Course C 로얄 VIP 더블 케어(100,000원~)까지 투명한 정찰제로 서울·경기 전역 어디든 최상의 힐링을 선사합니다.',
   },
   footer: {
     title: '서울·경기 출장마사지 · 출장안마 [20대 ACE 총출동] · 아밤(Abam.kr)',
@@ -206,7 +206,7 @@ export const EN: LandingContent = {
     { icon: INFO_ICONS[2], title: 'Anywhere you like', sub: '(Home · Hotel, etc.)' },
     { icon: INFO_ICONS[3], title: 'Private', sub: '1:1 Care' },
   ],
-  courseSection: { label: 'COURSE', title: 'Thai · Aroma · Special' },
+  courseSection: { label: 'COURSE', title: 'Course A · Course B · Course C' },
   courses: [
     { no: 1, name: 'Thai', subtitle: 'Traditional dry acupressure · Refreshing pressure', desc: 'Traditional Wat Pho-style dry acupressure releases tight muscles, and stretching restores your body’s balance.', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES_GLOBAL.thai },
     { no: 2, name: 'Aroma', subtitle: 'Natural aroma oil · Gentle care', desc: 'Using natural plant-based aroma oils, we gently care for your whole body and support lymphatic circulation and deep rest.', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_GLOBAL.aroma },
@@ -329,7 +329,7 @@ export const JP: LandingContent = {
     { icon: INFO_ICONS[2], title: 'ご希望の空間で', sub: '(ご自宅 · ホテルなど)' },
     { icon: INFO_ICONS[3], title: 'プライベートな', sub: '1:1ケア' },
   ],
-  courseSection: { label: 'COURSE', title: 'タイ · アロマ · スペシャル' },
+  courseSection: { label: 'COURSE', title: 'Course A · Course B · Course C' },
   courses: [
     { no: 1, name: 'タイ', subtitle: '伝統的な乾式指圧 · 爽快な圧', desc: 'ワットポー伝統式の乾式指圧で凝り固まった筋肉をすっきりほぐし、ストレッチで体のバランスを整えます。', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES_JP.thai },
     { no: 2, name: 'アロマ', subtitle: '天然アロマオイル · やさしいケア', desc: '天然植物性アロマオイルを使用して全身をやさしくケアし、リンパの流れと深いリラックスをサポートします。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_JP.aroma },
@@ -452,11 +452,11 @@ export const CN: LandingContent = {
     { icon: INFO_ICONS[2], title: '在您想要的空间', sub: '(住宅 · 酒店等)' },
     { icon: INFO_ICONS[3], title: '私密的', sub: '1:1护理' },
   ],
-  courseSection: { label: 'COURSE', title: '泰式 · 精油 · 特别' },
+  courseSection: { label: 'COURSE', title: 'Course A · Course B · Course C' },
   courses: [
     { no: 1, name: '泰式', subtitle: '传统干式指压 · 清爽力度', desc: '以卧佛寺传统方式进行干式指压，舒缓僵硬的肌肉，并通过拉伸调整身体的平衡。', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES_CN.thai },
-    { no: 2, name: '精油', subtitle: '天然芳香精油 · 温柔护理', desc: '使用天然植物性芳香精油温柔护理全身，帮助淋巴循环并获得深度放松。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_CN.aroma },
-    { no: 3, name: '特别', subtitle: '泰式 + 精油 复合护理', desc: '可同时享受泰式清爽指压与芳香温柔精油护理的高级课程。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_CN.special },
+    { no: 2, name: 'Course B · 舒缓芳香精油瑞典式 ⭐ [BEST代表推荐]', subtitle: '顶级天然植物精油 & 欧式淋巴瑞典式护理', desc: '选用100%纯天然顶级植物精油，融合柔和细腻的欧式淋巴瑞典式手法，促进淋巴循环，带来深度放松与安稳好眠。', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES_CN.aroma },
+    { no: 3, name: 'Course C · 皇家尊贵双重护理 [泰式+精油] 👑 [VIP一站式全套]', subtitle: '前半段干式指压 + 后半段芳香精油瑞典式', desc: '前半段无油深层指压彻底瓦解顽固酸痛，后半段温润芳香精油全面舒缓，深受高端商务人士青睐的VIP复购率第一招牌项目。', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES_CN.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: '课程', durations: ['60分钟', '90分钟', '120分钟'] },
   priceNotice: {
