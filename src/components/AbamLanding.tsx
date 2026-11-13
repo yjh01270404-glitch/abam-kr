@@ -1047,33 +1047,82 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 </div>
 
                 <form onSubmit={handleQuickSmsSubmit} className="space-y-4">
-                  {/* Step 1: Course Selection Tabs */}
+                  {/* Step 1: Course Selection Dropdown (서울로얄 스타일 프리미엄 드롭다운) */}
                   <div>
-                    <label className="block text-[12.5px] font-bold text-white mb-2 flex items-center gap-1.5">
-                      <span className="w-5 h-5 rounded-full bg-[#f2ca50] text-slate-950 flex items-center justify-center text-[11px] font-black">1</span>
-                      <span>희망 코스 선택 (터치)</span>
+                    <label className="block text-[12.5px] font-bold text-white mb-2 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-5 h-5 rounded-full bg-[#f2ca50] text-slate-950 flex items-center justify-center text-[11px] font-black">1</span>
+                        <span>희망 코스 선택</span>
+                      </div>
+                      <span className="text-[11px] text-[#f2ca50] font-semibold">드롭다운 간편 선택</span>
                     </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {[
-                        { title: 'A코스 90분 (10만)', tag: '인기' },
-                        { title: 'B코스 90분 (11만)', tag: '추천' },
-                        { title: 'C코스 90분 (12만)', tag: '베스트' },
-                        { title: 'A코스 60분 (8만)', tag: '기본' },
-                      ].map((item) => (
-                        <button
-                          key={item.title}
-                          type="button"
-                          onClick={() => setQuickCourse(item.title)}
-                          className={`p-2.5 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer ${
-                            quickCourse === item.title
-                              ? 'bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 border-[#EEC14B] font-extrabold shadow-md scale-[1.02]'
-                              : 'bg-[#162035] text-[#cbd5e1] border-[#293852] hover:border-[#475569]'
-                          }`}
-                        >
-                          <span className="text-[10px] opacity-80 uppercase tracking-wider block font-bold">{item.tag}</span>
-                          <span className="text-[12.5px] font-extrabold block leading-tight">{item.title}</span>
-                        </button>
-                      ))}
+
+                    {/* 서울로얄 스타일의 프리미엄 깔끔 드롭다운 */}
+                    <div style={{ position: 'relative', width: '100%' }}>
+                      <select
+                        id="abamQuickCourseSelect"
+                        value={quickCourse}
+                        onChange={(e) => setQuickCourse(e.target.value)}
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          padding: '12px 40px 12px 14px',
+                          backgroundColor: '#0c1424',
+                          border: '1.5px solid #2d3e5d',
+                          borderRadius: '12px',
+                          color: '#ffffff',
+                          WebkitTextFillColor: '#ffffff',
+                          fontSize: '14px',
+                          fontWeight: 700,
+                          outline: 'none',
+                          cursor: 'pointer',
+                          appearance: 'none',
+                          WebkitAppearance: 'none',
+                          MozAppearance: 'none',
+                          boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.4)',
+                          transition: 'border-color 0.2s, box-shadow 0.2s',
+                        }}
+                        onFocus={(e) => {
+                          e.currentTarget.style.borderColor = '#EEC14B';
+                          e.currentTarget.style.boxShadow = '0 0 12px rgba(238, 193, 75, 0.35)';
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.borderColor = '#2d3e5d';
+                          e.currentTarget.style.boxShadow = 'inset 0 2px 4px rgba(0, 0, 0, 0.4)';
+                        }}
+                      >
+                        <optgroup label="── A코스 · 로얄 건식 지압 타이 ──" style={{ backgroundColor: '#0c1424', color: '#94a3b8' }}>
+                          <option value="A코스 60분 (8만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>A코스 60분 (8만) — 80,000원 [기본 힐링]</option>
+                          <option value="A코스 90분 (10만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>A코스 90분 (10만) — 100,000원 ⭐ [인기 추천]</option>
+                          <option value="A코스 120분 (12만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>A코스 120분 (12만) — 120,000원 [전신 집중 케어]</option>
+                        </optgroup>
+                        <optgroup label="── B코스 · 힐링아로마 스웨디시 ⭐ [BEST 대표 추천] ──" style={{ backgroundColor: '#0c1424', color: '#94a3b8' }}>
+                          <option value="B코스 60분 (9만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>B코스 60분 (9만) — 90,000원 [아로마 이완]</option>
+                          <option value="B코스 90분 (11만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>B코스 90분 (11만) — 110,000원 ⭐ [BEST 대표 추천]</option>
+                          <option value="B코스 120분 (14만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>B코스 120분 (14만) — 140,000원 [프리미엄 림프 케어]</option>
+                        </optgroup>
+                        <optgroup label="── C코스 · 로얄 스페셜 더블케어 [VIP 90분/120분] ──" style={{ backgroundColor: '#0c1424', color: '#94a3b8' }}>
+                          <option value="C코스 90분 (12만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>C코스 90분 (12만) — 120,000원 👑 [VIP 최고 인기]</option>
+                          <option value="C코스 120분 (16만)" style={{ backgroundColor: '#0c1424', color: '#ffffff' }}>C코스 120분 (16만) — 160,000원 👑 [VIP 스페셜 풀코스]</option>
+                        </optgroup>
+                      </select>
+
+                      {/* 드롭다운 골드 화살표 아이콘 */}
+                      <div style={{
+                        position: 'absolute',
+                        right: '14px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        pointerEvents: 'none',
+                        color: '#EEC14B',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </div>
                     </div>
 
                     {/* 실시간 선택 즉각 반영 스트립 (터치 즉시 반응 피드백) */}
