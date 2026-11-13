@@ -124,63 +124,79 @@ export default function AbamBottomBookingBar({
           zIndex: 99999,
         }}
       >
+        {/* 상하 분리형 실시간 영업/배차 상태 안내 (모바일 2줄 깔끔 배치) */}
         <div
           style={{
             maxWidth: '680px',
             margin: '0 auto 6px',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 4px',
-            fontSize: '12.5px',
-            fontWeight: 900,
+            flexDirection: 'column',
+            gap: '2px',
+            padding: '0 2px',
+            fontSize: '12px',
+            fontWeight: 800,
           }}
         >
-          {isLateNight ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#34d399' }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '9px',
-                  height: '9px',
-                  borderRadius: '50%',
-                  backgroundColor: '#10b981',
-                  boxShadow: '0 0 12px #10b981',
-                }}
-              />
-              ⚡ [심야 긴급배차] 새벽 04:00까지 예약 접수
+          {/* 상단 1행: 실시간 배차/접수 상태 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minHeight: '18px' }}>
+            {isLateNight ? (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#34d399', fontWeight: 900, fontSize: '12px', whiteSpace: 'nowrap' }}>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    backgroundColor: '#10b981',
+                    boxShadow: '0 0 10px #10b981',
+                    flexShrink: 0,
+                  }}
+                />
+                ⚡ [심야 긴급배차] 새벽 04:00까지 예약 접수
+              </span>
+            ) : isOpenNow ? (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#34d399', fontWeight: 900, fontSize: '12px', whiteSpace: 'nowrap' }}>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    backgroundColor: '#10b981',
+                    boxShadow: '0 0 10px #10b981',
+                    flexShrink: 0,
+                  }}
+                />
+                🟢 [실시간 즉시 이용 가능] 배차 대기중
+              </span>
+            ) : (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#fbbf24', fontWeight: 900, fontSize: '12px', whiteSpace: 'nowrap' }}>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    backgroundColor: '#f59e0b',
+                    boxShadow: '0 0 8px #f59e0b',
+                    flexShrink: 0,
+                  }}
+                />
+                🌙 사전 예약 접수중 (오늘 저녁 18:00 오픈 · 19:00 순차출발)
+              </span>
+            )}
+          </div>
+
+          {/* 하단 2행: 영업 시간 / 도착 보장 안내 */}
+          <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '13px', minHeight: '16px' }}>
+            <span style={{ color: '#eec14b', fontSize: '11px', fontWeight: 700, whiteSpace: 'nowrap' }}>
+              {isLateNight
+                ? '🚨 지금 예약 시 20~25분 내 도착'
+                : isOpenNow
+                ? '⚡ 선입금 0원 · 30분 도착 보장 (04시까지 예약 가능)'
+                : '영업: 매일 18:00~04:00 (19시 순차출발 · 04시까지 접수)'}
             </span>
-          ) : isOpenNow ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#34d399' }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '9px',
-                  height: '9px',
-                  borderRadius: '50%',
-                  backgroundColor: '#10b981',
-                  boxShadow: '0 0 10px #10b981',
-                }}
-              />
-              🟢 [실시간 즉시 이용 가능] 배차 대기중
-            </span>
-          ) : (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#fbbf24' }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: '#f59e0b',
-                }}
-              />
-              🌙 사전 예약 접수중 (오늘 저녁 18:00 오픈 · 19:00 순차출발)
-            </span>
-          )}
-          <span style={{ color: '#eec14b', fontSize: '12px', fontWeight: 800 }}>
-            {isLateNight ? '🚨 지금 예약 시 20~25분 내 도착' : isOpenNow ? '⚡ 선입금 0원 · 30분 도착 보장' : '영업: 매일 18:00~04:00 (19시 순차출발)'}
-          </span>
+          </div>
         </div>
 
         <div
