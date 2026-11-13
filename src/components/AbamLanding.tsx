@@ -1134,31 +1134,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                       </div>
                     </div>
 
-                    {/* 실시간 선택 즉각 반영 스트립 (터치 즉시 반응 피드백) */}
-                    <div style={{
-                      marginTop: '10px',
-                      padding: '10px 14px',
-                      backgroundColor: '#0c1322',
-                      border: '1.5px solid rgba(238, 193, 75, 0.45)',
-                      borderRadius: '10px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      fontSize: '12.5px',
-                      color: '#e2e8f0',
-                      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.35)',
-                      transition: 'all 0.2s ease',
-                    }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
-                        <span style={{ color: '#EEC14B', fontWeight: 900, flexShrink: 0 }}>✓ 예약 구성:</span>
-                        <span style={{ color: '#ffffff', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                          {quickCourse} · {finalQuickPay}
-                        </span>
-                      </div>
-                      <span style={{ color: '#4ade80', fontSize: '11px', fontWeight: 900, flexShrink: 0, backgroundColor: 'rgba(34, 197, 94, 0.15)', padding: '2px 7px', borderRadius: '4px' }}>
-                        문자 자동완성
-                      </span>
-                    </div>
+
                   </div>
 
                   {/* Step 2: Address Input */}
@@ -1551,30 +1527,126 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                     )}
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+                  {/* 최종 예약 확인 & 문자 예약 전환 섹션 */}
+                  <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.12)' }}>
+                    
+                    {/* 1. 예약 구성 확인 카드 (이용자 선택 내용 직접 확인) */}
+                    <div style={{
+                      padding: '12px 16px',
+                      backgroundColor: '#0c1322',
+                      border: '1.5px solid rgba(238, 193, 75, 0.55)',
+                      borderRadius: '12px',
+                      boxShadow: '0 4px 16px rgba(0, 0, 0, 0.45)',
+                      marginBottom: '14px',
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                        <span style={{ color: '#EEC14B', fontWeight: 900, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span>✓ 최종 예약 구성 확인</span>
+                        </span>
+                        <span style={{ color: '#4ade80', fontSize: '11px', fontWeight: 900, backgroundColor: 'rgba(34, 197, 94, 0.15)', padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+                          문자 자동완성
+                        </span>
+                      </div>
+
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', color: '#ffffff', fontSize: '13.5px', fontWeight: 700 }}>
+                        <span style={{ color: '#FDE047', backgroundColor: 'rgba(253, 224, 71, 0.12)', padding: '3px 9px', borderRadius: '6px', border: '1px solid rgba(253, 224, 71, 0.3)' }}>
+                          {quickCourse}
+                        </span>
+                        <span style={{ color: '#94a3b8' }}>·</span>
+                        <span style={{ color: '#e2e8f0', backgroundColor: 'rgba(255, 255, 255, 0.08)', padding: '3px 9px', borderRadius: '6px' }}>
+                          {finalQuickPay}
+                        </span>
+                        {quickAddr && (
+                          <>
+                            <span style={{ color: '#94a3b8' }}>·</span>
+                            <span style={{ color: '#38bdf8', backgroundColor: 'rgba(56, 189, 248, 0.1)', padding: '3px 9px', borderRadius: '6px', fontSize: '12.5px', maxWidth: '240px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              📍 {quickAddr}
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* 2. "이대로 예약하시겠습니까?" 문구 */}
+                    <div style={{ textAlign: 'center', marginBottom: '12px' }}>
+                      <p style={{ color: '#ffffff', fontSize: '16px', fontWeight: 900, margin: '0 0 4px 0', letterSpacing: '-0.3px' }}>
+                        이대로 예약하시겠습니까?
+                      </p>
+                      <p style={{ color: '#94a3b8', fontSize: '12px', margin: 0 }}>
+                        아래 확인 버튼을 누르시면 입력하신 내용이 문자로 즉시 완성되어 전송됩니다.
+                      </p>
+                    </div>
+
+                    {/* 3. 명확한 대형 확인 버튼 (문자 예약 전환) */}
                     <button
                       type="submit"
-                      className="w-full sm:flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#EEC14B] via-[#F3CE6D] to-[#D4A528] hover:brightness-110 text-[#080C16] font-black text-[15px] flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(238,193,75,0.45)] transition-all cursor-pointer active:scale-95"
+                      style={{
+                        width: '100%',
+                        padding: '16px 20px',
+                        borderRadius: '14px',
+                        background: 'linear-gradient(135deg, #EEC14B 0%, #F3CE6D 50%, #D4A528 100%)',
+                        color: '#080C16',
+                        fontWeight: 900,
+                        fontSize: '16px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        boxShadow: '0 6px 24px rgba(238, 193, 75, 0.45)',
+                        transition: 'all 0.2s',
+                        letterSpacing: '-0.3px',
+                      }}
                     >
-                      <span className="material-symbols-outlined text-[20px]">sms</span>
-                      <span>문자 간편예약 (즉시 배차 🚀)</span>
+                      <span style={{ fontSize: '20px' }}>💬</span>
+                      <span>네, 이대로 예약하기 (문자 접수 🚀)</span>
                     </button>
-                    <a
-                      href={`tel:${cleanPhone}`}
-                      className="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#10b981] to-[#059669] hover:brightness-110 border border-[#34d399] text-white font-black text-[13.5px] flex items-center justify-center gap-1.5 transition-all shadow-[0_2px_10px_rgba(16,185,129,0.3)] cursor-pointer active:scale-95"
-                    >
-                      <span className="material-symbols-outlined text-[17px]">call</span>
-                      <span>전화 즉시예약</span>
-                    </a>
-                    <button
-                      type="button"
-                      onClick={copyQuickSlip}
-                      className="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-[#1e293b] hover:bg-[#334155] border border-[#475569] text-[#cbd5e1] font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
-                    >
-                      <span className="material-symbols-outlined text-[17px] text-[#f2ca50]">content_copy</span>
-                      <span>양식 복사</span>
-                    </button>
+
+                    {/* 4. 보조 옵션: 전화 예약 & 양식 복사 */}
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '16px',
+                      marginTop: '14px',
+                      paddingTop: '6px',
+                      fontSize: '12.5px',
+                      color: '#94a3b8',
+                    }}>
+                      <a
+                        href={`tel:${cleanPhone}`}
+                        style={{
+                          color: '#34d399',
+                          fontWeight: 800,
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                        }}
+                      >
+                        <span>📞 전화로 직접 예약하기</span>
+                      </a>
+                      <span style={{ color: '#475569' }}>|</span>
+                      <button
+                        type="button"
+                        onClick={copyQuickSlip}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: '#94a3b8',
+                          fontWeight: 600,
+                          fontSize: '12.5px',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          padding: 0,
+                        }}
+                      >
+                        <span>📋 양식 복사</span>
+                      </button>
+                    </div>
                   </div>
                 </form>
 
