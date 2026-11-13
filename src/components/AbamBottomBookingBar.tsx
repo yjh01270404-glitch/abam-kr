@@ -148,7 +148,7 @@ export default function AbamBottomBookingBar({
                   boxShadow: '0 0 12px #10b981',
                 }}
               />
-              ⚡ [심야 긴급배차] 새벽 05:00까지 정상영업
+              ⚡ [심야 긴급배차] 새벽 04:00까지 예약 접수
             </span>
           ) : isOpenNow ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#34d399' }}>
@@ -175,11 +175,11 @@ export default function AbamBottomBookingBar({
                   backgroundColor: '#f59e0b',
                 }}
               />
-              🌙 사전 예약 접수중 (오늘 저녁 18:00 순차 출발)
+              🌙 사전 예약 접수중 (오늘 저녁 18:00 오픈 · 19:00 순차출발)
             </span>
           )}
           <span style={{ color: '#eec14b', fontSize: '12px', fontWeight: 800 }}>
-            {isLateNight ? '🚨 지금 예약 시 20~25분 내 도착' : isOpenNow ? '⚡ 선입금 0원 · 30분 도착 보장' : '영업: 매일 18:00~05:00'}
+            {isLateNight ? '🚨 지금 예약 시 20~25분 내 도착' : isOpenNow ? '⚡ 선입금 0원 · 30분 도착 보장' : '영업: 매일 18:00~04:00 (19시 순차출발)'}
           </span>
         </div>
 
@@ -195,7 +195,7 @@ export default function AbamBottomBookingBar({
         >
           <button
             type="button"
-            onClick={() => openDirectAbamSms()}
+            onClick={() => setIsModalOpen(true)}
             style={{
               display: 'flex',
               alignItems: 'center',
