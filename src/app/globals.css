@@ -3,6 +3,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap");
 
 /* Google Stitch Nocturne Sanctuary Theme Tokens */
+@import url("https://fonts.googleapis.com/css2?family=Song+Myung&display=swap");
+
+@font-face {
+  font-family: 'ChosunGs';
+  src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/CHOSUN/ChosunGs.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 아밤 모바일 상단 대표 문구 궁서체 스타일 */
+.abam-header-slogan {
+  font-family: 'ChosunGs', 'Song Myung', 'Gungsuh', 'GungSeo', '궁서체', '궁서', 'Batang', serif !important;
+  font-size: 15.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  color: #FDE68A !important;
+  text-shadow: 0 0 12px rgba(238, 193, 75, 0.5), 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
+}
 :root {
   --font-pretendard: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --font-display: "Plus Jakarta Sans", "Pretendard Variable", "Pretendard", sans-serif;

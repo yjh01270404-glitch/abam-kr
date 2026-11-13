@@ -220,16 +220,19 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
             </Link>
           </div>
 
-          {/* 모바일 상단 중앙: "아름다운 밤" 브랜드 슬로건 표기 */}
+          {/* 모바일 상단 중앙: "아름다운 밤" 브랜드 대표 슬로건 (궁서체 캘리그래피 스타일) */}
           <div className="flex md:hidden items-center justify-center flex-1 px-1 text-center select-none pointer-events-none">
             <span
+              className="abam-header-slogan"
               style={{
-                fontSize: '13px',
-                fontWeight: 800,
-                color: '#fde047',
-                letterSpacing: '0.03em',
+                fontFamily: "'ChosunGs', 'Song Myung', 'Gungsuh', 'GungSeo', '궁서체', '궁서', 'Batang', serif",
+                fontSize: '15.5px',
+                fontWeight: 700,
+                color: '#FDE68A',
+                letterSpacing: '0.1em',
                 whiteSpace: 'nowrap',
-                textShadow: '0 1px 8px rgba(238, 193, 75, 0.25)',
+                textShadow: '0 0 12px rgba(238, 193, 75, 0.45), 0 1px 3px rgba(0, 0, 0, 0.9)',
+                display: 'inline-block',
               }}
             >
               아름다운 밤
