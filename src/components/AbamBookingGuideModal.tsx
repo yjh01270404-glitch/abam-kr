@@ -19,6 +19,7 @@ export default function AbamBookingGuideModal({
 }: Props) {
   const [addr, setAddr] = useState('');
   const [door, setDoor] = useState('');
+  const [placeType, setPlaceType] = useState<'home' | 'hotel'>('home');
   const [parking, setParking] = useState('주차가능');
   const [course, setCourse] = useState('타이90 10만');
   const [pay, setPay] = useState('');
@@ -302,20 +303,20 @@ export default function AbamBookingGuideModal({
                 cursor: 'pointer',
               }}
             >
-              <optgroup label="── 1. 타이 코스 (건식 지압) ──">
-                <option value="타이1 8만">타이 60분 (8만) — 80,000원</option>
-                <option value="타이90 10만">타이 90분 (10만) — 100,000원 (추천)</option>
-                <option value="타이2 12만">타이 120분 (12만) — 120,000원</option>
+              <optgroup label="── Course A · 로얄 건식 지압 타이 (Deep Thai) ──">
+                <option value="타이1 8만">Course A 60분 (8만) — 80,000원</option>
+                <option value="타이90 10만">Course A 90분 (10만) — 100,000원 (추천)</option>
+                <option value="타이2 12만">Course A 120분 (12만) — 120,000원</option>
               </optgroup>
-              <optgroup label="── 2. 아로마 코스 (천연 오일) ──">
-                <option value="아로마1 9만">아로마 60분 (9만) — 90,000원</option>
-                <option value="아로마90 11만">아로마 90분 (11만) — 110,000원 (인기)</option>
-                <option value="아로마2 14만">아로마 120분 (14만) — 140,000원</option>
+              <optgroup label="── Course B · 힐링아로마 스웨디시 (Swedish) ⭐ [BEST] ──">
+                <option value="아로마1 9만">Course B 60분 (9만) — 90,000원</option>
+                <option value="아로마90 11만">Course B 90분 (11만) — 110,000원 (BEST)</option>
+                <option value="아로마2 14만">Course B 120분 (14만) — 140,000원</option>
               </optgroup>
-              <optgroup label="── 3. 스페셜(타이+아로마) ──">
-                <option value="스페셜1 10만">스페셜 60분 (10만) — 100,000원</option>
-                <option value="스페셜90 12만">스페셜 90분 (12만) — 120,000원 (인기)</option>
-                <option value="스페셜2 16만">스페셜 120분 (16만) — 160,000원 (풀코스)</option>
+              <optgroup label="── Course C · 로얄 VIP 더블 케어 [Thai+Swedish] 👑 [VIP] ──">
+                <option value="스페셜1 10만">Course C 60분 (10만) — 100,000원</option>
+                <option value="스페셜90 12만">Course C 90분 (12만) — 120,000원 (인기)</option>
+                <option value="스페셜2 16만">Course C 120분 (16만) — 160,000원 (풀코스)</option>
               </optgroup>
             </select>
           </div>
@@ -328,11 +329,54 @@ export default function AbamBookingGuideModal({
               </label>
               <span style={{ color: '#94a3b8', fontSize: '11px' }}>문자창 직접 기재 가능</span>
             </div>
+
+            {/* Place Type Switcher */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', marginBottom: '6px' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setPlaceType('home');
+                  if (door === '호텔 1층 로비 픽업') setDoor('');
+                }}
+                style={{
+                  backgroundColor: placeType === 'home' ? 'rgba(238, 193, 75, 0.15)' : '#1e293b',
+                  border: '1px solid ' + (placeType === 'home' ? '#eec14b' : '#475569'),
+                  color: placeType === 'home' ? '#fde047' : '#94a3b8',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  padding: '7px 4px',
+                  borderRadius: '7px',
+                  cursor: 'pointer',
+                }}
+              >
+                🏡 자택 / 일반 주거
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setPlaceType('hotel');
+                  if (!door || door === '비번없음') setDoor('호텔 1층 로비 픽업');
+                }}
+                style={{
+                  backgroundColor: placeType === 'hotel' ? '#f59e0b' : '#1e293b',
+                  border: '1px solid ' + (placeType === 'hotel' ? '#fbbf24' : '#475569'),
+                  color: placeType === 'hotel' ? '#0f172a' : '#cbd5e1',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  padding: '7px 4px',
+                  borderRadius: '7px',
+                  cursor: 'pointer',
+                }}
+              >
+                🏨 호텔 / 모텔 (숙박업소)
+              </button>
+            </div>
+
             <input
               type="text"
               value={addr}
               onChange={(e) => setAddr(e.target.value)}
-              placeholder="예: 역삼동 649-4 102동 1204호 / 신라스테이 역삼 804호"
+              placeholder={placeType === 'hotel' ? "예: 신라스테이 역삼 804호 / OO호텔 00호" : "예: 역삼동 649-4 102동 1204호"}
               style={{
                 width: '100%',
                 boxSizing: 'border-box',
@@ -345,6 +389,39 @@ export default function AbamBookingGuideModal({
                 outline: 'none',
               }}
             />
+
+            {/* Intuitive Accommodation Alert with User Exact Specification */}
+            {(placeType === 'hotel' || (/호텔|모텔|스테이|리조트|게스트|숙소|비즈니스|파크|호스텔|inn|hotel|motel/i.test(addr) && placeType !== 'home')) ? (
+              <div style={{
+                marginTop: '6px',
+                padding: '8px 10px',
+                backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                border: '1.5px solid #f59e0b',
+                borderRadius: '7px',
+                fontSize: '11.5px',
+                lineHeight: 1.45,
+                color: '#fef3c7',
+              }}>
+                <div style={{ fontWeight: 800, color: '#fbbf24', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '2px' }}>
+                  <span>🏨 [숙박업소 필수 픽업 수칙]</span>
+                  <span style={{ fontSize: '9.5px', backgroundColor: '#f59e0b', color: '#0f172a', padding: '1px 4px', borderRadius: '3px', fontWeight: 900 }}>필독</span>
+                </div>
+                <div>호텔, 모텔 포함 모든 숙박업소는 <strong style={{ color: '#fef08a' }}>1층에서 운전기사와 대면하여 관리사를 픽업</strong>해 주세요.</div>
+              </div>
+            ) : (
+              <div style={{
+                marginTop: '6px',
+                padding: '7px 10px',
+                backgroundColor: 'rgba(30, 41, 59, 0.65)',
+                border: '1px solid rgba(148, 163, 184, 0.2)',
+                borderRadius: '6px',
+                fontSize: '11px',
+                color: '#cbd5e1',
+                lineHeight: 1.4,
+              }}>
+                <strong style={{ color: '#fde047' }}>🏡 자택 안내:</strong> 자택을 제외한 호텔, 모텔 포함 모든 숙박업소는 <strong>1층에서 운전기사와 대면하여 관리사를 픽업</strong>해 주세요.
+              </div>
+            )}
           </div>
 
           {/* 3. 1층 공동현관 비밀번호 / 호텔 로비 안내 */}
@@ -570,7 +647,7 @@ export default function AbamBookingGuideModal({
                 <div>
                   <strong style={{ color: '#fbbf24' }}>Q. 관리사 프로필 / 사진 볼 수 있나요?</strong>
                   <br />
-                  A. 20대 전문 힐러로 구성되며, 인터넷 도용 사진은 사용하지 않습니다. 선입금 0원의 현장 대면 시스템이므로 도착 후 직접 확인하신 뒤 불만족 시 즉시 무료 취소 가능합니다.
+                  A. 20대 전문 에이스 힐러로 구성되며, 인터넷 도용 및 허위 사진은 절대 사용하지 않습니다. 100% 실물 중심의 품격 있는 힐링을 보장하며, 선입금 없는 현장 후불제 시스템으로 안전하게 이용하실 수 있습니다.
                 </div>
                 <div>
                   <strong style={{ color: '#fbbf24' }}>Q. 선입금이나 예약금이 있나요?</strong>
@@ -634,15 +711,15 @@ export default function AbamBookingGuideModal({
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
-              backgroundColor: '#c59b27',
-              color: '#0f172a',
+              background: 'linear-gradient(135deg, #EEC14B 0%, #D4A528 100%)',
+              color: '#080C16',
               borderRadius: '10px',
               fontWeight: 900,
               fontSize: '15px',
               textDecoration: 'none',
               cursor: 'pointer',
               boxSizing: 'border-box',
-              boxShadow: '0 2px 10px rgba(197, 155, 39, 0.3)',
+              boxShadow: '0 4px 16px rgba(238, 193, 75, 0.4)',
             }}
           >
             <span>💬</span>
@@ -657,19 +734,20 @@ export default function AbamBookingGuideModal({
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
-              backgroundColor: '#1e293b',
-              border: '1px solid #475569',
-              color: '#f8fafc',
+              background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+              border: '1px solid #34D399',
+              color: '#ffffff',
               borderRadius: '10px',
-              fontWeight: 800,
+              fontWeight: 900,
               fontSize: '14.5px',
               textDecoration: 'none',
               cursor: 'pointer',
               boxSizing: 'border-box',
+              boxShadow: '0 4px 16px rgba(16, 185, 129, 0.35)',
             }}
           >
             <span>📞</span>
-            전화 직통 예약 (010-6607-2239)
+            전화 즉시예약 (010-6607-2239)
           </a>
         </div>
       </div>

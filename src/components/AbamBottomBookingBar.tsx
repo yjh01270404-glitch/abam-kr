@@ -12,20 +12,19 @@ interface Props {
 }
 
 export function openDirectAbamSms(initialCourse?: string) {
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(
-      new CustomEvent('abam-open-booking-modal', {
-        detail: { course: initialCourse || '' },
-      }),
-    );
-  }
+  if (typeof window === 'undefined') return;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent || '');
+  const sep = isIOS ? '&body=' : '?body=';
+  const courseStr = initialCourse || '타이 90분 (10만)';
+  const text = `[아밤 빠른예약]\n• 코스: ${courseStr}\n• 주소: [동/호수/호텔명 입력]\n• 공비: [공동현관 비번 or 1층호출]\n• 결제: [계좌이체 / 현금 / 카드]\n(작성 후 전송 시 추가 질문 없이 30분 내 즉시 출발)`;
+  window.location.href = `sms:01066072239${sep}${encodeURIComponent(text)}`;
 }
 
 export default function AbamBottomBookingBar({
   regionHint,
   phone = '01066072239',
-  smsLabel = '문자예약하기',
-  callLabel = '전화하기',
+  smsLabel = '문자 간편예약',
+  callLabel = '전화 즉시예약',
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<string | undefined>(undefined);
@@ -196,18 +195,15 @@ export default function AbamBottomBookingBar({
         >
           <button
             type="button"
-            onClick={() => {
-              setSelectedCourse(undefined);
-              setIsModalOpen(true);
-            }}
+            onClick={() => openDirectAbamSms()}
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
               height: '48px',
-              backgroundColor: '#c59b27',
-              boxShadow: '0 2px 10px rgba(197, 155, 39, 0.35)',
+              background: 'linear-gradient(135deg, #EEC14B 0%, #D4A528 100%)',
+              boxShadow: '0 2px 12px rgba(238, 193, 75, 0.4)',
               color: '#0f172a',
               borderRadius: '10px',
               fontWeight: 900,
@@ -229,10 +225,10 @@ export default function AbamBottomBookingBar({
               justifyContent: 'center',
               gap: '6px',
               height: '48px',
-              backgroundColor: isLateNight ? '#166534' : '#1e293b',
-              border: isLateNight ? '1.5px solid #22c55e' : '1px solid #475569',
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              border: '1px solid #34d399',
               color: '#ffffff',
-              boxShadow: isLateNight ? '0 0 16px rgba(34, 197, 94, 0.45)' : '0 2px 8px rgba(0, 0, 0, 0.25)',
+              boxShadow: '0 2px 12px rgba(16, 185, 129, 0.4)',
               borderRadius: '10px',
               fontWeight: 900,
               fontSize: '15px',

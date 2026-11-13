@@ -231,7 +231,7 @@ export default function JobDetailClient({ job, currentUser }: { job: JobAd; curr
             </div>
           </div>
 
-          {/* 4. 하단 24시간 실시간 문의 연락처 바 */}
+          {/* 4. 하단 실시간 문의 연락처 바 */}
           <div style={{
             background: 'linear-gradient(135deg, #be185d 0%, #9d174d 100%)',
             padding: '22px 20px',
@@ -242,7 +242,7 @@ export default function JobDetailClient({ job, currentUser }: { job: JobAd; curr
               📞 전화문의: <a href={`tel:${phone}`} style={{ color: '#ffffff', textDecoration: 'none' }}>{phone}</a>
             </div>
             <div style={{ fontSize: '15.5px', fontWeight: 800, color: '#fef08a' }}>
-              💬 카카오톡 ID: <strong>{kakao}</strong> (24시간 1:1 친절상담)
+              💬 카카오톡 ID: <strong>{kakao}</strong> (18:00~05:00 1:1 친절상담)
             </div>
             <p style={{ fontSize: '12.5px', opacity: 0.9, margin: '8px 0 0 0', fontWeight: 600 }}>
               "아름다운밤 보고 연락하셨다"고 말씀하시면 우선 우대 혜택을 받으실 수 있습니다.

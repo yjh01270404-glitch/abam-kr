@@ -104,9 +104,9 @@ export const KO: LandingContent = {
   ],
   courseSection: { label: 'COURSE', title: '타이 · 아로마 · 스페셜' },
   courses: [
-    { no: 1, name: '타이', subtitle: '전통 건식 지압 · 시원한 압', desc: '왓포 전통 방식의 건식 지압으로 뭉친 근육을 시원하게 풀어주고 스트레칭으로 몸의 균형을 잡아줍니다.', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES.thai },
-    { no: 2, name: '아로마', subtitle: '천연 아로마 오일 · 부드러운 케어', desc: '천연 식물성 아로마 오일을 사용하여 부드럽게 전신을 케어하고 림프 순환과 깊은 휴식을 돕습니다.', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES.aroma },
-    { no: 3, name: '스페셜(타이+아로마)', subtitle: '타이 + 아로마 복합 케어', desc: '타이의 시원한 지압과 아로마의 부드러운 오일 관리를 동시에 받을 수 있는 프리미엄 코스입니다.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
+    { no: 1, name: 'Course A · 로얄 건식 지압 타이 (Royal Deep Thai)', subtitle: '오일 없는 건식 깊은 압의 전신 지압 & 파워 스트레칭', desc: '오일 없는 건식 깊은 압의 전신 지압 & 파워 스트레칭으로 뭉친 속근육과 피로를 집중 해소하고 전신 밸런스를 바로잡아 주는 고품격 수기 프로그램입니다.', img: IMG.thai, icon: '🍃', tint: TINT.thai, prices: PRICES.thai },
+    { no: 2, name: 'Course B · 힐링아로마 스웨디시 (Healing Aroma Swedish) ⭐ [BEST 대표 추천]', subtitle: '최고급 천연 식물성 에센셜 오일 & 유러피언 림프 스웨디시', desc: '최고급 100% 천연 식물성 에센셜 오일과 부드러운 유러피언 림프 스웨디시 테크닉으로 림프 순환을 돕고 깊은 릴랙세이션과 숙면을 유도하는 대표 인기 코스입니다.', img: IMG.aroma, icon: '🌸', tint: TINT.aroma, prices: PRICES.aroma },
+    { no: 3, name: 'Course C · 로얄 VIP 더블 케어 [Thai + Swedish] 👑 [VIP 올인원]', subtitle: '전반부 건식 딥티슈 지압 + 후반부 힐링 아로마 스웨디시', desc: '전반부 오일 없는 건식 딥티슈 지압으로 뭉친 근육을 깊이 있게 분해하고, 후반부 따뜻한 힐링 아로마 스웨디시로 림프를 순환시켜 주는 VIP 고객 만족도 1위 올인원 프로그램입니다.', img: IMG.special, icon: '🍃🌸', tint: TINT.special, prices: PRICES.special },
   ],
   priceSection: { title: 'COURSE & PRICE', head: '코스', durations: ['60분', '90분', '120분'] },
   therapistSection: { label: "20대 ACE LINEUP", title: '오늘 밤 20대 ACE 총출동 라인업', note: '20대 전문 관리사 1:1 프라이빗 케어 · 실시간 도로 교통/배차 기준 순차 이동', kakaoBtn: '문자지명', callBtn: '전화지명' },

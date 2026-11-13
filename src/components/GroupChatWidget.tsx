@@ -574,7 +574,7 @@ export default function GroupChatWidget() {
               borderRadius: '6px',
               background: '#fff5f5'
             }}>
-              🌟 아밤 24시간 실시간 모니터링 작동 중
+              🌟 아밤 실시간 모니터링 작동 중 (18:00~05:00)
             </div>
           </div>
         )}

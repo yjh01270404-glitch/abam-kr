@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: '고객센터 및 예약 안내 | 아밤 (Abam.kr) 프라이빗 1:1 방문 홈케어',
-  description: '아밤(Abam.kr) 서울·경기 전역 자택·호텔 1:1 방문 홈케어 고객센터 및 24시간 실시간 전화·문자 예약 안내 (010-6607-2239).',
+  description: '아밤(Abam.kr) 서울·경기 전역 자택·호텔 1:1 방문 홈케어 고객센터 및 실시간 전화·문자 예약 안내 (매일 18:00~익일 05:00, 010-6607-2239).',
   alternates: { canonical: 'https://abam.kr/support' },
 };
 

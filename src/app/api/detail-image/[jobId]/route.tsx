@@ -1041,7 +1041,7 @@ export async function GET(
             </div>
           </div>
           <span style={{ fontSize: '15px', color: theme.textColor === '#fafafa' ? '#fbbf24' : '#be123c', fontWeight: 700, display: 'flex', fontFamily: 'Jua', marginTop: '4px' }}>
-            [안심보증] 24시간 안심 보증 1위 플랫폼
+            [안심보증] 야간 안심 보증 1위 플랫폼 (18:00~05:00)
           </span>
         </div>
 

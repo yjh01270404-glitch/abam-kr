@@ -587,18 +587,23 @@ button, a[href^="tel:"], a[href^="sms:"] {
   justify-content: center;
   gap: 6px;
   padding: 10px 14px;
-  background: linear-gradient(135deg, #eec14b 0%, #d4a528 100%);
-  color: #080c16 !important;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
   font-weight: 800;
-  font-size: 13px;
+  font-size: 13.5px;
   border-radius: 10px;
+  border: 1px solid #34d399 !important;
   text-decoration: none;
-  box-shadow: 0 2px 10px rgba(238, 193, 75, 0.25);
-  transition: filter 0.15s;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3) !important;
+  transition: all 0.15s ease-in-out;
 }
 
 .abam-footer-btn-call:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
   filter: brightness(1.08);
+}
+.abam-footer-btn-call * {
+  color: #ffffff !important;
 }
 
 .abam-footer-btn-sms {
@@ -607,17 +612,301 @@ button, a[href^="tel:"], a[href^="sms:"] {
   justify-content: center;
   gap: 6px;
   padding: 10px 14px;
-  background: #172138;
-  color: #ffffff !important;
-  font-weight: 700;
-  font-size: 13px;
+  background: linear-gradient(135deg, #eec14b 0%, #d4a528 100%) !important;
+  color: #080c16 !important;
+  font-weight: 900;
+  font-size: 13.5px;
   border-radius: 10px;
-  border: 1px solid #2d3c5e;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(238, 193, 75, 0.3) !important;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: filter 0.15s;
 }
 
 .abam-footer-btn-sms:hover {
-  background: #1f2d4d;
+  filter: brightness(1.08);
+}
+.abam-footer-btn-sms * {
+  color: #080c16 !important;
 }
 
+/* ======================================================== */
+/* ABAM LUXURY 2-COLUMN HERO (DESKTOP & MOBILE PARITY)     */
+/* ======================================================== */
+.abam-hero-grid {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .abam-hero-grid {
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.85fr !important;
+    gap: 40px !important;
+    align-items: center !important;
+    text-align: left !important;
+  }
+}
+
+.abam-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .abam-hero-left {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+.abam-hero-mobile-visual {
+  width: 100%;
+  max-width: 520px;
+  height: 300px;
+  margin: 0 auto 20px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid rgba(238, 193, 75, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+@media (min-width: 1024px) {
+  .abam-hero-mobile-visual {
+    display: none !important;
+  }
+}
+
+.abam-hero-desktop-visual {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .abam-hero-desktop-visual {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    height: 530px !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    border: 2px solid rgba(238, 193, 75, 0.45) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85) !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+}
+
+.abam-hero-top-badge {
+  position: absolute !important;
+  top: 14px !important;
+  left: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(8, 12, 22, 0.88) !important;
+  backdrop-filter: blur(8px) !important;
+  padding: 6px 14px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(238, 193, 75, 0.4) !important;
+  color: #fff !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  z-index: 10 !important;
+}
+
+.abam-hero-bottom-bar {
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 12px !important;
+  right: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: rgba(8, 12, 22, 0.92) !important;
+  backdrop-filter: blur(10px) !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(238, 193, 75, 0.35) !important;
+  z-index: 10 !important;
+  text-align: left !important;
+}
+
+/* ======================================================== */
+/* UNIFIED VIBRANT RESERVATION BUTTONS                      */
+/* ======================================================== */
+.abam-course-btn-gold {
+  width: 100% !important;
+  min-height: 50px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #EEC14B 0%, #F3CE6D 50%, #D4A528 100%) !important;
+  color: #080C16 !important;
+  font-weight: 900 !important;
+  font-size: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(238, 193, 75, 0.45) !important;
+  transition: all 0.2s ease-in-out !important;
+  margin-top: 16px !important;
+  text-decoration: none !important;
+}
+.abam-course-btn-gold:hover {
+  filter: brightness(1.08) !important;
+  transform: translateY(-1px) !important;
+}
+.abam-course-btn-gold * {
+  color: #080C16 !important;
+  font-weight: 900 !important;
+}
+
+.abam-course-btn-featured {
+  width: 100% !important;
+  min-height: 50px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #F5D061 0%, #EEC14B 50%, #D4A528 100%) !important;
+  color: #080C16 !important;
+  font-weight: 900 !important;
+  font-size: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  border: 2px solid #FDE68A !important;
+  box-shadow: 0 6px 24px rgba(245, 208, 97, 0.55) !important;
+  transition: all 0.2s ease-in-out !important;
+  margin-top: 16px !important;
+  text-decoration: none !important;
+}
+.abam-course-btn-featured:hover {
+  filter: brightness(1.1) !important;
+  transform: translateY(-1px) !important;
+}
+.abam-course-btn-featured * {
+  color: #080C16 !important;
+  font-weight: 900 !important;
+}
+
+.abam-hero-btn-sms {
+  height: 54px !important;
+  padding: 0 20px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #EEC14B 0%, #F3CE6D 50%, #D4A528 100%) !important;
+  color: #080C16 !important;
+  font-weight: 900 !important;
+  font-size: 15.5px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  box-shadow: 0 6px 20px rgba(238, 193, 75, 0.4) !important;
+  cursor: pointer !important;
+  border: none !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease-in-out !important;
+}
+.abam-hero-btn-sms:hover {
+  filter: brightness(1.08) !important;
+  transform: translateY(-1px) !important;
+}
+.abam-hero-btn-sms * {
+  color: #080C16 !important;
+  font-weight: 900 !important;
+}
+
+.abam-hero-btn-call {
+  height: 54px !important;
+  padding: 0 20px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  font-size: 15.5px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
+  cursor: pointer !important;
+  border: 1px solid #34D399 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease-in-out !important;
+}
+.abam-hero-btn-call:hover {
+  filter: brightness(1.08) !important;
+  transform: translateY(-1px) !important;
+}
+.abam-hero-btn-call * {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+
+
+
+/* ABAM INTERACTIVE PAYMENT BUTTON CARDS */
+.abam-payment-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 10px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-top: 6px !important;
+}
+
+@media (max-width: 640px) {
+  .abam-payment-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+}
+
+.abam-payment-card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  min-height: 84px !important;
+  padding: 10px 8px !important;
+  border-radius: 12px !important;
+  background-color: #121c30 !important;
+  border: 2px solid #2d3e5d !important;
+  color: #f1f5f9 !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  user-select: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.abam-payment-card:hover {
+  background-color: #192742 !important;
+  border-color: #4b6491 !important;
+  transform: translateY(-2px) !important;
+}
+
+.abam-payment-card:active {
+  transform: scale(0.97) !important;
+}
+
+.abam-payment-card.active {
+  background: linear-gradient(180deg, rgba(238, 193, 75, 0.25) 0%, rgba(20, 29, 48, 0.95) 100%) !important;
+  border: 2px solid #EEC14B !important;
+  box-shadow: 0 0 16px rgba(238, 193, 75, 0.4), inset 0 0 10px rgba(238, 193, 75, 0.15) !important;
+  transform: translateY(-2px) !important;
+}

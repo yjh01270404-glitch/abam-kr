@@ -50,8 +50,8 @@ export const UI: Record<UiLang, UiStrings> = {
     intro3: '과중한 업무와 일상에서 지친 심신을 가장 편안하고 익숙한 프라이빗 공간에서 최고의 힐링으로 채워드립니다.',
     priceTitle: '코스 안내 및 정찰 가격표', priceSub: '선입금 없는 100% 현장 대면결제 · 3대 시그니처 코스',
     priceBar1: '아밤 3대 프라이빗 맞춤 코스', priceBar2: '전 코스 100% 현장 대면결제 정찰제',
-    courseLetter: ['타이', '아로마', '스페셜'], courseSuffix: '',
-    tags: ['기본 충실 · 뭉친 피로 케어', '고객 선호 1위 · BEST', 'VIP 프리미엄 올케어'],
+    courseLetter: ['Course A · 로얄 타이', 'Course B · 힐링 아로마', 'Course C · VIP 더블케어'], courseSuffix: '',
+    tags: ['오일 없는 건식 깊은 압 · 집중 피로회복', '최고급 식물성 아로마 · 림프 스웨디시 [BEST]', '건식 지압 + 아로마 스웨디시 [VIP 올인원]'],
     chips: [
       ['전신 수기 건식 지압', '뭉친 어깨·허리 피로 해소', '스트레칭 균형 회복'],
       ['최고급 천연 식물성 아로마', '림프 순환 & 딥 릴랙싱', '부드럽고 섬세한 힐링'],

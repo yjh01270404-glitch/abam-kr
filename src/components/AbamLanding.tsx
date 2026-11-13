@@ -6,17 +6,7 @@ import Link from 'next/link';
 import { type LandingContent } from '../lib/landing-content';
 import AbamBottomBookingBar, { openDirectAbamSms } from './AbamBottomBookingBar';
 
-type Lang = 'ko' | 'en' | 'jp' | 'cn';
-
-const LANGS: { code: Lang; label: string; href: string }[] = [
-  { code: 'ko', label: 'KR', href: '/' },
-  { code: 'en', label: 'EN', href: 'https://seoulroyalspa.com' },
-  { code: 'jp', label: 'JP', href: 'https://seoulroyalspa.com/jp' },
-  { code: 'cn', label: 'CN', href: 'https://seoulroyalspa.com/cn' },
-];
-
 export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaLinks?: string[] }) {
-  const isKo = c.lang === 'ko';
   const cleanPhone = c.contact.phone.replace(/[^0-9]/g, '') || '01066072239';
   const formattedPhone = c.contact.phone || '010-6607-2239';
 
@@ -42,26 +32,77 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     ? `${cityName} 아름다운 밤, 아밤(ABAM.kr)` 
     : '아름다운 밤, 아밤(ABAM.kr)';
 
-  const heroSubtitle = isKo
-    ? "아밤은 '아름다운 밤'의 줄임말로, 지친 하루의 끝 가장 편안하고 프라이빗한 프리미엄 야간 힐링을 선물합니다. 자택 및 호텔 어디서든 전화나 문자 한 통으로 100% 현장 후불제로 품격 있게 시작하세요."
-    : 'Private premium in-room relaxation at your residence or hotel. 100% on-site settlement with zero advance deposit.';
+  const heroSubtitle = "아밤은 '아름다운 밤'의 줄임말로, 지친 하루의 끝 가장 편안하고 프라이빗한 프리미엄 야간 힐링을 선물합니다. 자택 및 호텔 어디서든 전화나 문자 한 통으로 100% 현장 후불제로 품격 있게 시작하세요.";
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const faqs = isKo ? [
+  const [quickCourse, setQuickCourse] = useState('타이 90분 (10만)');
+  const [quickAddr, setQuickAddr] = useState('');
+  const [quickDoor, setQuickDoor] = useState('');
+  const [quickPay, setQuickPay] = useState('계좌이체');
+  const [cashChange, setCashChange] = useState<'exact' | 'needChange'>('exact');
+  const finalQuickPay = quickPay === '현금 (후불)'
+    ? (cashChange === 'needChange' ? '현금(거스름돈 요청)' : '현금(딱맞춤)')
+    : quickPay;
+  const [quickPlaceType, setQuickPlaceType] = useState<'home' | 'hotel'>('home');
+  const isHotelBooking = quickPlaceType === 'hotel' || (/호텔|모텔|스테이|리조트|게스트|숙소|비즈니스|파크|호스텔|inn|hotel|motel/i.test(quickAddr) && quickPlaceType !== 'home');
+
+  const handleQuickSmsSubmit = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent || '');
+    const sep = isIOS ? '&body=' : '?body=';
+    const addrStr = quickAddr.trim() || '[방문 상세주소/호텔명·호수 입력]';
+    const doorStr = quickDoor.trim() || '[공동현관 비번 or 1층호출]';
+    const text = `[아밤 빠른예약신청]\n• 코스: ${quickCourse}\n• 주소: ${addrStr}\n• 공비: ${doorStr}\n• 결제: ${quickPay}\n(신속 배차 요청)`;
+    if (typeof window !== 'undefined') {
+      window.location.href = `sms:01066072239${sep}${encodeURIComponent(text)}`;
+    }
+  };
+
+  const copyQuickSlip = () => {
+    const addrStr = quickAddr.trim() || '역삼동 OO오피스텔 1204호';
+    const doorStr = quickDoor.trim() || '#1234 (또는 1층 호출)';
+    const text = `[아밤 빠른예약신청]\n• 코스: ${quickCourse}\n• 주소: ${addrStr}\n• 공비: ${doorStr}\n• 결제: ${finalQuickPay}`;
+    if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {});
+    }
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('abam-sms-toast', {
+          detail: '📋 예약 양식이 복사되었습니다. 문자로 붙여넣어 전송해주세요!',
+        }),
+      );
+    }
+  };
+
+  const copyBookingSlip = () => {
+    const text = `[아밤 빠른예약신청]\n• 코스: 타이 90분 (10만)\n• 주소: [방문 상세주소/호텔명·호수]\n• 공비: [공동현관 비번 or 1층호출]\n• 결제: [계좌이체 / 현금 / 카드]`;
+    if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {});
+    }
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('abam-sms-toast', {
+          detail: '📋 예약 양식이 복사되었습니다. 문자로 붙여넣어 전송해주세요!',
+        }),
+      );
+    }
+  };
+
+  const faqs = [
     {
       q: '선입금이나 예약금이 전혀 없나요?',
       a: '네, 100% 안심 현장 후불제입니다. 아밤은 어떠한 경우에도 예약금이나 보증금, 유류비를 요구하지 않으며, 관리사가 계신 곳에 도착하여 직접 대면한 후 현장 결제(현금, 계좌이체, 카드)로 진행됩니다.'
     },
     {
       q: '관리사분들은 어떤 분들이 오시나요? (사진 요구 및 나이/프로필)',
-      a: '아밤의 테라피스트는 전원 철저한 마인드와 실기 교육을 수료한 20대 전문 힐러로 구성되어 있습니다. 인터넷에 떠도는 불법 도용 사진으로 고객님을 기만하지 않으며, 선입금 0원의 100% 현장 대면 시스템이므로 도착 후 직접 확인하신 뒤 마음에 들지 않으실 경우 현장에서 즉시 무료 취소 가능합니다.'
+      a: '아밤의 테라피스트는 전원 철저한 마인드와 실기 교육을 수료한 20대 전문 에이스 힐러로 구성되어 있습니다. 인터넷에 떠도는 불법 도용 및 과도한 포토샵 사진으로 고객님을 기만하지 않으며, 100% 실물 중심의 품격 있는 힐링을 약속드립니다. 선입금 0원의 현장 후불제 시스템으로 안전하게 이용하실 수 있습니다.'
     },
     {
       q: '예약 후 도착까지 얼마나 걸리나요?',
-      a: '접수는 매일 저녁 18:00부터 시작되며, 매니저 출발은 19:00부터 익일 새벽 05:00 마감까지 운영됩니다. 서울 25개 구 및 경기 주요 거점 도시(분당, 판교, 수원, 일산, 부천, 안양, 평택, 동탄 등) 기준 접수 후 평균 25분~35분 내에 신속하게 도착합니다. 실시간 도로 상황에 따라 배차 즉시 예상 도착 시간을 안내해 드립니다.'
+      a: '접수는 매일 저녁 18:00부터 시작되며, 매니저 출발은 19:00부터 익일 새벽 04:00 마감까지 운영됩니다. 서울 25개 구 및 경기 주요 거점 도시(분당, 판교, 수원, 일산, 부천, 안양, 평택, 동탄 등) 기준 1분 내 예약 접수 확인 후 평균 25분~35분 내에 신속하게 도착합니다.'
     },
     {
       q: '따로 준비해야 할 물품이 있나요?',
@@ -73,7 +114,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     },
     {
       q: '호텔 및 오피스텔, 일반 자택에서도 이용 가능한가요?',
-      a: '네, 서울 및 수도권 소재 5성급 호텔, 비즈니스 호텔, 모텔, 오피스텔, 일반 아파트 및 빌라 등 편안하게 쉴 수 있는 프라이빗한 실내 공간이라면 어디든 방문 가능합니다.'
+      a: '네, 서울 및 수도권 소재 5성급 호텔, 비즈니스 호텔, 모텔, 오피스텔, 일반 아파트 및 빌라 등 편안하게 쉴 수 있는 프라이빗한 실내 공간이라면 어디든 방문 가능합니다. 단, 호텔, 모텔 포함 모든 숙박업소는 1층에서 운전기사와 대면하여 관리사를 픽업해 주시기 바랍니다.'
     },
     {
       q: '비밀 보장 및 프라이버시가 철저한가요?',
@@ -86,27 +127,6 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
     {
       q: '전화 통화 없이 문자로만 예약할 수 있나요?',
       a: '네, 가능합니다! 하단의 [문자 간편 예약]을 누르시거나 010-6607-2239 번호로 코스, 방문 주소(또는 호텔명·호수), 출입 방법을 남겨주시면 통화 없이 문자로 즉시 접수 및 도착 안내를 도와드립니다.'
-    }
-  ] : [
-    {
-      q: 'Is any deposit required in advance?',
-      a: 'Strictly NO deposit. 100% cash settlement on site upon meeting our therapist.'
-    },
-    {
-      q: 'Can I see therapist photos beforehand?',
-      a: 'We strictly protect therapists\' real privacy and refuse stolen internet model photos. 100% in-person lobby verification before payment guarantees zero catfishing and zero deposit risk.'
-    },
-    {
-      q: 'How quickly can you arrive?',
-      a: 'Average arrival time is 25-35 minutes across Seoul and metropolitan areas.'
-    },
-    {
-      q: 'Do I need to prepare towels or sheets?',
-      a: 'No, our professional therapist brings single-use sanitized linens and all essentials.'
-    },
-    {
-      q: 'Can I book to my hotel room?',
-      a: 'Yes, all 5-star hotels, luxury suites, and private residences are served 24/7.'
     }
   ];
 
@@ -186,211 +206,249 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* 1. 실시간 접수 상태 배지 (데스크톱 전용) */}
             <div className="abam-header-badge hidden lg:inline-flex items-center gap-2 px-3.5 bg-[#0F1626] border border-[#1E293B] shrink-0">
-              <span className={`w-2 h-2 rounded-full ${isOpenNow ? 'bg-[#10B981] animate-pulse' : 'bg-[#F59E0B]'} shrink-0`}></span>
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse shrink-0"></span>
               <span className="text-[12px] text-text-muted font-medium whitespace-nowrap">
-                {isOpenNow ? '🟢 실시간 영업중 (18:00 ~ 05:00)' : '🌙 사전 예약 접수중 (18:00 순차출발)'}
+                🟢 실시간 영업중 (지금 즉시 배차 가능)
               </span>
             </div>
 
-            {/* 2. 다국어 선택기 (태블릿/데스크톱 전용) */}
-            <div className="abam-header-lang hidden md:inline-flex items-center bg-[#1E293B]/90 border border-[#2A374A] p-1 text-[11.5px] font-bold shrink-0">
-              {LANGS.map((lang) => (
-                <Link
-                  key={lang.code}
-                  href={lang.href}
-                  className={`h-7 px-2.5 flex items-center justify-center rounded-full transition-all text-center leading-none ${
-                    c.lang === lang.code
-                      ? 'bg-primary text-[#080C16] shadow-sm font-extrabold'
-                      : 'text-text-muted hover:text-text-primary'
-                  }`}
-                >
-                  {lang.label}
-                </Link>
-              ))}
+            {/* 2. 100% 현장후불제 안심 뱃지 (한국인 전용 안심 보증) */}
+            <div className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#141C2E] border border-primary/30 text-[11.5px] font-bold text-primary shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>선입금 0원 · 100% 현장후불제</span>
             </div>
 
-            {/* 3. 24시 상담 버튼 (모바일 & 데스크톱 1줄 최적화) */}
+            {/* 3. 예약 상담 버튼 (모바일 & 데스크톱 1줄 최적화) */}
             <a
               href={`tel:${cleanPhone}`}
               className="abam-header-call inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 bg-gradient-to-r from-primary via-primary to-accent-gold-light text-[#080C16] font-extrabold text-[12.5px] shadow-[0_2px_12px_rgba(238,193,75,0.3)] hover:brightness-105 active:scale-95 transition-all shrink-0 whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[16px]">call</span>
-              <span>24시 상담</span>
+              <span>실시간 예약상담</span>
             </a>
           </div>
         </div>
       </header>
 
       {/* 0. ULTRA HIGH-VISIBILITY LIVE DISPATCH TOP BANNER */}
-      <aside className="fixed top-[56px] left-0 right-0 w-full z-40 bg-gradient-to-r from-[#032014] via-[#064e3b] to-[#032014] border-b-2 border-emerald-400 py-2.5 px-3 sm:px-6 shadow-[0_4px_20px_rgba(16,185,129,0.35)]">
-        <div className="max-w-[1200px] mx-auto flex flex-wrap items-center justify-between gap-2.5 text-xs sm:text-sm">
-          <div className="flex items-center gap-2 text-left">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-black text-[11px] sm:text-xs animate-pulse">
-              <span className="w-2 h-2 rounded-full bg-white"></span>
-              실시간 배차
+      <aside
+        style={{
+          position: 'fixed',
+          top: '56px',
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 40,
+          background: 'linear-gradient(90deg, #032014 0%, #083321 50%, #032014 100%)',
+          borderBottom: '2px solid #34d399',
+          padding: '8px 12px',
+          boxShadow: '0 4px 20px rgba(16,185,129,0.3)',
+        }}
+      >
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', fontSize: '12.5px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', textAlign: 'left' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px', borderRadius: '9999px', backgroundColor: '#10b981', color: '#032014', fontWeight: 900, fontSize: '10.5px', letterSpacing: '0.5px', flexShrink: 0 }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#ffffff', animation: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}></span>
+              REAL-TIME DISPATCH
             </span>
-            <span className="text-white font-black text-[13px] sm:text-[15px] tracking-tight">
-              🟢 <span className="text-emerald-300">지금 즉시 이용 가능:</span> 서울·경기 전지역 <strong className="text-amber-300">25~35분 내 신속 도착!</strong>
-            </span>
-            <span className="hidden md:inline-block text-[11.5px] text-emerald-200/90 font-bold bg-black/40 px-2 py-0.5 rounded border border-emerald-500/30">
-              대기 0분 · 예약금 0원 100% 현장후불제
+            <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '13px' }}>
+              🟢 <strong style={{ color: '#6ee7b7' }}>AVAILABLE NOW:</strong> 서울·경기 전지역 호텔·자택·오피스텔 (<strong style={{ color: '#fde047' }}>25~35분 내 신속 도착</strong>)
             </span>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => openDirectAbamSms()}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 font-black text-[12px] shadow-md hover:brightness-110 cursor-pointer"
-            >
-              💬 문자 즉시예약
-            </button>
-            <a
-              href={`tel:${cleanPhone}`}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-[12px] shadow-md cursor-pointer"
-            >
-              📞 24시 직통전화
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ display: 'inline-block', fontSize: '11px', color: '#34d399', fontWeight: 800, backgroundColor: 'rgba(52,211,153,0.12)', border: '1px solid rgba(52,211,153,0.3)', padding: '2px 8px', borderRadius: '4px' }}>
+              100% 현장후불제
+            </span>
+            <a href="#courses" style={{ background: '#10b981', color: '#032014', fontWeight: 800, padding: '4px 12px', borderRadius: '20px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', transition: 'transform 0.2s' }}>
+              ⚡ FAST BOOKING &rarr;
             </a>
           </div>
         </div>
       </aside>
 
-      <main className="w-full bg-surface-deep min-h-screen" style={{ paddingTop: '106px' }}>
+      <main className="w-full bg-surface-deep min-h-screen" style={{ paddingTop: '96px' }}>
         {/* HERO SECTION */}
         <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#080C16] via-[#0F1626] to-[#080C16] px-4 md:px-6 lg:px-8 pt-6 md:pt-12 pb-16 md:pb-24">
           {/* Ambient Subtle Midnight Glow */}
           <div className="absolute -top-24 right-1/2 md:right-1/4 translate-x-1/2 w-96 h-96 rounded-full bg-primary/10 blur-[120px] pointer-events-none"></div>
           <div className="absolute top-1/3 left-10 w-72 h-72 rounded-full bg-lavender-deep/20 blur-[100px] pointer-events-none"></div>
 
-          <div className="max-w-[1200px] mx-auto relative z-10 flex flex-col items-center text-center">
-            {/* Minimal Eyebrow Pill */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121826] border border-[#223049] shadow-sm mb-5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-[12px] sm:text-[13px] text-[#EEC14B] font-semibold tracking-tight">
-                24시간 서울·경기 전지역 100% 현장후불제
-              </span>
-            </div>
-
-            {/* Main Clean Headline - Single Clean Impactful Line (No multi-line overlap) */}
-            <div className="max-w-3xl mx-auto mb-5">
-              <h1 className="text-[22px] sm:text-[32px] md:text-[42px] font-black text-white tracking-tight leading-snug">
-                {cityName ? (
-                  <>
-                    {cityName}{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">
-                      아름다운 밤, 아밤(ABAM)
+          <div className="max-w-[1240px] mx-auto relative z-10">
+            {/* HERO INNER CONTAINER: 2-COLUMN ON PC, CLEAN VERTICAL STACK ON MOBILE */}
+            <div className="abam-hero-grid">
+                
+                {/* LEFT COLUMN: HEADLINE, BADGES, CTAS */}
+                <div className="abam-hero-left">
+                  
+                  {/* Minimal Eyebrow Pill */}
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121826] border border-[#223049] shadow-sm mb-4">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span className="text-[12px] sm:text-[13px] text-[#EEC14B] font-bold tracking-tight">
+                      서울·경기·인천 100% 현장후불제 (매일 18:00~04:00)
                     </span>
-                  </>
-                ) : (
-                  <>
-                    아름다운 밤,{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">
-                      아밤(ABAM.kr)
-                    </span>
-                  </>
-                )}
-              </h1>
-            </div>
-
-            {/* Spacious Subtitle with Generous Line Height */}
-            <p className="text-[14px] sm:text-[15.5px] text-[#94A3B8] max-w-xl mx-auto mb-4 leading-[1.8] px-2">
-              자택 및 호텔 어디서든 전화나 문자 한 통으로 30분 내 도착합니다.<br className="hidden sm:inline" />
-              예약금 일절 없는 100% 안심 현장후불제로 가장 편안하게 맞이하세요.
-            </p>
-
-            {/* GOOGLE ADS & NAVER SEARCH REAL-TIME VERIFIED GUARANTEE BOX */}
-            <div className="w-full max-w-xl mx-auto my-3 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#11253E] to-[#0F172A] border-2 border-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.3)] text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-2xl font-black text-emerald-400 shrink-0">
-                  🛡️
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[14px] sm:text-[15.5px] font-black text-white">공식 광고 인증: 지금 즉시 배차 가능</span>
-                    <span className="px-2 py-0.5 rounded-md bg-emerald-500 text-slate-950 text-[10.5px] font-black uppercase tracking-wider animate-pulse">실시간 대기</span>
                   </div>
-                  <p className="text-[12px] sm:text-[12.5px] text-slate-300 font-medium leading-snug mt-1">
-                    선입금/예약금 일절 없는 <strong>100% 현장후불제 안심 매칭</strong>입니다. 매니저 도착 시 대면 후 결제하세요!
+
+                  {/* Main Clean Headline */}
+                  <div className="w-full mb-3">
+                    <h1 className="text-[26px] sm:text-[34px] lg:text-[44px] font-black text-white tracking-tight leading-tight">
+                      {cityName ? (
+                        <>
+                          {cityName}{' '}
+                          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">
+                            아름다운 밤, 아밤(ABAM)
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          아름다운 밤,{' '}
+                          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">
+                            아밤(ABAM.kr)
+                          </span>
+                        </>
+                      )}
+                    </h1>
+                    <span className="block text-[15.5px] sm:text-[18px] text-amber-200/90 font-bold mt-1.5">
+                      홈케어 &amp; 5성급 호텔 방문 프리미엄 힐링 수기 케어
+                    </span>
+                  </div>
+
+                  {/* Spacious Subtitle */}
+                  <p className="text-[14px] sm:text-[15.5px] text-[#94A3B8] max-w-2xl mb-5 leading-relaxed">
+                    자택 및 호텔 어디서든 전화나 문자 한 통으로 <strong>30분 내 신속 도착</strong>합니다.<br className="hidden sm:inline" />
+                    예약금 일절 없는 100% 안심 현장후불제로 가장 편안하게 맞이하세요.
                   </p>
+
+                  {/* MOBILE-ONLY HERO VISUAL (< 1024px) */}
+                  <div className="abam-hero-mobile-visual group">
+                    <Image
+                      src="/images/abam_hero_seductive.jpg"
+                      alt="아밤 프리미엄 홈타이 & 호텔 출장마사지 1:1 프라이빗 케어"
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#080C16]/85 backdrop-blur-md border border-[#EEC14B]/40 text-[#EEC14B] text-[11px] font-extrabold flex items-center gap-1.5">
+                      <span>👑</span>
+                      <span>프리미엄 1:1 전담 케어 #1</span>
+                    </div>
+                  </div>
+
+                  {/* 공식 배너 & 안심 보증 카드 */}
+                  <div className="w-full max-w-xl lg:max-w-none mb-5 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#11253E] to-[#0F172A] border-2 border-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.25)] text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-2xl bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-2xl font-black text-emerald-400 shrink-0">
+                        🛡️
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-[14px] sm:text-[15.5px] font-black text-white">공식 광고 인증: 지금 즉시 배차 가능</span>
+                          <span className="px-2 py-0.5 rounded-md bg-emerald-500 text-slate-950 text-[10.5px] font-black uppercase tracking-wider animate-pulse">실시간 대기</span>
+                          <span className="text-[11.5px] font-bold text-emerald-400 flex items-center gap-1">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            {isOpenNow ? '실시간 영업중 (18:00~04:00)' : '사전 예약 접수중'}
+                          </span>
+                        </div>
+                        <p className="text-[12px] sm:text-[12.5px] text-slate-300 font-medium leading-snug mt-1">
+                          선입금/예약금 일절 없는 <strong>100% 현장후불제 안심 매칭</strong>입니다. 매니저 도착 시 대면 후 결제하세요!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+                      <button
+                        onClick={() => openDirectAbamSms()}
+                        className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 text-[12.5px] font-black shadow-lg hover:brightness-110 active:scale-95 transition-all cursor-pointer text-center"
+                      >
+                        ⚡ 간편 예약하기
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* 3 Key Trust Chips */}
+                  <div className="w-full flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3.5 mb-6">
+                    <div className="flex items-center gap-1.5 text-[12.5px] text-[#E2E8F0] font-semibold bg-[#121826] px-4 py-2 rounded-full border border-[#202C42] shadow-sm">
+                      <span className="text-[#EEC14B]">⚡</span>
+                      <span>평균 30분 도착 보장</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[12.5px] text-[#E2E8F0] font-semibold bg-[#121826] px-4 py-2 rounded-full border border-[#202C42] shadow-sm">
+                      <span className="text-emerald-400">🛡️</span>
+                      <span>선입금 0원 안심 후불제</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[12.5px] text-[#E2E8F0] font-semibold bg-[#121826] px-4 py-2 rounded-full border border-[#202C42] shadow-sm">
+                      <span className="text-sky-400">📍</span>
+                      <span>서울·경기·인천 전지역</span>
+                    </div>
+                  </div>
+
+                  {/* High-Conversion Action CTAs (54px height) */}
+                  <div className="w-full max-w-md lg:max-w-lg grid grid-cols-2 gap-3.5 mb-4">
+                    {/* SMS Button (Primary Gold) */}
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms()}
+                      className="abam-hero-btn-sms"
+                    >
+                      <span className="material-symbols-outlined text-[22px]">chat</span>
+                      <span>문자 간편예약</span>
+                    </button>
+
+                    {/* Call Button (Emerald Green) */}
+                    <a
+                      href={`tel:${cleanPhone}`}
+                      className="abam-hero-btn-call"
+                    >
+                      <span className="material-symbols-outlined text-[22px]">call</span>
+                      <span>전화 즉시예약</span>
+                    </a>
+                  </div>
+
+                  {/* Under CTA Anti-Scam Notice */}
+                  <div className="text-[12px] text-[#94A3B8] flex items-center gap-1.5 justify-center lg:justify-start">
+                    <span className="text-emerald-400 font-bold">🛡️ 안심 보증:</span>
+                    <span>100% 현장 대면 후불제로 어떠한 선입금이나 예약금도 요구하지 않습니다.</span>
+                  </div>
+
                 </div>
-              </div>
-              <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
-                <button
-                  onClick={() => openDirectAbamSms()}
-                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 text-[12.5px] font-black shadow-lg hover:brightness-110 active:scale-95 transition-all cursor-pointer text-center"
-                >
-                  ⚡ 간편 예약하기
-                </button>
-              </div>
-            </div>
 
-            {/* 럭셔리 호텔 인룸 메인 비주얼 배너 (여성 모델 메인 사진 복원) */}
-            <div
-              className="w-full max-w-xl mx-auto rounded-2xl overflow-hidden border border-[#EEC14B]/35 shadow-[0_12px_35px_-8px_rgba(0,0,0,0.85)] relative mb-7 group"
-              style={{ height: '230px', minHeight: '230px' }}
-            >
-              <Image
-                src="/images/abam_hero_seductive.jpg"
-                alt="아밤 프리미엄 홈타이 & 호텔 출장마사지 1:1 프라이빗 케어"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 600px"
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-              />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,12,22,0.95) 0%, rgba(8,12,22,0.15) 50%, transparent 100%)', pointerEvents: 'none' }} />
-              <div style={{ position: 'absolute', bottom: '12px', left: '12px', right: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 10, pointerEvents: 'none' }}>
-                <div style={{ background: 'rgba(8,12,22,0.85)', backdropFilter: 'blur(8px)', padding: '6px 12px', borderRadius: '8px', border: '1px solid rgba(238,193,75,0.35)', textAlign: 'left' }}>
-                  <span style={{ fontSize: '10.5px', fontWeight: 800, color: '#EEC14B', letterSpacing: '0.08em', textTransform: 'uppercase', display: 'block' }}>
-                    VIP 1:1 PRIVATE IN-ROOM
-                  </span>
-                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>
-                    편안한 자택·호텔에서 누리는 힐링
-                  </span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(8,12,22,0.85)', backdropFilter: 'blur(8px)', padding: '6px 12px', borderRadius: '9999px', border: isOpenNow ? '1px solid rgba(16,185,129,0.4)' : '1px solid rgba(245,158,11,0.4)', flexShrink: 0 }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isOpenNow ? '#10B981' : '#F59E0B', display: 'inline-block' }}></span>
-                  <span style={{ fontSize: '11.5px', fontWeight: 700, color: isOpenNow ? '#6EE7B7' : '#FCD34D', whiteSpace: 'nowrap' }}>
-                    {isOpenNow ? '🟢 실시간 영업중 (18:00~05:00)' : '🌙 사전 예약 접수중'}
-                  </span>
-                </div>
-              </div>
-            </div>
+                {/* RIGHT COLUMN: LUXURY MODEL CARD (DESKTOP ONLY >= 1024px) */}
+                <div className="abam-hero-desktop-visual group">
+                    <Image
+                      src="/images/abam_hero_seductive.jpg"
+                      alt="아밤 프리미엄 홈타이 & 호텔 출장마사지 1:1 프라이빗 케어"
+                      fill
+                      priority
+                      sizes="480px"
+                      className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080C16]/95 via-transparent to-[#080C16]/30 pointer-events-none" />
 
-            {/* 3 Key Trust Chips - Generously Spaced Horizontal Pills */}
-            <div className="w-full max-w-xl mx-auto flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mb-9 px-2">
-              <div className="flex items-center gap-1.5 text-[12px] sm:text-[13px] text-[#E2E8F0] font-semibold bg-[#121826] px-4 py-2 rounded-full border border-[#202C42] shadow-sm">
-                <span className="text-[#EEC14B]">⚡</span>
-                <span>평균 30분 도착 보장</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-[12px] sm:text-[13px] text-[#E2E8F0] font-semibold bg-[#121826] px-4 py-2 rounded-full border border-[#202C42] shadow-sm">
-                <span className="text-emerald-400">🛡️</span>
-                <span>선입금 0원 안심 후불제</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-[12px] sm:text-[13px] text-[#E2E8F0] font-semibold bg-[#121826] px-4 py-2 rounded-full border border-[#202C42] shadow-sm">
-                <span className="text-sky-400">📍</span>
-                <span>서울·경기 전지역</span>
-              </div>
-            </div>
+                    {/* Top Badge */}
+                    <div className="abam-hero-top-badge">
+                      <span className="text-[#EEC14B]">👑</span>
+                      <span>프리미엄 1:1 전담 케어 #1</span>
+                    </div>
 
-            {/* High-Conversion Action CTAs with Generous Bottom Separation */}
-            <div className="w-full max-w-md mx-auto grid grid-cols-2 gap-3.5 mb-12 px-2">
-              {/* Call Button */}
-              <a
-                href={`tel:${cleanPhone}`}
-                className="h-13 py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#EEC14B] via-[#F3CE6D] to-[#D4A528] text-[#080C16] font-black text-[14.5px] sm:text-[15.5px] flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(238,193,75,0.35)] hover:brightness-105 active:scale-[0.98] transition-all"
-              >
-                <span className="material-symbols-outlined text-[20px]">call</span>
-                <span>전화 즉시 예약</span>
-              </a>
+                    {/* Bottom Bar */}
+                    <div className="abam-hero-bottom-bar">
+                      <div>
+                        <span className="block text-[11.5px] text-[#EEC14B] font-extrabold uppercase tracking-wider">
+                          ⚡ 30분 내 신속 방문 배차
+                        </span>
+                        <span className="block text-[13.5px] text-white font-bold mt-0.5">
+                          서울 전역 · 경기 수도권 · 인천 전지역
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => openDirectAbamSms()}
+                        className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 font-black text-[12px] uppercase tracking-wider shadow-md hover:brightness-110 cursor-pointer"
+                      >
+                        간편 예약
+                      </button>
+                    </div>
+                  </div>
 
-              {/* SMS Button */}
-              <button
-                type="button"
-                onClick={() => openDirectAbamSms()}
-                className="h-13 py-3.5 px-4 rounded-xl bg-[#151D2E] hover:bg-[#1C273E] border border-[#273854] text-white font-bold text-[14.5px] sm:text-[15.5px] flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-[20px] text-[#EEC14B]">chat</span>
-                <span>문자 간편 예약</span>
-              </button>
-            </div>
+              </div>
 
             {/* Visual Showcase with Proper Margin Separation */}
             <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mt-4 pt-2">
@@ -460,7 +518,1036 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* 2. VALUE PROPOSITIONS (Why Abam) */}
+        {/* 2. SERVICE COURSES & TRANSPARENT PRICING */}
+        <section id="courses" className="w-full bg-[#0a0e18] px-4 md:px-6 lg:px-8 py-16 md:py-28 border-t border-[#1E293B]">
+          <div className="max-w-[1240px] mx-auto">
+            <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#171b26] border border-[#262a35] text-primary text-[11px] md:text-[12px] font-bold tracking-widest uppercase mb-2.5 shadow-sm">
+                Select Your Course
+              </span>
+              <h2 className="text-[24px] sm:text-[30px] md:text-[36px] font-bold text-text-primary mb-2.5">투명하고 정직한 서비스 코스</h2>
+              <p className="text-[13px] sm:text-[14px] md:text-[15px] text-text-muted leading-relaxed">
+                추가 요금이나 숨은 비용이 전혀 없는 100% 정찰제 요금입니다.
+              </p>
+            </div>
+
+            <div className="abam-courses-grid items-stretch">
+              {/* Course 1: Thai Healing */}
+              <div className="abam-course-card">
+                <div>
+                  {/* 코스 대표 비주얼 이미지 */}
+                  <div
+                    className="relative w-full rounded-xl overflow-hidden mb-4 border border-[#EEC14B]/25 group"
+                    style={{ height: '170px', minHeight: '170px' }}
+                  >
+                    <Image
+                      src="/images/thai.jpg"
+                      alt="전통 타이 건식 지압 테라피"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 380px"
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,14,24,0.92) 0%, rgba(10,14,24,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
+                    <span style={{ position: 'absolute', bottom: '10px', left: '12px', fontSize: '11px', fontWeight: 800, color: '#EEC14B', background: 'rgba(8,12,22,0.85)', padding: '3px 10px', borderRadius: '9999px', border: '1px solid rgba(238,193,75,0.3)', pointerEvents: 'none' }}>
+                      건식 전통 지압
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full bg-[#1b1f2a] text-text-secondary text-[11px] font-semibold">오일 없는 건식 깊은 압</span>
+                    <span className="text-[11px] text-[#EEC14B] font-bold">집중 피로회복 · 강한 압</span>
+                  </div>
+                  <h3 className="text-[22px] font-bold text-text-primary mb-1">Course A · 로얄 건식 지압 타이</h3>
+                  <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
+                    오일 없는 건식 깊은 압의 전신 지압 &amp; 파워 스트레칭으로 뭉친 속근육과 피로를 집중 해소하고 전신 밸런스를 바로잡아 드립니다.
+                  </p>
+
+                  {/* Price Tiers */}
+                  <div className="space-y-3 mb-8">
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('타이1 8만')}
+                      className="abam-price-row"
+                    >
+                      <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
+                      <span className="text-[17px] font-bold text-text-primary">₩80,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('타이90 10만')}
+                      className="abam-price-row highlight"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] font-semibold text-text-secondary">90분 코스</span>
+                        <span className="px-1.5 py-0.5 rounded bg-primary/20 text-primary text-[10px] font-bold">추천</span>
+                      </div>
+                      <span className="text-[17px] font-bold text-primary">₩100,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('타이2 12만')}
+                      className="abam-price-row"
+                    >
+                      <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
+                      <span className="text-[17px] font-bold text-text-primary">₩120,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                  </div>
+
+                  {/* Features */}
+                  <div className="space-y-2.5 mb-8">
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
+                      <span>전신 건식 수기 지압 및 골반·어깨 스트레칭</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
+                      <span>호텔/홈 전용 1회용 청결 위생 커버 지참</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
+                      <span>목·두피 쿨링 릴렉스 아로마 밤 서비스</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => openDirectAbamSms('타이90 10만')}
+                  className="abam-course-btn-gold"
+                >
+                  <span className="material-symbols-outlined text-[18px]">chat</span>
+                  <span>Course A 로얄 타이 간편예약</span>
+                </button>
+              </div>
+
+              {/* Course 2: Aroma Relaxing (POPULAR BEST) */}
+              <div className="abam-course-card featured">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-primary to-accent-gold-muted text-[#080C16] text-[11px] font-extrabold tracking-wide uppercase shadow-md z-20">
+                  ★ 가장 많은 고객 선택 BEST
+                </div>
+
+                <div>
+                  {/* 코스 대표 비주얼 이미지 */}
+                  <div
+                    className="relative w-full rounded-xl overflow-hidden mb-4 mt-2 border border-primary/40 group"
+                    style={{ height: '170px', minHeight: '170px' }}
+                  >
+                    <Image
+                      src="/images/aroma.jpg"
+                      alt="프리미엄 아로마 오일 테라피"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 380px"
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,14,24,0.92) 0%, rgba(10,14,24,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
+                    <span style={{ position: 'absolute', bottom: '10px', left: '12px', fontSize: '11px', fontWeight: 800, color: '#EEC14B', background: 'rgba(8,12,22,0.85)', padding: '3px 10px', borderRadius: '9999px', border: '1px solid rgba(238,193,75,0.4)', pointerEvents: 'none' }}>
+                      유기농 천연 에센셜 오일
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-[11px] font-bold">최고급 식물성 에센셜 오일</span>
+                    <span className="text-[11px] text-primary font-semibold">부드러운 이완 &amp; 숙면</span>
+                  </div>
+                  <h3 className="text-[22px] font-bold text-text-primary mb-1">Course B · 힐링아로마 스웨디시</h3>
+                  <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
+                    최고급 100% 천연 식물성 에센셜 오일과 부드러운 유러피언 림프 스웨디시 테크닉으로 림프 순환을 돕고 깊은 릴랙세이션과 숙면을 유도합니다.
+                  </p>
+
+                  {/* Price Tiers */}
+                  <div className="space-y-3 mb-8">
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('아로마1 9만')}
+                      className="abam-price-row"
+                    >
+                      <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
+                      <span className="text-[17px] font-bold text-text-primary">₩90,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('아로마90 11만')}
+                      className="abam-price-row highlight"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] font-semibold text-primary font-bold">90분 코스</span>
+                        <span className="px-1.5 py-0.5 rounded bg-primary text-[#080C16] text-[10px] font-extrabold">BEST</span>
+                      </div>
+                      <span className="text-[17px] font-bold text-primary">₩110,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('아로마2 14만')}
+                      className="abam-price-row"
+                    >
+                      <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
+                      <span className="text-[17px] font-bold text-text-primary">₩140,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                  </div>
+
+                  {/* Features */}
+                  <div className="space-y-2.5 mb-8">
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
+                      <span>천연 오가닉 베이스 라벤더 &amp; 유칼립투스 블렌딩</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
+                      <span>전신 림프 순환 케어 및 부종 완화 테라피</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
+                      <span>온습포 타월 릴렉싱 및 마무리 케어 제공</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => openDirectAbamSms('아로마90 11만')}
+                  className="abam-course-btn-featured"
+                >
+                  <span className="material-symbols-outlined text-[18px]">chat</span>
+                  <span>Course B 힐링아로마 간편예약</span>
+                </button>
+              </div>
+
+              {/* Course 3: Special (Thai + Aroma) */}
+              <div className="abam-course-card">
+                <div>
+                  {/* 코스 대표 비주얼 이미지 */}
+                  <div
+                    className="relative w-full rounded-xl border border-[#818CF8]/30 overflow-hidden mb-4 group"
+                    style={{ height: '170px', minHeight: '170px' }}
+                  >
+                    <Image
+                      src="/images/flower_spa.jpg"
+                      alt="VIP 스페셜 복합 콤비네이션 케어"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 380px"
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,14,24,0.92) 0%, rgba(10,14,24,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
+                    <span style={{ position: 'absolute', bottom: '10px', left: '12px', fontSize: '11px', fontWeight: 800, color: '#A5B4FC', background: 'rgba(8,12,22,0.85)', padding: '3px 10px', borderRadius: '9999px', border: '1px solid rgba(129,140,248,0.4)', pointerEvents: 'none' }}>
+                      건식 수기 + 아로마 콤보
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full bg-[#312E81]/40 text-[#818CF8] text-[11px] font-bold">건식 지압 + 아로마 스웨디시</span>
+                    <span className="text-[11px] text-[#818CF8] font-semibold">👑 VIP 올인원</span>
+                  </div>
+                  <h3 className="text-[22px] font-bold text-text-primary mb-1">Course C · 로얄 VIP 더블 케어 [Thai+Swedish]</h3>
+                  <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
+                    전반부 건식 딥티슈 지압으로 뭉친 근육을 깊이 있게 분해하고, 후반부 따뜻한 힐링 아로마 스웨디시로 림프를 순환시켜 주는 VIP 고객 만족도 1위 올인원 프로그램입니다.
+                  </p>
+
+                  {/* Price Tiers */}
+                  <div className="space-y-3 mb-8">
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('스페셜1 10만')}
+                      className="abam-price-row"
+                    >
+                      <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
+                      <span className="text-[17px] font-bold text-text-primary">₩100,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('스페셜90 12만')}
+                      className="abam-price-row highlight"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] font-semibold text-text-secondary">90분 코스</span>
+                        <span className="px-1.5 py-0.5 rounded bg-[#818CF8]/20 text-[#818CF8] text-[10px] font-bold">인기 추천</span>
+                      </div>
+                      <span className="text-[17px] font-bold text-[#818CF8]">₩120,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openDirectAbamSms('스페셜2 16만')}
+                      className="abam-price-row"
+                    >
+                      <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
+                      <span className="text-[17px] font-bold text-text-primary">₩160,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
+                    </button>
+                  </div>
+
+                  {/* Features */}
+                  <div className="space-y-2.5 mb-8">
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-[#818CF8] text-[17px]">check</span>
+                      <span>전신 수기 지압 + 프리미엄 딥티슈 아로마 블렌딩</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-[#818CF8] text-[17px]">check</span>
+                      <span>발 반사구 지압 + 두피·목 집중 쿨링 릴렉싱</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
+                      <span className="material-symbols-outlined text-[#818CF8] text-[17px]">check</span>
+                      <span>에이스 수석 테라피스트 최우선 배차 서비스</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => openDirectAbamSms('스페셜90 12만')}
+                  className="abam-course-btn-gold"
+                >
+                  <span className="material-symbols-outlined text-[18px]">chat</span>
+                  <span>Course C 로얄 VIP 간편예약</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Bottom Reassurance Banner */}
+            <div className="mt-12 p-4 md:p-5 rounded-2xl bg-[#0F1626] border border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <span className="material-symbols-outlined text-primary text-[22px]">verified_user</span>
+                </div>
+                <div>
+                  <h4 className="text-[14px] font-bold text-text-primary">선입금 없는 100% 현장 후불제 보장</h4>
+                  <p className="text-[12px] text-text-muted">관리사가 계신 곳에 도착하여 대면 후 현금, 계좌이체, 카드로 직접 결제하세요.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="px-2.5 py-1 rounded bg-[#171b26] text-text-secondary text-[11px] font-semibold">현금</span>
+                <span className="px-2.5 py-1 rounded bg-[#171b26] text-text-secondary text-[11px] font-semibold">계좌이체</span>
+                <span className="px-2.5 py-1 rounded bg-[#171b26] text-text-secondary text-[11px] font-semibold">카드결제</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. SIMPLE 3-STEP PROCESS */}
+        <section id="guide" className="w-full bg-[#080C16] px-4 md:px-6 lg:px-8 py-20 md:py-28 lg:py-32 border-t border-[#1E293B]">
+          <div className="max-w-[1240px] mx-auto">
+            <div className="text-center max-w-xl mx-auto mb-16 md:mb-20">
+              <span className="text-[12px] text-primary tracking-widest uppercase font-bold">Simple 3-Step Process</span>
+              <h2 className="text-[26px] md:text-[34px] font-bold text-text-primary mt-1 mb-2">누구나 쉬운 간편 이용 안내</h2>
+              <p className="text-[13px] md:text-[14px] text-text-muted">
+                복잡한 가입 절차 없이, 전화나 문자 한 통으로 30분 안에 힐링이 시작됩니다.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative">
+              {/* Step 1 */}
+              <div className="abam-step-card">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="w-11 h-11 rounded-full bg-primary/15 text-primary font-black text-lg flex items-center justify-center border border-primary/30">1</span>
+                    <span className="text-[11px] text-text-muted font-bold tracking-wider">STEP 01</span>
+                  </div>
+                  <h3 className="text-[19px] font-bold text-text-primary mb-3">전화 또는 문자 간편 접수</h3>
+                  <p className="text-[13.5px] text-text-muted leading-relaxed mb-6">
+                    원하시는 코스와 시간, 그리고 계신 곳의 주소(자택 주소 또는 호텔/모텔 상호명 및 호수)를 전달해 주세요.
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-[#1E293B] text-[12.5px] text-primary font-semibold flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[17px]">timer</span>
+                  <span>소요 시간: 약 1분</span>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="abam-step-card">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="w-11 h-11 rounded-full bg-primary/15 text-primary font-black text-lg flex items-center justify-center border border-primary/30">2</span>
+                    <span className="text-[11px] text-text-muted font-bold tracking-wider">STEP 02</span>
+                  </div>
+                  <h3 className="text-[19px] font-bold text-text-primary mb-3">테라피스트 배정 &amp; 신속 출발</h3>
+                  <p className="text-[13.5px] text-text-muted leading-relaxed mb-6">
+                    고객님과 가장 가까운 거점에 상주 중인 전문 테라피스트가 배정되어 즉시 출발하며, 25~35분 내 신속하게 도착합니다.
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-[#1E293B] text-[12.5px] text-primary font-semibold flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[17px]">near_me</span>
+                  <span>평균 도착: 25~35분</span>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="abam-step-card">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="w-11 h-11 rounded-full bg-primary/15 text-primary font-black text-lg flex items-center justify-center border border-primary/30">3</span>
+                    <span className="text-[11px] text-text-muted font-bold tracking-wider">STEP 03</span>
+                  </div>
+                  <h3 className="text-[19px] font-bold text-text-primary mb-3">맞춤 케어 &amp; 안심 후불 결제</h3>
+                  <p className="text-[13.5px] text-text-muted leading-relaxed mb-6">
+                    테라피스트 도착 후 현장에서 직접 대면하여 결제하신 후, 프라이빗하고 안락한 공간에서 최고급 힐링을 누리세요. (호텔, 모텔 포함 모든 숙박업소는 1층에서 운전기사와 대면하여 관리사를 픽업해 주세요.)
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-[#1E293B] text-[12.5px] text-primary font-semibold flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[17px]">verified</span>
+                  <span>100% 현장 대면 결제</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. ULTRA-INTUITIVE 10-SECOND RESERVATION BUILDER & CHAT MOCKUP */}
+        <section id="fast-booking-builder" className="w-full bg-gradient-to-b from-[#0c1424] via-[#09101d] to-[#070b14] px-4 md:px-6 lg:px-8 py-12 md:py-18 border-y-2 border-[#EEC14B]/35 shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+          <div className="max-w-[1240px] mx-auto">
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1e293b] border border-[#f2ca50]/50 text-[#f2ca50] text-[11.5px] md:text-[12.5px] font-black tracking-widest uppercase mb-3 shadow-md">
+                ⚡ 30초 원클릭 신속 예약기
+              </span>
+              <h2 className="text-[23px] sm:text-[30px] md:text-[36px] font-black text-white mb-3">
+                되묻는 번거로움 ZERO! <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">3개만 채우면 즉시 배차 확정</span>
+              </h2>
+              <p className="text-[13.5px] sm:text-[15px] text-[#94a3b8] leading-relaxed">
+                희망 코스를 누르고 계신 주소와 공동현관만 적으신 후 <strong className="text-white">문자 전송</strong>을 누르시면, 배차실에서 주소를 되묻지 않고 25~35분 내 즉시 출발합니다.
+              </p>
+            </div>
+
+            {/* 2-Column Responsive Layout: Left = Visual Chat Mockup, Right = Interactive Builder */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              
+              {/* LEFT: VISUAL SMARTPHONE CHAT MOCKUP (5 Cols) */}
+              <div className="lg:col-span-5 rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 sm:p-6 flex flex-col justify-between shadow-xl">
+                <div>
+                  <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#1e293b]">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span className="text-[13px] font-bold text-white">배차실 실시간 대화 예시</span>
+                    </div>
+                    <span className="text-[11px] text-[#94a3b8]">010-6607-2239 직통</span>
+                  </div>
+
+                  {/* Chat Bubbles */}
+                  <div className="space-y-4 my-2">
+                    {/* User Sent Message (Right Bubble) */}
+                    <div className="flex flex-col items-end">
+                      <span className="text-[10.5px] text-[#64748b] mb-1 font-medium">손님 전송 문자 (오후 10:15)</span>
+                      <div className="max-w-[90%] rounded-2xl rounded-tr-xs bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white p-3.5 text-[13px] sm:text-[13.5px] leading-relaxed shadow-lg">
+                        <div className="font-bold text-[#fde047] mb-1">[아밤 빠른예약]</div>
+                        <div>• 코스: <strong>타이 90분 (10만)</strong></div>
+                        <div>• 주소: <strong>역삼동 OO오피스텔 1204호</strong></div>
+                        <div>• 공비: <strong>#1234 (또는 1층 호출)</strong></div>
+                        <div>• 결제: <strong>계좌이체</strong></div>
+                      </div>
+                      <span className="text-[10px] text-emerald-400 mt-0.5">✓ 1초 만에 배차실 수신 완료</span>
+                    </div>
+
+                    {/* Dispatch Room Immediate Reply (Left Bubble) */}
+                    <div className="flex flex-col items-start">
+                      <span className="text-[10.5px] text-[#64748b] mb-1 font-medium">배차실 회신 (1분 내 신속 답변)</span>
+                      <div className="max-w-[92%] rounded-2xl rounded-tl-xs bg-[#1e293b] border border-[#334155] text-[#f1f5f9] p-3.5 text-[13px] sm:text-[13.5px] leading-relaxed shadow-md">
+                        <div className="font-bold text-[#38bdf8] flex items-center gap-1 mb-1">
+                          <span>⚡ 배차 접수 확인</span>
+                        </div>
+                        <p className="text-[#e2e8f0]">
+                          "접수 확인되었습니다! 현재 배차 진행 중이며 <strong>25~35분 내 도착</strong>합니다. 출발하는 기사가 곧 연락드리겠습니다. 모르는 번호로 전화가 오더라도 받아주세요."
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Callout Footer */}
+                <div className="mt-4 pt-3.5 border-t border-[#1e293b] flex items-center gap-2 text-[12px] text-[#94a3b8]">
+                  <span className="text-amber-400 text-[16px]">💡</span>
+                  <span><strong>핵심:</strong> 주소·비번을 남겨주시면 되묻는 번거로움 없이 1분 내 확인 후 <strong>25~35분 내 즉시 도착</strong>합니다.</span>
+                </div>
+
+                {/* Accommodation Pickup Callout */}
+                <div className="mt-3 px-3.5 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-2 text-[12px] text-amber-200/90 leading-snug">
+                  <span className="text-amber-400 text-[15px] shrink-0">🏨</span>
+                  <span><strong>숙박업소 안내:</strong> 호텔, 모텔 포함 모든 숙박업소는 1층에서 운전기사와 대면하여 관리사를 픽업해 주세요.</span>
+                </div>
+              </div>
+
+              {/* RIGHT: INTERACTIVE 10-SECOND RESERVATION BUILDER (7 Cols) */}
+              <div className="lg:col-span-7 rounded-2xl bg-gradient-to-b from-[#10192e] to-[#0c1424] border-2 border-[#f2ca50]/40 p-5 sm:p-7 flex flex-col justify-between shadow-2xl relative">
+                
+                <div className="flex items-center justify-between pb-3 mb-5 border-b border-[#334155]">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded bg-primary/20 text-[#f2ca50] font-black text-[11px] uppercase">
+                      Interactive Booker
+                    </span>
+                    <h3 className="text-[16px] sm:text-[18px] font-extrabold text-white">
+                      직접 선택하고 30초 만에 예약하기
+                    </h3>
+                  </div>
+                  <span className="text-[11.5px] text-emerald-400 font-bold hidden sm:inline">
+                    선입금 0원 · 100% 현장후불
+                  </span>
+                </div>
+
+                <form onSubmit={handleQuickSmsSubmit} className="space-y-4">
+                  {/* Step 1: Course Selection Tabs */}
+                  <div>
+                    <label className="block text-[12.5px] font-bold text-white mb-2 flex items-center gap-1.5">
+                      <span className="w-5 h-5 rounded-full bg-[#f2ca50] text-slate-950 flex items-center justify-center text-[11px] font-black">1</span>
+                      <span>희망 코스 선택 (터치)</span>
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {[
+                        { title: '타이 90분 (10만)', tag: '인기' },
+                        { title: '아로마 90분 (11만)', tag: '추천' },
+                        { title: 'VIP 90분 (12만)', tag: '베스트' },
+                        { title: '타이 60분 (8만)', tag: '기본' },
+                      ].map((item) => (
+                        <button
+                          key={item.title}
+                          type="button"
+                          onClick={() => setQuickCourse(item.title)}
+                          className={`p-2.5 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer ${
+                            quickCourse === item.title
+                              ? 'bg-gradient-to-r from-[#EEC14B] to-[#D4A528] text-slate-950 border-[#EEC14B] font-extrabold shadow-md scale-[1.02]'
+                              : 'bg-[#162035] text-[#cbd5e1] border-[#293852] hover:border-[#475569]'
+                          }`}
+                        >
+                          <span className="text-[10px] opacity-80 uppercase tracking-wider block font-bold">{item.tag}</span>
+                          <span className="text-[12.5px] font-extrabold block leading-tight">{item.title}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Step 2: Address Input */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="text-[12.5px] font-bold text-white flex items-center gap-1.5">
+                        <span className="w-5 h-5 rounded-full bg-[#f2ca50] text-slate-950 flex items-center justify-center text-[11px] font-black">2</span>
+                        <span>방문 상세 주소 (동/호수/호텔명)</span>
+                      </label>
+                      <span className="text-[11px] text-[#94a3b8]">문자 자동완성</span>
+                    </div>
+
+                    {/* Quick Place Type Switcher with Bulletproof Inline Styles */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '8px' }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setQuickPlaceType('home');
+                          if (quickDoor === '호텔 1층 로비 픽업') setQuickDoor('');
+                        }}
+                        style={{
+                          backgroundColor: quickPlaceType === 'home' ? 'rgba(238, 193, 75, 0.2)' : '#121c30',
+                          border: '2px solid ' + (quickPlaceType === 'home' ? '#EEC14B' : '#2d3e5d'),
+                          color: quickPlaceType === 'home' ? '#FDE047' : '#94a3b8',
+                          padding: '9px 12px',
+                          borderRadius: '10px',
+                          fontWeight: 800,
+                          fontSize: '12.5px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px',
+                          boxShadow: quickPlaceType === 'home' ? '0 0 12px rgba(238, 193, 75, 0.35)' : 'none',
+                          transition: 'all 0.2s',
+                        }}
+                      >
+                        <span>🏡 자택 / 일반 주거</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setQuickPlaceType('hotel');
+                          if (!quickDoor) setQuickDoor('호텔 1층 로비 픽업');
+                        }}
+                        style={{
+                          backgroundColor: quickPlaceType === 'hotel' ? '#f59e0b' : '#121c30',
+                          border: '2px solid ' + (quickPlaceType === 'hotel' ? '#fbbf24' : '#2d3e5d'),
+                          color: quickPlaceType === 'hotel' ? '#080C16' : '#cbd5e1',
+                          padding: '9px 12px',
+                          borderRadius: '10px',
+                          fontWeight: 900,
+                          fontSize: '12.5px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px',
+                          boxShadow: quickPlaceType === 'hotel' ? '0 0 16px rgba(245, 158, 11, 0.5)' : 'none',
+                          transition: 'all 0.2s',
+                        }}
+                      >
+                        <span>🏨 호텔 / 모텔 (숙박업소)</span>
+                      </button>
+                    </div>
+
+                    <input
+                      type="text"
+                      value={quickAddr}
+                      onChange={(e) => setQuickAddr(e.target.value)}
+                      placeholder={quickPlaceType === 'hotel' ? "예: 신라스테이 역삼 804호 / OO모텔 00호" : "예: 강남구 역삼동 OO오피스텔 1204호"}
+                      className="w-full px-4 py-3 rounded-xl bg-[#090e1a] border border-[#293852] text-white text-[13.5px] placeholder-[#64748b] focus:outline-none focus:border-[#f2ca50] transition-colors"
+                    />
+
+                    {/* Intuitive Accommodation Pickup Guidance with User Exact Specification */}
+                    {isHotelBooking ? (
+                      <div style={{
+                        marginTop: '10px',
+                        padding: '12px 14px',
+                        backgroundColor: 'rgba(245, 158, 11, 0.18)',
+                        border: '2px solid #f59e0b',
+                        borderRadius: '12px',
+                        color: '#fef3c7',
+                        fontSize: '12.5px',
+                        lineHeight: 1.5,
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '10px',
+                        boxShadow: '0 4px 16px rgba(245, 158, 11, 0.25)',
+                      }}>
+                        <span style={{ fontSize: '22px', flexShrink: 0, lineHeight: 1 }}>🏨</span>
+                        <div>
+                          <div style={{ fontWeight: 900, color: '#fbbf24', fontSize: '13px', marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span>[숙박업소 필수 픽업 수칙]</span>
+                            <span style={{ backgroundColor: '#f59e0b', color: '#080c16', fontSize: '10px', fontWeight: 900, padding: '1px 5px', borderRadius: '4px' }}>필독</span>
+                          </div>
+                          <p style={{ color: '#ffffff', fontWeight: 600, margin: 0 }}>
+                            호텔, 모텔 포함 모든 숙박업소는 <strong style={{ color: '#fef08a' }}>1층에서 운전기사와 대면하여 관리사를 픽업</strong>해 주세요.
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div style={{
+                        marginTop: '8px',
+                        padding: '10px 12px',
+                        backgroundColor: 'rgba(30, 41, 59, 0.65)',
+                        border: '1.5px solid rgba(148, 163, 184, 0.25)',
+                        borderRadius: '10px',
+                        fontSize: '12px',
+                        color: '#cbd5e1',
+                        lineHeight: 1.5,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                      }}>
+                        <span style={{ fontSize: '16px', flexShrink: 0 }}>🏡</span>
+                        <span><strong style={{ color: '#fde047' }}>자택 안내:</strong> 자택을 제외한 호텔, 모텔 포함 모든 숙박업소는 <strong>1층에서 운전기사와 대면하여 관리사를 픽업</strong>해 주세요.</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Step 3: Door Access Code (Clean, No Duplicate Note) */}
+                  <div>
+                    <label className="block text-[12.5px] font-bold text-white mb-1.5 flex items-center gap-1.5">
+                      <span className="w-5 h-5 rounded-full bg-[#f2ca50] text-slate-950 flex items-center justify-center text-[11px] font-black">3</span>
+                      <span>공동현관 출입 방법 / 로비 안내</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={quickDoor}
+                      onChange={(e) => setQuickDoor(e.target.value)}
+                      placeholder={isHotelBooking ? "예: 호텔 1층 로비 픽업 (또는 객실 번호)" : "예: 공동현관 비번 #1234 (또는 1층 도착 시 호출)"}
+                      className="w-full px-4 py-3 rounded-xl bg-[#090e1a] border border-[#293852] text-white text-[13.5px] placeholder-[#64748b] focus:outline-none focus:border-[#f2ca50] transition-colors"
+                    />
+                  </div>
+
+                  {/* Step 4: Ultra-Visible Tactile Payment Buttons with Bulletproof Inline Styles */}
+                  <div style={{ marginTop: '14px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                      <label style={{ fontSize: '13px', fontWeight: 900, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#EEC14B', color: '#080C16', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 900 }}>4</span>
+                        <span>결제 방식 선택 (터치하여 선택)</span>
+                      </label>
+                      <span style={{ fontSize: '11px', fontWeight: 800, color: '#4ade80', backgroundColor: 'rgba(34, 197, 94, 0.15)', border: '1px solid rgba(34, 197, 94, 0.35)', padding: '2px 8px', borderRadius: '9999px' }}>
+                        100% 현장 후불제 (선입금 0원)
+                      </span>
+                    </div>
+
+                    {/* 3 High-Contrast Tactile Cards with Direct Inline Styles */}
+                    <div className="abam-payment-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', width: '100%' }}>
+                      {[
+                        {
+                          id: '계좌이체',
+                          icon: '📱',
+                          title: '계좌이체',
+                          sub: '도착 후 실시간 송금',
+                          badge: '추천 1위',
+                          badgeBg: '#38bdf8',
+                          badgeColor: '#080c16',
+                        },
+                        {
+                          id: '현금 (후불)',
+                          icon: '💵',
+                          title: '현금 (후불)',
+                          sub: '대면 직접 결제',
+                          badge: '선입금 0원',
+                          badgeBg: '#22c55e',
+                          badgeColor: '#080c16',
+                        },
+                        {
+                          id: '카드 결제',
+                          icon: '💳',
+                          title: '카드 결제',
+                          sub: '무선단말기 지참',
+                          badge: '현장 단말기',
+                          badgeBg: '#c084fc',
+                          badgeColor: '#080c16',
+                        },
+                      ].map((item) => {
+                        const isSelected = quickPay === item.id;
+                        return (
+                          <button
+                            key={item.id}
+                            type="button"
+                            onClick={() => {
+                              setQuickPay(item.id);
+                              if (typeof window !== 'undefined') {
+                                window.dispatchEvent(
+                                  new CustomEvent('abam-sms-toast', {
+                                    detail: `✓ [${item.id}] 결제 방식이 선택되었습니다.`,
+                                  }),
+                                );
+                              }
+                            }}
+                            className={`abam-payment-card ${isSelected ? 'active' : ''}`}
+                            style={{
+                              position: 'relative',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'space-between',
+                              alignItems: 'flex-start',
+                              minHeight: '84px',
+                              padding: '10px 9px',
+                              borderRadius: '12px',
+                              backgroundColor: isSelected ? 'rgba(238, 193, 75, 0.22)' : '#131e33',
+                              border: isSelected ? '2px solid #EEC14B' : '2px solid #334769',
+                              boxShadow: isSelected ? '0 0 16px rgba(238, 193, 75, 0.45)' : '0 2px 8px rgba(0, 0, 0, 0.3)',
+                              cursor: 'pointer',
+                              textAlign: 'left',
+                              transition: 'all 0.2s',
+                              width: '100%',
+                              boxSizing: 'border-box',
+                            }}
+                          >
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '6px' }}>
+                              <span style={{ fontSize: '22px', lineHeight: 1 }}>{item.icon}</span>
+                              {isSelected ? (
+                                <span style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#EEC14B', color: '#080C16', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 900, boxShadow: '0 0 8px rgba(238, 193, 75, 0.7)' }}>
+                                  ✓
+                                </span>
+                              ) : (
+                                <span style={{ fontSize: '9.5px', fontWeight: 900, padding: '2px 5px', borderRadius: '4px', backgroundColor: item.badgeBg, color: item.badgeColor }}>
+                                  {item.badge}
+                                </span>
+                              )}
+                            </div>
+                            <div style={{ width: '100%' }}>
+                              <div style={{ fontSize: '13.5px', fontWeight: 900, color: isSelected ? '#FDE047' : '#ffffff', lineHeight: 1.2, marginBottom: '2px' }}>
+                                {item.title}
+                              </div>
+                              <div style={{ fontSize: '10.5px', color: isSelected ? '#cbd5e1' : '#94a3b8', fontWeight: 600, lineHeight: 1.2 }}>
+                                {item.sub}
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Instant Dynamic Interactive Feedback Box with Explicit Inline Styles */}
+                    {quickPay === '계좌이체' && (
+                      <div style={{
+                        marginTop: '10px',
+                        padding: '12px 14px',
+                        backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                        border: '2px solid #38bdf8',
+                        borderRadius: '12px',
+                        color: '#e0f2fe',
+                        fontSize: '12.5px',
+                        lineHeight: 1.5,
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '10px',
+                        boxShadow: '0 4px 14px rgba(56, 189, 248, 0.25)',
+                      }}>
+                        <span style={{ fontSize: '22px', flexShrink: 0, lineHeight: 1 }}>📱</span>
+                        <div>
+                          <div style={{ fontWeight: 900, color: '#38bdf8', fontSize: '13px', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span>계좌이체 결제 선택됨 (선입금 0원 보장)</span>
+                            <span style={{ fontSize: '10px', backgroundColor: '#38bdf8', color: '#080c16', padding: '1px 5px', borderRadius: '4px', fontWeight: 900 }}>선택완료</span>
+                          </div>
+                          <p style={{ color: '#f1f5f9', fontWeight: 500, margin: 0 }}>
+                            관리사가 고객님 계신 곳에 <strong>도착하여 대면한 후</strong> 계좌번호를 안내받고 실시간 이체해 주시면 됩니다. (출발 전 선입금은 절대 없습니다.)
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {quickPay === '현금 (후불)' && (
+                      <div style={{
+                        marginTop: '10px',
+                        padding: '12px 14px',
+                        backgroundColor: 'rgba(34, 197, 94, 0.15)',
+                        border: '2px solid #22c55e',
+                        borderRadius: '12px',
+                        color: '#dcfce7',
+                        fontSize: '12.5px',
+                        lineHeight: 1.5,
+                        boxShadow: '0 4px 14px rgba(34, 197, 94, 0.25)',
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '10px' }}>
+                          <span style={{ fontSize: '22px', flexShrink: 0, lineHeight: 1 }}>💵</span>
+                          <div>
+                            <div style={{ fontWeight: 900, color: '#4ade80', fontSize: '13px', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span>현금 결제 선택됨 (100% 현장 후불)</span>
+                              <span style={{ fontSize: '10px', backgroundColor: '#22c55e', color: '#080c16', padding: '1px 5px', borderRadius: '4px', fontWeight: 900 }}>선택완료</span>
+                            </div>
+                            <p style={{ color: '#f1f5f9', fontWeight: 500, margin: 0 }}>
+                              관리사 대면 후 현금을 직접 전달해 주시면 됩니다. <strong>거스름돈이 필요하신가요?</strong>
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Interactive Cash Change Pills */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingLeft: '32px' }}>
+                          <button
+                            type="button"
+                            onClick={() => setCashChange('exact')}
+                            style={{
+                              backgroundColor: cashChange === 'exact' ? '#22c55e' : '#172338',
+                              color: cashChange === 'exact' ? '#080c16' : '#cbd5e1',
+                              border: '2px solid ' + (cashChange === 'exact' ? '#4ade80' : '#3d5275'),
+                              fontWeight: 900,
+                              fontSize: '12px',
+                              padding: '7px 12px',
+                              borderRadius: '8px',
+                              cursor: 'pointer',
+                              boxShadow: cashChange === 'exact' ? '0 0 12px rgba(34, 197, 94, 0.5)' : 'none',
+                              transition: 'all 0.2s',
+                            }}
+                          >
+                            <span>✓ 정액 지참 (잔돈 불필요)</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setCashChange('needChange')}
+                            style={{
+                              backgroundColor: cashChange === 'needChange' ? '#f59e0b' : '#172338',
+                              color: cashChange === 'needChange' ? '#080c16' : '#cbd5e1',
+                              border: '2px solid ' + (cashChange === 'needChange' ? '#fbbf24' : '#3d5275'),
+                              fontWeight: 900,
+                              fontSize: '12px',
+                              padding: '7px 12px',
+                              borderRadius: '8px',
+                              cursor: 'pointer',
+                              boxShadow: cashChange === 'needChange' ? '0 0 12px rgba(245, 158, 11, 0.5)' : 'none',
+                              transition: 'all 0.2s',
+                            }}
+                          >
+                            <span>🪙 거스름돈 준비 요청</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {quickPay === '카드 결제' && (
+                      <div style={{
+                        marginTop: '10px',
+                        padding: '12px 14px',
+                        backgroundColor: 'rgba(192, 132, 252, 0.15)',
+                        border: '2px solid #c084fc',
+                        borderRadius: '12px',
+                        color: '#f3e8ff',
+                        fontSize: '12.5px',
+                        lineHeight: 1.5,
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: '10px',
+                        boxShadow: '0 4px 14px rgba(192, 132, 252, 0.25)',
+                      }}>
+                        <span style={{ fontSize: '22px', flexShrink: 0, lineHeight: 1 }}>💳</span>
+                        <div>
+                          <div style={{ fontWeight: 900, color: '#c084fc', fontSize: '13px', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span>현장 카드 결제 선택됨 (단말기 지참)</span>
+                            <span style={{ fontSize: '10px', backgroundColor: '#c084fc', color: '#080c16', padding: '1px 5px', borderRadius: '4px', fontWeight: 900 }}>선택완료</span>
+                          </div>
+                          <p style={{ color: '#f1f5f9', fontWeight: 500, margin: 0 }}>
+                            <strong>휴대용 무선 카드 단말기</strong>를 지참한 테라피스트로 우선 배정됩니다. 현장 도착 후 실물 카드로 편리하게 결제하세요.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Live Booking Summary Strip */}
+                  <div style={{
+                    marginTop: '12px',
+                    marginBottom: '6px',
+                    padding: '10px 14px',
+                    backgroundColor: '#0c1322',
+                    border: '1.5px solid rgba(238, 193, 75, 0.4)',
+                    borderRadius: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    fontSize: '12.5px',
+                    color: '#e2e8f0',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+                      <span style={{ color: '#EEC14B', fontWeight: 900, flexShrink: 0 }}>✓ 예약 구성:</span>
+                      <span style={{ color: '#ffffff', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {quickCourse} · {finalQuickPay}
+                      </span>
+                    </div>
+                    <span style={{ color: '#4ade80', fontSize: '11px', fontWeight: 900, flexShrink: 0, backgroundColor: 'rgba(34, 197, 94, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>
+                      문자 자동완성
+                    </span>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+                    <button
+                      type="submit"
+                      className="w-full sm:flex-1 py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#EEC14B] via-[#F3CE6D] to-[#D4A528] hover:brightness-110 text-[#080C16] font-black text-[15px] flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(238,193,75,0.45)] transition-all cursor-pointer active:scale-95"
+                    >
+                      <span className="material-symbols-outlined text-[20px]">sms</span>
+                      <span>문자 간편예약 (즉시 배차 🚀)</span>
+                    </button>
+                    <a
+                      href={`tel:${cleanPhone}`}
+                      className="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#10b981] to-[#059669] hover:brightness-110 border border-[#34d399] text-white font-black text-[13.5px] flex items-center justify-center gap-1.5 transition-all shadow-[0_2px_10px_rgba(16,185,129,0.3)] cursor-pointer active:scale-95"
+                    >
+                      <span className="material-symbols-outlined text-[17px]">call</span>
+                      <span>전화 즉시예약</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={copyQuickSlip}
+                      className="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-[#1e293b] hover:bg-[#334155] border border-[#475569] text-[#cbd5e1] font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
+                    >
+                      <span className="material-symbols-outlined text-[17px] text-[#f2ca50]">content_copy</span>
+                      <span>양식 복사</span>
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        {/* 5. TOP ESSENTIAL Q&A */}
+        <section id="essential-qa" className="w-full bg-[#0a0f1d] px-4 md:px-6 lg:px-8 py-12 md:py-16 border-t border-[#1E293B]">
+          <div className="max-w-[1240px] mx-auto">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1e293b] border border-[#f2ca50]/50 text-[#f2ca50] text-[11px] md:text-[12px] font-black tracking-widest uppercase mb-3 shadow">
+                💡 1초 즉문즉답 가이드
+              </span>
+              <h2 className="text-[22px] sm:text-[28px] md:text-[32px] font-black text-white mb-2">
+                이용 전 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFF4BD] via-[#EEC14B] to-[#D4A528]">가장 많이 묻는 질문 TOP 6</span>
+              </h2>
+              <p className="text-[13px] sm:text-[14.5px] text-[#94a3b8]">
+                되묻지 않으셔도 됩니다. 이용자분들이 가장 궁금해하시는 핵심 질문을 투명하게 안내해 드립니다.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {/* Q1 */}
+              <div className="rounded-2xl bg-[#080d18] border border-[#f2ca50]/30 p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/60 transition-colors">
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-black">Q1</span>
+                    <h3 className="text-[15px] font-extrabold text-white">선입금이나 예약금이 정말 없나요?</h3>
+                  </div>
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-[12px] font-black mb-2.5">
+                    ✅ 100% 현장 후불제 (선입금 절대 0원)
+                  </div>
+                  <p className="text-[13px] text-[#94a3b8] leading-relaxed">
+                    출장 사기나 먹튀 걱정 ZERO! 관리사가 고객님이 계신 곳(자택/호텔)에 도착하여 직접 대면한 후 결제합니다. 예약금, 유류비, 보증금 등을 먼저 요구하는 곳은 100% 사기입니다.
+                  </p>
+                </div>
+              </div>
+
+              {/* Q2 */}
+              <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span className="w-6 h-6 rounded-full bg-[#f2ca50]/20 text-[#f2ca50] flex items-center justify-center text-xs font-black">Q2</span>
+                    <h3 className="text-[15px] font-extrabold text-white">예약 후 도착까지 얼마나 걸리나요?</h3>
+                  </div>
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-[#f2ca50]/15 border border-[#f2ca50]/40 text-[#f2ca50] text-[12px] font-black mb-2.5">
+                    ⚡ 평균 25분 ~ 35분 내 신속 도착
+                  </div>
+                  <p className="text-[13px] text-[#94a3b8] leading-relaxed">
+                    서울 25개 구 및 경기 주요 거점 도시 기준, 예약 접수 확인 후 가장 가까운 전문 매니저가 출발하여 평균 25~35분 내에 신속하게 도착합니다.
+                  </p>
+                </div>
+              </div>
+
+              {/* Q3 */}
+              <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-black">Q3</span>
+                    <h3 className="text-[15px] font-extrabold text-white">관리사 사진(프로필)은 왜 없나요?</h3>
+                  </div>
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-blue-500/15 border border-blue-500/40 text-blue-300 text-[12px] font-black mb-2.5">
+                    🛡️ 가짜 도용 사진 근절 · 20대 에이스 힐러
+                  </div>
+                  <p className="text-[13px] text-[#94a3b8] leading-relaxed">
+                    인터넷에 떠도는 가짜 모델 도용 사진으로 고객님을 기만하지 않습니다. 전원 철저한 마인드와 실무 교육을 이수한 20대 전문 테라피스트가 방문하며, 100% 현장 후불제로 투명하고 정직하게 운영됩니다.
+                  </p>
+                </div>
+              </div>
+
+              {/* Q4 */}
+              <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs font-black">Q4</span>
+                    <h3 className="text-[15px] font-extrabold text-white">어디서 이용할 수 있나요?</h3>
+                  </div>
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-purple-500/15 border border-purple-500/40 text-purple-300 text-[12px] font-black mb-2.5">
+                    📍 자택 · 오피스텔 · 호텔 · 모텔 전지역
+                  </div>
+                  <p className="text-[13px] text-[#94a3b8] leading-relaxed">
+                    일반 아파트, 빌라, 원룸, 오피스텔부터 서울 5성급 호텔, 비즈니스 호텔, 모텔까지 편안하게 누우실 수 있는 실내 공간이라면 어디든 방문 가능합니다. (호텔, 모텔 포함 모든 숙박업소는 1층에서 운전기사와 대면하여 관리사를 픽업해 주세요.)
+                  </p>
+                </div>
+              </div>
+
+              {/* Q5 */}
+              <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span className="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-black">Q5</span>
+                    <h3 className="text-[15px] font-extrabold text-white">결제는 어떻게 하나요?</h3>
+                  </div>
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-amber-500/15 border border-amber-500/40 text-amber-300 text-[12px] font-black mb-2.5">
+                    💳 현금 · 계좌이체 · 카드 결제 모두 가능
+                  </div>
+                  <p className="text-[13px] text-[#94a3b8] leading-relaxed">
+                    현장 도착 후 관리사 대면 시 원하시는 방식으로 결제하시면 됩니다. 현금 결제 시 거스름돈이 필요하시면 예약 시 미리 말씀해 주시면 준비해 드립니다.
+                  </p>
+                </div>
+              </div>
+
+              {/* Q6 */}
+              <div className="rounded-2xl bg-[#080d18] border border-[#1e293b] p-5 shadow-lg flex flex-col justify-between hover:border-[#f2ca50]/40 transition-colors">
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span className="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-black">Q6</span>
+                    <h3 className="text-[15px] font-extrabold text-white">따로 준비할 물품이 있나요?</h3>
+                  </div>
+                  <div className="inline-block px-2.5 py-1 rounded-md bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 text-[12px] font-black mb-2.5">
+                    🎒 준비물 0개 (청결 위생 비품 완비)
+                  </div>
+                  <p className="text-[13px] text-[#94a3b8] leading-relaxed">
+                    관리사가 1회용 청결 위생 매트, 호텔급 고급 타월, 최고급 천연 아로마 오일 등 필요한 모든 전문 비품을 지참하여 방문하므로 고객님께서는 편안하게 휴식만 취하시면 됩니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. TRUST & EXCELLENCE */}
         <section className="w-full bg-[#080C16] px-4 md:px-6 lg:px-8 py-16 md:py-24 border-t border-[#1E293B]">
           <div className="max-w-[1240px] mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
@@ -487,7 +1574,7 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 </div>
                 <div className="flex items-center gap-2 text-primary text-[12.5px] font-semibold pt-4 mt-6 border-t border-[#1E293B]">
                   <span className="material-symbols-outlined text-[16px]">check_circle</span>
-                  <span>도착 예상 시간 실시간 안내</span>
+                  <span>25~35분 내 신속 도착 보장</span>
                 </div>
               </div>
 
@@ -545,379 +1632,6 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
           </div>
         </section>
 
-        {/* 3. SERVICE COURSES WITH TRANSPARENT PRICING */}
-        <section id="courses" className="w-full bg-[#0a0e18] px-4 md:px-6 lg:px-8 py-16 md:py-28 border-t border-[#1E293B]">
-          <div className="max-w-[1240px] mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-              <span className="inline-block px-3 py-1 rounded-full bg-[#171b26] border border-[#262a35] text-primary text-[11px] md:text-[12px] font-bold tracking-widest uppercase mb-2.5 shadow-sm">
-                Select Your Course
-              </span>
-              <h2 className="text-[24px] sm:text-[30px] md:text-[36px] font-bold text-text-primary mb-2.5">투명하고 정직한 서비스 코스</h2>
-              <p className="text-[13px] sm:text-[14px] md:text-[15px] text-text-muted leading-relaxed">
-                추가 요금이나 숨은 비용이 전혀 없는 100% 정찰제 요금입니다.
-              </p>
-            </div>
-
-            <div className="abam-courses-grid items-stretch">
-              {/* Course 1: Thai Healing */}
-              <div className="abam-course-card">
-                <div>
-                  {/* 코스 대표 비주얼 이미지 */}
-                  <div
-                    className="relative w-full rounded-xl overflow-hidden mb-4 border border-[#EEC14B]/25 group"
-                    style={{ height: '170px', minHeight: '170px' }}
-                  >
-                    <Image
-                      src="/images/thai.jpg"
-                      alt="전통 타이 건식 지압 테라피"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 380px"
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,14,24,0.92) 0%, rgba(10,14,24,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
-                    <span style={{ position: 'absolute', bottom: '10px', left: '12px', fontSize: '11px', fontWeight: 800, color: '#EEC14B', background: 'rgba(8,12,22,0.85)', padding: '3px 10px', borderRadius: '9999px', border: '1px solid rgba(238,193,75,0.3)', pointerEvents: 'none' }}>
-                      건식 전통 지압
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-[#1b1f2a] text-text-secondary text-[11px] font-semibold">건식 스트레칭</span>
-                    <span className="text-[11px] text-text-muted font-medium">기본 릴렉스</span>
-                  </div>
-                  <h3 className="text-[22px] font-bold text-text-primary mb-1">타이 코스</h3>
-                  <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
-                    전신 스트레칭과 정통 지압 요법으로 만성 근육 뭉침과 뻐근함을 시원하게 해소해 드립니다.
-                  </p>
-
-                  {/* Price Tiers */}
-                  <div className="space-y-3 mb-8">
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('타이1 8만')}
-                      className="abam-price-row"
-                    >
-                      <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
-                      <span className="text-[17px] font-bold text-text-primary">₩80,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('타이90 10만')}
-                      className="abam-price-row highlight"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-[13px] font-semibold text-text-secondary">90분 코스</span>
-                        <span className="px-1.5 py-0.5 rounded bg-primary/20 text-primary text-[10px] font-bold">추천</span>
-                      </div>
-                      <span className="text-[17px] font-bold text-primary">₩100,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('타이2 12만')}
-                      className="abam-price-row"
-                    >
-                      <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
-                      <span className="text-[17px] font-bold text-text-primary">₩120,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-2.5 mb-8">
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
-                      <span>전신 건식 수기 지압 및 골반·어깨 스트레칭</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
-                      <span>호텔/홈 전용 1회용 청결 위생 커버 지참</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
-                      <span>목·두피 쿨링 릴렉스 아로마 밤 서비스</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => openDirectAbamSms('타이90 10만')}
-                  className="w-full min-h-[48px] rounded-xl bg-[#1E293B] hover:bg-[#27354A] text-text-primary text-center font-bold text-[14px] transition-colors border border-[#27354A] flex items-center justify-center gap-2 cursor-pointer shadow-sm mt-4"
-                >
-                  <span className="material-symbols-outlined text-[18px] text-primary">chat</span>
-                  <span>타이 코스 간편 예약</span>
-                </button>
-              </div>
-
-              {/* Course 2: Aroma Relaxing (POPULAR BEST) */}
-              <div className="abam-course-card featured">
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-primary to-accent-gold-muted text-[#080C16] text-[11px] font-extrabold tracking-wide uppercase shadow-md z-20">
-                  ★ 가장 많은 고객 선택 BEST
-                </div>
-
-                <div>
-                  {/* 코스 대표 비주얼 이미지 */}
-                  <div
-                    className="relative w-full rounded-xl overflow-hidden mb-4 mt-2 border border-primary/40 group"
-                    style={{ height: '170px', minHeight: '170px' }}
-                  >
-                    <Image
-                      src="/images/aroma.jpg"
-                      alt="프리미엄 아로마 오일 테라피"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 380px"
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,14,24,0.92) 0%, rgba(10,14,24,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
-                    <span style={{ position: 'absolute', bottom: '10px', left: '12px', fontSize: '11px', fontWeight: 800, color: '#EEC14B', background: 'rgba(8,12,22,0.85)', padding: '3px 10px', borderRadius: '9999px', border: '1px solid rgba(238,193,75,0.4)', pointerEvents: 'none' }}>
-                      유기농 천연 에센셜 오일
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-[11px] font-bold">오일 테라피</span>
-                    <span className="text-[11px] text-primary font-semibold">심신 안정 &amp; 힐링</span>
-                  </div>
-                  <h3 className="text-[22px] font-bold text-text-primary mb-1">프리미엄 아로마 코스</h3>
-                  <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
-                    최고급 유기농 에센셜 오일과 부드러운 스웨디시 기법으로 깊은 숙면과 심신의 안정을 선물합니다.
-                  </p>
-
-                  {/* Price Tiers */}
-                  <div className="space-y-3 mb-8">
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('아로마1 9만')}
-                      className="abam-price-row"
-                    >
-                      <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
-                      <span className="text-[17px] font-bold text-text-primary">₩90,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('아로마90 11만')}
-                      className="abam-price-row highlight"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-[13px] font-semibold text-primary font-bold">90분 코스</span>
-                        <span className="px-1.5 py-0.5 rounded bg-primary text-[#080C16] text-[10px] font-extrabold">BEST</span>
-                      </div>
-                      <span className="text-[17px] font-bold text-primary">₩110,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('아로마2 14만')}
-                      className="abam-price-row"
-                    >
-                      <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
-                      <span className="text-[17px] font-bold text-text-primary">₩140,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-2.5 mb-8">
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
-                      <span>천연 오가닉 베이스 라벤더 &amp; 유칼립투스 블렌딩</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
-                      <span>전신 림프 순환 케어 및 부종 완화 테라피</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-primary text-[17px]">check</span>
-                      <span>온습포 타월 릴렉싱 및 마무리 케어 제공</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => openDirectAbamSms('아로마90 11만')}
-                  className="w-full min-h-[48px] rounded-xl bg-gradient-to-r from-primary via-primary to-accent-gold-muted text-[#080C16] text-center font-extrabold text-[14px] hover:brightness-105 transition-all shadow-[0_2px_12px_rgba(238,193,75,0.3)] flex items-center justify-center gap-2 cursor-pointer mt-4"
-                >
-                  <span className="material-symbols-outlined text-[18px]">chat</span>
-                  <span>아로마 베스트 예약 접수</span>
-                </button>
-              </div>
-
-              {/* Course 3: Special (Thai + Aroma) */}
-              <div className="abam-course-card">
-                <div>
-                  {/* 코스 대표 비주얼 이미지 */}
-                  <div
-                    className="relative w-full rounded-xl border border-[#818CF8]/30 overflow-hidden mb-4 group"
-                    style={{ height: '170px', minHeight: '170px' }}
-                  >
-                    <Image
-                      src="/images/flower_spa.jpg"
-                      alt="VIP 스페셜 복합 콤비네이션 케어"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 380px"
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,14,24,0.92) 0%, rgba(10,14,24,0.2) 60%, transparent 100%)', pointerEvents: 'none' }} />
-                    <span style={{ position: 'absolute', bottom: '10px', left: '12px', fontSize: '11px', fontWeight: 800, color: '#A5B4FC', background: 'rgba(8,12,22,0.85)', padding: '3px 10px', borderRadius: '9999px', border: '1px solid rgba(129,140,248,0.4)', pointerEvents: 'none' }}>
-                      건식 수기 + 아로마 콤보
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-[#312E81]/40 text-[#818CF8] text-[11px] font-bold">건식 + 아로마 콤보</span>
-                    <span className="text-[11px] text-[#818CF8] font-semibold">복합 힐링</span>
-                  </div>
-                  <h3 className="text-[22px] font-bold text-text-primary mb-1">스페셜 (타이+아로마)</h3>
-                  <p className="text-[13px] text-text-muted mb-6 leading-relaxed">
-                    타이의 시원한 수기 지압과 아로마의 부드러운 오일 케어를 동시에 누리는 인기 복합 코스입니다.
-                  </p>
-
-                  {/* Price Tiers */}
-                  <div className="space-y-3 mb-8">
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('스페셜1 10만')}
-                      className="abam-price-row"
-                    >
-                      <span className="text-[13px] font-semibold text-text-secondary">60분 코스</span>
-                      <span className="text-[17px] font-bold text-text-primary">₩100,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('스페셜90 12만')}
-                      className="abam-price-row highlight"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-[13px] font-semibold text-text-secondary">90분 코스</span>
-                        <span className="px-1.5 py-0.5 rounded bg-[#818CF8]/20 text-[#818CF8] text-[10px] font-bold">인기 추천</span>
-                      </div>
-                      <span className="text-[17px] font-bold text-[#818CF8]">₩120,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openDirectAbamSms('스페셜2 16만')}
-                      className="abam-price-row"
-                    >
-                      <span className="text-[13px] font-semibold text-text-secondary">120분 코스</span>
-                      <span className="text-[17px] font-bold text-text-primary">₩160,000<span className="text-[12px] font-normal text-text-muted ml-0.5">원</span></span>
-                    </button>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-2.5 mb-8">
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-[#818CF8] text-[17px]">check</span>
-                      <span>전신 수기 지압 + 프리미엄 딥티슈 아로마 블렌딩</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-[#818CF8] text-[17px]">check</span>
-                      <span>발 반사구 지압 + 두피·목 집중 쿨링 릴렉싱</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-text-secondary text-[12px]">
-                      <span className="material-symbols-outlined text-[#818CF8] text-[17px]">check</span>
-                      <span>에이스 수석 테라피스트 최우선 배차 서비스</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => openDirectAbamSms('스페셜90 12만')}
-                  className="w-full min-h-[48px] rounded-xl bg-[#1E293B] hover:bg-[#27354A] text-text-primary text-center font-bold text-[14px] transition-colors border border-[#27354A] flex items-center justify-center gap-2 cursor-pointer shadow-sm mt-4"
-                >
-                  <span className="material-symbols-outlined text-[18px] text-primary">chat</span>
-                  <span>스페셜 코스 예약 접수</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Bottom Reassurance Banner */}
-            <div className="mt-12 p-4 md:p-5 rounded-2xl bg-[#0F1626] border border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <span className="material-symbols-outlined text-primary text-[22px]">verified_user</span>
-                </div>
-                <div>
-                  <h4 className="text-[14px] font-bold text-text-primary">선입금 없는 100% 현장 후불제 보장</h4>
-                  <p className="text-[12px] text-text-muted">관리사가 계신 곳에 도착하여 대면 후 현금, 계좌이체, 카드로 직접 결제하세요.</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="px-2.5 py-1 rounded bg-[#171b26] text-text-secondary text-[11px] font-semibold">현금</span>
-                <span className="px-2.5 py-1 rounded bg-[#171b26] text-text-secondary text-[11px] font-semibold">계좌이체</span>
-                <span className="px-2.5 py-1 rounded bg-[#171b26] text-text-secondary text-[11px] font-semibold">카드결제</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. HOW IT WORKS (3 Simple Steps) */}
-        <section id="guide" className="w-full bg-[#080C16] px-4 md:px-6 lg:px-8 py-20 md:py-28 lg:py-32 border-t border-[#1E293B]">
-          <div className="max-w-[1240px] mx-auto">
-            <div className="text-center max-w-xl mx-auto mb-16 md:mb-20">
-              <span className="text-[12px] text-primary tracking-widest uppercase font-bold">Simple 3-Step Process</span>
-              <h2 className="text-[26px] md:text-[34px] font-bold text-text-primary mt-1 mb-2">누구나 쉬운 간편 이용 안내</h2>
-              <p className="text-[13px] md:text-[14px] text-text-muted">
-                복잡한 가입 절차 없이, 전화나 문자 한 통으로 30분 안에 힐링이 시작됩니다.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative">
-              {/* Step 1 */}
-              <div className="abam-step-card">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="w-11 h-11 rounded-full bg-primary/15 text-primary font-black text-lg flex items-center justify-center border border-primary/30">1</span>
-                    <span className="text-[11px] text-text-muted font-bold tracking-wider">STEP 01</span>
-                  </div>
-                  <h3 className="text-[19px] font-bold text-text-primary mb-3">전화 또는 문자 간편 접수</h3>
-                  <p className="text-[13.5px] text-text-muted leading-relaxed mb-6">
-                    원하시는 코스와 시간, 그리고 계신 곳의 주소(자택 주소 또는 호텔/모텔 상호명 및 호수)를 전달해 주세요.
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-[#1E293B] text-[12.5px] text-primary font-semibold flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[17px]">timer</span>
-                  <span>소요 시간: 약 1분</span>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="abam-step-card">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="w-11 h-11 rounded-full bg-primary/15 text-primary font-black text-lg flex items-center justify-center border border-primary/30">2</span>
-                    <span className="text-[11px] text-text-muted font-bold tracking-wider">STEP 02</span>
-                  </div>
-                  <h3 className="text-[19px] font-bold text-text-primary mb-3">테라피스트 배정 &amp; 신속 출발</h3>
-                  <p className="text-[13.5px] text-text-muted leading-relaxed mb-6">
-                    고객님과 가장 가까운 거점에 상주 중인 전문 테라피스트가 배정되어 즉시 출발하며, 실시간 예상 도착 시간을 안내해 드립니다.
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-[#1E293B] text-[12.5px] text-primary font-semibold flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[17px]">near_me</span>
-                  <span>평균 도착: 25~35분</span>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="abam-step-card">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="w-11 h-11 rounded-full bg-primary/15 text-primary font-black text-lg flex items-center justify-center border border-primary/30">3</span>
-                    <span className="text-[11px] text-text-muted font-bold tracking-wider">STEP 03</span>
-                  </div>
-                  <h3 className="text-[19px] font-bold text-text-primary mb-3">맞춤 케어 &amp; 안심 후불 결제</h3>
-                  <p className="text-[13.5px] text-text-muted leading-relaxed mb-6">
-                    테라피스트 도착 후 현장에서 직접 대면하여 결제하신 후, 프라이빗하고 안락한 공간에서 최고급 힐링을 누리세요.
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-[#1E293B] text-[12.5px] text-primary font-semibold flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[17px]">verified</span>
-                  <span>100% 현장 대면 결제</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 5. SERVICE REGIONS GRID */}
         <section id="regions" className="w-full bg-[#0a0e18] px-4 md:px-6 lg:px-8 py-20 md:py-28 lg:py-32 border-t border-[#1E293B]">
           <div className="max-w-[1240px] mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
@@ -1251,27 +1965,27 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   🌙 서울 전 지역 30분대 빠른 방문 배차
                 </span>
                 <span style={{ fontSize: '11px', color: '#94A3B8', fontWeight: 600 }}>
-                  24시 안심 프라이빗
+                  야간 안심 프라이빗 (18:00~04:00)
                 </span>
               </div>
             </div>
 
             <div className="w-full max-w-md flex flex-col sm:flex-row items-center justify-center gap-3.5">
-              <a
-                className="w-full sm:w-1/2 flex items-center justify-center gap-2 min-h-[50px] px-6 rounded-xl bg-gradient-to-r from-primary via-primary to-accent-gold-muted text-[#080C16] font-bold text-[15px] shadow-[0_4px_16px_rgba(238,193,75,0.3)] hover:brightness-105 transition-all no-underline"
-                href={`tel:${cleanPhone}`}
-              >
-                <span className="material-symbols-outlined text-[19px]">call</span>
-                <span>실시간 전화 상담</span>
-              </a>
               <button
                 type="button"
                 onClick={() => openDirectAbamSms()}
-                className="w-full sm:w-1/2 flex items-center justify-center gap-2 min-h-[50px] px-6 rounded-xl bg-[#171b26] border border-[#2a3040] text-white font-bold text-[15px] hover:bg-[#202636] transition-colors cursor-pointer"
+                className="abam-hero-btn-sms w-full sm:w-1/2"
               >
-                <span className="material-symbols-outlined text-primary text-[19px]">sms</span>
-                <span>문자 간편 상담 접수</span>
+                <span className="material-symbols-outlined text-[20px]">sms</span>
+                <span>문자 간편예약</span>
               </button>
+              <a
+                className="abam-hero-btn-call w-full sm:w-1/2"
+                href={`tel:${cleanPhone}`}
+              >
+                <span className="material-symbols-outlined text-[20px]">call</span>
+                <span>전화 즉시예약</span>
+              </a>
             </div>
           </div>
         </section>
@@ -1337,8 +2051,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </p>
               <div className="pt-1 space-y-1.5 text-[12px] text-[#64748B]">
                 <div className="flex items-center gap-2">
-                  <span className="text-primary font-bold">운영안내</span>
-                  <span className="text-slate-300">연중무휴 24시간 실시간 배차 접수</span>
+                  <span className="text-primary font-bold">운영시간</span>
+                  <span className="text-slate-300">매일 18:00 ~ 익일 04:00 (사전접수 18:00~ / 배차 19:00~)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-primary font-bold">방문지역</span>
@@ -1354,13 +2068,13 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               </h4>
               <div className="space-y-2">
                 <div className="abam-footer-course-row">
-                  <span className="font-semibold text-slate-200">타이 테라피 (건식 지압)</span>
+                  <span className="font-semibold text-slate-200">Course A · 로얄 건식 지압 타이</span>
                   <span className="abam-footer-course-badge">
                     60분 / 90분 / 120분
                   </span>
                 </div>
                 <div className="abam-footer-course-row">
-                  <span className="font-semibold text-slate-200">프리미엄 아로마 (오가닉)</span>
+                  <span className="font-semibold text-slate-200">Course B · 힐링아로마 스웨디시</span>
                   <span className="abam-footer-course-badge">
                     60분 / 90분 / 120분
                   </span>
@@ -1368,23 +2082,23 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                 <div className="abam-footer-course-row" style={{ borderColor: 'rgba(238, 193, 75, 0.4)', background: 'linear-gradient(90deg, #0d1424 0%, #161e33 100%)' }}>
                   <span className="font-bold text-white flex items-center gap-1.5">
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary text-slate-950 font-black">인기</span>
-                    스페셜 콤보 (타이+아로마)
+                    Course C · 로얄 VIP 더블 케어 [Thai+Swedish]
                   </span>
                   <span className="text-primary font-extrabold text-[12px]">120분 추천</span>
                 </div>
               </div>
             </div>
 
-            {/* Col 3: 24h Customer Support */}
+            {/* Col 3: Customer Support (18:00 ~ 04:00) */}
             <div className="space-y-3">
               <h4 className="text-[13.5px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <span className="text-primary">❖</span> 24시 실시간 접수 &amp; 고객센터
+                <span className="text-primary">❖</span> 실시간 접수 &amp; 고객센터
               </h4>
               <div className="abam-footer-cta-card space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="abam-live-dot"></span>
                   <span className="text-[12px] text-emerald-400 font-bold tracking-wide">
-                    연중무휴 실시간 접수 중
+                    매일 18:00 ~ 익일 04:00 운영 (연중무휴)
                   </span>
                 </div>
                 <a
@@ -1394,19 +2108,19 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
                   {formattedPhone}
                 </a>
                 <div className="abam-footer-btn-grid">
-                  <a
-                    href={`tel:${cleanPhone}`}
-                    className="abam-footer-btn-call"
-                  >
-                    <span>📞</span> 전화 문의
-                  </a>
                   <button
                     type="button"
                     onClick={() => openDirectAbamSms()}
                     className="abam-footer-btn-sms"
                   >
-                    <span>💬</span> 문자 예약
+                    <span>💬</span> 문자 간편예약
                   </button>
+                  <a
+                    href={`tel:${cleanPhone}`}
+                    className="abam-footer-btn-call"
+                  >
+                    <span>📞</span> 전화 즉시예약
+                  </a>
                 </div>
                 <p className="text-[11.5px] text-[#64748B] leading-relaxed pt-1">
                   예약금이나 선입금을 절대 요구하지 않는 100% 안심 후불제 플랫폼입니다.
@@ -1431,6 +2145,8 @@ export default function AbamLanding({ c, areaLinks }: { c: LandingContent; areaL
               <span className="hover:text-primary transition-colors cursor-pointer">개인정보처리방침</span>
               <span className="text-[#334155]">•</span>
               <span className="text-primary font-semibold">100% 현장후불제 원칙</span>
+              <span className="text-[#334155]">•</span>
+              <a href="https://seoulroyalspa.com" target="_blank" rel="noopener" className="hover:text-primary transition-colors text-[11px] text-slate-500">외국인 전용 호텔 스파 (Seoul Royal Spa) ↗</a>
             </div>
           </div>
 
